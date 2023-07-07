@@ -1,20 +1,18 @@
-import 'dart:ffi';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:vm_fm_4/feature/enums/service_response_status.dart';
-import 'package:vm_fm_4/feature/enums/service_status_enums.dart';
-import 'package:vm_fm_4/feature/exceptions/custom_service_exceptions.dart';
-import 'package:vm_fm_4/feature/models/work_order_models/work_order_added_resources_model.dart';
-import 'package:vm_fm_4/feature/models/work_order_models/work_order_attachments_model.dart';
-import 'package:vm_fm_4/feature/models/work_order_models/work_order_date_action_model.dart';
-import 'package:vm_fm_4/feature/models/work_order_models/work_order_details_model.dart';
-import 'package:vm_fm_4/feature/models/work_order_models/work_order_loads_model.dart';
-import 'package:vm_fm_4/feature/models/work_order_models/work_order_resources_model.dart';
-import 'package:vm_fm_4/feature/models/work_order_models/work_order_shiftings_model.dart';
-import 'package:vm_fm_4/feature/models/work_order_models/work_order_spareparts_model.dart';
-import 'package:vm_fm_4/feature/models/work_order_models/work_order_stores_model.dart';
-import 'package:vm_fm_4/feature/service/global_services.dart/work_order_service/work_order_service_repository.dart';
+import '../../../enums/service_response_status.dart';
+import '../../../enums/service_status_enums.dart';
+import '../../../exceptions/custom_service_exceptions.dart';
+import '../../../models/work_order_models/work_order_added_resources_model.dart';
+import '../../../models/work_order_models/work_order_attachments_model.dart';
+import '../../../models/work_order_models/work_order_date_action_model.dart';
+import '../../../models/work_order_models/work_order_details_model.dart';
+import '../../../models/work_order_models/work_order_loads_model.dart';
+import '../../../models/work_order_models/work_order_resources_model.dart';
+import '../../../models/work_order_models/work_order_shiftings_model.dart';
+import '../../../models/work_order_models/work_order_spareparts_model.dart';
+import '../../../models/work_order_models/work_order_stores_model.dart';
+import 'work_order_service_repository.dart';
 
 class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   // GET SERVICES
