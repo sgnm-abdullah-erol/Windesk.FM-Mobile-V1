@@ -1,8 +1,11 @@
+import 'dart:ffi';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:vm_fm_4/feature/enums/service_response_status.dart';
 import 'package:vm_fm_4/feature/enums/service_status_enums.dart';
 import 'package:vm_fm_4/feature/exceptions/custom_service_exceptions.dart';
+import 'package:vm_fm_4/feature/models/work_order_models/work_order_added_resources_model.dart';
 import 'package:vm_fm_4/feature/models/work_order_models/work_order_attachments_model.dart';
 import 'package:vm_fm_4/feature/models/work_order_models/work_order_date_action_model.dart';
 import 'package:vm_fm_4/feature/models/work_order_models/work_order_details_model.dart';
@@ -10,9 +13,11 @@ import 'package:vm_fm_4/feature/models/work_order_models/work_order_loads_model.
 import 'package:vm_fm_4/feature/models/work_order_models/work_order_resources_model.dart';
 import 'package:vm_fm_4/feature/models/work_order_models/work_order_shiftings_model.dart';
 import 'package:vm_fm_4/feature/models/work_order_models/work_order_spareparts_model.dart';
+import 'package:vm_fm_4/feature/models/work_order_models/work_order_stores_model.dart';
 import 'package:vm_fm_4/feature/service/global_services.dart/work_order_service/work_order_service_repository.dart';
 
 class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
+  // GET SERVICES
   @override
   Future<Either<List<WorkOrderLoadsModel>, CustomServiceException>> getWorkOrderLoads(String workOrderCode) async {
     List<WorkOrderLoadsModel> loads = [];
@@ -182,4 +187,149 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
       return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: '500'));
     }
   }
+
+  @override
+  Future<Either<List<WorkOrderStores>, CustomServiceException>> getWorkOrderStores() async {
+    List<WorkOrderStores> stores;
+    String url =
+        'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_null&action=getStore&user=sgnm1040';
+    try {
+      final response = await super.dio.get(url);
+      if (response.data[ServiceResponseStatus.result.rawText] == ServiceStatusEnums.success.rawText) {
+        final data = response.data[ServiceResponseStatus.records.rawText];
+        stores = WorkOrderStores.fromJsonList(data);
+
+        return Left(stores);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: response.statusCode.toString()));
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<List<WorkOrderAddedResources>, CustomServiceException>> getWorkOrderAddedResources(String serviceCode) async {
+    List<WorkOrderAddedResources> addedResources;
+    String url =
+        'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_null&action=getResponsible&service=$serviceCode';
+    try {
+      final response = await super.dio.get(url);
+      if (response.data[ServiceResponseStatus.result.rawText] == ServiceStatusEnums.success.rawText) {
+        final data = response.data[ServiceResponseStatus.records.rawText];
+        addedResources = WorkOrderAddedResources.fromJsonList(data);
+
+        return Left(addedResources);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: response.statusCode.toString()));
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: '500'));
+    }
+  }
+
+  // ADD SERVICES
+  @override
+  Future<Either<bool, CustomServiceException>> addWorkOrderEffort(String workOrderCode, String workPeriod) async {
+    bool result = false;
+
+    String url =
+        'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_null&action=addWorkorderEffort&workordercode=wo00002986&username=sgnm1040&module=workorder&workperiod=000010000&startdate=1&type=PREDICTED&description=test';
+    try {
+      final response = await super.dio.get(url);
+      super.logger.e(response.toString());
+
+      if (response.data[ServiceResponseStatus.result.rawText] == ServiceStatusEnums.success.rawText) {
+        result = true;
+
+        super.logger.e(result.toString());
+
+        return Left(result);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: response.statusCode.toString()));
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<bool, CustomServiceException>> addWorkOrderImage(String workOrderCode, String image, String desc) async {
+    bool result = false;
+
+    String url =
+        'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_null&action=addAttachment&username=sgnm1040&moduleName=workorder&issueCode=wo00002986';
+    try {
+      final response = await super.dio.get(url);
+      super.logger.e(response.toString());
+
+      if (response.data[ServiceResponseStatus.result.rawText] == ServiceStatusEnums.success.rawText) {
+        result = true;
+
+        super.logger.e(result.toString());
+
+        return Left(result);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: response.statusCode.toString()));
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<bool, CustomServiceException>> addWorkOrderPersonal(String workOrderCode, String moduleCode, String tuwnofWork) async {
+    bool result = false;
+
+    String url =
+        'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_null&action=addResourceStaff&module=xusr&modulecode=K200462&workordercode=wo00002986&turnofwork=V00000001';
+    try {
+      final response = await super.dio.get(url);
+      super.logger.e(response.toString());
+
+      if (response.data[ServiceResponseStatus.result.rawText] == ServiceStatusEnums.success.rawText) {
+        result = true;
+
+        super.logger.e(result.toString());
+
+        return Left(result);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: response.statusCode.toString()));
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<bool, CustomServiceException>> addWorkOrderSpareparts(String workOrderCode, String product, String amount, String unit) async {
+    bool result = false;
+
+    String url =
+        'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_6BCFD9E7-75A8-4688-8E85-10C5E2B4A96E&action=addMaterial&module=stproductdef&modulecode=S00000000002067&workordercode=MYM_WO00000551&amount=12&unit=PCK0000010893';
+    try {
+      final response = await super.dio.get(url);
+      super.logger.e(response.toString());
+
+      if (response.data[ServiceResponseStatus.result.rawText] == ServiceStatusEnums.success.rawText) {
+        result = true;
+
+        super.logger.e(result.toString());
+
+        return Left(result);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: response.statusCode.toString()));
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: '500'));
+    }
+  }
+
+// DELETE SERVICES
 }
