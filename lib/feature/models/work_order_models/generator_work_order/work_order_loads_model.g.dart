@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../work_order_loads.dart';
+part of '../work_order_loads_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-WorkOrderLoads _$WorkOrderLoadsFromJson(Map<String, dynamic> json) => WorkOrderLoads(
+WorkOrderLoadsModel _$WorkOrderLoadsModelFromJson(Map<String, dynamic> json) => WorkOrderLoadsModel(
       code: json['CODE'] as String?,
       user: json['USER'] as String?,
       startdate: json['STARTDATE'],
@@ -15,11 +15,11 @@ WorkOrderLoads _$WorkOrderLoadsFromJson(Map<String, dynamic> json) => WorkOrderL
       timeworked: (json['TIMEWORKED'] as num?)?.toDouble(),
     );
 
-Map<String, dynamic> _$WorkOrderLoadsToJson(WorkOrderLoads instance) => <String, dynamic>{
-      'CODE': instance.code,
-      'USER': instance.user,
-      'STARTDATE': instance.startdate,
-      'TYPE': instance.type,
-      'TYPE_NAME': instance.typeName,
-      'TIMEWORKED': instance.timeworked,
+Map<String, dynamic> _$WorkOrderLoadsModelToJson(WorkOrderLoadsModel instance) => <String, dynamic>{
+      'code': instance.code,
+      'user': instance.user,
+      'startdate': instance.startdate,
+      'type': instance.type,
+      'typeName': instance.typeName,
+      'timeworked': instance.timeworked,
     };

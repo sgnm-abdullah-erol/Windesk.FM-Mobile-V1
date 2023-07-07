@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../work_order_attachments.dart';
+part of '../work_order_attachments_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-WorkOrderAttachments _$WorkOrderAttachmentsFromJson(Map<String, dynamic> json) => WorkOrderAttachments(
+WorkOrderAttachmentsModel _$WorkOrderAttachmentsModelFromJson(Map<String, dynamic> json) => WorkOrderAttachmentsModel(
       id: json['ID'] as int?,
       name: json['NAME'] as String?,
       filename: json['FILENAME'] as String?,
@@ -16,7 +16,7 @@ WorkOrderAttachments _$WorkOrderAttachmentsFromJson(Map<String, dynamic> json) =
       idate: json['IDATE'] as String?,
     );
 
-Map<String, dynamic> _$WorkOrderAttachmentsToJson(WorkOrderAttachments instance) => <String, dynamic>{
+Map<String, dynamic> _$WorkOrderAttachmentsModelToJson(WorkOrderAttachmentsModel instance) => <String, dynamic>{
       'ID': instance.id,
       'NAME': instance.name,
       'FILENAME': instance.filename,

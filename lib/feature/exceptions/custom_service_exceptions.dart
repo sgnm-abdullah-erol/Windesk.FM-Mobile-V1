@@ -16,5 +16,7 @@ class CustomServiceException implements Exception {
 class CustomServiceMessages {
   const CustomServiceMessages._();
 
+  static const String workOrderWorkloadError = 'Error while fetching workload';
+  static const String workOrderAttachmentsError = 'Error while fetching attachments';
   static const String noInternetConnection = "No internet connection";
 }

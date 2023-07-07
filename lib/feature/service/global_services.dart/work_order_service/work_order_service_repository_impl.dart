@@ -3,15 +3,117 @@ import 'package:dio/dio.dart';
 import 'package:vm_fm_4/feature/enums/service_response_status.dart';
 import 'package:vm_fm_4/feature/enums/service_status_enums.dart';
 import 'package:vm_fm_4/feature/exceptions/custom_service_exceptions.dart';
-import 'package:vm_fm_4/feature/models/work_order_models/work_order_attachments.dart';
-import 'package:vm_fm_4/feature/models/work_order_models/work_order_loads.dart';
+import 'package:vm_fm_4/feature/models/work_order_models/work_order_attachments_model.dart';
+import 'package:vm_fm_4/feature/models/work_order_models/work_order_date_action_model.dart';
+import 'package:vm_fm_4/feature/models/work_order_models/work_order_details_model.dart';
+import 'package:vm_fm_4/feature/models/work_order_models/work_order_loads_model.dart';
+import 'package:vm_fm_4/feature/models/work_order_models/work_order_resources_model.dart';
+import 'package:vm_fm_4/feature/models/work_order_models/work_order_shiftings_model.dart';
+import 'package:vm_fm_4/feature/models/work_order_models/work_order_spareparts_model.dart';
 import 'package:vm_fm_4/feature/service/global_services.dart/work_order_service/work_order_service_repository.dart';
 
 class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
   @override
-  Future<Either<List<WorkOrderLoads>, CustomServiceException>> getWorkOrderLoads(String workOrderCode) async {
-    List<WorkOrderLoads> loads = [];
+  Future<Either<List<WorkOrderLoadsModel>, CustomServiceException>> getWorkOrderLoads(String workOrderCode) async {
+    List<WorkOrderLoadsModel> loads = [];
     String url = 'http://windeskmobile.signumtte.com/workorder/$workOrderCode/workloads';
+
+    try {
+      final response = await super.dio.get(url,
+          options: Options(
+            headers: {'xusercode': "sgnm1040", 'xtoken': 'demo!'},
+          ));
+
+      if (response.data[ServiceResponseStatus.result.rawText] == ServiceStatusEnums.success.rawText) {
+        final data = response.data[ServiceResponseStatus.records.rawText];
+        loads = const WorkOrderLoadsModel().fromJsonList(data);
+
+        return Left(loads);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: response.statusCode.toString()));
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<List<WorkOrderAttachmentsModel>, CustomServiceException>> getWorkOrderAttachments(String workOrderCode) async {
+    List<WorkOrderAttachmentsModel> attachments = [];
+    String url = 'http://windeskmobile.signumtte.com/workorder/$workOrderCode/attachments';
+
+    try {
+      final response = await super.dio.get(url,
+          options: Options(
+            headers: {'xusercode': "sgnm1040", 'xtoken': 'demo!'},
+          ));
+      if (response.data[ServiceResponseStatus.result.rawText] == ServiceStatusEnums.success.rawText) {
+        final data = response.data[ServiceResponseStatus.records.rawText];
+        attachments = const WorkOrderAttachmentsModel().fromJsonList(data);
+
+        return Left(attachments);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: response.statusCode.toString()));
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<List<WorkOrderResourcesModel>, CustomServiceException>> getWorkOrderResources(String workOrderCode) async {
+    List<WorkOrderResourcesModel> resources = [];
+    String url = 'http://windeskmobile.signumtte.com/workorder/$workOrderCode/resources';
+
+    try {
+      final response = await super.dio.get(url,
+          options: Options(
+            headers: {'xusercode': "sgnm1040", 'xtoken': 'demo!'},
+          ));
+
+      if (response.data[ServiceResponseStatus.result.rawText] == ServiceStatusEnums.success.rawText) {
+        final data = response.data[ServiceResponseStatus.records.rawText];
+        resources = WorkOrderResourcesModel.fromJsonList(data);
+        return Left(resources);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: response.statusCode.toString()));
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<List<WorkOrderShiftingsModel>, CustomServiceException>> getWorkOrderShiftings() async {
+    List<WorkOrderShiftingsModel> shiftings = [];
+
+    String url =
+        'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_null&action=getVardiyas';
+    try {
+      final response = await super.dio.get(url);
+      if (response.data[ServiceResponseStatus.result.rawText] == ServiceStatusEnums.success.rawText) {
+        final data = response.data[ServiceResponseStatus.records.rawText];
+        super.logger.e(shiftings.toString());
+
+        shiftings = WorkOrderShiftingsModel.fromJsonList(data);
+
+        return Left(shiftings);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: response.statusCode.toString()));
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<WorkOrderDetailsModel, CustomServiceException>> getWorkOrderDetails(String workOrderCode) async {
+    WorkOrderDetailsModel workOrderDeatails;
+    String url = 'http://windeskmobile.signumtte.com/workorder/detail/$workOrderCode';
 
     try {
       final response = await super.dio.get(url,
@@ -20,26 +122,64 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
               'xusercode': "sgnm1040",
               'xtoken': 'demo!',
             },
-            responseType: ResponseType.json,
           ));
 
       if (response.data[ServiceResponseStatus.result.rawText] == ServiceStatusEnums.success.rawText) {
-        final data = response.data['records'];
-        loads = const WorkOrderLoads().fromJsonList(data);
+        final data = response.data[ServiceResponseStatus.detail.rawText];
+        workOrderDeatails = WorkOrderDetailsModel.fromJson(data);
 
-        return Left(loads);
+        return Left(workOrderDeatails);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.noInternetConnection, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: response.statusCode.toString()));
       }
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.noInternetConnection, statusCode: '500'));
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: '500'));
     }
   }
 
   @override
-  Future<Either<List<WorkOrderAttachments>, CustomServiceException>> getWorkOrderAttachments(String workOrderCode) {
-    // TODO: implement getWorkOrderAttachments
-    throw UnimplementedError();
+  Future<Either<List<WorkOrderSparepartsModel>, CustomServiceException>> getWorkOrderSpareparts(String workOrderCode) async {
+    List<WorkOrderSparepartsModel> spareparts = [];
+    String url = 'http://windeskmobile.signumtte.com/workorder/$workOrderCode/spareparts';
+
+    try {
+      final response = await super.dio.get(url,
+          options: Options(
+            headers: {'xusercode': "sgnm1040", 'xtoken': 'demo!'},
+          ));
+
+      if (response.data[ServiceResponseStatus.result.rawText] == ServiceStatusEnums.success.rawText) {
+        final data = response.data[ServiceResponseStatus.records.rawText];
+        spareparts = WorkOrderSparepartsModel.fromJsonList(data);
+
+        return Left(spareparts);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: response.statusCode.toString()));
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<WorkOrderDateActionModel, CustomServiceException>> getWorkOrderDateAction(String workOrderCode, String actionType) async {
+    WorkOrderDateActionModel dateAction;
+    String url =
+        'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_null&action=workorderActualDateActions&workorderCode=$workOrderCode&username=sgnm1040&type=$actionType&nfc=0&workorder_wait_reason=&workorder_wait_reasoncode=';
+    try {
+      final response = await super.dio.get(url);
+      if (response.statusCode == 200) {
+        dateAction = WorkOrderDateActionModel.fromJson(response.data);
+
+        return Left(dateAction);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: response.statusCode.toString()));
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: '500'));
+    }
   }
 }

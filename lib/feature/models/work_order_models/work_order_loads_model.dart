@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'generator_work_order/work_order_loads.g.dart';
+part 'generator_work_order/work_order_loads_model.g.dart';
 
 @JsonSerializable()
-class WorkOrderLoads extends Equatable {
+class WorkOrderLoadsModel extends Equatable {
   final String? code;
   final String? user;
   final dynamic startdate;
@@ -12,7 +12,7 @@ class WorkOrderLoads extends Equatable {
   final String? typeName;
   final double? timeworked;
 
-  const WorkOrderLoads({
+  const WorkOrderLoadsModel({
     this.code,
     this.user,
     this.startdate,
@@ -21,15 +21,15 @@ class WorkOrderLoads extends Equatable {
     this.timeworked,
   });
 
-  factory WorkOrderLoads.fromJson(Map<String, dynamic> json) => _$WorkOrderLoadsFromJson(json);
+  factory WorkOrderLoadsModel.fromJson(Map<String, dynamic> json) => _$WorkOrderLoadsModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$WorkOrderLoadsToJson(this);
+  Map<String, dynamic> toJson() => _$WorkOrderLoadsModelToJson(this);
 
-  List<WorkOrderLoads> fromJsonList(List<dynamic> json) {
-    List<WorkOrderLoads> workOrderLoads = [];
+  List<WorkOrderLoadsModel> fromJsonList(List<dynamic> json) {
+    List<WorkOrderLoadsModel> workOrderLoads = [];
 
     for (var item in json) {
-      workOrderLoads.add(WorkOrderLoads.fromJson(item));
+      workOrderLoads.add(WorkOrderLoadsModel.fromJson(item));
     }
 
     return workOrderLoads;

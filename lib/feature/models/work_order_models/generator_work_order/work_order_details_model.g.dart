@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../work_order_details.dart';
+part of '../work_order_details_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-WorkOrderDetails _$WorkOrderDetailsFromJson(Map<String, dynamic> json) => WorkOrderDetails(
+WorkOrderDetailsModel _$WorkOrderDetailsModelFromJson(Map<String, dynamic> json) => WorkOrderDetailsModel(
       id: json['ID'] as String?,
       code: json['CODE'] as String?,
       name: json['NAME'] as String?,
@@ -35,7 +35,7 @@ WorkOrderDetails _$WorkOrderDetailsFromJson(Map<String, dynamic> json) => WorkOr
       description: json['DESCRIPTION'],
     );
 
-Map<String, dynamic> _$WorkOrderDetailsToJson(WorkOrderDetails instance) => <String, dynamic>{
+Map<String, dynamic> _$WorkOrderDetailsModelToJson(WorkOrderDetailsModel instance) => <String, dynamic>{
       'ID': instance.id,
       'CODE': instance.code,
       'NAME': instance.name,

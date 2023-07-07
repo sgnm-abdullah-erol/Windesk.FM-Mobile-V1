@@ -1,4 +1,4 @@
-enum ServiceResponseStatus { result, records }
+enum ServiceResponseStatus { result, records, detail }
 
 extension ServiceResponseStatusExtension on ServiceResponseStatus {
   String get rawText {
@@ -7,6 +7,8 @@ extension ServiceResponseStatusExtension on ServiceResponseStatus {
         return 'result';
       case ServiceResponseStatus.records:
         return 'records';
+      case ServiceResponseStatus.detail:
+        return 'detail';
       default:
         return 'unknown';
     }

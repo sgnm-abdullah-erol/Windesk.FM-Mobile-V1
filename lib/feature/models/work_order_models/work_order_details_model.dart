@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'generator_work_order/work_order_details.g.dart';
+part 'generator_work_order/work_order_details_model.g.dart';
 
 @JsonSerializable()
-class WorkOrderDetails extends Equatable {
+class WorkOrderDetailsModel extends Equatable {
   final String? id;
   final String? code;
   final String? name;
@@ -32,7 +32,7 @@ class WorkOrderDetails extends Equatable {
   final String? enfectionrisk;
   final dynamic description;
 
-  WorkOrderDetails({
+  const WorkOrderDetailsModel({
     this.id,
     this.code,
     this.name,
@@ -61,9 +61,9 @@ class WorkOrderDetails extends Equatable {
     this.description,
   });
 
-  factory WorkOrderDetails.fromJson(Map<String, dynamic> json) => _$WorkOrderDetailsFromJson(json);
+  factory WorkOrderDetailsModel.fromJson(Map<String, dynamic> json) => _$WorkOrderDetailsModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$WorkOrderDetailsToJson(this);
+  Map<String, dynamic> toJson() => _$WorkOrderDetailsModelToJson(this);
 
   @override
   List<Object?> get props => [

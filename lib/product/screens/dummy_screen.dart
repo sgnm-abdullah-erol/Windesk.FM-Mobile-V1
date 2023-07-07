@@ -18,7 +18,7 @@ class _DummyScreenState extends State<DummyScreen> {
   void initState() {
     WorkOrderServiceRepository x = WorkOrderServiceRepositoryImpl();
 
-    x.getWorkOrderLoads('wo00002989');
+    x.getWorkOrderDateAction('wo00002989', 'end');
 
     super.initState();
   }
