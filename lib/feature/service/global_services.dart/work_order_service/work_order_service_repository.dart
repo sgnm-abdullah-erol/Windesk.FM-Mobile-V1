@@ -48,4 +48,9 @@ abstract class WorkOrderServiceRepository {
   Future<Either<bool, CustomServiceException>> addWorkOrderSpareparts(String workOrderCode, String product, String amount, String unit);
 
   // DELETE WORK ORDER METHODS
+  Future<Either<bool, CustomServiceException>> deleteWorkOrderSpareparts(String workOrderCode);
+
+  Future<Either<bool, CustomServiceException>> deleteWorkOrderPersonal(String workOrderCode, String moduleCode);
+
+  Future<Either<bool, CustomServiceException>> deleteWorkOrderEffort(String workOrderCode);
 }

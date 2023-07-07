@@ -81,11 +81,11 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
         resources = WorkOrderResourcesModel.fromJsonList(data);
         return Left(resources);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderResourcesError, statusCode: response.statusCode.toString()));
       }
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: '500'));
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderResourcesError, statusCode: '500'));
     }
   }
 
@@ -105,11 +105,11 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
 
         return Left(shiftings);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderShiftingsError, statusCode: response.statusCode.toString()));
       }
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: '500'));
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderShiftingsError, statusCode: '500'));
     }
   }
 
@@ -133,11 +133,11 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
 
         return Left(workOrderDeatails);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderDetailsError, statusCode: response.statusCode.toString()));
       }
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: '500'));
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderDetailsError, statusCode: '500'));
     }
   }
 
@@ -158,11 +158,11 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
 
         return Left(spareparts);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderSparepartsError, statusCode: response.statusCode.toString()));
       }
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderSparepartsError, statusCode: '500'));
     }
   }
 
@@ -178,11 +178,11 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
 
         return Left(dateAction);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderDateActionError, statusCode: response.statusCode.toString()));
       }
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: '500'));
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderDateActionError, statusCode: '500'));
     }
   }
 
@@ -199,11 +199,11 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
 
         return Left(stores);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderStoresError, statusCode: response.statusCode.toString()));
       }
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: '500'));
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderStoresError, statusCode: '500'));
     }
   }
 
@@ -220,11 +220,11 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
 
         return Left(addedResources);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAddedResourcesError, statusCode: response.statusCode.toString()));
       }
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: '500'));
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAddedResourcesError, statusCode: '500'));
     }
   }
 
@@ -246,11 +246,11 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
 
         return Left(result);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAddEffortError, statusCode: response.statusCode.toString()));
       }
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: '500'));
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAddEffortError, statusCode: '500'));
     }
   }
 
@@ -271,11 +271,11 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
 
         return Left(result);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAddImageError, statusCode: response.statusCode.toString()));
       }
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: '500'));
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAddImageError, statusCode: '500'));
     }
   }
 
@@ -296,11 +296,11 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
 
         return Left(result);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAddPersonalError, statusCode: response.statusCode.toString()));
       }
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: '500'));
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAddPersonalError, statusCode: '500'));
     }
   }
 
@@ -321,13 +321,89 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
 
         return Left(result);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAddSparepartsError, statusCode: response.statusCode.toString()));
       }
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAttachmentsError, statusCode: '500'));
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAddSparepartsError, statusCode: '500'));
     }
   }
 
-// DELETE SERVICES
+  // DELETE SERVICES
+  @override
+  Future<Either<bool, CustomServiceException>> deleteWorkOrderEffort(String workOrderCode) async {
+    bool result = false;
+
+    String url =
+        'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_null&action=deleteWorkorderWorklog&code=WL00000261&username=sgnm1040';
+    try {
+      final response = await super.dio.get(url);
+      super.logger.e(response.toString());
+
+      if (response.data[ServiceResponseStatus.result.rawText] == ServiceStatusEnums.success.rawText) {
+        result = true;
+
+        super.logger.e(result.toString());
+
+        return Left(result);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderDeleteEffortError, statusCode: response.statusCode.toString()));
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderDeleteEffortError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<bool, CustomServiceException>> deleteWorkOrderPersonal(String workOrderCode, String moduleCode) async {
+    bool result = false;
+
+    String url =
+        'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_null&action=deleteWorkorderResource&username=sgnm1040&module=xusr&moduleCode=K200462&workorderCode=wo00002986';
+    try {
+      final response = await super.dio.get(url);
+      super.logger.e(response.toString());
+
+      if (response.data[ServiceResponseStatus.result.rawText] == ServiceStatusEnums.success.rawText) {
+        result = true;
+
+        super.logger.e(result.toString());
+
+        return Left(result);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.workOrderDeletePersonalError, statusCode: response.statusCode.toString()));
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderDeletePersonalError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<bool, CustomServiceException>> deleteWorkOrderSpareparts(String workOrderCode) async {
+    bool result = false;
+
+    String url =
+        'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_null&action=deleteWorkorderSparepart&code=malzeme kod&username=sgnm1040';
+    try {
+      final response = await super.dio.get(url);
+      super.logger.e(response.toString());
+
+      if (response.data[ServiceResponseStatus.result.rawText] == ServiceStatusEnums.success.rawText) {
+        result = true;
+
+        super.logger.e(result.toString());
+
+        return Left(result);
+      } else {
+        return Right(
+          CustomServiceException(message: CustomServiceMessages.workOrderDeleteSparepartsError, statusCode: response.statusCode.toString()),
+        );
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderDeleteSparepartsError, statusCode: '500'));
+    }
+  }
 }
