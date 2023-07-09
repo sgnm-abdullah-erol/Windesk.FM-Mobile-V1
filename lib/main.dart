@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vm_fm_4/feature/constants/other/app_strings.dart';
 import 'package:vm_fm_4/feature/injection.dart';
 
 import 'feature/route/app_route.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: _appRouter.config(),
-      title: 'Flutter Demo',
+      title: AppStrings.appName,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
