@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:vm_fm_4/feature/constants/other/colors.dart';
-import 'package:vm_fm_4/feature/constants/style/font_sizes.dart';
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 
 import '../../constants/style/border_radius.dart';
@@ -17,8 +16,8 @@ class CustomHalfButtons extends StatelessWidget {
     this.buttonsWidth,
   });
 
-  final String leftTitle;
-  final String rightTitle;
+  final Widget leftTitle;
+  final Widget rightTitle;
   final Function leftOnPressed;
   final Function rightOnPressed;
   final Color? leftColor;
@@ -48,7 +47,7 @@ class CustomHalfButtons extends StatelessWidget {
             ),
           ),
         ),
-        child: _Title(title: leftTitle),
+        child: leftTitle,
       ),
     );
   }
@@ -66,25 +65,15 @@ class CustomHalfButtons extends StatelessWidget {
             ),
           ),
         ),
-        child: _Title(title: rightTitle),
+        child: rightTitle,
       ),
     );
   }
 }
+// title text olursa style olarak bu kullanılabilir
+//  TextStyle(
+//         fontSize: FontSizes.button,
+//         color: APPColors.Main.white,
+//       ),
 
-class _Title extends StatelessWidget {
-  const _Title({required this.title});
 
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      title,
-      style: TextStyle(
-        fontSize: FontSizes.button,
-        color: APPColors.Main.white,
-      ),
-    );
-  }
-}
