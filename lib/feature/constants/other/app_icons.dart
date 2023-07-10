@@ -17,5 +17,5 @@ class AppIcons {
 // INPUT ACTION ICONS
   static const IconData qr = Icons.qr_code;
   //DROPDOWN INPUT ICON
-  static const IconData arrow_down = Icons.keyboard_arrow_down;
+  static const IconData arrowDown = Icons.keyboard_arrow_down;
 }

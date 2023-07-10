@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/constants/style/border_radius.dart';
-import 'package:vm_fm_4/feature/constants/style/custom_paddings.dart';
+import '../../constants/style/border_radius.dart';
 
 class TextFieldsInputWithAction extends StatelessWidget {
-  const TextFieldsInputWithAction(
-      {super.key,
-      required this.onChangedFunction,
-      required this.labelText,
-      required this.actionIcon,
-      required this.actionFunction});
+  const TextFieldsInputWithAction({
+    super.key,
+    required this.onChangedFunction,
+    required this.labelText,
+    required this.actionIcon,
+    required this.actionFunction,
+  });
   final Function onChangedFunction;
   final Function actionFunction;
   final String labelText;
@@ -21,9 +21,7 @@ class TextFieldsInputWithAction extends StatelessWidget {
       children: <Widget>[
         TextField(
           decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: CustomBorderRadius.textFieldBorderRadius,
-            ),
+            border: OutlineInputBorder(borderRadius: CustomBorderRadius.textFieldBorderRadius),
             labelText: labelText,
           ),
           onChanged: (inputValue) => onChangedFunction(inputValue),
