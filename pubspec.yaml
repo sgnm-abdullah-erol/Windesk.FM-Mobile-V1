@@ -35,6 +35,9 @@ dependencies:
   # persistent tab bar --for bottom navigation bar
   bottom_navy_bar: ^6.0.0
 
+  # badges -- for home circular buttons
+  badges: ^2.0.2
+
   cupertino_icons: ^1.0.2
 
 dev_dependencies:

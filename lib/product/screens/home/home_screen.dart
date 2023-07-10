@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../../../feature/components/buttons/custom_main_big_button.dart';
+
 @RoutePage()
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -12,8 +14,16 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Home'),
       ),
-      body: const Center(
-        child: Text('Home'),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: CustomMainBigButton(
+              onPressed: () {},
+              title: 'Home',
+            ),
+          ),
+        ],
       ),
     );
   }
