@@ -19,7 +19,7 @@ class HomeScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
-              child: TaskListWidget(
+              child: CustomIssueListCard(
             code: 'asdasd',
             taskNo: 'sasdasdsad',
             description: 'sasdasdsad',
