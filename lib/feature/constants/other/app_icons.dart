@@ -14,8 +14,9 @@ class AppIcons {
   static const IconData contentPasteSearch = Icons.content_paste_search;
   static const IconData contentPaseOff = Icons.content_paste_off;
 
-// INPUT ACTION ICONS
+  // INPUT ACTION ICONS
   static const IconData qr = Icons.qr_code;
+
   //DROPDOWN INPUT ICON
   static const IconData arrowDown = Icons.keyboard_arrow_down;
 }

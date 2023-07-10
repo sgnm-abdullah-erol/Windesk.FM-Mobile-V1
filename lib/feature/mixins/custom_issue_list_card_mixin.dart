@@ -32,6 +32,7 @@ mixin CustomIssueListCardConstantsMixin<T extends CustomIssueListCard> {
 }
 
 mixin CustomIssueListCardStylesMixin<T extends CustomIssueListCard> {
+  // color tasinacak
   final BoxDecoration containerDecoration = BoxDecoration(
     borderRadius: CustomBorderRadius.mediumBorderRadius,
     boxShadow: const [BoxShadow(color: Color(0x19025273), blurRadius: 50, offset: Offset(6, 8))],

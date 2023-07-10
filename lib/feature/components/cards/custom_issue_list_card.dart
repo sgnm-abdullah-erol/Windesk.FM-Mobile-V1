@@ -181,7 +181,6 @@ class _CustomIssueListCardState extends State<CustomIssueListCard> with CustomIs
     );
   }
 
-  //TODO color fix atılacak
   Flexible plannedlWidget(Size size, plannedDate) {
     return Flexible(
       child: SizedBox(

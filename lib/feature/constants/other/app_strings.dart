@@ -18,4 +18,10 @@ class AppStrings {
   static const String workOrderList = 'İş Emri Listesi';
   static const String workOrderSearch = 'İş Emri Arama';
   static const String newWorkOrder = 'Yeni İş Emri';
+
+  // date strings
+  static const day = 'gün';
+  static const hour = 'saat';
+  static const minute = 'dk.';
+  static const second = 'sn.';
 }
