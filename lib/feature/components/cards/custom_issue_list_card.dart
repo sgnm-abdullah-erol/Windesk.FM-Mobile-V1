@@ -164,90 +164,12 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Flexible(
-                              child: SizedBox(
-                                width: size.width / 1,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(bottom: 8.0),
-                                  child: Container(
-                                    width: size.width,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(5),
-                                        color: CustomColorCalculator()
-                                            .colorCalculatorBackground(widget.respondedIDate.toString(), widget.targetRDate.toString())),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: Text(
-                                        'Gerçekleşen Yanıtlama ${TimeClass().timeRecover(widget.respondedIDate).toString()}',
-                                        softWrap: true,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                            fontSize: 13,
-                                            letterSpacing: 0.5,
-                                            color: CustomColorCalculator()
-                                                .colorCalculatorText(widget.respondedIDate.toString(), widget.targetRDate.toString()),
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
+                            happeningTimeWidget(size, 'Gerçekleşen Yanıtlama : ', widget.respondedIDate.toString(), widget.targetRDate.toString()),
+                            NullCheckWidget().nullCheckWidget(
+                              widget.fixedIDate.toString(),
+                              happeningTimeWidget(size, 'Düzeltme tarihine ulaşılamadı : ', '5000000000000000', widget.targetFDate.toString()),
+                              happeningTimeWidget(size, 'Gerçekleşen Düzeltme', widget.fixedIDate.toString(), widget.targetFDate.toString()),
                             ),
-                            widget.fixedIDate == ''
-                                ? Flexible(
-                                    child: SizedBox(
-                                      width: size.width / 1,
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(bottom: 0.0),
-                                        child: Container(
-                                          width: size.width,
-                                          decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(5),
-                                              color: CustomColorCalculator()
-                                                  .colorCalculatorBackground('5000000000000000', (widget.targetFDate).toString())),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(5.0),
-                                            child: Text(
-                                              'Düzeltme tarihine ulaşılamadı.',
-                                              style: TextStyle(
-                                                  fontSize: 13,
-                                                  letterSpacing: 0.5,
-                                                  color: CustomColorCalculator()
-                                                      .colorCalculatorText('5000000000000000', (widget.targetFDate).toString()),
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                : Flexible(
-                                    child: SizedBox(
-                                      width: size.width / 1,
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(bottom: 0.0),
-                                        child: Container(
-                                          width: size.width,
-                                          decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(5),
-                                              color: CustomColorCalculator()
-                                                  .colorCalculatorBackground((widget.fixedIDate).toString(), (widget.targetFDate).toString())),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(5.0),
-                                            child: Text(
-                                              'Gerçekleşen Düzeltme ${TimeClass().timeRecover(widget.fixedIDate).toString()}',
-                                              style: TextStyle(
-                                                  fontSize: 13,
-                                                  letterSpacing: 0.5,
-                                                  color: CustomColorCalculator()
-                                                      .colorCalculatorText((widget.fixedIDate).toString(), (widget.targetFDate).toString()),
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
                           ],
                         )
                       : widget.responseTimer == "0" && widget.fixedTimer == "1"
@@ -300,6 +222,33 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                               ),
                             ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Flexible happeningTimeWidget(Size size, String header, String fixedDate, String targetDate) {
+    return Flexible(
+      child: SizedBox(
+        width: size.width / 1,
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 0.0),
+          child: Container(
+            width: size.width,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5), color: CustomColorCalculator().colorCalculatorBackground(fixedDate, targetDate)),
+            child: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Text(
+                '${header} ${TimeClass().timeRecover(fixedDate).toString()}',
+                style: TextStyle(
+                    fontSize: 13,
+                    letterSpacing: 0.5,
+                    color: CustomColorCalculator().colorCalculatorText(fixedDate, targetDate),
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
           ),
         ),
       ),
