@@ -12,6 +12,7 @@ dependencies:
 
   # local database
   shared_preferences: ^2.2.0
+  shared_preferences_foundation: ^2.2.2
 
   # dependency injection
   get_it: ^7.6.0
