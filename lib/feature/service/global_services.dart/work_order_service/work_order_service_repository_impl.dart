@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import '../../../enums/service_response_status.dart';
+import '../../../enums/service_response_status_enums.dart';
 import '../../../enums/service_status_enums.dart';
 import '../../../exceptions/custom_service_exceptions.dart';
 import '../../../models/work_order_models/work_order_added_resources_model.dart';
@@ -27,8 +27,8 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
             headers: {'xusercode': "sgnm1040", 'xtoken': 'demo!'},
           ));
 
-      if (response.data[ServiceResponseStatus.result.rawText] == ServiceStatusEnums.success.rawText) {
-        final data = response.data[ServiceResponseStatus.records.rawText];
+      if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
+        final data = response.data[ServiceResponseStatusEnums.records.rawText];
         loads = const WorkOrderLoadsModel().fromJsonList(data);
 
         return Left(loads);
@@ -51,8 +51,8 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
           options: Options(
             headers: {'xusercode': "sgnm1040", 'xtoken': 'demo!'},
           ));
-      if (response.data[ServiceResponseStatus.result.rawText] == ServiceStatusEnums.success.rawText) {
-        final data = response.data[ServiceResponseStatus.records.rawText];
+      if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
+        final data = response.data[ServiceResponseStatusEnums.records.rawText];
         attachments = const WorkOrderAttachmentsModel().fromJsonList(data);
 
         return Left(attachments);
@@ -76,8 +76,8 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
             headers: {'xusercode': "sgnm1040", 'xtoken': 'demo!'},
           ));
 
-      if (response.data[ServiceResponseStatus.result.rawText] == ServiceStatusEnums.success.rawText) {
-        final data = response.data[ServiceResponseStatus.records.rawText];
+      if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
+        final data = response.data[ServiceResponseStatusEnums.records.rawText];
         resources = WorkOrderResourcesModel.fromJsonList(data);
         return Left(resources);
       } else {
@@ -97,8 +97,8 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
         'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_null&action=getVardiyas';
     try {
       final response = await super.dio.get(url);
-      if (response.data[ServiceResponseStatus.result.rawText] == ServiceStatusEnums.success.rawText) {
-        final data = response.data[ServiceResponseStatus.records.rawText];
+      if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
+        final data = response.data[ServiceResponseStatusEnums.records.rawText];
         super.logger.e(shiftings.toString());
 
         shiftings = WorkOrderShiftingsModel.fromJsonList(data);
@@ -127,8 +127,8 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
             },
           ));
 
-      if (response.data[ServiceResponseStatus.result.rawText] == ServiceStatusEnums.success.rawText) {
-        final data = response.data[ServiceResponseStatus.detail.rawText];
+      if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
+        final data = response.data[ServiceResponseStatusEnums.detail.rawText];
         workOrderDeatails = WorkOrderDetailsModel.fromJson(data);
 
         return Left(workOrderDeatails);
@@ -152,8 +152,8 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
             headers: {'xusercode': "sgnm1040", 'xtoken': 'demo!'},
           ));
 
-      if (response.data[ServiceResponseStatus.result.rawText] == ServiceStatusEnums.success.rawText) {
-        final data = response.data[ServiceResponseStatus.records.rawText];
+      if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
+        final data = response.data[ServiceResponseStatusEnums.records.rawText];
         spareparts = WorkOrderSparepartsModel.fromJsonList(data);
 
         return Left(spareparts);
@@ -193,8 +193,8 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
         'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_null&action=getStore&user=sgnm1040';
     try {
       final response = await super.dio.get(url);
-      if (response.data[ServiceResponseStatus.result.rawText] == ServiceStatusEnums.success.rawText) {
-        final data = response.data[ServiceResponseStatus.records.rawText];
+      if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
+        final data = response.data[ServiceResponseStatusEnums.records.rawText];
         stores = WorkOrderStores.fromJsonList(data);
 
         return Left(stores);
@@ -214,8 +214,8 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
         'https://demo.signumtte.com/windesk/app/webroot/integration/WindeskMobile.php?use_rest=1&wsusername=wdmobile&wspassword=wdsgnm1017_&token=wddemo!_null&action=getResponsible&service=$serviceCode';
     try {
       final response = await super.dio.get(url);
-      if (response.data[ServiceResponseStatus.result.rawText] == ServiceStatusEnums.success.rawText) {
-        final data = response.data[ServiceResponseStatus.records.rawText];
+      if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
+        final data = response.data[ServiceResponseStatusEnums.records.rawText];
         addedResources = WorkOrderAddedResources.fromJsonList(data);
 
         return Left(addedResources);
@@ -239,7 +239,7 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
       final response = await super.dio.get(url);
       super.logger.e(response.toString());
 
-      if (response.data[ServiceResponseStatus.result.rawText] == ServiceStatusEnums.success.rawText) {
+      if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
         result = true;
 
         super.logger.e(result.toString());
@@ -264,7 +264,7 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
       final response = await super.dio.get(url);
       super.logger.e(response.toString());
 
-      if (response.data[ServiceResponseStatus.result.rawText] == ServiceStatusEnums.success.rawText) {
+      if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
         result = true;
 
         super.logger.e(result.toString());
@@ -289,7 +289,7 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
       final response = await super.dio.get(url);
       super.logger.e(response.toString());
 
-      if (response.data[ServiceResponseStatus.result.rawText] == ServiceStatusEnums.success.rawText) {
+      if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
         result = true;
 
         super.logger.e(result.toString());
@@ -314,7 +314,7 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
       final response = await super.dio.get(url);
       super.logger.e(response.toString());
 
-      if (response.data[ServiceResponseStatus.result.rawText] == ServiceStatusEnums.success.rawText) {
+      if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
         result = true;
 
         super.logger.e(result.toString());
@@ -340,7 +340,7 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
       final response = await super.dio.get(url);
       super.logger.e(response.toString());
 
-      if (response.data[ServiceResponseStatus.result.rawText] == ServiceStatusEnums.success.rawText) {
+      if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
         result = true;
 
         super.logger.e(result.toString());
@@ -365,7 +365,7 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
       final response = await super.dio.get(url);
       super.logger.e(response.toString());
 
-      if (response.data[ServiceResponseStatus.result.rawText] == ServiceStatusEnums.success.rawText) {
+      if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
         result = true;
 
         super.logger.e(result.toString());
@@ -390,7 +390,7 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
       final response = await super.dio.get(url);
       super.logger.e(response.toString());
 
-      if (response.data[ServiceResponseStatus.result.rawText] == ServiceStatusEnums.success.rawText) {
+      if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
         result = true;
 
         super.logger.e(result.toString());
