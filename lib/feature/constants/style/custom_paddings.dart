@@ -4,4 +4,7 @@ import 'package:flutter/material.dart';
 class CustomPaddings {
   const CustomPaddings._();
   static EdgeInsets textFieldsInputWithAction = const EdgeInsets.all(8.0);
+  static EdgeInsets onlyBottomLow = const EdgeInsets.only(bottom: 8.0);
+  static EdgeInsets onlyTopLow = const EdgeInsets.only(top: 8.0);
+  static EdgeInsets topAndBottomLow = const EdgeInsets.fromLTRB(0,5,0,5);
 }

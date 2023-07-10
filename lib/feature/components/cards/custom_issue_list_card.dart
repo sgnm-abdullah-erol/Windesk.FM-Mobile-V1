@@ -4,7 +4,10 @@ import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:vm_fm_4/feature/constants/style/border_radius.dart';
 import 'package:vm_fm_4/feature/constants/style/color_calculator.dart';
+import 'package:vm_fm_4/feature/constants/style/custom_paddings.dart';
+import 'package:vm_fm_4/feature/constants/style/font_sizes.dart';
 
 import '../../constants/functions/null_check_widget.dart';
 import '../../constants/other/colors.dart';
@@ -67,8 +70,9 @@ class TaskListWidget extends StatefulWidget {
 
 class _TaskListWidgetState extends State<TaskListWidget> {
   String dateNow = DateFormat("yyyyMMddhhmmss").format(DateTime.now());
+  late final Timer _timer;
 
-  changeTime() {
+  void changeTime() {
     if (mounted) {
       setState(() {
         dateNow = DateFormat("yyyyMMddhhmmss").format(DateTime.now());
@@ -79,7 +83,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
   @override
   void initState() {
     super.initState();
-    Timer.periodic(Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       if (!mounted) {
         timer.cancel();
         return;
@@ -90,8 +94,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
-    changeTime().dispose();
+    _timer.cancel();
     super.dispose();
   }
 
@@ -100,24 +103,13 @@ class _TaskListWidgetState extends State<TaskListWidget> {
     Size size = MediaQuery.of(context).size;
 
     return GestureDetector(
-      onTap: () {
-        widget.onPressed(widget.code.toString());
-      },
-      onLongPress: () {
-        widget.onPressedLong();
-        print('object');
-      },
+      onTap: () => widget.onPressed(widget.code.toString()),
+      onLongPress: () => widget.onPressedLong(),
       child: Container(
         width: size.width / 1.1,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              color: Color(0x19025273),
-              blurRadius: 50,
-              offset: Offset(6, 8),
-            ),
-          ],
+          borderRadius: CustomBorderRadius.mediumBorderRadius,
+          boxShadow: [BoxShadow(color: Color(0x19025273), blurRadius: 50, offset: Offset(6, 8))],
           color: APPColors.Main.white,
         ),
         child: Padding(
@@ -128,37 +120,13 @@ class _TaskListWidgetState extends State<TaskListWidget> {
             children: [
               codeWidget(size),
               statusNameWidget(size),
-              Divider(
-                height: 5,
-              ),
               NullCheckWidget().nullCheckWidget(widget.location.toString(), Container(), issueListText(size, 'Lokasyon', widget.location.toString())),
-              Divider(
-                height: 5,
-              ),
               NullCheckWidget().nullCheckWidget(widget.space.toString(), Container(), issueListText(size, 'Mahal', widget.space.toString())),
-              Divider(
-                height: 5,
-              ),
               NullCheckWidget()
                   .nullCheckWidget(widget.description.toString(), Container(), issueListText(size, 'Açıklama', widget.description.toString())),
-              SizedBox(height: 6),
               NullCheckWidget().nullCheckWidget(widget.idate.toString(), Container(), issueListText(size, 'Açılma Tarihi', widget.idate.toString())),
               widget.statusCode.toString() == "OPlanned"
-                  ? Flexible(
-                      child: SizedBox(
-                        width: size.width / 1,
-                        child: Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
-                          child: Text(
-                            'Randevulu Vaka ${TimeClass().timeRecover(widget.planedDate)}',
-                            style: TextStyle(
-                              color: Color(0xff025273),
-                              fontSize: 13,
-                            ),
-                          ),
-                        ),
-                      ),
-                    )
+                  ? plannedlWidget(size, widget.planedDate.toString())
                   : widget.responseTimer == "0" && widget.fixedTimer == "0"
                       ? Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -178,32 +146,8 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  SizedBox(
-                                    width: size.width / 1,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(bottom: 8.0),
-                                      child: Container(
-                                        height: size.height / 22,
-                                        alignment: Alignment.centerLeft,
-                                        decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(5),
-                                            color: CustomColorCalculator()
-                                                .colorCalculatorBackground(widget.respondedIDate.toString(), widget.targetRDate.toString())),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(5.0),
-                                          child: Text(
-                                            'Gerçekleşen Yanıtlama ${TimeClass().timeRecover(widget.respondedIDate.toString())}',
-                                            style: TextStyle(
-                                                fontSize: 13,
-                                                letterSpacing: 0.5,
-                                                color: CustomColorCalculator()
-                                                    .colorCalculatorText(widget.respondedIDate.toString(), widget.targetRDate.toString()),
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                  happeningTimeWidget(
+                                      size, 'Gerçekleşen Yanıtlama : ', widget.respondedIDate.toString(), widget.targetRDate.toString()),
                                   timerRecoverText(size, 'Hedef Düzeltme ', widget.targetFDate.toString()),
                                   timerDifferenceText(size, 'Kalan Süreniz', widget.targetFDate.toString()),
                                 ],
@@ -228,26 +172,42 @@ class _TaskListWidgetState extends State<TaskListWidget> {
     );
   }
 
-  Flexible happeningTimeWidget(Size size, String header, String fixedDate, String targetDate) {
+  Flexible plannedlWidget(Size size, plannedDate) {
     return Flexible(
       child: SizedBox(
         width: size.width / 1,
         child: Padding(
-          padding: const EdgeInsets.only(bottom: 0.0),
-          child: Container(
-            width: size.width,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5), color: CustomColorCalculator().colorCalculatorBackground(fixedDate, targetDate)),
-            child: Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Text(
-                '${header} ${TimeClass().timeRecover(fixedDate).toString()}',
-                style: TextStyle(
-                    fontSize: 13,
-                    letterSpacing: 0.5,
-                    color: CustomColorCalculator().colorCalculatorText(fixedDate, targetDate),
-                    fontWeight: FontWeight.bold),
-              ),
+          padding: const EdgeInsets.only(bottom: 8.0),
+          child: Text(
+            'Randevulu Vaka ${TimeClass().timeRecover(plannedDate)}',
+            style: TextStyle(
+              color: Color(0xff025273),
+              fontSize: 13,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  SizedBox happeningTimeWidget(Size size, String header, String fixedDate, String targetDate) {
+    return SizedBox(
+      width: size.width / 1,
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 0.0),
+        child: Container(
+          width: size.width,
+          decoration:
+              BoxDecoration(borderRadius: BorderRadius.circular(5), color: CustomColorCalculator().colorCalculatorBackground(fixedDate, targetDate)),
+          child: Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Text(
+              '$header ${TimeClass().timeRecover(fixedDate).toString()}',
+              style: TextStyle(
+                  fontSize: 13,
+                  letterSpacing: 0.5,
+                  color: CustomColorCalculator().colorCalculatorText(fixedDate, targetDate),
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ),
@@ -257,12 +217,12 @@ class _TaskListWidgetState extends State<TaskListWidget> {
 
   SizedBox timerDifferenceText(Size size, String header, String targetTime) {
     return SizedBox(
-      width: size.width / 1,
+      width: size.width,
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 8.0),
+        padding: CustomPaddings.topAndBottomLow,
         child: Text(
           key: Key('kalanSüreniz'),
-          '${header} ${TimeClass().timeDifference(targetTime)}',
+          '$header ${TimeClass().timeDifference(targetTime)}',
           style: TextStyle(
             color: CustomColorCalculator().colorCalculator(dateNow.toString(), targetTime),
             fontSize: 13,
@@ -274,12 +234,12 @@ class _TaskListWidgetState extends State<TaskListWidget> {
 
   SizedBox timerRecoverText(Size size, String header, String targetTime) {
     return SizedBox(
-      width: size.width / 1,
+      width: size.width,
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 8.0),
+        padding: CustomPaddings.topAndBottomLow,
         child: Text(
           key: Key('Hedef Yanıtlama'),
-          '${header} ${TimeClass().timeRecover(targetTime)}',
+          '$header ${TimeClass().timeRecover(targetTime)}',
           style: TextStyle(
             color: CustomColorCalculator().colorCalculator(dateNow.toString(), targetTime),
             fontSize: 13,
@@ -295,12 +255,12 @@ class _TaskListWidgetState extends State<TaskListWidget> {
       child: SizedBox(
         width: size.width / 1,
         child: Padding(
-          padding: const EdgeInsets.only(bottom: 8.0),
+          padding: CustomPaddings.onlyBottomLow,
           child: Text(
             widget.statusName.toString(),
             style: TextStyle(
               color: Color(0xff025273),
-              fontSize: 13,
+              fontSize: FontSizes.caption - 1,
             ),
           ),
         ),
@@ -313,17 +273,12 @@ class _TaskListWidgetState extends State<TaskListWidget> {
       child: SizedBox(
         width: size.width / 2.0,
         child: Padding(
-          padding: const EdgeInsets.only(top: 8.0),
+          padding: CustomPaddings.onlyTopLow,
           child: Text(
             widget.code.toString(),
             softWrap: true,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              color: Color(0xff025273),
-              fontSize: 14,
-              fontFamily: "Poppins",
-              fontWeight: FontWeight.bold,
-            ),
+            style: TextStyle(color: Color(0xff025273), fontSize: FontSizes.caption, fontFamily: "Poppins", fontWeight: FontWeight.bold),
           ),
         ),
       ),
@@ -333,17 +288,22 @@ class _TaskListWidgetState extends State<TaskListWidget> {
   Flexible issueListText(Size size, String header, String description) {
     return Flexible(
       child: SizedBox(
-        width: size.width / 1,
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 8.0),
-          child: Text(
-            key: Key('issueListText'),
-            header + ' : ' + description,
-            style: TextStyle(
-              color: Color(0xff025273),
-              fontSize: 13,
+        width: size.width,
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: CustomPaddings.onlyBottomLow,
+                child: Text(
+                  key: Key('issueListText'),
+                  '$header : $description',
+                  style: TextStyle(color: Color(0xff025273), fontSize: FontSizes.caption - 1),
+                ),
+              ),
             ),
-          ),
+            Divider(height: 5),
+          ],
         ),
       ),
     );

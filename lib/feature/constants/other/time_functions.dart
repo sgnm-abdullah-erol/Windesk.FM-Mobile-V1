@@ -1,11 +1,9 @@
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'colors.dart';
 
 @immutable
 class TimeClass {
-
   String timeRecover(timeInfo) {
     if (timeInfo == '') {
       return 'Bilgi Yok';
@@ -68,18 +66,15 @@ class TimeClass {
   }
 
   String convertSecToStringFormat(String second) {
-    if (second != null) {
-      int seconds = int.parse(second);
-      int h = (seconds / 3600).floor();
-      int m = ((seconds % 3600) / 60).floor();
-      int s = ((seconds % 3600) % 60).floor();
+    final int seconds = int.parse(second);
+    final int h = (seconds / 3600).floor();
+    final int m = ((seconds % 3600) / 60).floor();
+    final int s = ((seconds % 3600) % 60).floor();
 
-      var hDisplay = h > 0 ? ' $h sa ' : '';
-      var mDisplay = m > 0 ? '$m dk ' : '';
-      var sDisplay = s > 0 ? '$s sn ' : '';
-      return hDisplay + mDisplay + sDisplay;
-    } else {
-      return 'Zaman bilgisi bulunamadı';
-    }
+    final String hDisplay = h > 0 ? ' $h sa ' : '';
+    final String mDisplay = m > 0 ? '$m dk ' : '';
+    final String sDisplay = s > 0 ? '$s sn ' : '';
+
+    return hDisplay + mDisplay + sDisplay;
   }
 }
