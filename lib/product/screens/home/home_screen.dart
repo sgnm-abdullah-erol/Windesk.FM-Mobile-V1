@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../../../feature/components/cards/custom_issue_list_card.dart';
-import '../../../feature/components/cards/custom_tracing_list_card.dart';
 
 //s
 @RoutePage()
@@ -32,18 +31,8 @@ class HomeScreen extends StatelessWidget {
             statusCode: 'sasdasdsad',
             targetFDate: '20240212151200',
             targetRDate: '20240212151200',
-            // planedDate: 'sasdasdsad',
-            // respondedIDate: 'sasdasdsad',
-            // responseTimer: 'sasdasdsad',
-            // fixedTimer: 'sasdasdsad',
-            // fixedIDate: 'sasdasdsad',
-            // timeInfoNow: 'sasdasdsad',
-            onPressed: () {
-              print('object');
-            },
-            onPressedLong: () {
-              print('object');
-            },
+            onPressed: () {},
+            onPressedLong: () {},
           )),
         ],
       ),

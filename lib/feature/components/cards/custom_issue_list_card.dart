@@ -5,6 +5,8 @@ import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:vm_fm_4/feature/constants/style/color_calculator.dart';
+import 'package:vm_fm_4/feature/constants/style/custom_paddings.dart';
+import 'package:vm_fm_4/feature/constants/style/font_sizes.dart';
 
 import '../../constants/functions/null_check_widget.dart';
 import '../../constants/other/colors.dart';
@@ -67,8 +69,9 @@ class TaskListWidget extends StatefulWidget {
 
 class _TaskListWidgetState extends State<TaskListWidget> {
   String dateNow = DateFormat("yyyyMMddhhmmss").format(DateTime.now());
+  late final Timer _timer;
 
-  changeTime() {
+  void changeTime() {
     if (mounted) {
       setState(() {
         dateNow = DateFormat("yyyyMMddhhmmss").format(DateTime.now());
@@ -79,7 +82,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
   @override
   void initState() {
     super.initState();
-    Timer.periodic(Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       if (!mounted) {
         timer.cancel();
         return;
@@ -90,8 +93,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
-    changeTime().dispose();
+    _timer.cancel();
     super.dispose();
   }
 
@@ -100,24 +102,13 @@ class _TaskListWidgetState extends State<TaskListWidget> {
     Size size = MediaQuery.of(context).size;
 
     return GestureDetector(
-      onTap: () {
-        widget.onPressed(widget.code.toString());
-      },
-      onLongPress: () {
-        widget.onPressedLong();
-        print('object');
-      },
+      onTap: () => widget.onPressed(widget.code.toString()),
+      onLongPress: () => widget.onPressedLong(),
       child: Container(
         width: size.width / 1.1,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              color: Color(0x19025273),
-              blurRadius: 50,
-              offset: Offset(6, 8),
-            ),
-          ],
+          boxShadow: [BoxShadow(color: Color(0x19025273), blurRadius: 50, offset: Offset(6, 8))],
           color: APPColors.Main.white,
         ),
         child: Padding(
@@ -128,17 +119,11 @@ class _TaskListWidgetState extends State<TaskListWidget> {
             children: [
               codeWidget(size),
               statusNameWidget(size),
-              Divider(
-                height: 5,
-              ),
+              Divider(height: 5),
               NullCheckWidget().nullCheckWidget(widget.location.toString(), Container(), issueListText(size, 'Lokasyon', widget.location.toString())),
-              Divider(
-                height: 5,
-              ),
+              Divider(height: 5),
               NullCheckWidget().nullCheckWidget(widget.space.toString(), Container(), issueListText(size, 'Mahal', widget.space.toString())),
-              Divider(
-                height: 5,
-              ),
+              Divider(height: 5),
               NullCheckWidget()
                   .nullCheckWidget(widget.description.toString(), Container(), issueListText(size, 'Açıklama', widget.description.toString())),
               SizedBox(height: 6),
@@ -308,12 +293,12 @@ class _TaskListWidgetState extends State<TaskListWidget> {
 
   SizedBox timerDifferenceText(Size size, String header, String targetTime) {
     return SizedBox(
-      width: size.width / 1,
+      width: size.width,
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 8.0),
+        padding: CustomPaddings.onlyBottomLow,
         child: Text(
           key: Key('kalanSüreniz'),
-          '${header} ${TimeClass().timeDifference(targetTime)}',
+          '$header ${TimeClass().timeDifference(targetTime)}',
           style: TextStyle(
             color: CustomColorCalculator().colorCalculator(dateNow.toString(), targetTime),
             fontSize: 13,
@@ -325,12 +310,12 @@ class _TaskListWidgetState extends State<TaskListWidget> {
 
   SizedBox timerRecoverText(Size size, String header, String targetTime) {
     return SizedBox(
-      width: size.width / 1,
+      width: size.width,
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 8.0),
+        padding: CustomPaddings.onlyBottomLow,
         child: Text(
           key: Key('Hedef Yanıtlama'),
-          '${header} ${TimeClass().timeRecover(targetTime)}',
+          '$header ${TimeClass().timeRecover(targetTime)}',
           style: TextStyle(
             color: CustomColorCalculator().colorCalculator(dateNow.toString(), targetTime),
             fontSize: 13,
@@ -346,12 +331,12 @@ class _TaskListWidgetState extends State<TaskListWidget> {
       child: SizedBox(
         width: size.width / 1,
         child: Padding(
-          padding: const EdgeInsets.only(bottom: 8.0),
+          padding: CustomPaddings.onlyBottomLow,
           child: Text(
             widget.statusName.toString(),
             style: TextStyle(
               color: Color(0xff025273),
-              fontSize: 13,
+              fontSize: FontSizes.caption - 1,
             ),
           ),
         ),
@@ -364,17 +349,12 @@ class _TaskListWidgetState extends State<TaskListWidget> {
       child: SizedBox(
         width: size.width / 2.0,
         child: Padding(
-          padding: const EdgeInsets.only(top: 8.0),
+          padding: CustomPaddings.onlyTopLow,
           child: Text(
             widget.code.toString(),
             softWrap: true,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              color: Color(0xff025273),
-              fontSize: 14,
-              fontFamily: "Poppins",
-              fontWeight: FontWeight.bold,
-            ),
+            style: TextStyle(color: Color(0xff025273), fontSize: FontSizes.caption, fontFamily: "Poppins", fontWeight: FontWeight.bold),
           ),
         ),
       ),
@@ -384,16 +364,13 @@ class _TaskListWidgetState extends State<TaskListWidget> {
   Flexible issueListText(Size size, String header, String description) {
     return Flexible(
       child: SizedBox(
-        width: size.width / 1,
+        width: size.width,
         child: Padding(
-          padding: const EdgeInsets.only(bottom: 8.0),
+          padding: CustomPaddings.onlyBottomLow,
           child: Text(
             key: Key('issueListText'),
-            header + ' : ' + description,
-            style: TextStyle(
-              color: Color(0xff025273),
-              fontSize: 13,
-            ),
+            '$header : $description',
+            style: TextStyle(color: Color(0xff025273), fontSize: FontSizes.caption - 1),
           ),
         ),
       ),
