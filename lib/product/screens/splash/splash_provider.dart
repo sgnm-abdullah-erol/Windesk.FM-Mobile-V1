@@ -1,7 +1,10 @@
 import 'dart:async';
+import 'dart:developer';
 
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/database/shared_manager.dart';
+import '../../../feature/database/shared_manager.dart';
+import 'dart:developer' as logDev;
 
 class SplashProvider extends ChangeNotifier {
   late Timer _timer;
@@ -11,9 +14,30 @@ class SplashProvider extends ChangeNotifier {
   bool _isUserAlreadyLoggedIn = false;
   bool get isUserAlreadyLoggedIn => _isUserAlreadyLoggedIn;
 
+  void _getDeviceInformation() async {
+    final deviceInfoPlugin = DeviceInfoPlugin();
+
+    final result = await deviceInfoPlugin.deviceInfo;
+    debugPrint(result.toString(), wrapWidth: 10000);
+    logDev.log(result.toString());
+    final deviceId = result.data['id'];
+    final deviceType = result.data['systemFeatures'];
+
+    print(deviceId);
+    print(deviceType);
+
+    // await SharedManager().setString(SharedEnum.deviceId, deviceId);
+    // await SharedManager().setString(SharedEnum.deviceType, deviceType);
+  }
+
   void checkUserAlreadyLoggedIn() async {
     await SharedManager().initInstances();
-    print(await SharedManager().getString('isUserLoggedIn'));
+    _getDeviceInformation();
+
+    // print(await SharedManager().getString(SharedEnum.deviceId));
+    // print(await SharedManager().getString(SharedEnum.deviceType));
+
+    // final String? userName = await SharedManager().getString(SharedEnum.userName);
   }
 
   void setSplashFinished() {

@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'feature/constants/other/app_strings.dart';
 import 'feature/injection.dart';
 import 'feature/route/app_route.dart';
-import 'feature/service/firebase/firebase_notification.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   Injection().initInstances();
-  FirebaseNotification.init();
+
   runApp(MyApp());
 }
 
