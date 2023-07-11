@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import '../../../feature/components/cards/custom_issue_list_card.dart';
+import '../../../feature/components/cards/custom_issue_detail_card.dart';
 
 //s
 @RoutePage()
@@ -19,23 +19,14 @@ class HomeScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
-              child: TaskListWidget(
-            code: 'asdasd',
-            taskNo: 'sasdasdsad',
-            description: 'sasdasdsad',
-            sumdesc1: 'sasdasdsad',
-            statusName: 'sasdasdsad',
-            space: 'sasdasdsad',
-            location: 'sasdasdsad',
-            idate: 'sasdasdsad',
-            statusCode: 'sasdasdsad',
-            respondedIDate: '20220210151200',
-            targetFDate: '20240212151200',
-            targetRDate: '20220212151200',
-            responseTimer: '0',
-            fixedTimer: '1',
+              child: DetailListWidget(
+            respondedDate: '20240202124212',
+            fixedDate: '20240102124212',
+            fixTimer: '20240502124212',
+            respondedTimer: '20240702124212',
+            targetFDate: '20240702124212',
+            targetRDate: '',
             onPressed: () {},
-            onPressedLong: () {},
           )),
         ],
       ),

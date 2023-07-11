@@ -115,6 +115,7 @@ class _TaskListWidgetState extends State<TaskListWidget> {
         child: Padding(
           padding: const EdgeInsets.only(top: 8, left: 12, right: 8, bottom: 8),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -129,8 +130,6 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                   ? plannedlWidget(size, widget.planedDate.toString())
                   : widget.responseTimer == "0" && widget.fixedTimer == "0"
                       ? Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
                           children: [
                             happeningTimeWidget(size, 'Gerçekleşen Yanıtlama : ', widget.respondedIDate.toString(), widget.targetRDate.toString()),
                             NullCheckWidget().nullCheckWidget(
@@ -143,8 +142,6 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                       : widget.responseTimer == "0" && widget.fixedTimer == "1"
                           ? Flexible(
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   happeningTimeWidget(
                                       size, 'Gerçekleşen Yanıtlama : ', widget.respondedIDate.toString(), widget.targetRDate.toString()),
@@ -155,8 +152,6 @@ class _TaskListWidgetState extends State<TaskListWidget> {
                             )
                           : Flexible(
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   timerRecoverText(size, 'Hedef Yanıtlama ', widget.targetRDate.toString()),
                                   timerDifferenceText(size, 'Kalan Süreniz', widget.targetRDate.toString()),
