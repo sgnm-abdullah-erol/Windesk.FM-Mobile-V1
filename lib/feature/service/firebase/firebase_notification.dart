@@ -11,7 +11,7 @@ import 'local_notification.dart';
 class FirebaseNotification {
   static void init() async {
     WidgetsFlutterBinding.ensureInitialized();
-    Firebase.initializeApp();
+    await Firebase.initializeApp();
     FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
         FlutterLocalNotificationsPlugin();
     final onNotifications = BehaviorSubject<String?>();
