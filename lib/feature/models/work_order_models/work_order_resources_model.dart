@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+
 part 'generator_work_order/work_order_resources_model.g.dart';
 
 @JsonSerializable()

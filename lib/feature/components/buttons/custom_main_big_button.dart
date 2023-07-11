@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/constants/other/colors.dart';
-import 'package:vm_fm_4/feature/constants/style/border_radius.dart';
-import 'package:vm_fm_4/feature/constants/style/font_sizes.dart';
-import 'package:vm_fm_4/feature/extensions/context_extension.dart';
+import '../../constants/other/colors.dart';
+import '../../constants/style/border_radius.dart';
+import '../../constants/style/font_sizes.dart';
+import '../../extensions/context_extension.dart';
 
 class CustomMainBigButton extends StatelessWidget {
   const CustomMainBigButton({

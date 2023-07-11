@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
@@ -16,15 +17,20 @@ class SplashProvider extends ChangeNotifier {
 
   void _getDeviceInformation() async {
     final deviceInfoPlugin = DeviceInfoPlugin();
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    if (Platform.isAndroid) {
+      AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+    } else if (Platform.isIOS) {
+      IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+      logDev.log(iosInfo.toString());
+    }
+    // final result = await deviceInfoPlugin.deviceInfo;
+    // debugPrint(result.toString(), wrapWidth: 10000);
+    // final deviceId = result.data['id'];
+    // final deviceType = result.data['systemFeatures'];
 
-    final result = await deviceInfoPlugin.deviceInfo;
-    debugPrint(result.toString(), wrapWidth: 10000);
-    logDev.log(result.toString());
-    final deviceId = result.data['id'];
-    final deviceType = result.data['systemFeatures'];
-
-    print(deviceId);
-    print(deviceType);
+    // print(deviceId);
+    // print(deviceType);
 
     // await SharedManager().setString(SharedEnum.deviceId, deviceId);
     // await SharedManager().setString(SharedEnum.deviceType, deviceType);

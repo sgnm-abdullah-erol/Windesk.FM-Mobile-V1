@@ -19,4 +19,6 @@ class AppIcons {
 
   //DROPDOWN INPUT ICON
   static const IconData arrowDown = Icons.keyboard_arrow_down;
+
+  static const IconData addPhoto = Icons.add_a_photo;
 }

@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import '../../../feature/components/cards/custom_issue_detail_card.dart';
+import '../../../feature/components/snackbar/snackbar.dart';
 
 //s
 @RoutePage()
@@ -10,26 +10,19 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    test() {
+      print('asd');
+    }
+
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: const Text('Home'),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-              child: DetailListWidget(
-            respondedDate: '20240202124212',
-            fixedDate: '20240102124212',
-            fixTimer: '20240502124212',
-            respondedTimer: '20240702124212',
-            targetFDate: '20240702124212',
-            targetRDate: '',
-            onPressed: () {},
-          )),
-        ],
-      ),
-    );
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          title: const Text('Home'),
+        ),
+        body: ElevatedButton(
+            onPressed: () {
+              snackBar(context, 'test', 'success');
+            },
+            child: Text('asd')));
   }
 }

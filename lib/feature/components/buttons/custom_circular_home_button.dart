@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/constants/style/border_radius.dart';
-import 'package:vm_fm_4/feature/extensions/context_extension.dart';
+import '../../constants/style/border_radius.dart';
+import '../../constants/style/font_sizes.dart';
+import '../../extensions/context_extension.dart';
 
 import '../../constants/other/colors.dart';
 
@@ -41,7 +42,7 @@ class _Title extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title,
-      style: TextStyle(fontSize: 16, color: APPColors.Accent.blue),
+      style: TextStyle(fontSize: FontSizes.button, color: APPColors.Accent.blue),
       textAlign: TextAlign.center,
     );
   }
