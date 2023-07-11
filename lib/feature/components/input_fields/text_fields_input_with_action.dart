@@ -26,10 +26,7 @@ class TextFieldsInputWithAction extends StatelessWidget {
           ),
           onChanged: (inputValue) => onChangedFunction(inputValue),
         ),
-        IconButton(
-          icon: Icon(actionIcon),
-          onPressed: () => actionFunction,
-        ),
+        IconButton(icon: Icon(actionIcon), onPressed: () => actionFunction),
       ],
     );
   }
