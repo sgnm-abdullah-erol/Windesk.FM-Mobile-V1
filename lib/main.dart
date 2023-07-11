@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/constants/other/app_strings.dart';
-import 'package:vm_fm_4/feature/injection.dart';
 
+import 'feature/constants/other/app_strings.dart';
+import 'feature/injection.dart';
 import 'feature/route/app_route.dart';
+import 'feature/service/firebase/firebase_notification.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   Injection().initInstances();
+  FirebaseNotification.init();
   runApp(MyApp());
 }
 
@@ -14,7 +18,6 @@ class MyApp extends StatelessWidget {
 
   final _appRouter = AppRouter();
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(

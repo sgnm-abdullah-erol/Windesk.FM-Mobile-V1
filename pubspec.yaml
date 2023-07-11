@@ -45,6 +45,13 @@ dependencies:
   # localizations
   easy_localization: ^3.0.2
 
+  # firebase --for push notification
+  firebase_messaging: ^14.4.0
+  firebase_core: ^2.9.0
+  flutter_local_notifications: ^8.2.0
+  rxdart: ^0.27.7
+
+
 
   cupertino_icons: ^1.0.2
 

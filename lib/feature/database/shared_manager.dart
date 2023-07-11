@@ -5,7 +5,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SharedManager {
   static SharedPreferences? _sharedPreferences;
 
-  const SharedManager();
+  SharedManager() {
+    if (_sharedPreferences == null) initInstances();
+  }
 
   Future<void> initInstances() async {
     _sharedPreferences = await SharedPreferences.getInstance();
