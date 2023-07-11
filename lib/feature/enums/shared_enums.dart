@@ -1,6 +1,6 @@
 enum SharedEnum {
   deviceId,
   deviceType,
-  userToken,
+  firebaseToken,
   userName,
 }

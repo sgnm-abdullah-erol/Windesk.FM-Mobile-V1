@@ -54,10 +54,11 @@ dependencies:
   # device info --get device info
   device_info_plus: ^9.0.2
 
+  # snackbar
+  top_snackbar_flutter: ^3.1.0
 
 
   cupertino_icons: ^1.0.2
-  top_snackbar_flutter: ^3.1.0
 
 dev_dependencies:
   flutter_test:

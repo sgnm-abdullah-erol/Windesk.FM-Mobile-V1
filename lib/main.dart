@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/service/firebase/firebase_notification.dart';
+import 'package:provider/provider.dart';
+import 'package:vm_fm_4/feature/global_providers/global_provider.dart';
 
 import 'feature/constants/other/app_strings.dart';
 import 'feature/injection.dart';
@@ -9,8 +10,15 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   Injection().initInstances();
-  FirebaseNotification.init();
-  runApp(MyApp());
+  // FirebaseNotification.init();
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<GlobalProvider>(create: (_) => GlobalProvider()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
