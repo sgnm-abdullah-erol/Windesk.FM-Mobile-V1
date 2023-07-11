@@ -54,6 +54,7 @@ dependencies:
 
 
   cupertino_icons: ^1.0.2
+  top_snackbar_flutter: ^3.1.0
 
 dev_dependencies:
   flutter_test:
