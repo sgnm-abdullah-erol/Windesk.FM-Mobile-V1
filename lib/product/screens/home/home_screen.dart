@@ -62,9 +62,9 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(
         children: [
           rowIconButtonSection(
-              LocaleKeys.issueList, AppIcons.calendarMonth, const TestScreen(), LocaleKeys.issueSearch, AppIcons.attachment, const TestScreen()),
-          rowIconButtonSection(LocaleKeys.workOrderList, AppIcons.contentPasteSearch, const TestScreen(), LocaleKeys.workOrderSearch,
-              AppIcons.contentPasteOff, const TestScreen()),
+              LocaleKeys.issueList, AppIcons.calendarMonth,  TestScreen(), LocaleKeys.issueSearch, AppIcons.attachment, TestScreen()),
+          rowIconButtonSection(LocaleKeys.workOrderList, AppIcons.contentPasteSearch, TestScreen(), LocaleKeys.workOrderSearch,
+              AppIcons.contentPasteOff, TestScreen()),
         ],
       ),
     );

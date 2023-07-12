@@ -9,6 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i9;
+import 'package:flutter/material.dart' as _i10;
 import 'package:vm_fm_4/feature/route/empty_router.dart' as _i8;
 import 'package:vm_fm_4/product/screens/auth/view/login_screen.dart' as _i5;
 import 'package:vm_fm_4/product/screens/home/home_screen.dart' as _i2;
@@ -42,9 +43,11 @@ abstract class $AppRouter extends _i9.RootStackRouter {
       );
     },
     TestScreen.name: (routeData) {
+      final args = routeData.argsAs<TestScreenArgs>(
+          orElse: () => const TestScreenArgs());
       return _i9.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i4.TestScreen(),
+        child: _i4.TestScreen(key: args.key),
       );
     },
     LoginScreen.name: (routeData) {
@@ -118,16 +121,31 @@ class SplashScreen extends _i9.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.TestScreen]
-class TestScreen extends _i9.PageRouteInfo<void> {
-  const TestScreen({List<_i9.PageRouteInfo>? children})
-      : super(
+class TestScreen extends _i9.PageRouteInfo<TestScreenArgs> {
+  TestScreen({
+    _i10.Key? key,
+    List<_i9.PageRouteInfo>? children,
+  }) : super(
           TestScreen.name,
+          args: TestScreenArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'TestScreen';
 
-  static const _i9.PageInfo<void> page = _i9.PageInfo<void>(name);
+  static const _i9.PageInfo<TestScreenArgs> page =
+      _i9.PageInfo<TestScreenArgs>(name);
+}
+
+class TestScreenArgs {
+  const TestScreenArgs({this.key});
+
+  final _i10.Key? key;
+
+  @override
+  String toString() {
+    return 'TestScreenArgs{key: $key}';
+  }
 }
 
 /// generated route for
