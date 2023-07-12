@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:vm_fm_4/feature/constants/paths/service_tools.dart';
 import 'package:vm_fm_4/product/screens/test/service/test_service_repo_impl.dart';
 
 import '../../../feature/components/cards/custom_issue_detail_card.dart';
@@ -36,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
               children: [
                 Text(
-                  'Ankara Etlik Şehir Hastanesi',
+                  ServiceTools.facilityName,
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400),
                 ),
                 Text(
