@@ -9,32 +9,32 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i10;
-import 'package:vm_fm_4/feature/route/empty_router.dart' as _i1;
-import 'package:vm_fm_4/product/screens/auth/view/login_screen.dart' as _i2;
+import 'package:vm_fm_4/feature/route/empty_router.dart' as _i9;
+import 'package:vm_fm_4/product/screens/auth/view/login_screen.dart' as _i6;
 import 'package:vm_fm_4/product/screens/home/home_screen.dart' as _i3;
 import 'package:vm_fm_4/product/screens/home/screens/work_order_list/view/work_order_list_screen.dart'
-    as _i4;
-import 'package:vm_fm_4/product/screens/new_order/new_order_screen.dart' as _i5;
-import 'package:vm_fm_4/product/screens/search/search_screen.dart' as _i6;
-import 'package:vm_fm_4/product/screens/splash/splash_screen.dart' as _i7;
-import 'package:vm_fm_4/product/screens/test/view/test_screen.dart' as _i8;
-import 'package:vm_fm_4/product/wrapper/app_wrapper.dart' as _i9;
+    as _i2;
+import 'package:vm_fm_4/product/screens/new_order/new_order_screen.dart' as _i8;
+import 'package:vm_fm_4/product/screens/search/search_screen.dart' as _i7;
+import 'package:vm_fm_4/product/screens/splash/splash_screen.dart' as _i4;
+import 'package:vm_fm_4/product/screens/test/view/test_screen.dart' as _i5;
+import 'package:vm_fm_4/product/wrapper/app_wrapper.dart' as _i1;
 
 abstract class $AppRouter extends _i10.RootStackRouter {
   $AppRouter({super.navigatorKey});
 
   @override
   final Map<String, _i10.PageFactory> pagesMap = {
-    EmptyRouter.name: (routeData) {
+    AppWrapper.name: (routeData) {
       return _i10.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i1.EmptyRouter(),
+        child: const _i1.AppWrapper(),
       );
     },
-    LoginScreen.name: (routeData) {
+    WorkOrderListScreen.name: (routeData) {
       return _i10.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i2.LoginScreen(),
+        child: const _i2.WorkOrderListScreen(),
       );
     },
     HomeScreen.name: (routeData) {
@@ -43,69 +43,69 @@ abstract class $AppRouter extends _i10.RootStackRouter {
         child: const _i3.HomeScreen(),
       );
     },
-    WorkOrderListScreen.name: (routeData) {
-      return _i10.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i4.WorkOrderListScreen(),
-      );
-    },
-    NewOrderScreen.name: (routeData) {
-      return _i10.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i5.NewOrderScreen(),
-      );
-    },
-    SearchScreen.name: (routeData) {
-      return _i10.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i6.SearchScreen(),
-      );
-    },
     SplashScreen.name: (routeData) {
       return _i10.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i7.SplashScreen(),
+        child: const _i4.SplashScreen(),
       );
     },
     TestScreen.name: (routeData) {
       return _i10.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i8.TestScreen(),
+        child: const _i5.TestScreen(),
       );
     },
-    AppWrapper.name: (routeData) {
+    LoginScreen.name: (routeData) {
       return _i10.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i9.AppWrapper(),
+        child: const _i6.LoginScreen(),
+      );
+    },
+    SearchScreen.name: (routeData) {
+      return _i10.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i7.SearchScreen(),
+      );
+    },
+    NewOrderScreen.name: (routeData) {
+      return _i10.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i8.NewOrderScreen(),
+      );
+    },
+    EmptyRouter.name: (routeData) {
+      return _i10.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i9.EmptyRouter(),
       );
     },
   };
 }
 
 /// generated route for
-/// [_i1.EmptyRouter]
-class EmptyRouter extends _i10.PageRouteInfo<void> {
-  const EmptyRouter({List<_i10.PageRouteInfo>? children})
+/// [_i1.AppWrapper]
+class AppWrapper extends _i10.PageRouteInfo<void> {
+  const AppWrapper({List<_i10.PageRouteInfo>? children})
       : super(
-          EmptyRouter.name,
+          AppWrapper.name,
           initialChildren: children,
         );
 
-  static const String name = 'EmptyRouter';
+  static const String name = 'AppWrapper';
 
   static const _i10.PageInfo<void> page = _i10.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i2.LoginScreen]
-class LoginScreen extends _i10.PageRouteInfo<void> {
-  const LoginScreen({List<_i10.PageRouteInfo>? children})
+/// [_i2.WorkOrderListScreen]
+class WorkOrderListScreen extends _i10.PageRouteInfo<void> {
+  const WorkOrderListScreen({List<_i10.PageRouteInfo>? children})
       : super(
-          LoginScreen.name,
+          WorkOrderListScreen.name,
           initialChildren: children,
         );
 
-  static const String name = 'LoginScreen';
+  static const String name = 'WorkOrderListScreen';
 
   static const _i10.PageInfo<void> page = _i10.PageInfo<void>(name);
 }
@@ -125,49 +125,7 @@ class HomeScreen extends _i10.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i4.WorkOrderListScreen]
-class WorkOrderListScreen extends _i10.PageRouteInfo<void> {
-  const WorkOrderListScreen({List<_i10.PageRouteInfo>? children})
-      : super(
-          WorkOrderListScreen.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'WorkOrderListScreen';
-
-  static const _i10.PageInfo<void> page = _i10.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i5.NewOrderScreen]
-class NewOrderScreen extends _i10.PageRouteInfo<void> {
-  const NewOrderScreen({List<_i10.PageRouteInfo>? children})
-      : super(
-          NewOrderScreen.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'NewOrderScreen';
-
-  static const _i10.PageInfo<void> page = _i10.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i6.SearchScreen]
-class SearchScreen extends _i10.PageRouteInfo<void> {
-  const SearchScreen({List<_i10.PageRouteInfo>? children})
-      : super(
-          SearchScreen.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'SearchScreen';
-
-  static const _i10.PageInfo<void> page = _i10.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i7.SplashScreen]
+/// [_i4.SplashScreen]
 class SplashScreen extends _i10.PageRouteInfo<void> {
   const SplashScreen({List<_i10.PageRouteInfo>? children})
       : super(
@@ -181,7 +139,7 @@ class SplashScreen extends _i10.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i8.TestScreen]
+/// [_i5.TestScreen]
 class TestScreen extends _i10.PageRouteInfo<void> {
   const TestScreen({List<_i10.PageRouteInfo>? children})
       : super(
@@ -195,15 +153,57 @@ class TestScreen extends _i10.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i9.AppWrapper]
-class AppWrapper extends _i10.PageRouteInfo<void> {
-  const AppWrapper({List<_i10.PageRouteInfo>? children})
+/// [_i6.LoginScreen]
+class LoginScreen extends _i10.PageRouteInfo<void> {
+  const LoginScreen({List<_i10.PageRouteInfo>? children})
       : super(
-          AppWrapper.name,
+          LoginScreen.name,
           initialChildren: children,
         );
 
-  static const String name = 'AppWrapper';
+  static const String name = 'LoginScreen';
+
+  static const _i10.PageInfo<void> page = _i10.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i7.SearchScreen]
+class SearchScreen extends _i10.PageRouteInfo<void> {
+  const SearchScreen({List<_i10.PageRouteInfo>? children})
+      : super(
+          SearchScreen.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SearchScreen';
+
+  static const _i10.PageInfo<void> page = _i10.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i8.NewOrderScreen]
+class NewOrderScreen extends _i10.PageRouteInfo<void> {
+  const NewOrderScreen({List<_i10.PageRouteInfo>? children})
+      : super(
+          NewOrderScreen.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'NewOrderScreen';
+
+  static const _i10.PageInfo<void> page = _i10.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i9.EmptyRouter]
+class EmptyRouter extends _i10.PageRouteInfo<void> {
+  const EmptyRouter({List<_i10.PageRouteInfo>? children})
+      : super(
+          EmptyRouter.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'EmptyRouter';
 
   static const _i10.PageInfo<void> page = _i10.PageInfo<void>(name);
 }
