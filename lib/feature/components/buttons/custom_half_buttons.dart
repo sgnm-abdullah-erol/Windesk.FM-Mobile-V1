@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../constants/other/colors.dart';
-import '../../extensions/context_extension.dart';
 
+import '../../constants/other/colors.dart';
 import '../../constants/style/border_radius.dart';
+import '../../extensions/context_extension.dart';
 
 class CustomHalfButtons extends StatelessWidget {
   const CustomHalfButtons({

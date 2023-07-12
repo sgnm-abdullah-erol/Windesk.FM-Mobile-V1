@@ -29,4 +29,8 @@ class AppStrings {
   static const myOrders = 'Üzerimdekiler';
   static const myGroups = 'Grubumdakiler';
   static const myPendiks = 'Bekleyenler';
+
+  //button
+  static const vazgec = 'Vazgeç';
+  static const kaydet = 'Kaydet';
 }
