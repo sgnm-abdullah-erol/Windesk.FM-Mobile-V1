@@ -25,7 +25,7 @@ class HomeProvider extends ChangeNotifier {
   }
 
   void logoutFunction() async {
-    final result = await HomeServiceRepositoryImpl().logout();
+    final result =  HomeServiceRepositoryImpl().logout();
     // ignore: unrelated_type_equality_checks
     if (result == 'success') {
       _isUserLogout = true;
@@ -36,7 +36,7 @@ class HomeProvider extends ChangeNotifier {
   void getAnnouncement(){
     final result = HomeServiceRepositoryImpl().getAnnouncements();
     if(result is CustomServiceException){
-      
+
     }
     else{
       announcementList.addAll(result as List<AnnouncementModel>);

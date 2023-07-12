@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
               body: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[headerTextWidget(), homePageIcons()],
+                  children: <Widget>[headerTextWidget(), homePageIcons(context)],
                 ),
               ),
             ),
@@ -56,22 +56,22 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Expanded homePageIcons() {
+  Expanded homePageIcons(BuildContext context) {
     return Expanded(
       flex: 4,
       child: Column(
         children: [
           rowIconButtonSection(
-              LocaleKeys.issueList, AppIcons.calendarMonth,  TestScreen(), LocaleKeys.issueSearch, AppIcons.attachment, TestScreen()),
-          rowIconButtonSection(LocaleKeys.workOrderList, AppIcons.contentPasteSearch, TestScreen(), LocaleKeys.workOrderSearch,
+              context, LocaleKeys.issueList, AppIcons.calendarMonth, TestScreen(), LocaleKeys.issueSearch, AppIcons.attachment, TestScreen()),
+          rowIconButtonSection(context, LocaleKeys.workOrderList, AppIcons.contentPasteSearch, TestScreen(), LocaleKeys.workOrderSearch,
               AppIcons.contentPasteOff, TestScreen()),
         ],
       ),
     );
   }
 
-  Expanded rowIconButtonSection(String buttonTitle1, IconData buttonIcon1, PageRouteInfo<dynamic> navigateRouteName1, String buttonTitle2,
-      IconData buttonIcon2, PageRouteInfo<dynamic> navigateRouteName2) {
+  Expanded rowIconButtonSection(BuildContext context, String buttonTitle1, IconData buttonIcon1, PageRouteInfo<dynamic> navigateRouteName1,
+      String buttonTitle2, IconData buttonIcon2, PageRouteInfo<dynamic> navigateRouteName2) {
     return Expanded(
       child: Center(
         child: Row(
@@ -79,7 +79,10 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             CustomCircularHomeButton(
               title: buttonTitle1,
-              icon: Icon(buttonIcon1),
+              icon: Icon(
+                buttonIcon1,
+                size: MediaQuery.of(context).size.width / 10,
+              ),
               onPressed: () {
                 context.router.push(navigateRouteName1);
               },
@@ -88,7 +91,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             CustomCircularHomeButton(
               title: buttonTitle2,
-              icon: Icon(buttonIcon2),
+              icon: Icon(
+                buttonIcon2,
+                size: MediaQuery.of(context).size.width / 10,
+              ),
               onPressed: () {},
               isBadgeVisible: false,
               badgeCount: '0',
@@ -136,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
             try {
               if (context.read<HomeProvider>().isUserLogout == true) {
                 snackBar(context, 'Çıkış İşlemi Başarılı', 'success');
-                context.router.push(const SplashScreen());
+                context.router.pop(const LoginScreen());
               }
             } catch (e) {
               snackBar(context, 'Çıkış İşlemi Başarısız', 'error');
