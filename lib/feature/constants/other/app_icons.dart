@@ -17,8 +17,12 @@ class AppIcons {
   // INPUT ACTION ICONS
   static const IconData qr = Icons.qr_code;
 
-  //DROPDOWN INPUT ICON
+  // DROPDOWN INPUT ICON
   static const IconData arrowDown = Icons.keyboard_arrow_down;
 
   static const IconData addPhoto = Icons.add_a_photo;
+
+  // PASSWORD INPUT ICON
+  static const IconData visibility = Icons.visibility;
+  static const IconData visibilityOff = Icons.visibility_off;
 }
