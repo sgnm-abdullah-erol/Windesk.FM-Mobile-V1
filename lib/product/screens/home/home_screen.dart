@@ -1,10 +1,21 @@
+// ignore_for_file: unrelated_type_equality_checks
+
 import 'package:auto_route/auto_route.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:vm_fm_4/feature/constants/paths/asset_paths.dart';
+import 'package:vm_fm_4/product/screens/home/service/home_service_repo_impl.dart';
 
 import '../../../feature/components/buttons/custom_circular_home_button.dart';
+import '../../../feature/components/snackBar/snackbar.dart';
+import '../../../feature/constants/other/app_icons.dart';
 import '../../../feature/constants/other/colors.dart';
 import '../../../feature/constants/paths/service_tools.dart';
 import '../../../feature/l10n/locale_keys.g.dart';
+import '../../../feature/route/app_route.gr.dart';
+import 'announcement_screen.dart';
+import 'home_provider.dart';
 
 @RoutePage()
 class HomeScreen extends StatefulWidget {
@@ -15,84 +26,86 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // @override
-  // void initState() {
-  //   TestServiceRepositoryImpl x = TestServiceRepositoryImpl();
-  //   x.accessTestMobileService();
-  //   super.initState();
-  // }
+  @override
+  void initState() {
+    HomeServiceRepositoryImpl homeService = HomeServiceRepositoryImpl();
+    homeService.getAnnouncements();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: APPColors.Main.white,
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              headerWidget(),
-              Expanded(
-                flex: 4,
+    return ChangeNotifierProvider(
+      create: (context) => HomeProvider(),
+      child: Consumer<HomeProvider>(
+        builder: (context, HomeProvider homeProvider, child) {
+          return SafeArea(
+            child: Scaffold(
+              appBar: appBarWidget(context),
+              backgroundColor: APPColors.Main.white,
+              body: Center(
                 child: Column(
-                  children: [
-                    rowIconButtonSection(LocaleKeys.issueList, Icons.calendar_month, '', LocaleKeys.issueSearch, Icons.attachment, ''),
-                    rowIconButtonSection(
-                        LocaleKeys.workOrderList, Icons.content_paste_search, '', LocaleKeys.workOrderSearch, Icons.content_paste_off, ''),
-                    // Expanded(
-                    //   child: Row(
-                    //     children: [
-                    //       Expanded(
-                    //         child: HomeButton(
-                    //             text: 'Yeni İş Emri',
-                    //             iconName: Icons.calendar_month,
-                    //             navigator: ComplaintRequests()),
-                    //       ),
-                    //       // Expanded(
-                    //       //   child: HomeButton(
-                    //       //       text: 'Kapatılmış Taleplerim',
-                    //       //       iconName: Icons.attachment,
-                    //       //       navigator: ClosedRequests()),
-                    //       // )
-                    //     ],
-                    //   ),
-                    // )
-                  ],
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[headerTextWidget(), homePageIcons(context)],
                 ),
-              )
-            ],
-          ),
-        ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
 
-  Expanded rowIconButtonSection(title1, icon1, func1, title2, icon2, func2) {
+  Expanded homePageIcons(BuildContext context) {
     return Expanded(
-      child: Row(
+      flex: 4,
+      child: Column(
         children: [
-          Expanded(
-            child: CustomCircularHomeButton(
-              title: title1,
-              icon: Icon(icon1),
-              onPressed: () {},
-              isBadgeVisible: false,
-              badgeCount: '0',
-            ),
-          ),
-          CustomCircularHomeButton(
-            title: title2,
-            icon: Icon(icon2),
-            onPressed: () {},
-            isBadgeVisible: false,
-            badgeCount: '0',
-          ),
+          rowIconButtonSection(context, LocaleKeys.issueList, AppIcons.calendarMonth, const TestScreen(), LocaleKeys.issueSearch, AppIcons.attachment,
+              const TestScreen()),
+          rowIconButtonSection(context, LocaleKeys.workOrderList, AppIcons.contentPasteSearch, const TestScreen(), LocaleKeys.workOrderSearch,
+              AppIcons.contentPasteOff, const TestScreen()),
         ],
       ),
     );
   }
 
-  Expanded headerWidget() {
+  Expanded rowIconButtonSection(BuildContext context, String buttonTitle1, IconData buttonIcon1, PageRouteInfo<dynamic> navigateRouteName1,
+      String buttonTitle2, IconData buttonIcon2, PageRouteInfo<dynamic> navigateRouteName2) {
+    return Expanded(
+      child: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            CustomCircularHomeButton(
+              title: buttonTitle1,
+              icon: Icon(
+                buttonIcon1,
+                size: MediaQuery.of(context).size.width / 10,
+              ),
+              onPressed: () {
+                context.router.push(navigateRouteName1);
+              },
+              isBadgeVisible: false,
+              badgeCount: '0',
+            ),
+            CustomCircularHomeButton(
+              title: buttonTitle2,
+              icon: Icon(
+                buttonIcon2,
+                size: MediaQuery.of(context).size.width / 10,
+              ),
+              onPressed: () {},
+              isBadgeVisible: false,
+              badgeCount: '0',
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Expanded headerTextWidget() {
     return const Expanded(
         child: Column(
       children: [
@@ -108,106 +121,71 @@ class _HomeScreenState extends State<HomeScreen> {
     ));
   }
 
-  // AppBar AppBarWidget(BuildContext context) {
-  //   return AppBar(
-  //       title: Image.asset(
-  //         'lib/assets/images/windesk.jpg',
-  //         width: MediaQuery.of(context).size.width / 1.2,
-  //         height: MediaQuery.of(context).size.width / 1.2,
-  //         fit: BoxFit.cover,
-  //       ),
-  //       actions: <Widget>[
-  //         IconButton(
-  //           icon: Icon(
-  //             Icons.power_settings_new,
-  //             size: 35,
-  //             color: APPColors.Main.black,
-  //           ),
-  //           tooltip: 'Exit',
-  //           onPressed: () async {
-  //             var cikisResult =
-  //                 await apirepository.cikis(mainViewProvider.kadi);
-  //             try {
-  //               if (cikisResult) {
-  //                 snackBar(context, 'Çıkış İşlemi Başarılı', 'success');
+  AppBar appBarWidget(BuildContext context) {
+    return AppBar(
+      title: Image.asset(
+        AssetPaths.windesk,
+        width: MediaQuery.of(context).size.width / 1.2,
+        height: MediaQuery.of(context).size.width / 1.2,
+        fit: BoxFit.cover,
+      ),
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(
+            AppIcons.powerSettingsOff,
+            size: 35,
+            color: APPColors.Main.black,
+          ),
+          tooltip: 'Exit',
+          onPressed: () async {
+            context.read<HomeProvider>().logoutFunction();
+            try {
+              if (context.read<HomeProvider>().isUserLogout == true) {
+                snackBar(context, 'Çıkış İşlemi Başarılı', 'success');
+                context.router.pop(const LoginScreen());
+              }
+            } catch (e) {
+              snackBar(context, 'Çıkış İşlemi Başarısız', 'error');
+            }
+          },
+        ),
+      ],
+      centerTitle: true,
+      elevation: 0.0,
+      backgroundColor: APPColors.Main.white,
+      leading: announcementBuilder(),
+    );
+  }
 
-  //                 Future.delayed(const Duration(seconds: 1)).whenComplete(() {
-  //                   Phoenix.rebirth(context);
-  //                 });
-  //               } else {}
-  //             } catch (e) {
-  //               snackBar(context, 'Çıkış İşlemi Başarısız', 'error');
-  //             }
-  //           },
-  //         ),
-  //       ],
-  //       centerTitle: true,
-  //       elevation: 0.0,
-  //       backgroundColor: APPColors.Main.white,
-  //       leading: Builder(
-  //         builder: (BuildContext context) {
-  //           return badges.Badge(
-  //             position: badges.BadgePosition.topEnd(top: 10, end: 10),
-  //             badgeContent: Text(
-  //               mainViewProvider.toplamKayitSayisi.toString(),
-  //               style: TextStyle(color: APPColors.Main.white),
-  //             ),
-  //             onTap: () {},
-  //             child: IconButton(
-  //               icon: Icon(
-  //                 Icons.notifications,
-  //                 size: 35,
-  //                 color: APPColors.Main.black,
-  //               ),
-  //               onPressed: () {
-  //                 // ignore: unrelated_type_equality_checks
-  //                 mainViewProvider.toplamKayitSayisi != 0
-  //                     ? showModalBottomSheet<void>(
-  //                         isScrollControlled: true,
-  //                         backgroundColor: Colors.transparent,
-  //                         elevation: 10,
-  //                         context: context,
-  //                         builder: (context) => const AnnouncementList())
-  //                     : null;
-  //               },
-  //             ),
-  //           );
-  //         },
-  //       ),
-  //     ],
-  //     centerTitle: true,
-  //     elevation: 0.0,
-  //     backgroundColor: APPColors.Main.white,
-  //     leading: Builder(
-  //       builder: (BuildContext context) {
-  //         return badges.Badge(
-  //           position: badges.BadgePosition.topEnd(top: 10, end: 10),
-  //           badgeContent: Text(
-  //             mainViewProvider.toplamKayitSayisi.toString(),
-  //             style: TextStyle(color: APPColors.Main.white),
-  //           ),
-  //           onTap: () {},
-  //           child: IconButton(
-  //             icon: Icon(
-  //               Icons.notifications,
-  //               size: 35,
-  //               color: APPColors.Main.black,
-  //             ),
-  //             onPressed: () {
-  //               // ignore: unrelated_type_equality_checks
-  //               mainViewProvider.toplamKayitSayisi != 0
-  //                   ? showModalBottomSheet<void>(
-  //                       isScrollControlled: true,
-  //                       backgroundColor: Colors.transparent,
-  //                       elevation: 10,
-  //                       context: context,
-  //                       builder: (context) => AnnouncementList())
-  //                   : null;
-  //             },
-  //           ),
-  //         );
-  //       },
-  //     ),
-  //   );
-  // }
+  Builder announcementBuilder() {
+    return Builder(
+      builder: (BuildContext context) {
+        return badges.Badge(
+          position: badges.BadgePosition.topEnd(top: 10, end: 10),
+          badgeContent: Text(
+            context.read<HomeProvider>().totalAnnoucementCount.toString(),
+            style: TextStyle(color: APPColors.Main.white),
+          ),
+          onTap: () {},
+          child: IconButton(
+            icon: Icon(
+              AppIcons.notifications,
+              size: 35,
+              color: APPColors.Main.black,
+            ),
+            onPressed: () {
+              context.read<HomeProvider>().totalAnnoucementCount.toString() != 0
+                  ? showModalBottomSheet<void>(
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      elevation: 10,
+                      context: context,
+                      builder: (context) => const AnnouncementList())
+                  : null;
+            },
+          ),
+        );
+      },
+    );
+  }
 }

@@ -2,9 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
-import 'package:vm_fm_4/product/screens/test/test_provider.dart';
 
-import '../service/test_service_repo_impl.dart';
+import '../test_provider.dart';
 
 @RoutePage()
 class TestScreen extends StatefulWidget {
@@ -20,16 +19,29 @@ class _TestScreenState extends State<TestScreen> {
   RoundedLoadingButtonController get controllerButton => _controllerButton;
 
   void connectionTest(RoundedLoadingButtonController controller) async {
+<<<<<<< HEAD
     TestServiceRepositoryImpl x = TestServiceRepositoryImpl();
     final result = await x.accessTestMobileService();
+=======
 
-    print('result' + result.toString());
+    // TestServiceRepositoryImpl x = TestServiceRepositoryImpl();
+    // final result = await x.accessTestMobileService();
+>>>>>>> cf808166ebf970899e301bbca98956557bace3d8
 
+
+<<<<<<< HEAD
     if (result == 'success') {
       setState(() {
         _controllerButton.success();
       });
     }
+=======
+    // if (result == 'success') {
+    //   setState(() {
+    //           _controllerButton.success();
+    //   });
+    // }
+>>>>>>> cf808166ebf970899e301bbca98956557bace3d8
   }
 
   @override

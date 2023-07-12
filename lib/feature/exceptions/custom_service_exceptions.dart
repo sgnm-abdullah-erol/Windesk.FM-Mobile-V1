@@ -34,4 +34,9 @@ class CustomServiceMessages {
   static const String workOrderDeleteEffortError = 'Error while deleting effort';
 
   static const String noInternetConnection = "No internet connection";
+  
+  //home page
+
+  static const String announcementViewError = 'Error while fetching Announcements';
+
 }

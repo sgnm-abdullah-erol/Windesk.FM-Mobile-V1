@@ -99,7 +99,7 @@ class _Stack extends StatelessWidget {
       elevation: _elevation,
       shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.circularBorderRadius, side: BorderSide(color: APPColors.Secondary.blue)),
       backgroundColor: APPColors.Secondary.blue,
-      foregroundColor: APPColors.Main.white,
+      foregroundColor: APPColors.Accent.blue,
     );
   }
 }
