@@ -1,10 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vm_fm_4/feature/components/buttons/custom_circular_with_icon_button.dart';
+import 'package:vm_fm_4/feature/components/model_bottom_sheet/add_photo_modal_bottom_sheet.dart';
+import 'package:vm_fm_4/feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
 import '../../../../feature/components/buttons/custom_login_button.dart';
 import '../../../../feature/components/input_fields/text_fields_input_underline.dart';
 import '../../../../feature/components/loading/custom_main_loading.dart';
-import '../../../../feature/constants/paths/service_tools.dart';
 import '../../../../feature/constants/style/custom_paddings.dart';
 import '../../../../feature/constants/style/font_sizes.dart';
 import '../login_provider.dart';
@@ -40,6 +42,7 @@ class _LoginScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    test() {}
     return Scaffold(
       appBar: CustomMainAppbar(
           title: _loginAppbarTitle(context), returnBack: false),
@@ -47,10 +50,16 @@ class _LoginScreenBody extends StatelessWidget {
           ? const CustomMainLoading()
           : Column(
               children: <Widget>[
-                _loginImage(context),
-                _loginTitleWidget(),
-                _textFields(),
-                _loginButton(),
+                CustomCircularWithIconButton(
+                    bgColor: Colors.red,
+                    icon: Icons.add_a_photo,
+                    onPressFunction: () {
+                      ShowModalBottomSheet().show(
+                          context,
+                          AddPhotoModalBottomSheet(
+                              test, test, test, 'hintDescText'));
+                    },
+                    iconColor: Colors.white)
               ],
             ),
     );
@@ -86,11 +95,12 @@ class _LoginScreenBody extends StatelessWidget {
   }
 
   Expanded _loginTitleWidget() {
-    return const Expanded(
+    return Expanded(
       flex: 1,
       child: Text(
-        ServiceTools.facilityName,
-        style: TextStyle(fontSize: FontSizes.titleLarge, fontFamily: 'Roboto'),
+        _login,
+        style: const TextStyle(
+            fontSize: FontSizes.titleLarge, fontFamily: 'Roboto'),
       ),
     );
   }

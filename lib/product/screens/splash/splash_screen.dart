@@ -2,6 +2,7 @@ import 'package:animated_widgets/animated_widgets.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../feature/constants/paths/asset_paths.dart';
 import '../../../feature/extensions/context_extension.dart';
 import '../../../feature/global_providers/global_provider.dart';

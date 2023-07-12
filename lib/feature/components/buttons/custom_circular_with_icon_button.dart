@@ -26,7 +26,7 @@ class CustomCircularWithIconButton extends StatelessWidget {
               borderRadius:
                   BorderRadius.all(CustomBorderRadius.buttonWithIconRadius)),
         ),
-        onPressed: () => onPressFunction,
+        onPressed: () => onPressFunction(),
         child: Icon(
           icon,
           color: iconColor,
