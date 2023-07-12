@@ -10,7 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i9;
 import 'package:vm_fm_4/feature/route/empty_router.dart' as _i1;
-import 'package:vm_fm_4/product/screens/auth/login_screen.dart' as _i2;
+import 'package:vm_fm_4/product/screens/auth/view/login_screen.dart' as _i2;
 import 'package:vm_fm_4/product/screens/home/home_screen.dart' as _i3;
 import 'package:vm_fm_4/product/screens/new_order/new_order_screen.dart' as _i4;
 import 'package:vm_fm_4/product/screens/search/search_screen.dart' as _i5;

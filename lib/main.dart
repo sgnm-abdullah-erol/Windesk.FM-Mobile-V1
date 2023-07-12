@@ -11,7 +11,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   Injection().initInstances();
-  FirebaseNotification.init();
+  // FirebaseNotification.init();
   runApp(
     MultiProvider(
       providers: [
