@@ -8,7 +8,7 @@ import '../service/test_service_repo_impl.dart';
 
 @RoutePage()
 class TestScreen extends StatefulWidget {
-  TestScreen({super.key});
+  const TestScreen({super.key});
 
   @override
   State<TestScreen> createState() => _TestScreenState();
@@ -20,7 +20,6 @@ class _TestScreenState extends State<TestScreen> {
   RoundedLoadingButtonController get controllerButton => _controllerButton;
 
   void connectionTest(RoundedLoadingButtonController controller) async {
-
     TestServiceRepositoryImpl x = TestServiceRepositoryImpl();
     final result = await x.accessTestMobileService();
 
@@ -28,7 +27,7 @@ class _TestScreenState extends State<TestScreen> {
 
     if (result == 'success') {
       setState(() {
-              _controllerButton.success();
+        _controllerButton.success();
       });
     }
   }
@@ -37,8 +36,7 @@ class _TestScreenState extends State<TestScreen> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => TestProvider(),
-      child: Consumer<TestProvider>(
-        builder: (context, TestProvider testProvider, child) {
+      child: Consumer<TestProvider>(builder: (context, TestProvider testProvider, child) {
         return SizedBox(
           width: 45,
           height: 6,
@@ -49,13 +47,12 @@ class _TestScreenState extends State<TestScreen> {
             onPressed: () => connectionTest(_controllerButton),
             valueColor: Colors.white,
             borderRadius: 20,
-            child: Center(
+            child: const Center(
               child: Text('Erişim Testi', style: TextStyle(color: Colors.white)),
             ),
           ),
         );
-                }
-      ),
+      }),
     );
   }
 }

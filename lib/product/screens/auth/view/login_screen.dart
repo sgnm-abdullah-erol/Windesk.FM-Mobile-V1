@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:vm_fm_4/feature/components/buttons/custom_login_button.dart';
 import 'package:vm_fm_4/feature/components/input_fields/text_fields_input_underline.dart';
 import 'package:vm_fm_4/feature/components/loading/custom_main_loading.dart';
+import 'package:vm_fm_4/feature/constants/paths/service_tools.dart';
 import 'package:vm_fm_4/feature/constants/style/custom_paddings.dart';
 import 'package:vm_fm_4/feature/constants/style/font_sizes.dart';
 import 'package:vm_fm_4/product/screens/auth/login_provider.dart';
@@ -33,7 +34,6 @@ class _LoginScreenBody extends StatelessWidget {
   const _LoginScreenBody({required this.provider});
 
   final LoginProvider provider;
-  final String _loginTitle = 'Merkezi Yardım Masası';
   final String _userNameHint = 'Kullanıcı Adı';
   final String _passwordHint = 'Şifre';
   final String _login = 'Giriş Yap';
@@ -84,11 +84,11 @@ class _LoginScreenBody extends StatelessWidget {
   }
 
   Expanded _loginTitleWidget() {
-    return Expanded(
+    return const Expanded(
       flex: 1,
       child: Text(
-        _loginTitle,
-        style: const TextStyle(fontSize: FontSizes.titleLarge, fontFamily: 'Roboto'),
+        ServiceTools.facilityName,
+        style: TextStyle(fontSize: FontSizes.titleLarge, fontFamily: 'Roboto'),
       ),
     );
   }

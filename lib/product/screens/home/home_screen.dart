@@ -1,11 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/constants/paths/service_tools.dart';
 
 import '../../../feature/components/buttons/custom_circular_home_button.dart';
-import '../../../feature/components/cards/custom_issue_detail_card.dart';
-import '../../../feature/components/snackBar/snackbar.dart';
 import '../../../feature/constants/other/colors.dart';
+import '../../../feature/constants/paths/service_tools.dart';
 import '../../../feature/l10n/locale_keys.g.dart';
 
 @RoutePage()
@@ -28,85 +26,86 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-      backgroundColor: APPColors.Main.white,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            headerWidget(),
-            Expanded(
-              flex: 4,
-              child: Column(
-                children: [
-                  rowIconButtonSection(LocaleKeys.issueList, Icons.calendar_month, '', LocaleKeys.issueSearch, Icons.attachment,''),
-                  rowIconButtonSection(LocaleKeys.workOrderList, Icons.content_paste_search, '', LocaleKeys.workOrderSearch, Icons.content_paste_off,''),
-                  // Expanded(
-                  //   child: Row(
-                  //     children: [
-                  //       Expanded(
-                  //         child: HomeButton(
-                  //             text: 'Yeni İş Emri',
-                  //             iconName: Icons.calendar_month,
-                  //             navigator: ComplaintRequests()),
-                  //       ),
-                  //       // Expanded(
-                  //       //   child: HomeButton(
-                  //       //       text: 'Kapatılmış Taleplerim',
-                  //       //       iconName: Icons.attachment,
-                  //       //       navigator: ClosedRequests()),
-                  //       // )
-                  //     ],
-                  //   ),
-                  // )
-                ],
-              ),
-            )
-          ],
+        backgroundColor: APPColors.Main.white,
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              headerWidget(),
+              Expanded(
+                flex: 4,
+                child: Column(
+                  children: [
+                    rowIconButtonSection(LocaleKeys.issueList, Icons.calendar_month, '', LocaleKeys.issueSearch, Icons.attachment, ''),
+                    rowIconButtonSection(
+                        LocaleKeys.workOrderList, Icons.content_paste_search, '', LocaleKeys.workOrderSearch, Icons.content_paste_off, ''),
+                    // Expanded(
+                    //   child: Row(
+                    //     children: [
+                    //       Expanded(
+                    //         child: HomeButton(
+                    //             text: 'Yeni İş Emri',
+                    //             iconName: Icons.calendar_month,
+                    //             navigator: ComplaintRequests()),
+                    //       ),
+                    //       // Expanded(
+                    //       //   child: HomeButton(
+                    //       //       text: 'Kapatılmış Taleplerim',
+                    //       //       iconName: Icons.attachment,
+                    //       //       navigator: ClosedRequests()),
+                    //       // )
+                    //     ],
+                    //   ),
+                    // )
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
-    ),);
+    );
   }
 
-  Expanded rowIconButtonSection(title1,icon1,func1,title2,icon2,func2) {
+  Expanded rowIconButtonSection(title1, icon1, func1, title2, icon2, func2) {
     return Expanded(
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: 
-                        CustomCircularHomeButton(
-                            title: title1,
-                            icon: Icon(icon1),
-                            onPressed: () {},
-                            isBadgeVisible: false,
-                            badgeCount: '0',
-                            ),
-                      ),
-                        CustomCircularHomeButton(
-                            title: title2,
-                            icon:  Icon(icon2),
-                            onPressed: () {},
-                            isBadgeVisible: false,
-                            badgeCount: '0',
-                            ),
-                    ],
-                  ),
-                );
+      child: Row(
+        children: [
+          Expanded(
+            child: CustomCircularHomeButton(
+              title: title1,
+              icon: Icon(icon1),
+              onPressed: () {},
+              isBadgeVisible: false,
+              badgeCount: '0',
+            ),
+          ),
+          CustomCircularHomeButton(
+            title: title2,
+            icon: Icon(icon2),
+            onPressed: () {},
+            isBadgeVisible: false,
+            badgeCount: '0',
+          ),
+        ],
+      ),
+    );
   }
 
   Expanded headerWidget() {
     return const Expanded(
-              child: Column(
-            children: [
-              Text(
-                ServiceTools.facilityName,
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400),
-              ),
-              Text(
-                'Yardım Masası Uygulaması',
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-              ),
-            ],
-          ));
+        child: Column(
+      children: [
+        Text(
+          ServiceTools.facilityName,
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400),
+        ),
+        Text(
+          'Yardım Masası Uygulaması',
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+        ),
+      ],
+    ));
   }
 
   // AppBar AppBarWidget(BuildContext context) {

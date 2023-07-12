@@ -131,6 +131,8 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
         final data = response.data[ServiceResponseStatusEnums.detail.rawText];
         workOrderDeatails = WorkOrderDetailsModel.fromJson(data);
 
+        super.logger.d(workOrderDeatails.toString());
+
         return Left(workOrderDeatails);
       } else {
         return Right(CustomServiceException(message: CustomServiceMessages.workOrderDetailsError, statusCode: response.statusCode.toString()));
