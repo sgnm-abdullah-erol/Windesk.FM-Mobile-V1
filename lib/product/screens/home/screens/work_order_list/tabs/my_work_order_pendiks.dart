@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import '../../../../../../feature/components/cards/custom_wo_detail_card.dart';
+import '../../../../../../feature/components/cards/custom_wo_listl_card.dart';
 import '../provider/work_order_list_provider.dart';
 
 class MyWorkOrderPendiks extends StatefulWidget {

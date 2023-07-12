@@ -7,6 +7,8 @@ import 'package:vm_fm_4/feature/constants/style/custom_paddings.dart';
 import 'package:vm_fm_4/feature/l10n/locale_keys.g.dart';
 
 import '../../constants/other/colors.dart';
+import '../../constants/style/border_radius.dart';
+import '../../constants/style/font_sizes.dart';
 
 class CustomWoDetailCard extends StatelessWidget {
   final String? id, code, statusName, service, serviceName, moduleLocation, name, responsible, plannedEndDate;
@@ -16,22 +18,22 @@ class CustomWoDetailCard extends StatelessWidget {
   final bool isIcon;
   final Function onPressed;
 
-  const CustomWoDetailCard(
-      {Key? key,
-      this.code,
-      this.id,
-      this.moduleLocation,
-      this.name,
-      this.plannedEndDate,
-      this.service,
-      this.responsible,
-      this.serviceName,
-      this.importanceLevelColor,
-      this.statusName,
-      this.press,
-      this.isIcon = false,
-      required this.onPressed,})
-      : super(key: key);
+  const CustomWoDetailCard({
+    Key? key,
+    this.code,
+    this.id,
+    this.moduleLocation,
+    this.name,
+    this.plannedEndDate,
+    this.service,
+    this.responsible,
+    this.serviceName,
+    this.importanceLevelColor,
+    this.statusName,
+    this.press,
+    this.isIcon = false,
+    required this.onPressed,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,37 +46,22 @@ class CustomWoDetailCard extends StatelessWidget {
       child: Container(
         width: size.width / 1.1,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              color: Color(0x19025273),
-              blurRadius: 50,
-              offset: Offset(6, 8),
-            ),
-          ],
+          borderRadius: CustomBorderRadius.mediumBorderRadius,
+          boxShadow: const [BoxShadow(color: Color(0x19025273), blurRadius: 50, offset: Offset(6, 8))],
           color: APPColors.Main.white,
         ),
-        child: Column(
-          children: [
-            SizedBox(
-              height: size.height / 1.8,
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: CustomPaddings.onlyBottomLow,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      codeAndStatusWidget(size),
-                      Divider(height: 15, color: APPColors.Main.black),
-                      issueSummaryRow(serviceName, ""),
-                      issueSummaryRow(serviceName, ""),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.only(top: 8, left: 12, right: 8, bottom: 8),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              codeAndStatusWidget(size),
+              Divider(height: 10),
+              woListText(serviceName),
+              woListText(serviceName),
+            ],
+          ),
         ),
       ),
     );
@@ -118,7 +105,7 @@ class CustomWoDetailCard extends StatelessWidget {
     );
   }
 
-  Column issueSummaryRow(header, description) {
+  Column woListText(header) {
     return Column(
       children: [
         Row(
@@ -135,22 +122,36 @@ class CustomWoDetailCard extends StatelessWidget {
                 ),
               ),
             ),
-            Expanded(
-                flex: 3,
-                child: NullCheckWidget().nullCheckWidget(
-                  description,
-                  Text(LocaleKeys.noInfo),
-                  Text(
-                    description,
-                    style: TextStyle(color: APPColors.Secondary.black, fontSize: 14, fontWeight: FontWeight.w400),
-                  ),
-                )),
           ],
         ),
         Divider(
           height: 15,
         ),
       ],
+    );
+  }
+
+
+  Flexible issueListText(Size size, String header, String description) {
+    return Flexible(
+      child: SizedBox(
+        width: size.width,
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: CustomPaddings.onlyBottomLow,
+                child: Text('$header : $description', style: const TextStyle(
+    color: Color(0xff025273),
+    fontSize: FontSizes.caption - 1,
+  )),
+              ),
+            ),
+            Divider(height: 5),
+          ],
+        ),
+      ),
     );
   }
 }
