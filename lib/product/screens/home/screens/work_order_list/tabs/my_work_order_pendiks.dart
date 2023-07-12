@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+import '../../../../../../feature/components/cards/custom_wo_detail_card.dart';
 import '../provider/work_order_list_provider.dart';
 
 class MyWorkOrderPendiks extends StatefulWidget {
@@ -23,6 +24,19 @@ class _MyWorkOrderPendiksState extends State<MyWorkOrderPendiks> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return CustomWoDetailCard(
+      onPressed: (woCode) {
+        print(woCode);
+      },
+      code: 'asda',
+      id: 'asda',
+      moduleLocation: 'asda',
+      name: 'asda',
+      plannedEndDate: 'asda',
+      service: 'asda',
+      responsible: 'asda',
+      serviceName: 'asda',
+      statusName: 'asda',
+    );
   }
 }
