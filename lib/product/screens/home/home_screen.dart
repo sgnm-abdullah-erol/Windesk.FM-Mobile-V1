@@ -139,14 +139,13 @@ class _HomeScreenState extends State<HomeScreen> {
           tooltip: 'Exit',
           onPressed: () async {
             context.read<HomeProvider>().logoutFunction();
-            try {
-              if (context.read<HomeProvider>().isUserLogout == true) {
-                snackBar(context, 'Çıkış İşlemi Başarılı', 'success');
-                context.router.pop(const LoginScreen());
-              }
-            } catch (e) {
+            if (context.read<HomeProvider>().isUserLogout == true) {
+              snackBar(context, 'Çıkış İşlemi Başarılı', 'success');
+            } else {
               snackBar(context, 'Çıkış İşlemi Başarısız', 'error');
+              context.router.push(const LoginScreen());
             }
+          
           },
         ),
       ],
