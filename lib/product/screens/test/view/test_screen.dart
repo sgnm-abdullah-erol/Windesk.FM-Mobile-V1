@@ -19,29 +19,14 @@ class _TestScreenState extends State<TestScreen> {
   RoundedLoadingButtonController get controllerButton => _controllerButton;
 
   void connectionTest(RoundedLoadingButtonController controller) async {
-<<<<<<< HEAD
-    TestServiceRepositoryImpl x = TestServiceRepositoryImpl();
-    final result = await x.accessTestMobileService();
-=======
-
     // TestServiceRepositoryImpl x = TestServiceRepositoryImpl();
     // final result = await x.accessTestMobileService();
->>>>>>> cf808166ebf970899e301bbca98956557bace3d8
 
-
-<<<<<<< HEAD
-    if (result == 'success') {
-      setState(() {
-        _controllerButton.success();
-      });
-    }
-=======
     // if (result == 'success') {
     //   setState(() {
     //           _controllerButton.success();
     //   });
     // }
->>>>>>> cf808166ebf970899e301bbca98956557bace3d8
   }
 
   @override
