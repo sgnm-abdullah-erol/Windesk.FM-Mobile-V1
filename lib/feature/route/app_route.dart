@@ -16,7 +16,15 @@ class AppRouter extends $AppRouter {
           path: '/appWrapper',
           page: AppWrapper.page,
           children: [
-            AutoRoute(path: 'homeScreen', page: HomeScreen.page, initial: true),
+            AutoRoute(
+              path: 'emptyHomeScreen',
+              page: EmptyRouter.page,
+              children: [
+                RedirectRoute(path: '', redirectTo: 'homeScreen'),
+                AutoRoute(path: 'homeScreen', page: HomeScreen.page, initial: true),
+                AutoRoute(path: 'workOrderListScreen', page: WorkOrderListScreen.page),
+              ],
+            ),
             AutoRoute(path: 'newOrderScreen', page: NewOrderScreen.page),
             AutoRoute(path: 'searchScreen', page: SearchScreen.page),
             AutoRoute(path: 'testScreen', page: TestScreen.page),
