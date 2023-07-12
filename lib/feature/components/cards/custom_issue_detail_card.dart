@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:vm_fm_4/feature/constants/functions/null_check_widget.dart';
 import 'package:vm_fm_4/feature/constants/other/time_functions.dart';
 import 'package:vm_fm_4/feature/constants/style/custom_paddings.dart';
+import 'package:vm_fm_4/feature/l10n/locale_keys.g.dart';
 
 import '../../constants/other/colors.dart';
 
@@ -136,44 +137,44 @@ class DetailListWidget extends StatelessWidget {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                                     children: [
-                                      Text('Randevulu Vakadır'),
+                                      Text(LocaleKeys.plannedIssue),
                                       Text(planedDate.toString()),
                                     ],
                                   ),
                                 )
-                              : respondedTimer == '1'
-                                  ? timeBarWidget('Hedef Yanıtlama Tarihi', targetRDate, respondedTimer.toString(),
-                                      fixTimer.toString(), targetFDate.toString(), fixedDate.toString())
-                                  : timeBarWidget('Yanıtlama Tarihi', respondedDate, respondedTimer.toString(),
-                                      fixTimer.toString(), targetFDate.toString(), fixedDate.toString())
+                              : respondedTimer == LocaleKeys.oneStr
+                                  ? timeBarWidget(LocaleKeys.targetResponsedDate, targetRDate, respondedTimer.toString(), fixTimer.toString(),
+                                      targetFDate.toString(), fixedDate.toString())
+                                  : timeBarWidget(LocaleKeys.targetResponsed, respondedDate, respondedTimer.toString(), fixTimer.toString(),
+                                      targetFDate.toString(), fixedDate.toString())
                         ],
                       ),
                       Column(children: [
-                        fixTimer == '1'
-                            ? timeBarWidget('Hedef Düzeltme Tarihi', targetFDate, respondedTimer.toString(), fixTimer.toString(),
+                        fixTimer == LocaleKeys.oneStr
+                            ? timeBarWidget(LocaleKeys.targetFixedDate, targetFDate, respondedTimer.toString(), fixTimer.toString(),
                                 targetFDate.toString(), fixedDate.toString())
-                            : timeBarWidget('Düzeltme Tarihi', fixedDate, respondedTimer.toString(), fixTimer.toString(),
-                                targetFDate.toString(), fixedDate.toString())
+                            : timeBarWidget(LocaleKeys.fixedDate, fixedDate, respondedTimer.toString(), fixTimer.toString(), targetFDate.toString(),
+                                fixedDate.toString())
                       ])
                     ],
                   ),
                   Divider(height: 15, color: APPColors.Main.black),
-                  issueSummaryRow(code.toString(), description.toString()),
-                  issueSummaryRow('Vaka Durumu', statusName.toString()),
-                  issueSummaryRow('Açıklama', description.toString()),
-                  issueSummaryRow('Vaka Sahibi', contactName.toString()),
-                  issueSummaryRow('Mahal', locName.toString()),
-                  issueSummaryRow('Mahal Yeri', locTree.toString()),
-                  issueSummaryRow('Arama Nedeni', title.toString()),
-                  issueSummaryRow('Varlık Bilgisi', cmdb.toString()),
-                  issueSummaryRow('Açılma Tarihi', idate.toString()),
-                  issueSummaryRow('Arayan Numara', ani.toString()),
-                  issueSummaryRow('Hedef Yanıtlama', TimeClass().timeRecover(targetRDate).toString()),
-                  issueSummaryRow('Hedef Düzeltme', TimeClass().timeRecover(targetFDate).toString()),
-                  issueSummaryRow('HYS-48 saat', hys.toString()),
-                  issueSummaryRow('HDS-48 saat', hds.toString()),
-                  issueSummaryRow('Atama Grubu', assignmentGroupName.toString()),
-                  issueSummaryRow('Atanan Kişi', assigneName.toString()),
+                  issueSummaryRow(code.toString(), description ?? ""),
+                  issueSummaryRow(LocaleKeys.issueSituation, statusName ?? ""),
+                  issueSummaryRow(LocaleKeys.explanation, description ?? ""),
+                  issueSummaryRow(LocaleKeys.issueOwner, contactName ?? ""),
+                  issueSummaryRow(LocaleKeys.space, locName ?? ""),
+                  issueSummaryRow(LocaleKeys.spaceLoc, locTree ?? ""),
+                  issueSummaryRow(LocaleKeys.callReason, title ?? ""),
+                  issueSummaryRow(LocaleKeys.callReason, cmdb ?? ""),
+                  issueSummaryRow(LocaleKeys.openingDate, idate ?? ""),
+                  issueSummaryRow(LocaleKeys.incallNumber, ani ?? ""),
+                  issueSummaryRow(LocaleKeys.targetFixed, TimeClass().timeRecover(targetRDate).toString()),
+                  issueSummaryRow(LocaleKeys.targetResponsed, TimeClass().timeRecover(targetFDate).toString()),
+                  issueSummaryRow(LocaleKeys.hys, hys ?? "" ),
+                  issueSummaryRow(LocaleKeys.hds, hds ?? ""),
+                  issueSummaryRow(LocaleKeys.assignmentGroup, assignmentGroupName ?? ""),
+                  issueSummaryRow(LocaleKeys.assigneName, assigneName ?? ""),
                 ],
               ),
             ),
@@ -193,7 +194,7 @@ class DetailListWidget extends StatelessWidget {
           Text(header),
           NullCheckWidget().nullCheckWidget(
               targetTime,
-              Text('Zaman Bilgisine Ulaşılamadı'),
+              Text(LocaleKeys.noTimeInfo),
               Text(
                 TimeClass().timeRecover(targetTime),
                 style: TimeClass().fixStyle(respondedTime, fixTime, targetDate, fixedDate),
@@ -224,7 +225,7 @@ class DetailListWidget extends StatelessWidget {
                 flex: 3,
                 child: NullCheckWidget().nullCheckWidget(
                   description,
-                  Text('Bilgi Yok'),
+                  Text(LocaleKeys.noInfo),
                   Text(
                     description,
                     style: TextStyle(color: APPColors.Secondary.black, fontSize: 14, fontWeight: FontWeight.w400),
@@ -239,4 +240,3 @@ class DetailListWidget extends StatelessWidget {
     );
   }
 }
-

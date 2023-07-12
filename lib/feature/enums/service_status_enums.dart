@@ -1,5 +1,6 @@
 enum ServiceStatusEnums {
   success,
+  resultCode
 }
 
 extension ServiceStatusEnumsExtension on ServiceStatusEnums {
@@ -7,6 +8,8 @@ extension ServiceStatusEnumsExtension on ServiceStatusEnums {
     switch (this) {
       case ServiceStatusEnums.success:
         return 'success';
+      case ServiceStatusEnums.resultCode:
+        return '200';
       default:
         return 'unknown';
     }
