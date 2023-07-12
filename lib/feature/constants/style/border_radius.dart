@@ -9,4 +9,5 @@ class CustomBorderRadius {
   static BorderRadius textFieldBorderRadius = BorderRadius.circular(12);
 
   static Radius buttonMediumRadius = const Radius.circular(15);
+  static Radius buttonWithIconRadius = const Radius.circular(12);
 }

@@ -1,7 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/constants/other/app_strings.dart';
-import 'package:vm_fm_4/feature/constants/style/font_sizes.dart';
+
+import '../style/font_sizes.dart';
+import 'app_strings.dart';
 import 'colors.dart';
 
 @immutable

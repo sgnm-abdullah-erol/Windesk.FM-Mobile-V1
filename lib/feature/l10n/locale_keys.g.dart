@@ -76,6 +76,13 @@ abstract class LocaleKeys {
   static const String zeroStr = '0';
   static const String oneStr = '1';
 
+  //home page titles
+  static const issueList = 'Vaka-(SLA) Listesi';
+  static const issueSearch = 'Vaka-(SLA) Arama';
+  static const workOrderList = 'İş Emri Listesi';
+  static const workOrderSearch = 'İş Emri Arama';
+
+
 
   // page titles
   static const String searchTitle = 'Arama';

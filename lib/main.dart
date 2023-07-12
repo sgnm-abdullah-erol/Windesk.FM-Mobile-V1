@@ -1,12 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/constants/other/app_strings.dart';
-import 'package:vm_fm_4/feature/injection.dart';
+import 'package:provider/provider.dart';
 
+import 'feature/constants/other/app_strings.dart';
+import 'feature/global_providers/global_provider.dart';
+import 'feature/injection.dart';
 import 'feature/route/app_route.dart';
+import 'feature/service/firebase/firebase_notification.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   Injection().initInstances();
-  runApp(MyApp());
+  FirebaseNotification.init();
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<GlobalProvider>(create: (_) => GlobalProvider()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -14,14 +27,13 @@ class MyApp extends StatelessWidget {
 
   final _appRouter = AppRouter();
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: _appRouter.config(),
       title: AppStrings.appName,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
       ),
     );

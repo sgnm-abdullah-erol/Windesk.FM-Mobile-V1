@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../feature/constants/paths/asset_paths.dart';
 import '../../../feature/extensions/context_extension.dart';
+import '../../../feature/global_providers/global_provider.dart';
 import '../../../feature/route/app_route.gr.dart';
 import 'splash_provider.dart';
 
@@ -14,7 +15,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => SplashProvider(),
+      create: (context) => SplashProvider(),
       child: Consumer<SplashProvider>(
         builder: (context, SplashProvider splashProvider, child) {
           context.watch<SplashProvider>().setSplashFinished();
@@ -26,6 +27,8 @@ class SplashScreen extends StatelessWidget {
   }
 
   void _navigate(BuildContext context) {
+    context.read<GlobalProvider>().setDeviceModel(context.read<SplashProvider>().getDeviceModel());
+    context.read<GlobalProvider>().setDeviceVersion(context.read<SplashProvider>().getDeviceVersion());
     context.watch<SplashProvider>().isSplashFinished
         ? context.watch<SplashProvider>().isUserAlreadyLoggedIn
             ? context.router.replace(const HomeScreen())
