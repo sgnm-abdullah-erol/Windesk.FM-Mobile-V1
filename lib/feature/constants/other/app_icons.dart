@@ -12,7 +12,9 @@ class AppIcons {
   static const IconData calendarMonth = Icons.calendar_month;
   static const IconData attachment = Icons.attachment;
   static const IconData contentPasteSearch = Icons.content_paste_search;
-  static const IconData contentPaseOff = Icons.content_paste_off;
+  static const IconData contentPasteOff = Icons.content_paste_off;
+  static const IconData notifications = Icons.notifications;
+  static const IconData powerSettingsOff = Icons.power_settings_new;
 
   // INPUT ACTION ICONS
   static const IconData qr = Icons.qr_code;

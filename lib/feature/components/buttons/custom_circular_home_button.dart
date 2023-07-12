@@ -98,8 +98,8 @@ class _Stack extends StatelessWidget {
     return ElevatedButton.styleFrom(
       elevation: _elevation,
       shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.circularBorderRadius, side: BorderSide(color: APPColors.Secondary.blue)),
-      backgroundColor: APPColors.Secondary.blue,
-      foregroundColor: APPColors.Main.white,
+      backgroundColor: APPColors.Main.blue,
+      foregroundColor: APPColors.Main.blue,
     );
   }
 }

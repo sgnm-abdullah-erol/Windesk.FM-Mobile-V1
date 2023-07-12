@@ -13,7 +13,7 @@ class AppWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AutoTabsRouter.pageView(
-      routes: [
+      routes: const [
         HomeScreen(),
         NewOrderScreen(),
         SearchScreen(),
