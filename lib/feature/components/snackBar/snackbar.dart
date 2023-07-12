@@ -25,21 +25,7 @@ void snackBar(BuildContext context, String message, String type) async {
       ),
       displayDuration: const Duration(seconds: 2),
     );
-  } else if (type == 'connect') {
-    showTopSnackBar(
-      Overlay.of(context),
-      CustomSnackBar.connect(
-        message: message,
-      ),
-    );
-  } else if (type == 'notconnect') {
-    showTopSnackBar(
-        Overlay.of(context),
-        CustomSnackBar.notconnect(
-          message: message,
-        ),
-        displayDuration: const Duration(hours: 2));
-  } else if (type == 'true') {
+  }else if (type == 'true') {
     showTopSnackBar(
         Overlay.of(context),
         CustomSnackBar.success(

@@ -1,13 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vm_fm_4/feature/components/buttons/custom_login_button.dart';
-import 'package:vm_fm_4/feature/components/input_fields/text_fields_input_underline.dart';
-import 'package:vm_fm_4/feature/components/loading/custom_main_loading.dart';
-import 'package:vm_fm_4/feature/constants/paths/service_tools.dart';
-import 'package:vm_fm_4/feature/constants/style/custom_paddings.dart';
-import 'package:vm_fm_4/feature/constants/style/font_sizes.dart';
-import 'package:vm_fm_4/product/screens/auth/login_provider.dart';
+import '../../../../feature/components/buttons/custom_login_button.dart';
+import '../../../../feature/components/input_fields/text_fields_input_underline.dart';
+import '../../../../feature/components/loading/custom_main_loading.dart';
+import '../../../../feature/constants/paths/service_tools.dart';
+import '../../../../feature/constants/style/custom_paddings.dart';
+import '../../../../feature/constants/style/font_sizes.dart';
+import '../login_provider.dart';
 import '../../../../feature/components/appbar/custom_main_appbar.dart';
 import '../../../../feature/components/input_fields/text_fields_password_input_underline.dart';
 import '../../../../feature/constants/paths/asset_paths.dart';
@@ -41,7 +41,8 @@ class _LoginScreenBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomMainAppbar(title: _loginAppbarTitle(context), returnBack: false),
+      appBar: CustomMainAppbar(
+          title: _loginAppbarTitle(context), returnBack: false),
       body: provider.loading
           ? const CustomMainLoading()
           : Column(
@@ -70,7 +71,8 @@ class _LoginScreenBody extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            TextFieldsInputUnderline(hintText: _userNameHint, onChanged: provider.setUserName),
+            TextFieldsInputUnderline(
+                hintText: _userNameHint, onChanged: provider.setUserName),
             TextInputFieldsPasswordInputUnderline(
               hintText: _passwordHint,
               onChanged: provider.setPassword,
