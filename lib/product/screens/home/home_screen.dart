@@ -61,10 +61,10 @@ class _HomeScreenState extends State<HomeScreen> {
       flex: 4,
       child: Column(
         children: [
-          rowIconButtonSection(
-              context, LocaleKeys.issueList, AppIcons.calendarMonth, TestScreen(), LocaleKeys.issueSearch, AppIcons.attachment, TestScreen()),
-          rowIconButtonSection(context, LocaleKeys.workOrderList, AppIcons.contentPasteSearch, TestScreen(), LocaleKeys.workOrderSearch,
-              AppIcons.contentPasteOff, TestScreen()),
+          rowIconButtonSection(context, LocaleKeys.issueList, AppIcons.calendarMonth, const TestScreen(), LocaleKeys.issueSearch, AppIcons.attachment,
+              const TestScreen()),
+          rowIconButtonSection(context, LocaleKeys.workOrderList, AppIcons.contentPasteSearch, const WorkOrderListScreen(),
+              LocaleKeys.workOrderSearch, AppIcons.contentPasteOff, const TestScreen()),
         ],
       ),
     );

@@ -1,12 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vm_fm_4/feature/components/buttons/custom_login_button.dart';
-import 'package:vm_fm_4/feature/components/input_fields/text_fields_input_underline.dart';
-import 'package:vm_fm_4/feature/components/loading/custom_main_loading.dart';
-import 'package:vm_fm_4/feature/constants/style/custom_paddings.dart';
-import 'package:vm_fm_4/feature/constants/style/font_sizes.dart';
-import 'package:vm_fm_4/product/screens/auth/login_provider.dart';
+import 'package:vm_fm_4/feature/components/buttons/custom_circular_with_icon_button.dart';
+import 'package:vm_fm_4/feature/components/model_bottom_sheet/add_photo_modal_bottom_sheet.dart';
+import 'package:vm_fm_4/feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
+import '../../../../feature/components/buttons/custom_login_button.dart';
+import '../../../../feature/components/input_fields/text_fields_input_underline.dart';
+import '../../../../feature/components/loading/custom_main_loading.dart';
+import '../../../../feature/constants/style/custom_paddings.dart';
+import '../../../../feature/constants/style/font_sizes.dart';
+import '../login_provider.dart';
 import '../../../../feature/components/appbar/custom_main_appbar.dart';
 import '../../../../feature/components/input_fields/text_fields_password_input_underline.dart';
 import '../../../../feature/constants/paths/asset_paths.dart';
@@ -33,23 +36,30 @@ class _LoginScreenBody extends StatelessWidget {
   const _LoginScreenBody({required this.provider});
 
   final LoginProvider provider;
-  final String _loginTitle = 'Merkezi Yardım Masası';
   final String _userNameHint = 'Kullanıcı Adı';
   final String _passwordHint = 'Şifre';
   final String _login = 'Giriş Yap';
 
   @override
   Widget build(BuildContext context) {
+    test() {}
     return Scaffold(
-      appBar: CustomMainAppbar(title: _loginAppbarTitle(context), returnBack: false),
+      appBar: CustomMainAppbar(
+          title: _loginAppbarTitle(context), returnBack: false),
       body: provider.loading
           ? const CustomMainLoading()
           : Column(
               children: <Widget>[
-                _loginImage(context),
-                _loginTitleWidget(),
-                _textFields(),
-                _loginButton(),
+                CustomCircularWithIconButton(
+                    bgColor: Colors.red,
+                    icon: Icons.add_a_photo,
+                    onPressFunction: () {
+                      ShowModalBottomSheet().show(
+                          context,
+                          AddPhotoModalBottomSheet(
+                              test, test, test, 'hintDescText'));
+                    },
+                    iconColor: Colors.white)
               ],
             ),
     );
@@ -70,7 +80,8 @@ class _LoginScreenBody extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            TextFieldsInputUnderline(hintText: _userNameHint, onChanged: provider.setUserName),
+            TextFieldsInputUnderline(
+                hintText: _userNameHint, onChanged: provider.setUserName),
             TextInputFieldsPasswordInputUnderline(
               hintText: _passwordHint,
               onChanged: provider.setPassword,
@@ -87,8 +98,9 @@ class _LoginScreenBody extends StatelessWidget {
     return Expanded(
       flex: 1,
       child: Text(
-        _loginTitle,
-        style: const TextStyle(fontSize: FontSizes.titleLarge, fontFamily: 'Roboto'),
+        _login,
+        style: const TextStyle(
+            fontSize: FontSizes.titleLarge, fontFamily: 'Roboto'),
       ),
     );
   }

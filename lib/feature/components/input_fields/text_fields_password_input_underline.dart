@@ -12,6 +12,8 @@ class TextInputFieldsPasswordInputUnderline extends StatelessWidget {
     required this.showPassword,
   });
 
+  final String _validatorHintText = 'Lütfen bu alanı doldurunuz';
+
   final String hintText;
   final Function onChanged;
   final Function changeVisibility;
@@ -19,7 +21,8 @@ class TextInputFieldsPasswordInputUnderline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       textInputAction: TextInputAction.next,
       keyboardType: TextInputType.visiblePassword,
       obscureText: !showPassword,
@@ -33,6 +36,12 @@ class TextInputFieldsPasswordInputUnderline extends StatelessWidget {
       ),
       style: const TextStyle(fontSize: FontSizes.button, fontFamily: 'Roboto', letterSpacing: 1),
       onChanged: (String value) => onChanged(value),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return _validatorHintText;
+        }
+        return null;
+      },
     );
   }
 }

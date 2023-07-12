@@ -24,4 +24,13 @@ class AppStrings {
   static const hour = 'saat';
   static const minute = 'dk.';
   static const second = 'sn.';
+
+  // workorder tabs
+  static const myOrders = 'Üzerimdekiler';
+  static const myGroups = 'Grubumdakiler';
+  static const myPendiks = 'Bekleyenler';
+
+  //button
+  static const vazgec = 'Vazgeç';
+  static const kaydet = 'Kaydet';
 }

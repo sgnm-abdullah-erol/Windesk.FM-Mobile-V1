@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
+import 'package:vm_fm_4/feature/enums/service_status_enums.dart';
+import '../test_provider.dart';
 
 import '../test_provider.dart';
 
@@ -14,15 +16,14 @@ class TestScreen extends StatefulWidget {
 }
 
 class _TestScreenState extends State<TestScreen> {
-  final RoundedLoadingButtonController _controllerButton = RoundedLoadingButtonController();
+  final RoundedLoadingButtonController _controllerButton =
+      RoundedLoadingButtonController();
 
   RoundedLoadingButtonController get controllerButton => _controllerButton;
 
   void connectionTest(RoundedLoadingButtonController controller) async {
-
     // TestServiceRepositoryImpl x = TestServiceRepositoryImpl();
     // final result = await x.accessTestMobileService();
-
 
     // if (result == 'success') {
     //   setState(() {
@@ -36,7 +37,7 @@ class _TestScreenState extends State<TestScreen> {
     return ChangeNotifierProvider(
       create: (_) => TestProvider(),
       child: Consumer<TestProvider>(
-        builder: (context, TestProvider testProvider, child) {
+          builder: (context, TestProvider testProvider, child) {
         return SizedBox(
           width: 45,
           height: 6,
@@ -48,12 +49,12 @@ class _TestScreenState extends State<TestScreen> {
             valueColor: Colors.white,
             borderRadius: 20,
             child: const Center(
-              child: Text('Erişim Testi', style: TextStyle(color: Colors.white)),
+              child:
+                  Text('Erişim Testi', style: TextStyle(color: Colors.white)),
             ),
           ),
         );
-                }
-      ),
+      }),
     );
   }
 }

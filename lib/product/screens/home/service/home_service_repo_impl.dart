@@ -18,7 +18,8 @@ class HomeServiceRepositoryImpl extends HomeServiceRepository {
     bool result = false;
     String deviceToken = await SharedManager().getString(SharedEnum.deviceId);
 
-    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$deviceToken&action=logout&username=';
+    String url =
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$deviceToken&action=logout&username=';
 
     try {
       final response = await super.dio.get(url);
@@ -29,35 +30,46 @@ class HomeServiceRepositoryImpl extends HomeServiceRepository {
 
         return Left(result);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.workOrderAddEffortError, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(
+            message: CustomServiceMessages.workOrderAddEffortError,
+            statusCode: response.statusCode.toString()));
       }
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderAddEffortError, statusCode: '500'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.workOrderAddEffortError,
+          statusCode: '500'));
     }
   }
 
   @override
-  Future<Either<List<AnnouncementModel>, CustomServiceException>> getAnnouncements() async {
+  Future<Either<List<AnnouncementModel>, CustomServiceException>>
+      getAnnouncements() async {
     List<AnnouncementModel> announcements = [];
     String deviceToken = await SharedManager().getString(SharedEnum.deviceId);
-    String url = '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$deviceToken&action=getAnnouncements&username=';
+    String url =
+        '${ServiceTools.baseUrlV1}${ServiceTools.tokenV1}$deviceToken&action=getAnnouncements&username=';
 
     try {
       final response = await super.dio.get(url);
       super.logger.e(response.toString());
 
-      if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
+      if (response.data[ServiceResponseStatusEnums.result.rawText] ==
+          ServiceStatusEnums.success.rawText) {
         final data = response.data[ServiceResponseStatusEnums.records.rawText];
         announcements = const AnnouncementModel().fromJsonList(data);
 
         return Left(announcements);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.announcementViewError, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(
+            message: CustomServiceMessages.announcementViewError,
+            statusCode: response.statusCode.toString()));
       }
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.announcementViewError, statusCode: '500'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.announcementViewError,
+          statusCode: '500'));
     }
   }
 }

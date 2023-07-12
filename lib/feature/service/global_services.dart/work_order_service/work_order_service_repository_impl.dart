@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+
 import '../../../enums/service_response_status_enums.dart';
 import '../../../enums/service_status_enums.dart';
 import '../../../exceptions/custom_service_exceptions.dart';
@@ -130,6 +131,8 @@ class WorkOrderServiceRepositoryImpl extends WorkOrderServiceRepository {
       if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
         final data = response.data[ServiceResponseStatusEnums.detail.rawText];
         workOrderDeatails = WorkOrderDetailsModel.fromJson(data);
+
+        super.logger.d(workOrderDeatails.toString());
 
         return Left(workOrderDeatails);
       } else {

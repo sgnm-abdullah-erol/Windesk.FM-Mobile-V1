@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:vm_fm_4/feature/enums/shared_enums.dart';
+import '../enums/shared_enums.dart';
 
 @immutable
 class SharedManager {
