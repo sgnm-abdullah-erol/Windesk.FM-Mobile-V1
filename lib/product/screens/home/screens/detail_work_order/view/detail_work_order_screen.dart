@@ -19,13 +19,14 @@ class DetailWorkOrderScreen extends StatefulWidget {
 }
 
 class _DetailWorkOrderScreenState extends State<DetailWorkOrderScreen> {
+  WorkOrderDetailProvider woDetailProvider = WorkOrderDetailProvider();
+  WorkOrderDetailsModel woDetailList = const WorkOrderDetailsModel();
+
   @override
   void initState() {
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      WorkOrderDetailProvider woDetailProvider = WorkOrderDetailProvider();
-      woDetailProvider.getWorkOrderDetails(widget.workOrderCode);
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      woDetailList= await woDetailProvider.getWorkOrderDetails(widget.workOrderCode);
     });
-
     super.initState();
   }
 
@@ -36,12 +37,12 @@ class _DetailWorkOrderScreenState extends State<DetailWorkOrderScreen> {
       child: Consumer<WorkOrderDetailProvider>(
         builder: (context, WorkOrderDetailProvider woDetailProvider, child) {
           return context.read<WorkOrderDetailProvider>().isLoading
-        ? const Center(child: CustomLoadingIndicator())
-        : Column(
-            children: [
-              WoSummary(woModel: context.read<WorkOrderDetailProvider>().woDetailList),
-            ],
-          );
+              ? const Center(child: CustomLoadingIndicator())
+              : Column(
+                  children: [
+                    WoSummary(woModel: woDetailList),
+                  ],
+                );
         },
       ),
     );
@@ -49,7 +50,6 @@ class _DetailWorkOrderScreenState extends State<DetailWorkOrderScreen> {
 }
 
 StatelessWidget _woDetailSummary(BuildContext context) {
-
   WorkOrderDetailsModel woDetail = context.read<WorkOrderDetailProvider>().woDetailList;
   return WoSummary(woModel: woDetail);
 }

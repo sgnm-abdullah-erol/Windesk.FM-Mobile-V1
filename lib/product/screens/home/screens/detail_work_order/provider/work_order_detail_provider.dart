@@ -13,14 +13,17 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   WorkOrderDetailsModel _woDetailList = const WorkOrderDetailsModel();
   WorkOrderDetailsModel get woDetailList => _woDetailList;
 
-  void getWorkOrderDetails(String workOrderCode) async {
+  Future<WorkOrderDetailsModel> getWorkOrderDetails(String workOrderCode) async {
     print('asdasdasd');
     _isLoading = true;
     notifyListeners();
-    Future.delayed(const Duration(seconds: 4));
     final result = await WorkOrderServiceRepositoryImpl().getWorkOrderDetails(workOrderCode);
-    result.fold((l) => _woDetailList = l, (r) {});
-    _isLoading = false;
-    notifyListeners();
+      result.fold((l) => _woDetailList = l, (r) {});
+      notifyListeners();
+
+      _isLoading = false;
+      notifyListeners();
+      return _woDetailList;
+
   }
 }
