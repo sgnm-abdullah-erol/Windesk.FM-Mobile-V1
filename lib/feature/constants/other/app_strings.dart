@@ -33,4 +33,26 @@ class AppStrings {
   //button
   static const vazgec = 'Vazgeç';
   static const kaydet = 'Kaydet';
+
+  //Add efforts labels
+  static const eforEkle = 'Efor Ekle';
+  static const sure = 'Süre Seçiniz';
+  static const gun = 'Gün';
+  static const saat = 'Saat';
+  static const dakika = 'Dakika';
+
+  // add material strings
+
+  static const malzemeEkle = 'Malzeme Ekle';
+  static const depoSeciniz = 'Depo Seçiniz';
+  static const urunSeciniz = 'Ürün Seçiniz';
+
+  static const birimSeciniz = 'Birim Seçiniz';
+  static const miktarGiriniz = 'Miktar Giriniz';
+
+  // add personal strings
+
+  static const personelEkle = 'Personel Ekle';
+  static const personelSeciniz = 'Personel Seçiniz';
+  static const vardiyaSeciniz = 'Vardiya Seçiniz';
 }
