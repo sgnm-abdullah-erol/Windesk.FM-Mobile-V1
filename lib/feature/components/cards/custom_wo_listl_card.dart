@@ -1,7 +1,9 @@
 // ignore_for_file:file_names, prefer_const_constructors_in_immutables,prefer_const_constructors,prefer_const_literals_to_create_immutables,use_key_in_widget_constructors
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:vm_fm_4/feature/constants/functions/null_check_widget.dart';
+import 'package:vm_fm_4/feature/constants/style/border_radius.dart';
 import 'package:vm_fm_4/feature/constants/style/font_sizes.dart';
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_list/provider/work_order_list_provider.dart';
@@ -10,6 +12,7 @@ import '../../constants/other/app_strings.dart';
 import '../../constants/other/colors.dart';
 import '../../constants/style/box_decorations.dart';
 import '../../models/work_space/work_space_detail.dart';
+import '../../route/app_route.gr.dart';
 import '../buttons/custom_half_buttons.dart';
 
 class CustomWoDetailCard extends StatelessWidget {
@@ -34,13 +37,15 @@ class CustomWoDetailCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () => context.router.push(DetailWorkOrderScreen(workSpaceDetail: workSpaceDetail)),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Card(
-          color: APPColors.Main.grey,
-          shadowColor: APPColors.Main.grey,
-          elevation: 5.0,
+          shape: RoundedRectangleBorder(
+            borderRadius: CustomBorderRadius.mediumBorderRadius,
+            side: BorderSide(color: APPColors.Secondary.black, width: 0.2),
+          ),
+          elevation: 8.0,
           child: Container(
             width: context.width / 1.2,
             decoration: WoListCardDecoration(),
@@ -59,7 +64,7 @@ class CustomWoDetailCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           codeAndStatusWidget(context),
-          Divider(height: 10),
+          Divider(height: 10, thickness: 1, color: APPColors.Secondary.black),
           woListText(workSpaceDetail.task?.priority?.label?.first ?? _noLabel),
           woListText(workSpaceDetail.task?.name ?? _noName),
           NullCheckWidget().nullCheckWidget(
@@ -127,7 +132,7 @@ class CustomWoDetailCard extends StatelessWidget {
             ),
           ],
         ),
-        Divider(height: 15),
+        Divider(height: 10, thickness: 1, color: APPColors.Secondary.black),
       ],
     );
   }

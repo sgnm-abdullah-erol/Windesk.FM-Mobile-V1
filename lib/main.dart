@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vm_fm_4/feature/themes/custom_light_theme.dart';
 
 import 'feature/constants/other/app_strings.dart';
 import 'feature/global_providers/global_provider.dart';
@@ -31,10 +32,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: _appRouter.config(),
       title: AppStrings.appName,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
-        useMaterial3: true,
-      ),
+      theme: CustomLightTheme().lightTheme,
     );
   }
 }
