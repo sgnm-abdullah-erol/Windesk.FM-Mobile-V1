@@ -1,24 +1,18 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vm_fm_4/feature/route/app_route.gr.dart';
 
-import '../../../../feature/components/appbar/custom_main_appbar.dart';
-import '../../../../feature/components/buttons/custom_circular_with_icon_button.dart';
-import '../../../../feature/components/buttons/custom_circular_with_text_button.dart';
-import '../../../../feature/components/buttons/custom_elevated_button_with_icon.dart';
 import '../../../../feature/components/buttons/custom_login_button.dart';
 import '../../../../feature/components/input_fields/text_fields_input_underline.dart';
-import '../../../../feature/components/input_fields/text_fields_password_input_underline.dart';
 import '../../../../feature/components/loading/custom_main_loading.dart';
-import '../../../../feature/components/model_bottom_sheet/issue_filter_modal_bottom_sheet.dart';
-import '../../../../feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
-import '../../../../feature/constants/other/colors.dart';
-import '../../../../feature/constants/paths/asset_paths.dart';
 import '../../../../feature/constants/style/custom_paddings.dart';
 import '../../../../feature/constants/style/font_sizes.dart';
-import '../../../../feature/extensions/context_extension.dart';
-import '../../../../feature/route/app_route.gr.dart';
 import '../login_provider.dart';
+import '../../../../feature/components/appbar/custom_main_appbar.dart';
+import '../../../../feature/components/input_fields/text_fields_password_input_underline.dart';
+import '../../../../feature/constants/paths/asset_paths.dart';
+import '../../../../feature/extensions/context_extension.dart';
 
 @RoutePage()
 class LoginScreen extends StatelessWidget {
@@ -54,44 +48,17 @@ class _LoginScreenBody extends StatelessWidget {
           ? const CustomMainLoading()
           : Column(
               children: <Widget>[
-                CustomCircularWithIconButton(
-                    bgColor: Colors.red,
-                    icon: Icons.add_a_photo,
-                    onPressFunction: () {
-                      ShowModalBottomSheet().show(
-                          context,
-                           IssueFilterModalBottomSheet(
-                              stateList: const ['stateList'],
-                              buildList: const ['buildList'],
-                              floorList: const ['floorList'],
-                              wingList: const ['wingList'],
-                              selectStateFunction: () {},
-                              selectBuildFunction: () {},
-                              selectFloorFunction: () {},
-                              selectWingFunction: () {},
-                              filterStartFunction: () {},
-                              taskForMeFunction: () {},
-                              selectedParamList: const [
-                                'selectedItem',
-                                'sgnm1032',
-                                'Üzerinde Çalışılıyor'
-                              ],
-                              selectedParamListDeleteItem: () {}));
-                    },
-                    iconColor: Colors.white),
-                CustomCircularWithTextButton(
-                  bgColor: APPColors.Main.blue,
-                  onPressFunction: () {},
-                  textButton: 'textButton',
-                  textColor: APPColors.Main.white,
-                ),
-                CustomElevatedButtonWithIcon(
-                    bgColor: Colors.red,
-                    onPressFunction: () {},
-                    textValue: 'tet',
-                    textColor: Colors.black,
-                    iconColor: Colors.red,
-                    icon: Icons.abc)
+                _loginImage(context),
+                _loginTitleWidget(),
+                _textFields(),
+                _loginButton(),
+                // CustomCircularWithIconButton(
+                //     bgColor: Colors.red,
+                //     icon: Icons.add_a_photo,
+                //     onPressFunction: () {
+                //       ShowModalBottomSheet().show(context, AddPhotoModalBottomSheet(test, test, test, 'hintDescText'));
+                //     },
+                //     iconColor: Colors.white)
               ],
             ),
     );

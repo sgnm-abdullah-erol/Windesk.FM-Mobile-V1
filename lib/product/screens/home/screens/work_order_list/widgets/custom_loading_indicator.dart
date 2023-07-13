@@ -6,7 +6,7 @@ class CustomLoadingIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height / 2.5),
+      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height / 30),
       child: const Align(alignment: Alignment.center, child: CircularProgressIndicator()),
     );
   }

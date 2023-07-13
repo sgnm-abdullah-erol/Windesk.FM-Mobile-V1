@@ -9,7 +9,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getMyWorkSpaces(String id, String token, int page) async {
     List<WorkSpaceDetail> workSpaceDetailList = [];
 
-    String url = 'http://10.0.2.2:3015/task/workSpace/task/state/List/for/assigned/user/pagination/';
+    String url = 'http://10.0.2.2:3015/task/workSpace/task/state/List/for/assigned/user/pagination/$id';
 
     try {
       final response = await super.dio.get(
@@ -17,14 +17,13 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
             data: {
               "page": page,
               "limit": 10,
-              "workSpaceId": id,
             },
             options: Options(
-              headers: {'authorization': token},
+              headers: {'authorization': 'Bearer $token'},
             ),
           );
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
         workSpaceDetailList = WorkSpaceDetail.fromJsonList(data);
 
@@ -34,20 +33,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       } else {
         return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
       }
-
-      // final response = await super.dio.get(url,
-      //     options: Options(
-      //       headers: {'xusercode': "sgnm1040", 'xtoken': 'demo!'},
-      //     ));
-
-      // if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
-      //   final data = response.data[ServiceResponseStatusEnums.records.rawText];
-      //   loads = const WorkOrderLoadsModel().fromJsonList(data);
-
-      //   return Left(loads);
-      // } else {
-      //   return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: response.statusCode.toString()));
-      // }
     } catch (error) {
       super.logger.e(error.toString());
       return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
