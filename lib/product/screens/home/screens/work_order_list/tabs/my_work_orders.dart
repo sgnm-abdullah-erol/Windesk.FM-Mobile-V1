@@ -1,11 +1,14 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import 'package:vm_fm_4/product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
 import '../../../../../../feature/components/cards/custom_wo_listl_card.dart';
 import '../../../../../../feature/extensions/context_extension.dart';
+import '../../../../../../feature/route/app_route.gr.dart';
 import '../provider/work_order_list_provider.dart';
 
+@RoutePage()
 class MyWorkOrders extends StatefulWidget {
   const MyWorkOrders({super.key, required this.provider});
 
@@ -35,7 +38,9 @@ class _MyWorkOrdersState extends State<MyWorkOrders> {
               itemCount: 20,
               itemBuilder: (context, index) {
                 return CustomWoDetailCard(
-                  onPressed: (woCode) {},
+                  onPressed: (woCode) {
+                    context.router.push(DetailWorkOrderScreen(workOrderCode: 'wo00002986'));
+                  },
                   code: 'asda',
                   id: 'asda',
                   moduleLocation: 'asda',
