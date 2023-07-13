@@ -46,8 +46,8 @@ class WoSummary extends StatelessWidget {
             NullCheckWidget().nullCheckWidget(woModel.iuser, Container(), woSummaryTextWidget(Icons.person_outline, woModel.iuser.toString())),
             woModel.plannedTime == null
                 ? Container()
-                : Padding(
-                    padding: const EdgeInsets.all(8.0),
+                : const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Align(
                       alignment: Alignment.topLeft,
                       child: Row(
@@ -63,8 +63,8 @@ class WoSummary extends StatelessWidget {
                   ),
             woModel.plannedStartdate == null
                 ? Container()
-                : Padding(
-                    padding: const EdgeInsets.all(8.0),
+                : const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Align(
                       alignment: Alignment.topLeft,
                       child: Row(

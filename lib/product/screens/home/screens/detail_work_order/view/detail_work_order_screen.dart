@@ -6,7 +6,6 @@ import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/provider/
 
 import '../../../../../../feature/components/cards/custom_wo_detail_summary.card.dart';
 import '../../../../../../feature/models/work_order_models/work_order_details_model.dart';
-import '../../work_order_list/provider/work_order_list_provider.dart';
 import '../../work_order_list/widgets/custom_loading_indicator.dart';
 
 @RoutePage()
@@ -22,9 +21,11 @@ class DetailWorkOrderScreen extends StatefulWidget {
 class _DetailWorkOrderScreenState extends State<DetailWorkOrderScreen> {
   @override
   void initState() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      WorkOrderDetailProvider woDetailProvider = WorkOrderDetailProvider();
+      woDetailProvider.getWorkOrderDetails(widget.workOrderCode);
+    });
 
-    WorkOrderDetailProvider woDetailProvider = WorkOrderDetailProvider();
-    woDetailProvider.getWorkOrderDetails(widget.workOrderCode);
     super.initState();
   }
 
@@ -35,7 +36,7 @@ class _DetailWorkOrderScreenState extends State<DetailWorkOrderScreen> {
       child: Consumer<WorkOrderDetailProvider>(
         builder: (context, WorkOrderDetailProvider woDetailProvider, child) {
           return context.read<WorkOrderDetailProvider>().isLoading
-        ? const CustomLoadingIndicator()
+        ? const Center(child: CustomLoadingIndicator())
         : Column(
             children: [
               WoSummary(woModel: context.read<WorkOrderDetailProvider>().woDetailList),

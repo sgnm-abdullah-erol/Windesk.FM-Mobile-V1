@@ -14,12 +14,13 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   WorkOrderDetailsModel get woDetailList => _woDetailList;
 
   void getWorkOrderDetails(String workOrderCode) async {
+    print('asdasdasd');
     _isLoading = true;
-
-    Future.delayed(Duration(seconds: 4));
+    notifyListeners();
+    Future.delayed(const Duration(seconds: 4));
     final result = await WorkOrderServiceRepositoryImpl().getWorkOrderDetails(workOrderCode);
     result.fold((l) => _woDetailList = l, (r) {});
-    notifyListeners();
     _isLoading = false;
+    notifyListeners();
   }
 }
