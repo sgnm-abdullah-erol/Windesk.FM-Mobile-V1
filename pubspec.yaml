@@ -64,9 +64,15 @@ dependencies:
   badges: ^3.1.1
   url_launcher: ^6.1.12
 
+  # image picker
+  image_picker: ^1.0.1
+
+  # accordion --ui
+  accordion: ^2.5.1
+
+
   # icons
   cupertino_icons: ^1.0.2
-  image_picker: ^1.0.1
 
 dev_dependencies:
   flutter_test:
