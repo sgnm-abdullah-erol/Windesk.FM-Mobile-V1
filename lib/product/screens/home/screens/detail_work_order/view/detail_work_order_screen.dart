@@ -36,12 +36,12 @@ class _DetailWorkOrderScreenState extends State<DetailWorkOrderScreen> {
       child: Consumer<WorkOrderDetailProvider>(
         builder: (context, WorkOrderDetailProvider woDetailProvider, child) {
           return context.read<WorkOrderDetailProvider>().isLoading
-        ? const Center(child: CustomLoadingIndicator())
-        : Column(
-            children: [
-              WoSummary(woModel: context.read<WorkOrderDetailProvider>().woDetailList),
-            ],
-          );
+              ? const Center(child: CustomLoadingIndicator())
+              : Column(
+                  children: [
+                    WoSummary(woModel: context.read<WorkOrderDetailProvider>().woDetailList),
+                  ],
+                );
         },
       ),
     );
@@ -49,7 +49,6 @@ class _DetailWorkOrderScreenState extends State<DetailWorkOrderScreen> {
 }
 
 StatelessWidget _woDetailSummary(BuildContext context) {
-
   WorkOrderDetailsModel woDetail = context.read<WorkOrderDetailProvider>().woDetailList;
   return WoSummary(woModel: woDetail);
 }
