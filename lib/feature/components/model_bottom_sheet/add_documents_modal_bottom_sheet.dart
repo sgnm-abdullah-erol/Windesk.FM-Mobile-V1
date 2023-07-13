@@ -3,17 +3,19 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:vm_fm_4/feature/components/buttons/custom_circular_with_icon_button.dart';
+import 'package:vm_fm_4/feature/constants/other/colors.dart';
 import '../../constants/other/app_strings.dart';
 import '../buttons/custom_half_buttons.dart';
 import '../../constants/style/border_radius.dart';
 
-class AddPhotoModalBottomSheet extends StatelessWidget {
-  const AddPhotoModalBottomSheet(this.saveImageFunction, this.saveDescFunction,
-      this.addPhotoFunction, this.hintDescText,
-      {super.key});
-  final Function saveImageFunction;
+class AddDocumentsModalBottomSheet extends StatelessWidget {
+  const AddDocumentsModalBottomSheet(
+      this.saveDescFunction, this.addDocumentFunction, this.hintDescText,
+      {super.key, required this.pickDocumentFunction});
+  final Function pickDocumentFunction;
   final Function saveDescFunction;
-  final Function addPhotoFunction;
+  final Function addDocumentFunction;
   final String hintDescText;
   @override
   Widget build(BuildContext context) {
@@ -27,11 +29,11 @@ class AddPhotoModalBottomSheet extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
         child: Column(
           children: [
-            _PhotoStack(saveImageFunction: saveImageFunction),
+            _document(context, pickDocumentFunction),
             Expanded(
                 flex: 20,
                 child: _descriptionTextField(saveDescFunction, hintDescText)),
-            _buttons(context, addPhotoFunction),
+            _buttons(context, addDocumentFunction),
             const Spacer(flex: 10),
           ],
         ),
@@ -39,7 +41,23 @@ class AddPhotoModalBottomSheet extends StatelessWidget {
     );
   }
 
-  Expanded _buttons(context, Function addPhotoFunction) {
+  Expanded _document(context, Function pickDocumentFunction) {
+    return Expanded(
+      flex: 20,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CustomCircularWithIconButton(
+              bgColor: APPColors.Main.blue,
+              icon: Icons.add_box,
+              onPressFunction: pickDocumentFunction,
+              iconColor: APPColors.Main.white)
+        ],
+      ),
+    );
+  }
+
+  Expanded _buttons(context, Function add) {
     return Expanded(
       flex: 20,
       child: Row(
@@ -51,7 +69,7 @@ class AddPhotoModalBottomSheet extends StatelessWidget {
               leftOnPressed: () {
                 Navigator.pop(context);
               },
-              rightOnPressed: addPhotoFunction)
+              rightOnPressed: addDocumentFunction)
         ],
       ),
     );
@@ -72,7 +90,7 @@ class AddPhotoModalBottomSheet extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-        .add(DiagnosticsProperty<Function>('saveImage', addPhotoFunction));
+        .add(DiagnosticsProperty<Function>('saveImage', addDocumentFunction));
   }
 }
 
