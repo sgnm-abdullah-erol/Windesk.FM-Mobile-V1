@@ -7,15 +7,15 @@ import 'package:provider/provider.dart';
 import 'package:vm_fm_4/feature/constants/paths/asset_paths.dart';
 import 'package:vm_fm_4/product/screens/home/service/home_service_repo_impl.dart';
 
-import '../../../feature/components/buttons/custom_circular_home_button.dart';
-import '../../../feature/components/snackBar/snackbar.dart';
-import '../../../feature/constants/other/app_icons.dart';
-import '../../../feature/constants/other/colors.dart';
-import '../../../feature/constants/paths/service_tools.dart';
-import '../../../feature/l10n/locale_keys.g.dart';
-import '../../../feature/route/app_route.gr.dart';
+import '../../../../feature/components/buttons/custom_circular_home_button.dart';
+import '../../../../feature/components/snackBar/snackbar.dart';
+import '../../../../feature/constants/other/app_icons.dart';
+import '../../../../feature/constants/other/colors.dart';
+import '../../../../feature/constants/paths/service_tools.dart';
+import '../../../../feature/l10n/locale_keys.g.dart';
+import '../../../../feature/route/app_route.gr.dart';
 import 'announcement_screen.dart';
-import 'home_provider.dart';
+import '../provider/home_provider.dart';
 
 @RoutePage()
 class HomeScreen extends StatefulWidget {
@@ -145,7 +145,6 @@ class _HomeScreenState extends State<HomeScreen> {
               snackBar(context, 'Çıkış İşlemi Başarısız', 'error');
               context.router.push(const LoginScreen());
             }
-          
           },
         ),
       ],

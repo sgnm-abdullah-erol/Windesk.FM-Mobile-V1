@@ -10,8 +10,7 @@ import '../buttons/custom_half_buttons.dart';
 import '../../constants/style/border_radius.dart';
 
 class AddDocumentsModalBottomSheet extends StatelessWidget {
-  const AddDocumentsModalBottomSheet(
-      this.saveDescFunction, this.addDocumentFunction, this.hintDescText,
+  const AddDocumentsModalBottomSheet(this.saveDescFunction, this.addDocumentFunction, this.hintDescText,
       {super.key, required this.pickDocumentFunction});
   final Function pickDocumentFunction;
   final Function saveDescFunction;
@@ -30,9 +29,7 @@ class AddDocumentsModalBottomSheet extends StatelessWidget {
         child: Column(
           children: [
             _document(context, pickDocumentFunction),
-            Expanded(
-                flex: 20,
-                child: _descriptionTextField(saveDescFunction, hintDescText)),
+            Expanded(flex: 20, child: _descriptionTextField(saveDescFunction, hintDescText)),
             _buttons(context, addDocumentFunction),
             const Spacer(flex: 10),
           ],
@@ -48,10 +45,7 @@ class AddDocumentsModalBottomSheet extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CustomCircularWithIconButton(
-              bgColor: APPColors.Main.blue,
-              icon: Icons.add_box,
-              onPressFunction: pickDocumentFunction,
-              iconColor: APPColors.Main.white)
+              bgColor: APPColors.Main.blue, icon: Icons.add_box, onPressFunction: pickDocumentFunction, iconColor: APPColors.Main.white)
         ],
       ),
     );
@@ -64,8 +58,8 @@ class AddDocumentsModalBottomSheet extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CustomHalfButtons(
-              leftTitle: const Text(AppStrings.vazgec),
-              rightTitle: const Text(AppStrings.kaydet),
+              leftTitle: const Text(AppStrings.cancel),
+              rightTitle: const Text(AppStrings.save),
               leftOnPressed: () {
                 Navigator.pop(context);
               },
@@ -89,8 +83,7 @@ class AddDocumentsModalBottomSheet extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-        .add(DiagnosticsProperty<Function>('saveImage', addDocumentFunction));
+    properties.add(DiagnosticsProperty<Function>('saveImage', addDocumentFunction));
   }
 }
 

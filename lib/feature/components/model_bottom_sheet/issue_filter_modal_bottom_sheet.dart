@@ -123,8 +123,8 @@ class IssueFilterModalBottomSheet extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CustomHalfButtons(
-              leftTitle: const Text(AppStrings.vazgec),
-              rightTitle: const Text(AppStrings.kaydet),
+              leftTitle: const Text(AppStrings.cancel),
+              rightTitle: const Text(AppStrings.save),
               leftOnPressed: () {
                 Navigator.pop(context);
               },

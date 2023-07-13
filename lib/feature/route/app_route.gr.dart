@@ -12,17 +12,12 @@ import 'package:auto_route/auto_route.dart' as _i12;
 import 'package:flutter/material.dart' as _i13;
 import 'package:vm_fm_4/feature/route/empty_router.dart' as _i11;
 import 'package:vm_fm_4/product/screens/auth/view/login_screen.dart' as _i8;
-import 'package:vm_fm_4/product/screens/home/home_screen.dart' as _i5;
-import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/view/detail_work_order_screen.dart'
-    as _i2;
-import 'package:vm_fm_4/product/screens/home/screens/work_order_list/provider/work_order_list_provider.dart'
-    as _i14;
-import 'package:vm_fm_4/product/screens/home/screens/work_order_list/tabs/my_work_orders.dart'
-    as _i3;
-import 'package:vm_fm_4/product/screens/home/screens/work_order_list/view/work_order_list_screen.dart'
-    as _i4;
-import 'package:vm_fm_4/product/screens/new_order/new_order_screen.dart'
-    as _i10;
+import 'package:vm_fm_4/product/screens/home/view/home_screen.dart' as _i5;
+import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/view/detail_work_order_screen.dart' as _i2;
+import 'package:vm_fm_4/product/screens/home/screens/work_order_list/provider/work_order_list_provider.dart' as _i14;
+import 'package:vm_fm_4/product/screens/home/screens/work_order_list/tabs/my_work_orders.dart' as _i3;
+import 'package:vm_fm_4/product/screens/home/screens/work_order_list/view/work_order_list_screen.dart' as _i4;
+import 'package:vm_fm_4/product/screens/new_order/new_order_screen.dart' as _i10;
 import 'package:vm_fm_4/product/screens/search/search_screen.dart' as _i9;
 import 'package:vm_fm_4/product/screens/splash/splash_screen.dart' as _i6;
 import 'package:vm_fm_4/product/screens/test/view/test_screen.dart' as _i7;
@@ -126,8 +121,7 @@ class AppWrapper extends _i12.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.DetailWorkOrderScreen]
-class DetailWorkOrderScreen
-    extends _i12.PageRouteInfo<DetailWorkOrderScreenArgs> {
+class DetailWorkOrderScreen extends _i12.PageRouteInfo<DetailWorkOrderScreenArgs> {
   DetailWorkOrderScreen({
     required String workOrderCode,
     _i13.Key? key,
@@ -143,8 +137,7 @@ class DetailWorkOrderScreen
 
   static const String name = 'DetailWorkOrderScreen';
 
-  static const _i12.PageInfo<DetailWorkOrderScreenArgs> page =
-      _i12.PageInfo<DetailWorkOrderScreenArgs>(name);
+  static const _i12.PageInfo<DetailWorkOrderScreenArgs> page = _i12.PageInfo<DetailWorkOrderScreenArgs>(name);
 }
 
 class DetailWorkOrderScreenArgs {
@@ -181,8 +174,7 @@ class MyWorkOrders extends _i12.PageRouteInfo<MyWorkOrdersArgs> {
 
   static const String name = 'MyWorkOrders';
 
-  static const _i12.PageInfo<MyWorkOrdersArgs> page =
-      _i12.PageInfo<MyWorkOrdersArgs>(name);
+  static const _i12.PageInfo<MyWorkOrdersArgs> page = _i12.PageInfo<MyWorkOrdersArgs>(name);
 }
 
 class MyWorkOrdersArgs {

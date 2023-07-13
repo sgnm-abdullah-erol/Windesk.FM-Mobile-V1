@@ -2,6 +2,7 @@ import 'package:accordion/accordion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import '../widgets/custom_base_accordion.dart';
+import '../widgets/custom_base_accordion_section.dart';
 import '../widgets/custom_loading_indicator.dart';
 
 import '../provider/work_order_list_provider.dart';
@@ -33,7 +34,7 @@ class _MyGroupWorkOrdersState extends State<MyGroupWorkOrders> {
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               child: ListView.builder(
-                itemCount: 50,
+                itemCount: 10,
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
@@ -56,10 +57,10 @@ class _MyGroupWorkOrdersState extends State<MyGroupWorkOrders> {
       content: Accordion(
         maxOpenSections: 0,
         headerBackgroundColorOpened: Colors.black54,
-        children: const [
-          // for (int i = 0; i < index; i++) ...{
-          //   CustomBaseAccordionSections().baseAccordionSection('selam', '1', 1),
-          // }
+        children: [
+          for (int i = 0; i < index; i++) ...{
+            CustomBaseAccordionSections().baseAccordionSection('selam', '1', 1),
+          }
         ],
       ),
     );

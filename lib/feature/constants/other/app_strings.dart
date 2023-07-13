@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 @immutable
 class AppStrings {
   const AppStrings._();
+
   // app name
   static const String appName = 'Windesk FM Mobile V1';
 
@@ -31,18 +32,18 @@ class AppStrings {
   static const myPendiks = 'Bekleyenler';
 
   //button
-  static const vazgec = 'Vazgeç';
-  static const kaydet = 'Kaydet';
+  static const cancel = 'Vazgeç';
+  static const save = 'Kaydet';
+  static const approve = 'Onayla';
 
   //Add efforts labels
-  static const eforEkle = 'Efor Ekle';
-  static const sure = 'Süre Seçiniz';
+  static const addEffort = 'Efor Ekle';
+  static const date = 'Süre Seçiniz';
   static const gun = 'Gün';
   static const saat = 'Saat';
   static const dakika = 'Dakika';
 
   // add material strings
-
   static const malzemeEkle = 'Malzeme Ekle';
   static const depoSeciniz = 'Depo Seçiniz';
   static const urunSeciniz = 'Ürün Seçiniz';
@@ -51,13 +52,11 @@ class AppStrings {
   static const miktarGiriniz = 'Miktar Giriniz';
 
   // add personal strings
-
   static const personelEkle = 'Personel Ekle';
   static const personelSeciniz = 'Personel Seçiniz';
   static const vardiyaSeciniz = 'Vardiya Seçiniz';
 
   //issue filter strings
-
   static const durum = 'Durum';
   static const bina = 'Bina';
   static const kat = 'Kat';

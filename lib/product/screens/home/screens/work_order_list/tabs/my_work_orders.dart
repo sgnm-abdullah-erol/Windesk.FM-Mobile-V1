@@ -2,10 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import 'package:vm_fm_4/product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
+import '../widgets/custom_loading_indicator.dart';
 import '../../../../../../feature/components/cards/custom_wo_listl_card.dart';
 import '../../../../../../feature/extensions/context_extension.dart';
-import '../../../../../../feature/route/app_route.gr.dart';
 import '../provider/work_order_list_provider.dart';
 
 @RoutePage()
@@ -35,21 +34,12 @@ class _MyWorkOrdersState extends State<MyWorkOrders> {
             height: context.height,
             width: context.width,
             child: ListView.builder(
-              itemCount: 20,
+              itemCount: widget.provider.myWorkSpaceDetails.length,
               itemBuilder: (context, index) {
                 return CustomWoDetailCard(
-                  onPressed: (woCode) {
-                    context.router.push(DetailWorkOrderScreen(workOrderCode: 'wo00002986'));
-                  },
-                  code: 'asda',
-                  id: 'asda',
-                  moduleLocation: 'asda',
-                  name: 'asda',
-                  plannedEndDate: 'asda',
-                  service: 'asda',
-                  responsible: 'asda',
-                  serviceName: 'asda',
-                  statusName: 'asda',
+                  workSpaceDetail: widget.provider.myWorkSpaceDetails[index],
+                  isButtonVisible: false,
+                  provider: widget.provider,
                 );
               },
             ),
