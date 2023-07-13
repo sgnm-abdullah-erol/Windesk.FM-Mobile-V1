@@ -1,9 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../../feature/components/buttons/custom_circular_with_icon_button.dart';
-import '../../../../feature/components/model_bottom_sheet/add_photo_modal_bottom_sheet.dart';
-import '../../../../feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
+import 'package:vm_fm_4/feature/route/app_route.gr.dart';
+
 import '../../../../feature/components/buttons/custom_login_button.dart';
 import '../../../../feature/components/input_fields/text_fields_input_underline.dart';
 import '../../../../feature/components/loading/custom_main_loading.dart';
@@ -42,24 +41,24 @@ class _LoginScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    test() {}
+    provider.isLoginSuccess ? context.router.push(const HomeScreen()) : null;
     return Scaffold(
-      appBar: CustomMainAppbar(
-          title: _loginAppbarTitle(context), returnBack: false),
+      appBar: CustomMainAppbar(title: _loginAppbarTitle(context), returnBack: false),
       body: provider.loading
           ? const CustomMainLoading()
           : Column(
               children: <Widget>[
-                CustomCircularWithIconButton(
-                    bgColor: Colors.red,
-                    icon: Icons.add_a_photo,
-                    onPressFunction: () {
-                      ShowModalBottomSheet().show(
-                          context,
-                          AddPhotoModalBottomSheet(
-                              test, test, test, 'hintDescText'));
-                    },
-                    iconColor: Colors.white)
+                _loginImage(context),
+                _loginTitleWidget(),
+                _textFields(),
+                _loginButton(),
+                // CustomCircularWithIconButton(
+                //     bgColor: Colors.red,
+                //     icon: Icons.add_a_photo,
+                //     onPressFunction: () {
+                //       ShowModalBottomSheet().show(context, AddPhotoModalBottomSheet(test, test, test, 'hintDescText'));
+                //     },
+                //     iconColor: Colors.white)
               ],
             ),
     );
@@ -80,8 +79,7 @@ class _LoginScreenBody extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            TextFieldsInputUnderline(
-                hintText: _userNameHint, onChanged: provider.setUserName),
+            TextFieldsInputUnderline(hintText: _userNameHint, onChanged: provider.setUserName),
             TextInputFieldsPasswordInputUnderline(
               hintText: _passwordHint,
               onChanged: provider.setPassword,
@@ -99,8 +97,7 @@ class _LoginScreenBody extends StatelessWidget {
       flex: 1,
       child: Text(
         _login,
-        style: const TextStyle(
-            fontSize: FontSizes.titleLarge, fontFamily: 'Roboto'),
+        style: const TextStyle(fontSize: FontSizes.titleLarge, fontFamily: 'Roboto'),
       ),
     );
   }

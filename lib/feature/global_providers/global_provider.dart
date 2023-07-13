@@ -7,6 +7,9 @@ class GlobalProvider extends ChangeNotifier {
   String? _deviceVersion;
   String get deviceVersion => _deviceVersion ?? '';
 
+  String? _globalUserToken;
+  String get globalUserToken => _globalUserToken ?? '';
+
   // set functions
   void setDeviceModel(String deviceModel) {
     _deviceModel = deviceModel;

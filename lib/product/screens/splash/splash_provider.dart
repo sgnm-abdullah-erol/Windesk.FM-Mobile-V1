@@ -6,11 +6,14 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:vm_fm_4/feature/service/global_services.dart/auth_service/auth_service_repository_impl.dart';
 
 import '../../../feature/database/shared_manager.dart';
 import '../../../feature/enums/shared_enums.dart';
 
 class SplashProvider extends ChangeNotifier {
+  final AuthServiceRepositoryImpl _authService = AuthServiceRepositoryImpl();
+
   String? deviceModel;
   String? deviceVersion;
 
@@ -77,10 +80,21 @@ class SplashProvider extends ChangeNotifier {
 
     final String userName = await SharedManager().getString(SharedEnum.userName);
 
-    if (userName.isEmpty) {
-      _isUserAlreadyLoggedIn = false;
+    if (userName.isNotEmpty) {
+      final String userToken = await SharedManager().getString(SharedEnum.userToken);
+      await _authService.checkAccessToken(userToken).then((value) {
+        value.fold((l) {
+          if (l.isTokenValid == true) {
+            _isUserAlreadyLoggedIn = true;
+          } else {
+            _isUserAlreadyLoggedIn = false;
+          }
+        }, (r) {
+          _isUserAlreadyLoggedIn = false;
+        });
+      });
     } else {
-      _isUserAlreadyLoggedIn = true;
+      _isUserAlreadyLoggedIn = false;
     }
   }
 

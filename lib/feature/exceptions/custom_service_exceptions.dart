@@ -16,6 +16,14 @@ class CustomServiceException implements Exception {
 class CustomServiceMessages {
   const CustomServiceMessages._();
 
+  // work space
+  static const String work = 'Error while fetching workspaces';
+
+  // login
+  static const String loginError = 'Error while logging in';
+  static const String tokenChangeError = 'Error while checking token';
+
+  // work order
   static const String workOrderWorkloadError = 'Error while fetching workload';
   static const String workOrderAttachmentsError = 'Error while fetching attachments';
   static const String workOrderResourcesError = 'Error while fetching resources';
@@ -34,9 +42,7 @@ class CustomServiceMessages {
   static const String workOrderDeleteEffortError = 'Error while deleting effort';
 
   static const String noInternetConnection = "No internet connection";
-  
-  //home page
 
+  // home page
   static const String announcementViewError = 'Error while fetching Announcements';
-
 }
