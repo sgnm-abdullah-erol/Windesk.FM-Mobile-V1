@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:vm_fm_4/feature/components/loading/custom_main_loading.dart';
+import 'package:vm_fm_4/product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
 import '../../../../../../feature/components/cards/custom_wo_listl_card.dart';
 import '../../../../../../feature/extensions/context_extension.dart';
 import '../provider/work_order_list_provider.dart';
@@ -24,27 +26,28 @@ class _MyWorkOrdersState extends State<MyWorkOrders> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: context.height,
-      width: context.width ,      
-      child: ListView.builder(
-        itemCount: 20,
-        itemBuilder: (context, index) {
-          return CustomWoDetailCard(
-              onPressed: (woCode) {
+    return widget.provider.isLoading
+        ? const CustomLoadingIndicator()
+        : SizedBox(
+            height: context.height,
+            width: context.width,
+            child: ListView.builder(
+              itemCount: 20,
+              itemBuilder: (context, index) {
+                return CustomWoDetailCard(
+                  onPressed: (woCode) {},
+                  code: 'asda',
+                  id: 'asda',
+                  moduleLocation: 'asda',
+                  name: 'asda',
+                  plannedEndDate: 'asda',
+                  service: 'asda',
+                  responsible: 'asda',
+                  serviceName: 'asda',
+                  statusName: 'asda',
+                );
               },
-              code: 'asda',
-              id: 'asda',
-              moduleLocation: 'asda',
-              name: 'asda',
-              plannedEndDate: 'asda',
-              service: 'asda',
-              responsible: 'asda',
-              serviceName: 'asda',
-              statusName: 'asda',
-              );
-        },
-      ),
-    );
+            ),
+          );
   }
 }

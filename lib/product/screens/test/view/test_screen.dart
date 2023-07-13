@@ -2,10 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
-<<<<<<< HEAD
-=======
-
->>>>>>> d110652f9fa5f40f6e63c1795e284e3e2d4d45e8
 import '../test_provider.dart';
 
 @RoutePage()

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:vm_fm_4/product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
 
 import '../../../../../../feature/components/cards/custom_wo_listl_card.dart';
 import '../provider/work_order_list_provider.dart';
@@ -24,20 +25,22 @@ class _MyWorkOrderPendiksState extends State<MyWorkOrderPendiks> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomWoDetailCard(
-      onPressed: (woCode) {
-        print(woCode);
-      },
-      code: 'asda',
-      id: 'asda',
-      moduleLocation: 'asda',
-      name: 'asda',
-      plannedEndDate: 'asda',
-      service: 'asda',
-      responsible: 'asda',
-      serviceName: 'asda',
-      statusName: 'asda',
-      isButtonVisible: true,
-    );
+    return widget.provider.isLoading
+        ? const CustomLoadingIndicator()
+        : CustomWoDetailCard(
+            onPressed: (woCode) {
+              print(woCode);
+            },
+            code: 'asda',
+            id: 'asda',
+            moduleLocation: 'asda',
+            name: 'asda',
+            plannedEndDate: 'asda',
+            service: 'asda',
+            responsible: 'asda',
+            serviceName: 'asda',
+            statusName: 'asda',
+            isButtonVisible: true,
+          );
   }
 }
