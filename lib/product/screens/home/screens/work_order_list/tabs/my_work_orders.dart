@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import '../../../../../../feature/components/cards/custom_wo_listl_card.dart';
 import '../../../../../../feature/extensions/context_extension.dart';
 import '../provider/work_order_list_provider.dart';
 
@@ -25,18 +26,23 @@ class _MyWorkOrdersState extends State<MyWorkOrders> {
   Widget build(BuildContext context) {
     return SizedBox(
       height: context.height,
-      width: context.width,
+      width: context.width ,      
       child: ListView.builder(
         itemCount: 20,
         itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: 100,
-              width: 100,
-              color: Colors.red,
-            ),
-          );
+          return CustomWoDetailCard(
+              onPressed: (woCode) {
+              },
+              code: 'asda',
+              id: 'asda',
+              moduleLocation: 'asda',
+              name: 'asda',
+              plannedEndDate: 'asda',
+              service: 'asda',
+              responsible: 'asda',
+              serviceName: 'asda',
+              statusName: 'asda',
+              );
         },
       ),
     );
