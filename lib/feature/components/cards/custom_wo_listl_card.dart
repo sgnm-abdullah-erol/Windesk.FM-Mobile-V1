@@ -5,10 +5,12 @@ import 'package:vm_fm_4/feature/constants/functions/null_check_widget.dart';
 import 'package:vm_fm_4/feature/constants/other/time_functions.dart';
 import 'package:vm_fm_4/feature/constants/style/custom_paddings.dart';
 import 'package:vm_fm_4/feature/l10n/locale_keys.g.dart';
+import 'package:vm_fm_4/feature/mixins/custom_wo_list_card_mixin.dart';
 
 import '../../constants/other/colors.dart';
 import '../../constants/style/border_radius.dart';
 import '../../constants/style/font_sizes.dart';
+import '../buttons/custom_half_buttons.dart';
 
 class CustomWoDetailCard extends StatelessWidget {
   final String? id, code, statusName, service, serviceName, moduleLocation, name, responsible, plannedEndDate;
@@ -45,11 +47,7 @@ class CustomWoDetailCard extends StatelessWidget {
       },
       child: Container(
         width: size.width / 1.1,
-        decoration: BoxDecoration(
-          borderRadius: CustomBorderRadius.mediumBorderRadius,
-          boxShadow: const [BoxShadow(color: Color(0x19025273), blurRadius: 50, offset: Offset(6, 8))],
-          color: APPColors.Main.white,
-        ),
+        decoration: WoListCardDecoration(),
         child: Padding(
           padding: const EdgeInsets.only(top: 8, left: 12, right: 8, bottom: 8),
           child: Column(
@@ -59,7 +57,16 @@ class CustomWoDetailCard extends StatelessWidget {
               codeAndStatusWidget(size),
               Divider(height: 10),
               woListText(serviceName),
-              woListText(serviceName),
+              woListText(name),
+              NullCheckWidget().nullCheckWidget(
+                  moduleLocation,
+                  Text(
+                    'Mahal Bilgisi Bulunmuyor',
+                    style: TextStyle(color: APPColors.Main.red),
+                  ),
+                  woListText(moduleLocation)),
+              Center(
+                child: CustomHalfButtons(leftTitle: Text('Reddet',style: TextStyle(color: APPColors.Main.white),), leftOnPressed: (){},rightTitle: Text('Onayla',style: TextStyle(color: APPColors.Main.white),),rightOnPressed: (){},))
             ],
           ),
         ),
@@ -128,30 +135,6 @@ class CustomWoDetailCard extends StatelessWidget {
           height: 15,
         ),
       ],
-    );
-  }
-
-
-  Flexible issueListText(Size size, String header, String description) {
-    return Flexible(
-      child: SizedBox(
-        width: size.width,
-        child: Column(
-          children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: CustomPaddings.onlyBottomLow,
-                child: Text('$header : $description', style: const TextStyle(
-    color: Color(0xff025273),
-    fontSize: FontSizes.caption - 1,
-  )),
-              ),
-            ),
-            Divider(height: 5),
-          ],
-        ),
-      ),
     );
   }
 }
