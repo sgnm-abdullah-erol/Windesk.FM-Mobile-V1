@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../constants/other/colors.dart';
-import '../constants/style/border_radius.dart';
+import '../other/colors.dart';
+import 'border_radius.dart';
+
 
 class WoListCardDecoration extends BoxDecoration {
   WoListCardDecoration()
