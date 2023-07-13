@@ -29,18 +29,10 @@ class AppWrapper extends StatelessWidget {
             selectedIndex: tabsRouter.activeIndex,
             onItemSelected: tabsRouter.setActiveIndex,
             items: [
-              BottomNavyBarItem(
-                  title: const Text(AppStrings.homeTab),
-                  icon: const Icon(AppIcons.home)),
-              BottomNavyBarItem(
-                  title: const Text(AppStrings.newOrderTab),
-                  icon: const Icon(AppIcons.addBox)),
-              BottomNavyBarItem(
-                  title: const Text(AppStrings.searchTab),
-                  icon: const Icon(AppIcons.search)),
-              BottomNavyBarItem(
-                  title: const Text(AppStrings.testTab),
-                  icon: const Icon(AppIcons.wifi)),
+              BottomNavyBarItem(title: const Text(AppStrings.homeTab), icon: const Icon(AppIcons.home)),
+              BottomNavyBarItem(title: const Text(AppStrings.newOrderTab), icon: const Icon(AppIcons.addBox)),
+              BottomNavyBarItem(title: const Text(AppStrings.searchTab), icon: const Icon(AppIcons.search)),
+              BottomNavyBarItem(title: const Text(AppStrings.testTab), icon: const Icon(AppIcons.wifi)),
             ],
           ),
         );

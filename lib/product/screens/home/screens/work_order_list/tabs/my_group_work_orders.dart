@@ -23,6 +23,6 @@ class _MyGroupWorkOrdersState extends State<MyGroupWorkOrders> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return widget.provider.isLoading ? const Center(child: CircularProgressIndicator()) : const SizedBox();
   }
 }
