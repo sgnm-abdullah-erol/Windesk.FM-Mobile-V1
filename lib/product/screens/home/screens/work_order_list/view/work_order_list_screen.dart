@@ -42,18 +42,19 @@ class _BuildScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomMainAppbar(title: Text(AppStrings.workOrderList), returnBack: true, elevation: 3),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(height: 10),
-            CustomDefaultTabController(provider: provider, tabs: tabs),
-            provider.tabIndex == 0
+      body: Column(
+        children: [
+          const SizedBox(height: 10),
+          Expanded(flex: 10, child: CustomDefaultTabController(provider: provider, tabs: tabs)),
+          Expanded(
+            flex: 90,
+            child: provider.tabIndex == 0
                 ? MyWorkOrders(provider: provider)
                 : provider.tabIndex == 1
                     ? MyGroupWorkOrders(provider: provider)
-                    : MyWorkOrderPendiks(provider: provider)
-          ],
-        ),
+                    : MyWorkOrderPendiks(provider: provider),
+          ),
+        ],
       ),
     );
   }

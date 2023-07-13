@@ -28,7 +28,9 @@ class CustomLoginButton extends StatelessWidget {
                 foregroundColor: APPColors.Main.white,
                 shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.largeBorderRadius),
                 textStyle: const TextStyle(fontSize: FontSizes.button, fontFamily: 'Roboto', letterSpacing: 1)),
-            onPressed: () => onPressed(),
+            onPressed: () {
+              onPressed(context);
+            },
             child: Text(title),
           ),
         ),

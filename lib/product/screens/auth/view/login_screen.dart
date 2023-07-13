@@ -1,20 +1,24 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vm_fm_4/feature/components/model_bottom_sheet/add_documents_modal_bottom_sheet.dart';
-import 'package:vm_fm_4/feature/components/model_bottom_sheet/add_personal_modal_bottom_sheet.dart';
+
+import '../../../../feature/components/appbar/custom_main_appbar.dart';
 import '../../../../feature/components/buttons/custom_circular_with_icon_button.dart';
-import '../../../../feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
+import '../../../../feature/components/buttons/custom_circular_with_text_button.dart';
+import '../../../../feature/components/buttons/custom_elevated_button_with_icon.dart';
 import '../../../../feature/components/buttons/custom_login_button.dart';
 import '../../../../feature/components/input_fields/text_fields_input_underline.dart';
+import '../../../../feature/components/input_fields/text_fields_password_input_underline.dart';
 import '../../../../feature/components/loading/custom_main_loading.dart';
+import '../../../../feature/components/model_bottom_sheet/issue_filter_modal_bottom_sheet.dart';
+import '../../../../feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
+import '../../../../feature/constants/other/colors.dart';
+import '../../../../feature/constants/paths/asset_paths.dart';
 import '../../../../feature/constants/style/custom_paddings.dart';
 import '../../../../feature/constants/style/font_sizes.dart';
-import '../login_provider.dart';
-import '../../../../feature/components/appbar/custom_main_appbar.dart';
-import '../../../../feature/components/input_fields/text_fields_password_input_underline.dart';
-import '../../../../feature/constants/paths/asset_paths.dart';
 import '../../../../feature/extensions/context_extension.dart';
+import '../../../../feature/route/app_route.gr.dart';
+import '../login_provider.dart';
 
 @RoutePage()
 class LoginScreen extends StatelessWidget {
@@ -43,10 +47,9 @@ class _LoginScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    test() {}
+    provider.isLoginSuccess ? context.router.push(const HomeScreen()) : null;
     return Scaffold(
-      appBar: CustomMainAppbar(
-          title: _loginAppbarTitle(context), returnBack: false),
+      appBar: CustomMainAppbar(title: _loginAppbarTitle(context), returnBack: false),
       body: provider.loading
           ? const CustomMainLoading()
           : Column(
@@ -57,11 +60,38 @@ class _LoginScreenBody extends StatelessWidget {
                     onPressFunction: () {
                       ShowModalBottomSheet().show(
                           context,
-                          AddDocumentsModalBottomSheet(
-                              test, test, 'Açıklama giriniz',
-                              pickDocumentFunction: test));
+                           IssueFilterModalBottomSheet(
+                              stateList: const ['stateList'],
+                              buildList: const ['buildList'],
+                              floorList: const ['floorList'],
+                              wingList: const ['wingList'],
+                              selectStateFunction: () {},
+                              selectBuildFunction: () {},
+                              selectFloorFunction: () {},
+                              selectWingFunction: () {},
+                              filterStartFunction: () {},
+                              taskForMeFunction: () {},
+                              selectedParamList: const [
+                                'selectedItem',
+                                'sgnm1032',
+                                'Üzerinde Çalışılıyor'
+                              ],
+                              selectedParamListDeleteItem: () {}));
                     },
-                    iconColor: Colors.white)
+                    iconColor: Colors.white),
+                CustomCircularWithTextButton(
+                  bgColor: APPColors.Main.blue,
+                  onPressFunction: () {},
+                  textButton: 'textButton',
+                  textColor: APPColors.Main.white,
+                ),
+                CustomElevatedButtonWithIcon(
+                    bgColor: Colors.red,
+                    onPressFunction: () {},
+                    textValue: 'tet',
+                    textColor: Colors.black,
+                    iconColor: Colors.red,
+                    icon: Icons.abc)
               ],
             ),
     );
@@ -82,8 +112,7 @@ class _LoginScreenBody extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            TextFieldsInputUnderline(
-                hintText: _userNameHint, onChanged: provider.setUserName),
+            TextFieldsInputUnderline(hintText: _userNameHint, onChanged: provider.setUserName),
             TextInputFieldsPasswordInputUnderline(
               hintText: _passwordHint,
               onChanged: provider.setPassword,
@@ -101,8 +130,7 @@ class _LoginScreenBody extends StatelessWidget {
       flex: 1,
       child: Text(
         _login,
-        style: const TextStyle(
-            fontSize: FontSizes.titleLarge, fontFamily: 'Roboto'),
+        style: const TextStyle(fontSize: FontSizes.titleLarge, fontFamily: 'Roboto'),
       ),
     );
   }

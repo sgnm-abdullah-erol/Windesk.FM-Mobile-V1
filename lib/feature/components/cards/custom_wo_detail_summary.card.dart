@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:vm_fm_4/feature/constants/functions/null_check_widget.dart';
-import 'package:vm_fm_4/feature/models/work_order_models/work_order_details_model.dart';
+import '../../constants/functions/null_check_widget.dart';
+import '../../models/work_order_models/work_order_details_model.dart';
 
 import '../../constants/other/colors.dart';
 
@@ -10,11 +9,10 @@ class WoSummary extends StatelessWidget {
 
   final WorkOrderDetailsModel woModel;
 
-
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(10,50,10,0),
+      padding: const EdgeInsets.fromLTRB(10, 50, 10, 0),
       child: Column(
         children: [
           Column(children: [
@@ -38,10 +36,14 @@ class WoSummary extends StatelessWidget {
                 ),
               ),
             ),
-            NullCheckWidget().nullCheckWidget(woModel.priority, Container(), woSummaryTextWidget(Icons.navigation_rounded, woModel.priority.toString())),
-            NullCheckWidget().nullCheckWidget(woModel.modulecode, Container(), woSummaryTextWidget(Icons.apartment_outlined, woModel.modulecode.toString())),
-            NullCheckWidget().nullCheckWidget(woModel.modulename, Container(), woSummaryTextWidget(Icons.apartment_outlined, woModel.modulename.toString())),
-            NullCheckWidget().nullCheckWidget(woModel.responsible, Container(), woSummaryTextWidget(Icons.apartment_outlined, woModel.responsible.toString())),
+            NullCheckWidget()
+                .nullCheckWidget(woModel.priority, Container(), woSummaryTextWidget(Icons.navigation_rounded, woModel.priority.toString())),
+            NullCheckWidget()
+                .nullCheckWidget(woModel.modulecode, Container(), woSummaryTextWidget(Icons.apartment_outlined, woModel.modulecode.toString())),
+            NullCheckWidget()
+                .nullCheckWidget(woModel.modulename, Container(), woSummaryTextWidget(Icons.apartment_outlined, woModel.modulename.toString())),
+            NullCheckWidget()
+                .nullCheckWidget(woModel.responsible, Container(), woSummaryTextWidget(Icons.apartment_outlined, woModel.responsible.toString())),
             NullCheckWidget().nullCheckWidget(woModel.iuser, Container(), woSummaryTextWidget(Icons.person_outline, woModel.iuser.toString())),
             NullCheckWidget().nullCheckWidget(woModel.iuser, Container(), woSummaryTextWidget(Icons.person_outline, woModel.iuser.toString())),
             woModel.plannedTime == null
@@ -86,20 +88,20 @@ class WoSummary extends StatelessWidget {
 
   Padding woSummaryTextWidget(IconData icon, String text) {
     return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Align(
-                    alignment: Alignment.topLeft,
-                    child: Row(
-                      children: [
-                        Icon(icon),
-                        Text(
-                          text,
-                          style: TextStyle(color: APPColors.Main.black),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
+      padding: const EdgeInsets.all(8.0),
+      child: Align(
+        alignment: Alignment.topLeft,
+        child: Row(
+          children: [
+            Icon(icon),
+            Text(
+              text,
+              style: TextStyle(color: APPColors.Main.black),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 

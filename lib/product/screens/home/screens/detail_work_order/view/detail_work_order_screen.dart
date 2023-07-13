@@ -24,8 +24,8 @@ class _DetailWorkOrderScreenState extends State<DetailWorkOrderScreen> {
 
   @override
   void initState() {
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      woDetailList= await woDetailProvider.getWorkOrderDetails(widget.workOrderCode);
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      woDetailProvider.getWorkOrderDetails(widget.workOrderCode);
     });
     super.initState();
   }
@@ -40,7 +40,7 @@ class _DetailWorkOrderScreenState extends State<DetailWorkOrderScreen> {
               ? const Center(child: CustomLoadingIndicator())
               : Column(
                   children: [
-                    WoSummary(woModel: woDetailList),
+                    WoSummary(woModel: context.read<WorkOrderDetailProvider>().woDetailList),
                   ],
                 );
         },

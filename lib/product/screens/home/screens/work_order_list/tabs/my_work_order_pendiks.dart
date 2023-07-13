@@ -28,9 +28,7 @@ class _MyWorkOrderPendiksState extends State<MyWorkOrderPendiks> {
     return widget.provider.isLoading
         ? const CustomLoadingIndicator()
         : CustomWoDetailCard(
-            onPressed: (woCode) {
-              print(woCode);
-            },
+            onPressed: (woCode) {},
             code: 'asda',
             id: 'asda',
             moduleLocation: 'asda',
