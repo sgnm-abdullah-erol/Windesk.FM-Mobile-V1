@@ -55,4 +55,12 @@ class AppStrings {
   static const personelEkle = 'Personel Ekle';
   static const personelSeciniz = 'Personel Seçiniz';
   static const vardiyaSeciniz = 'Vardiya Seçiniz';
+
+  //issue filter strings
+
+  static const durum = 'Durum';
+  static const bina = 'Bina';
+  static const kat = 'Kat';
+  static const kanat = 'Kanat';
+  static const taskForMe = 'Üzerime Atanan Vakalar';
 }

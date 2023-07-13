@@ -1,8 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vm_fm_4/feature/components/buttons/custom_circular_with_text_button.dart';
+import 'package:vm_fm_4/feature/components/buttons/custom_elevated_button_with_icon.dart';
 import 'package:vm_fm_4/feature/components/model_bottom_sheet/add_documents_modal_bottom_sheet.dart';
-import 'package:vm_fm_4/feature/components/model_bottom_sheet/add_personal_modal_bottom_sheet.dart';
+import 'package:vm_fm_4/feature/components/model_bottom_sheet/issue_filter_modal_bottom_sheet.dart';
+import 'package:vm_fm_4/feature/constants/other/colors.dart';
 import '../../../../feature/components/buttons/custom_circular_with_icon_button.dart';
 import '../../../../feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
 import '../../../../feature/components/buttons/custom_login_button.dart';
@@ -57,11 +60,38 @@ class _LoginScreenBody extends StatelessWidget {
                     onPressFunction: () {
                       ShowModalBottomSheet().show(
                           context,
-                          AddDocumentsModalBottomSheet(
-                              test, test, 'Açıklama giriniz',
-                              pickDocumentFunction: test));
+                          IssueFilterModalBottomSheet(
+                              stateList: ['stateList'],
+                              buildList: ['buildList'],
+                              floorList: ['floorList'],
+                              wingList: ['wingList'],
+                              selectStateFunction: test,
+                              selectBuildFunction: test,
+                              selectFloorFunction: test,
+                              selectWingFunction: test,
+                              filterStartFunction: test,
+                              taskForMeFunction: test,
+                              selectedParamList: [
+                                'selectedItem',
+                                'sgnm1032',
+                                'Üzerinde Çalışılıyor'
+                              ],
+                              selectedParamListDeleteItem: test));
                     },
-                    iconColor: Colors.white)
+                    iconColor: Colors.white),
+                CustomCircularWithTextButton(
+                  bgColor: APPColors.Main.blue,
+                  onPressFunction: test,
+                  textButton: 'textButton',
+                  textColor: APPColors.Main.white,
+                ),
+                CustomElevatedButtonWithIcon(
+                    bgColor: Colors.red,
+                    onPressFunction: test,
+                    textValue: 'tet',
+                    textColor: Colors.black,
+                    iconColor: Colors.red,
+                    icon: Icons.abc)
               ],
             ),
     );
