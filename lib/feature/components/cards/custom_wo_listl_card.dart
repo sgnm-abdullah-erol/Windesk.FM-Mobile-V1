@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:vm_fm_4/feature/constants/functions/null_check_widget.dart';
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
-import 'package:vm_fm_4/feature/mixins/custom_wo_list_card_mixin.dart';
 
 import '../../constants/other/colors.dart';
+import '../../constants/style/box_decorations.dart';
 import '../buttons/custom_half_buttons.dart';
 
 class CustomWoDetailCard extends StatelessWidget {

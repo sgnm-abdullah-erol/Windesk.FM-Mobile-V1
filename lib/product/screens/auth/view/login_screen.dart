@@ -1,8 +1,18 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+<<<<<<< HEAD
 import 'package:vm_fm_4/feature/route/app_route.gr.dart';
 
+=======
+import 'package:vm_fm_4/feature/components/buttons/custom_circular_with_text_button.dart';
+import 'package:vm_fm_4/feature/components/buttons/custom_elevated_button_with_icon.dart';
+import 'package:vm_fm_4/feature/components/model_bottom_sheet/add_documents_modal_bottom_sheet.dart';
+import 'package:vm_fm_4/feature/components/model_bottom_sheet/issue_filter_modal_bottom_sheet.dart';
+import 'package:vm_fm_4/feature/constants/other/colors.dart';
+import '../../../../feature/components/buttons/custom_circular_with_icon_button.dart';
+import '../../../../feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
+>>>>>>> 0d2086740310b38c85690cedc616da2003a3ddc1
 import '../../../../feature/components/buttons/custom_login_button.dart';
 import '../../../../feature/components/input_fields/text_fields_input_underline.dart';
 import '../../../../feature/components/loading/custom_main_loading.dart';
@@ -48,6 +58,7 @@ class _LoginScreenBody extends StatelessWidget {
           ? const CustomMainLoading()
           : Column(
               children: <Widget>[
+<<<<<<< HEAD
                 _loginImage(context),
                 _loginTitleWidget(),
                 _textFields(),
@@ -59,6 +70,46 @@ class _LoginScreenBody extends StatelessWidget {
                 //       ShowModalBottomSheet().show(context, AddPhotoModalBottomSheet(test, test, test, 'hintDescText'));
                 //     },
                 //     iconColor: Colors.white)
+=======
+                CustomCircularWithIconButton(
+                    bgColor: Colors.red,
+                    icon: Icons.add_a_photo,
+                    onPressFunction: () {
+                      ShowModalBottomSheet().show(
+                          context,
+                          IssueFilterModalBottomSheet(
+                              stateList: ['stateList'],
+                              buildList: ['buildList'],
+                              floorList: ['floorList'],
+                              wingList: ['wingList'],
+                              selectStateFunction: test,
+                              selectBuildFunction: test,
+                              selectFloorFunction: test,
+                              selectWingFunction: test,
+                              filterStartFunction: test,
+                              taskForMeFunction: test,
+                              selectedParamList: [
+                                'selectedItem',
+                                'sgnm1032',
+                                'Üzerinde Çalışılıyor'
+                              ],
+                              selectedParamListDeleteItem: test));
+                    },
+                    iconColor: Colors.white),
+                CustomCircularWithTextButton(
+                  bgColor: APPColors.Main.blue,
+                  onPressFunction: test,
+                  textButton: 'textButton',
+                  textColor: APPColors.Main.white,
+                ),
+                CustomElevatedButtonWithIcon(
+                    bgColor: Colors.red,
+                    onPressFunction: test,
+                    textValue: 'tet',
+                    textColor: Colors.black,
+                    iconColor: Colors.red,
+                    icon: Icons.abc)
+>>>>>>> 0d2086740310b38c85690cedc616da2003a3ddc1
               ],
             ),
     );
