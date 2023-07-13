@@ -37,6 +37,7 @@ class _MyWorkOrderPendiksState extends State<MyWorkOrderPendiks> {
       responsible: 'asda',
       serviceName: 'asda',
       statusName: 'asda',
+      isButtonVisible: true,
     );
   }
 }

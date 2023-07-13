@@ -1,10 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vm_fm_4/feature/components/loading/custom_main_loading.dart';
 
 import '../../../../../../feature/components/appbar/custom_main_appbar.dart';
-import '../../../../../../feature/components/loading/custom_appbar_loading.dart';
+import '../../../../../../feature/components/loading/custom_main_loading.dart';
 import '../../../../../../feature/constants/other/app_strings.dart';
 import '../provider/work_order_list_provider.dart';
 import '../tabs/my_group_work_orders.dart';
