@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:vm_fm_4/feature/exceptions/custom_service_exceptions.dart';
@@ -30,8 +28,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
         final data = response.data;
         workSpaceDetailList = WorkSpaceDetail.fromJsonList(data);
 
-        super.logger.e(workSpaceDetailList);
-
         return Left(workSpaceDetailList);
       } else {
         return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
@@ -49,7 +45,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     String url = 'http://10.0.2.2:3015/classification/getRequestTypeWithTaskCount';
 
     try {
-      final response = await super.dio.get(
+      final response = await super.dio.post(
             url,
             options: Options(
               headers: {'authorization': 'Bearer $token'},
@@ -57,9 +53,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
             ),
           );
 
-      if (response.statusCode == HttpStatus.ok) {
-        super.logger.e(response.data);
-
+      if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
 
         workSpaceMyGroupDemandList = WorkSpaceMyGroupDemandList.fromJson(data);
