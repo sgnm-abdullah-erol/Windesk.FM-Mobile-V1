@@ -15,8 +15,15 @@ class AuthServiceRepositoryImpl extends AuthServiceRepository {
     String url = 'http://10.0.2.2:3012/user/login';
 
     try {
-      final response =
-          await super.dio.post(url, data: {'username': username, 'password': password}, options: Options(responseType: ResponseType.json));
+      final response = await super.dio.post(
+            url,
+            data: {'username': username, 'password': password},
+            options: Options(
+              responseType: ResponseType.json,
+              sendTimeout: const Duration(seconds: 3),
+              receiveTimeout: const Duration(seconds: 3),
+            ),
+          );
 
       final data = response.data;
 

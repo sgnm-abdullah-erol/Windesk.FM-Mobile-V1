@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/constants/style/border_radius.dart';
-import 'package:vm_fm_4/feature/models/work_space/work_space_detail.dart';
-import '../../constants/functions/null_check_widget.dart';
 
+import '../../constants/functions/null_check_widget.dart';
 import '../../constants/other/colors.dart';
+import '../../constants/style/border_radius.dart';
+import '../../models/work_space/work_space_detail.dart';
 
 class WoSummary extends StatelessWidget {
   const WoSummary({super.key, required this.workSpaceDetail});

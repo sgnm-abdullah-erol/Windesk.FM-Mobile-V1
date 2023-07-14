@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:vm_fm_4/feature/exceptions/custom_service_exceptions.dart';
 import 'package:vm_fm_4/feature/models/work_space/work_space_detail.dart';
+import 'package:vm_fm_4/feature/models/work_space/work_space_my_group_demand_list.dart';
 import 'package:vm_fm_4/feature/service/global_services.dart/work_space_service/work_space_service_repository.dart';
 
 class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
@@ -31,6 +34,39 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
         return Left(workSpaceDetailList);
       } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<WorkSpaceMyGroupDemandList, CustomServiceException>> getMyGroupDemandList(String token) async {
+    WorkSpaceMyGroupDemandList workSpaceMyGroupDemandList;
+
+    String url = 'http://10.0.2.2:3015/classification/getRequestTypeWithTaskCount';
+
+    try {
+      final response = await super.dio.get(
+            url,
+            options: Options(
+              headers: {'authorization': 'Bearer $token'},
+              responseType: ResponseType.json,
+            ),
+          );
+
+      if (response.statusCode == HttpStatus.ok) {
+        super.logger.e(response.data);
+
+        final data = response.data;
+
+        workSpaceMyGroupDemandList = WorkSpaceMyGroupDemandList.fromJson(data);
+
+        return Left(workSpaceMyGroupDemandList);
+      } else {
+        super.logger.e(response.statusCode);
         return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
       }
     } catch (error) {
