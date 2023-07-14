@@ -19,6 +19,36 @@ class CustomLightTheme {
           fontWeight: FontWeight.w600,
         ),
       ),
+      inputDecorationTheme: InputDecorationTheme(
+        labelStyle: TextStyle(
+          color: APPColors.Main.black,
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+        ),
+        hintStyle: TextStyle(
+          color: APPColors.Main.black,
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+        ),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: APPColors.Main.black,
+            width: 1,
+          ),
+        ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: APPColors.Main.black,
+            width: 1,
+          ),
+        ),
+        border: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: APPColors.Main.black,
+            width: 1,
+          ),
+        ),
+      ),
       textTheme: const TextTheme(),
     );
   }

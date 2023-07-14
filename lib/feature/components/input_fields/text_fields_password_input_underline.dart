@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vm_fm_4/feature/constants/other/colors.dart';
 
 import '../../constants/other/app_icons.dart';
 import '../../constants/style/font_sizes.dart';
@@ -10,11 +11,13 @@ class TextInputFieldsPasswordInputUnderline extends StatelessWidget {
     required this.onChanged,
     required this.changeVisibility,
     required this.showPassword,
+    this.labelText,
   });
 
   final String _validatorHintText = 'Lütfen bu alanı doldurunuz';
 
   final String hintText;
+  final String? labelText;
   final Function onChanged;
   final Function changeVisibility;
   final bool showPassword;
@@ -29,12 +32,13 @@ class TextInputFieldsPasswordInputUnderline extends StatelessWidget {
       decoration: InputDecoration(
         border: const UnderlineInputBorder(),
         hintText: hintText,
+        labelText: labelText,
         suffixIcon: IconButton(
           onPressed: () => changeVisibility(),
           icon: showPassword ? const Icon(AppIcons.visibilityOff) : const Icon(AppIcons.visibility),
         ),
       ),
-      style: const TextStyle(fontSize: FontSizes.button, fontFamily: 'Roboto', letterSpacing: 1),
+      style: TextStyle(fontSize: FontSizes.button, fontFamily: 'Roboto', letterSpacing: 1, color: APPColors.Main.black),
       onChanged: (String value) => onChanged(value),
       validator: (value) {
         if (value == null || value.isEmpty) {

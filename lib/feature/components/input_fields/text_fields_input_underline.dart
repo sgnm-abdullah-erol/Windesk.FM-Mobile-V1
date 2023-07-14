@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vm_fm_4/feature/constants/other/colors.dart';
 
 import '../../constants/style/font_sizes.dart';
 
@@ -22,7 +23,7 @@ class TextFieldsInputUnderline extends StatelessWidget {
       keyboardType: TextInputType.text,
       decoration: InputDecoration(border: const UnderlineInputBorder(), hintText: hintText),
       onChanged: (inputValue) => onChanged(inputValue),
-      style: const TextStyle(fontSize: FontSizes.body, letterSpacing: 1, fontFamily: 'Roboto'),
+      style: TextStyle(fontSize: FontSizes.body, letterSpacing: 1, fontFamily: 'Roboto', color: APPColors.Main.black),
       validator: (value) {
         if (value == null || value.isEmpty) {
           return _validatorHintText;

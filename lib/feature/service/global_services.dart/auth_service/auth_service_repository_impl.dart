@@ -37,6 +37,8 @@ class AuthServiceRepositoryImpl extends AuthServiceRepository {
       final response = await super.dio.post(url,
           options: Options(
             headers: {'authorization': 'Bearer $token'},
+            sendTimeout: const Duration(seconds: 4),
+            receiveTimeout: const Duration(seconds: 4),
             responseType: ResponseType.json,
           ));
       if (response.statusCode == 200 || response.statusCode == 201) {
