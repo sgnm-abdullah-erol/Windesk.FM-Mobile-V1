@@ -34,7 +34,7 @@ class _MyGroupWorkOrdersState extends State<MyGroupWorkOrders> {
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               child: ListView.builder(
-                itemCount: 10,
+                itemCount: widget.provider.workSpaceMyGroupDemandList?.children?.length ?? 0,
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
@@ -53,16 +53,20 @@ class _MyGroupWorkOrdersState extends State<MyGroupWorkOrders> {
       onOpenSection: () {
         // print('onOpenSection $index');
       },
-      header: Row(children: [const Text('header'), const Spacer(), Text('count $index')]),
-      content: Accordion(
-        maxOpenSections: 0,
-        headerBackgroundColorOpened: Colors.black54,
+      header: Row(
         children: [
-          for (int i = 0; i < index; i++) ...{
-            CustomBaseAccordionSections().baseAccordionSection('selam', '1', 1),
-          }
+          Text(widget.provider.workSpaceMyGroupDemandList?.children?[index].name ?? ''),
+          const Spacer(),
+          Text(widget.provider.workSpaceMyGroupDemandList?.children?[index].taskCount.toString() ?? ''),
         ],
       ),
+      content: Accordion(maxOpenSections: 0, headerBackgroundColorOpened: Colors.black54, children: [
+        for (int i = 0; i < (widget.provider.workSpaceMyGroupDemandList?.children?[index].children?.length.toInt() ?? 0); i++) ...{
+          CustomBaseAccordionSections().baseAccordionSection(
+            widget.provider.workSpaceMyGroupDemandList?.children?[index].children?[i].name ?? '',
+          ),
+        }
+      ]),
     );
   }
 }
