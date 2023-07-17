@@ -62,10 +62,10 @@ class _DetailWorkOrderScreenState extends State<DetailWorkOrderScreen> {
                             children: [
                               CustomBaseAccordion(
                                 list: [
-                                  _accordionSection(AppStrings.efforts, const AddEffortsAccordion()),
-                                  _accordionSection(AppStrings.addMaterial, const AddMaterialAccordion()),
-                                  _accordionSection(AppStrings.requstMaterial, const RequestMaterialAccordion()),
-                                  _accordionSection(AppStrings.addDocumant, const AddDocumantAccordion()),
+                                  _accordionSection(AppStrings.efforts, const AddEffortsAccordion(), AppIcons.insightsRounded),
+                                  _accordionSection(AppStrings.addMaterial, const AddMaterialAccordion(), AppIcons.warehouse),
+                                  _accordionSection(AppStrings.requstMaterial, const RequestMaterialAccordion(), AppIcons.tool),
+                                  _accordionSection(AppStrings.addDocumant, const AddDocumantAccordion(), AppIcons.photoAlbum),
                                 ],
                               )
                             ],
@@ -80,8 +80,12 @@ class _DetailWorkOrderScreenState extends State<DetailWorkOrderScreen> {
     );
   }
 
-  AccordionSection _accordionSection(String title, Widget content) {
+  AccordionSection _accordionSection(String title, Widget content, IconData icon) {
     return AccordionSection(
+      isOpen: false,
+      headerBackgroundColor: APPColors.Login.blue,
+      headerBackgroundColorOpened: Colors.black,
+      leftIcon: Icon(icon, color: Colors.white),
       onOpenSection: () {},
       header: Text(title),
       content: content,

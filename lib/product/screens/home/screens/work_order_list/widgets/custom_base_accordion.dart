@@ -2,6 +2,8 @@ import 'package:accordion/accordion.dart';
 import 'package:accordion/controllers.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../../feature/constants/other/colors.dart';
+
 class CustomBaseAccordion extends StatelessWidget {
   const CustomBaseAccordion({super.key, required this.list});
 
@@ -11,7 +13,9 @@ class CustomBaseAccordion extends StatelessWidget {
   Widget build(BuildContext context) {
     return Accordion(
       maxOpenSections: 1,
-      headerBackgroundColor: Colors.black54,
+      headerBackgroundColor: APPColors.Login.blue,
+      headerBackgroundColorOpened: Colors.black,
+      contentBorderColor: APPColors.Login.blue,
       scaleWhenAnimating: true,
       openAndCloseAnimation: true,
       sectionOpeningHapticFeedback: SectionHapticFeedback.heavy,

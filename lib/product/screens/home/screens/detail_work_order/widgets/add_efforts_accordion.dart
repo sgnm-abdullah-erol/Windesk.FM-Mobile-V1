@@ -6,20 +6,27 @@ import 'package:vm_fm_4/feature/components/buttons/custom_row_accordion_button.d
 import 'package:vm_fm_4/feature/constants/other/app_strings.dart';
 import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/widgets/data_table_accordion.dart';
 
+import '../../../../../../feature/constants/other/app_icons.dart';
+import '../../../../../../feature/constants/other/colors.dart';
+
 class AddEffortsAccordion extends StatelessWidget {
   const AddEffortsAccordion({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Accordion(
+      headerBackgroundColorOpened: APPColors.Main.black,
       maxOpenSections: 1,
-      headerBackgroundColorOpened: Colors.black54,
       children: [
         AccordionSection(
+          headerBackgroundColor: APPColors.Login.blue,
+          leftIcon: Icon(AppIcons.add, color: APPColors.Main.white),
           header: const Text(AppStrings.addEffort),
           content: CustomRowAccordionButton(onPressed: () {}, buttonTitle: AppStrings.addEffort),
         ),
         AccordionSection(
+          headerBackgroundColor: APPColors.Clear.green,
+          leftIcon: Icon(AppIcons.compareRounded, color: APPColors.Main.white),
           header: const Text(AppStrings.addedEfforts),
           content: DataTableAccordion(
             delete: () {},

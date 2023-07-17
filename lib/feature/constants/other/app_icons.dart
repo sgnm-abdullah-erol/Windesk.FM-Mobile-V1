@@ -21,11 +21,24 @@ class AppIcons {
 
   // DROPDOWN INPUT ICON
   static const IconData arrowDown = Icons.keyboard_arrow_down;
-  static const IconData delete = Icons.delete;
 
   static const IconData addPhoto = Icons.add_a_photo;
 
   // PASSWORD INPUT ICON
   static const IconData visibility = Icons.visibility;
   static const IconData visibilityOff = Icons.visibility_off;
+
+  // accordion icons
+  static const IconData add = Icons.add;
+  static const IconData delete = Icons.delete;
+  static const IconData warehouse = Icons.warehouse;
+  static const IconData tool = Icons.build;
+  static const IconData photoAlbum = Icons.photo_album;
+  static const IconData insightsRounded = Icons.insights_rounded;
+  static const IconData compareRounded = Icons.compare_arrows_rounded;
+  static const IconData pictureAsPdf = Icons.picture_as_pdf;
+  static const IconData camera = Icons.camera;
+  static const IconData documantScanner = Icons.document_scanner;
+  static const IconData personal = Icons.person;
+  static const IconData people = Icons.people;
 }
