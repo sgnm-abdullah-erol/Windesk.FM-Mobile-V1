@@ -27,7 +27,7 @@ extension APPColorsExtension on APPColors {
       case APPColors.Accent:
         return const Color(0xffFFCC7E);
       default:
-        return const Color(0xffF9AA33);
+        return Colors.green;
     }
   }
 
