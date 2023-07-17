@@ -39,43 +39,40 @@ class AppStrings {
   static const approve = 'Onayla';
 
   //Add efforts labels
-  static const addEffort = 'Effor Ekle';
+  static const addEffort = 'Efor Ekle';
   static const date = 'Süre Seçiniz';
-  static const gun = 'Gün';
-  static const saat = 'Saat';
-  static const dakika = 'Dakika';
 
   // add material strings
-  static const malzemeEkle = 'Malzeme Ekle';
-  static const depoSeciniz = 'Depo Seçiniz';
-  static const urunSeciniz = 'Ürün Seçiniz';
+  static const addMaterial = 'Malzeme Ekle';
+  static const chooseWareHouse = 'Depo Seçiniz';
+  static const chooseProduct = 'Ürün Seçiniz';
 
-  static const birimSeciniz = 'Birim Seçiniz';
-  static const miktarGiriniz = 'Miktar Giriniz';
+  static const chooseUnit = 'Birim Seçiniz';
+  static const enterAmount = 'Miktar Giriniz';
 
   // add personal strings
-  static const personelEkle = 'Personel Ekle';
-  static const personelSeciniz = 'Personel Seçiniz';
-  static const vardiyaSeciniz = 'Vardiya Seçiniz';
+  static const addPersonal = 'Personel Ekle';
+  static const choosePersonal = 'Personel Seçiniz';
+  static const chooseShift = 'Vardiya Seçiniz';
 
   // accordion titles
   static const requstMaterial = 'Malzeme Talebi';
-  static const addMaterial = 'Parça Ekle';
-  static const efforts = 'Efforlar';
+  static const addPiece = 'Parça Ekle';
+  static const efforts = 'Eforlar';
   static const addDocumant = 'Döküman Ekle';
 
   // sub accordion titles
   static const addedMaterials = 'Eklenmiş Parçalar';
-  static const addedEfforts = 'Eklenmiş Efforlar';
+  static const addedEfforts = 'Eklenmiş Eforlar';
   static const requstedMaterials = 'Talep Edilen Malzemeler';
   static const addPdf = 'Pdf Ekle';
   static const addImage = 'Fotoğraf Ekle';
   static const addedDocumants = 'Eklenmiş Dökümanlar';
 
   //issue filter strings
-  static const durum = 'Durum';
-  static const bina = 'Bina';
-  static const kat = 'Kat';
-  static const kanat = 'Kanat';
+  static const state = 'Durum';
+  static const build = 'Bina';
+  static const floor = 'Kat';
+  static const wing = 'Kanat';
   static const taskForMe = 'Üzerime Atanan Vakalar';
 }
