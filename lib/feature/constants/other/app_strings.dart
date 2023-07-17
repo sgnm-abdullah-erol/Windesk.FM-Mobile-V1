@@ -35,6 +35,7 @@ class AppStrings {
   static const start = 'Başlat';
   static const end = 'Bitir';
   static const cancel = 'Vazgeç';
+  static const reject = 'Reddet';
   static const save = 'Kaydet';
   static const approve = 'Onayla';
 

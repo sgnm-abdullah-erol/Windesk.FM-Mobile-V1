@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:vm_fm_4/feature/exceptions/custom_service_exceptions.dart';
+import 'package:vm_fm_4/feature/models/work_space/work_space_appendings.dart';
 import 'package:vm_fm_4/feature/models/work_space/work_space_detail.dart';
 
 import '../../../injection.dart';
@@ -15,4 +16,6 @@ abstract class WorkSpaceServiceRepository {
   Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getMyWorkSpaces(String id, String token, int page);
 
   Future<Either<WorkSpaceMyGroupDemandList, CustomServiceException>> getMyGroupDemandList(String token);
+
+  Future<Either<List<WorkSpacePendiks>, CustomServiceException>> getWorkSpacePendiks(String id, String token, int page);
 }
