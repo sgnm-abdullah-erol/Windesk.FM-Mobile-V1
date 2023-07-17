@@ -6,11 +6,13 @@ import 'package:vm_fm_4/feature/constants/functions/null_check_widget.dart';
 import 'package:vm_fm_4/feature/constants/style/border_radius.dart';
 import 'package:vm_fm_4/feature/constants/style/font_sizes.dart';
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
+import 'package:vm_fm_4/feature/extensions/date_string_extension.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_list/provider/work_order_list_provider.dart';
 
 import '../../constants/other/app_strings.dart';
 import '../../constants/other/colors.dart';
 import '../../constants/style/box_decorations.dart';
+import '../../l10n/locale_keys.g.dart';
 import '../../models/work_space/work_space_detail.dart';
 import '../../route/app_route.gr.dart';
 import '../buttons/custom_half_buttons.dart';
@@ -26,13 +28,6 @@ class CustomWoDetailCard extends StatelessWidget {
     required this.isButtonVisible,
     required this.provider,
   }) : super(key: key);
-
-  final String _noDescription = 'Açıklama Bulunamadı';
-  final String _noLabel = 'Etiket Bulunamadı';
-  final String _noName = 'İsim Bulunamadı';
-  final String _noCode = 'Kod Bulunamadı';
-  final String _noState = 'Durum Bulunamadı';
-  final String _noDate = 'Tarih Bulunamadı';
 
   @override
   Widget build(BuildContext context) {
@@ -64,14 +59,10 @@ class CustomWoDetailCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           codeAndStatusWidget(context),
-          Divider(height: 10, thickness: 1, color: APPColors.Secondary.black),
-          woListText(workSpaceDetail.task?.priority?.label?.first ?? _noLabel),
-          woListText(workSpaceDetail.task?.name ?? _noName),
-          NullCheckWidget().nullCheckWidget(
-            workSpaceDetail.task?.description,
-            Text(_noDescription, style: TextStyle(color: APPColors.Main.red)),
-            woListText(workSpaceDetail.task?.createdAt.toString() ?? _noDate),
-          ),
+          Divider(height: 10, thickness: 0.5, color: APPColors.Secondary.black),
+          woListText(workSpaceDetail.task?.description ?? LocaleKeys.noDescription),
+          woListText(DateExtension().splitString(workSpaceDetail.calendar?.start.toString() ?? '') ?? LocaleKeys.noDate),
+          woListText(DateExtension().splitString(workSpaceDetail.calendar?.end.toString() ?? '') ?? LocaleKeys.noDate),
           _checkButtonVisibility()
         ],
       ),
@@ -101,7 +92,7 @@ class CustomWoDetailCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(2.0),
               child: Text(
-                workSpaceDetail.workspace?.id.toString() ?? _noCode,
+                'WO${workSpaceDetail.task?.id.toString() ?? LocaleKeys.noCode} ' ' ${workSpaceDetail.task?.name ?? LocaleKeys.noName} ',
                 softWrap: true,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(color: APPColors.Secondary.black, fontSize: 15, fontFamily: "Poppins", fontWeight: FontWeight.bold),
@@ -110,7 +101,7 @@ class CustomWoDetailCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(2.0),
               child: Text(
-                workSpaceDetail.state?.isActive.toString() ?? _noState,
+                workSpaceDetail.state?.name.toString() ?? LocaleKeys.noState,
                 style: TextStyle(fontWeight: FontWeight.bold, color: APPColors.Secondary.black, fontSize: FontSizes.caption),
               ),
             ),
@@ -128,11 +119,11 @@ class CustomWoDetailCard extends StatelessWidget {
           children: [
             Expanded(
               flex: 2,
-              child: Text(header, style: TextStyle(color: APPColors.Secondary.black, fontWeight: FontWeight.bold, fontSize: FontSizes.caption)),
+              child: Text(header, style: TextStyle(color: APPColors.Secondary.black, fontWeight: FontWeight.w500, fontSize: FontSizes.caption)),
             ),
           ],
         ),
-        Divider(height: 10, thickness: 1, color: APPColors.Secondary.black),
+        Divider(height: 10, thickness: 0.5, color: APPColors.Secondary.black),
       ],
     );
   }
