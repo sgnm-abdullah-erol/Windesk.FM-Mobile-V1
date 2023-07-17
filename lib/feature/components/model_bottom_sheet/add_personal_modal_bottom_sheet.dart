@@ -34,8 +34,7 @@ class AddPersonalModalBottomSheet extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
         child: Column(
           children: [
-            _inputS(context, personalList, shiftList, selectPersonalFunction,
-                selectShiftFunction),
+            _inputS(context, personalList, shiftList, selectPersonalFunction, selectShiftFunction),
             _buttons(context, addPersonalFunction),
           ],
         ),
@@ -43,8 +42,7 @@ class AddPersonalModalBottomSheet extends StatelessWidget {
     );
   }
 
-  Expanded _inputS(context, personalList, shiftList, selectPersonalFunction,
-      selectShiftFunction) {
+  Expanded _inputS(context, personalList, shiftList, selectPersonalFunction, selectShiftFunction) {
     return Expanded(
       flex: 50,
       child: Column(
@@ -84,8 +82,8 @@ class AddPersonalModalBottomSheet extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CustomHalfButtons(
-              leftTitle: const Text(AppStrings.vazgec),
-              rightTitle: const Text(AppStrings.kaydet),
+              leftTitle: const Text(AppStrings.cancel),
+              rightTitle: const Text(AppStrings.save),
               leftOnPressed: () {
                 Navigator.pop(context);
               },
@@ -98,7 +96,6 @@ class AddPersonalModalBottomSheet extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-        .add(DiagnosticsProperty<Function>('saveEffort', addPersonalFunction));
+    properties.add(DiagnosticsProperty<Function>('saveEffort', addPersonalFunction));
   }
 }

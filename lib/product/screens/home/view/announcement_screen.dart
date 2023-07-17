@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/link.dart';
 
-import '../../../feature/components/buttons/custom_exit_button.dart';
-import '../../../feature/constants/other/colors.dart';
-import '../../../feature/models/home_page_models/announcement_model.dart';
-import 'home_provider.dart';
+import '../../../../feature/components/buttons/custom_exit_button.dart';
+import '../../../../feature/constants/other/colors.dart';
+import '../../../../feature/models/home_page_models/announcement_model.dart';
+import '../provider/home_provider.dart';
 
 class AnnouncementList extends StatelessWidget {
   const AnnouncementList({Key? key}) : super(key: key);
@@ -27,7 +27,11 @@ class AnnouncementList extends StatelessWidget {
             alignment: Alignment.center,
             child: Column(
               children: [
-                CustomExitButton(title: 'Duyuruları Kapat', onTap: () {Navigator.pop(context);}),
+                CustomExitButton(
+                    title: 'Duyuruları Kapat',
+                    onTap: () {
+                      Navigator.pop(context);
+                    }),
                 context.read<HomeProvider>().announcementList.isNotEmpty
                     ? Expanded(
                         child: NotificationListener<ScrollNotification>(
@@ -109,15 +113,15 @@ class AnnouncementList extends StatelessWidget {
 
   Padding closeAnnouncemeent(BuildContext context) {
     return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: GestureDetector(
-                  child: Text(
-                    'Duyuruları Kapat',
-                    style: TextStyle(color: APPColors.Main.white, fontSize: 16),
-                  ),
-                  onTap: () => Navigator.pop(context),
-                ),
-              );
+      padding: const EdgeInsets.all(8.0),
+      child: GestureDetector(
+        child: Text(
+          'Duyuruları Kapat',
+          style: TextStyle(color: APPColors.Main.white, fontSize: 16),
+        ),
+        onTap: () => Navigator.pop(context),
+      ),
+    );
   }
 }
 

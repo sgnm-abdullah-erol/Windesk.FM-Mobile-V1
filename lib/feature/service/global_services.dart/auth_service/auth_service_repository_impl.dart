@@ -12,11 +12,18 @@ class AuthServiceRepositoryImpl extends AuthServiceRepository {
   @override
   Future<Either<LoginModel, CustomServiceException>> login(String username, String password) async {
     @override
-    String url = 'http://10.0.2.2:3012/user/login';
+    String url = 'http://localhost:3012/user/login';
 
     try {
-      final response =
-          await super.dio.post(url, data: {'username': username, 'password': password}, options: Options(responseType: ResponseType.json));
+      final response = await super.dio.post(
+            url,
+            data: {'username': username, 'password': password},
+            options: Options(
+              responseType: ResponseType.json,
+              sendTimeout: const Duration(seconds: 3),
+              receiveTimeout: const Duration(seconds: 3),
+            ),
+          );
 
       final data = response.data;
 
@@ -31,12 +38,14 @@ class AuthServiceRepositoryImpl extends AuthServiceRepository {
 
   @override
   Future<Either<CheckAccesTokenModel, CustomServiceException>> checkAccessToken(String token) async {
-    String url = 'http://10.0.2.2:3012/user/checkAccessToken';
+    String url = 'http://localhost:3012/user/checkAccessToken';
 
     try {
       final response = await super.dio.post(url,
           options: Options(
             headers: {'authorization': 'Bearer $token'},
+            sendTimeout: const Duration(seconds: 4),
+            receiveTimeout: const Duration(seconds: 4),
             responseType: ResponseType.json,
           ));
       if (response.statusCode == 200 || response.statusCode == 201) {

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:vm_fm_4/feature/exceptions/custom_service_exceptions.dart';
 import 'package:vm_fm_4/product/screens/home/service/home_service_repo_impl.dart';
 
-import '../../../feature/models/home_page_models/announcement_model.dart';
+import '../../../../feature/models/home_page_models/announcement_model.dart';
 
 class HomeProvider extends ChangeNotifier {
   bool _isUserLogout = false;
@@ -25,7 +25,7 @@ class HomeProvider extends ChangeNotifier {
   }
 
   void logoutFunction() async {
-    final result =  HomeServiceRepositoryImpl().logout();
+    final result = HomeServiceRepositoryImpl().logout();
     // ignore: unrelated_type_equality_checks
     if (result == 'success') {
       _isUserLogout = true;
@@ -33,12 +33,10 @@ class HomeProvider extends ChangeNotifier {
     }
   }
 
-  void getAnnouncement(){
+  void getAnnouncement() {
     final result = HomeServiceRepositoryImpl().getAnnouncements();
-    if(result is CustomServiceException){
-
-    }
-    else{
+    if (result is CustomServiceException) {
+    } else {
       announcementList.addAll(result as List<AnnouncementModel>);
     }
     settotalAnnoucementCount = announcementList.length;

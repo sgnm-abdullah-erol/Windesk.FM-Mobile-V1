@@ -40,14 +40,7 @@ class AddMaterialModalBottomSheet extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
         child: Column(
           children: [
-            _inputS(
-                context,
-                wareHouseList,
-                selectWareHouseFunction,
-                productList,
-                selectProductFunction,
-                unitList,
-                selectUnitFunction,
+            _inputS(context, wareHouseList, selectWareHouseFunction, productList, selectProductFunction, unitList, selectUnitFunction,
                 saveAmountFunction),
             _buttons(context, addMaterial),
           ],
@@ -56,8 +49,8 @@ class AddMaterialModalBottomSheet extends StatelessWidget {
     );
   }
 
-  Expanded _inputS(context, wareHouseList, selectWareHouseFunction, productList,
-      selectProductFunction, unitList, selectUnitFunction, saveAmountFunction) {
+  Expanded _inputS(
+      context, wareHouseList, selectWareHouseFunction, productList, selectProductFunction, unitList, selectUnitFunction, saveAmountFunction) {
     return Expanded(
       flex: 50,
       child: Column(
@@ -87,15 +80,9 @@ class AddMaterialModalBottomSheet extends StatelessWidget {
           ),
           Expanded(
             child: DropDownInputFields(
-                labelText: AppStrings.birimSeciniz,
-                onChangedFunction: selectUnitFunction,
-                rightIcon: AppIcons.arrowDown,
-                dropDownArray: unitList),
+                labelText: AppStrings.birimSeciniz, onChangedFunction: selectUnitFunction, rightIcon: AppIcons.arrowDown, dropDownArray: unitList),
           ),
-          Expanded(
-              child: TextFieldsInput(
-                  onChangedFunction: saveAmountFunction,
-                  labelText: AppStrings.miktarGiriniz))
+          Expanded(child: TextFieldsInput(onChangedFunction: saveAmountFunction, labelText: AppStrings.miktarGiriniz))
         ],
       ),
     );
@@ -108,8 +95,8 @@ class AddMaterialModalBottomSheet extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CustomHalfButtons(
-              leftTitle: const Text(AppStrings.vazgec),
-              rightTitle: const Text(AppStrings.kaydet),
+              leftTitle: const Text(AppStrings.cancel),
+              rightTitle: const Text(AppStrings.save),
               leftOnPressed: () {
                 Navigator.pop(context);
               },

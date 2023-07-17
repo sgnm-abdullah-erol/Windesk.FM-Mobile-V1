@@ -16,11 +16,10 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     _isLoading = true;
     notifyListeners();
     final result = await WorkOrderServiceRepositoryImpl().getWorkOrderDetails(workOrderCode);
-      result.fold((l) => _woDetailList = l, (r) {});
-      notifyListeners();
+    result.fold((l) => _woDetailList = l, (r) {});
+    notifyListeners();
 
-      _isLoading = false;
-      notifyListeners();
-
+    _isLoading = false;
+    notifyListeners();
   }
 }

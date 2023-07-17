@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
 import 'package:vm_fm_4/feature/database/shared_manager.dart';
 import 'package:vm_fm_4/feature/enums/shared_enums.dart';
 import 'package:vm_fm_4/feature/models/auth_models/login_model.dart';
@@ -15,11 +16,14 @@ class LoginProvider extends ChangeNotifier {
   String _password = '';
   String get password => _password;
 
-  bool _showPassword = false;
-  bool get showPassword => _showPassword;
-
   bool _isLoginSuccess = false;
   bool get isLoginSuccess => _isLoginSuccess;
+
+  bool _isErrorActive = false;
+  bool get isErrorActive => _isErrorActive;
+
+  bool _textFieldEmptyError = false;
+  bool get textFieldEmptyError => _textFieldEmptyError;
 
   String _userToken = '';
   String _userTokenName = '';
@@ -47,8 +51,18 @@ class LoginProvider extends ChangeNotifier {
         });
       }, (error) {
         _isLoginSuccess = false;
-        _setField();
+        _isErrorActive = true;
+        _loading = false;
         notifyListeners();
+        Future.delayed(const Duration(milliseconds: 1000), () {
+          _isErrorActive = false;
+        });
+      });
+    } else {
+      _textFieldEmptyError = true;
+      notifyListeners();
+      Future.delayed(const Duration(milliseconds: 1000), () {
+        _textFieldEmptyError = false;
       });
     }
   }
@@ -73,6 +87,26 @@ class LoginProvider extends ChangeNotifier {
   void setPassword(String value) {
     _password = value;
   }
+
+  void showSnckbar(BuildContext context, String message, String type) {
+    snackBar(context, message, type);
+  }
+
+  void setStart() {
+    _password = '';
+    _userName = '';
+    _isLoginSuccess = false;
+    _textFieldEmptyError = false;
+    _isErrorActive = false;
+    _userToken = '';
+    _userTokenName = '';
+    notifyListeners();
+  }
+}
+
+class LoginPassword extends ChangeNotifier {
+  bool _showPassword = false;
+  bool get showPassword => _showPassword;
 
   void setShowPassword() {
     _showPassword = !showPassword;

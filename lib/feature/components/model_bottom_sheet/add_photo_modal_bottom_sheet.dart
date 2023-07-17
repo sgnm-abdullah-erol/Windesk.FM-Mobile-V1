@@ -8,9 +8,7 @@ import '../buttons/custom_half_buttons.dart';
 import '../../constants/style/border_radius.dart';
 
 class AddPhotoModalBottomSheet extends StatelessWidget {
-  const AddPhotoModalBottomSheet(this.saveImageFunction, this.saveDescFunction,
-      this.addPhotoFunction, this.hintDescText,
-      {super.key});
+  const AddPhotoModalBottomSheet(this.saveImageFunction, this.saveDescFunction, this.addPhotoFunction, this.hintDescText, {super.key});
   final Function saveImageFunction;
   final Function saveDescFunction;
   final Function addPhotoFunction;
@@ -28,9 +26,7 @@ class AddPhotoModalBottomSheet extends StatelessWidget {
         child: Column(
           children: [
             _PhotoStack(saveImageFunction: saveImageFunction),
-            Expanded(
-                flex: 20,
-                child: _descriptionTextField(saveDescFunction, hintDescText)),
+            Expanded(flex: 20, child: _descriptionTextField(saveDescFunction, hintDescText)),
             _buttons(context, addPhotoFunction),
             const Spacer(flex: 10),
           ],
@@ -46,8 +42,8 @@ class AddPhotoModalBottomSheet extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CustomHalfButtons(
-              leftTitle: const Text(AppStrings.vazgec),
-              rightTitle: const Text(AppStrings.kaydet),
+              leftTitle: const Text(AppStrings.cancel),
+              rightTitle: const Text(AppStrings.save),
               leftOnPressed: () {
                 Navigator.pop(context);
               },
@@ -71,8 +67,7 @@ class AddPhotoModalBottomSheet extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-        .add(DiagnosticsProperty<Function>('saveImage', addPhotoFunction));
+    properties.add(DiagnosticsProperty<Function>('saveImage', addPhotoFunction));
   }
 }
 

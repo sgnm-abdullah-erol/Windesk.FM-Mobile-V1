@@ -5,17 +5,18 @@ import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vm_fm_4/feature/constants/paths/asset_paths.dart';
+import 'package:vm_fm_4/feature/database/shared_manager.dart';
 import 'package:vm_fm_4/product/screens/home/service/home_service_repo_impl.dart';
 
-import '../../../feature/components/buttons/custom_circular_home_button.dart';
-import '../../../feature/components/snackBar/snackbar.dart';
-import '../../../feature/constants/other/app_icons.dart';
-import '../../../feature/constants/other/colors.dart';
-import '../../../feature/constants/paths/service_tools.dart';
-import '../../../feature/l10n/locale_keys.g.dart';
-import '../../../feature/route/app_route.gr.dart';
+import '../../../../feature/components/buttons/custom_circular_home_button.dart';
+import '../../../../feature/components/snackBar/snackbar.dart';
+import '../../../../feature/constants/other/app_icons.dart';
+import '../../../../feature/constants/other/colors.dart';
+import '../../../../feature/constants/paths/service_tools.dart';
+import '../../../../feature/l10n/locale_keys.g.dart';
+import '../../../../feature/route/app_route.gr.dart';
 import 'announcement_screen.dart';
-import 'home_provider.dart';
+import '../provider/home_provider.dart';
 
 @RoutePage()
 class HomeScreen extends StatefulWidget {
@@ -138,14 +139,16 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           tooltip: 'Exit',
           onPressed: () async {
+            await SharedManager().clearAll();
             context.read<HomeProvider>().logoutFunction();
             if (context.read<HomeProvider>().isUserLogout == true) {
               snackBar(context, 'Çıkış İşlemi Başarılı', 'success');
             } else {
-              snackBar(context, 'Çıkış İşlemi Başarısız', 'error');
-              context.router.push(const LoginScreen());
+              // await SharedManager().clearAll();
+              // snackBar(context, 'Çıkış İşlemi Başarısız', 'error');
+              // ignore: use_build_context_synchronously
+              context.router.pop<bool>(true);
             }
-          
           },
         ),
       ],

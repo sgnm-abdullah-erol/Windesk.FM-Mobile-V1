@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:vm_fm_4/feature/enums/shared_enums.dart';
+import 'package:vm_fm_4/feature/models/work_space/work_space_detail.dart';
+import 'package:vm_fm_4/feature/models/work_space/work_space_my_group_demand_list.dart';
+import 'package:vm_fm_4/feature/service/global_services.dart/work_space_service/work_space_service_repository_impl.dart';
 
+import '../../../../../../feature/database/shared_manager.dart';
 import '../../../../../../feature/injection.dart';
 import '../../../../../../feature/service/global_services.dart/work_order_service/work_order_service_repository_impl.dart';
 
 class WorkOrderListProvider extends ChangeNotifier {
   final WorkOrderServiceRepositoryImpl service = Injection.getIt.get<WorkOrderServiceRepositoryImpl>();
+  final WorkSpaceServiceRepositoryImpl workSpaceService = WorkSpaceServiceRepositoryImpl();
 
   int _tabIndex = 0;
   int get tabIndex => _tabIndex;
@@ -21,30 +27,50 @@ class WorkOrderListProvider extends ChangeNotifier {
   bool _isMyPendikWorkOrdersDataFetched = false;
   bool get isMyPendikWorkOrdersDataFetched => _isMyPendikWorkOrdersDataFetched;
 
-  void getMyWorkOrders() {
+  List<WorkSpaceDetail> _myWorkSpaceDetails = [];
+  List<WorkSpaceDetail> get myWorkSpaceDetails => _myWorkSpaceDetails;
+
+  WorkSpaceMyGroupDemandList? _workSpaceMyGroupDemandList;
+  WorkSpaceMyGroupDemandList? get workSpaceMyGroupDemandList => _workSpaceMyGroupDemandList;
+
+  List<WorkSpaceDetail> _myPendikWorkSpaceDetails = [];
+  List<WorkSpaceDetail> get myPendikWorkSpaceDetails => _myPendikWorkSpaceDetails;
+
+  void getMyWorkOrders() async {
     if (_isMyWorkOrdersDataFetched) return;
+    String userToken = await SharedManager().getString(SharedEnum.userToken);
 
     _isLoading = true;
     notifyListeners();
+    final result = await workSpaceService.getMyWorkSpaces('swagger', userToken, 1);
 
-    Future.delayed(const Duration(seconds: 2), () {
-      _isMyWorkOrdersDataFetched = true;
-      _isLoading = false;
-      notifyListeners();
-    });
+    result.fold((l) {
+      _myWorkSpaceDetails = l;
+    }, (r) {});
+
+    _isMyWorkOrdersDataFetched = true;
+    _isLoading = false;
+    notifyListeners();
   }
 
-  void getMyGroupWorkOrders() {
+  void getMyGroupWorkOrders() async {
     if (_isMyGroupWorkOrdersDataFetched) return;
-
     _isLoading = true;
     notifyListeners();
+    final String token = await SharedManager().getString(SharedEnum.userToken);
+    if (token.isNotEmpty) {
+      final result = await workSpaceService.getMyGroupDemandList(token);
 
-    Future.delayed(const Duration(seconds: 2), () {
+      result.fold((l) {
+        _workSpaceMyGroupDemandList = l;
+      }, (r) {
+        // TODO hata kontrolu
+      });
+
       _isMyGroupWorkOrdersDataFetched = true;
-      _isLoading = false;
-      notifyListeners();
-    });
+    }
+    _isLoading = false;
+    notifyListeners();
   }
 
   void getMyPendikWorkOrders() {
