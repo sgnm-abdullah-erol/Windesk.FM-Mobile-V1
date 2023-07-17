@@ -11,12 +11,11 @@ import 'package:vm_fm_4/product/screens/home/screens/work_order_list/provider/wo
 import '../../constants/other/app_strings.dart';
 import '../../constants/other/colors.dart';
 import '../../constants/style/box_decorations.dart';
-import '../../models/work_space/work_space_detail.dart';
 import '../../route/app_route.gr.dart';
 import '../buttons/custom_half_buttons.dart';
 
 class CustomWoDetailCard extends StatelessWidget {
-  final WorkSpaceDetail workSpaceDetail;
+  final dynamic workSpaceDetail;
   final WorkOrderListProvider provider;
   final bool isButtonVisible;
 

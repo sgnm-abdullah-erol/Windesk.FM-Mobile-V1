@@ -11,7 +11,7 @@ import 'work_space_user_information.dart';
 part '../work_order_models/generator_work_order/work_space_appendings.g.dart';
 
 @JsonSerializable()
-class WorkSpaceAppendings extends Equatable {
+class WorkSpacePendiks extends Equatable {
   final Workspace? workspace;
   final Task? task;
   final State? state;
@@ -19,7 +19,7 @@ class WorkSpaceAppendings extends Equatable {
   final TotalCount? totalCount;
   final WorkSpaceUserInformation? workSpaceUserInformation;
 
-  const WorkSpaceAppendings(
+  const WorkSpacePendiks(
     this.workspace,
     this.task,
     this.state,
@@ -28,12 +28,12 @@ class WorkSpaceAppendings extends Equatable {
     this.workSpaceUserInformation,
   );
 
-  factory WorkSpaceAppendings.fromJson(Map<String, dynamic> json) => _$WorkSpaceAppendingsFromJson(json);
+  factory WorkSpacePendiks.fromJson(Map<String, dynamic> json) => _$WorkSpaceAppendingsFromJson(json);
 
   Map<String, dynamic> toJson() => _$WorkSpaceAppendingsToJson(this);
 
-  static List<WorkSpaceAppendings> fromJsonList(List<dynamic> jsonList) {
-    return jsonList.map((json) => WorkSpaceAppendings.fromJson(json)).toList();
+  static List<WorkSpacePendiks> fromJsonList(List<dynamic> jsonList) {
+    return jsonList.map((json) => WorkSpacePendiks.fromJson(json)).toList();
   }
 
   @override
