@@ -3,6 +3,8 @@
 import 'package:accordion/accordion.dart';
 import 'package:flutter/material.dart';
 import 'package:vm_fm_4/feature/components/buttons/custom_row_accordion_button.dart';
+import 'package:vm_fm_4/feature/components/model_bottom_sheet/add_efforts_modal_bottom_sheet.dart';
+import 'package:vm_fm_4/feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/constants/other/app_strings.dart';
 import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/widgets/data_table_accordion.dart';
 
@@ -11,6 +13,7 @@ import '../../../../../../feature/constants/other/colors.dart';
 
 class AddEffortsAccordion extends StatelessWidget {
   const AddEffortsAccordion({super.key});
+  test() {}
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +25,20 @@ class AddEffortsAccordion extends StatelessWidget {
           headerBackgroundColor: APPColors.Login.blue,
           leftIcon: Icon(AppIcons.add, color: APPColors.Main.white),
           header: const Text(AppStrings.addEffort),
-          content: CustomRowAccordionButton(onPressed: () {}, buttonTitle: AppStrings.addEffort),
+          content: CustomRowAccordionButton(
+              onPressed: () {
+                ShowModalBottomSheet().show(
+                    context,
+                    AddEffortsModalBottomSheet(
+                      test,
+                      addEffortFunction: test,
+                      selectedTime: "15 dk",
+                      dayArray: ["1", "2", "3"],
+                      hoursArray: ["1", "2", "3"],
+                      minuteArray: ["1", "2", "3"],
+                    ));
+              },
+              buttonTitle: AppStrings.addEffort),
         ),
         AccordionSection(
           headerBackgroundColor: APPColors.Clear.green,

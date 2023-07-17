@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vm_fm_4/feature/constants/other/colors.dart';
 
 import '../../constants/style/border_radius.dart';
 
@@ -21,14 +22,20 @@ class DropDownInputFields extends StatelessWidget {
       isExpanded: true,
       value: dropDownArray.first,
       decoration: InputDecoration(
-        border: OutlineInputBorder(borderRadius: CustomBorderRadius.textFieldBorderRadius),
+        border: OutlineInputBorder(
+          
+            borderRadius: CustomBorderRadius.textFieldBorderRadius,
+            borderSide: BorderSide(color: APPColors.Main.black, width: 4)),
         labelText: labelText,
       ),
       icon: Icon(rightIcon),
       items: dropDownArray.map((String items) {
         return DropdownMenuItem(
           value: items,
-          child: Text(items),
+          child: Text(
+            items,
+            style: TextStyle(color: APPColors.Main.black),
+          ),
         );
       }).toList(),
       onChanged: (newValue) => onChangedFunction(newValue),

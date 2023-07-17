@@ -7,10 +7,12 @@ import 'package:vm_fm_4/feature/service/global_services.dart/work_space_service/
 
 class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   @override
-  Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getMyWorkSpaces(String id, String token, int page) async {
+  Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getMyWorkSpaces(
+      String id, String token, int page) async {
     List<WorkSpaceDetail> workSpaceDetailList = [];
 
-    String url = 'http://10.0.2.2:3015/task/workSpace/task/state/List/for/assigned/user/pagination/$id';
+    String url =
+        'http://localhost:3015/task/workSpace/task/state/List/for/assigned/user/pagination/$id';
 
     try {
       final response = await super.dio.get(
@@ -30,19 +32,25 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
         return Left(workSpaceDetailList);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(
+            message: CustomServiceMessages.work,
+            statusCode: response.statusCode.toString()));
       }
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.workOrderWorkloadError,
+          statusCode: '500'));
     }
   }
 
   @override
-  Future<Either<WorkSpaceMyGroupDemandList, CustomServiceException>> getMyGroupDemandList(String token) async {
+  Future<Either<WorkSpaceMyGroupDemandList, CustomServiceException>>
+      getMyGroupDemandList(String token) async {
     WorkSpaceMyGroupDemandList workSpaceMyGroupDemandList;
 
-    String url = 'http://10.0.2.2:3015/classification/getRequestTypeWithTaskCount';
+    String url =
+        'http://localhost:3015/classification/getRequestTypeWithTaskCount';
 
     try {
       final response = await super.dio.post(
@@ -61,11 +69,15 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
         return Left(workSpaceMyGroupDemandList);
       } else {
         super.logger.e(response.statusCode);
-        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(
+            message: CustomServiceMessages.work,
+            statusCode: response.statusCode.toString()));
       }
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.workOrderWorkloadError,
+          statusCode: '500'));
     }
   }
 }
