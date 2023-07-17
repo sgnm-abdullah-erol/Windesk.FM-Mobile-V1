@@ -25,7 +25,6 @@ extension SnackbarEnumsExtension on SnackbarEnums {
         return 'true';
       case SnackbarEnums.enumFalse:
         return 'false';
-
       default:
         return 'unknown';
     }

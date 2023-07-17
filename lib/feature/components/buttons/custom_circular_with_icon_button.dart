@@ -3,12 +3,7 @@ import '../../constants/style/border_radius.dart';
 import '../../extensions/context_extension.dart';
 
 class CustomCircularWithIconButton extends StatelessWidget {
-  const CustomCircularWithIconButton(
-      {super.key,
-      required this.bgColor,
-      required this.icon,
-      required this.onPressFunction,
-      required this.iconColor});
+  const CustomCircularWithIconButton({super.key, required this.bgColor, required this.icon, required this.onPressFunction, required this.iconColor});
   final Color bgColor;
   final IconData icon;
   final Color iconColor;
@@ -23,8 +18,8 @@ class CustomCircularWithIconButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: bgColor,
           shape: RoundedRectangleBorder(
-              borderRadius:
-                  BorderRadius.all(CustomBorderRadius.buttonWithIconRadius)),
+            borderRadius: BorderRadius.all(CustomBorderRadius.buttonWithIconRadius),
+          ),
         ),
         onPressed: () => onPressFunction(),
         child: Icon(

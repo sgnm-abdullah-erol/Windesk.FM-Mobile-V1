@@ -32,12 +32,14 @@ class AppStrings {
   static const myPendiks = 'Bekleyenler';
 
   //button
+  static const start = 'Başlat';
+  static const end = 'Bitir';
   static const cancel = 'Vazgeç';
   static const save = 'Kaydet';
   static const approve = 'Onayla';
 
   //Add efforts labels
-  static const addEffort = 'Efor Ekle';
+  static const addEffort = 'Effor Ekle';
   static const date = 'Süre Seçiniz';
   static const gun = 'Gün';
   static const saat = 'Saat';
@@ -55,6 +57,20 @@ class AppStrings {
   static const personelEkle = 'Personel Ekle';
   static const personelSeciniz = 'Personel Seçiniz';
   static const vardiyaSeciniz = 'Vardiya Seçiniz';
+
+  // accordion titles
+  static const requstMaterial = 'Malzeme Talebi';
+  static const addMaterial = 'Parça Ekle';
+  static const efforts = 'Efforlar';
+  static const addDocumant = 'Döküman Ekle';
+
+  // sub accordion titles
+  static const addedMaterials = 'Eklenmiş Parçalar';
+  static const addedEfforts = 'Eklenmiş Efforlar';
+  static const requstedMaterials = 'Talep Edilen Malzemeler';
+  static const addPdf = 'Pdf Ekle';
+  static const addImage = 'Fotoğraf Ekle';
+  static const addedDocumants = 'Eklenmiş Dökümanlar';
 
   //issue filter strings
   static const durum = 'Durum';
