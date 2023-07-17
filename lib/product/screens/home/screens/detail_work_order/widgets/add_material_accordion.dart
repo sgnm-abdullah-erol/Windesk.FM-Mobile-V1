@@ -27,9 +27,9 @@ class AddMaterialAccordion extends StatelessWidget {
                 ShowModalBottomSheet().show(
                     context,
                     AddMaterialModalBottomSheet(
-                        wareHouseList: ['depo1', 'depo2', 'depo3'],
-                        productList: ['urun1', 'urun2', 'urun3'],
-                        unitList: ['birim1', 'birim2', 'birim3'],
+                        wareHouseList: const ['depo1', 'depo2', 'depo3'],
+                        productList: const ['urun1', 'urun2', 'urun3'],
+                        unitList: const ['birim1', 'birim2', 'birim3'],
                         selectWareHouseFunction: test,
                         selectProductFunction: test,
                         selectUnitFunction: test,

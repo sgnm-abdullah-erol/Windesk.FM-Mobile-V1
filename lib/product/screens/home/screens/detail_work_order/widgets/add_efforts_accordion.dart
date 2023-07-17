@@ -33,9 +33,9 @@ class AddEffortsAccordion extends StatelessWidget {
                       test,
                       addEffortFunction: test,
                       selectedTime: "15 dk",
-                      dayArray: ["1", "2", "3"],
-                      hoursArray: ["1", "2", "3"],
-                      minuteArray: ["1", "2", "3"],
+                      dayArray: const ["1", "2", "3"],
+                      hoursArray: const ["1", "2", "3"],
+                      minuteArray: const ["1", "2", "3"],
                     ));
               },
               buttonTitle: AppStrings.addEffort),
