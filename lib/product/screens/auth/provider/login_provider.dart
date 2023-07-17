@@ -91,6 +91,17 @@ class LoginProvider extends ChangeNotifier {
   void showSnckbar(BuildContext context, String message, String type) {
     snackBar(context, message, type);
   }
+
+  void setStart() {
+    _password = '';
+    _userName = '';
+    _isLoginSuccess = false;
+    _textFieldEmptyError = false;
+    _isErrorActive = false;
+    _userToken = '';
+    _userTokenName = '';
+    notifyListeners();
+  }
 }
 
 class LoginPassword extends ChangeNotifier {
