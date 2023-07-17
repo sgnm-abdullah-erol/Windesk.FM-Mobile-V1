@@ -13,8 +13,14 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       String id, String token, int page) async {
     List<WorkSpaceDetail> workSpaceDetailList = [];
 
+<<<<<<< HEAD
     String url =
         'http://localhost:3015/task/workSpace/task/state/List/for/assigned/user/pagination/$id';
+=======
+    String url = 'http://localhost:3015/task/workSpace/task/state/List/for/assigned/user/pagination/$id';
+
+    print('url' + url.toString());
+>>>>>>> 4e29ba17196bfa248f58b117262ea9ea1302b2d3
 
     try {
       final response = await super.dio.get(
@@ -51,8 +57,12 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       getMyGroupDemandList(String token) async {
     WorkSpaceMyGroupDemandList workSpaceMyGroupDemandList;
 
+<<<<<<< HEAD
     String url =
         'http://localhost:3015/classification/getRequestTypeWithTaskCount';
+=======
+    String url = 'http://localhost:3015/classification/getRequestTypeWithTaskCount';
+>>>>>>> 4e29ba17196bfa248f58b117262ea9ea1302b2d3
 
     try {
       final response = await super.dio.post(
