@@ -49,7 +49,3 @@ class _DetailWorkOrderScreenState extends State<DetailWorkOrderScreen> {
   }
 }
 
-StatelessWidget _woDetailSummary(BuildContext context) {
-  WorkOrderDetailsModel woDetail = context.read<WorkOrderDetailProvider>().woDetailList;
-  return WoSummary(woModel: woDetail);
-}

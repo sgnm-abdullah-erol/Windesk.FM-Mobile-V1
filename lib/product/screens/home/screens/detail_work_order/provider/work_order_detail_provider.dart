@@ -13,7 +13,6 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   WorkOrderDetailsModel get woDetailList => _woDetailList;
 
   void getWorkOrderDetails(String workOrderCode) async {
-    print('asdasdasd');
     _isLoading = true;
     notifyListeners();
     final result = await WorkOrderServiceRepositoryImpl().getWorkOrderDetails(workOrderCode);
