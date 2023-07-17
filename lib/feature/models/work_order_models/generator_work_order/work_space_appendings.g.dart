@@ -6,7 +6,7 @@ part of '../../work_space/work_space_appendings.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-WorkSpaceAppendings _$WorkSpaceAppendingsFromJson(Map<String, dynamic> json) => WorkSpaceAppendings(
+WorkSpacePendiks _$WorkSpaceAppendingsFromJson(Map<String, dynamic> json) => WorkSpacePendiks(
       json['workspace'] == null ? null : Workspace.fromJson(json['workspace'] as Map<String, dynamic>),
       json['task'] == null ? null : Task.fromJson(json['task'] as Map<String, dynamic>),
       json['state'] == null ? null : State.fromJson(json['state'] as Map<String, dynamic>),
@@ -15,7 +15,7 @@ WorkSpaceAppendings _$WorkSpaceAppendingsFromJson(Map<String, dynamic> json) => 
       json['workSpaceUserInformation'] == null ? null : WorkSpaceUserInformation.fromJson(json['workSpaceUserInformation'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$WorkSpaceAppendingsToJson(WorkSpaceAppendings instance) => <String, dynamic>{
+Map<String, dynamic> _$WorkSpaceAppendingsToJson(WorkSpacePendiks instance) => <String, dynamic>{
       'workspace': instance.workspace,
       'task': instance.task,
       'state': instance.state,

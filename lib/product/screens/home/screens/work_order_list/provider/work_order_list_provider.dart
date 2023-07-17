@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vm_fm_4/feature/enums/shared_enums.dart';
+import 'package:vm_fm_4/feature/models/work_space/work_space_appendings.dart';
 import 'package:vm_fm_4/feature/models/work_space/work_space_detail.dart';
 import 'package:vm_fm_4/feature/models/work_space/work_space_my_group_demand_list.dart';
 import 'package:vm_fm_4/feature/service/global_services.dart/work_space_service/work_space_service_repository_impl.dart';
@@ -33,8 +34,8 @@ class WorkOrderListProvider extends ChangeNotifier {
   WorkSpaceMyGroupDemandList? _workSpaceMyGroupDemandList;
   WorkSpaceMyGroupDemandList? get workSpaceMyGroupDemandList => _workSpaceMyGroupDemandList;
 
-  List<WorkSpaceDetail> _myPendikWorkSpaceDetails = [];
-  List<WorkSpaceDetail> get myPendikWorkSpaceDetails => _myPendikWorkSpaceDetails;
+  List<WorkSpacePendiks> _myPendikWorkSpaceDetails = [];
+  List<WorkSpacePendiks> get myPendikWorkSpaceDetails => _myPendikWorkSpaceDetails;
 
   void getMyWorkOrders() async {
     if (_isMyWorkOrdersDataFetched) return;
@@ -73,11 +74,24 @@ class WorkOrderListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void getMyPendikWorkOrders() {
+  void getMyPendikWorkOrders() async {
     if (_isMyPendikWorkOrdersDataFetched) return;
 
     _isLoading = true;
     notifyListeners();
+
+    final String token = await SharedManager().getString(SharedEnum.userToken);
+    if (token.isNotEmpty) {
+      final result = await workSpaceService.getWorkSpacePendiks('swagger', token, 1);
+
+      result.fold((l) {
+        _myPendikWorkSpaceDetails = l;
+      }, (r) {
+        // TODO hata kontrolu
+      });
+
+      _isMyPendikWorkOrdersDataFetched = true;
+    }
 
     Future.delayed(const Duration(seconds: 2), () {
       _isMyPendikWorkOrdersDataFetched = true;
