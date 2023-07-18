@@ -49,8 +49,12 @@ class CustomPendiksCard extends StatelessWidget {
                   leftTitle: const Text(AppStrings.reject),
                   rightTitle: const Text(AppStrings.approve),
                   leftOnPressed: () {
-                    WoWaitRejectModalAlert()
-                        .showAlertDialog(context, 'rejectText');
+                    WoWaitRejectModalAlert().showAlertDialog(
+                        context,
+                        'textData',
+                        'inputArrayLabelText',
+                        ['inputArray', 'inputArray2'],
+                        test);
                   },
                   rightOnPressed: () {
                     WoWaitAcceptModalAlert()
