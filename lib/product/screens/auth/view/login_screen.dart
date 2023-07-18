@@ -59,13 +59,7 @@ class _LoginScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    provider.isLoginSuccess
-        ? context.router.push(const HomeScreen()).then((value) {
-            if (value == true) {
-              provider.setStart();
-            }
-          })
-        : null;
+    provider.isLoginSuccess ? context.router.push(const HomeScreen()) : null;
     return Scaffold(
       key: _globalKey,
       appBar: CustomMainAppbar(title: _loginAppbarTitle(context), returnBack: false),

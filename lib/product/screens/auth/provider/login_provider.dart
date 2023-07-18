@@ -41,18 +41,20 @@ class LoginProvider extends ChangeNotifier {
       LoginModel loginModel;
 
       response.fold((login) {
-        _setUserName(context);
+        // _setUserName(context);
         _isLoginSuccess = true;
-        Future.delayed(const Duration(milliseconds: 500), () {
+        notifyListeners();
+
+        Future.delayed(const Duration(milliseconds: 1000), () {
           loginModel = login;
           _userToken = loginModel.accessToken ?? '';
           _userTokenName = userName;
           _setTokenToPreferences(login.refreshToken ?? '');
           _setField();
         });
-
         Future.delayed(const Duration(milliseconds: 1000), () {
           notifyListeners();
+          _loading = false;
           _isLoginSuccess = false;
         });
       }, (error) {
@@ -82,7 +84,7 @@ class LoginProvider extends ChangeNotifier {
   }
 
   void _setUserName(BuildContext context) async {
-    context.read<GlobalProvider>().setUserName(_userTokenName);
+    Provider.of<GlobalProvider>(context, listen: false).setUserName(_userTokenName);
   }
 
   void _setField() {
