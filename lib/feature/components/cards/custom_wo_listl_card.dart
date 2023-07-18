@@ -14,6 +14,7 @@ import '../../constants/style/box_decorations.dart';
 import '../../l10n/locale_keys.g.dart';
 import '../../route/app_route.gr.dart';
 import '../buttons/custom_half_buttons.dart';
+import '../dividers/custom_wo_summary_divider.dart';
 
 class CustomWoDetailCard extends StatelessWidget {
   final dynamic workSpaceDetail;
@@ -121,7 +122,7 @@ class CustomWoDetailCard extends StatelessWidget {
             ),
           ],
         ),
-        Divider(height: 10, thickness: 0.5, color: APPColors.Secondary.black),
+        CustomWoSummaryDivider(),
       ],
     );
   }

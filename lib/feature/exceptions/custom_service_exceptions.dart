@@ -22,6 +22,7 @@ class CustomServiceMessages {
   // login
   static const String loginError = 'Error while logging in';
   static const String tokenChangeError = 'Error while checking token';
+  static const String logoutError = 'Error while logging out';
 
   // work order
   static const String workOrderWorkloadError = 'Error while fetching workload';

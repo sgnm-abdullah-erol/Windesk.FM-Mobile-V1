@@ -56,10 +56,10 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
               responseType: ResponseType.json,
             ),
           );
+      super.logger.i(response);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
-
         workSpaceMyGroupDemandList = WorkSpaceMyGroupDemandList.fromJson(data);
 
         return Left(workSpaceMyGroupDemandList);

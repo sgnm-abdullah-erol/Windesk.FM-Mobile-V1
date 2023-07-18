@@ -45,7 +45,6 @@ class HomeServiceRepositoryImpl extends HomeServiceRepository {
 
     try {
       final response = await super.dio.get(url);
-      super.logger.e(response.toString());
 
       if (response.data[ServiceResponseStatusEnums.result.rawText] == ServiceStatusEnums.success.rawText) {
         final data = response.data[ServiceResponseStatusEnums.records.rawText];

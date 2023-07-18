@@ -8,9 +8,12 @@ import 'package:vm_fm_4/feature/constants/paths/asset_paths.dart';
 import 'package:vm_fm_4/product/screens/home/service/home_service_repo_impl.dart';
 
 import '../../../../feature/components/buttons/custom_circular_home_button.dart';
+import '../../../../feature/components/internet_conneciton/internet_connection_listener.dart';
+import '../../../../feature/components/snackBar/snackbar.dart';
 import '../../../../feature/constants/other/app_icons.dart';
 import '../../../../feature/constants/other/app_strings.dart';
 import '../../../../feature/constants/other/colors.dart';
+import '../../../../feature/constants/other/snackbar_strings.dart';
 import '../../../../feature/constants/paths/service_tools.dart';
 import '../../../../feature/l10n/locale_keys.g.dart';
 import '../../../../feature/route/app_route.gr.dart';
@@ -26,6 +29,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   void initState() {
     HomeServiceRepositoryImpl homeService = HomeServiceRepositoryImpl();
@@ -35,13 +40,25 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    InternetListenerClass().internetConnection(context);
+
     return ChangeNotifierProvider(
       create: (context) => HomeProvider(),
       child: Consumer<HomeProvider>(
         builder: (context, HomeProvider homeProvider, child) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (homeProvider.logoutError) {
+              snackBar(context, SnackbarStrings.logoutError, 'error');
+            }
+            if (homeProvider.isUserLogout) {
+              snackBar(context, SnackbarStrings.logoutSuccess, 'success');
+              context.router.pushAndPopUntil(const LoginScreen(), predicate: (_) => false);
+            }
+          });
           return SafeArea(
             child: Scaffold(
-              appBar: appBarWidget(context),
+              key: _scaffoldKey,
+              appBar: appBarWidget(context, homeProvider),
               backgroundColor: APPColors.Main.white,
               body: Center(
                 child: Column(
@@ -116,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  AppBar appBarWidget(BuildContext context) {
+  AppBar appBarWidget(BuildContext context, HomeProvider provider) {
     return AppBar(
       title: Image.asset(
         AssetPaths.windesk,
@@ -128,7 +145,9 @@ class _HomeScreenState extends State<HomeScreen> {
         IconButton(
           icon: Icon(AppIcons.powerSettingsOff, size: 35, color: APPColors.Main.black),
           tooltip: AppStrings.logout,
-          onPressed: () {},
+          onPressed: () {
+            provider.logOut();
+          },
         ),
       ],
       centerTitle: true,

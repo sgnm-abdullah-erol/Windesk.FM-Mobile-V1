@@ -1,14 +1,22 @@
 // ignore_for_file: unused_element
 
 import 'package:flutter/material.dart';
+import 'package:vm_fm_4/feature/enums/shared_enums.dart';
 import 'package:vm_fm_4/feature/exceptions/custom_service_exceptions.dart';
+import 'package:vm_fm_4/feature/service/global_services.dart/auth_service/auth_service_repository.dart';
+import 'package:vm_fm_4/feature/service/global_services.dart/auth_service/auth_service_repository_impl.dart';
 import 'package:vm_fm_4/product/screens/home/service/home_service_repo_impl.dart';
 
+import '../../../../feature/database/shared_manager.dart';
 import '../../../../feature/models/home_page_models/announcement_model.dart';
 
 class HomeProvider extends ChangeNotifier {
+  final AuthServiceRepository _authServiceRepository = AuthServiceRepositoryImpl();
   bool _isUserLogout = false;
   bool get isUserLogout => _isUserLogout;
+
+  bool _logoutError = false;
+  bool get logoutError => _logoutError;
 
   List<AnnouncementModel> _announcementList = [];
   List<AnnouncementModel> get announcementList => _announcementList;
@@ -44,15 +52,33 @@ class HomeProvider extends ChangeNotifier {
   }
 
   void logOut() async {
-    // await SharedManager().clearAll();
-    // context.read<HomeProvider>().logoutFunction();
-    // if (context.read<HomeProvider>().isUserLogout == true) {
-    //   snackBar(context, 'Çıkış İşlemi Başarılı', 'success');
-    // } else {
-    //   // await SharedManager().clearAll();
-    //   // snackBar(context, 'Çıkış İşlemi Başarısız', 'error');
-    //   // ignore: use_build_context_synchronously
-    //   context.router.pop<bool>(true);
-    // }
+    final String refreshToken = await SharedManager().getString(SharedEnum.refreshToken);
+    final String token = await SharedManager().getString(SharedEnum.userToken);
+
+    if (token.isNotEmpty && refreshToken.isNotEmpty) {
+      final response = await _authServiceRepository.logout(refreshToken, token);
+      response.fold(
+        (l) => {
+          _isUserLogout = true,
+          _clearShared(),
+          notifyListeners(),
+          Future.delayed(const Duration(seconds: 1), () {
+            _isUserLogout = false;
+          }),
+        },
+        (r) => {
+          _isUserLogout = false,
+          _logoutError = true,
+          notifyListeners(),
+          Future.delayed(const Duration(seconds: 1), () {
+            _logoutError = false;
+          })
+        },
+      );
+    }
+  }
+
+  void _clearShared() async {
+    await SharedManager().clearAll();
   }
 }

@@ -1,9 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_list/widgets/custom_pendinks_card.dart';
 
+import '../../../../../../feature/route/app_route.gr.dart';
 import '../provider/work_order_list_provider.dart';
 
 class MyWorkOrderPendiks extends StatefulWidget {
@@ -35,8 +37,13 @@ class _MyWorkOrderPendiksState extends State<MyWorkOrderPendiks> {
               itemCount: widget.provider.myPendikWorkSpaceDetails.length,
               itemBuilder: (context, index) => Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: CustomPendiksCard(
-                  workSpacePendiks: widget.provider.myPendikWorkSpaceDetails[index],
+                child: InkWell(
+                  onTap: () {
+                    context.router.push(PendingDetailWorkOrderScreen(workSpacePendiks: widget.provider.myPendikWorkSpaceDetails[index]));
+                  },
+                  child: CustomPendiksCard(
+                    workSpacePendiks: widget.provider.myPendikWorkSpaceDetails[index],
+                  ),
                 ),
 
                 // CustomWoDetailCard(
