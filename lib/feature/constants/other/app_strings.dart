@@ -76,4 +76,7 @@ class AppStrings {
   static const floor = 'Kat';
   static const wing = 'Kanat';
   static const taskForMe = 'Üzerime Atanan Vakalar';
+
+  static const logout = 'Çıkış Yap';
+  static const title = 'Yardım Masası Uygulaması';
 }

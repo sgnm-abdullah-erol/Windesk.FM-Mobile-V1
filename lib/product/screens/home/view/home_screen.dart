@@ -5,18 +5,17 @@ import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vm_fm_4/feature/constants/paths/asset_paths.dart';
-import 'package:vm_fm_4/feature/database/shared_manager.dart';
 import 'package:vm_fm_4/product/screens/home/service/home_service_repo_impl.dart';
 
 import '../../../../feature/components/buttons/custom_circular_home_button.dart';
-import '../../../../feature/components/snackBar/snackbar.dart';
 import '../../../../feature/constants/other/app_icons.dart';
+import '../../../../feature/constants/other/app_strings.dart';
 import '../../../../feature/constants/other/colors.dart';
 import '../../../../feature/constants/paths/service_tools.dart';
 import '../../../../feature/l10n/locale_keys.g.dart';
 import '../../../../feature/route/app_route.gr.dart';
-import 'announcement_screen.dart';
 import '../provider/home_provider.dart';
+import 'announcement_screen.dart';
 
 @RoutePage()
 class HomeScreen extends StatefulWidget {
@@ -65,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
           rowIconButtonSection(context, LocaleKeys.issueList, AppIcons.calendarMonth, const TestScreen(), LocaleKeys.issueSearch, AppIcons.attachment,
               const TestScreen()),
           rowIconButtonSection(context, LocaleKeys.workOrderList, AppIcons.contentPasteSearch, const WorkOrderListScreen(),
-              LocaleKeys.workOrderSearch, AppIcons.contentPasteOff, const TestScreen()),
+              LocaleKeys.workOrderSearch, AppIcons.contentPasteOff, const SearchScreen()),
         ],
       ),
     );
@@ -108,18 +107,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Expanded headerTextWidget() {
     return const Expanded(
-        child: Column(
-      children: [
-        Text(
-          ServiceTools.facilityName,
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400),
-        ),
-        Text(
-          'Yardım Masası Uygulaması',
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-        ),
-      ],
-    ));
+      child: Column(
+        children: [
+          Text(ServiceTools.facilityName, style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400)),
+          Text(AppStrings.title, style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+        ],
+      ),
+    );
   }
 
   AppBar appBarWidget(BuildContext context) {
@@ -132,24 +126,9 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       actions: <Widget>[
         IconButton(
-          icon: Icon(
-            AppIcons.powerSettingsOff,
-            size: 35,
-            color: APPColors.Main.black,
-          ),
-          tooltip: 'Exit',
-          onPressed: () async {
-            await SharedManager().clearAll();
-            context.read<HomeProvider>().logoutFunction();
-            if (context.read<HomeProvider>().isUserLogout == true) {
-              snackBar(context, 'Çıkış İşlemi Başarılı', 'success');
-            } else {
-              // await SharedManager().clearAll();
-              // snackBar(context, 'Çıkış İşlemi Başarısız', 'error');
-              // ignore: use_build_context_synchronously
-              context.router.pop<bool>(true);
-            }
-          },
+          icon: Icon(AppIcons.powerSettingsOff, size: 35, color: APPColors.Main.black),
+          tooltip: AppStrings.logout,
+          onPressed: () {},
         ),
       ],
       centerTitle: true,

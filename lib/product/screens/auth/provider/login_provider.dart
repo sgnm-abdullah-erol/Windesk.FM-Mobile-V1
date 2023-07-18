@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
 import 'package:vm_fm_4/feature/database/shared_manager.dart';
 import 'package:vm_fm_4/feature/enums/shared_enums.dart';
+import 'package:vm_fm_4/feature/global_providers/global_provider.dart';
 import 'package:vm_fm_4/feature/models/auth_models/login_model.dart';
 import 'package:vm_fm_4/feature/service/global_services.dart/auth_service/auth_service_repository.dart';
 import 'package:vm_fm_4/feature/service/global_services.dart/auth_service/auth_service_repository_impl.dart';
@@ -40,6 +42,7 @@ class LoginProvider extends ChangeNotifier {
 
       response.fold((login) {
         _isLoginSuccess = true;
+        _setUserName(context);
         notifyListeners();
         loginModel = login;
         _userToken = loginModel.accessToken ?? '';
@@ -72,6 +75,10 @@ class LoginProvider extends ChangeNotifier {
       await SharedManager().setString(SharedEnum.userToken, _userToken);
       await SharedManager().setString(SharedEnum.userName, _userTokenName);
     }
+  }
+
+  void _setUserName(BuildContext context) async {
+    context.read<GlobalProvider>().setUserName(_userTokenName);
   }
 
   void _setField() {

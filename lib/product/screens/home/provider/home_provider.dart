@@ -42,4 +42,17 @@ class HomeProvider extends ChangeNotifier {
     settotalAnnoucementCount = announcementList.length;
     notifyListeners();
   }
+
+  void logOut() async {
+    // await SharedManager().clearAll();
+    // context.read<HomeProvider>().logoutFunction();
+    // if (context.read<HomeProvider>().isUserLogout == true) {
+    //   snackBar(context, 'Çıkış İşlemi Başarılı', 'success');
+    // } else {
+    //   // await SharedManager().clearAll();
+    //   // snackBar(context, 'Çıkış İşlemi Başarısız', 'error');
+    //   // ignore: use_build_context_synchronously
+    //   context.router.pop<bool>(true);
+    // }
+  }
 }

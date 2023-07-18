@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vm_fm_4/feature/components/buttons/custom_half_buttons.dart';
 import 'package:vm_fm_4/feature/constants/other/colors.dart';
+import 'package:vm_fm_4/feature/constants/style/border_radius.dart';
 import 'package:vm_fm_4/feature/constants/style/font_sizes.dart';
 
 import '../../../../../../feature/components/dividers/custom_wo_summary_divider.dart';
@@ -17,7 +18,8 @@ class CustomPendiksCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: Card(
-        elevation: 4,
+        shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.mediumBorderRadius),
+        elevation: 8,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 24.0),
           child: Column(
@@ -31,11 +33,13 @@ class CustomPendiksCard extends StatelessWidget {
               Text(workSpacePendiks.task?.createdAt.toString() ?? '', style: _textStyle()),
               const CustomWoSummaryDivider(),
               const SizedBox(height: 10),
-              CustomHalfButtons(
-                leftTitle: const Text(AppStrings.reject),
-                rightTitle: const Text(AppStrings.approve),
-                leftOnPressed: () {},
-                rightOnPressed: () {},
+              Center(
+                child: CustomHalfButtons(
+                  leftTitle: const Text(AppStrings.reject),
+                  rightTitle: const Text(AppStrings.approve),
+                  leftOnPressed: () {},
+                  rightOnPressed: () {},
+                ),
               ),
             ],
           ),

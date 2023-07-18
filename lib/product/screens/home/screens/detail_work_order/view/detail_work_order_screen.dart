@@ -3,18 +3,17 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
-import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/widgets/add_documant_accordion.dart';
-import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/widgets/add_efforts_accordion.dart';
-import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/widgets/request_material_accordion.dart';
+import '../widgets/add_documant_accordion.dart';
+import '../widgets/add_efforts_accordion.dart';
+import '../widgets/request_material_accordion.dart';
 import '../../../../../../feature/components/appbar/custom_main_appbar.dart';
-import '../../../../../../feature/components/buttons/custom_half_buttons.dart';
 import '../../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../../feature/constants/other/colors.dart';
+import '../../../../../../feature/global_providers/global_provider.dart';
 import '../../../../../../feature/models/work_space/work_space_detail.dart';
 import '../provider/work_order_detail_provider.dart';
 import '../../work_order_list/widgets/custom_base_accordion.dart';
 
-import '../../../../../../feature/components/buttons/custom_circular_with_icon_button.dart';
 import '../../../../../../feature/components/cards/custom_wo_detail_summary.card.dart';
 import '../../../../../../feature/constants/other/app_strings.dart';
 import '../../work_order_list/widgets/custom_loading_indicator.dart';
@@ -52,9 +51,10 @@ class _DetailWorkOrderScreenState extends State<DetailWorkOrderScreen> {
                       children: [
                         WoSummary(workSpaceDetail: widget.workSpaceDetail),
                         const SizedBox(height: 20),
-                        _startEndButton(),
-                        const SizedBox(height: 10),
-                        _addPhotoIconButton(),
+                        (widget.workSpaceDetail.task?.user ?? '') == context.read<GlobalProvider>().userName
+                            ? Container(color: Colors.red, height: 50)
+                            : Container(color: Colors.green, height: 50),
+                        //_startEndButton(),
                         const SizedBox(height: 20),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -92,23 +92,14 @@ class _DetailWorkOrderScreenState extends State<DetailWorkOrderScreen> {
     );
   }
 
-  CustomCircularWithIconButton _addPhotoIconButton() {
-    return CustomCircularWithIconButton(
-      bgColor: APPColors.Login.blue,
-      icon: AppIcons.addPhoto,
-      onPressFunction: () {},
-      iconColor: Colors.white,
-    );
-  }
-
-  CustomHalfButtons _startEndButton() {
-    return CustomHalfButtons(
-      leftTitle: const Text(AppStrings.start),
-      rightTitle: const Text(AppStrings.end),
-      leftOnPressed: () {},
-      rightOnPressed: () {},
-    );
-  }
+  // CustomHalfButtons _startEndButton() {
+  //   return CustomHalfButtons(
+  //     leftTitle: const Text(AppStrings.start),
+  //     rightTitle: const Text(AppStrings.end),
+  //     leftOnPressed: () {},
+  //     rightOnPressed: () {},
+  //   );
+  // }
 }
 
 // StatelessWidget _woDetailSummary(BuildContext context) {

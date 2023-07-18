@@ -6,6 +6,6 @@ class CustomWoSummaryDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Divider(color: APPColors.Main.black, indent: 5, endIndent: 5, thickness: 1);
+    return Divider(color: APPColors.Main.black, indent: 2, endIndent: 2, thickness: 1);
   }
 }
