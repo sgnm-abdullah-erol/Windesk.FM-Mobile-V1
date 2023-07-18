@@ -14,5 +14,7 @@ abstract class AuthServiceRepository {
 
   Future<Either<LoginModel, CustomServiceException>> login(String username, String password);
 
+  Future<Either<bool, CustomServiceException>> logout(String refreshToken, String token);
+
   Future<Either<CheckAccesTokenModel, CustomServiceException>> checkAccessToken(String token);
 }

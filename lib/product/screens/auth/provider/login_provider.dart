@@ -41,15 +41,15 @@ class LoginProvider extends ChangeNotifier {
       LoginModel loginModel;
 
       response.fold((login) {
-        _isLoginSuccess = true;
         _setUserName(context);
-        notifyListeners();
+        _isLoginSuccess = true;
         loginModel = login;
         _userToken = loginModel.accessToken ?? '';
         _userTokenName = userName;
-        _setTokenToPreferences();
+        _setTokenToPreferences(login.refreshToken ?? '');
         _setField();
         Future.delayed(const Duration(milliseconds: 500), () {
+          notifyListeners();
           _isLoginSuccess = false;
         });
       }, (error) {
@@ -70,10 +70,11 @@ class LoginProvider extends ChangeNotifier {
     }
   }
 
-  void _setTokenToPreferences() async {
-    if (_userToken != '' && _userName != '') {
+  void _setTokenToPreferences(String refreshToken) async {
+    if (_userToken != '' && _userName != '' && refreshToken != '') {
       await SharedManager().setString(SharedEnum.userToken, _userToken);
       await SharedManager().setString(SharedEnum.userName, _userTokenName);
+      await SharedManager().setString(SharedEnum.refreshToken, refreshToken);
     }
   }
 
