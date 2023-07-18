@@ -32,7 +32,7 @@ class _MyWorkOrderPendiksState extends State<MyWorkOrderPendiks> {
             height: context.height,
             width: context.width,
             child: ListView.builder(
-              itemCount: widget.provider.myWorkSpaceDetails.length,
+              itemCount: widget.provider.myPendikWorkSpaceDetails.length,
               itemBuilder: (context, index) => Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: CustomPendiksCard(

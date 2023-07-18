@@ -1,4 +1,4 @@
-// ignore_for_file: unused_element
+// ignore_for_file: unused_element, use_build_context_synchronously
 
 import 'dart:async';
 import 'dart:io';
@@ -6,6 +6,8 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:vm_fm_4/feature/global_providers/global_provider.dart';
 import 'package:vm_fm_4/feature/service/global_services.dart/auth_service/auth_service_repository_impl.dart';
 
 import '../../../feature/database/shared_manager.dart';
@@ -73,7 +75,7 @@ class SplashProvider extends ChangeNotifier {
     return 'unknown';
   }
 
-  void checkUserAlreadyLoggedIn() async {
+  void checkUserAlreadyLoggedIn(BuildContext context) async {
     await SharedManager().initInstances();
     _getDeviceInformation();
     // _getFirebaseInformation();
@@ -93,14 +95,17 @@ class SplashProvider extends ChangeNotifier {
           _isUserAlreadyLoggedIn = false;
         });
       });
+
+      String userName = await SharedManager().getString(SharedEnum.userName);
+      context.read<GlobalProvider>().setUserName(userName);
     } else {
       _isUserAlreadyLoggedIn = false;
     }
   }
 
-  void setSplashFinished() {
+  void setSplashFinished(BuildContext context) {
     if (_isSplashFinished == true) return;
-    checkUserAlreadyLoggedIn();
+    checkUserAlreadyLoggedIn(context);
 
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (timer.tick == 3) {
