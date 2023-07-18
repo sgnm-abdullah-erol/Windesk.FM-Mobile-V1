@@ -43,12 +43,15 @@ class LoginProvider extends ChangeNotifier {
       response.fold((login) {
         _setUserName(context);
         _isLoginSuccess = true;
-        loginModel = login;
-        _userToken = loginModel.accessToken ?? '';
-        _userTokenName = userName;
-        _setTokenToPreferences(login.refreshToken ?? '');
-        _setField();
         Future.delayed(const Duration(milliseconds: 500), () {
+          loginModel = login;
+          _userToken = loginModel.accessToken ?? '';
+          _userTokenName = userName;
+          _setTokenToPreferences(login.refreshToken ?? '');
+          _setField();
+        });
+
+        Future.delayed(const Duration(milliseconds: 1000), () {
           notifyListeners();
           _isLoginSuccess = false;
         });

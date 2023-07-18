@@ -64,6 +64,7 @@ class _MyGroupWorkOrdersState extends State<MyGroupWorkOrders> {
         for (int i = 0; i < (widget.provider.workSpaceMyGroupDemandList?.children?[index].children?.length.toInt() ?? 0); i++) ...{
           CustomBaseAccordionSections().baseAccordionSection(
             widget.provider.workSpaceMyGroupDemandList?.children?[index].children?[i].name ?? '',
+            widget.provider.workSpaceMyGroupDemandList?.children?[index].children?[i].taskCount.toString() ?? '',
           ),
         }
       ]),

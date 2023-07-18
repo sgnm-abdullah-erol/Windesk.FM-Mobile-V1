@@ -13,7 +13,7 @@ class AuthServiceRepositoryImpl extends AuthServiceRepository {
   @override
   Future<Either<LoginModel, CustomServiceException>> login(String username, String password) async {
     @override
-    String url = 'http://127.0.0.1:3012/user/login';
+    String url = 'http://10.0.2.2:3012/user/login';
 
     try {
       final response = await super.dio.post(
