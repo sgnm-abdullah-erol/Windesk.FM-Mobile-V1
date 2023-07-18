@@ -52,8 +52,8 @@ class _DetailWorkOrderScreenState extends State<DetailWorkOrderScreen> {
                         WoSummary(workSpaceDetail: widget.workSpaceDetail),
                         const SizedBox(height: 20),
                         (widget.workSpaceDetail.task?.user ?? '') == context.read<GlobalProvider>().userName
-                            ? Container(color: Colors.red, height: 50)
-                            : Container(color: Colors.green, height: 50),
+                            ? const SizedBox(height: 25)
+                            : const SizedBox(height: 25),
                         //_startEndButton(),
                         const SizedBox(height: 20),
                         Padding(
