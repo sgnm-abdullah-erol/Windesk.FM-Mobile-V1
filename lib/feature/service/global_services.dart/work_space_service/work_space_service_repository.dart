@@ -18,4 +18,7 @@ abstract class WorkSpaceServiceRepository {
   Future<Either<WorkSpaceMyGroupDemandList, CustomServiceException>> getMyGroupDemandList(String token);
 
   Future<Either<List<WorkSpacePendiks>, CustomServiceException>> getWorkSpacePendiks(String id, String token, int page);
+
+  Future<Either<WorkSpaceDetail, CustomServiceException>> getWorkOrderWithSearch(String workOrderCode, String token);
+
 }

@@ -64,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
           rowIconButtonSection(context, LocaleKeys.issueList, AppIcons.calendarMonth, const TestScreen(), LocaleKeys.issueSearch, AppIcons.attachment,
               const TestScreen()),
           rowIconButtonSection(context, LocaleKeys.workOrderList, AppIcons.contentPasteSearch, const WorkOrderListScreen(),
-              LocaleKeys.workOrderSearch, AppIcons.contentPasteOff, const SearchScreen()),
+              LocaleKeys.workOrderSearch, AppIcons.contentPasteOff, const SearchWorkOrderScreen()),
         ],
       ),
     );
@@ -95,7 +95,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 buttonIcon2,
                 size: MediaQuery.of(context).size.width / 10,
               ),
-              onPressed: () {},
+              onPressed: () {
+                context.router.push(navigateRouteName2);
+              },
               isBadgeVisible: false,
               badgeCount: '0',
             ),
