@@ -8,6 +8,7 @@ import 'package:vm_fm_4/feature/constants/paths/asset_paths.dart';
 import 'package:vm_fm_4/product/screens/home/service/home_service_repo_impl.dart';
 
 import '../../../../feature/components/buttons/custom_circular_home_button.dart';
+import '../../../../feature/components/internet_conneciton/internet_connection_listener.dart';
 import '../../../../feature/components/snackBar/snackbar.dart';
 import '../../../../feature/constants/other/app_icons.dart';
 import '../../../../feature/constants/other/app_strings.dart';
@@ -39,6 +40,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    InternetListenerClass().internetConnection(context);
+
     return ChangeNotifierProvider(
       create: (context) => HomeProvider(),
       child: Consumer<HomeProvider>(
