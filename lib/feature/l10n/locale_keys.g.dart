@@ -82,8 +82,6 @@ abstract class LocaleKeys {
   static const workOrderList = 'İş Emri Listesi';
   static const workOrderSearch = 'İş Emri Arama';
 
-
-
   // page titles
   static const String searchTitle = 'Arama';
   static const String caseSLASearchTitle = 'Vaka-(SLA) Arama';
@@ -111,4 +109,7 @@ abstract class LocaleKeys {
   static const String noCode = 'Kod Bulunamadı';
   static const String noState = 'Durum Bulunamadı';
   static const String noDate = 'Tarih Bulunamadı';
+
+  //woSearch
+  static const String woSearch = 'Vaka Arama';
 }

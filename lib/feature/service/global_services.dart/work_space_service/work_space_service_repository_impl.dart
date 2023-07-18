@@ -14,8 +14,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
     String url = 'http://localhost:3015/task/workSpace/task/state/List/for/assigned/user/pagination/$id';
 
-    print('url' + url.toString());
-
     try {
       final response = await super.dio.get(
             url,
@@ -94,6 +92,33 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
         final data = response.data;
         workSpaceAppendings = WorkSpacePendiks.fromJsonList(data);
         return Left(workSpaceAppendings);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<WorkSpaceDetail, CustomServiceException>> getWorkOrderWithSearch(String workOrderCode, String token) async {
+    List <WorkSpaceDetail> workSpaceDetailList;
+    String url = 'http://localhost:3015/task/workSpace/task/state/List/for/assigned/user/pagination/swagger/search?&searchString=$workOrderCode';
+
+    try {
+      final response = await super.dio.get(
+            url,
+            options: Options(
+              headers: {'authorization': 'Bearer $token'},
+            ),
+          );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = response.data;
+        workSpaceDetailList = WorkSpaceDetail.fromJsonList(data);
+
+        return Left(workSpaceDetailList.first);
       } else {
         return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
       }
