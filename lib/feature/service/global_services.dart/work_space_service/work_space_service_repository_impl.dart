@@ -14,7 +14,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     List<WorkSpaceDetail> workSpaceDetailList = [];
 
     String url =
-        'http://172.0.0.1:3015/task/workSpace/task/state/List/for/assigned/user/pagination/$id';
+        'http://127.0.0.1:3015/task/workSpace/task/state/List/for/assigned/user/pagination/$id';
 
     try {
       final response = await super.dio.get(
@@ -52,7 +52,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     WorkSpaceMyGroupDemandList workSpaceMyGroupDemandList;
 
     String url =
-        'http://172.0.0.1:3015/classification/getRequestTypeWithTaskCount';
+        'http://127.0.0.1:3015/classification/getRequestTypeWithTaskCount';
 
     try {
       final response = await super.dio.post(
@@ -88,7 +88,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       getWorkSpacePendiks(String id, String token, int page) async {
     List<WorkSpacePendiks> workSpaceAppendings = [];
     String url =
-        'http://172.0.0.1:3015/task/workSpace/task/state/List/can/be/approve/current/user/pagination/$id';
+        'http://127.0.0.1:3015/task/workSpace/task/state/List/can/be/approve/current/user/pagination/$id';
 
     try {
       final response = await super.dio.get(
