@@ -26,13 +26,15 @@ class Task extends Equatable {
   final CreatedBy? requestedBy;
   final CreatedBy? requestedSpaces;
   final CreatedBy? createdBy;
+  final Priority? woCategory;
   final Priority? requestType;
   final Priority? priority;
   final String? userFirstNameLastName;
   final String? user;
   final String? userId;
 
-  const Task({
+  const Task(
+    this.woCategory, {
     this.owner,
     this.canDisplay,
     this.dueDate,

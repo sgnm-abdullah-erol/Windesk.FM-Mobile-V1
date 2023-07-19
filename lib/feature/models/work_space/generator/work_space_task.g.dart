@@ -7,6 +7,7 @@ part of '../work_space_task.dart';
 // **************************************************************************
 
 Task _$TaskFromJson(Map<String, dynamic> json) => Task(
+      json['woCategory'] == null ? null : Priority.fromJson(json['woCategory'] as Map<String, dynamic>),
       owner: json['owner'] as String?,
       canDisplay: json['canDisplay'] as bool?,
       dueDate: json['dueDate'] == null ? null : DateTime.parse(json['dueDate'] as String),
