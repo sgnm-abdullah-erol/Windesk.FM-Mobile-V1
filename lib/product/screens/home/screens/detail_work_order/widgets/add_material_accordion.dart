@@ -7,10 +7,14 @@ import '../../../../../../feature/components/buttons/custom_row_accordion_button
 import '../../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../../feature/constants/other/app_strings.dart';
 import '../../../../../../feature/constants/other/colors.dart';
+import '../provider/work_order_detail_provider.dart';
 import 'data_table_accordion.dart';
 
 class AddMaterialAccordion extends StatelessWidget {
-  const AddMaterialAccordion({super.key});
+  const AddMaterialAccordion({super.key, required this.provider});
+
+  final WorkOrderDetailProvider provider;
+
   test() {}
   @override
   Widget build(BuildContext context) {
@@ -44,8 +48,8 @@ class AddMaterialAccordion extends StatelessWidget {
           header: const Text(AppStrings.addedMaterials),
           content: DataTableAccordion(
             delete: () {},
-            labelList: ['urunler', 'asdasd', 'asdasd'].toList(),
-            data: const ['asdasd', 'asdsad', 'adasdas'].toList(),
+            labelList: ['urunler', 'asdasd', 'asdasd', 'asdas', 'asdas'].toList(),
+            data: provider.woEffortList != null ? provider.woEffortList!.effort : null,
           ),
         )
       ],

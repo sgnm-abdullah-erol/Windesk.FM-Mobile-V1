@@ -8,10 +8,12 @@ import '../../../../../../feature/components/buttons/custom_row_accordion_button
 import '../../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../../feature/constants/other/app_strings.dart';
 import '../../../../../../feature/constants/other/colors.dart';
+import '../provider/work_order_detail_provider.dart';
 import 'data_table_accordion.dart';
 
 class AddDocumantAccordion extends StatelessWidget {
-  const AddDocumantAccordion({super.key});
+  const AddDocumantAccordion({super.key, required this.provider});
+  final WorkOrderDetailProvider provider;
 
   test() {}
 
@@ -27,8 +29,7 @@ class AddDocumantAccordion extends StatelessWidget {
           header: const Text(AppStrings.addImage),
           content: CustomRowAccordionButton(
               onPressed: () {
-                ShowModalBottomSheet().show(context,
-                    AddPhotoModalBottomSheet(test, test, test, 'Açıklama'));
+                ShowModalBottomSheet().show(context, AddPhotoModalBottomSheet(test, test, test, 'Açıklama'));
               },
               buttonTitle: AppStrings.addImage),
         ),
@@ -38,10 +39,7 @@ class AddDocumantAccordion extends StatelessWidget {
           header: const Text(AppStrings.addPdf),
           content: CustomRowAccordionButton(
               onPressed: () {
-                ShowModalBottomSheet().show(
-                    context,
-                    AddDocumentsModalBottomSheet(test, test, 'Açıklama',
-                        pickDocumentFunction: test));
+                ShowModalBottomSheet().show(context, AddDocumentsModalBottomSheet(test, test, 'Açıklama', pickDocumentFunction: test));
               },
               buttonTitle: AppStrings.addMaterial),
         ),
@@ -51,8 +49,8 @@ class AddDocumantAccordion extends StatelessWidget {
           header: const Text(AppStrings.addedDocumants),
           content: DataTableAccordion(
             delete: () {},
-            labelList: ['urunler', 'asdasd', 'asdasd'].toList(),
-            data: const ['asdasd', 'asdsad', 'adasdas'].toList(),
+            labelList: ['urunler', 'asdasd', 'asdasd', 'asdasd', 'sdasd'].toList(),
+            data: provider.woEffortList != null ? provider.woEffortList!.effort : null,
           ),
         )
       ],

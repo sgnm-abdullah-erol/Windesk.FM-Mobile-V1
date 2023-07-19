@@ -73,9 +73,9 @@ class _DetailWorkOrderScreenState extends State<DetailWorkOrderScreen> {
                                 list: [
                                   // TODO hangi next state id alinacak
                                   _accordionSection(AppStrings.efforts, AddEffortsAccordion(provider: woDetailProvider), AppIcons.insightsRounded),
-                                  _accordionSection(AppStrings.addMaterial, const AddMaterialAccordion(), AppIcons.warehouse),
-                                  _accordionSection(AppStrings.requstMaterial, const RequestMaterialAccordion(), AppIcons.tool),
-                                  _accordionSection(AppStrings.addDocumant, const AddDocumantAccordion(), AppIcons.photoAlbum),
+                                  _accordionSection(AppStrings.addMaterial, AddMaterialAccordion(provider: woDetailProvider), AppIcons.warehouse),
+                                  _accordionSection(AppStrings.requstMaterial, RequestMaterialAccordion(provider: woDetailProvider), AppIcons.tool),
+                                  _accordionSection(AppStrings.addDocumant, AddDocumantAccordion(provider: woDetailProvider), AppIcons.photoAlbum),
                                 ],
                               )
                             ],
