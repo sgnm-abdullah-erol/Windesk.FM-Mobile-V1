@@ -38,6 +38,7 @@ class AppStrings {
   static const reject = 'Reddet';
   static const save = 'Kaydet';
   static const approve = 'Onayla';
+  static const warning = 'Uyarı';
 
   //Add efforts labels
   static const addEffort = 'Efor Ekle';

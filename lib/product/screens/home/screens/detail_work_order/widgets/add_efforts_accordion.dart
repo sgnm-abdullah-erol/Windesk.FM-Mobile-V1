@@ -6,13 +6,17 @@ import 'package:vm_fm_4/feature/components/buttons/custom_row_accordion_button.d
 import 'package:vm_fm_4/feature/components/model_bottom_sheet/add_efforts_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/constants/other/app_strings.dart';
+import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/provider/work_order_detail_provider.dart';
 import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/widgets/data_table_accordion.dart';
 
 import '../../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../../feature/constants/other/colors.dart';
 
 class AddEffortsAccordion extends StatelessWidget {
-  const AddEffortsAccordion({super.key});
+  const AddEffortsAccordion({super.key, required this.provider});
+
+  final WorkOrderDetailProvider provider;
+
   test() {}
 
   @override
@@ -44,10 +48,11 @@ class AddEffortsAccordion extends StatelessWidget {
           headerBackgroundColor: APPColors.Clear.green,
           leftIcon: Icon(AppIcons.compareRounded, color: APPColors.Main.white),
           header: const Text(AppStrings.addedEfforts),
+          onOpenSection: () {},
           content: DataTableAccordion(
             delete: () {},
-            labelList: ['urunler', 'asdasd', 'asdasd'].toList(),
-            data: const ['asdasd', 'asdsad', 'adasdas'].toList(),
+            labelList: ['id', 'Tip', 'İsim', 'Süre', 'Sil'].toList(),
+            data: provider.woEffortList != null ? provider.woEffortList!.effort : null,
           ),
         )
       ],

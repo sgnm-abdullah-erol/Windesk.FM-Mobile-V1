@@ -30,38 +30,39 @@ class _SearchWorkOrderScreenState extends State<SearchWorkOrderScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (context) => WorkOrderDetailProvider(),
-        child: Consumer<WorkOrderDetailProvider>(builder: (context, WorkOrderDetailProvider woDetailProvider, child) {
-          context.read<WorkOrderDetailProvider>().isSuccess
-              ? context.router.push(DetailWorkOrderScreen(workSpaceDetail: context.read<WorkOrderDetailProvider>().woDetailList!))
-              : null;
-          return Scaffold(
-            appBar: AppBar(),
-            body: context.read<WorkOrderDetailProvider>().isLoading
-                ? const CustomLoadingIndicator()
-                : Center(
-                    child: Padding(
-                      padding: CustomPaddings.pageNormal,
-                      child: Column(
-                        children: [
-                          TextFieldSearch(onChangedFunction: onChangedFunction),
-                          CustomElevatedButtonWithIcon(
-                            width: MediaQuery.of(context).size.width / 2,
-                            height: MediaQuery.of(context).size.height / 20,
-                            bgColor: APPColors.Modal.blue,
-                            textValue: 'Ara',
-                            textColor: APPColors.Main.white,
-                            icon: Icons.send,
-                            iconColor: APPColors.Main.white,
-                            onPressFunction: () {
-                              context.read<WorkOrderDetailProvider>().getWorkOrderWithSearch(_woNumber);
-                            },
-                          )
-                        ],
-                      ),
+      create: (context) => WorkOrderDetailProvider(),
+      child: Consumer<WorkOrderDetailProvider>(builder: (context, WorkOrderDetailProvider woDetailProvider, child) {
+        context.read<WorkOrderDetailProvider>().isSuccess
+            ? context.router.push(DetailWorkOrderScreen(workSpaceDetail: context.read<WorkOrderDetailProvider>().woDetailList!))
+            : null;
+        return Scaffold(
+          appBar: AppBar(),
+          body: context.read<WorkOrderDetailProvider>().isLoading
+              ? const CustomLoadingIndicator()
+              : Center(
+                  child: Padding(
+                    padding: CustomPaddings.pageNormal,
+                    child: Column(
+                      children: [
+                        TextFieldSearch(onChangedFunction: onChangedFunction),
+                        CustomElevatedButtonWithIcon(
+                          width: MediaQuery.of(context).size.width / 2,
+                          height: MediaQuery.of(context).size.height / 20,
+                          bgColor: APPColors.Modal.blue,
+                          textValue: 'Ara',
+                          textColor: APPColors.Main.white,
+                          icon: Icons.send,
+                          iconColor: APPColors.Main.white,
+                          onPressFunction: () {
+                            context.read<WorkOrderDetailProvider>().getWorkOrderWithSearch(_woNumber);
+                          },
+                        )
+                      ],
                     ),
                   ),
-          );
-        }));
+                ),
+        );
+      }),
+    );
   }
 }
