@@ -5,7 +5,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../feature/components/appbar/custom_main_appbar.dart';
-import '../../../../../../feature/components/cards/custom_wo_detail_summary.card.dart';
 import '../../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../../feature/constants/other/app_strings.dart';
 import '../../../../../../feature/constants/other/colors.dart';
@@ -17,6 +16,7 @@ import '../provider/work_order_detail_provider.dart';
 import '../widgets/add_documant_accordion.dart';
 import '../widgets/add_efforts_accordion.dart';
 import '../widgets/add_material_accordion.dart';
+import '../widgets/custom_work_space_detail_card.dart';
 import '../widgets/request_material_accordion.dart';
 
 @RoutePage()
@@ -56,32 +56,36 @@ class _DetailWorkOrderScreenState extends State<DetailWorkOrderScreen> {
             body: context.read<WorkOrderDetailProvider>().isLoading
                 ? const CustomLoadingIndicator()
                 : SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        WoSummary(workSpaceDetail: widget.workSpaceDetail),
-                        const SizedBox(height: 20),
-                        (widget.workSpaceDetail.task?.user ?? '') == context.read<GlobalProvider>().userName
-                            ? const SizedBox(height: 25)
-                            : const SizedBox(height: 25),
-                        //_startEndButton(),
-                        const SizedBox(height: 20),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Column(
-                            children: [
-                              CustomBaseAccordion(
-                                list: [
-                                  // TODO hangi next state id alinacak
-                                  _accordionSection(AppStrings.efforts, AddEffortsAccordion(provider: woDetailProvider), AppIcons.insightsRounded),
-                                  _accordionSection(AppStrings.addMaterial, AddMaterialAccordion(provider: woDetailProvider), AppIcons.warehouse),
-                                  _accordionSection(AppStrings.requstMaterial, RequestMaterialAccordion(provider: woDetailProvider), AppIcons.tool),
-                                  _accordionSection(AppStrings.addDocumant, AddDocumantAccordion(provider: woDetailProvider), AppIcons.photoAlbum),
-                                ],
-                              )
-                            ],
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
+                      child: Column(
+                        children: [
+                          CustomWorkSpaceDetailCard(workSpaceDetail: widget.workSpaceDetail),
+                          // WoSummary(workSpaceDetail: widget.workSpaceDetail),
+                          const SizedBox(height: 20),
+                          (widget.workSpaceDetail.task?.user ?? '') == context.read<GlobalProvider>().userName
+                              ? const SizedBox(height: 25)
+                              : const SizedBox(height: 25),
+                          //_startEndButton(),
+                          const SizedBox(height: 20),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Column(
+                              children: [
+                                CustomBaseAccordion(
+                                  list: [
+                                    // TODO hangi next state id alinacak
+                                    _accordionSection(AppStrings.efforts, AddEffortsAccordion(provider: woDetailProvider), AppIcons.insightsRounded),
+                                    _accordionSection(AppStrings.addMaterial, AddMaterialAccordion(provider: woDetailProvider), AppIcons.warehouse),
+                                    _accordionSection(AppStrings.requstMaterial, RequestMaterialAccordion(provider: woDetailProvider), AppIcons.tool),
+                                    _accordionSection(AppStrings.addDocumant, AddDocumantAccordion(provider: woDetailProvider), AppIcons.photoAlbum),
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
           );
