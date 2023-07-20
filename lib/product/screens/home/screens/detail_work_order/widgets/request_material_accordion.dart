@@ -21,32 +21,33 @@ class RequestMaterialAccordion extends StatelessWidget {
   Widget build(BuildContext context) {
     return Accordion(
       maxOpenSections: 1,
-      headerBackgroundColorOpened: APPColors.Main.black,
+      headerBackgroundColorOpened: APPColors.Accent.black,
       children: [
         AccordionSection(
           headerBackgroundColor: APPColors.Login.blue,
           leftIcon: Icon(AppIcons.add, color: APPColors.Main.white),
-          header: const Text(AppStrings.requstMaterial),
+          header: Text(AppStrings.requstMaterial, style: TextStyle(color: APPColors.Main.white)),
           content: CustomRowAccordionButton(
               onPressed: () {
                 ShowModalBottomSheet().show(
-                    context,
-                    AddMaterialModalBottomSheet(
-                        wareHouseList: const ['depo1', 'depo2', 'depo3'],
-                        productList: const ['urun1', 'urun2', 'urun3'],
-                        unitList: const ['birim1', 'birim2', 'birim3'],
-                        selectWareHouseFunction: test,
-                        selectProductFunction: test,
-                        selectUnitFunction: test,
-                        saveAmountFunction: test,
-                        addMaterial: test));
+                  context,
+                  AddMaterialModalBottomSheet(
+                      wareHouseList: const ['depo1', 'depo2', 'depo3'],
+                      productList: const ['urun1', 'urun2', 'urun3'],
+                      unitList: const ['birim1', 'birim2', 'birim3'],
+                      selectWareHouseFunction: test,
+                      selectProductFunction: test,
+                      selectUnitFunction: test,
+                      saveAmountFunction: test,
+                      addMaterial: test),
+                );
               },
               buttonTitle: AppStrings.requstMaterial),
         ),
         AccordionSection(
-          headerBackgroundColor: APPColors.Clear.green,
+          headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.tool, color: APPColors.Main.white),
-          header: const Text(AppStrings.requstedMaterials),
+          header: Text(AppStrings.requstedMaterials, style: TextStyle(color: APPColors.Main.white)),
           content: Consumer<WorkOrderDetailServiceProvider>(
             builder: (context, value, child) {
               SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -56,7 +57,6 @@ class RequestMaterialAccordion extends StatelessWidget {
                         : value.fetchRequestedMaterials()
                     : null;
               });
-
               return value.isLoading
                   ? const Center(child: CircularProgressIndicator())
                   : DataTableAccordion(

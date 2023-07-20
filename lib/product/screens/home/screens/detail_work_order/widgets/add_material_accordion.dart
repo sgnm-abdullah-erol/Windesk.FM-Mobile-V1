@@ -22,12 +22,12 @@ class AddMaterialAccordion extends StatelessWidget {
   Widget build(BuildContext context) {
     return Accordion(
       maxOpenSections: 1,
-      headerBackgroundColorOpened: APPColors.Main.black,
+      headerBackgroundColorOpened: APPColors.Accent.black,
       children: [
         AccordionSection(
-          headerBackgroundColor: APPColors.Login.blue,
+          headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.add, color: APPColors.Main.white),
-          header: const Text(AppStrings.addMaterial),
+          header: Text(AppStrings.addMaterial, style: TextStyle(color: APPColors.Main.white)),
           content: CustomRowAccordionButton(
               onPressed: () {
                 ShowModalBottomSheet().show(
@@ -45,9 +45,9 @@ class AddMaterialAccordion extends StatelessWidget {
               buttonTitle: AppStrings.addMaterial),
         ),
         AccordionSection(
-          headerBackgroundColor: APPColors.Clear.green,
+          headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.warehouse, color: APPColors.Main.white),
-          header: const Text(AppStrings.addedMaterials),
+          header: Text(AppStrings.addedMaterials, style: TextStyle(color: APPColors.Main.white)),
           content: Consumer<WorkOrderDetailServiceProvider>(
             builder: ((context, value, child) {
               SchedulerBinding.instance.addPostFrameCallback((_) {

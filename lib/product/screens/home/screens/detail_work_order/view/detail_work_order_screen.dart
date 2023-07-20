@@ -78,7 +78,6 @@ class _DetailWorkOrderScreenState extends State<DetailWorkOrderScreen> {
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: CustomBaseAccordion(
         list: [
-          // TODO hangi next state(next state birden fazla olabilir) id alinacak
           _accordionSection(AppStrings.efforts, AddEffortsAccordion(provider: woDetailProvider), AppIcons.insightsRounded),
           _accordionSection(AppStrings.addMaterial, AddMaterialAccordion(provider: woDetailProvider), AppIcons.warehouse),
           _accordionSection(AppStrings.requstMaterial, RequestMaterialAccordion(provider: woDetailProvider), AppIcons.tool),
@@ -91,11 +90,12 @@ class _DetailWorkOrderScreenState extends State<DetailWorkOrderScreen> {
   AccordionSection _accordionSection(String title, Widget content, IconData icon) {
     return AccordionSection(
       isOpen: false,
-      headerBackgroundColor: APPColors.Login.blue,
-      headerBackgroundColorOpened: Colors.black,
-      leftIcon: Icon(icon, color: Colors.white),
+      headerBackgroundColor: APPColors.Accent.black,
+      headerBackgroundColorOpened: APPColors.Accent.black,
+      leftIcon: Icon(icon, color: APPColors.Main.white),
+      contentBorderColor: APPColors.Accent.black,
       onOpenSection: () {},
-      header: Text(title),
+      header: Text(title, style: TextStyle(color: APPColors.Main.white, letterSpacing: 1.5)),
       content: content,
     );
   }

@@ -22,13 +22,13 @@ class AddDocumantAccordion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Accordion(
-      headerBackgroundColorOpened: APPColors.Main.black,
+      headerBackgroundColorOpened: APPColors.Accent.black,
       maxOpenSections: 1,
       children: [
         AccordionSection(
-          headerBackgroundColor: APPColors.Login.blue,
+          headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.camera, color: APPColors.Main.white),
-          header: const Text(AppStrings.addImage),
+          header: Text(AppStrings.addImage, style: TextStyle(color: APPColors.Main.white)),
           content: CustomRowAccordionButton(
               onPressed: () {
                 ShowModalBottomSheet().show(context, AddPhotoModalBottomSheet(test, test, test, 'Açıklama'));
@@ -36,9 +36,9 @@ class AddDocumantAccordion extends StatelessWidget {
               buttonTitle: AppStrings.addImage),
         ),
         AccordionSection(
-          headerBackgroundColor: APPColors.Login.blue,
+          headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.pictureAsPdf, color: APPColors.Main.white),
-          header: const Text(AppStrings.addPdf),
+          header: Text(AppStrings.addPdf, style: TextStyle(color: APPColors.Main.white)),
           content: CustomRowAccordionButton(
               onPressed: () {
                 ShowModalBottomSheet().show(context, AddDocumentsModalBottomSheet(test, test, 'Açıklama', pickDocumentFunction: test));
@@ -46,7 +46,7 @@ class AddDocumantAccordion extends StatelessWidget {
               buttonTitle: AppStrings.addMaterial),
         ),
         AccordionSection(
-          headerBackgroundColor: APPColors.Clear.green,
+          headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.documantScanner, color: APPColors.Main.white),
           header: const Text(AppStrings.addedDocumants),
           content: Consumer<WorkOrderDetailServiceProvider>(

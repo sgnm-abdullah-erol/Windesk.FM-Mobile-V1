@@ -26,15 +26,15 @@ class AddEffortsAccordion extends StatelessWidget {
       children: [
         AccordionSection(
           isOpen: false,
-          headerBackgroundColor: APPColors.Login.blue,
-          contentBackgroundColor: APPColors.Main.white,
+          headerBackgroundColor: APPColors.Accent.black,
+          contentBackgroundColor: APPColors.Accent.black,
           contentBorderWidth: 0,
           contentHorizontalPadding: 0,
           contentVerticalPadding: 0,
           contentBorderColor: APPColors.Main.white,
           rightIcon: const Icon(Icons.abc, size: 0),
           leftIcon: Icon(AppIcons.add, color: APPColors.Main.white),
-          header: const Text(AppStrings.addEffort),
+          header: Text(AppStrings.addEffort, style: TextStyle(color: APPColors.Main.white)),
           onOpenSection: () {
             ShowModalBottomSheet().show(
                 context,
@@ -50,9 +50,9 @@ class AddEffortsAccordion extends StatelessWidget {
           content: const SizedBox(height: 0),
         ),
         AccordionSection(
-          headerBackgroundColor: APPColors.Clear.green,
+          headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.compareRounded, color: APPColors.Main.white),
-          header: const Text(AppStrings.addedEfforts),
+          header: Text(AppStrings.addedEfforts, style: TextStyle(color: APPColors.Main.white)),
           onOpenSection: () {
             provider.userClickedEffortsFunction();
           },
