@@ -1,4 +1,6 @@
 import 'package:get_it/get_it.dart';
+import 'package:vm_fm_4/feature/service/global_services.dart/auth_service/auth_service_repository_impl.dart';
+import 'package:vm_fm_4/feature/service/global_services.dart/work_space_service/work_space_service_repository_impl.dart';
 
 import 'global_providers/global_provider.dart';
 import 'log/log_manager.dart';
@@ -11,10 +13,12 @@ class Injection {
   void initInstances() {
     getIt
       ..registerLazySingleton<ServiceManager>(() => ServiceManager())
-      ..registerSingleton<LogManager>(LogManager())
-      ..registerSingleton<GlobalProvider>(GlobalProvider())
+      ..registerLazySingleton<LogManager>(() => LogManager())
+      ..registerLazySingleton<GlobalProvider>(() => GlobalProvider())
 
       // services
-      ..registerLazySingleton<WorkOrderServiceRepositoryImpl>(() => WorkOrderServiceRepositoryImpl());
+      ..registerLazySingleton<WorkOrderServiceRepositoryImpl>(() => WorkOrderServiceRepositoryImpl())
+      ..registerLazySingleton<AuthServiceRepositoryImpl>(() => AuthServiceRepositoryImpl())
+      ..registerLazySingleton<WorkSpaceServiceRepositoryImpl>(() => WorkSpaceServiceRepositoryImpl());
   }
 }

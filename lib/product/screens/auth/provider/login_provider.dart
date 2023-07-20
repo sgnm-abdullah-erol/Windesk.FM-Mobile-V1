@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import '../../../../feature/components/snackBar/snackbar.dart';
 import '../../../../feature/database/shared_manager.dart';
 import '../../../../feature/enums/shared_enums.dart';
+import '../../../../feature/injection.dart';
 import '../../../../feature/models/auth_models/login_model.dart';
-import '../../../../feature/service/global_services.dart/auth_service/auth_service_repository.dart';
 import '../../../../feature/service/global_services.dart/auth_service/auth_service_repository_impl.dart';
 
 class LoginProvider extends ChangeNotifier {
+  final AuthServiceRepositoryImpl _authService = Injection.getIt.get<AuthServiceRepositoryImpl>();
+
   bool _loading = false;
   bool get loading => _loading;
 
@@ -31,11 +33,10 @@ class LoginProvider extends ChangeNotifier {
 
   void logIn(BuildContext context) async {
     if (_userName.isNotEmpty && _password.isNotEmpty) {
-      AuthServiceRepository authService = AuthServiceRepositoryImpl();
       _loading = true;
       notifyListeners();
 
-      final response = await authService.login(userName, password);
+      final response = await _authService.login(userName, password);
 
       LoginModel loginModel;
 

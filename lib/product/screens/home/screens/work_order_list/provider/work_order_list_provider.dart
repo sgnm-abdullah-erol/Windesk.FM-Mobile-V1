@@ -7,11 +7,9 @@ import '../../../../../../feature/service/global_services.dart/work_space_servic
 
 import '../../../../../../feature/database/shared_manager.dart';
 import '../../../../../../feature/injection.dart';
-import '../../../../../../feature/service/global_services.dart/work_order_service/work_order_service_repository_impl.dart';
 
 class WorkOrderListProvider extends ChangeNotifier {
-  final WorkOrderServiceRepositoryImpl service = Injection.getIt.get<WorkOrderServiceRepositoryImpl>();
-  final WorkSpaceServiceRepositoryImpl workSpaceService = WorkSpaceServiceRepositoryImpl();
+  final WorkSpaceServiceRepositoryImpl workSpaceService = Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
 
   int _tabIndex = 0;
   int get tabIndex => _tabIndex;

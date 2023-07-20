@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../../../feature/injection.dart';
 import '../../../../../../feature/models/work_space/work_space_efforts.dart';
 
 import '../../../../../../feature/database/shared_manager.dart';
@@ -10,7 +11,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   WorkOrderDetailProvider({required this.detail});
   final WorkSpaceDetail detail;
 
-  final WorkSpaceServiceRepositoryImpl workSpaceService = WorkSpaceServiceRepositoryImpl();
+  final WorkSpaceServiceRepositoryImpl workSpaceService = Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -70,7 +71,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 }
 
 class WorkOrderDetailServiceProvider extends ChangeNotifier {
-  final WorkSpaceServiceRepositoryImpl workSpaceService = WorkSpaceServiceRepositoryImpl();
+  final WorkSpaceServiceRepositoryImpl workSpaceService = Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
 
   bool _isEffortListFetched = false;
   bool get isEffortListFetched => _isEffortListFetched;
