@@ -50,8 +50,13 @@ class RequestMaterialAccordion extends StatelessWidget {
           content: Consumer<WorkOrderDetailServiceProvider>(
             builder: (context, value, child) {
               SchedulerBinding.instance.addPostFrameCallback((_) {
-                value.isRequestedMaterialListFetched ? null : value.fetchRequestedMaterials();
+                provider.userClickedRequestedMaterial
+                    ? value.isRequestedMaterialListFetched
+                        ? null
+                        : value.fetchRequestedMaterials()
+                    : null;
               });
+
               return value.isLoading
                   ? const Center(child: CircularProgressIndicator())
                   : DataTableAccordion(

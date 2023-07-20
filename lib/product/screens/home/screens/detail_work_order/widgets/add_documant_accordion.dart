@@ -52,7 +52,11 @@ class AddDocumantAccordion extends StatelessWidget {
           content: Consumer<WorkOrderDetailServiceProvider>(
             builder: (context, value, child) {
               SchedulerBinding.instance.addPostFrameCallback((_) {
-                value.isDocumantListFetched ? null : value.fetchDocumants();
+                provider.userClickedDocumants
+                    ? value.isDocumantListFetched
+                        ? null
+                        : value.fetchDocumants()
+                    : null;
               });
               return value.isLoading
                   ? const Center(child: CircularProgressIndicator())

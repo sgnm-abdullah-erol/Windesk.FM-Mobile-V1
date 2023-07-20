@@ -53,19 +53,27 @@ class AddEffortsAccordion extends StatelessWidget {
           headerBackgroundColor: APPColors.Clear.green,
           leftIcon: Icon(AppIcons.compareRounded, color: APPColors.Main.white),
           header: const Text(AppStrings.addedEfforts),
-          onOpenSection: () {},
+          onOpenSection: () {
+            provider.userClickedEffortsFunction();
+          },
           content: Consumer<WorkOrderDetailServiceProvider>(
             builder: (context, value, child) {
               SchedulerBinding.instance.addPostFrameCallback((_) {
-                value.isEffortListFetched ? null : value.fetchEfforts();
+                provider.userClickedEfforts
+                    ? value.isEffortListFetched
+                        ? null
+                        : value.fetchEfforts(
+                            provider.detail.task?.id.toString() ?? '',
+                            provider.detail.state?.nextStates?.first.id.toString() ?? '',
+                          )
+                    : null;
               });
-
               return value.isLoading
                   ? const Center(child: CircularProgressIndicator())
                   : DataTableAccordion(
                       delete: () {},
                       labelList: ['id', 'Tip', 'İsim', 'Süre', 'Sil'].toList(),
-                      data: provider.woEffortList != null ? provider.woEffortList!.effort : null,
+                      data: value.woEffortList != null ? value.woEffortList!.effort : null,
                     );
             },
           ),

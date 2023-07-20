@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:vm_fm_4/feature/constants/other/colors.dart';
 import 'package:vm_fm_4/feature/constants/style/custom_paddings.dart';
 import 'package:vm_fm_4/feature/route/app_route.gr.dart';
+import 'package:vm_fm_4/product/screens/home/screens/search_work_order/provider/search_work_order_provider.dart';
 
 import '../../../../../../feature/components/buttons/custom_elevated_button_with_icon.dart';
 import '../../../../../../feature/components/input_fields/text_fields_search.dart';
@@ -30,7 +31,7 @@ class _SearchWorkOrderScreenState extends State<SearchWorkOrderScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => WorkOrderDetailProvider(),
+      create: (context) => SearchWorkOrderProvider(),
       child: Consumer<WorkOrderDetailProvider>(builder: (context, WorkOrderDetailProvider woDetailProvider, child) {
         context.read<WorkOrderDetailProvider>().isSuccess
             ? context.router.push(DetailWorkOrderScreen(workSpaceDetail: context.read<WorkOrderDetailProvider>().woDetailList!))

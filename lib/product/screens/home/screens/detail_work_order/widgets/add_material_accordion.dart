@@ -51,6 +51,11 @@ class AddMaterialAccordion extends StatelessWidget {
           content: Consumer<WorkOrderDetailServiceProvider>(
             builder: ((context, value, child) {
               SchedulerBinding.instance.addPostFrameCallback((_) {
+                provider.userClickedMaterial
+                    ? value.isMaterialPartsFetched
+                        ? null
+                        : value.fetchMaterials()
+                    : null;
                 value.isMaterialPartsFetched ? null : value.fetchMaterials();
               });
 

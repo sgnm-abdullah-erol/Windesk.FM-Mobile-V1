@@ -7,13 +7,45 @@ import '../../../../../../feature/models/work_space/work_space_detail.dart';
 import '../../../../../../feature/service/global_services.dart/work_space_service/work_space_service_repository_impl.dart';
 
 class WorkOrderDetailProvider extends ChangeNotifier {
+  WorkOrderDetailProvider({required this.detail});
+  final WorkSpaceDetail detail;
+
   final WorkSpaceServiceRepositoryImpl workSpaceService = WorkSpaceServiceRepositoryImpl();
 
   bool _isLoading = false;
+
   bool get isLoading => _isLoading;
 
   bool _isSuccess = false;
   bool get isSuccess => _isSuccess;
+
+  bool _userClickedEfforts = false;
+  bool get userClickedEfforts => _userClickedEfforts;
+
+  bool _userClickedMaterial = false;
+  bool get userClickedMaterial => _userClickedMaterial;
+
+  bool _userClickedRequestedMaterial = false;
+  bool get userClickedRequestedMaterial => _userClickedRequestedMaterial;
+
+  bool _userClickedDocumants = false;
+  bool get userClickedDocumants => _userClickedDocumants;
+
+  void userClickedEffortsFunction() {
+    _userClickedEfforts = true;
+  }
+
+  void userClickedMaterialFunction() {
+    _userClickedMaterial = true;
+  }
+
+  void userClickedRequestedMaterialFunction() {
+    _userClickedRequestedMaterial = true;
+  }
+
+  void userClickedDocumantsFunction() {
+    _userClickedDocumants = true;
+  }
 
   WorkSpaceDetail? _woDetailList;
   WorkSpaceDetail? get woDetailList => _woDetailList;
@@ -63,6 +95,8 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 }
 
 class WorkOrderDetailServiceProvider extends ChangeNotifier {
+  final WorkSpaceServiceRepositoryImpl workSpaceService = WorkSpaceServiceRepositoryImpl();
+
   bool _isEffortListFetched = false;
   bool get isEffortListFetched => _isEffortListFetched;
 
@@ -77,6 +111,9 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
+
+  WorkSpaceEfforts? _woEffortList;
+  WorkSpaceEfforts? get woEffortList => _woEffortList;
 
   void fetchDocumants() {
     _isLoading = true;
@@ -111,14 +148,22 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
     });
   }
 
-  void fetchEfforts() {
+  void fetchEfforts(String taskId, String nextStateId) async {
     _isLoading = true;
     _isEffortListFetched = true;
-    notifyListeners();
 
-    Future.delayed(const Duration(seconds: 5), () {
-      _isLoading = false;
-      notifyListeners();
-    });
+    String userToken = await SharedManager().getString(SharedEnum.userToken);
+
+    notifyListeners();
+    final result = await workSpaceService.getWorkOrderEfforts(taskId, nextStateId, userToken);
+
+    result.fold(
+      (l) => {
+        _woEffortList = l,
+      },
+      (r) {},
+    );
+    _isLoading = false;
+    notifyListeners();
   }
 }

@@ -41,19 +41,10 @@ class _DetailWorkOrderScreenState extends State<DetailWorkOrderScreen> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => WorkOrderDetailServiceProvider()),
-        ChangeNotifierProvider(create: (context) => WorkOrderDetailProvider()),
+        ChangeNotifierProvider(create: (context) => WorkOrderDetailProvider(detail: widget.workSpaceDetail)),
       ],
       child: Consumer<WorkOrderDetailProvider>(
         builder: (context, WorkOrderDetailProvider woDetailProvider, child) {
-          SchedulerBinding.instance.addPostFrameCallback((_) {
-            woDetailProvider.isWorkOrderEffortListFetched
-                ? null
-                : woDetailProvider.getEfforts(
-                    widget.workSpaceDetail.task?.id.toString() ?? '',
-                    widget.workSpaceDetail.state?.nextStates?.first.id.toString() ?? '',
-                  );
-          });
-
           return Scaffold(
             appBar: CustomMainAppbar(title: Text('WO - ${widget.workSpaceDetail.task?.id.toString() ?? ''}'), returnBack: true, elevation: 4),
             body: context.read<WorkOrderDetailProvider>().isLoading
@@ -85,17 +76,13 @@ class _DetailWorkOrderScreenState extends State<DetailWorkOrderScreen> {
   Padding _customPageAccordionSection(WorkOrderDetailProvider woDetailProvider) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: Column(
-        children: [
-          CustomBaseAccordion(
-            list: [
-              // TODO hangi next state(next state birden fazla olabilir) id alinacak
-              _accordionSection(AppStrings.efforts, AddEffortsAccordion(provider: woDetailProvider), AppIcons.insightsRounded),
-              _accordionSection(AppStrings.addMaterial, AddMaterialAccordion(provider: woDetailProvider), AppIcons.warehouse),
-              _accordionSection(AppStrings.requstMaterial, RequestMaterialAccordion(provider: woDetailProvider), AppIcons.tool),
-              _accordionSection(AppStrings.addDocumant, AddDocumantAccordion(provider: woDetailProvider), AppIcons.photoAlbum),
-            ],
-          ),
+      child: CustomBaseAccordion(
+        list: [
+          // TODO hangi next state(next state birden fazla olabilir) id alinacak
+          _accordionSection(AppStrings.efforts, AddEffortsAccordion(provider: woDetailProvider), AppIcons.insightsRounded),
+          _accordionSection(AppStrings.addMaterial, AddMaterialAccordion(provider: woDetailProvider), AppIcons.warehouse),
+          _accordionSection(AppStrings.requstMaterial, RequestMaterialAccordion(provider: woDetailProvider), AppIcons.tool),
+          _accordionSection(AppStrings.addDocumant, AddDocumantAccordion(provider: woDetailProvider), AppIcons.photoAlbum),
         ],
       ),
     );
