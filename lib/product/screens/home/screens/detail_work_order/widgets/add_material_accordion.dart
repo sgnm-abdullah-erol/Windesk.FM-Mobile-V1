@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import '../../../../../../feature/components/model_bottom_sheet/add_material_modal_bottom_sheet.dart';
 import '../../../../../../feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
 
-import '../../../../../../feature/components/buttons/custom_row_accordion_button.dart';
 import '../../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../../feature/constants/other/app_strings.dart';
 import '../../../../../../feature/constants/other/colors.dart';
@@ -28,21 +27,22 @@ class AddMaterialAccordion extends StatelessWidget {
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.add, color: APPColors.Main.white),
           header: Text(AppStrings.addMaterial, style: TextStyle(color: APPColors.Main.white)),
-          content: CustomRowAccordionButton(
-              onPressed: () {
-                ShowModalBottomSheet().show(
-                    context,
-                    AddMaterialModalBottomSheet(
-                        wareHouseList: const ['depo1', 'depo2', 'depo3'],
-                        productList: const ['urun1', 'urun2', 'urun3'],
-                        unitList: const ['birim1', 'birim2', 'birim3'],
-                        selectWareHouseFunction: test,
-                        selectProductFunction: test,
-                        selectUnitFunction: test,
-                        saveAmountFunction: test,
-                        addMaterial: test));
-              },
-              buttonTitle: AppStrings.addMaterial),
+          rightIcon: const Icon(AppIcons.arrowDown, size: 0),
+          onOpenSection: () {
+            ShowModalBottomSheet().show(
+              context,
+              AddMaterialModalBottomSheet(
+                  wareHouseList: const ['depo1', 'depo2', 'depo3'],
+                  productList: const ['urun1', 'urun2', 'urun3'],
+                  unitList: const ['birim1', 'birim2', 'birim3'],
+                  selectWareHouseFunction: test,
+                  selectProductFunction: test,
+                  selectUnitFunction: test,
+                  saveAmountFunction: test,
+                  addMaterial: test),
+            );
+          },
+          content: const SizedBox(height: 0),
         ),
         AccordionSection(
           headerBackgroundColor: APPColors.Accent.black,

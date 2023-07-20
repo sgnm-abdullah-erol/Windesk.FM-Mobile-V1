@@ -1,12 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
+import '../../../enums/service_response_status_enums.dart';
 import '../../../exceptions/custom_service_exceptions.dart';
 import '../../../models/auth_models/check_access_token_model.dart';
-
 import '../../../models/auth_models/login_model.dart';
-
-import '../../../enums/service_response_status_enums.dart';
 import 'auth_service_repository.dart';
 
 class AuthServiceRepositoryImpl extends AuthServiceRepository {

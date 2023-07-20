@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'work_space_state.dart';
-import 'work_space_task.dart';
 
 import 'work_space.dart';
 import 'work_space_calendar.dart';
+import 'work_space_state.dart';
+import 'work_space_task.dart';
 import 'work_space_total_count.dart';
 import 'work_space_user_information.dart';
 

@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:accordion/accordion.dart';
+import 'package:accordion/controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -32,9 +33,13 @@ class AddEffortsAccordion extends StatelessWidget {
           contentHorizontalPadding: 0,
           contentVerticalPadding: 0,
           contentBorderColor: APPColors.Main.white,
-          rightIcon: const Icon(Icons.abc, size: 0),
+          rightIcon: const Icon(AppIcons.arrowDown, size: 0),
+          flipRightIconIfOpen: false,
           leftIcon: Icon(AppIcons.add, color: APPColors.Main.white),
           header: Text(AppStrings.addEffort, style: TextStyle(color: APPColors.Main.white)),
+          sectionOpeningHapticFeedback: SectionHapticFeedback.none,
+          scrollIntoViewOfItems: ScrollIntoViewOfItems.slow,
+          sectionClosingHapticFeedback: SectionHapticFeedback.none,
           onOpenSection: () {
             ShowModalBottomSheet().show(
                 context,
@@ -47,6 +52,7 @@ class AddEffortsAccordion extends StatelessWidget {
                   minuteArray: const ["1", "2", "3"],
                 ));
           },
+          onCloseSection: () {},
           content: const SizedBox(height: 0),
         ),
         AccordionSection(

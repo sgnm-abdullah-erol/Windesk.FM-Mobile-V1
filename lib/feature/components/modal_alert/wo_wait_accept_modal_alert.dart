@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import '../../constants/other/colors.dart';
 
 import '../../constants/other/app_strings.dart';
+import '../../constants/other/colors.dart';
 
 class WoWaitAcceptModalAlert {
   Future<bool?> showAlertDialog(BuildContext context, String textData) async {
