@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vm_fm_4/feature/constants/other/snackbar_strings.dart';
-import 'package:vm_fm_4/feature/route/app_route.gr.dart';
+import '../../../../feature/constants/other/snackbar_strings.dart';
+import '../../../../feature/route/app_route.gr.dart';
 
 import '../../../../feature/components/buttons/custom_login_button.dart';
 import '../../../../feature/components/input_fields/text_fields_input_underline.dart';

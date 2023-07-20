@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:vm_fm_4/feature/models/work_space/work_space_effort_value.dart';
+import 'work_space_effort_value.dart';
 part 'generator/work_space_effort.g.dart';
 
 @JsonSerializable()

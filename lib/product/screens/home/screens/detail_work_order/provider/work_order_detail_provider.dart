@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/models/work_space/work_space_efforts.dart';
+import '../../../../../../feature/models/work_space/work_space_efforts.dart';
 
 import '../../../../../../feature/database/shared_manager.dart';
 import '../../../../../../feature/enums/shared_enums.dart';
@@ -13,11 +13,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   final WorkSpaceServiceRepositoryImpl workSpaceService = WorkSpaceServiceRepositoryImpl();
 
   bool _isLoading = false;
-
   bool get isLoading => _isLoading;
-
-  bool _isSuccess = false;
-  bool get isSuccess => _isSuccess;
 
   bool _userClickedEfforts = false;
   bool get userClickedEfforts => _userClickedEfforts;
@@ -46,27 +42,6 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   void userClickedDocumantsFunction() {
     _userClickedDocumants = true;
   }
-
-  WorkSpaceDetail? _woDetailList;
-  WorkSpaceDetail? get woDetailList => _woDetailList;
-
-  void getWorkOrderWithSearch(String workOrderCode) async {
-    String userToken = await SharedManager().getString(SharedEnum.userToken);
-
-    _isLoading = true;
-    notifyListeners();
-    final result = await workSpaceService.getWorkOrderWithSearch(workOrderCode, userToken);
-
-    result.fold((l) => {_woDetailList = l, _isSuccess = true}, (r) {});
-    notifyListeners();
-
-    _isLoading = false;
-    notifyListeners();
-  }
-
-  ////// YUKARI SEARCH KISMINA TASINSIN
-  ///
-  ///
 
   WorkSpaceEfforts? _woEffortList;
   WorkSpaceEfforts? get woEffortList => _woEffortList;

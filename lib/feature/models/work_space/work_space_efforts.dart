@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:vm_fm_4/feature/models/work_space/work_space_created_by.dart';
-import 'package:vm_fm_4/feature/models/work_space/work_space_effort.dart';
+import 'work_space_created_by.dart';
+import 'work_space_effort.dart';
 
 part 'generator/work_space_efforts.g.dart';
 

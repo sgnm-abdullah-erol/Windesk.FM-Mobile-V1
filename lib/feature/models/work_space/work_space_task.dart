@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'work_space_created_by.dart';
 import 'work_space_priority.dart';
+
 part 'generator/work_space_task.g.dart';
 
 @JsonSerializable()

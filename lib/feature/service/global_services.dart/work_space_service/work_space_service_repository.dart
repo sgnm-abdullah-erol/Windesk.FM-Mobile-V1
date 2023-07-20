@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:vm_fm_4/feature/exceptions/custom_service_exceptions.dart';
-import 'package:vm_fm_4/feature/models/work_space/work_space_appendings.dart';
-import 'package:vm_fm_4/feature/models/work_space/work_space_detail.dart';
-import 'package:vm_fm_4/feature/models/work_space/work_space_efforts.dart';
+import '../../../exceptions/custom_service_exceptions.dart';
+import '../../../models/work_space/work_space_appendings.dart';
+import '../../../models/work_space/work_space_detail.dart';
+import '../../../models/work_space/work_space_efforts.dart';
 
 import '../../../injection.dart';
 import '../../../log/log_manager.dart';

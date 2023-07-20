@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/components/dividers/custom_wo_summary_divider.dart';
-import 'package:vm_fm_4/feature/constants/other/colors.dart';
-import 'package:vm_fm_4/feature/constants/style/border_radius.dart';
-import 'package:vm_fm_4/feature/constants/style/custom_paddings.dart';
-import 'package:vm_fm_4/feature/extensions/context_extension.dart';
+import '../dividers/custom_wo_summary_divider.dart';
+import '../../constants/other/colors.dart';
+import '../../constants/style/border_radius.dart';
+import '../../constants/style/custom_paddings.dart';
+import '../../extensions/context_extension.dart';
 
 import '../../models/work_space/work_space_appendings.dart';
 

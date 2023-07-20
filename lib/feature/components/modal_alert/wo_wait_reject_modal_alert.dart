@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/constants/other/app_strings.dart';
-import 'package:vm_fm_4/feature/constants/other/colors.dart';
+import '../../constants/other/app_strings.dart';
+import '../../constants/other/colors.dart';
 
 import '../../constants/other/app_icons.dart';
 import '../input_fields/dropdown_input_fields.dart';
