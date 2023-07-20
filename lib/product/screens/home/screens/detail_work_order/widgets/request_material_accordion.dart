@@ -1,5 +1,7 @@
 import 'package:accordion/accordion.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 import 'package:vm_fm_4/feature/components/model_bottom_sheet/add_material_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/constants/other/colors.dart';
@@ -45,10 +47,19 @@ class RequestMaterialAccordion extends StatelessWidget {
           headerBackgroundColor: APPColors.Clear.green,
           leftIcon: Icon(AppIcons.tool, color: APPColors.Main.white),
           header: const Text(AppStrings.requstedMaterials),
-          content: DataTableAccordion(
-            delete: () {},
-            labelList: ['urunler', 'asdasd', 'asdasd', 'asdsad', 'asda'].toList(),
-            data: provider.woEffortList != null ? provider.woEffortList!.effort : null,
+          content: Consumer<WorkOrderDetailServiceProvider>(
+            builder: (context, value, child) {
+              SchedulerBinding.instance.addPostFrameCallback((_) {
+                value.isRequestedMaterialListFetched ? null : value.fetchRequestedMaterials();
+              });
+              return value.isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : DataTableAccordion(
+                      delete: () {},
+                      labelList: ['urunler', 'asdasd', 'asdasd', 'asdsad', 'asda'].toList(),
+                      data: provider.woEffortList != null ? provider.woEffortList!.effort : null,
+                    );
+            },
           ),
         )
       ],

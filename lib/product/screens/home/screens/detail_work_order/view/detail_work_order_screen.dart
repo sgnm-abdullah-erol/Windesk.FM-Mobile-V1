@@ -38,8 +38,11 @@ class _DetailWorkOrderScreenState extends State<DetailWorkOrderScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => WorkOrderDetailProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => WorkOrderDetailServiceProvider()),
+        ChangeNotifierProvider(create: (context) => WorkOrderDetailProvider()),
+      ],
       child: Consumer<WorkOrderDetailProvider>(
         builder: (context, WorkOrderDetailProvider woDetailProvider, child) {
           SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -52,7 +55,7 @@ class _DetailWorkOrderScreenState extends State<DetailWorkOrderScreen> {
           });
 
           return Scaffold(
-            appBar: CustomMainAppbar(title: Text(widget.workSpaceDetail.task?.name ?? ''), returnBack: true, elevation: 4),
+            appBar: CustomMainAppbar(title: Text('WO - ${widget.workSpaceDetail.task?.id.toString() ?? ''}'), returnBack: true, elevation: 4),
             body: context.read<WorkOrderDetailProvider>().isLoading
                 ? const CustomLoadingIndicator()
                 : SingleChildScrollView(
@@ -68,28 +71,32 @@ class _DetailWorkOrderScreenState extends State<DetailWorkOrderScreen> {
                               : const SizedBox(height: 25),
                           //_startEndButton(),
                           const SizedBox(height: 20),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: Column(
-                              children: [
-                                CustomBaseAccordion(
-                                  list: [
-                                    // TODO hangi next state id alinacak
-                                    _accordionSection(AppStrings.efforts, AddEffortsAccordion(provider: woDetailProvider), AppIcons.insightsRounded),
-                                    _accordionSection(AppStrings.addMaterial, AddMaterialAccordion(provider: woDetailProvider), AppIcons.warehouse),
-                                    _accordionSection(AppStrings.requstMaterial, RequestMaterialAccordion(provider: woDetailProvider), AppIcons.tool),
-                                    _accordionSection(AppStrings.addDocumant, AddDocumantAccordion(provider: woDetailProvider), AppIcons.photoAlbum),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
+                          _customPageAccordionSection(woDetailProvider),
                         ],
                       ),
                     ),
                   ),
           );
         },
+      ),
+    );
+  }
+
+  Padding _customPageAccordionSection(WorkOrderDetailProvider woDetailProvider) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Column(
+        children: [
+          CustomBaseAccordion(
+            list: [
+              // TODO hangi next state(next state birden fazla olabilir) id alinacak
+              _accordionSection(AppStrings.efforts, AddEffortsAccordion(provider: woDetailProvider), AppIcons.insightsRounded),
+              _accordionSection(AppStrings.addMaterial, AddMaterialAccordion(provider: woDetailProvider), AppIcons.warehouse),
+              _accordionSection(AppStrings.requstMaterial, RequestMaterialAccordion(provider: woDetailProvider), AppIcons.tool),
+              _accordionSection(AppStrings.addDocumant, AddDocumantAccordion(provider: woDetailProvider), AppIcons.photoAlbum),
+            ],
+          ),
+        ],
       ),
     );
   }

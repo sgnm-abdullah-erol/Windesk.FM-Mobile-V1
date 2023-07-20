@@ -61,3 +61,64 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+class WorkOrderDetailServiceProvider extends ChangeNotifier {
+  bool _isEffortListFetched = false;
+  bool get isEffortListFetched => _isEffortListFetched;
+
+  bool _isMaterialPartsFetched = false;
+  bool get isMaterialPartsFetched => _isMaterialPartsFetched;
+
+  bool _isRequestedListFetched = false;
+  bool get isRequestedMaterialListFetched => _isRequestedListFetched;
+
+  bool _isDocumantListFetched = false;
+  bool get isDocumantListFetched => _isDocumantListFetched;
+
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+
+  void fetchDocumants() {
+    _isLoading = true;
+    _isDocumantListFetched = true;
+    notifyListeners();
+
+    Future.delayed(const Duration(seconds: 5), () {
+      _isLoading = false;
+      notifyListeners();
+    });
+  }
+
+  void fetchMaterials() {
+    _isLoading = true;
+    _isMaterialPartsFetched = true;
+    notifyListeners();
+
+    Future.delayed(const Duration(seconds: 5), () {
+      _isLoading = false;
+      notifyListeners();
+    });
+  }
+
+  void fetchRequestedMaterials() {
+    _isLoading = true;
+    _isRequestedListFetched = true;
+    notifyListeners();
+
+    Future.delayed(const Duration(seconds: 5), () {
+      _isLoading = false;
+      notifyListeners();
+    });
+  }
+
+  void fetchEfforts() {
+    _isLoading = true;
+    _isEffortListFetched = true;
+    notifyListeners();
+
+    Future.delayed(const Duration(seconds: 5), () {
+      _isLoading = false;
+      notifyListeners();
+    });
+  }
+}
