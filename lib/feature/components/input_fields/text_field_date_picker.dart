@@ -32,7 +32,6 @@ class _TextFieldDatePickerState extends State<TextFieldDatePicker> {
         if (date != null) {
           setState(() {
             _controller.text = date.toString().split(' ')[0];
-            print(_controller.text);
           });
         }
       },
@@ -44,7 +43,7 @@ class _TextFieldDatePickerState extends State<TextFieldDatePicker> {
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2010),
-      lastDate: DateTime(2050),
+      lastDate: DateTime.now(),
     );
   }
 }

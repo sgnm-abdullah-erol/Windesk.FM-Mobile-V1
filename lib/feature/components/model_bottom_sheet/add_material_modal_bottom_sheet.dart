@@ -62,7 +62,7 @@ class _Inputs extends StatelessWidget {
         Expanded(
           flex: 30,
           child: DropDownInputFields(
-            labelText: 'Choose WareHouse',
+            labelText: 'Malzeme Listesi',
             onChangedFunction: (newValue) {},
             rightIcon: Icons.arrow_downward,
             dropDownArray: const ['1', '2', '3'],
