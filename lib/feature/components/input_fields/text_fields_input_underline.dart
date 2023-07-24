@@ -8,16 +8,19 @@ class TextFieldsInputUnderline extends StatelessWidget {
     super.key,
     required this.hintText,
     required this.onChanged,
+    this.enabled,
   });
 
   final String _validatorHintText = 'Lütfen bu alanı doldurunuz';
 
   final String hintText;
   final Function onChanged;
+  final bool? enabled;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      enabled: enabled ?? true,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       textInputAction: TextInputAction.next,
       keyboardType: TextInputType.text,

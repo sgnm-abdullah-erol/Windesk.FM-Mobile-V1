@@ -44,8 +44,8 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     _userClickedDocumants = true;
   }
 
-  WorkSpaceEfforts? _woEffortList;
-  WorkSpaceEfforts? get woEffortList => _woEffortList;
+  List<WorkSpaceEfforts>? _woEffortList;
+  List<WorkSpaceEfforts>? get woEffortList => _woEffortList;
 
   bool _isWorkOrderEffortListFetched = false;
   bool get isWorkOrderEffortListFetched => _isWorkOrderEffortListFetched;
@@ -56,7 +56,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     _isLoading = true;
     _isWorkOrderEffortListFetched = true;
     notifyListeners();
-    final result = await workSpaceService.getWorkOrderEfforts(taskId, nextStateId, userToken);
+    final result = await workSpaceService.getWorkOrderEfforts(taskId, userToken);
 
     result.fold(
       (l) => {
@@ -88,8 +88,8 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
-  WorkSpaceEfforts? _woEffortList;
-  WorkSpaceEfforts? get woEffortList => _woEffortList;
+  List<WorkSpaceEfforts>? _woEffortList;
+  List<WorkSpaceEfforts>? get woEffortList => _woEffortList;
 
   void fetchDocumants() {
     _isLoading = true;
@@ -131,7 +131,7 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
     String userToken = await SharedManager().getString(SharedEnum.userToken);
 
     notifyListeners();
-    final result = await workSpaceService.getWorkOrderEfforts(taskId, nextStateId, userToken);
+    final result = await workSpaceService.getWorkOrderEfforts(taskId, userToken);
 
     result.fold(
       (l) => {

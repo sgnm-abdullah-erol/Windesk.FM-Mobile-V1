@@ -23,12 +23,11 @@ class DropDownInputFields extends StatelessWidget {
       value: dropDownArray.first,
       decoration: InputDecoration(
         border: OutlineInputBorder(
-          
-            borderRadius: CustomBorderRadius.textFieldBorderRadius,
-            borderSide: BorderSide(color: APPColors.Main.black, width: 4)),
+          borderRadius: CustomBorderRadius.textFieldBorderRadius,
+          borderSide: BorderSide(color: APPColors.Main.black, width: 4),
+        ),
         labelText: labelText,
       ),
-      icon: Icon(rightIcon),
       items: dropDownArray.map((String items) {
         return DropdownMenuItem(
           value: items,

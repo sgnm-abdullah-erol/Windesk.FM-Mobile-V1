@@ -62,7 +62,7 @@ class AddDocumantAccordion extends StatelessWidget {
                   : DataTableAccordion(
                       delete: () {},
                       labelList: ['urunler', 'asdasd', 'asdasd', 'asdasd', 'sdasd'].toList(),
-                      data: provider.woEffortList != null ? provider.woEffortList!.effort : null,
+                      data: provider.woEffortList,
                     );
             },
           ),

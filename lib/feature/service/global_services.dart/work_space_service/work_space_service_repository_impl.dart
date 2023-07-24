@@ -130,18 +130,14 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   }
 
   @override
-  Future<Either<WorkSpaceEfforts, CustomServiceException>> getWorkOrderEfforts(String taskId, String nextStateId, String token) async {
-    WorkSpaceEfforts workSpaceEfforts;
-    String url = 'http://10.0.2.2:3015/task/558';
+  Future<Either<List<WorkSpaceEfforts>, CustomServiceException>> getWorkOrderEfforts(String taskId, String token) async {
+    List<WorkSpaceEfforts> workSpaceEfforts;
+    String url = 'http://10.0.2.2:3015/task/mobile/getEffortsByTaskId/$taskId';
 
     try {
       final response = await super.dio.get(
             url,
-            data: {
-              "label": ["Task"],
-              "identifier": "540",
-              "identifier_target": "545"
-            },
+            data: {},
             options: Options(
               headers: {'authorization': 'Bearer $token'},
             ),
@@ -149,7 +145,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
-        workSpaceEfforts = WorkSpaceEfforts.fromJson(data);
+        workSpaceEfforts = WorkSpaceEfforts.fromJsonList(data);
 
         return Left(workSpaceEfforts);
       } else {

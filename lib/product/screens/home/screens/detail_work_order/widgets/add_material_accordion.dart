@@ -16,7 +16,6 @@ class AddMaterialAccordion extends StatelessWidget {
 
   final WorkOrderDetailProvider provider;
 
-  test() {}
   @override
   Widget build(BuildContext context) {
     return Accordion(
@@ -29,17 +28,14 @@ class AddMaterialAccordion extends StatelessWidget {
           header: Text(AppStrings.addMaterial, style: TextStyle(color: APPColors.Main.white)),
           rightIcon: const Icon(AppIcons.arrowDown, size: 0),
           onOpenSection: () {
+            //TODO GET WAREHOUSE LIST
             ShowModalBottomSheet().show(
               context,
               AddMaterialModalBottomSheet(
-                  wareHouseList: const ['depo1', 'depo2', 'depo3'],
-                  productList: const ['urun1', 'urun2', 'urun3'],
-                  unitList: const ['birim1', 'birim2', 'birim3'],
-                  selectWareHouseFunction: test,
-                  selectProductFunction: test,
-                  selectUnitFunction: test,
-                  saveAmountFunction: test,
-                  addMaterial: test),
+                wareHouseList: {'asd', 'SADSAD'}.toList(),
+                selectAmount: () {},
+                approveButton: () {},
+              ),
             );
           },
           content: const SizedBox(height: 0),
@@ -64,7 +60,7 @@ class AddMaterialAccordion extends StatelessWidget {
                   : DataTableAccordion(
                       delete: () {},
                       labelList: ['urunler', 'asdasd', 'asdasd', 'asdas', 'asdas'].toList(),
-                      data: provider.woEffortList != null ? provider.woEffortList!.effort : null,
+                      data: provider.woEffortList,
                     );
             }),
           ),

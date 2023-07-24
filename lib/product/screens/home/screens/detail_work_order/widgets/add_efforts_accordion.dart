@@ -42,15 +42,16 @@ class AddEffortsAccordion extends StatelessWidget {
           sectionClosingHapticFeedback: SectionHapticFeedback.none,
           onOpenSection: () {
             ShowModalBottomSheet().show(
-                context,
-                AddEffortsModalBottomSheet(
-                  () {},
-                  addEffortFunction: () {},
-                  selectedTime: "15 dk",
-                  dayArray: const ["1", "2", "3"],
-                  hoursArray: const ["1", "2", "3"],
-                  minuteArray: const ["1", "2", "3"],
-                ));
+              context,
+              AddEffortsModalBottomSheet(
+                selectedStartDate: () {},
+                selectedEndtDate: () {},
+                selectedEffortDuration: () {},
+                selectedEffortType: () {},
+                selectedDescription: () {},
+                addEffortFunction: () {},
+              ),
+            );
           },
           onCloseSection: () {},
           content: const SizedBox(height: 0),
@@ -79,7 +80,7 @@ class AddEffortsAccordion extends StatelessWidget {
                   : DataTableAccordion(
                       delete: () {},
                       labelList: ['id', 'Tip', 'İsim', 'Süre', 'Sil'].toList(),
-                      data: value.woEffortList != null ? value.woEffortList!.effort : null,
+                      data: value.woEffortList,
                     );
             },
           ),

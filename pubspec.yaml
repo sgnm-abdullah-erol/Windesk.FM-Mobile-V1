@@ -44,6 +44,7 @@ dependencies:
 
   # localizations
   easy_localization: ^3.0.2
+  timezone: ^0.8.0
 
   # firebase --for push notification
   firebase_messaging: ^14.6.4
@@ -69,7 +70,6 @@ dependencies:
 
   # accordion --ui
   accordion: ^2.5.1
-
 
   # icons
   cupertino_icons: ^1.0.2

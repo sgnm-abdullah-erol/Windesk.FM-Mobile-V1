@@ -7,9 +7,7 @@ class CustomBaseAccordionSections {
     return AccordionSection(
       headerBackgroundColor: APPColors.Accent.black,
       rightIcon: const Icon(Icons.arrow_drop_down, size: 0),
-      onOpenSection: () {
-        print('onOpenSection $header');
-      },
+      onOpenSection: () {},
       header: Row(
         children: [
           Text(header, style: TextStyle(color: APPColors.Main.white, letterSpacing: 1.5)),

@@ -33,13 +33,8 @@ class RequestMaterialAccordion extends StatelessWidget {
               context,
               AddMaterialModalBottomSheet(
                 wareHouseList: const ['depo1', 'depo2', 'depo3'],
-                productList: const ['urun1', 'urun2', 'urun3'],
-                unitList: const ['birim1', 'birim2', 'birim3'],
-                selectWareHouseFunction: test,
-                selectProductFunction: test,
-                selectUnitFunction: test,
-                saveAmountFunction: test,
-                addMaterial: test,
+                selectAmount: () {},
+                approveButton: () {},
               ),
             );
           },
@@ -64,7 +59,7 @@ class RequestMaterialAccordion extends StatelessWidget {
                   : DataTableAccordion(
                       delete: () {},
                       labelList: ['urunler', 'asdasd', 'asdasd', 'asdsad', 'asda'].toList(),
-                      data: provider.woEffortList != null ? provider.woEffortList!.effort : null,
+                      data: provider.woEffortList,
                     );
             },
           ),

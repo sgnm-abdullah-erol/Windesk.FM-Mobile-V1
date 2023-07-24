@@ -10,6 +10,9 @@ class DataTableAccordion extends StatelessWidget {
   final List<String> labelList;
   final dynamic data;
 
+  final String _nonKnownName = 'Bilinmiyor';
+  final String _noEffortType = 'Çalışma Türü Belirtilmemiş';
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -34,9 +37,9 @@ class DataTableAccordion extends StatelessWidget {
           for (var i = 0; i < (data == null ? 0 : data!.length); i++) ...{
             DataRow(cells: [
               DataCell(Text(data[i].id.toString(), style: _cellTextStyle())),
-              DataCell(Text(data[i].value.effortType.toString(), style: _cellTextStyle())),
-              DataCell(Text(data[i].value.user.toString(), style: _cellTextStyle())),
-              DataCell(Text(data[i].value.effortDuration.toString(), style: _cellTextStyle())),
+              DataCell(Text(data[i].effortType ?? _noEffortType, style: _cellTextStyle())),
+              DataCell(Text(data[i].user ?? _nonKnownName, style: _cellTextStyle())),
+              DataCell(Text(data[i].effortDuration.toString(), style: _cellTextStyle())),
               DataCell(
                 IconButton(
                   onPressed: () => delete(),

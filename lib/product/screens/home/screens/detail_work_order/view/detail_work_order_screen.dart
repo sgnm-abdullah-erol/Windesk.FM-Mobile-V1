@@ -56,7 +56,6 @@ class _DetailWorkOrderScreenState extends State<DetailWorkOrderScreen> {
                         children: [
                           CustomWorkSpaceDetailCard(workSpaceDetail: widget.workSpaceDetail),
                           // WoSummary(workSpaceDetail: widget.workSpaceDetail),
-                          const SizedBox(height: 20),
                           (widget.workSpaceDetail.task?.user ?? '') == context.read<GlobalProvider>().userName
                               ? const SizedBox(height: 25)
                               : const SizedBox(height: 25),
