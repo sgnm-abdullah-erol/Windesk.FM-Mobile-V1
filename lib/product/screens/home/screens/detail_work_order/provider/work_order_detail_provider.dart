@@ -13,6 +13,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
   final WorkSpaceServiceRepositoryImpl workSpaceService = Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
 
+  // for page
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
@@ -44,6 +45,80 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     _userClickedDocumants = true;
   }
 
+  // for efforts
+  bool _effortAdded = false;
+  bool get effortAdded => _effortAdded;
+
+  String _startEffortDate = '';
+  String get startEffortDate => _startEffortDate;
+
+  String _endEffortDate = '';
+  String get endEffortDate => _endEffortDate;
+
+  String _effortDuration = '';
+  String get effortDuration => _effortDuration;
+
+  String _effortType = '';
+  String get effortType => _effortType;
+
+  String _effortDescription = '';
+  String get effortDescription => _effortDescription;
+
+  void setEffortDescription(String value) {
+    _effortDescription = value;
+  }
+
+  void setEffortType(String value) {
+    _effortType = value;
+  }
+
+  void setEffortDuration(String value) {
+    _effortDuration = value;
+  }
+
+  void setStartEffortDate(String value) {
+    _startEffortDate = value;
+  }
+
+  void setEndEffortDate(String value) {
+    _endEffortDate = value;
+  }
+
+  void addEffort() async {
+    // service add effort
+    String userToken = await SharedManager().getString(SharedEnum.userToken);
+
+    _isLoading = true;
+    notifyListeners();
+
+    final result = await workSpaceService.addWorkOrderEffort(
+      detail.task?.id.toString() ?? '',
+      userToken,
+      _effortDescription,
+      _effortDuration,
+      _startEffortDate,
+      _endEffortDate,
+      _effortType,
+    );
+
+    result.fold(
+      (l) => {
+        _effortAdded = true,
+      },
+      (r) => {
+        _effortAdded = false,
+      },
+    );
+
+    _isLoading = false;
+    notifyListeners();
+
+    Future.delayed(const Duration(seconds: 2), () {
+      _effortAdded = false;
+    });
+  }
+
+  // work space effort list
   List<WorkSpaceEfforts>? _woEffortList;
   List<WorkSpaceEfforts>? get woEffortList => _woEffortList;
 

@@ -44,12 +44,12 @@ class AddEffortsAccordion extends StatelessWidget {
             ShowModalBottomSheet().show(
               context,
               AddEffortsModalBottomSheet(
-                selectedStartDate: () {},
-                selectedEndtDate: () {},
-                selectedEffortDuration: () {},
-                selectedEffortType: () {},
-                selectedDescription: () {},
-                addEffortFunction: () {},
+                selectedStartDate: provider.setStartEffortDate,
+                selectedEndtDate: provider.setEndEffortDate,
+                selectedEffortDuration: provider.setEffortDuration,
+                selectedEffortType: provider.setEffortType,
+                selectedDescription: provider.setEffortDescription,
+                addEffortFunction: provider.addEffort,
               ),
             );
           },

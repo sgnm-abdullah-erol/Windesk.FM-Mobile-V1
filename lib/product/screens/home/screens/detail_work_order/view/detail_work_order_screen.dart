@@ -1,13 +1,14 @@
 import 'package:accordion/accordion.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../feature/components/appbar/custom_main_appbar.dart';
+import '../../../../../../feature/components/snackBar/snackbar.dart';
 import '../../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../../feature/constants/other/app_strings.dart';
 import '../../../../../../feature/constants/other/colors.dart';
+import '../../../../../../feature/constants/other/snackbar_strings.dart';
 import '../../../../../../feature/global_providers/global_provider.dart';
 import '../../../../../../feature/models/work_space/work_space_detail.dart';
 import '../../work_order_list/widgets/custom_base_accordion.dart';
@@ -20,33 +21,31 @@ import '../widgets/custom_work_space_detail_card.dart';
 import '../widgets/request_material_accordion.dart';
 
 @RoutePage()
-class DetailWorkOrderScreen extends StatefulWidget {
+class DetailWorkOrderScreen extends StatelessWidget {
   const DetailWorkOrderScreen({super.key, required this.workSpaceDetail});
+
+  static final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   final WorkSpaceDetail workSpaceDetail;
 
-  @override
-  State<DetailWorkOrderScreen> createState() => _DetailWorkOrderScreenState();
-}
-
-class _DetailWorkOrderScreenState extends State<DetailWorkOrderScreen> {
-  @override
-  void initState() {
-    SchedulerBinding.instance.addPostFrameCallback((_) {});
-    super.initState();
-  }
+  final String message = 'Effor eklenmiştir.';
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => WorkOrderDetailServiceProvider()),
-        ChangeNotifierProvider(create: (context) => WorkOrderDetailProvider(detail: widget.workSpaceDetail)),
+        ChangeNotifierProvider(create: (context) => WorkOrderDetailProvider(detail: workSpaceDetail)),
       ],
       child: Consumer<WorkOrderDetailProvider>(
         builder: (context, WorkOrderDetailProvider woDetailProvider, child) {
+          if (woDetailProvider.effortAdded) {
+            snackBar(context, SnackbarStrings.effortAdded, 'success');
+          }
+
           return Scaffold(
-            appBar: CustomMainAppbar(title: Text('WO - ${widget.workSpaceDetail.task?.id.toString() ?? ''}'), returnBack: true, elevation: 4),
+            key: _scaffoldKey,
+            appBar: CustomMainAppbar(title: Text('WO - ${workSpaceDetail.task?.id.toString() ?? ''}'), returnBack: true, elevation: 4),
             body: context.read<WorkOrderDetailProvider>().isLoading
                 ? const CustomLoadingIndicator()
                 : SingleChildScrollView(
@@ -54,9 +53,9 @@ class _DetailWorkOrderScreenState extends State<DetailWorkOrderScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
                       child: Column(
                         children: [
-                          CustomWorkSpaceDetailCard(workSpaceDetail: widget.workSpaceDetail),
+                          CustomWorkSpaceDetailCard(workSpaceDetail: workSpaceDetail),
                           // WoSummary(workSpaceDetail: widget.workSpaceDetail),
-                          (widget.workSpaceDetail.task?.user ?? '') == context.read<GlobalProvider>().userName
+                          (workSpaceDetail.task?.user ?? '') == context.read<GlobalProvider>().userName
                               ? const SizedBox(height: 25)
                               : const SizedBox(height: 25),
                           //_startEndButton(),

@@ -23,4 +23,14 @@ abstract class WorkSpaceServiceRepository {
   Future<Either<WorkSpaceDetail, CustomServiceException>> getWorkOrderWithSearch(String workOrderCode, String token);
 
   Future<Either<List<WorkSpaceEfforts>, CustomServiceException>> getWorkOrderEfforts(String taskId, String token);
+
+  Future<Either<bool, CustomServiceException>> addWorkOrderEffort(
+    String taskId,
+    String token,
+    String description,
+    String duration,
+    String startDate,
+    String endDate,
+    String effortType,
+  );
 }

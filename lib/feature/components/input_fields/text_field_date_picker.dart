@@ -34,6 +34,7 @@ class _TextFieldDatePickerState extends State<TextFieldDatePicker> {
             _controller.text = date.toString().split(' ')[0];
           });
         }
+        widget.onTap(_controller.text);
       },
     );
   }
