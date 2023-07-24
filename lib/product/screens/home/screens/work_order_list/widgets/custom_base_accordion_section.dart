@@ -1,13 +1,21 @@
 import 'package:accordion/accordion_section.dart';
 import 'package:flutter/material.dart';
+import 'package:vm_fm_4/feature/constants/other/colors.dart';
 
 class CustomBaseAccordionSections {
   AccordionSection baseAccordionSection(String header, String taskCount) {
     return AccordionSection(
-      onOpenSection: () {},
+      headerBackgroundColor: APPColors.Accent.black,
       rightIcon: const Icon(Icons.arrow_drop_down, size: 0),
+      onOpenSection: () {
+        print('onOpenSection $header');
+      },
       header: Row(
-        children: [Text(header), const Spacer(), Text(taskCount)],
+        children: [
+          Text(header, style: TextStyle(color: APPColors.Main.white, letterSpacing: 1.5)),
+          const Spacer(),
+          Text(taskCount, style: TextStyle(color: APPColors.Main.white)),
+        ],
       ),
       content: const SizedBox(),
     );
