@@ -1,11 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:vm_fm_4/feature/exceptions/custom_service_exceptions.dart';
-import 'package:vm_fm_4/feature/models/work_space/work_space_appendings.dart';
-import 'package:vm_fm_4/feature/models/work_space/work_space_detail.dart';
 
+import '../../../exceptions/custom_service_exceptions.dart';
 import '../../../injection.dart';
 import '../../../log/log_manager.dart';
+import '../../../models/work_space/work_space_appendings.dart';
+import '../../../models/work_space/work_space_detail.dart';
+import '../../../models/work_space/work_space_efforts.dart';
 import '../../../models/work_space/work_space_my_group_demand_list.dart';
 import '../../service_manager.dart';
 
@@ -21,4 +22,5 @@ abstract class WorkSpaceServiceRepository {
 
   Future<Either<WorkSpaceDetail, CustomServiceException>> getWorkOrderWithSearch(String workOrderCode, String token);
 
+  Future<Either<List<WorkSpaceEfforts>, CustomServiceException>> getWorkOrderEfforts(String taskId, String token);
 }

@@ -18,6 +18,8 @@ class AppIcons {
 
   // INPUT ACTION ICONS
   static const IconData qr = Icons.qr_code;
+  static const IconData calendarToday = Icons.calendar_today;
+  static const IconData time = Icons.access_time;
 
   // DROPDOWN INPUT ICON
   static const IconData arrowDown = Icons.keyboard_arrow_down;

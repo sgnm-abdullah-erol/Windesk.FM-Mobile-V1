@@ -1,12 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
-import 'package:vm_fm_4/feature/exceptions/custom_service_exceptions.dart';
-import 'package:vm_fm_4/feature/models/auth_models/check_access_token_model.dart';
-
-import 'package:vm_fm_4/feature/models/auth_models/login_model.dart';
-
 import '../../../enums/service_response_status_enums.dart';
+import '../../../exceptions/custom_service_exceptions.dart';
+import '../../../models/auth_models/check_access_token_model.dart';
+import '../../../models/auth_models/login_model.dart';
 import 'auth_service_repository.dart';
 
 class AuthServiceRepositoryImpl extends AuthServiceRepository {
@@ -26,8 +24,6 @@ class AuthServiceRepositoryImpl extends AuthServiceRepository {
 
       LoginModel loginModel = LoginModel.fromJson(data);
 
-      super.logger.i(loginModel);
-
       return Left(loginModel);
     } catch (error) {
       super.logger.e(error.toString());
@@ -37,7 +33,7 @@ class AuthServiceRepositoryImpl extends AuthServiceRepository {
 
   @override
   Future<Either<bool, CustomServiceException>> logout(String refreshToken, String token) async {
-    String url = 'http://10.0.2.2:3012/user/logout';
+    String url = 'http://localhost:3012/user/logout';
 
     try {
       final response = await super.dio.post(
@@ -52,9 +48,7 @@ class AuthServiceRepositoryImpl extends AuthServiceRepository {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
-        super.logger.i(data);
         if (data[ServiceResponseStatusEnums.success.rawText] == true) {
-          super.logger.i('logout success');
           return const Left(true);
         } else {
           return Right(CustomServiceException(message: CustomServiceMessages.logoutError, statusCode: '400'));

@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/components/buttons/custom_half_buttons.dart';
-import 'package:vm_fm_4/feature/components/modal_alert/wo_wait_accept_modal_alert.dart';
-import 'package:vm_fm_4/feature/components/modal_alert/wo_wait_reject_modal_alert.dart';
-import 'package:vm_fm_4/feature/components/model_bottom_sheet/wo_wait_task_accept_moddal_bottom_sheet.dart';
-import 'package:vm_fm_4/feature/components/model_bottom_sheet/wo_wait_task_reject_modal_bottom_sheet.dart';
-import 'package:vm_fm_4/feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
-import 'package:vm_fm_4/feature/constants/other/colors.dart';
-import 'package:vm_fm_4/feature/constants/style/border_radius.dart';
-import 'package:vm_fm_4/feature/constants/style/font_sizes.dart';
 
+import '../../../../../../feature/components/buttons/custom_half_buttons.dart';
 import '../../../../../../feature/components/dividers/custom_wo_summary_divider.dart';
+import '../../../../../../feature/components/modal_alert/wo_wait_accept_modal_alert.dart';
+import '../../../../../../feature/components/modal_alert/wo_wait_reject_modal_alert.dart';
 import '../../../../../../feature/constants/other/app_strings.dart';
+import '../../../../../../feature/constants/other/colors.dart';
+import '../../../../../../feature/constants/style/border_radius.dart';
+import '../../../../../../feature/constants/style/font_sizes.dart';
 import '../../../../../../feature/models/work_space/work_space_appendings.dart';
 
 class CustomPendiksCard extends StatelessWidget {
@@ -24,8 +21,7 @@ class CustomPendiksCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: Card(
-        shape: RoundedRectangleBorder(
-            borderRadius: CustomBorderRadius.mediumBorderRadius),
+        shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.mediumBorderRadius),
         elevation: 8,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 24.0),
@@ -33,15 +29,11 @@ class CustomPendiksCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                  'Wo - ${workSpacePendiks.task?.id ?? ''} -${workSpacePendiks.task?.name ?? ''}',
-                  style: _textStyle()),
+              Text('Wo - ${workSpacePendiks.task?.id ?? ''} -${workSpacePendiks.task?.name ?? ''}', style: _textStyle()),
               const CustomWoSummaryDivider(),
-              Text(workSpacePendiks.task?.description ?? '',
-                  style: _textStyle()),
+              Text(workSpacePendiks.task?.description ?? '', style: _textStyle()),
               const CustomWoSummaryDivider(),
-              Text(workSpacePendiks.task?.createdAt.toString() ?? '',
-                  style: _textStyle()),
+              Text(workSpacePendiks.task?.createdAt.toString() ?? '', style: _textStyle()),
               const CustomWoSummaryDivider(),
               const SizedBox(height: 10),
               Center(
@@ -49,16 +41,10 @@ class CustomPendiksCard extends StatelessWidget {
                   leftTitle: const Text(AppStrings.reject),
                   rightTitle: const Text(AppStrings.approve),
                   leftOnPressed: () {
-                    WoWaitRejectModalAlert().showAlertDialog(
-                        context,
-                        'textData',
-                        'inputArrayLabelText',
-                        ['inputArray', 'inputArray2'],
-                        test);
+                    WoWaitRejectModalAlert().showAlertDialog(context, 'textData', 'inputArrayLabelText', ['inputArray', 'inputArray2'], test);
                   },
                   rightOnPressed: () {
-                    WoWaitAcceptModalAlert()
-                        .showAlertDialog(context, 'textData');
+                    WoWaitAcceptModalAlert().showAlertDialog(context, 'textData');
                   },
                 ),
               ),

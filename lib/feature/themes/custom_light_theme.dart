@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/constants/other/colors.dart';
+
+import '../constants/other/colors.dart';
+import '../constants/style/font_sizes.dart';
 
 class CustomLightTheme {
   late final ThemeData lightTheme;
@@ -49,7 +51,45 @@ class CustomLightTheme {
           ),
         ),
       ),
-      textTheme: const TextTheme(),
+      textTheme: TextTheme(
+        // create basic text theme
+        bodyLarge: TextStyle(
+          color: APPColors.Main.black,
+          fontSize: FontSizes.caption + 1,
+          fontWeight: FontWeight.w600,
+          overflow: TextOverflow.ellipsis,
+        ),
+        bodyMedium: TextStyle(
+          color: APPColors.Main.black,
+          fontSize: FontSizes.caption + 1,
+          fontWeight: FontWeight.w600,
+          overflow: TextOverflow.ellipsis,
+        ),
+        bodySmall: TextStyle(
+          color: APPColors.Main.black,
+          fontSize: FontSizes.overline,
+          fontWeight: FontWeight.w600,
+          overflow: TextOverflow.ellipsis,
+        ),
+        displayLarge: TextStyle(
+          color: APPColors.Main.black,
+          fontSize: FontSizes.body,
+          fontWeight: FontWeight.w600,
+          overflow: TextOverflow.ellipsis,
+        ),
+        displayMedium: TextStyle(
+          color: APPColors.Main.black,
+          fontSize: FontSizes.caption + 1,
+          fontWeight: FontWeight.w600,
+          overflow: TextOverflow.ellipsis,
+        ),
+        displaySmall: TextStyle(
+          color: APPColors.Main.black,
+          fontSize: FontSizes.caption + 1,
+          fontWeight: FontWeight.w600,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ),
     );
   }
 }

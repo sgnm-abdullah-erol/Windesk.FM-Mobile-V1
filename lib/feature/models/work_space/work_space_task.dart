@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'work_space_created_by.dart';
 import 'work_space_priority.dart';
+
 part 'generator/work_space_task.g.dart';
 
 @JsonSerializable()
@@ -26,13 +27,15 @@ class Task extends Equatable {
   final CreatedBy? requestedBy;
   final CreatedBy? requestedSpaces;
   final CreatedBy? createdBy;
+  final Priority? woCategory;
   final Priority? requestType;
   final Priority? priority;
   final String? userFirstNameLastName;
   final String? user;
   final String? userId;
 
-  const Task({
+  const Task(
+    this.woCategory, {
     this.owner,
     this.canDisplay,
     this.dueDate,

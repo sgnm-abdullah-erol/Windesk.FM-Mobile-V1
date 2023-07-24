@@ -3,9 +3,10 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+
 import '../../constants/other/app_strings.dart';
-import '../buttons/custom_half_buttons.dart';
 import '../../constants/style/border_radius.dart';
+import '../buttons/custom_half_buttons.dart';
 
 class AddPhotoModalBottomSheet extends StatelessWidget {
   const AddPhotoModalBottomSheet(this.saveImageFunction, this.saveDescFunction, this.addPhotoFunction, this.hintDescText, {super.key});

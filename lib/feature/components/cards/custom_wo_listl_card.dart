@@ -6,6 +6,7 @@ import 'package:vm_fm_4/feature/constants/style/border_radius.dart';
 import 'package:vm_fm_4/feature/constants/style/font_sizes.dart';
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 import 'package:vm_fm_4/feature/extensions/date_string_extension.dart';
+import 'package:vm_fm_4/feature/models/work_space/work_space_detail.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_list/provider/work_order_list_provider.dart';
 
 import '../../constants/other/app_strings.dart';
@@ -14,10 +15,9 @@ import '../../constants/style/box_decorations.dart';
 import '../../l10n/locale_keys.g.dart';
 import '../../route/app_route.gr.dart';
 import '../buttons/custom_half_buttons.dart';
-import '../dividers/custom_wo_summary_divider.dart';
 
 class CustomWoDetailCard extends StatelessWidget {
-  final dynamic workSpaceDetail;
+  final WorkSpaceDetail workSpaceDetail;
   final WorkOrderListProvider provider;
   final bool isButtonVisible;
 
@@ -28,23 +28,21 @@ class CustomWoDetailCard extends StatelessWidget {
     required this.provider,
   }) : super(key: key);
 
+  final double _elevation = 4;
+  final String _labelStartDate = 'Açılma Tarihi:';
+  final String _labelUpdatedDate = 'Güncellenme Tarihi:';
+  final String _labelEndDate = 'Bitiş Tarihi:';
+
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: () => context.router.push(DetailWorkOrderScreen(workSpaceDetail: workSpaceDetail)),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: CustomBorderRadius.mediumBorderRadius,
-            side: BorderSide(color: APPColors.Secondary.black, width: 0.2),
-          ),
-          elevation: 8.0,
-          child: Container(
-            width: context.width / 1.2,
-            decoration: WoListCardDecoration(),
-            child: _content(context),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.mediumBorderRadius),
+          elevation: _elevation,
+          child: Container(width: context.width / 1.2, decoration: WoListCardDecoration(), child: _content(context)),
         ),
       ),
     );
@@ -57,14 +55,67 @@ class CustomWoDetailCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          codeAndStatusWidget(context),
-          Divider(height: 10, thickness: 0.5, color: APPColors.Secondary.black),
-          woListText(workSpaceDetail.task?.description ?? LocaleKeys.noDescription),
-          woListText(DateExtension().splitString(workSpaceDetail.calendar?.start.toString() ?? '') ?? LocaleKeys.noDate),
-          woListText(DateExtension().splitString(workSpaceDetail.calendar?.end.toString() ?? '') ?? LocaleKeys.noDate),
+          _codeAndStatusWidget(context),
+          SizedBox(height: 5),
+          _woListText(workSpaceDetail.task?.name ?? LocaleKeys.noName),
+          _divider(),
+          SizedBox(height: 5),
+          _woLocationText(),
+          _divider(),
+          SizedBox(height: 5),
+          _woListText(workSpaceDetail.task?.description ?? LocaleKeys.noDescription),
+          _divider(),
+          SizedBox(height: 5),
+          _dateText(_labelStartDate, workSpaceDetail.calendar?.start.toString() ?? '', true),
+          SizedBox(height: 5),
+          _dateText(_labelUpdatedDate, workSpaceDetail.task?.updatedAt.toString() ?? '', false),
+          SizedBox(height: 5),
+          _dateText(_labelEndDate, workSpaceDetail.calendar?.end.toString() ?? '', true),
+          SizedBox(height: 5),
           _checkButtonVisibility()
         ],
       ),
+    );
+  }
+
+  Divider _divider() => Divider(height: 10, thickness: 0.5, color: APPColors.Secondary.black);
+
+  Widget _dateText(String label, String date, bool giveFormat) {
+    var textStyle = TextStyle(
+      color: APPColors.Secondary.black,
+      fontWeight: FontWeight.w500,
+      fontSize: FontSizes.caption + 1,
+    );
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          label,
+          style: textStyle,
+        ),
+        Text(
+          giveFormat ? date.splitString(date) : date,
+          style: textStyle,
+        )
+      ],
+    );
+  }
+
+  Column _woLocationText() {
+    var textStyle = TextStyle(color: APPColors.Secondary.black, fontWeight: FontWeight.w500, fontSize: FontSizes.caption + 1);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          workSpaceDetail.task?.woCategory?.name ?? '',
+          style: textStyle,
+        ),
+        SizedBox(height: 5),
+        Text(
+          workSpaceDetail.task?.requestType?.name ?? '',
+          style: textStyle,
+        ),
+      ],
     );
   }
 
@@ -81,7 +132,7 @@ class CustomWoDetailCard extends StatelessWidget {
         : Container();
   }
 
-  Flexible codeAndStatusWidget(BuildContext context) {
+  Flexible _codeAndStatusWidget(BuildContext context) {
     return Flexible(
       child: SizedBox(
         width: context.width / 1.2,
@@ -91,7 +142,7 @@ class CustomWoDetailCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(2.0),
               child: Text(
-                'WO${workSpaceDetail.task?.id.toString() ?? LocaleKeys.noCode} ' ' ${workSpaceDetail.task?.name ?? LocaleKeys.noName} ',
+                'WO ${workSpaceDetail.task?.id.toString() ?? LocaleKeys.noCode}',
                 softWrap: true,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(color: APPColors.Secondary.black, fontSize: 15, fontFamily: "Poppins", fontWeight: FontWeight.bold),
@@ -110,7 +161,7 @@ class CustomWoDetailCard extends StatelessWidget {
     );
   }
 
-  Column woListText(header) {
+  Column _woListText(header) {
     return Column(
       children: [
         Row(
@@ -118,11 +169,10 @@ class CustomWoDetailCard extends StatelessWidget {
           children: [
             Expanded(
               flex: 2,
-              child: Text(header, style: TextStyle(color: APPColors.Secondary.black, fontWeight: FontWeight.w500, fontSize: FontSizes.caption)),
+              child: Text(header, style: TextStyle(color: APPColors.Secondary.black, fontWeight: FontWeight.w500, fontSize: FontSizes.caption + 1)),
             ),
           ],
         ),
-        CustomWoSummaryDivider(),
       ],
     );
   }

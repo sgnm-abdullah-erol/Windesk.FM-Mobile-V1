@@ -1,13 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import '../buttons/custom_circular_with_text_button.dart';
-import '../buttons/custom_elevated_button_with_icon.dart';
-import '../../constants/other/colors.dart';
-import '../input_fields/dropdown_input_fields.dart';
+
 import '../../constants/other/app_icons.dart';
 import '../../constants/other/app_strings.dart';
+import '../../constants/other/colors.dart';
 import '../../extensions/context_extension.dart';
+import '../buttons/custom_circular_with_text_button.dart';
+import '../buttons/custom_elevated_button_with_icon.dart';
 import '../buttons/custom_half_buttons.dart';
+import '../input_fields/dropdown_input_fields.dart';
 
 class IssueFilterModalBottomSheet extends StatelessWidget {
   const IssueFilterModalBottomSheet({
@@ -51,17 +52,8 @@ class IssueFilterModalBottomSheet extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
         child: Column(
           children: [
-            _inputS(
-                context,
-                stateList,
-                buildList,
-                floorList,
-                wingList,
-                selectStateFunction,
-                selectBuildFunction,
-                selectFloorFunction,
-                selectWingFunction,
-                taskForMeFunction),
+            _inputS(context, stateList, buildList, floorList, wingList, selectStateFunction, selectBuildFunction, selectFloorFunction,
+                selectWingFunction, taskForMeFunction),
             _selectedParamS(selectedParamList, selectedParamListDeleteItem),
             _buttons(context, filterStartFunction),
           ],
@@ -70,17 +62,8 @@ class IssueFilterModalBottomSheet extends StatelessWidget {
     );
   }
 
-  Expanded _inputS(
-      context,
-      stateList,
-      buildList,
-      floorList,
-      wingList,
-      selectStateFunction,
-      selectBuildFunction,
-      selectFloorFunction,
-      selectWingFunction,
-      taskForMeFunction) {
+  Expanded _inputS(context, stateList, buildList, floorList, wingList, selectStateFunction, selectBuildFunction, selectFloorFunction,
+      selectWingFunction, taskForMeFunction) {
     return Expanded(
       flex: 60,
       child: Column(
@@ -90,38 +73,23 @@ class IssueFilterModalBottomSheet extends StatelessWidget {
               child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: CustomCircularWithTextButton(
-                bgColor: APPColors.Login.blue,
-                onPressFunction: taskForMeFunction,
-                textButton: AppStrings.taskForMe,
-                textColor: APPColors.Main.white),
+                bgColor: APPColors.Login.blue, onPressFunction: taskForMeFunction, textButton: AppStrings.taskForMe, textColor: APPColors.Main.white),
           )),
           Expanded(
             child: DropDownInputFields(
-                labelText: AppStrings.state,
-                onChangedFunction: selectStateFunction,
-                rightIcon: AppIcons.arrowDown,
-                dropDownArray: stateList),
+                labelText: AppStrings.state, onChangedFunction: selectStateFunction, rightIcon: AppIcons.arrowDown, dropDownArray: stateList),
           ),
           Expanded(
             child: DropDownInputFields(
-                labelText: AppStrings.build,
-                onChangedFunction: selectBuildFunction,
-                rightIcon: AppIcons.arrowDown,
-                dropDownArray: buildList),
+                labelText: AppStrings.build, onChangedFunction: selectBuildFunction, rightIcon: AppIcons.arrowDown, dropDownArray: buildList),
           ),
           Expanded(
             child: DropDownInputFields(
-                labelText: AppStrings.floor,
-                onChangedFunction: selectFloorFunction,
-                rightIcon: AppIcons.arrowDown,
-                dropDownArray: floorList),
+                labelText: AppStrings.floor, onChangedFunction: selectFloorFunction, rightIcon: AppIcons.arrowDown, dropDownArray: floorList),
           ),
           Expanded(
             child: DropDownInputFields(
-                labelText: AppStrings.wing,
-                onChangedFunction: selectWingFunction,
-                rightIcon: AppIcons.arrowDown,
-                dropDownArray: wingList),
+                labelText: AppStrings.wing, onChangedFunction: selectWingFunction, rightIcon: AppIcons.arrowDown, dropDownArray: wingList),
           ),
         ],
       ),
@@ -170,7 +138,6 @@ class IssueFilterModalBottomSheet extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-        .add(DiagnosticsProperty<Function>('saveEffort', filterStartFunction));
+    properties.add(DiagnosticsProperty<Function>('saveEffort', filterStartFunction));
   }
 }

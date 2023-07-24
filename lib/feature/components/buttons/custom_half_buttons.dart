@@ -29,7 +29,7 @@ class CustomHalfButtons extends StatelessWidget {
     return SizedBox(
       width: buttonsWidth ?? context.width * 0.75,
       child: Row(
-        children: [_leftButton(), _rightButton()],
+        children: [_leftButton(), const SizedBox(width: 10), _rightButton()],
       ),
     );
   }

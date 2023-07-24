@@ -1,11 +1,12 @@
 import 'package:accordion/accordion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+
+import '../../../../../../feature/constants/other/colors.dart';
+import '../provider/work_order_list_provider.dart';
 import '../widgets/custom_base_accordion.dart';
 import '../widgets/custom_base_accordion_section.dart';
 import '../widgets/custom_loading_indicator.dart';
-
-import '../provider/work_order_list_provider.dart';
 
 class MyGroupWorkOrders extends StatefulWidget {
   const MyGroupWorkOrders({super.key, required this.provider});
@@ -55,19 +56,32 @@ class _MyGroupWorkOrdersState extends State<MyGroupWorkOrders> {
       },
       header: Row(
         children: [
-          Text(widget.provider.workSpaceMyGroupDemandList?.children?[index].name ?? ''),
+          InkWell(
+            onTap: () {},
+            child: Text(
+              widget.provider.workSpaceMyGroupDemandList?.children?[index].name ?? '',
+              style: TextStyle(color: APPColors.Main.white, letterSpacing: 1.5),
+            ),
+          ),
           const Spacer(),
-          Text(widget.provider.workSpaceMyGroupDemandList?.children?[index].taskCount.toString() ?? ''),
+          Text(
+            widget.provider.workSpaceMyGroupDemandList?.children?[index].taskCount.toString() ?? '',
+            style: TextStyle(color: APPColors.Main.white),
+          ),
         ],
       ),
-      content: Accordion(maxOpenSections: 0, headerBackgroundColorOpened: Colors.black54, children: [
-        for (int i = 0; i < (widget.provider.workSpaceMyGroupDemandList?.children?[index].children?.length.toInt() ?? 0); i++) ...{
-          CustomBaseAccordionSections().baseAccordionSection(
-            widget.provider.workSpaceMyGroupDemandList?.children?[index].children?[i].name ?? '',
-            widget.provider.workSpaceMyGroupDemandList?.children?[index].children?[i].taskCount.toString() ?? '',
-          ),
-        }
-      ]),
+      content: Accordion(
+        maxOpenSections: 0,
+        headerBackgroundColorOpened: APPColors.Accent.black,
+        children: [
+          for (int i = 0; i < (widget.provider.workSpaceMyGroupDemandList?.children?[index].children?.length.toInt() ?? 0); i++) ...{
+            CustomBaseAccordionSections().baseAccordionSection(
+              widget.provider.workSpaceMyGroupDemandList?.children?[index].children?[i].name ?? '',
+              widget.provider.workSpaceMyGroupDemandList?.children?[index].children?[i].taskCount.toString() ?? '',
+            ),
+          }
+        ],
+      ),
     );
   }
 }
