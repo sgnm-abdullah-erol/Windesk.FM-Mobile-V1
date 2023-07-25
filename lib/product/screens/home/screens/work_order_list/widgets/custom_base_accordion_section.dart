@@ -12,7 +12,7 @@ class CustomBaseAccordionSections {
       rightIcon: const Icon(Icons.arrow_drop_down, size: 0),
       onOpenSection: () {
         if (int.parse(taskCount) > 0) {
-          context.router.push(WorkOrderGroupDetailScreen(requestCode: requestId));
+          context.router.push(WorkOrderGroupDetailScreen(requestCode: requestId, appTitle: header));
         }
       },
       header: Row(

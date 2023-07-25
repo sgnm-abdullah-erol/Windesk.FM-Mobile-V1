@@ -15,5 +15,5 @@ State _$StateFromJson(Map<String, dynamic> json) => State(
       key: json['key'] as String?,
       id: json['id'] as int?,
       labels: (json['labels'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      nextStates: (json['nextStates'] as List<dynamic>?)!.map((e) => NextState.fromJson(e as Map<String, dynamic>)).toList(),
+      nextStates: (json['nextStates'] as List<dynamic>?)?.map((e) => NextState.fromJson(e as Map<String, dynamic>)).toList(),
     );

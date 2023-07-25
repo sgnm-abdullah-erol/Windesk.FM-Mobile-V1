@@ -39,7 +39,6 @@ class _MyWorkOrdersState extends State<MyWorkOrders> {
                 return CustomWoDetailCard(
                   workSpaceDetail: widget.provider.myWorkSpaceDetails[index],
                   isButtonVisible: false,
-                  provider: widget.provider,
                 );
               },
             ),

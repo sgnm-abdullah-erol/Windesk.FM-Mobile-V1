@@ -1,16 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'wo_create_location_children_model.dart';
+part of '../wo_create_location_children_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-WoCreateLocationChildrenModel _$WoCreateLocationChildrenModelFromJson(
-        Map<String, dynamic> json) =>
-    WoCreateLocationChildrenModel(
-      labels:
-          (json['labels'] as List<dynamic>?)?.map((e) => e as String).toList(),
+WoCreateLocationChildrenModel _$WoCreateLocationChildrenModelFromJson(Map<String, dynamic> json) => WoCreateLocationChildrenModel(
+      labels: (json['labels'] as List<dynamic>?)?.map((e) => e as String).toList(),
       contractor: json['contractor'] as String?,
       code: json['code'] as String?,
       externalSiteObject: json['externalSiteObject'] as String?,
@@ -47,9 +44,7 @@ WoCreateLocationChildrenModel _$WoCreateLocationChildrenModelFromJson(
       leaf: json['leaf'] as bool?,
     );
 
-Map<String, dynamic> _$WoCreateLocationChildrenModelToJson(
-        WoCreateLocationChildrenModel instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$WoCreateLocationChildrenModelToJson(WoCreateLocationChildrenModel instance) => <String, dynamic>{
       'labels': instance.labels,
       'contractor': instance.contractor,
       'code': instance.code,

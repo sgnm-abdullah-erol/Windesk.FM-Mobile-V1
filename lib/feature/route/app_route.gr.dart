@@ -88,6 +88,7 @@ abstract class $AppRouter extends _i15.RootStackRouter {
         child: _i6.WorkOrderGroupDetailScreen(
           key: args.key,
           requestCode: args.requestCode,
+          appTitle: args.appTitle,
         ),
       );
     },
@@ -273,12 +274,14 @@ class WorkOrderGroupDetailScreen
   WorkOrderGroupDetailScreen({
     _i16.Key? key,
     required String requestCode,
+    required String appTitle,
     List<_i15.PageRouteInfo>? children,
   }) : super(
           WorkOrderGroupDetailScreen.name,
           args: WorkOrderGroupDetailScreenArgs(
             key: key,
             requestCode: requestCode,
+            appTitle: appTitle,
           ),
           initialChildren: children,
         );
@@ -293,15 +296,18 @@ class WorkOrderGroupDetailScreenArgs {
   const WorkOrderGroupDetailScreenArgs({
     this.key,
     required this.requestCode,
+    required this.appTitle,
   });
 
   final _i16.Key? key;
 
   final String requestCode;
 
+  final String appTitle;
+
   @override
   String toString() {
-    return 'WorkOrderGroupDetailScreenArgs{key: $key, requestCode: $requestCode}';
+    return 'WorkOrderGroupDetailScreenArgs{key: $key, requestCode: $requestCode, appTitle: $appTitle}';
   }
 }
 

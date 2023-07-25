@@ -1,14 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'wo_create_location_model.dart';
+part of '../wo_create_location_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-WoCreateLocationModel _$WoCreateLocationModelFromJson(
-        Map<String, dynamic> json) =>
-    WoCreateLocationModel(
+WoCreateLocationModel _$WoCreateLocationModelFromJson(Map<String, dynamic> json) => WoCreateLocationModel(
       canDisplay: json['canDisplay'] as bool?,
       description: json['description'] as String?,
       nodeType: json['nodeType'] as String?,
@@ -24,15 +22,10 @@ WoCreateLocationModel _$WoCreateLocationModelFromJson(
       updatedAt: json['updatedAt'] as String?,
       id: json['id'] as int?,
       leaf: json['leaf'] as bool?,
-      children: (json['children'] as List<dynamic>?)
-          ?.map((e) =>
-              WoCreateLocationChildrenModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      children: (json['children'] as List<dynamic>?)?.map((e) => WoCreateLocationChildrenModel.fromJson(e as Map<String, dynamic>)).toList(),
     );
 
-Map<String, dynamic> _$WoCreateLocationModelToJson(
-        WoCreateLocationModel instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$WoCreateLocationModelToJson(WoCreateLocationModel instance) => <String, dynamic>{
       'canDisplay': instance.canDisplay,
       'description': instance.description,
       'nodeType': instance.nodeType,
