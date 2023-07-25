@@ -24,6 +24,9 @@ class AddMaterialAccordion extends StatelessWidget {
       children: [
         AccordionSection(
           isOpen: false,
+          contentBorderWidth: 0,
+          contentHorizontalPadding: 0,
+          contentVerticalPadding: 0,
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.add, color: APPColors.Main.white),
           header: Text(AppStrings.addMaterial, style: TextStyle(color: APPColors.Main.white)),

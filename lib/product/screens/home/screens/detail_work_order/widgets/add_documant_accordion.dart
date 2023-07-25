@@ -25,6 +25,9 @@ class AddDocumantAccordion extends StatelessWidget {
       maxOpenSections: 1,
       children: [
         AccordionSection(
+          contentBorderWidth: 0,
+          contentHorizontalPadding: 0,
+          contentVerticalPadding: 0,
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.camera, color: APPColors.Main.white),
           header: Text(AppStrings.addImage, style: TextStyle(color: APPColors.Main.white)),
@@ -35,6 +38,9 @@ class AddDocumantAccordion extends StatelessWidget {
           content: const SizedBox(height: 0),
         ),
         AccordionSection(
+          contentBorderWidth: 0,
+          contentHorizontalPadding: 0,
+          contentVerticalPadding: 0,
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.pictureAsPdf, color: APPColors.Main.white),
           header: Text(AppStrings.addPdf, style: TextStyle(color: APPColors.Main.white)),
