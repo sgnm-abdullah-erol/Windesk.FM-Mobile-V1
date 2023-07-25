@@ -22,6 +22,7 @@ class TextFieldsInput extends StatelessWidget {
         labelText: labelText,
       ),
       onChanged: (inputValue) => onChangedFunction(inputValue),
+      
     );
   }
 }

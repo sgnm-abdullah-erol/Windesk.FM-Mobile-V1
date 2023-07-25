@@ -67,7 +67,10 @@ class _InputButton extends StatelessWidget {
       leftTitle: const Text(AppStrings.cancel),
       rightTitle: const Text(AppStrings.approve),
       leftOnPressed: () => Navigator.pop(context),
-      rightOnPressed: () {},
+      rightOnPressed: () {
+        Navigator.pop(context);
+        onPressed();
+      },
     );
   }
 }
@@ -100,28 +103,28 @@ class _Inputs extends StatelessWidget {
           flex: 10,
           child: TextFieldDatePicker(
             label: _entryDate,
-            onTap: (value) {},
+            onTap: (value) => selectedStartDate(value),
           ),
         ),
         Expanded(
           flex: 10,
           child: TextFieldDatePicker(
             label: _endDate,
-            onTap: (value) {},
+            onTap: (value) => selectedEndDate(value),
           ),
         ),
         Expanded(
           flex: 10,
           child: TextFieldTimePicker(
             label: _efortDuration,
-            onTap: (value) {},
+            onTap: (value) => selectedEffortDuration(value),
           ),
         ),
         Expanded(
           flex: 10,
           child: DropDownInputFields(
             labelText: _efortType,
-            onChangedFunction: (value) {},
+            onChangedFunction: (value) => selectedEffortType(value),
             rightIcon: Icons.arrow_downward,
             dropDownArray: const ['Way', 'Working'],
           ),
@@ -130,7 +133,7 @@ class _Inputs extends StatelessWidget {
           flex: 10,
           child: TextFieldsInputUnderline(
             hintText: 'Açıklama',
-            onChanged: (value) {},
+            onChanged: (value) => selectedDescription(value),
           ),
         )
       ],
