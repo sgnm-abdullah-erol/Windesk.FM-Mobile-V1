@@ -131,6 +131,37 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   }
 
   @override
+  Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getWorkSpaceDetailsByRequestType(String requestId, int page, String token) async {
+    List<WorkSpaceDetail> workSpaceDetailList = [];
+    String url = 'http://localhost:3015/task/mobile/getTasksByRequestType/swagger/$requestId?page=1&limit=10&orderBy=DESC&orderByColumn=updateAt';
+
+    try {
+      final response = await super.dio.get(
+            url,
+            data: {
+              "page": page,
+              "limit": 10,
+            },
+            options: Options(
+              headers: {'authorization': 'Bearer $token'},
+            ),
+          );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = response.data;
+        workSpaceDetailList = WorkSpaceDetail.fromJsonList(data);
+
+        return Left(workSpaceDetailList);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+    }
+  }
+
+  @override
   Future<Either<List<WorkSpaceEfforts>, CustomServiceException>> getWorkSpaceEfforts(String taskId, String token) async {
     List<WorkSpaceEfforts> workSpaceEfforts;
     String url = 'http://10.0.2.2:3015/task/mobile/getEffortsByTaskId/$taskId';

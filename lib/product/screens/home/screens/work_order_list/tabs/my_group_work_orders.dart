@@ -51,9 +51,6 @@ class _MyGroupWorkOrdersState extends State<MyGroupWorkOrders> {
 
   AccordionSection _accordionSection(int index) {
     return AccordionSection(
-      onOpenSection: () {
-        // print('onOpenSection $index');
-      },
       header: Row(
         children: [
           InkWell(
@@ -76,8 +73,10 @@ class _MyGroupWorkOrdersState extends State<MyGroupWorkOrders> {
         children: [
           for (int i = 0; i < (widget.provider.workSpaceMyGroupDemandList?.children?[index].children?.length.toInt() ?? 0); i++) ...{
             CustomBaseAccordionSections().baseAccordionSection(
+              context,
               widget.provider.workSpaceMyGroupDemandList?.children?[index].children?[i].name ?? '',
               widget.provider.workSpaceMyGroupDemandList?.children?[index].children?[i].taskCount.toString() ?? '',
+              widget.provider.workSpaceMyGroupDemandList?.children?[index].children?[i].id.toString() ?? '',
             ),
           }
         ],
