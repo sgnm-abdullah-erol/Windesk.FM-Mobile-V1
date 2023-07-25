@@ -2,6 +2,7 @@ import 'package:accordion/accordion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
+import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/widgets/tables/data_table_accordion_spareparts.dart';
 import '../../../../../../feature/components/model_bottom_sheet/add_material_modal_bottom_sheet.dart';
 import '../../../../../../feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
 
@@ -9,7 +10,6 @@ import '../../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../../feature/constants/other/app_strings.dart';
 import '../../../../../../feature/constants/other/colors.dart';
 import '../provider/work_order_detail_provider.dart';
-import 'data_table_accordion.dart';
 
 class AddMaterialAccordion extends StatelessWidget {
   const AddMaterialAccordion({super.key, required this.provider});
@@ -23,6 +23,7 @@ class AddMaterialAccordion extends StatelessWidget {
       headerBackgroundColorOpened: APPColors.Accent.black,
       children: [
         AccordionSection(
+          isOpen: false,
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.add, color: APPColors.Main.white),
           header: Text(AppStrings.addMaterial, style: TextStyle(color: APPColors.Main.white)),
@@ -41,26 +42,29 @@ class AddMaterialAccordion extends StatelessWidget {
           content: const SizedBox(height: 0),
         ),
         AccordionSection(
+          isOpen: false,
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.warehouse, color: APPColors.Main.white),
           header: Text(AppStrings.addedMaterials, style: TextStyle(color: APPColors.Main.white)),
+          onOpenSection: () {
+            Provider.of<WorkOrderDetailServiceProvider>(context, listen: false).update();
+            provider.userClickedMaterialFunction();
+          },
           content: Consumer<WorkOrderDetailServiceProvider>(
             builder: ((context, value, child) {
               SchedulerBinding.instance.addPostFrameCallback((_) {
                 provider.userClickedMaterial
                     ? value.isMaterialPartsFetched
                         ? null
-                        : value.fetchMaterials()
+                        : value.fetchSpareparts(provider.detail.task?.id.toString() ?? '')
                     : null;
-                value.isMaterialPartsFetched ? null : value.fetchMaterials();
               });
 
               return value.isLoading
                   ? const Center(child: CircularProgressIndicator())
-                  : DataTableAccordion(
+                  : DataTableAccordionSpareparts(
                       delete: () {},
-                      labelList: ['urunler', 'asdasd', 'asdasd', 'asdas', 'asdas'].toList(),
-                      data: provider.woEffortList,
+                      data: value.woSpareparts ?? [],
                     );
             }),
           ),

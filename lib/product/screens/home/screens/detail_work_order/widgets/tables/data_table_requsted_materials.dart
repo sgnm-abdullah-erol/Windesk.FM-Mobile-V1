@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import '../../../../../../feature/constants/other/colors.dart';
 
-import '../../../../../../feature/constants/other/app_icons.dart';
+import '../../../../../../../feature/constants/other/app_icons.dart';
+import '../../../../../../../feature/constants/other/colors.dart';
+import '../../../../../../../feature/models/work_space/work_space_efforts.dart';
 
-class DataTableAccordion extends StatelessWidget {
-  const DataTableAccordion({super.key, required this.delete, required this.data, required this.labelList});
+class DataTableAccordionRequstedMaterials extends StatelessWidget {
+  DataTableAccordionRequstedMaterials({super.key, required this.delete, required this.data});
 
   final Function delete;
-  final List<String> labelList;
-  final dynamic data;
+  final List<String> _labelList = ['id', 'Tip', 'İsim', 'Süre', 'Sil'];
+  final List<WorkSpaceEfforts> data;
 
   final String _nonKnownName = 'Bilinmiyor';
   final String _noEffortType = 'Çalışma Türü Belirtilmemiş';
@@ -23,10 +24,10 @@ class DataTableAccordion extends StatelessWidget {
         showBottomBorder: true,
         horizontalMargin: 0,
         columns: [
-          for (var i = 0; i < labelList.length; i++) ...{
+          for (var i = 0; i < _labelList.length; i++) ...{
             DataColumn(
               label: Text(
-                labelList[i],
+                _labelList[i],
                 style: _cellTextStyle(),
               ),
               numeric: false,
@@ -34,7 +35,7 @@ class DataTableAccordion extends StatelessWidget {
           }
         ],
         rows: [
-          for (var i = 0; i < (data == null ? 0 : data!.length); i++) ...{
+          for (var i = 0; i < (data.length); i++) ...{
             DataRow(cells: [
               DataCell(Text(data[i].id.toString(), style: _cellTextStyle())),
               DataCell(Text(data[i].effortType ?? _noEffortType, style: _cellTextStyle())),

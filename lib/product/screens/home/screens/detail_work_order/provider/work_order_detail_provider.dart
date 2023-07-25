@@ -5,6 +5,7 @@ import '../../../../../../feature/models/work_space/work_space_efforts.dart';
 import '../../../../../../feature/database/shared_manager.dart';
 import '../../../../../../feature/enums/shared_enums.dart';
 import '../../../../../../feature/models/work_space/work_space_detail.dart';
+import '../../../../../../feature/models/work_space/work_space_spareparts.dart';
 import '../../../../../../feature/service/global_services.dart/work_space_service/work_space_service_repository_impl.dart';
 
 class WorkOrderDetailProvider extends ChangeNotifier {
@@ -131,7 +132,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     _isLoading = true;
     _isWorkOrderEffortListFetched = true;
     notifyListeners();
-    final result = await workSpaceService.getWorkOrderEfforts(taskId, userToken);
+    final result = await workSpaceService.getWorkSpaceEfforts(taskId, userToken);
 
     result.fold(
       (l) => {
@@ -151,8 +152,8 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
   bool _isEffortListFetched = false;
   bool get isEffortListFetched => _isEffortListFetched;
 
-  bool _isMaterialPartsFetched = false;
-  bool get isMaterialPartsFetched => _isMaterialPartsFetched;
+  bool _isSparepartsFetched = false;
+  bool get isMaterialPartsFetched => _isSparepartsFetched;
 
   bool _isRequestedListFetched = false;
   bool get isRequestedMaterialListFetched => _isRequestedListFetched;
@@ -166,6 +167,13 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
   List<WorkSpaceEfforts>? _woEffortList;
   List<WorkSpaceEfforts>? get woEffortList => _woEffortList;
 
+  List<WorkSpaceSpareparts>? _woSpareparts;
+  List<WorkSpaceSpareparts>? get woSpareparts => _woSpareparts;
+
+  void update() {
+    notifyListeners();
+  }
+
   void fetchDocumants() {
     _isLoading = true;
     _isDocumantListFetched = true;
@@ -177,15 +185,25 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
     });
   }
 
-  void fetchMaterials() {
+  void fetchSpareparts(String taskId) async {
     _isLoading = true;
-    _isMaterialPartsFetched = true;
+    _isSparepartsFetched = true;
     notifyListeners();
 
-    Future.delayed(const Duration(seconds: 5), () {
-      _isLoading = false;
-      notifyListeners();
-    });
+    String userToken = await SharedManager().getString(SharedEnum.userToken);
+    final result = await workSpaceService.getWorkSpaceSpareparts(taskId, userToken);
+
+    result.fold(
+      (l) => {
+        _woSpareparts = l,
+      },
+      (r) => {
+        _isSparepartsFetched = false,
+      },
+    );
+
+    _isLoading = false;
+    notifyListeners();
   }
 
   void fetchRequestedMaterials() {
@@ -203,10 +221,10 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
     _isLoading = true;
     _isEffortListFetched = true;
 
-    String userToken = await SharedManager().getString(SharedEnum.userToken);
-
     notifyListeners();
-    final result = await workSpaceService.getWorkOrderEfforts(taskId, userToken);
+
+    String userToken = await SharedManager().getString(SharedEnum.userToken);
+    final result = await workSpaceService.getWorkSpaceEfforts(taskId, userToken);
 
     result.fold(
       (l) => {
