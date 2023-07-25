@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:vm_fm_4/feature/models/work_space/work_space_spareparts.dart';
+import 'package:vm_fm_4/feature/models/work_space/work_space_user_inventory.dart';
 
 import '../../../exceptions/custom_service_exceptions.dart';
 import '../../../models/work_space/work_space_appendings.dart';
@@ -271,6 +272,34 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
         workSpaceSpareparts = WorkSpaceSpareparts.fromJsonList(data);
 
         return Left(workSpaceSpareparts);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+      }
+    } catch (e) {
+      super.logger.i(e);
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<WorkSpaceUserInventory, CustomServiceException>> getWorkSpaceUserInventory(String token) async {
+    WorkSpaceUserInventory workSpaceUserInventory;
+    String url = 'http://10.0.2.2:3012/inventory/userInventory';
+
+    try {
+      final response = await super.dio.get(
+            url,
+            data: {},
+            options: Options(
+              headers: {'authorization': 'Bearer $token'},
+            ),
+          );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = response.data;
+        workSpaceUserInventory = WorkSpaceUserInventory.fromJson(data);
+
+        return Left(workSpaceUserInventory);
       } else {
         return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
       }

@@ -31,15 +31,10 @@ class AddMaterialAccordion extends StatelessWidget {
           leftIcon: Icon(AppIcons.add, color: APPColors.Main.white),
           header: Text(AppStrings.addMaterial, style: TextStyle(color: APPColors.Main.white)),
           rightIcon: const Icon(AppIcons.arrowDown, size: 0),
-          onOpenSection: () {
-            //TODO GET WAREHOUSE LIST
+          onOpenSection: () async {
             ShowModalBottomSheet().show(
               context,
-              AddMaterialModalBottomSheet(
-                wareHouseList: {'asd', 'SADSAD'}.toList(),
-                selectAmount: () {},
-                approveButton: () {},
-              ),
+              const AddMaterialModalBottomSheet(),
             );
           },
           content: const SizedBox(height: 0),

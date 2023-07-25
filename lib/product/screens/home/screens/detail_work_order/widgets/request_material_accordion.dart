@@ -34,11 +34,7 @@ class RequestMaterialAccordion extends StatelessWidget {
           onOpenSection: () {
             ShowModalBottomSheet().show(
               context,
-              AddMaterialModalBottomSheet(
-                wareHouseList: const ['depo1', 'depo2', 'depo3'],
-                selectAmount: () {},
-                approveButton: () {},
-              ),
+              const AddMaterialModalBottomSheet(),
             );
           },
           content: const SizedBox(height: 0),

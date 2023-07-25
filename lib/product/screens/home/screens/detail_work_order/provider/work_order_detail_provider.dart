@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vm_fm_4/feature/models/work_space/work_space_user_inventory.dart';
 import '../../../../../../feature/injection.dart';
 import '../../../../../../feature/models/work_space/work_space_efforts.dart';
 
@@ -47,6 +48,10 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   }
 
   // for efforts
+  // work space effort list
+  List<WorkSpaceEfforts>? _woEffortList;
+  List<WorkSpaceEfforts>? get woEffortList => _woEffortList;
+
   bool _effortAdded = false;
   bool get effortAdded => _effortAdded;
 
@@ -119,28 +124,32 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     });
   }
 
-  // work space effort list
-  List<WorkSpaceEfforts>? _woEffortList;
-  List<WorkSpaceEfforts>? get woEffortList => _woEffortList;
+  // for spareparts
+  WorkSpaceUserInventory _userInventoryList = const WorkSpaceUserInventory();
+  WorkSpaceUserInventory get userInventoryList => _userInventoryList;
 
-  bool _isWorkOrderEffortListFetched = false;
-  bool get isWorkOrderEffortListFetched => _isWorkOrderEffortListFetched;
+  List<String> workSpaceUserInventoryLabelList = [];
 
-  void getEfforts(String taskId, String nextStateId) async {
+  void getUserInventory() async {
+    _isLoading = true;
+    notifyListeners();
+
     String userToken = await SharedManager().getString(SharedEnum.userToken);
 
-    _isLoading = true;
-    _isWorkOrderEffortListFetched = true;
-    notifyListeners();
-    final result = await workSpaceService.getWorkSpaceEfforts(taskId, userToken);
+    final result = await workSpaceService.getWorkSpaceUserInventory(userToken);
 
     result.fold(
       (l) => {
-        _woEffortList = l,
-        notifyListeners(),
+        _userInventoryList = l,
+        for (var i = 0; i < (_userInventoryList.materials?.length ?? 0); i++)
+          {
+            workSpaceUserInventoryLabelList.add(_userInventoryList.materials?[i].properties?.name ?? ''),
+          },
+        print(_userInventoryList),
       },
-      (r) {},
+      (r) => {},
     );
+
     _isLoading = false;
     notifyListeners();
   }

@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:vm_fm_4/feature/models/work_space/work_space_user_inventory.dart';
 
 import '../../../exceptions/custom_service_exceptions.dart';
 import '../../../injection.dart';
@@ -38,4 +39,6 @@ abstract class WorkSpaceServiceRepository {
   );
 
   Future<Either<List<WorkSpaceSpareparts>, CustomServiceException>> getWorkSpaceSpareparts(String taskId, String token);
+
+  Future<Either<WorkSpaceUserInventory, CustomServiceException>> getWorkSpaceUserInventory(String token);
 }
