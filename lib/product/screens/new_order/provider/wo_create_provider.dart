@@ -1,19 +1,13 @@
 // ignore_for_file: unused_element
 
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/enums/shared_enums.dart';
-import 'package:vm_fm_4/feature/exceptions/custom_service_exceptions.dart';
-import 'package:vm_fm_4/product/screens/home/service/home_service_repo_impl.dart';
-
-import '../../../../feature/database/shared_manager.dart';
-import '../../../../feature/models/home_page_models/announcement_model.dart';
 
 class WoCreateProvider extends ChangeNotifier {
   //final AuthServiceRepositoryImpl _authServiceRepository = Injection.getIt.get<AuthServiceRepositoryImpl>();
 
   String _summary = '';
   String get summary => _summary;
-  
+
   String _requestedBy = '';
   String get requestedBy => _requestedBy;
 
@@ -44,8 +38,7 @@ class WoCreateProvider extends ChangeNotifier {
   }
 
   void setrequestType(String newValue) {
-    _requestType= newValue;
+    _requestType = newValue;
     notifyListeners();
   }
-
 }

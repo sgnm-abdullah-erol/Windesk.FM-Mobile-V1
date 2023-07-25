@@ -1,12 +1,10 @@
-
-
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'wo_create_location_children.g.dart';
+part 'generator_wo_create/wo_create_location_children_model.g.dart';
 
 @JsonSerializable()
-class WoCreateLocationChildrenModel extends Equatable{
+class WoCreateLocationChildrenModel extends Equatable {
   final List<String>? labels;
   final String? contractor;
   final String? code;
@@ -43,7 +41,7 @@ class WoCreateLocationChildrenModel extends Equatable{
   final int? id;
   final bool? leaf;
 
-  const  WoCreateLocationChildrenModel(
+  const WoCreateLocationChildrenModel(
       {this.labels,
       this.contractor,
       this.code,
@@ -84,43 +82,42 @@ class WoCreateLocationChildrenModel extends Equatable{
 
   Map<String, dynamic> toJson() => _$WoCreateLocationChildrenModelToJson(this);
 
-      
   @override
   List<Object?> get props => [
-      labels,
-      contractor,
-      code,
-      externalSiteObject,
-      warrantyExpireDate,
-      externalFacilityObject,
-      description,
-      siteName,
-      isActive,
-      operator,
-      handoverDate,
-      createdAt,
-      isDeleted,
-      operationStartDate,
-      externalIdentifier,
-      canDelete,
-      tag,
-      externalFacilityIdentifier,
-      key,
-      owner,
-      phase,
-      canDisplay,
-      address,
-      siteDescription,
-      areaMeasurement,
-      nodeType,
-      externalSystem,
-      externalObject,
-      name,
-      projectDescription,
-      projectName,
-      externalSiteIdentifier,
-      status,
-      id,
-      leaf
+        labels,
+        contractor,
+        code,
+        externalSiteObject,
+        warrantyExpireDate,
+        externalFacilityObject,
+        description,
+        siteName,
+        isActive,
+        operator,
+        handoverDate,
+        createdAt,
+        isDeleted,
+        operationStartDate,
+        externalIdentifier,
+        canDelete,
+        tag,
+        externalFacilityIdentifier,
+        key,
+        owner,
+        phase,
+        canDisplay,
+        address,
+        siteDescription,
+        areaMeasurement,
+        nodeType,
+        externalSystem,
+        externalObject,
+        name,
+        projectDescription,
+        projectName,
+        externalSiteIdentifier,
+        status,
+        id,
+        leaf
       ];
 }

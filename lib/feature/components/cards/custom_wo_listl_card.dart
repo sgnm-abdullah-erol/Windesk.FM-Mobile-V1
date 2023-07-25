@@ -13,6 +13,7 @@ import '../../constants/other/app_strings.dart';
 import '../../constants/other/colors.dart';
 import '../../constants/style/box_decorations.dart';
 import '../../l10n/locale_keys.g.dart';
+import '../../route/app_route.gr.dart';
 import '../buttons/custom_half_buttons.dart';
 
 class CustomWoDetailCard extends StatelessWidget {

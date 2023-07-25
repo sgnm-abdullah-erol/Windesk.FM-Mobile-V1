@@ -1,9 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_location_children.model.dart';
+import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_location_children_model.dart';
 
-
-part 'wo_create_location_model.g.dart';
+part 'generator_wo_create/wo_create_location_model.g.dart';
 
 @JsonSerializable()
 class WoCreateLocationModel extends Equatable {

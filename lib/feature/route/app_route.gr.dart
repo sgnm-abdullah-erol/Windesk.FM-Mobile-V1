@@ -19,7 +19,7 @@ import 'package:vm_fm_4/product/screens/auth/view/login_screen.dart' as _i2;
 import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/view/detail_work_order_screen.dart'
     as _i3;
 import 'package:vm_fm_4/product/screens/home/screens/pending_detail_work_order/pending_detail_work_order_screen.dart'
-    as _i2;
+    as _i4;
 import 'package:vm_fm_4/product/screens/home/screens/search_work_order/view/search_work_order_screen.dart'
     as _i5;
 import 'package:vm_fm_4/product/screens/home/screens/work_order_group_detail/work_order_group_detail_screen.dart'
@@ -31,7 +31,7 @@ import 'package:vm_fm_4/product/screens/home/screens/work_order_list/tabs/my_wor
 import 'package:vm_fm_4/product/screens/home/screens/work_order_list/view/work_order_list_screen.dart'
     as _i8;
 import 'package:vm_fm_4/product/screens/home/view/home_screen.dart' as _i9;
-import 'package:vm_fm_4/product/screens/new_order/new_order_screen.dart'
+import 'package:vm_fm_4/product/screens/new_order/view/new_order_screen.dart'
     as _i10;
 import 'package:vm_fm_4/product/screens/search/search_screen.dart' as _i11;
 import 'package:vm_fm_4/product/screens/splash/splash_screen.dart' as _i12;
@@ -46,16 +46,13 @@ abstract class $AppRouter extends _i15.RootStackRouter {
     EmptyRouter.name: (routeData) {
       return _i15.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i1.AppWrapper(),
+        child: const _i1.EmptyRouter(),
       );
     },
     LoginScreen.name: (routeData) {
       return _i15.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i2.PendingDetailWorkOrderScreen(
-          key: args.key,
-          workSpacePendiks: args.workSpacePendiks,
-        ),
+        child: const _i2.LoginScreen(),
       );
     },
     DetailWorkOrderScreen.name: (routeData) {
@@ -81,7 +78,7 @@ abstract class $AppRouter extends _i15.RootStackRouter {
     SearchWorkOrderScreen.name: (routeData) {
       return _i15.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i4.SearchWorkOrderScreen(),
+        child: const _i5.SearchWorkOrderScreen(),
       );
     },
     WorkOrderGroupDetailScreen.name: (routeData) {
@@ -154,11 +151,11 @@ abstract class $AppRouter extends _i15.RootStackRouter {
 class EmptyRouter extends _i15.PageRouteInfo<void> {
   const EmptyRouter({List<_i15.PageRouteInfo>? children})
       : super(
-          AppWrapper.name,
+          EmptyRouter.name,
           initialChildren: children,
         );
 
-  static const String name = 'AppWrapper';
+  static const String name = 'EmptyRouter';
 
   static const _i15.PageInfo<void> page = _i15.PageInfo<void>(name);
 }
@@ -435,53 +432,11 @@ class TestScreen extends _i15.PageRouteInfo<void> {
 class AppWrapper extends _i15.PageRouteInfo<void> {
   const AppWrapper({List<_i15.PageRouteInfo>? children})
       : super(
-          LoginScreen.name,
+          AppWrapper.name,
           initialChildren: children,
         );
 
-  static const String name = 'LoginScreen';
-
-  static const _i14.PageInfo<void> page = _i14.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i11.SearchScreen]
-class SearchScreen extends _i14.PageRouteInfo<void> {
-  const SearchScreen({List<_i14.PageRouteInfo>? children})
-      : super(
-          SearchScreen.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'SearchScreen';
-
-  static const _i14.PageInfo<void> page = _i14.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i12.NewOrderScreen]
-class NewOrderScreen extends _i14.PageRouteInfo<void> {
-  const NewOrderScreen({List<_i14.PageRouteInfo>? children})
-      : super(
-          NewOrderScreen.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'NewOrderScreen';
-
-  static const _i14.PageInfo<void> page = _i14.PageInfo<void>(name);
-}
-
-/// generated route for
-/// [_i13.EmptyRouter]
-class EmptyRouter extends _i14.PageRouteInfo<void> {
-  const EmptyRouter({List<_i14.PageRouteInfo>? children})
-      : super(
-          EmptyRouter.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'EmptyRouter';
+  static const String name = 'AppWrapper';
 
   static const _i15.PageInfo<void> page = _i15.PageInfo<void>(name);
 }

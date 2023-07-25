@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../feature/constants/paths/asset_paths.dart';
 import '../../../feature/extensions/context_extension.dart';
 import '../../../feature/global_providers/global_provider.dart';
+import '../../../feature/route/app_route.gr.dart';
 import 'splash_provider.dart';
 
 @RoutePage()

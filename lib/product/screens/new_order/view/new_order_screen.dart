@@ -30,32 +30,32 @@ class NewOrderScreen extends StatelessWidget {
                       onChanged: (String newValue) {
                         woCreateProvider.setSummary(newValue);
                       }),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   DropDownInputFields(
                     labelText: 'Requested By',
                     onChangedFunction: (String newValue) {
                       woCreateProvider.setRequestedBy(newValue);
                     },
                     rightIcon: Icons.arrow_drop_down_rounded,
-                    dropDownArray: ['asdasd', 'asd'],
+                    dropDownArray: const ['asdasd', 'asd'],
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   DropDownInputFields(
                     labelText: 'Type',
                     onChangedFunction: (String newValue) {
                       woCreateProvider.setType(newValue);
                     },
                     rightIcon: Icons.arrow_drop_down_rounded,
-                    dropDownArray: ['asdasd', 'asd'],
+                    dropDownArray: const ['asdasd', 'asd'],
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   DropDownInputFields(
                     labelText: 'Location',
                     onChangedFunction: (String newValue) {
                       woCreateProvider.setLocation(newValue);
                     },
                     rightIcon: Icons.arrow_drop_down_rounded,
-                    dropDownArray: ['asdasd', 'asd'],
+                    dropDownArray: const ['asdasd', 'asd'],
                   ),
                   Padding(
                       padding: CustomPaddings.onlyLeft,
@@ -68,17 +68,17 @@ class NewOrderScreen extends StatelessWidget {
                             woCreateProvider.setLocation(newValue);
                           },
                           rightIcon: Icons.arrow_drop_down_rounded,
-                          dropDownArray: ['asdasd', 'asd'],
+                          dropDownArray: const ['asdasd', 'asd'],
                         ),
                       )),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   DropDownInputFields(
                     labelText: 'Request Type',
                     onChangedFunction: (String newValue) {
                       woCreateProvider.setrequestType(newValue);
                     },
                     rightIcon: Icons.arrow_drop_down_rounded,
-                    dropDownArray: ['asdasd', 'asd'],
+                    dropDownArray: const ['asdasd', 'asd'],
                   ),
                 ],
               ),
