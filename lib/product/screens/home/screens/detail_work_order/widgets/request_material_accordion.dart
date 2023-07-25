@@ -9,7 +9,7 @@ import '../../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../../feature/constants/other/app_strings.dart';
 import '../../../../../../feature/constants/other/colors.dart';
 import '../provider/work_order_detail_provider.dart';
-import 'data_table_accordion.dart';
+import 'tables/data_table_requsted_materials.dart';
 
 class RequestMaterialAccordion extends StatelessWidget {
   const RequestMaterialAccordion({super.key, required this.provider});
@@ -56,10 +56,9 @@ class RequestMaterialAccordion extends StatelessWidget {
               });
               return value.isLoading
                   ? const Center(child: CircularProgressIndicator())
-                  : DataTableAccordion(
+                  : DataTableAccordionRequstedMaterials(
                       delete: () {},
-                      labelList: ['urunler', 'asdasd', 'asdasd', 'asdsad', 'asda'].toList(),
-                      data: provider.woEffortList,
+                      data: provider.woEffortList ?? [],
                     );
             },
           ),

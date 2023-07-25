@@ -28,8 +28,6 @@ class DetailWorkOrderScreen extends StatelessWidget {
 
   final WorkSpaceDetail workSpaceDetail;
 
-  final String message = 'Effor eklenmiştir.';
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -42,7 +40,6 @@ class DetailWorkOrderScreen extends StatelessWidget {
           if (woDetailProvider.effortAdded) {
             snackBar(context, SnackbarStrings.effortAdded, 'success');
           }
-
           return Scaffold(
             key: _scaffoldKey,
             appBar: CustomMainAppbar(title: Text('WO - ${workSpaceDetail.task?.id.toString() ?? ''}'), returnBack: true, elevation: 4),

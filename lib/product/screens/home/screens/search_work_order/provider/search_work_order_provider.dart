@@ -26,7 +26,7 @@ class SearchWorkOrderProvider extends ChangeNotifier {
 
     _isLoading = true;
     notifyListeners();
-    final result = await workSpaceService.getWorkOrderWithSearch(workOrderCode, userToken);
+    final result = await workSpaceService.getWorkSpaceWithSearch(workOrderCode, userToken);
 
     result.fold((l) => {_woDetailList = l, _isSuccess = true}, (r) {});
     notifyListeners();

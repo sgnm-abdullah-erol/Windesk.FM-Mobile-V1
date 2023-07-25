@@ -10,7 +10,7 @@ import '../../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../../feature/constants/other/app_strings.dart';
 import '../../../../../../feature/constants/other/colors.dart';
 import '../provider/work_order_detail_provider.dart';
-import 'data_table_accordion.dart';
+import 'tables/data_table_accordion_documants.dart';
 
 class AddDocumantAccordion extends StatelessWidget {
   const AddDocumantAccordion({super.key, required this.provider});
@@ -59,10 +59,9 @@ class AddDocumantAccordion extends StatelessWidget {
               });
               return value.isLoading
                   ? const Center(child: CircularProgressIndicator())
-                  : DataTableAccordion(
+                  : DataTableAccordionDocumants(
                       delete: () {},
-                      labelList: ['urunler', 'asdasd', 'asdasd', 'asdasd', 'sdasd'].toList(),
-                      data: provider.woEffortList,
+                      data: provider.woEffortList ?? [],
                     );
             },
           ),

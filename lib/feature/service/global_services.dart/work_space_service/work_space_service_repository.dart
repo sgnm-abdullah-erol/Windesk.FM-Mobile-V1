@@ -8,6 +8,7 @@ import '../../../models/work_space/work_space_appendings.dart';
 import '../../../models/work_space/work_space_detail.dart';
 import '../../../models/work_space/work_space_efforts.dart';
 import '../../../models/work_space/work_space_my_group_demand_list.dart';
+import '../../../models/work_space/work_space_spareparts.dart';
 import '../../service_manager.dart';
 
 abstract class WorkSpaceServiceRepository {
@@ -20,9 +21,9 @@ abstract class WorkSpaceServiceRepository {
 
   Future<Either<List<WorkSpacePendiks>, CustomServiceException>> getWorkSpacePendiks(String id, String token, int page);
 
-  Future<Either<WorkSpaceDetail, CustomServiceException>> getWorkOrderWithSearch(String workOrderCode, String token);
+  Future<Either<WorkSpaceDetail, CustomServiceException>> getWorkSpaceWithSearch(String workOrderCode, String token);
 
-  Future<Either<List<WorkSpaceEfforts>, CustomServiceException>> getWorkOrderEfforts(String taskId, String token);
+  Future<Either<List<WorkSpaceEfforts>, CustomServiceException>> getWorkSpaceEfforts(String taskId, String token);
 
   Future<Either<bool, CustomServiceException>> addWorkOrderEffort(
     String taskId,
@@ -33,4 +34,6 @@ abstract class WorkSpaceServiceRepository {
     String endDate,
     String effortType,
   );
+
+  Future<Either<List<WorkSpaceSpareparts>, CustomServiceException>> getWorkSpaceSpareparts(String taskId, String token);
 }

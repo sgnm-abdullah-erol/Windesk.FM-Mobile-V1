@@ -9,7 +9,7 @@ import 'package:vm_fm_4/feature/components/model_bottom_sheet/add_efforts_modal_
 import 'package:vm_fm_4/feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/constants/other/app_strings.dart';
 import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/provider/work_order_detail_provider.dart';
-import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/widgets/data_table_accordion.dart';
+import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/widgets/tables/data_table_accordion_efforts.dart';
 
 import '../../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../../feature/constants/other/colors.dart';
@@ -61,6 +61,7 @@ class AddEffortsAccordion extends StatelessWidget {
           leftIcon: Icon(AppIcons.compareRounded, color: APPColors.Main.white),
           header: Text(AppStrings.addedEfforts, style: TextStyle(color: APPColors.Main.white)),
           onOpenSection: () {
+            Provider.of<WorkOrderDetailServiceProvider>(context, listen: false).update();
             provider.userClickedEffortsFunction();
           },
           content: Consumer<WorkOrderDetailServiceProvider>(
@@ -75,12 +76,12 @@ class AddEffortsAccordion extends StatelessWidget {
                           )
                     : null;
               });
+
               return value.isLoading
                   ? const Center(child: CircularProgressIndicator())
-                  : DataTableAccordion(
+                  : DataTableAccordionEfforts(
                       delete: () {},
-                      labelList: ['id', 'Tip', 'İsim', 'Süre', 'Sil'].toList(),
-                      data: value.woEffortList,
+                      data: value.woEffortList ?? [],
                     );
             },
           ),

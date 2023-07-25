@@ -9,7 +9,6 @@ import 'feature/themes/custom_light_theme.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-
   Injection().initInstances();
   // FirebaseNotification.init();
   runApp(
