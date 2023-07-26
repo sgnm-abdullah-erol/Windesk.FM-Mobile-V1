@@ -8,9 +8,9 @@ class WorkSpaceSpareparts extends Equatable {
   final String? id;
   final List<String>? label;
   final String? name;
-  final String? amount;
+  final dynamic amount;
   final String? measurementUnit;
-  final String? totalAmount;
+  final dynamic totalAmount;
   final String? materialUsedDate;
   final String? user;
 
@@ -25,7 +25,7 @@ class WorkSpaceSpareparts extends Equatable {
     this.user,
   });
 
-  factory WorkSpaceSpareparts.fromJson(Map<String, dynamic> json) => _$SparepartsFromJson(json);
+  factory WorkSpaceSpareparts.fromJson(Map<String, dynamic> json) => _$WorkSpaceSparepartsFromJson(json);
 
   static List<WorkSpaceSpareparts> fromJsonList(List<dynamic> jsonList) {
     List<WorkSpaceSpareparts> workSpaceSparepartsList = [];
@@ -35,7 +35,7 @@ class WorkSpaceSpareparts extends Equatable {
     return workSpaceSparepartsList;
   }
 
-  Map<String, dynamic> toJson() => _$SparepartsToJson(this);
+  Map<String, dynamic> toJson() => _$WorkSpaceSparepartsToJson(this);
 
   @override
   List<Object?> get props => [

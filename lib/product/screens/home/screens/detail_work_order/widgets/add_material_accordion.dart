@@ -10,6 +10,7 @@ import '../../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../../feature/constants/other/app_strings.dart';
 import '../../../../../../feature/constants/other/colors.dart';
 import '../provider/work_order_detail_provider.dart';
+import '../provider/work_order_detail_service_provider.dart';
 
 class AddMaterialAccordion extends StatelessWidget {
   const AddMaterialAccordion({super.key, required this.provider});
@@ -34,7 +35,7 @@ class AddMaterialAccordion extends StatelessWidget {
           onOpenSection: () async {
             ShowModalBottomSheet().show(
               context,
-              const AddMaterialModalBottomSheet(),
+              AddMaterialModalBottomSheet(taskId: provider.detail.task?.id.toString() ?? '0'),
             );
           },
           content: const SizedBox(height: 0),

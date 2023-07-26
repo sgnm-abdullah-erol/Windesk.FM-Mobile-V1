@@ -12,4 +12,5 @@ class SnackbarStrings {
   static const String loginSuccess = 'Giriş Başarılı';
 
   static const String effortAdded = 'Effor eklenmiştir.';
+  static const String materialAdded = 'Malzeme eklenmiştir.';
 }

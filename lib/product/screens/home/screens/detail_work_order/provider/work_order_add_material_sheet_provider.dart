@@ -15,11 +15,17 @@ class WorkOrderAddMaterialSheetProvider extends ChangeNotifier {
   bool _isInventoryFetched = false;
   bool get isInventoryFetched => _isInventoryFetched;
 
+  bool _isMaterialAdded = false;
+  bool get isMaterialAdded => _isMaterialAdded;
+
   String _hintAmount = 'Malzeme miktari';
   String get hintAmount => _hintAmount;
 
   String _hintUnit = 'Malzeme unit';
   String get hintUnit => _hintUnit;
+
+  String _choosenMaterial = '';
+  String get choosenMaterial => _choosenMaterial;
 
   String _wantedMaterialAmount = '0';
   String get wantedMaterialAmount => _wantedMaterialAmount;
@@ -34,7 +40,43 @@ class WorkOrderAddMaterialSheetProvider extends ChangeNotifier {
     _wantedMaterialAmount = value;
   }
 
+  void addSparepart(String taskId) async {
+    if (_wantedMaterialAmount == '0' || _wantedMaterialAmount.isEmpty) return;
+    _isLoading = true;
+    notifyListeners();
+
+    String userToken = await SharedManager().getString(SharedEnum.userToken);
+
+    String sparePartId = '';
+    for (var i = 0; i < (_userInventoryList.materials?.length ?? 0); i++) {
+      if (_userInventoryList.materials?[i].properties?.name == _choosenMaterial) {
+        sparePartId = _userInventoryList.materials?[i].properties?.referenceId.toString() ?? '';
+        break;
+      }
+    }
+
+    final result = await workSpaceService.addWorkSpaceSpareparts(taskId, userToken, sparePartId, _wantedMaterialAmount);
+
+    result.fold(
+      (l) => {
+        _isMaterialAdded = true,
+      },
+      (r) => {
+        _isMaterialAdded = false,
+      },
+    );
+
+    _isLoading = false;
+    notifyListeners();
+
+    Future.delayed(const Duration(milliseconds: 2000), () {
+      _isMaterialAdded = false;
+      notifyListeners();
+    });
+  }
+
   void setHintTexts(String value) {
+    _choosenMaterial = value;
     for (var i = 0; i < (_userInventoryList.materials?.length ?? 0); i++) {
       if (_userInventoryList.materials?[i].properties?.name == value) {
         _hintAmount = _userInventoryList.materials?[i].properties?.count.toString() ?? '';

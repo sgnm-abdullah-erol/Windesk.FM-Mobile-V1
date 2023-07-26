@@ -9,6 +9,7 @@ import '../../../models/work_space/work_space_appendings.dart';
 import '../../../models/work_space/work_space_detail.dart';
 import '../../../models/work_space/work_space_efforts.dart';
 import '../../../models/work_space/work_space_my_group_demand_list.dart';
+import '../../../models/work_space/work_space_requested_materials.dart';
 import '../../../models/work_space/work_space_spareparts.dart';
 import '../../service_manager.dart';
 
@@ -41,4 +42,8 @@ abstract class WorkSpaceServiceRepository {
   Future<Either<List<WorkSpaceSpareparts>, CustomServiceException>> getWorkSpaceSpareparts(String taskId, String token);
 
   Future<Either<WorkSpaceUserInventory, CustomServiceException>> getWorkSpaceUserInventory(String token);
+
+  Future<Either<bool, CustomServiceException>> addWorkSpaceSpareparts(String taskId, String token, String sparePartId, String amount);
+
+  Future<Either<List<WorkSpaceRequestedMaterials>, CustomServiceException>> getWorkSpaceRequestedMaterials(String token, int page);
 }

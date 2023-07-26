@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:vm_fm_4/feature/models/work_space/work_space_requested_materials.dart';
 import 'package:vm_fm_4/feature/models/work_space/work_space_spareparts.dart';
 import 'package:vm_fm_4/feature/models/work_space/work_space_user_inventory.dart';
 
@@ -300,6 +301,81 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
         workSpaceUserInventory = WorkSpaceUserInventory.fromJson(data);
 
         return Left(workSpaceUserInventory);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+      }
+    } catch (e) {
+      super.logger.i(e);
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<bool, CustomServiceException>> addWorkSpaceSpareparts(String taskId, String token, String sparePartId, String amount) async {
+    bool result;
+    String url = 'http://10.0.2.2:3015/task/add/node/to/task';
+
+    try {
+      final response = await super.dio.post(
+            url,
+            data: [
+              {
+                "label": ["Task"],
+                "identifier": taskId,
+                "variableName": "usedSpareOf",
+                "value": [
+                  {
+                    "id": sparePartId,
+                    "amount": amount,
+                  }
+                ]
+              }
+            ],
+            options: Options(
+              headers: {'authorization': 'Bearer $token'},
+              contentType: Headers.jsonContentType,
+            ),
+          );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = response.data;
+
+        if (data == 'added') {
+          result = true;
+        } else {
+          result = false;
+        }
+
+        return Left(result);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+      }
+    } catch (e) {
+      super.logger.i(e);
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<List<WorkSpaceRequestedMaterials>, CustomServiceException>> getWorkSpaceRequestedMaterials(String token, int page) async {
+    List<WorkSpaceRequestedMaterials> workSpaceRequestedMaterials;
+    String url =
+        'http://10.0.2.2:3014/types/getMobileAllTypesWithMeasurementUnitAndAmount?page=$page&limit=10&orderBy=ASC&orderByColumn=name&superSet=Spare';
+
+    try {
+      final response = await super.dio.get(
+            url,
+            data: {},
+            options: Options(
+              headers: {'authorization': 'Bearer $token'},
+            ),
+          );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = response.data;
+        workSpaceRequestedMaterials = WorkSpaceRequestedMaterials.fromJsonList(data) ?? [];
+
+        return Left(workSpaceRequestedMaterials);
       } else {
         return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
       }

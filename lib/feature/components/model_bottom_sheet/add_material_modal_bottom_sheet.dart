@@ -4,15 +4,19 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/provider/work_order_add_material_sheet_provider.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
+import '../../constants/other/snackbar_strings.dart';
 import '../buttons/custom_half_buttons.dart';
 import '../input_fields/dropdown_input_fields.dart';
 import '../input_fields/text_fields_input_underline.dart';
 
 import '../../constants/other/app_strings.dart';
 import '../../extensions/context_extension.dart';
+import '../snackBar/snackbar.dart';
 
 class AddMaterialModalBottomSheet extends StatelessWidget {
-  const AddMaterialModalBottomSheet({super.key});
+  const AddMaterialModalBottomSheet({super.key, required this.taskId});
+
+  final String taskId;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +30,7 @@ class AddMaterialModalBottomSheet extends StatelessWidget {
           child: Consumer<WorkOrderAddMaterialSheetProvider>(builder: ((context, value, child) {
             SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
               value.isInventoryFetched ? null : value.getUserInventory();
+              value.isMaterialAdded ? snackBar(context, SnackbarStrings.materialAdded, 'success') : null;
             });
 
             return value.isLoading ? const CustomLoadingIndicator() : _bodyWidget(context, value);
@@ -43,11 +48,13 @@ class AddMaterialModalBottomSheet extends StatelessWidget {
           flex: 70,
           child: CustomHalfButtons(
             leftTitle: const Text(AppStrings.cancel),
-            rightTitle: const Text(AppStrings.cancel),
+            rightTitle: const Text(AppStrings.approve),
             leftOnPressed: () {
               Navigator.of(context).pop();
             },
-            rightOnPressed: () {},
+            rightOnPressed: () {
+              value.addSparepart(taskId);
+            },
           ),
         ),
       ],

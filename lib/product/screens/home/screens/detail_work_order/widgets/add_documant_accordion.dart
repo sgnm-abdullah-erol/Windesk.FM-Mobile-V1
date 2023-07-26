@@ -10,6 +10,7 @@ import '../../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../../feature/constants/other/app_strings.dart';
 import '../../../../../../feature/constants/other/colors.dart';
 import '../provider/work_order_detail_provider.dart';
+import '../provider/work_order_detail_service_provider.dart';
 import 'tables/data_table_accordion_documants.dart';
 
 class AddDocumantAccordion extends StatelessWidget {
