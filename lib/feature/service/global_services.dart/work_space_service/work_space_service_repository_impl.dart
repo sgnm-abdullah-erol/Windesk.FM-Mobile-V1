@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:vm_fm_4/feature/models/work_space/work_space_requested_materials.dart';
+import 'package:vm_fm_4/feature/models/work_space/work_space_requested_materials_inventory.dart';
 import 'package:vm_fm_4/feature/models/work_space/work_space_spareparts.dart';
 import 'package:vm_fm_4/feature/models/work_space/work_space_user_inventory.dart';
 
@@ -357,8 +357,11 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   }
 
   @override
-  Future<Either<List<WorkSpaceRequestedMaterials>, CustomServiceException>> getWorkSpaceRequestedMaterials(String token, int page) async {
-    List<WorkSpaceRequestedMaterials> workSpaceRequestedMaterials;
+  Future<Either<List<WorkSpaceRequestedMaterialsInventory>, CustomServiceException>> getWorkSpaceRequestedMaterialsInventory(
+    String token,
+    int page,
+  ) async {
+    List<WorkSpaceRequestedMaterialsInventory> workSpaceRequestedMaterials;
     String url =
         'http://10.0.2.2:3014/types/getMobileAllTypesWithMeasurementUnitAndAmount?page=$page&limit=10&orderBy=ASC&orderByColumn=name&superSet=Spare';
 
@@ -373,7 +376,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
-        workSpaceRequestedMaterials = WorkSpaceRequestedMaterials.fromJsonList(data) ?? [];
+        workSpaceRequestedMaterials = WorkSpaceRequestedMaterialsInventory.fromJsonList(data) ?? [];
 
         return Left(workSpaceRequestedMaterials);
       } else {

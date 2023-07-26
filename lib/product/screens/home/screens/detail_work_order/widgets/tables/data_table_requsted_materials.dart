@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/models/work_space/work_space_requested_materials.dart';
+import 'package:vm_fm_4/feature/models/work_space/work_space_requested_materials_inventory.dart';
 
 import '../../../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../../../feature/constants/other/colors.dart';
@@ -9,7 +9,7 @@ class DataTableAccordionRequstedMaterials extends StatelessWidget {
 
   final Function delete;
   final List<String> _labelList = ['id', 'İsim', 'Ünite', 'Miktar', 'Sil'];
-  final List<WorkSpaceRequestedMaterials> data;
+  final List<WorkSpaceRequestedMaterialsInventory> data;
 
   final String _nonKnownName = 'Bilinmiyor';
   final String _noEffortType = 'Çalışma Türü Belirtilmemiş';
