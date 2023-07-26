@@ -53,6 +53,11 @@ class CustomLightTheme {
       ),
       textTheme: TextTheme(
         // create basic text theme
+        titleMedium: TextStyle(
+          color: APPColors.Main.black,
+          fontSize: FontSizes.subtitle - 2,
+          fontWeight: FontWeight.w600,
+        ),
         bodyLarge: TextStyle(
           color: APPColors.Main.black,
           fontSize: FontSizes.caption + 1,

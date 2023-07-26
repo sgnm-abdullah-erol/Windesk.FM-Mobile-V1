@@ -58,6 +58,7 @@ class AppStrings {
   static const chooseShift = 'Vardiya Seçiniz';
 
   // accordion titles
+  static const approvedRequestMaterials = 'Onaylanmış Talep Malzemeleri';
   static const requstMaterial = 'Malzeme Talebi';
   static const addPiece = 'Parça Ekle';
   static const efforts = 'Eforlar';

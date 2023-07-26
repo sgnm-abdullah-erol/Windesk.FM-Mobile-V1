@@ -246,7 +246,7 @@ class WoCreateProvider extends ChangeNotifier {
         _getRequestedBy = l,
         for (var i = 0; i < (_getRequestedBy.length ?? 0); i++)
           {
-            _woLocationListChildren.add(_getRequestedBy.children?[i].name ?? ''),
+            _woLocationListChildren.add(_getRequestedBy.length?[i].name ?? ''),
             notifyListeners(),
           }
       },

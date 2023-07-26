@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../feature/components/snackBar/snackbar.dart';
 import '../../../../feature/database/shared_manager.dart';
 import '../../../../feature/enums/shared_enums.dart';
+import '../../../../feature/global_providers/global_provider.dart';
 import '../../../../feature/injection.dart';
 import '../../../../feature/models/auth_models/login_model.dart';
 import '../../../../feature/service/global_services.dart/auth_service/auth_service_repository_impl.dart';
@@ -48,7 +50,9 @@ class LoginProvider extends ChangeNotifier {
           loginModel = login;
           _userToken = loginModel.accessToken ?? '';
           _userTokenName = userName;
-          _setTokenToPreferences(login.refreshToken ?? '');
+          _setTokenToPreferences(login.refreshToken ?? '', login.id.toString());
+          context.read<GlobalProvider>().setUserId(userName);
+
           _setField();
         });
         Future.delayed(const Duration(milliseconds: 1000), () {
@@ -74,11 +78,12 @@ class LoginProvider extends ChangeNotifier {
     }
   }
 
-  void _setTokenToPreferences(String refreshToken) async {
-    if (_userToken != '' && _userName != '' && refreshToken != '') {
+  void _setTokenToPreferences(String refreshToken, String userId) async {
+    if (_userToken != '' && _userName != '' && refreshToken != '' && userId != '' && userId != 'null') {
       await SharedManager().setString(SharedEnum.userToken, _userToken);
       await SharedManager().setString(SharedEnum.userName, _userTokenName);
       await SharedManager().setString(SharedEnum.refreshToken, refreshToken);
+      await SharedManager().setString(SharedEnum.userId, userId);
     }
   }
 

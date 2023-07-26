@@ -1,14 +1,14 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:vm_fm_4/feature/models/work_space/work_space_requested_materials.dart';
-import 'package:vm_fm_4/feature/models/work_space/work_space_spareparts.dart';
-import 'package:vm_fm_4/feature/models/work_space/work_space_user_inventory.dart';
 
 import '../../../exceptions/custom_service_exceptions.dart';
 import '../../../models/work_space/work_space_appendings.dart';
 import '../../../models/work_space/work_space_detail.dart';
 import '../../../models/work_space/work_space_efforts.dart';
 import '../../../models/work_space/work_space_my_group_demand_list.dart';
+import '../../../models/work_space/work_space_requested_materials_inventory.dart';
+import '../../../models/work_space/work_space_spareparts.dart';
+import '../../../models/work_space/work_space_user_inventory.dart';
 import 'work_space_service_repository.dart';
 
 class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
@@ -357,8 +357,11 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   }
 
   @override
-  Future<Either<List<WorkSpaceRequestedMaterials>, CustomServiceException>> getWorkSpaceRequestedMaterials(String token, int page) async {
-    List<WorkSpaceRequestedMaterials> workSpaceRequestedMaterials;
+  Future<Either<List<WorkSpaceRequestedMaterialsInventory>, CustomServiceException>> getWorkSpaceRequestedMaterialsInventory(
+    String token,
+    int page,
+  ) async {
+    List<WorkSpaceRequestedMaterialsInventory> workSpaceRequestedMaterials;
     String url =
         'http://10.0.2.2:3014/types/getMobileAllTypesWithMeasurementUnitAndAmount?page=$page&limit=10&orderBy=ASC&orderByColumn=name&superSet=Spare';
 
@@ -373,9 +376,62 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
-        workSpaceRequestedMaterials = WorkSpaceRequestedMaterials.fromJsonList(data) ?? [];
+        workSpaceRequestedMaterials = WorkSpaceRequestedMaterialsInventory.fromJsonList(data) ?? [];
 
         return Left(workSpaceRequestedMaterials);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+      }
+    } catch (e) {
+      super.logger.i(e);
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<bool, CustomServiceException>> requestWorkSpaceMaterial(
+    String workSpaceId,
+    String taskId,
+    String token,
+    String subject,
+    String description,
+    String amount,
+    String materialId,
+  ) async {
+    bool result;
+    String url = 'http://10.0.2.2:3015/task';
+
+    try {
+      final response = await super.dio.post(
+            url,
+            data: {
+              "idLabel": {
+                "label": ["WorkSpace"],
+                "identifier": workSpaceId // workspace id
+              },
+              "tag": ["depo"],
+              "name": subject,
+              "description": description,
+              "originiatedBy": taskId, // task id
+              "templatedBy": ["MaterialRequest001"],
+              "requestedSpareOf": [
+                {
+                  "id": materialId, // malzeme id
+                  "amount": amount, // amount
+                  "label": ["Spare"]
+                }
+              ]
+            },
+            options: Options(
+              headers: {'authorization': 'Bearer $token'},
+              contentType: Headers.jsonContentType,
+            ),
+          );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        result = true;
+
+        return Left(result);
       } else {
         return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
       }

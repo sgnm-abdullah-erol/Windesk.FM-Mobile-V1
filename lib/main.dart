@@ -5,12 +5,13 @@ import 'feature/constants/other/app_strings.dart';
 import 'feature/global_providers/global_provider.dart';
 import 'feature/injection.dart';
 import 'feature/route/app_route.dart';
+import 'feature/service/firebase/firebase_notification.dart';
 import 'feature/themes/custom_light_theme.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Injection().initInstances();
-  // FirebaseNotification.init();
+  FirebaseNotification.init();
   runApp(
     MultiProvider(
       providers: [

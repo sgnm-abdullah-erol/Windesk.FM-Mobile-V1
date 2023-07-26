@@ -12,6 +12,9 @@ class TextFieldsInputUnderline extends StatelessWidget {
     this.enabled,
     this.keyboardType,
     this.inputFormatters,
+    this.maxLines,
+    this.textInputAction,
+    this.minLines,
   });
 
   final String _validatorHintText = 'Lütfen bu alanı doldurunuz';
@@ -21,16 +24,27 @@ class TextFieldsInputUnderline extends StatelessWidget {
   final bool? enabled;
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
+  final TextInputAction? textInputAction;
+  final int? maxLines;
+  final int? minLines;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       enabled: enabled ?? true,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      textInputAction: TextInputAction.next,
+      textInputAction: textInputAction ?? TextInputAction.next,
       keyboardType: keyboardType ?? TextInputType.text,
-      decoration: InputDecoration(border: const UnderlineInputBorder(), hintText: hintText),
+      decoration: InputDecoration(
+        disabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: APPColors.Main.black),
+        ),
+        border: const UnderlineInputBorder(),
+        hintText: hintText,
+      ),
       inputFormatters: inputFormatters,
+      maxLines: maxLines ?? 1,
+      minLines: minLines ?? 1,
       onChanged: (inputValue) => onChanged(inputValue),
       style: TextStyle(fontSize: FontSizes.body, letterSpacing: 1, fontFamily: 'Roboto', color: APPColors.Main.black),
       validator: (value) {

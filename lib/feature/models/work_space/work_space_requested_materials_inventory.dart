@@ -1,16 +1,16 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-part 'generator/work_space_requested_materials.g.dart';
+part 'generator/work_space_requested_materials_inventory.g.dart';
 
 @JsonSerializable()
-class WorkSpaceRequestedMaterials extends Equatable {
+class WorkSpaceRequestedMaterialsInventory extends Equatable {
   final int? id;
   final List<String>? labels;
   final String? name;
   final String? measurementUnit;
   final int? amount;
 
-  const WorkSpaceRequestedMaterials({
+  const WorkSpaceRequestedMaterialsInventory({
     this.id,
     this.labels,
     this.name,
@@ -18,13 +18,13 @@ class WorkSpaceRequestedMaterials extends Equatable {
     this.amount,
   });
 
-  factory WorkSpaceRequestedMaterials.fromJson(Map<String, dynamic> json) => _$WorkSpaceRequestedMaterialsFromJson(json);
+  factory WorkSpaceRequestedMaterialsInventory.fromJson(Map<String, dynamic> json) => _$WorkSpaceRequestedMaterialsFromJson(json);
 
   Map<String, dynamic> toJson() => _$WorkSpaceRequestedMaterialsToJson(this);
 
-  static List<WorkSpaceRequestedMaterials>? fromJsonList(List<dynamic>? jsonList) {
+  static List<WorkSpaceRequestedMaterialsInventory>? fromJsonList(List<dynamic>? jsonList) {
     if (jsonList == null) return null;
-    return jsonList.map((json) => WorkSpaceRequestedMaterials.fromJson(json)).toList();
+    return jsonList.map((json) => WorkSpaceRequestedMaterialsInventory.fromJson(json)).toList();
   }
 
   @override

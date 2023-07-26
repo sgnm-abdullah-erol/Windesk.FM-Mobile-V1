@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:vm_fm_4/feature/models/work_space/work_space_requested_materials.dart';
 
 import '../../../../../../feature/database/shared_manager.dart';
 import '../../../../../../feature/enums/shared_enums.dart';
@@ -32,9 +31,6 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
   List<WorkSpaceSpareparts>? _woSpareparts;
   List<WorkSpaceSpareparts>? get woSpareparts => _woSpareparts;
 
-  List<WorkSpaceRequestedMaterials> _woRequestedMaterials = [];
-  List<WorkSpaceRequestedMaterials> get woRequestedMaterials => _woRequestedMaterials;
-
   void update() {
     notifyListeners();
   }
@@ -64,27 +60,6 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
       },
       (r) => {
         _isSparepartsFetched = false,
-      },
-    );
-
-    _isLoading = false;
-    notifyListeners();
-  }
-
-  void fetchRequestedMaterials() async {
-    _isLoading = true;
-    _isRequestedListFetched = true;
-    notifyListeners();
-
-    String userToken = await SharedManager().getString(SharedEnum.userToken);
-    final result = await workSpaceService.getWorkSpaceRequestedMaterials(userToken, 1);
-
-    result.fold(
-      (l) => {
-        _woRequestedMaterials = l,
-      },
-      (r) => {
-        _isRequestedListFetched = false,
       },
     );
 

@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../work_space_requested_materials.dart';
+part of '../work_space_requested_materials_inventory.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-WorkSpaceRequestedMaterials _$WorkSpaceRequestedMaterialsFromJson(Map<String, dynamic> json) => WorkSpaceRequestedMaterials(
+WorkSpaceRequestedMaterialsInventory _$WorkSpaceRequestedMaterialsFromJson(Map<String, dynamic> json) => WorkSpaceRequestedMaterialsInventory(
       id: json['id'] as int?,
       labels: (json['labels'] as List<dynamic>?)?.map((e) => e as String).toList(),
       name: json['name'] as String?,
@@ -14,7 +14,7 @@ WorkSpaceRequestedMaterials _$WorkSpaceRequestedMaterialsFromJson(Map<String, dy
       amount: json['amount'] as int?,
     );
 
-Map<String, dynamic> _$WorkSpaceRequestedMaterialsToJson(WorkSpaceRequestedMaterials instance) => <String, dynamic>{
+Map<String, dynamic> _$WorkSpaceRequestedMaterialsToJson(WorkSpaceRequestedMaterialsInventory instance) => <String, dynamic>{
       'id': instance.id,
       'labels': instance.labels,
       'name': instance.name,
