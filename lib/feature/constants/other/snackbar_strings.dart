@@ -13,4 +13,5 @@ class SnackbarStrings {
 
   static const String effortAdded = 'Effor eklenmiştir.';
   static const String materialAdded = 'Malzeme eklenmiştir.';
+  static const String materialRequested = 'Malzeme talep edilmiştir.';
 }

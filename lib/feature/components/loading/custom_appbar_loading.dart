@@ -19,6 +19,7 @@ class CustomAppbarLoading extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Align(alignment: Alignment.center, child: CircularProgressIndicator(color: APPColors.Main.blue)),
+          const SizedBox(height: 10),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -29,7 +30,7 @@ class CustomAppbarLoading extends StatelessWidget {
                       color: APPColors.Main.blue,
                     ),
               ),
-              const SizedBox(height: 5),
+              const SizedBox(width: 10),
               AnimatedTextKit(
                 animatedTexts: [
                   RotateAnimatedText(

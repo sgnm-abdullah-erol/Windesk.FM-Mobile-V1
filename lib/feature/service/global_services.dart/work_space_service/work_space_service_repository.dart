@@ -46,4 +46,14 @@ abstract class WorkSpaceServiceRepository {
   Future<Either<bool, CustomServiceException>> addWorkSpaceSpareparts(String taskId, String token, String sparePartId, String amount);
 
   Future<Either<List<WorkSpaceRequestedMaterialsInventory>, CustomServiceException>> getWorkSpaceRequestedMaterialsInventory(String token, int page);
+
+  Future<Either<bool, CustomServiceException>> requestWorkSpaceMaterial(
+    String workSpaceId,
+    String taskId,
+    String token,
+    String subject,
+    String description,
+    String amount,
+    String materialId,
+  );
 }

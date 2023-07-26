@@ -57,7 +57,6 @@ class SplashProvider extends ChangeNotifier {
   void _getFirebaseInformation() async {
     FirebaseMessaging messaging = FirebaseMessaging.instance;
     String? firebaseToken = await messaging.getToken();
-    print('fb token : ' + firebaseToken.toString());
     if (firebaseToken == null) return;
     await SharedManager().setString(SharedEnum.firebaseToken, firebaseToken);
   }
@@ -81,12 +80,10 @@ class SplashProvider extends ChangeNotifier {
     _getDeviceInformation();
     // _getFirebaseInformation();
 
-    final String userName =
-        await SharedManager().getString(SharedEnum.userName);
+    final String userName = await SharedManager().getString(SharedEnum.userName);
 
     if (userName.isNotEmpty) {
-      final String userToken =
-          await SharedManager().getString(SharedEnum.userToken);
+      final String userToken = await SharedManager().getString(SharedEnum.userToken);
       await _authService.checkAccessToken(userToken).then((value) {
         value.fold((l) {
           if (l.isTokenValid == true) {

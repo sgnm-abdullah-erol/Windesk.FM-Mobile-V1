@@ -31,7 +31,13 @@ class RequestMaterialAccordion extends StatelessWidget {
           header: Text(AppStrings.requstMaterial, style: TextStyle(color: APPColors.Main.white)),
           rightIcon: const Icon(AppIcons.arrowDown, size: 0),
           onOpenSection: () {
-            ShowModalBottomSheet().show(context, const RequestMaterialBottomSheet());
+            ShowModalBottomSheet().show(
+              context,
+              RequestMaterialBottomSheet(
+                taskId: provider.detail.task?.id.toString() ?? '',
+                workSpaceId: provider.detail.workspace?.id.toString() ?? '',
+              ),
+            );
           },
           content: const SizedBox(height: 0),
         ),

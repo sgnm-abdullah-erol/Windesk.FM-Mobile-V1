@@ -15,6 +15,9 @@ class WorkOrderRequestMaterialSheetProvider extends ChangeNotifier {
   bool _isInventoryFetched = false;
   bool get isInventoryFetched => _isInventoryFetched;
 
+  bool _isWorkOrderMaterialRequested = false;
+  bool get isWorkOrderMaterialRequested => _isWorkOrderMaterialRequested;
+
   String _subject = '';
   String get subject => _subject;
 
@@ -26,6 +29,9 @@ class WorkOrderRequestMaterialSheetProvider extends ChangeNotifier {
 
   String _hintUnit = 'Malzeme Birimi';
   String get hintUnit => _hintUnit;
+
+  String _choosenMaterial = '';
+  String get choosenMaterial => _choosenMaterial;
 
   String _wantedMaterialAmount = '';
   String get wantedMaterialAmount => _wantedMaterialAmount;
@@ -49,6 +55,8 @@ class WorkOrderRequestMaterialSheetProvider extends ChangeNotifier {
   }
 
   void changeHintTexts(String value) {
+    _choosenMaterial = value;
+
     for (var i = 0; i < _workSpaceRequestedMaterialsInventory.length; i++) {
       if (value == workSpaceRequestedMaterialsInventory[i].name) {
         _hintAmount = workSpaceRequestedMaterialsInventory[i].amount.toString();
@@ -82,5 +90,53 @@ class WorkOrderRequestMaterialSheetProvider extends ChangeNotifier {
 
     _isLoading = false;
     notifyListeners();
+  }
+
+  void addRequestedMaterial(String workSpaceId, String taskId) async {
+    if (_wantedMaterialAmount == '0' || _wantedMaterialAmount.isEmpty || _subject.isEmpty || _hintAmount.isEmpty || _hintAmount == '0') return;
+
+    _isLoading = true;
+    notifyListeners();
+
+    String userToken = await SharedManager().getString(SharedEnum.userToken);
+
+    String materialId = '';
+
+    for (var i = 0; i < _workSpaceRequestedMaterialsInventory.length; i++) {
+      if (_workSpaceRequestedMaterialsInventory[i].name == _choosenMaterial) {
+        materialId = _workSpaceRequestedMaterialsInventory[i].id.toString();
+        break;
+      }
+    }
+
+    if (materialId.isEmpty) return;
+
+    await workSpaceService
+        .requestWorkSpaceMaterial(
+          workSpaceId,
+          taskId,
+          userToken,
+          _subject,
+          _description,
+          _wantedMaterialAmount,
+          materialId,
+        )
+        .then(
+          (value) => value.fold(
+            (l) => {
+              _isWorkOrderMaterialRequested = true,
+            },
+            (r) => {
+              _isWorkOrderMaterialRequested = false,
+            },
+          ),
+        );
+
+    _isLoading = false;
+    notifyListeners();
+
+    await Future.delayed(const Duration(seconds: 1), () {
+      _isWorkOrderMaterialRequested = false;
+    });
   }
 }

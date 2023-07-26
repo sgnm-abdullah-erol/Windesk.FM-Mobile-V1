@@ -17,6 +17,7 @@ class CustomLoadingIndicator extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Align(alignment: Alignment.center, child: CircularProgressIndicator(color: APPColors.Main.blue)),
+          const SizedBox(height: 10),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,

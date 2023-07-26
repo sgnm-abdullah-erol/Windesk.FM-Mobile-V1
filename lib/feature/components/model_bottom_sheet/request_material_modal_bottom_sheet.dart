@@ -8,11 +8,16 @@ import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/provider/
 
 import '../../../product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
 import '../../constants/other/app_strings.dart';
+import '../../constants/other/snackbar_strings.dart';
 import '../buttons/custom_half_buttons.dart';
 import '../input_fields/dropdown_input_fields.dart';
+import '../snackBar/snackbar.dart';
 
 class RequestMaterialBottomSheet extends StatelessWidget {
-  const RequestMaterialBottomSheet({super.key});
+  const RequestMaterialBottomSheet({super.key, required this.taskId, required this.workSpaceId});
+
+  final String taskId;
+  final String workSpaceId;
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +31,10 @@ class RequestMaterialBottomSheet extends StatelessWidget {
           child: Consumer<WorkOrderRequestMaterialSheetProvider>(builder: ((context, value, child) {
             SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
               value.isInventoryFetched ? null : value.fetchRequestedMaterials();
-              // value.isMaterialAdded ? snackBar(context, SnackbarStrings.materialAdded, 'success') : null;
+              value.isWorkOrderMaterialRequested ? snackBar(context, SnackbarStrings.materialRequested, 'success') : null;
             });
 
-            return value.isLoading ? const CustomLoadingIndicator() : _BodyWidget(value: value);
+            return value.isLoading ? const CustomLoadingIndicator() : _BodyWidget(value: value, workSpaceId: workSpaceId, taskId: taskId);
           })),
         ),
       ),
@@ -38,9 +43,11 @@ class RequestMaterialBottomSheet extends StatelessWidget {
 }
 
 class _BodyWidget extends StatelessWidget {
-  const _BodyWidget({required this.value});
+  const _BodyWidget({required this.value, required this.workSpaceId, required this.taskId});
 
   final WorkOrderRequestMaterialSheetProvider value;
+  final String workSpaceId;
+  final String taskId;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +63,7 @@ class _BodyWidget extends StatelessWidget {
               Navigator.of(context).pop();
             },
             rightOnPressed: () {
-              // value.addSparepart(taskId);
+              value.addRequestedMaterial(workSpaceId, taskId);
             },
           ),
         ),

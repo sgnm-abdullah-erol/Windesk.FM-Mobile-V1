@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, unused_local_variable
+// ignore_for_file: avoid_print, unused_local_variable, no_leading_underscores_for_local_identifiers
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -13,15 +13,11 @@ class FirebaseNotification {
     await Firebase.initializeApp();
 
     FirebaseMessaging messaging = FirebaseMessaging.instance;
-    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-        FlutterLocalNotificationsPlugin();
+    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
     final onNotifications = BehaviorSubject<String?>();
 
-    FirebaseMessaging.onBackgroundMessage((message) =>
-        LocalNotification.showNotification(
-            title: "message.notification?.title",
-            body: "message.notification?.body",
-            payload: 'asd'));
+    FirebaseMessaging.onBackgroundMessage(
+        (message) => LocalNotification.showNotification(title: "message.notification?.title", body: "message.notification?.body", payload: 'asd'));
     FirebaseMessaging.instance.getInitialMessage().then((message) {
       if (message != null) {
         RemoteNotification? notification = message.notification;
@@ -54,11 +50,9 @@ class FirebaseNotification {
       }
     });
 
-    const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
+    const AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('@mipmap/ic_launcher');
 
-    final InitializationSettings initializationSettings =
-        InitializationSettings(
+    const InitializationSettings initializationSettings = InitializationSettings(
       android: initializationSettingsAndroid,
       iOS: DarwinInitializationSettings(),
     );
@@ -66,20 +60,19 @@ class FirebaseNotification {
     await flutterLocalNotificationsPlugin.initialize(initializationSettings);
 
     void onClickedNotification(String? payload) {
-      print('Foreground HOME Payload : ' + payload.toString());
+      print('Foreground HOME Payload : $payload');
       String data = payload.toString();
-      final splitted_data = data.split('/-*-/');
-      String title = splitted_data[0];
-      String body = splitted_data[1];
-      String module = splitted_data[2];
-      String code = splitted_data[3];
+      final splittedData = data.split('/-*-/');
+      String title = splittedData[0];
+      String body = splittedData[1];
+      String module = splittedData[2];
+      String code = splittedData[3];
     }
 
     onNotifications.stream.listen(onClickedNotification);
 
 // Lisitnening to the background messages
-    Future<void> _firebaseMessagingBackgroundHandler(
-        RemoteMessage message) async {
+    Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
       await Firebase.initializeApp();
 
       print("Handling a background message: ${message.messageId}");
@@ -93,16 +86,12 @@ class FirebaseNotification {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       print('Got a message whilst in the foreground!');
       print('Message data Home: ${message.data}');
-      NotificationDetails notificationDetails = NotificationDetails(
+      NotificationDetails notificationDetails = const NotificationDetails(
         android: AndroidNotificationDetails('channelId', 'channelName'),
         iOS: DarwinNotificationDetails(),
       );
-      await FlutterLocalNotificationsPlugin().show(
-          1,
-          message.notification?.title,
-          message.notification?.body,
-          notificationDetails,
-          payload: message.data['route']);
+      await FlutterLocalNotificationsPlugin()
+          .show(1, message.notification?.title, message.notification?.body, notificationDetails, payload: message.data['route']);
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
