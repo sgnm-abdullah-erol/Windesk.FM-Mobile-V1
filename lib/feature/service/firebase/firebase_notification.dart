@@ -13,11 +13,15 @@ class FirebaseNotification {
     await Firebase.initializeApp();
 
     FirebaseMessaging messaging = FirebaseMessaging.instance;
-    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+        FlutterLocalNotificationsPlugin();
     final onNotifications = BehaviorSubject<String?>();
 
-    FirebaseMessaging.onBackgroundMessage(
-        (message) => LocalNotification.showNotification(title: "message.notification?.title", body: "message.notification?.body", payload: 'asd'));
+    FirebaseMessaging.onBackgroundMessage((message) =>
+        LocalNotification.showNotification(
+            title: "message.notification?.title",
+            body: "message.notification?.body",
+            payload: 'asd'));
     FirebaseMessaging.instance.getInitialMessage().then((message) {
       if (message != null) {
         RemoteNotification? notification = message.notification;
@@ -41,7 +45,7 @@ class FirebaseNotification {
     print('fcm.token : ');
     print(await messaging.getToken());
     String? fbtoken = await messaging.getToken();
-
+    print(fbtoken);
     FirebaseMessaging.instance.getInitialMessage().then((message) {
       if (message != null) {
         RemoteNotification? notification = message.notification;
@@ -50,14 +54,24 @@ class FirebaseNotification {
       }
     });
 
-    const AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('@mipmap/ic_launcher');
-
-    const InitializationSettings initializationSettings = InitializationSettings(
-      android: initializationSettingsAndroid,
-      iOS: DarwinInitializationSettings(),
+    const AndroidInitializationSettings initializationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+    const iosInitializationSetting = DarwinInitializationSettings(
+      requestAlertPermission: true,
+      requestBadgePermission: true,
+      requestSoundPermission: true,
+      requestCriticalPermission: true,
     );
 
-    await flutterLocalNotificationsPlugin.initialize(initializationSettings);
+    const InitializationSettings initializationSettings =
+        InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: iosInitializationSetting,
+    );
+
+    await flutterLocalNotificationsPlugin.initialize(
+      initializationSettings,
+    );
 
     void onClickedNotification(String? payload) {
       print('Foreground HOME Payload : $payload');
@@ -72,7 +86,8 @@ class FirebaseNotification {
     onNotifications.stream.listen(onClickedNotification);
 
 // Lisitnening to the background messages
-    Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+    Future<void> _firebaseMessagingBackgroundHandler(
+        RemoteMessage message) async {
       await Firebase.initializeApp();
 
       print("Handling a background message: ${message.messageId}");
@@ -86,12 +101,21 @@ class FirebaseNotification {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       print('Got a message whilst in the foreground!');
       print('Message data Home: ${message.data}');
-      NotificationDetails notificationDetails = const NotificationDetails(
-        android: AndroidNotificationDetails('channelId', 'channelName'),
-        iOS: DarwinNotificationDetails(),
+      NotificationDetails notificationDetails = NotificationDetails(
+        android: AndroidNotificationDetails(
+          '1',
+          'channel name',
+          importance: Importance.max,
+        ),
+        iOS: DarwinNotificationDetails(
+          presentAlert: true,
+          presentBadge: true,
+          presentSound: true,
+        ),
       );
-      await FlutterLocalNotificationsPlugin()
-          .show(1, message.notification?.title, message.notification?.body, notificationDetails, payload: message.data['route']);
+
+      LocalNotification.showNotification(
+          title: 'title', body: 'body', payload: 'asd');
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {

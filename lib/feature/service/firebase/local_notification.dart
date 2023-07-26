@@ -15,7 +15,7 @@ class LocalNotification {
   }
 
   static Future showNotification({
-    int id = 0,
+    int id = 1,
     String? title,
     String? body,
     String? payload,
