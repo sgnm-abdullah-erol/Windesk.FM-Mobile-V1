@@ -69,6 +69,7 @@ class WorkOrderListProvider extends ChangeNotifier {
       _isMyGroupWorkOrdersDataFetched = true;
     }
     _isLoading = false;
+
     notifyListeners();
   }
 

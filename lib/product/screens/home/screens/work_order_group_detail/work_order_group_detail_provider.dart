@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'package:flutter/material.dart';
 import 'package:vm_fm_4/feature/database/shared_manager.dart';
 import 'package:vm_fm_4/feature/enums/shared_enums.dart';
@@ -20,14 +22,16 @@ class WorkOrderGroupDetailProvider extends ChangeNotifier {
 
   void getGroupSpaceOrders(String requestId) async {
     _isLoading = true;
+    _isGroupWorkOrdersDataFetched = true;
     notifyListeners();
 
     final userToken = await SharedManager().getString(SharedEnum.userToken);
 
-    _workSpaceService.getWorkSpaceDetailsByRequestType(requestId, 1, userToken).then((value) {
+    await _workSpaceService.getWorkSpaceDetailsByRequestType(requestId, 1, userToken).then((value) {
       value.fold(
         (l) {
           _workSpaceGroupWorkOrdersList = l;
+          notifyListeners();
         },
         (r) {},
       );

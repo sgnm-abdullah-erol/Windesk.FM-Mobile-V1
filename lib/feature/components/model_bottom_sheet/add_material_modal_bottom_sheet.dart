@@ -1,59 +1,75 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/provider/work_order_add_material_sheet_provider.dart';
+import 'package:vm_fm_4/product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
+import '../../constants/other/snackbar_strings.dart';
 import '../buttons/custom_half_buttons.dart';
 import '../input_fields/dropdown_input_fields.dart';
 import '../input_fields/text_fields_input_underline.dart';
 
 import '../../constants/other/app_strings.dart';
 import '../../extensions/context_extension.dart';
+import '../snackBar/snackbar.dart';
 
-class AddMaterialModalBottomSheet extends StatefulWidget {
-  const AddMaterialModalBottomSheet({
-    super.key,
-    required this.wareHouseList,
-    required this.selectAmount,
-    required this.approveButton,
-  });
-  final List<String> wareHouseList;
-  final Function selectAmount;
-  final Function approveButton;
+class AddMaterialModalBottomSheet extends StatelessWidget {
+  const AddMaterialModalBottomSheet({super.key, required this.taskId});
 
-  @override
-  State<AddMaterialModalBottomSheet> createState() => _AddMaterialModalBottomSheetState();
-}
+  final String taskId;
 
-class _AddMaterialModalBottomSheetState extends State<AddMaterialModalBottomSheet> {
   @override
   Widget build(BuildContext context) {
-    return _bodyWidget(context);
-  }
-
-  _bodyWidget(BuildContext context) {
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.6,
       width: context.width,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
-        child: Column(
-          children: [
-            const Expanded(flex: 70, child: _Inputs()),
-            Expanded(
-              flex: 70,
-              child: CustomHalfButtons(
-                leftTitle: const Text(AppStrings.cancel),
-                rightTitle: const Text(AppStrings.cancel),
-                leftOnPressed: () {},
-                rightOnPressed: () {},
-              ),
-            ),
-          ],
+        child: ChangeNotifierProvider(
+          create: (context) => WorkOrderAddMaterialSheetProvider(),
+          child: Consumer<WorkOrderAddMaterialSheetProvider>(builder: ((context, value, child) {
+            SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+              value.isInventoryFetched ? null : value.getUserInventory();
+              value.isMaterialAdded ? snackBar(context, SnackbarStrings.materialAdded, 'success') : null;
+            });
+
+            return value.isLoading ? const CustomLoadingIndicator() : _bodyWidget(context, value);
+          })),
         ),
       ),
+    );
+  }
+
+  _bodyWidget(BuildContext context, WorkOrderAddMaterialSheetProvider value) {
+    return Column(
+      children: [
+        Expanded(flex: 70, child: _Inputs(value.workSpaceUserInventoryLabelList, value)),
+        Expanded(
+          flex: 70,
+          child: CustomHalfButtons(
+            leftTitle: const Text(AppStrings.cancel),
+            rightTitle: const Text(AppStrings.approve),
+            leftOnPressed: () {
+              Navigator.of(context).pop();
+            },
+            rightOnPressed: () {
+              value.addSparepart(taskId);
+            },
+          ),
+        ),
+      ],
     );
   }
 }
 
 class _Inputs extends StatelessWidget {
-  const _Inputs();
+  const _Inputs(this.wareHouseList, this.value);
+
+  final List<String> wareHouseList;
+  final WorkOrderAddMaterialSheetProvider value;
+
+  final String _materialList = 'Malzeme Listesi';
+  final String _wantedMaterialAmount = 'Malzeme Miktari';
 
   @override
   Widget build(BuildContext context) {
@@ -62,34 +78,36 @@ class _Inputs extends StatelessWidget {
         Expanded(
           flex: 30,
           child: DropDownInputFields(
-            labelText: 'Malzeme Listesi',
-            onChangedFunction: (newValue) {},
+            labelText: _materialList,
+            onChangedFunction: value.setHintTexts,
             rightIcon: Icons.arrow_downward,
-            dropDownArray: const ['1', '2', '3'],
+            dropDownArray: wareHouseList.isEmpty ? [''] : wareHouseList,
           ),
         ),
         Expanded(
           flex: 20,
           child: TextFieldsInputUnderline(
-            onChanged: (newValue) {},
-            hintText: 'Malzeme miktari',
+            onChanged: (val) {},
+            hintText: value.hintAmount,
             enabled: false,
           ),
         ),
         Expanded(
           flex: 20,
           child: TextFieldsInputUnderline(
-            onChanged: (newValue) {},
-            hintText: 'Malzeme unit',
+            onChanged: (val) {},
+            hintText: value.hintUnit,
             enabled: false,
           ),
         ),
         Expanded(
           flex: 20,
           child: TextFieldsInputUnderline(
-            onChanged: (newValue) {},
-            hintText: 'Kullanici tarafindan girilecek malzeme miktari',
-            enabled: false,
+            onChanged: value.changeWantedMaterialAmount,
+            hintText: _wantedMaterialAmount,
+            enabled: true,
+            keyboardType: TextInputType.number,
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           ),
         ),
       ],

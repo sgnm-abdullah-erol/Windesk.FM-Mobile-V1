@@ -9,6 +9,7 @@ import '../../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../../feature/constants/other/app_strings.dart';
 import '../../../../../../feature/constants/other/colors.dart';
 import '../provider/work_order_detail_provider.dart';
+import '../provider/work_order_detail_service_provider.dart';
 import 'tables/data_table_requsted_materials.dart';
 
 class RequestMaterialAccordion extends StatelessWidget {
@@ -24,6 +25,9 @@ class RequestMaterialAccordion extends StatelessWidget {
       children: [
         AccordionSection(
           isOpen: false,
+          contentBorderWidth: 0,
+          contentHorizontalPadding: 0,
+          contentVerticalPadding: 0,
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.add, color: APPColors.Main.white),
           header: Text(AppStrings.requstMaterial, style: TextStyle(color: APPColors.Main.white)),
@@ -31,11 +35,7 @@ class RequestMaterialAccordion extends StatelessWidget {
           onOpenSection: () {
             ShowModalBottomSheet().show(
               context,
-              AddMaterialModalBottomSheet(
-                wareHouseList: const ['depo1', 'depo2', 'depo3'],
-                selectAmount: () {},
-                approveButton: () {},
-              ),
+              AddMaterialModalBottomSheet(taskId: provider.detail.task?.id.toString() ?? '0'),
             );
           },
           content: const SizedBox(height: 0),
@@ -45,6 +45,10 @@ class RequestMaterialAccordion extends StatelessWidget {
           leftIcon: Icon(AppIcons.tool, color: APPColors.Main.white),
           header: Text(AppStrings.requstedMaterials, style: TextStyle(color: APPColors.Main.white)),
           rightIcon: const Icon(AppIcons.arrowDown, size: 0),
+          onOpenSection: () {
+            Provider.of<WorkOrderDetailServiceProvider>(context, listen: false).update();
+            provider.userClickedRequestedMaterialFunction();
+          },
           content: Consumer<WorkOrderDetailServiceProvider>(
             builder: (context, value, child) {
               SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -58,7 +62,7 @@ class RequestMaterialAccordion extends StatelessWidget {
                   ? const Center(child: CircularProgressIndicator())
                   : DataTableAccordionRequstedMaterials(
                       delete: () {},
-                      data: provider.woEffortList ?? [],
+                      data: value.woRequestedMaterials,
                     );
             },
           ),

@@ -10,4 +10,12 @@ class NullCheckWidget {
       return FullFilledWidget;
     }
   }
+
+  Widget isLeafFalse(bool? isLeafFalse, Widget FullFilledWidget) {
+    if (isLeafFalse == true) {
+      return Container();
+    } else {
+      return FullFilledWidget;
+    }
+  }
 }

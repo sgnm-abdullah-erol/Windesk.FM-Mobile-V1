@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:vm_fm_4/feature/models/work_space/work_space_requested_materials.dart';
 
 import '../../../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../../../feature/constants/other/colors.dart';
-import '../../../../../../../feature/models/work_space/work_space_efforts.dart';
 
 class DataTableAccordionRequstedMaterials extends StatelessWidget {
   DataTableAccordionRequstedMaterials({super.key, required this.delete, required this.data});
 
   final Function delete;
-  final List<String> _labelList = ['id', 'Tip', 'İsim', 'Süre', 'Sil'];
-  final List<WorkSpaceEfforts> data;
+  final List<String> _labelList = ['id', 'İsim', 'Ünite', 'Miktar', 'Sil'];
+  final List<WorkSpaceRequestedMaterials> data;
 
   final String _nonKnownName = 'Bilinmiyor';
   final String _noEffortType = 'Çalışma Türü Belirtilmemiş';
@@ -38,9 +38,9 @@ class DataTableAccordionRequstedMaterials extends StatelessWidget {
           for (var i = 0; i < (data.length); i++) ...{
             DataRow(cells: [
               DataCell(Text(data[i].id.toString(), style: _cellTextStyle())),
-              DataCell(Text(data[i].effortType ?? _noEffortType, style: _cellTextStyle())),
-              DataCell(Text(data[i].user ?? _nonKnownName, style: _cellTextStyle())),
-              DataCell(Text(data[i].effortDuration.toString(), style: _cellTextStyle())),
+              DataCell(Text(data[i].name ?? _noEffortType, style: _cellTextStyle())),
+              DataCell(Text(data[i].measurementUnit ?? _nonKnownName, style: _cellTextStyle())),
+              DataCell(Text(data[i].amount.toString(), style: _cellTextStyle())),
               DataCell(
                 IconButton(
                   onPressed: () => delete(),

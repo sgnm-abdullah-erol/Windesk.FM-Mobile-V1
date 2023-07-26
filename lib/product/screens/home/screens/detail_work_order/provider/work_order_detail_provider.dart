@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../../../../../feature/injection.dart';
-import '../../../../../../feature/models/work_space/work_space_efforts.dart';
 
 import '../../../../../../feature/database/shared_manager.dart';
 import '../../../../../../feature/enums/shared_enums.dart';
+import '../../../../../../feature/injection.dart';
 import '../../../../../../feature/models/work_space/work_space_detail.dart';
-import '../../../../../../feature/models/work_space/work_space_spareparts.dart';
+import '../../../../../../feature/models/work_space/work_space_efforts.dart';
+import '../../../../../../feature/models/work_space/work_space_user_inventory.dart';
 import '../../../../../../feature/service/global_services.dart/work_space_service/work_space_service_repository_impl.dart';
 
 class WorkOrderDetailProvider extends ChangeNotifier {
@@ -47,6 +47,10 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   }
 
   // for efforts
+  // work space effort list
+  List<WorkSpaceEfforts>? _woEffortList;
+  List<WorkSpaceEfforts>? get woEffortList => _woEffortList;
+
   bool _effortAdded = false;
   bool get effortAdded => _effortAdded;
 
@@ -119,119 +123,31 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     });
   }
 
-  // work space effort list
-  List<WorkSpaceEfforts>? _woEffortList;
-  List<WorkSpaceEfforts>? get woEffortList => _woEffortList;
+  // for spareparts
+  WorkSpaceUserInventory _userInventoryList = const WorkSpaceUserInventory();
+  WorkSpaceUserInventory get userInventoryList => _userInventoryList;
 
-  bool _isWorkOrderEffortListFetched = false;
-  bool get isWorkOrderEffortListFetched => _isWorkOrderEffortListFetched;
+  List<String> workSpaceUserInventoryLabelList = [];
 
-  void getEfforts(String taskId, String nextStateId) async {
-    String userToken = await SharedManager().getString(SharedEnum.userToken);
-
+  void getUserInventory() async {
     _isLoading = true;
-    _isWorkOrderEffortListFetched = true;
-    notifyListeners();
-    final result = await workSpaceService.getWorkSpaceEfforts(taskId, userToken);
-
-    result.fold(
-      (l) => {
-        _woEffortList = l,
-        notifyListeners(),
-      },
-      (r) {},
-    );
-    _isLoading = false;
-    notifyListeners();
-  }
-}
-
-class WorkOrderDetailServiceProvider extends ChangeNotifier {
-  final WorkSpaceServiceRepositoryImpl workSpaceService = Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
-
-  bool _isEffortListFetched = false;
-  bool get isEffortListFetched => _isEffortListFetched;
-
-  bool _isSparepartsFetched = false;
-  bool get isMaterialPartsFetched => _isSparepartsFetched;
-
-  bool _isRequestedListFetched = false;
-  bool get isRequestedMaterialListFetched => _isRequestedListFetched;
-
-  bool _isDocumantListFetched = false;
-  bool get isDocumantListFetched => _isDocumantListFetched;
-
-  bool _isLoading = false;
-  bool get isLoading => _isLoading;
-
-  List<WorkSpaceEfforts>? _woEffortList;
-  List<WorkSpaceEfforts>? get woEffortList => _woEffortList;
-
-  List<WorkSpaceSpareparts>? _woSpareparts;
-  List<WorkSpaceSpareparts>? get woSpareparts => _woSpareparts;
-
-  void update() {
-    notifyListeners();
-  }
-
-  void fetchDocumants() {
-    _isLoading = true;
-    _isDocumantListFetched = true;
-    notifyListeners();
-
-    Future.delayed(const Duration(seconds: 5), () {
-      _isLoading = false;
-      notifyListeners();
-    });
-  }
-
-  void fetchSpareparts(String taskId) async {
-    _isLoading = true;
-    _isSparepartsFetched = true;
     notifyListeners();
 
     String userToken = await SharedManager().getString(SharedEnum.userToken);
-    final result = await workSpaceService.getWorkSpaceSpareparts(taskId, userToken);
+
+    final result = await workSpaceService.getWorkSpaceUserInventory(userToken);
 
     result.fold(
       (l) => {
-        _woSpareparts = l,
+        _userInventoryList = l,
+        for (var i = 0; i < (_userInventoryList.materials?.length ?? 0); i++)
+          {
+            workSpaceUserInventoryLabelList.add(_userInventoryList.materials?[i].properties?.name ?? ''),
+          },
       },
-      (r) => {
-        _isSparepartsFetched = false,
-      },
+      (r) => {},
     );
 
-    _isLoading = false;
-    notifyListeners();
-  }
-
-  void fetchRequestedMaterials() {
-    _isLoading = true;
-    _isRequestedListFetched = true;
-    notifyListeners();
-
-    Future.delayed(const Duration(seconds: 5), () {
-      _isLoading = false;
-      notifyListeners();
-    });
-  }
-
-  void fetchEfforts(String taskId, String nextStateId) async {
-    _isLoading = true;
-    _isEffortListFetched = true;
-
-    notifyListeners();
-
-    String userToken = await SharedManager().getString(SharedEnum.userToken);
-    final result = await workSpaceService.getWorkSpaceEfforts(taskId, userToken);
-
-    result.fold(
-      (l) => {
-        _woEffortList = l,
-      },
-      (r) {},
-    );
     _isLoading = false;
     notifyListeners();
   }

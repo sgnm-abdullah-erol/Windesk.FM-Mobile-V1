@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../wo_create_location_children_model.dart';
+part of '../wo_create_leaf_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-WoCreateLocationChildrenModel _$WoCreateLocationChildrenModelFromJson(Map<String, dynamic> json) => WoCreateLocationChildrenModel(
-      labels: (json['labels'] as List<dynamic>?)?.map((e) => e as String).toList(),
+WoCreateLeafModel _$WoCreateLeafModelFromJson(Map<String, dynamic> json) =>
+    WoCreateLeafModel(
       contractor: json['contractor'] as String?,
       code: json['code'] as String?,
       externalSiteObject: json['externalSiteObject'] as String?,
@@ -16,14 +16,16 @@ WoCreateLocationChildrenModel _$WoCreateLocationChildrenModelFromJson(Map<String
       description: json['description'] as String?,
       siteName: json['siteName'] as String?,
       isActive: json['isActive'] as bool?,
-      operator: json['operator'] as String?,
+      temperaturesOperator: json['temperaturesOperator'] as String?,
       handoverDate: json['handoverDate'] as String?,
-      createdAt: json['createdAt'] as String?,
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
       isDeleted: json['isDeleted'] as bool?,
       operationStartDate: json['operationStartDate'] as String?,
       externalIdentifier: json['externalIdentifier'] as String?,
       canDelete: json['canDelete'] as bool?,
-      tag: (json['tag'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      tag: json['tag'] as List<dynamic>?,
       externalFacilityIdentifier: json['externalFacilityIdentifier'] as String?,
       key: json['key'] as String?,
       owner: json['owner'] as String?,
@@ -42,10 +44,14 @@ WoCreateLocationChildrenModel _$WoCreateLocationChildrenModelFromJson(Map<String
       status: json['status'] as String?,
       id: json['id'] as int?,
       leaf: json['leaf'] as bool?,
+      children: (json['children'] as List<dynamic>?)
+          ?.map((e) =>
+              WoCreateLeafChildrenModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
-Map<String, dynamic> _$WoCreateLocationChildrenModelToJson(WoCreateLocationChildrenModel instance) => <String, dynamic>{
-      'labels': instance.labels,
+Map<String, dynamic> _$WoCreateLeafModelToJson(WoCreateLeafModel instance) =>
+    <String, dynamic>{
       'contractor': instance.contractor,
       'code': instance.code,
       'externalSiteObject': instance.externalSiteObject,
@@ -54,9 +60,9 @@ Map<String, dynamic> _$WoCreateLocationChildrenModelToJson(WoCreateLocationChild
       'description': instance.description,
       'siteName': instance.siteName,
       'isActive': instance.isActive,
-      'operator': instance.operator,
+      'temperaturesOperator': instance.temperaturesOperator,
       'handoverDate': instance.handoverDate,
-      'createdAt': instance.createdAt,
+      'createdAt': instance.createdAt?.toIso8601String(),
       'isDeleted': instance.isDeleted,
       'operationStartDate': instance.operationStartDate,
       'externalIdentifier': instance.externalIdentifier,
@@ -80,4 +86,5 @@ Map<String, dynamic> _$WoCreateLocationChildrenModelToJson(WoCreateLocationChild
       'status': instance.status,
       'id': instance.id,
       'leaf': instance.leaf,
+      'children': instance.children,
     };

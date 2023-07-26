@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:vm_fm_4/feature/models/work_space/work_space_requested_materials.dart';
 import 'package:vm_fm_4/feature/models/work_space/work_space_spareparts.dart';
+import 'package:vm_fm_4/feature/models/work_space/work_space_user_inventory.dart';
 
 import '../../../exceptions/custom_service_exceptions.dart';
 import '../../../models/work_space/work_space_appendings.dart';
@@ -14,7 +16,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getMyWorkSpaces(String id, String token, int page) async {
     List<WorkSpaceDetail> workSpaceDetailList = [];
 
-    String url = 'http://localhost:3015/task/workSpace/task/state/List/for/assigned/user/pagination/$id';
+    String url = 'http://10.0.2.2:3015/task/workSpace/task/state/List/for/assigned/user/pagination/$id';
 
     try {
       final response = await super.dio.get(
@@ -46,7 +48,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   Future<Either<WorkSpaceMyGroupDemandList, CustomServiceException>> getMyGroupDemandList(String token) async {
     WorkSpaceMyGroupDemandList workSpaceMyGroupDemandList;
 
-    String url = 'http://localhost:3015/classification/getRequestTypeWithTaskCount';
+    String url = 'http://10.0.2.2:3015/classification/getRequestTypeWithTaskCount';
 
     try {
       final response = await super.dio.post(
@@ -76,7 +78,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   @override
   Future<Either<List<WorkSpacePendiks>, CustomServiceException>> getWorkSpacePendiks(String id, String token, int page) async {
     List<WorkSpacePendiks> workSpaceAppendings = [];
-    String url = 'http://localhost:3015/task/workSpace/task/state/List/can/be/approve/current/user/pagination/$id';
+    String url = 'http://10.0.2.2:3015/task/workSpace/task/state/List/can/be/approve/current/user/pagination/$id';
 
     try {
       final response = await super.dio.get(
@@ -106,7 +108,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   @override
   Future<Either<WorkSpaceDetail, CustomServiceException>> getWorkSpaceWithSearch(String workOrderCode, String token) async {
     List<WorkSpaceDetail> workSpaceDetailList;
-    String url = 'http://localhost:3015/task/workSpace/task/state/List/for/assigned/user/pagination/swagger/search?&searchString=$workOrderCode';
+    String url = 'http://10.0.2.2:3015/task/workSpace/task/state/List/for/assigned/user/pagination/swagger/search?&searchString=$workOrderCode';
 
     try {
       final response = await super.dio.get(
@@ -133,7 +135,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   @override
   Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getWorkSpaceDetailsByRequestType(String requestId, int page, String token) async {
     List<WorkSpaceDetail> workSpaceDetailList = [];
-    String url = 'http://localhost:3015/task/mobile/getTasksByRequestType/swagger/$requestId?page=1&limit=10&orderBy=DESC&orderByColumn=updateAt';
+    String url = 'http://10.0.2.2:3015/task/mobile/getTasksByRequestType/swagger/$requestId?page=1&limit=10&orderBy=DESC&orderByColumn=updateAt';
 
     try {
       final response = await super.dio.get(
@@ -164,7 +166,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   @override
   Future<Either<List<WorkSpaceEfforts>, CustomServiceException>> getWorkSpaceEfforts(String taskId, String token) async {
     List<WorkSpaceEfforts> workSpaceEfforts;
-    String url = 'http://localhost:3015/task/mobile/getEffortsByTaskId/$taskId';
+    String url = 'http://10.0.2.2:3015/task/mobile/getEffortsByTaskId/$taskId';
 
     try {
       final response = await super.dio.get(
@@ -271,6 +273,109 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
         workSpaceSpareparts = WorkSpaceSpareparts.fromJsonList(data);
 
         return Left(workSpaceSpareparts);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+      }
+    } catch (e) {
+      super.logger.i(e);
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<WorkSpaceUserInventory, CustomServiceException>> getWorkSpaceUserInventory(String token) async {
+    WorkSpaceUserInventory workSpaceUserInventory;
+    String url = 'http://10.0.2.2:3012/inventory/userInventory';
+
+    try {
+      final response = await super.dio.get(
+            url,
+            data: {},
+            options: Options(
+              headers: {'authorization': 'Bearer $token'},
+            ),
+          );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = response.data;
+        workSpaceUserInventory = WorkSpaceUserInventory.fromJson(data);
+
+        return Left(workSpaceUserInventory);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+      }
+    } catch (e) {
+      super.logger.i(e);
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<bool, CustomServiceException>> addWorkSpaceSpareparts(String taskId, String token, String sparePartId, String amount) async {
+    bool result;
+    String url = 'http://10.0.2.2:3015/task/add/node/to/task';
+
+    try {
+      final response = await super.dio.post(
+            url,
+            data: [
+              {
+                "label": ["Task"],
+                "identifier": taskId,
+                "variableName": "usedSpareOf",
+                "value": [
+                  {
+                    "id": sparePartId,
+                    "amount": amount,
+                  }
+                ]
+              }
+            ],
+            options: Options(
+              headers: {'authorization': 'Bearer $token'},
+              contentType: Headers.jsonContentType,
+            ),
+          );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = response.data;
+
+        if (data == 'added') {
+          result = true;
+        } else {
+          result = false;
+        }
+
+        return Left(result);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+      }
+    } catch (e) {
+      super.logger.i(e);
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<List<WorkSpaceRequestedMaterials>, CustomServiceException>> getWorkSpaceRequestedMaterials(String token, int page) async {
+    List<WorkSpaceRequestedMaterials> workSpaceRequestedMaterials;
+    String url =
+        'http://10.0.2.2:3014/types/getMobileAllTypesWithMeasurementUnitAndAmount?page=$page&limit=10&orderBy=ASC&orderByColumn=name&superSet=Spare';
+
+    try {
+      final response = await super.dio.get(
+            url,
+            data: {},
+            options: Options(
+              headers: {'authorization': 'Bearer $token'},
+            ),
+          );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = response.data;
+        workSpaceRequestedMaterials = WorkSpaceRequestedMaterials.fromJsonList(data) ?? [];
+
+        return Left(workSpaceRequestedMaterials);
       } else {
         return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
       }

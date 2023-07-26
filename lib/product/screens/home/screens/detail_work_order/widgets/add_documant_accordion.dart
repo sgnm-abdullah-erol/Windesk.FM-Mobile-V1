@@ -10,6 +10,7 @@ import '../../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../../feature/constants/other/app_strings.dart';
 import '../../../../../../feature/constants/other/colors.dart';
 import '../provider/work_order_detail_provider.dart';
+import '../provider/work_order_detail_service_provider.dart';
 import 'tables/data_table_accordion_documants.dart';
 
 class AddDocumantAccordion extends StatelessWidget {
@@ -25,6 +26,9 @@ class AddDocumantAccordion extends StatelessWidget {
       maxOpenSections: 1,
       children: [
         AccordionSection(
+          contentBorderWidth: 0,
+          contentHorizontalPadding: 0,
+          contentVerticalPadding: 0,
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.camera, color: APPColors.Main.white),
           header: Text(AppStrings.addImage, style: TextStyle(color: APPColors.Main.white)),
@@ -35,6 +39,9 @@ class AddDocumantAccordion extends StatelessWidget {
           content: const SizedBox(height: 0),
         ),
         AccordionSection(
+          contentBorderWidth: 0,
+          contentHorizontalPadding: 0,
+          contentVerticalPadding: 0,
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.pictureAsPdf, color: APPColors.Main.white),
           header: Text(AppStrings.addPdf, style: TextStyle(color: APPColors.Main.white)),

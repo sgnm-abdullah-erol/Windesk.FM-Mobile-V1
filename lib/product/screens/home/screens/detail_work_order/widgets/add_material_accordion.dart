@@ -10,6 +10,7 @@ import '../../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../../feature/constants/other/app_strings.dart';
 import '../../../../../../feature/constants/other/colors.dart';
 import '../provider/work_order_detail_provider.dart';
+import '../provider/work_order_detail_service_provider.dart';
 
 class AddMaterialAccordion extends StatelessWidget {
   const AddMaterialAccordion({super.key, required this.provider});
@@ -24,19 +25,17 @@ class AddMaterialAccordion extends StatelessWidget {
       children: [
         AccordionSection(
           isOpen: false,
+          contentBorderWidth: 0,
+          contentHorizontalPadding: 0,
+          contentVerticalPadding: 0,
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.add, color: APPColors.Main.white),
           header: Text(AppStrings.addMaterial, style: TextStyle(color: APPColors.Main.white)),
           rightIcon: const Icon(AppIcons.arrowDown, size: 0),
-          onOpenSection: () {
-            //TODO GET WAREHOUSE LIST
+          onOpenSection: () async {
             ShowModalBottomSheet().show(
               context,
-              AddMaterialModalBottomSheet(
-                wareHouseList: {'asd', 'SADSAD'}.toList(),
-                selectAmount: () {},
-                approveButton: () {},
-              ),
+              AddMaterialModalBottomSheet(taskId: provider.detail.task?.id.toString() ?? '0'),
             );
           },
           content: const SizedBox(height: 0),

@@ -13,6 +13,7 @@ import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/widgets/t
 
 import '../../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../../feature/constants/other/colors.dart';
+import '../provider/work_order_detail_service_provider.dart';
 
 class AddEffortsAccordion extends StatelessWidget {
   const AddEffortsAccordion({super.key, required this.provider});
