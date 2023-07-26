@@ -44,6 +44,31 @@ class RequestMaterialAccordion extends StatelessWidget {
         AccordionSection(
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.tool, color: APPColors.Main.white),
+          header: Text(AppStrings.approvedRequestMaterials, style: TextStyle(color: APPColors.Main.white)),
+          rightIcon: const Icon(AppIcons.arrowDown, size: 0),
+          onOpenSection: () {},
+          content: Consumer<WorkOrderDetailServiceProvider>(
+            builder: (context, value, child) {
+              // SchedulerBinding.instance.addPostFrameCallback((_) {
+              //   provider.userClickedRequestedMaterial
+              //       ? value.isRequestedMaterialListFetched
+              //           ? null
+              //           : value.fetchRequestedMaterials()
+              //       : null;
+              // });
+              // return value.isLoading
+              //     ? const Center(child: CircularProgressIndicator())
+              //     : DataTableAccordionRequstedMaterials(
+              //         delete: () {},
+              //         data: value.woRequestedMaterials,
+              //       );
+              return const SizedBox();
+            },
+          ),
+        ),
+        AccordionSection(
+          headerBackgroundColor: APPColors.Accent.black,
+          leftIcon: Icon(AppIcons.tool, color: APPColors.Main.white),
           header: Text(AppStrings.requstedMaterials, style: TextStyle(color: APPColors.Main.white)),
           rightIcon: const Icon(AppIcons.arrowDown, size: 0),
           onOpenSection: () {

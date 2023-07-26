@@ -56,7 +56,6 @@ class DetailWorkOrderScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           CustomWorkSpaceDetailCard(workSpaceDetail: workSpaceDetail),
-                          // WoSummary(workSpaceDetail: widget.workSpaceDetail),
                           (workSpaceDetail.task?.user ?? '') == context.read<GlobalProvider>().userName
                               ? const SizedBox(height: 25)
                               : const SizedBox(height: 25),

@@ -5,4 +5,5 @@ enum SharedEnum {
   refreshToken,
   userToken,
   userName,
+  userId,
 }
