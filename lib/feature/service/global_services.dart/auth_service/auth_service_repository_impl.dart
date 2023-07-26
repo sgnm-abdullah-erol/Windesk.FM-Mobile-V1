@@ -9,7 +9,8 @@ import 'auth_service_repository.dart';
 
 class AuthServiceRepositoryImpl extends AuthServiceRepository {
   @override
-  Future<Either<LoginModel, CustomServiceException>> login(String username, String password) async {
+  Future<Either<LoginModel, CustomServiceException>> login(
+      String username, String password) async {
     @override
     String url = 'http://10.0.2.2:3012/user/login';
 
@@ -27,13 +28,15 @@ class AuthServiceRepositoryImpl extends AuthServiceRepository {
       return Left(loginModel);
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.loginError, statusCode: '400'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.loginError, statusCode: '400'));
     }
   }
 
   @override
-  Future<Either<bool, CustomServiceException>> logout(String refreshToken, String token) async {
-    String url = 'http://10.0.2.2:3012/user/logout';
+  Future<Either<bool, CustomServiceException>> logout(
+      String refreshToken, String token) async {
+    String url = 'http://localhost:3012/user/logout';
 
     try {
       final response = await super.dio.post(
@@ -51,20 +54,24 @@ class AuthServiceRepositoryImpl extends AuthServiceRepository {
         if (data[ServiceResponseStatusEnums.success.rawText] == true) {
           return const Left(true);
         } else {
-          return Right(CustomServiceException(message: CustomServiceMessages.logoutError, statusCode: '400'));
+          return Right(CustomServiceException(
+              message: CustomServiceMessages.logoutError, statusCode: '400'));
         }
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.logoutError, statusCode: '400'));
+        return Right(CustomServiceException(
+            message: CustomServiceMessages.logoutError, statusCode: '400'));
       }
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.logoutError, statusCode: '400'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.logoutError, statusCode: '400'));
     }
   }
 
   @override
-  Future<Either<CheckAccesTokenModel, CustomServiceException>> checkAccessToken(String token) async {
-    String url = 'http://10.0.2.2:3012/user/checkAccessToken';
+  Future<Either<CheckAccesTokenModel, CustomServiceException>> checkAccessToken(
+      String token) async {
+    String url = 'http://localhost:3012/user/checkAccessToken';
 
     try {
       final response = await super.dio.post(url,
@@ -77,15 +84,19 @@ class AuthServiceRepositoryImpl extends AuthServiceRepository {
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
 
-        CheckAccesTokenModel checkAccesTokenModel = CheckAccesTokenModel.fromJson(data);
+        CheckAccesTokenModel checkAccesTokenModel =
+            CheckAccesTokenModel.fromJson(data);
 
         return Left(checkAccesTokenModel);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.tokenChangeError, statusCode: '400'));
+        return Right(CustomServiceException(
+            message: CustomServiceMessages.tokenChangeError,
+            statusCode: '400'));
       }
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.tokenChangeError, statusCode: '400'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.tokenChangeError, statusCode: '400'));
     }
   }
 }

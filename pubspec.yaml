@@ -44,12 +44,12 @@ dependencies:
 
   # localizations
   easy_localization: ^3.0.2
-  timezone: ^0.8.0
+  timezone: ^0.9.0
 
   # firebase --for push notification
   firebase_messaging: ^14.6.4
   firebase_core: ^2.14.0
-  flutter_local_notifications: ^8.2.0
+  flutter_local_notifications: ^14.1.1
   rxdart: ^0.27.7
 
   # device info --get device info

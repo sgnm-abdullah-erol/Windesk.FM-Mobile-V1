@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>347606667309-vpj11fh0vs2eblj7l1940t7clv3aj465.apps.googleusercontent.com</string>
+	<string>347606667309-lk5atpp984ogka0n0pedto5rc1b8n4gs.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.347606667309-vpj11fh0vs2eblj7l1940t7clv3aj465</string>
+	<string>com.googleusercontent.apps.347606667309-lk5atpp984ogka0n0pedto5rc1b8n4gs</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>347606667309-oggk6s88ffuru8ndhjr1ajg6gp8e0hei.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.windesk.pppmobilev4</string>
+	<string>com.windesk.pppmobilev4fm</string>
 	<key>PROJECT_ID</key>
 	<string>ash-mobile</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,7 +31,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:347606667309:ios:4abe793dc412b3605aa8a4</string>
+	<string>1:347606667309:ios:65d764b93edfd2f35aa8a4</string>
 	<key>DATABASE_URL</key>
 	<string>https://ash-mobile.firebaseio.com</string>
 </dict>
