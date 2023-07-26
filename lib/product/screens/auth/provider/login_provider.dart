@@ -44,7 +44,6 @@ class LoginProvider extends ChangeNotifier {
         // _setUserName(context);
         _isLoginSuccess = true;
         notifyListeners();
-
         Future.delayed(const Duration(milliseconds: 1000), () {
           loginModel = login;
           _userToken = loginModel.accessToken ?? '';

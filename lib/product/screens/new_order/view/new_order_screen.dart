@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:vm_fm_4/feature/components/appbar/custom_main_appbar.dart';
 import 'package:vm_fm_4/feature/components/input_fields/dropdown_input_fields.dart';
@@ -18,10 +19,11 @@ class NewOrderScreen extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => WoCreateProvider(),
       child: Consumer<WoCreateProvider>(builder: (context, WoCreateProvider woCreateProvider, child) {
+         woCreateProvider.locationLoading ? woCreateProvider.getLocation() : null;
         return Scaffold(
           appBar: const CustomMainAppbar(title: Text(LocaleKeys.newWorkOrder)),
           body: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(20.0),
             child: Center(
               child: Column(
                 children: [
@@ -55,7 +57,7 @@ class NewOrderScreen extends StatelessWidget {
                       woCreateProvider.setLocation(newValue);
                     },
                     rightIcon: Icons.arrow_drop_down_rounded,
-                    dropDownArray: const ['asdasd', 'asd'],
+                    dropDownArray: woCreateProvider.woLocationList,
                   ),
                   Padding(
                       padding: CustomPaddings.onlyLeft,

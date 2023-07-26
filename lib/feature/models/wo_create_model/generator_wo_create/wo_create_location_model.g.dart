@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'wo_create_location_model.dart';
+part of '../wo_create_location_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

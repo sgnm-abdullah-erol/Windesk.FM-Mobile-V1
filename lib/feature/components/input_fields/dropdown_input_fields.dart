@@ -15,7 +15,7 @@ class DropDownInputFields extends StatelessWidget {
   final String labelText;
   final Function onChangedFunction;
   final IconData rightIcon;
-  final List<String> dropDownArray;
+  final List<dynamic> dropDownArray;
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
@@ -28,7 +28,7 @@ class DropDownInputFields extends StatelessWidget {
         ),
         labelText: labelText,
       ),
-      items: dropDownArray.map((String items) {
+      items: dropDownArray.map((dynamic items) {
         return DropdownMenuItem(
           value: items,
           child: Text(

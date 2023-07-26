@@ -48,4 +48,5 @@ class WoCreateLocationModel extends Equatable {
   @override
   List<Object?> get props =>
       [canDisplay, description, nodeType, isActive, createdAt, isDeleted, createdBy, name, realm, canDelete, tag, key, updatedAt, id, leaf, children];
+
 }
