@@ -48,6 +48,7 @@ class DetailWorkOrderScreen extends StatelessWidget {
             }
             if (woDetailProvider.isTaskStateChange) {
               snackBar(context, '${SnackbarStrings.taskStateChange} Yeni görev ${woDetailProvider.selectedTaskState}', 'success');
+              context.router.pop<bool>(true);
             }
 
             if (woDetailProvider.takeItOnMeSuccess) {
@@ -134,10 +135,11 @@ class _StateChangeDropDownButton extends StatelessWidget {
             if (value == true) {
               provider.changeState(val);
             } else {
-              provider.update();
+              // fix this
             }
           });
         },
+        value: provider.dropdownValue,
         rightIcon: AppIcons.arrowDown,
         dropDownArray: provider.workSpaceUserTaskLabels,
       ),

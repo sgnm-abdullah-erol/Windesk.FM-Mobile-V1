@@ -51,6 +51,9 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   bool _takeItOnMeSuccess = false;
   bool get takeItOnMeSuccess => _takeItOnMeSuccess;
 
+  String? _dropdownValue = null;
+  String? get dropdownValue => _dropdownValue;
+
   void userClickedEffortsFunction() {
     _userClickedEfforts = true;
   }
@@ -70,8 +73,13 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   List<String> _workSpaceUserTaskLabels = [];
   List<String> get workSpaceUserTaskLabels => _workSpaceUserTaskLabels;
 
-  void update() {
+  void setDropdown() {
+    _dropdownValue = _workSpaceUserTaskLabels[0];
     notifyListeners();
+
+    Future.delayed(const Duration(seconds: 2), () {
+      _dropdownValue = null;
+    });
   }
 
   void takeItOnMe() async {

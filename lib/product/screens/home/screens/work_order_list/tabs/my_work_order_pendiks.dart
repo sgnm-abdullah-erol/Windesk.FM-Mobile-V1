@@ -39,7 +39,13 @@ class _MyWorkOrderPendiksState extends State<MyWorkOrderPendiks> {
                 padding: const EdgeInsets.all(8.0),
                 child: InkWell(
                   onTap: () {
-                    context.router.push(PendingDetailWorkOrderScreen(workSpacePendiks: widget.provider.myPendikWorkSpaceDetails[index]));
+                    context.router
+                        .push(PendingDetailWorkOrderScreen(workSpacePendiks: widget.provider.myPendikWorkSpaceDetails[index]))
+                        .then((value) {
+                      if (true) {
+                        widget.provider.getMyPendikWorkOrders();
+                      }
+                    });
                   },
                   child: CustomPendiksCard(
                     workSpacePendiks: widget.provider.myPendikWorkSpaceDetails[index],

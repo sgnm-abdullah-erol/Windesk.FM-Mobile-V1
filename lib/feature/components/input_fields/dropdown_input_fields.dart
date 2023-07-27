@@ -11,17 +11,19 @@ class DropDownInputFields extends StatelessWidget {
     required this.onChangedFunction,
     required this.rightIcon,
     required this.dropDownArray,
+    this.value,
   });
 
   final String labelText;
   final Function onChangedFunction;
   final IconData rightIcon;
   final List<String> dropDownArray;
+  final String? value;
+
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
       isExpanded: true,
-      value: dropDownArray.first,
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: CustomBorderRadius.textFieldBorderRadius,
@@ -32,7 +34,7 @@ class DropDownInputFields extends StatelessWidget {
       ),
       items: dropDownArray.map((String items) {
         return DropdownMenuItem(
-          value: items,
+          value: value ?? items,
           child: Text(
             items,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: FontSizes.body),

@@ -128,15 +128,12 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   @override
   Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getWorkSpaceDetailsByRequestType(String requestId, int page, String token) async {
     List<WorkSpaceDetail> workSpaceDetailList = [];
-    String url = 'http://10.0.2.2:3015/task/mobile/getTasksByRequestType/swagger/$requestId?page=1&limit=10&orderBy=DESC&orderByColumn=updateAt';
+    String url = 'http://10.0.2.2:3015/task/mobile/getTasksByRequestType/swagger/$requestId?page=$page&limit=999&orderBy=DESC&orderByColumn=updateAt';
 
     try {
       final response = await super.dio.get(
             url,
-            data: {
-              "page": page,
-              "limit": 10,
-            },
+            data: {},
             options: Options(
               headers: {'authorization': 'Bearer $token'},
             ),

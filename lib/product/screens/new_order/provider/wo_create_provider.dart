@@ -63,7 +63,7 @@ class WoCreateProvider extends ChangeNotifier {
   WoCreateLocationModel _woLocationList = const WoCreateLocationModel();
   WoCreateLocationModel get woLocationList => _woLocationList;
 
-  WoCreateRequestedByModel _getRequestedBy = const WoCreateRequestedByModel();
+  final WoCreateRequestedByModel _getRequestedBy = const WoCreateRequestedByModel();
   WoCreateRequestedByModel get getRequestedBy => _getRequestedBy;
 
   WoCreateLeafModel _woBlockList = const WoCreateLeafModel();
