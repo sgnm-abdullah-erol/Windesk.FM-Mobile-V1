@@ -33,6 +33,9 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   bool _userClickedRequestedMaterial = false;
   bool get userClickedRequestedMaterial => _userClickedRequestedMaterial;
 
+  bool _userClickedRequestedApprovedMaterial = false;
+  bool get userClickedRequestedApprovedMaterial => _userClickedRequestedApprovedMaterial;
+
   bool _userClickedDocumants = false;
   bool get userClickedDocumants => _userClickedDocumants;
 
@@ -68,6 +71,10 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
   void userClickedDocumantsFunction() {
     _userClickedDocumants = true;
+  }
+
+  void userClickedApprovedRequestedMaterialFunction() {
+    _userClickedRequestedApprovedMaterial = true;
   }
 
   List<String> _workSpaceUserTaskLabels = [];

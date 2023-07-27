@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/models/work_space/work_space_requested_materials_inventory.dart';
 
 import '../../../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../../../feature/constants/other/colors.dart';
+import '../../../../../../../feature/models/work_space/work_space_requirement_materials_list.dart';
 
 class DataTableAccordionRequstedMaterials extends StatelessWidget {
   DataTableAccordionRequstedMaterials({super.key, required this.delete, required this.data});
 
   final Function delete;
-  final List<String> _labelList = ['id', 'İsim', 'Ünite', 'Miktar', 'Sil'];
-  final List<WorkSpaceRequestedMaterialsInventory> data;
+  final List<String> _labelList = ['id', 'İsim', 'Ünite', 'Miktar', 'Kullanıcı', 'Toplam Miktar', 'Sil'];
+  final List<WorkSpaceRequirementMaterialsList> data;
 
   final String _nonKnownName = 'Bilinmiyor';
   final String _noEffortType = 'Çalışma Türü Belirtilmemiş';
@@ -41,6 +41,8 @@ class DataTableAccordionRequstedMaterials extends StatelessWidget {
               DataCell(Text(data[i].name ?? _noEffortType, style: _cellTextStyle())),
               DataCell(Text(data[i].measurementUnit ?? _nonKnownName, style: _cellTextStyle())),
               DataCell(Text(data[i].amount.toString(), style: _cellTextStyle())),
+              DataCell(Text(data[i].user.toString(), style: _cellTextStyle())),
+              DataCell(Text(data[i].totalAmount.toString(), style: _cellTextStyle())),
               DataCell(
                 IconButton(
                   onPressed: () => delete(),
