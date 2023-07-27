@@ -61,21 +61,28 @@ class DetailWorkOrderScreen extends StatelessWidget {
             appBar: CustomMainAppbar(title: Text('WO - ${workSpaceDetail.task?.id.toString() ?? ''}'), returnBack: true, elevation: 4),
             body: context.read<WorkOrderDetailProvider>().isLoading
                 ? const CustomLoadingIndicator()
-                : SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
-                      child: Column(
-                        children: [
-                          CustomWorkSpaceDetailCard(workSpaceDetail: workSpaceDetail),
-                          const SizedBox(height: 10),
-                          (workSpaceDetail.task?.userId ?? '') != context.read<GlobalProvider>().userId
-                              ? _TakeItOnMe(provider: woDetailProvider)
-                              : _StateChangeDropDownButton(provider: woDetailProvider),
-                          const SizedBox(height: 20),
-                          (workSpaceDetail.task?.userId ?? '') != context.read<GlobalProvider>().userId
-                              ? const SizedBox()
-                              : _customPageAccordionSection(woDetailProvider),
-                        ],
+                : RefreshIndicator(
+                    onRefresh: () async {
+                      await Future.delayed(const Duration(seconds: 1), () {
+                        woDetailProvider.setStateToBeginning();
+                      });
+                    },
+                    child: SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
+                        child: Column(
+                          children: [
+                            CustomWorkSpaceDetailCard(workSpaceDetail: workSpaceDetail),
+                            const SizedBox(height: 10),
+                            (workSpaceDetail.task?.userId ?? '') != context.read<GlobalProvider>().userId
+                                ? _TakeItOnMe(provider: woDetailProvider)
+                                : _StateChangeDropDownButton(provider: woDetailProvider),
+                            const SizedBox(height: 20),
+                            (workSpaceDetail.task?.userId ?? '') != context.read<GlobalProvider>().userId
+                                ? const SizedBox()
+                                : _customPageAccordionSection(woDetailProvider),
+                          ],
+                        ),
                       ),
                     ),
                   ),

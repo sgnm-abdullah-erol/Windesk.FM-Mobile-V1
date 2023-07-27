@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_final_fields
+// ignore_for_file: prefer_final_fields, avoid_init_to_null
 
 import 'package:flutter/material.dart';
 
@@ -56,6 +56,16 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
   String? _dropdownValue = null;
   String? get dropdownValue => _dropdownValue;
+
+  void setStateToBeginning() {
+    _userClickedEfforts = false;
+    _userClickedMaterial = false;
+    _userClickedRequestedMaterial = false;
+    _userClickedRequestedApprovedMaterial = false;
+    _userClickedDocumants = false;
+  }
+
+  void getWorkOrderDetail() {}
 
   void userClickedEffortsFunction() {
     _userClickedEfforts = true;

@@ -33,7 +33,7 @@ class AuthServiceRepositoryImpl extends AuthServiceRepository {
 
   @override
   Future<Either<bool, CustomServiceException>> logout(String refreshToken, String token) async {
-    String url = 'http://localhost:3012/user/logout';
+    String url = 'http://10.0.2.2:3012/user/logout';
 
     try {
       final response = await super.dio.post(
@@ -64,7 +64,7 @@ class AuthServiceRepositoryImpl extends AuthServiceRepository {
 
   @override
   Future<Either<CheckAccesTokenModel, CustomServiceException>> checkAccessToken(String token) async {
-    String url = 'http://localhost:3012/user/checkAccessToken';
+    String url = 'http://10.0.2.2:3012/user/checkAccessToken';
 
     try {
       final response = await super.dio.post(url,

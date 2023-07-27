@@ -49,7 +49,6 @@ class WorkOrderListProvider extends ChangeNotifier {
 
     result.fold((l) {
       _myWorkSpaceDetails = l;
-      print('asdsa');
     }, (r) {});
 
     _isMyWorkOrdersDataFetched = true;

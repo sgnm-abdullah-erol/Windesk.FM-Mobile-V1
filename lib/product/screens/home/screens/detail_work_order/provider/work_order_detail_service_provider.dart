@@ -77,6 +77,10 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
 
     _isLoading = false;
     notifyListeners();
+
+    Future.delayed(const Duration(seconds: 2), () {
+      _isSparepartsFetched = false;
+    });
   }
 
   void fetchEfforts(String taskId, String nextStateId) async {
@@ -96,6 +100,10 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
     );
     _isLoading = false;
     notifyListeners();
+
+    Future.delayed(const Duration(seconds: 2), () {
+      _isEffortListFetched = false;
+    });
   }
 
   void fetchRequstedMaterials(String taskId) async {
@@ -116,6 +124,10 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
 
     _isLoading = false;
     notifyListeners();
+
+    Future.delayed(const Duration(seconds: 2), () {
+      _isRequestedListFetched = false;
+    });
   }
 
   void fetchRequstedApprovedMaterials(String taskId) async {
@@ -136,5 +148,9 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
 
     _isLoading = false;
     notifyListeners();
+
+    Future.delayed(const Duration(seconds: 2), () {
+      _isRequstedApprovedMaterialListFetched = false;
+    });
   }
 }
