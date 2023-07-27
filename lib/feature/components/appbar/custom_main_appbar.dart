@@ -24,7 +24,7 @@ class CustomMainAppbar extends StatelessWidget implements PreferredSizeWidget {
       title: title,
       centerTitle: true,
       leading: returnBack == true
-          ? IconButton(onPressed: () => Navigator.pop(context), icon: const Icon(Icons.arrow_back_ios, color: Colors.black))
+          ? IconButton(onPressed: () => Navigator.pop<bool>(context, true), icon: const Icon(Icons.arrow_back_ios, color: Colors.black))
           : leading,
       automaticallyImplyLeading: returnBack ?? false,
       actions: actions != null ? actions! : [],

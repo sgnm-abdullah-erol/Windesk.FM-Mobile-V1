@@ -13,15 +13,11 @@ class FirebaseNotification {
     await Firebase.initializeApp();
 
     FirebaseMessaging messaging = FirebaseMessaging.instance;
-    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-        FlutterLocalNotificationsPlugin();
+    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
     final onNotifications = BehaviorSubject<String?>();
 
-    FirebaseMessaging.onBackgroundMessage((message) =>
-        LocalNotification.showNotification(
-            title: "message.notification?.title",
-            body: "message.notification?.body",
-            payload: 'asd'));
+    FirebaseMessaging.onBackgroundMessage(
+        (message) => LocalNotification.showNotification(title: "message.notification?.title", body: "message.notification?.body", payload: 'asd'));
     FirebaseMessaging.instance.getInitialMessage().then((message) {
       if (message != null) {
         RemoteNotification? notification = message.notification;
@@ -54,8 +50,7 @@ class FirebaseNotification {
       }
     });
 
-    const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
+    const AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('@mipmap/ic_launcher');
     const iosInitializationSetting = DarwinInitializationSettings(
       requestAlertPermission: true,
       requestBadgePermission: true,
@@ -63,8 +58,7 @@ class FirebaseNotification {
       requestCriticalPermission: true,
     );
 
-    const InitializationSettings initializationSettings =
-        InitializationSettings(
+    const InitializationSettings initializationSettings = InitializationSettings(
       android: initializationSettingsAndroid,
       iOS: iosInitializationSetting,
     );
@@ -86,8 +80,7 @@ class FirebaseNotification {
     onNotifications.stream.listen(onClickedNotification);
 
 // Lisitnening to the background messages
-    Future<void> _firebaseMessagingBackgroundHandler(
-        RemoteMessage message) async {
+    Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
       await Firebase.initializeApp();
 
       print("Handling a background message: ${message.messageId}");
@@ -101,7 +94,7 @@ class FirebaseNotification {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       print('Got a message whilst in the foreground!');
       print('Message data Home: ${message.data}');
-      NotificationDetails notificationDetails = NotificationDetails(
+      NotificationDetails notificationDetails = const NotificationDetails(
         android: AndroidNotificationDetails(
           '1',
           'channel name',
@@ -115,7 +108,9 @@ class FirebaseNotification {
       );
 
       LocalNotification.showNotification(
-          title: 'title', body: 'body', payload: 'asd');
+          title: message.notification!.title.toString(),
+          body: message.notification!.body.toString(),
+          payload: message.data.toString());
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {

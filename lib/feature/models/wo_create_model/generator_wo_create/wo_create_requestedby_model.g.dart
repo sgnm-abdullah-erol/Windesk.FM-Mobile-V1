@@ -6,10 +6,6 @@ part of '../wo_create_requestedby_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-WoCreateRequestedByModel _$WoCreateRequestedByModelFromJson(
-        Map<String, dynamic> json) =>
-    WoCreateRequestedByModel();
+WoCreateRequestedByModel _$WoCreateRequestedByModelFromJson(Map<String, dynamic> json) => const WoCreateRequestedByModel();
 
-Map<String, dynamic> _$WoCreateRequestedByModelToJson(
-        WoCreateRequestedByModel instance) =>
-    <String, dynamic>{};
+Map<String, dynamic> _$WoCreateRequestedByModelToJson(WoCreateRequestedByModel instance) => <String, dynamic>{};

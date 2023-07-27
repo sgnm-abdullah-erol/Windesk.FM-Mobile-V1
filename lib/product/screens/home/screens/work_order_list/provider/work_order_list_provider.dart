@@ -20,6 +20,10 @@ class WorkOrderListProvider extends ChangeNotifier {
   bool _isMyWorkOrdersDataFetched = false;
   bool get isMyWorkOrdersDataFetched => _isMyWorkOrdersDataFetched;
 
+  void setIsMyWorkOrdersDataFetched(bool result) {
+    _isMyWorkOrdersDataFetched = result;
+  }
+
   bool _isMyGroupWorkOrdersDataFetched = false;
   bool get isMyGroupWorkOrdersDataFetched => _isMyGroupWorkOrdersDataFetched;
 

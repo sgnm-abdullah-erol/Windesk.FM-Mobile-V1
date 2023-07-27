@@ -11,8 +11,8 @@ class CustomLoginButton extends StatelessWidget {
   final String title;
   final Function onPressed;
 
-  final double _buttonWidth = 200;
-  final double _buttonHeight = 50;
+  final double _buttonWidth = 180;
+  final double _buttonHeight = 40;
 
   @override
   Widget build(BuildContext context) {

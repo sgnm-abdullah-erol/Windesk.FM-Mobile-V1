@@ -1,7 +1,10 @@
+// ignore_for_file: prefer_final_fields, avoid_init_to_null
+
 import 'package:flutter/material.dart';
 
 import '../../../../../../feature/database/shared_manager.dart';
 import '../../../../../../feature/enums/shared_enums.dart';
+import '../../../../../../feature/enums/task_response_enums.dart';
 import '../../../../../../feature/injection.dart';
 import '../../../../../../feature/models/work_space/work_space_detail.dart';
 import '../../../../../../feature/models/work_space/work_space_efforts.dart';
@@ -9,7 +12,10 @@ import '../../../../../../feature/models/work_space/work_space_user_inventory.da
 import '../../../../../../feature/service/global_services.dart/work_space_service/work_space_service_repository_impl.dart';
 
 class WorkOrderDetailProvider extends ChangeNotifier {
-  WorkOrderDetailProvider({required this.detail});
+  WorkOrderDetailProvider({required this.detail}) {
+    _setUserTaskLabels();
+  }
+
   final WorkSpaceDetail detail;
 
   final WorkSpaceServiceRepositoryImpl workSpaceService = Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
@@ -27,8 +33,39 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   bool _userClickedRequestedMaterial = false;
   bool get userClickedRequestedMaterial => _userClickedRequestedMaterial;
 
+  bool _userClickedRequestedApprovedMaterial = false;
+  bool get userClickedRequestedApprovedMaterial => _userClickedRequestedApprovedMaterial;
+
   bool _userClickedDocumants = false;
   bool get userClickedDocumants => _userClickedDocumants;
+
+  bool _isTaskStateChange = false;
+  bool get isTaskStateChange => _isTaskStateChange;
+
+  String _selectedTaskState = '';
+  String get selectedTaskState => _selectedTaskState;
+
+  bool _finishTask = false;
+  bool get finishTask => _finishTask;
+
+  bool _errorAccurWhileTakingOnMe = false;
+  bool get errorAccurWhileTakingOnMe => _errorAccurWhileTakingOnMe;
+
+  bool _takeItOnMeSuccess = false;
+  bool get takeItOnMeSuccess => _takeItOnMeSuccess;
+
+  String? _dropdownValue = null;
+  String? get dropdownValue => _dropdownValue;
+
+  void setStateToBeginning() {
+    _userClickedEfforts = false;
+    _userClickedMaterial = false;
+    _userClickedRequestedMaterial = false;
+    _userClickedRequestedApprovedMaterial = false;
+    _userClickedDocumants = false;
+  }
+
+  void getWorkOrderDetail() {}
 
   void userClickedEffortsFunction() {
     _userClickedEfforts = true;
@@ -44,6 +81,112 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
   void userClickedDocumantsFunction() {
     _userClickedDocumants = true;
+  }
+
+  void userClickedApprovedRequestedMaterialFunction() {
+    _userClickedRequestedApprovedMaterial = true;
+  }
+
+  List<String> _workSpaceUserTaskLabels = [];
+  List<String> get workSpaceUserTaskLabels => _workSpaceUserTaskLabels;
+
+  void setDropdown() {
+    _dropdownValue = _workSpaceUserTaskLabels[0];
+    notifyListeners();
+
+    Future.delayed(const Duration(seconds: 2), () {
+      _dropdownValue = null;
+    });
+  }
+
+  void takeItOnMe() async {
+    _isLoading = true;
+    notifyListeners();
+
+    String userToken = await SharedManager().getString(SharedEnum.userToken);
+
+    final response = await workSpaceService.takeItOnMe(detail.task?.id.toString() ?? '', detail.state?.id.toString() ?? '', userToken);
+
+    response.fold(
+      (l) => {
+        _takeItOnMeSuccess = true,
+      },
+      (r) => {
+        _errorAccurWhileTakingOnMe = true,
+      },
+    );
+
+    _isLoading = false;
+    notifyListeners();
+
+    Future.delayed(const Duration(seconds: 2), () {
+      _errorAccurWhileTakingOnMe = false;
+      _takeItOnMeSuccess = false;
+    });
+  }
+
+  void _setUserTaskLabels() {
+    _workSpaceUserTaskLabels.add(detail.state?.name.toString() ?? '');
+
+    for (var i = 0; i < (detail.state?.nextStates?.length ?? 0); i++) {
+      _workSpaceUserTaskLabels.add(detail.state?.nextStates?[i].name ?? '');
+    }
+  }
+
+  void changeState(String value) async {
+    _isLoading = true;
+    notifyListeners();
+
+    String userToken = await SharedManager().getString(SharedEnum.userToken);
+
+    final response = await workSpaceService.changeWorkSpaceState(
+      detail.task?.id.toString() ?? '',
+      detail.state?.nextStates?[0].id.toString() ?? '',
+      userToken,
+    );
+
+    response.fold(
+      (l) => {
+        if (l == TaskResponseEnums.my)
+          {
+            _isTaskStateChange = true,
+            _selectedTaskState = 'kendi grubuma gönderilmiştir',
+          }
+        else if (l == TaskResponseEnums.our)
+          {
+            _isTaskStateChange = true,
+            _selectedTaskState = 'grubumdakilere gönderilmiştir',
+          }
+        else if (l == TaskResponseEnums.pendiks)
+          {_isTaskStateChange = true, _selectedTaskState = 'onay bekleyenlere gönderilmiştir'}
+        else if (l == TaskResponseEnums.end)
+          {
+            _isTaskStateChange = true,
+            _finishTask = true,
+            _selectedTaskState = 'işlem tamamlanmıştır',
+          }
+        else if (l == TaskResponseEnums.error)
+          {
+            _isTaskStateChange = false,
+            _selectedTaskState = 'hata oluştu',
+          }
+        else
+          {
+            _isTaskStateChange = false,
+            _selectedTaskState = 'hata oluştu',
+          },
+      },
+      (r) => {
+        _isTaskStateChange = false,
+      },
+    );
+
+    _isLoading = false;
+    notifyListeners();
+
+    Future.delayed(const Duration(seconds: 3), () {
+      _isTaskStateChange = false;
+    });
   }
 
   // for efforts
