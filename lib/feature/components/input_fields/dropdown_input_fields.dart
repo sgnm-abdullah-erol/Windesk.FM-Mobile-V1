@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vm_fm_4/feature/constants/style/font_sizes.dart';
 
 import '../../constants/other/colors.dart';
 import '../../constants/style/border_radius.dart';
@@ -27,13 +28,14 @@ class DropDownInputFields extends StatelessWidget {
           borderSide: BorderSide(color: APPColors.Main.black, width: 4),
         ),
         labelText: labelText,
+        labelStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: FontSizes.subtitle),
       ),
       items: dropDownArray.map((String items) {
         return DropdownMenuItem(
           value: items,
           child: Text(
             items,
-            style: TextStyle(color: APPColors.Main.black),
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: FontSizes.body),
           ),
         );
       }).toList(),

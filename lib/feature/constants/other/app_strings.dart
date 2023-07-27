@@ -81,4 +81,8 @@ class AppStrings {
 
   static const logout = 'Çıkış Yap';
   static const title = 'Yardım Masası Uygulaması';
+  static const takeItOnMe = 'Üzerime Al';
+
+  // alert dialog
+  static const changeState = 'İş Emri Durum Değişimi';
 }

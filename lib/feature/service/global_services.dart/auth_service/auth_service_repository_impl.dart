@@ -11,12 +11,12 @@ class AuthServiceRepositoryImpl extends AuthServiceRepository {
   @override
   Future<Either<LoginModel, CustomServiceException>> login(String username, String password) async {
     @override
-    String url = 'http://10.0.2.2:3012/user/login';
+    String url = 'http://10.0.2.2:3012/user/loginMobile';
 
     try {
       final response = await super.dio.post(
             url,
-            data: {'username': username, 'password': password},
+            data: {'username': username, 'password': password, "firebaseToken": "token123"},
             options: Options(),
           );
 

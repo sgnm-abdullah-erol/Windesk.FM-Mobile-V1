@@ -6,7 +6,6 @@ part 'generator/login_model.g.dart';
 @JsonSerializable()
 class LoginModel extends Equatable {
   final String? accessToken;
-  final String? id;
   final int? expiresIn;
   final int? refreshExpiresIn;
   final String? refreshToken;
@@ -14,9 +13,9 @@ class LoginModel extends Equatable {
   final int? notBeforePolicy;
   final String? sessionState;
   final String? scope;
+  final String? id;
 
-  const LoginModel(
-    this.id, {
+  const LoginModel({
     this.accessToken,
     this.expiresIn,
     this.refreshExpiresIn,
@@ -25,6 +24,7 @@ class LoginModel extends Equatable {
     this.notBeforePolicy,
     this.sessionState,
     this.scope,
+    this.id,
   });
 
   factory LoginModel.fromJson(Map<String, dynamic> json) => _$LoginModelFromJson(json);
@@ -34,7 +34,6 @@ class LoginModel extends Equatable {
   @override
   List<Object?> get props => [
         accessToken,
-        id,
         expiresIn,
         refreshExpiresIn,
         refreshToken,
@@ -42,5 +41,6 @@ class LoginModel extends Equatable {
         notBeforePolicy,
         sessionState,
         scope,
+        id,
       ];
 }

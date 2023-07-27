@@ -4,6 +4,7 @@ import 'package:flutter/scheduler.dart';
 
 import '../../../../../../feature/components/cards/custom_wo_listl_card.dart';
 import '../../../../../../feature/extensions/context_extension.dart';
+import '../../../../../../feature/route/app_route.gr.dart';
 import '../provider/work_order_list_provider.dart';
 import '../widgets/custom_loading_indicator.dart';
 
@@ -18,6 +19,8 @@ class MyWorkOrders extends StatefulWidget {
 }
 
 class _MyWorkOrdersState extends State<MyWorkOrders> {
+  get workSpaceDetail => null;
+
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -39,6 +42,13 @@ class _MyWorkOrdersState extends State<MyWorkOrders> {
                 return CustomWoDetailCard(
                   workSpaceDetail: widget.provider.myWorkSpaceDetails[index],
                   isButtonVisible: false,
+                  onTap: () {
+                    context.router.push(DetailWorkOrderScreen(workSpaceDetail: workSpaceDetail)).then((value) {
+                      if (value == true) {
+                        widget.provider.getMyWorkOrders();
+                      }
+                    });
+                  },
                 );
               },
             ),

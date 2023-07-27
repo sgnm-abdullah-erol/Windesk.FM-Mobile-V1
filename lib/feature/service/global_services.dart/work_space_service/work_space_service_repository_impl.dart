@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
+import '../../../enums/task_response_enums.dart';
 import '../../../exceptions/custom_service_exceptions.dart';
 import '../../../models/work_space/work_space_appendings.dart';
 import '../../../models/work_space/work_space_detail.dart';
@@ -16,31 +17,23 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getMyWorkSpaces(String id, String token, int page) async {
     List<WorkSpaceDetail> workSpaceDetailList = [];
 
-    String url = 'http://10.0.2.2:3015/task/workSpace/task/state/List/for/assigned/user/pagination/$id';
+    String url =
+        'http://10.0.2.2:3015/task/workSpace/task/state/List/for/assigned/user/pagination/swagger?page=$page&limit=10&orderBy=DESC&orderByColumn%5B0%5D=updatedAt';
 
-    try {
-      final response = await super.dio.get(
-            url,
-            data: {
-              "page": page,
-              "limit": 10,
-            },
-            options: Options(
-              headers: {'authorization': 'Bearer $token'},
-            ),
-          );
+    final response = await super.dio.get(
+          url,
+          options: Options(
+            headers: {'authorization': 'Bearer $token'},
+          ),
+        );
 
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        final data = response.data;
-        workSpaceDetailList = WorkSpaceDetail.fromJsonList(data);
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      final data = response.data;
+      workSpaceDetailList = WorkSpaceDetail.fromJsonList(data);
 
-        return Left(workSpaceDetailList);
-      } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
-      }
-    } catch (error) {
-      super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+      return Left(workSpaceDetailList);
+    } else {
+      return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
     }
   }
 
@@ -431,6 +424,87 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       if (response.statusCode == 200 || response.statusCode == 201) {
         result = true;
 
+        return Left(result);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+      }
+    } catch (e) {
+      super.logger.i(e);
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<bool, CustomServiceException>> takeItOnMe(String taskId, String currentStateId, String token) async {
+    String url = 'http://10.0.2.2:3015/task/add/user/to/state';
+    bool result = false;
+
+    try {
+      final response = await super.dio.post(
+            url,
+            data: {
+              "label": ["Task"],
+              "identifier": taskId,
+              "identifier_target": currentStateId
+            },
+            options: Options(
+              headers: {'authorization': 'Bearer $token'},
+              contentType: Headers.jsonContentType,
+            ),
+          );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        super.logger.i(response.data);
+        if (response.data == 'my') {
+          result = true;
+          return Left(result);
+        } else {
+          result = false;
+          return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+        }
+      } else {
+        result = false;
+        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+      }
+    } catch (e) {
+      super.logger.i(e);
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<TaskResponseEnums, CustomServiceException>> changeWorkSpaceState(String taskId, String nextStateId, String token) async {
+    String url = 'http://10.0.2.2:3015/task/change/approve/state/of/task';
+    TaskResponseEnums result;
+
+    try {
+      final response = await super.dio.post(
+            url,
+            data: {
+              "label": ["Task"],
+              "identifier": taskId, // task id
+              "identifier_target": nextStateId // next state id
+            },
+            options: Options(
+              headers: {'authorization': 'Bearer $token'},
+              contentType: Headers.jsonContentType,
+            ),
+          );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        super.logger.i(response.data);
+
+        if (response.data == TaskResponseEnums.end.rawValue) {
+          result = TaskResponseEnums.end;
+        } else if (response.data == TaskResponseEnums.my.rawValue) {
+          result = TaskResponseEnums.my;
+        } else if (response.data == TaskResponseEnums.our.rawValue) {
+          result = TaskResponseEnums.our;
+        } else if (response.data == TaskResponseEnums.pendiks.rawValue) {
+          result = TaskResponseEnums.pendiks;
+        } else {
+          result = TaskResponseEnums.error;
+        }
         return Left(result);
       } else {
         return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));

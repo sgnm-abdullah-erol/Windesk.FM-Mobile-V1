@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vm_fm_4/feature/global_providers/global_provider.dart';
 
 import '../../../../feature/components/appbar/custom_main_appbar.dart';
 import '../../../../feature/components/buttons/custom_login_button.dart';
@@ -38,6 +39,7 @@ class LoginScreen extends StatelessWidget {
             }
             if (loginProvider.isLoginSuccess) {
               snackBar(context, SnackbarStrings.loginSuccess, 'success');
+              context.read<GlobalProvider>().setUserId(loginProvider.userId);
             }
           });
 

@@ -59,7 +59,7 @@ class _BuildScaffold extends StatelessWidget {
                 });
               },
               rightOnPressed: () {
-                WoWaitAcceptModalAlert().showAlertDialog(context, '').then((value) {
+                WoWaitAcceptModalAlert().showAlertDialog(context, '', 'kk').then((value) {
                   if (value != null) {
                     value ? print(value) : print(value);
                   }

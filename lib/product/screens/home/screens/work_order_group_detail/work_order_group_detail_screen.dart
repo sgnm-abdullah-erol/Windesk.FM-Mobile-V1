@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import '../../../../../feature/components/appbar/custom_main_appbar.dart';
+import '../../../../../feature/route/app_route.gr.dart';
 import 'work_order_group_detail_provider.dart';
 import '../work_order_list/widgets/custom_loading_indicator.dart';
 
@@ -26,7 +27,7 @@ class WorkOrderGroupDetailScreen extends StatelessWidget {
             SchedulerBinding.instance.addPostFrameCallback((_) {
               provider.isGroupWorkOrdersDataFetched ? null : provider.getGroupSpaceOrders(requestCode);
             });
-            return provider.isLoading ? const CustomLoadingIndicator() : _BuildScaffold(provider);
+            return provider.isLoading ? const CustomLoadingIndicator() : _BuildScaffold(provider, requestCode);
           },
         ),
       ),
@@ -35,9 +36,10 @@ class WorkOrderGroupDetailScreen extends StatelessWidget {
 }
 
 class _BuildScaffold extends StatelessWidget {
-  const _BuildScaffold(this.provider);
+  const _BuildScaffold(this.provider, this.requestCode);
 
   final WorkOrderGroupDetailProvider provider;
+  final String requestCode;
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +49,13 @@ class _BuildScaffold extends StatelessWidget {
           return CustomWoDetailCard(
             workSpaceDetail: provider.workSpaceGroupWorkOrdersList[index],
             isButtonVisible: false,
+            onTap: () {
+              context.router.push(DetailWorkOrderScreen(workSpaceDetail: provider.workSpaceGroupWorkOrdersList[index])).then((value) {
+                if (value == true) {
+                  provider.getGroupSpaceOrders(requestCode);
+                }
+              });
+            },
           );
         });
   }

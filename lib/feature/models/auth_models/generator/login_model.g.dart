@@ -7,25 +7,25 @@ part of '../login_model.dart';
 // **************************************************************************
 
 LoginModel _$LoginModelFromJson(Map<String, dynamic> json) => LoginModel(
-      json['id'] as String?,
-      accessToken: json['accessToken'] as String?,
-      expiresIn: json['expiresIn'] as int?,
-      refreshExpiresIn: json['refreshExpiresIn'] as int?,
-      refreshToken: json['refreshToken'] as String?,
-      tokenType: json['tokenType'] as String?,
-      notBeforePolicy: json['notBeforePolicy'] as int?,
-      sessionState: json['sessionState'] as String?,
+      accessToken: json['access_token'] as String?,
+      expiresIn: json['expires_in'] as int?,
+      refreshExpiresIn: json['refresh_expires_in'] as int?,
+      refreshToken: json['refresh_token'] as String?,
+      tokenType: json['token_type'] as String?,
+      notBeforePolicy: json['not-before-policy'] as int?,
+      sessionState: json['session_state'] as String?,
       scope: json['scope'] as String?,
+      id: json['id'] as String?,
     );
 
 Map<String, dynamic> _$LoginModelToJson(LoginModel instance) => <String, dynamic>{
-      'accessToken': instance.accessToken,
-      'id': instance.id,
-      'expiresIn': instance.expiresIn,
-      'refreshExpiresIn': instance.refreshExpiresIn,
-      'refreshToken': instance.refreshToken,
-      'tokenType': instance.tokenType,
-      'notBeforePolicy': instance.notBeforePolicy,
-      'sessionState': instance.sessionState,
+      'access_token': instance.accessToken,
+      'expires_in': instance.expiresIn,
+      'refresh_expires_in': instance.refreshExpiresIn,
+      'refresh_token': instance.refreshToken,
+      'token_type': instance.tokenType,
+      'not-before-policy': instance.notBeforePolicy,
+      'session_state': instance.sessionState,
       'scope': instance.scope,
+      'id': instance.id,
     };
