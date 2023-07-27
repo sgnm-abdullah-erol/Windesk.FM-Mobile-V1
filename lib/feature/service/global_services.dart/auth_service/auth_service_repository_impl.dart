@@ -28,7 +28,6 @@ class AuthServiceRepositoryImpl extends AuthServiceRepository {
       final data = response.data;
 
       LoginModel loginModel = LoginModel.fromJson(data);
-
       return Left(loginModel);
     } catch (error) {
       super.logger.e(error.toString());

@@ -4,6 +4,7 @@ import 'package:vm_fm_4/feature/exceptions/custom_service_exceptions.dart';
 import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_leaf_model.dart';
 import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_location_model.dart';
 import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_requestedby_model.dart';
+import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_type_model.dart';
 import 'package:vm_fm_4/product/screens/new_order/service/wo_create_service_repository.dart';
 
 class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
@@ -34,7 +35,6 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
   Future<Either<WoCreateLeafModel, CustomServiceException>> getLazyLoading(token, key) async {
     WoCreateLeafModel woCreateLeafModel;
     String url = 'http://localhost:3010/jointspaces/lazyLoadingByKey';
-    try {
       final response = await super.dio.post(
             url,
             data: {"key": key, "leafType": "", "rootLabels": [], "childrenLabels": []},
@@ -46,31 +46,49 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
       woCreateLeafModel = WoCreateLeafModel.fromJson(data);
       super.logger.e(woCreateLeafModel);
       return Left(woCreateLeafModel);
-    } catch (error) {
-      super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.loginError, statusCode: '400'));
-    }
+   
   }
 
-    @override
-  Future<Either<WoCreateRequestedByModel, CustomServiceException>> getRequestedBy(token) async {
-    WoCreateRequestedByModel woCreateRequestedByModel;
+  @override
+  Future<Either<List<WoCreateRequestedByModel>, CustomServiceException>> getRequestedBy(token) async {
+    List<WoCreateRequestedByModel> woCreateRequestedByModel = [];
+
     String url = 'http://localhost:3012/user?page=1&limit=100';
     try {
-      final response = await super.dio.post(
+      final response = await super.dio.get(
             url,
-            data: {"label": ['RequestType'],},
+            data: {
+              "label": ["RequestType"],
+            },
             options: Options(
               headers: {'authorization': 'Bearer $token'},
             ),
           );
-      final data = response.data['users'];
-      woCreateRequestedByModel = WoCreateRequestedByModel.fromJson(data);
+
+      woCreateRequestedByModel = WoCreateRequestedByModel.fromJsonList(response.data['users']);
       super.logger.e(woCreateRequestedByModel);
       return Left(woCreateRequestedByModel);
     } catch (error) {
       super.logger.e(error.toString());
       return Right(CustomServiceException(message: CustomServiceMessages.loginError, statusCode: '400'));
     }
+  }
+
+  @override
+  Future<Either<List<WoCreateTypeModel>, CustomServiceException>> getType(token) async {
+    List<WoCreateTypeModel> woCreateTypeModel = [];
+
+    String url = 'http://localhost:3015/task/task/find/task/types/related/with/workspace/469?page=1&limit=100';
+      final response = await super.dio.get(
+            url,
+            options: Options(
+              headers: {'authorization': 'Bearer $token'},
+            ),
+          );
+
+      woCreateTypeModel = WoCreateTypeModel.fromJsonList(response.data);
+      super.logger.e(woCreateTypeModel);
+      return Left(woCreateTypeModel);
+    
   }
 }
