@@ -15,13 +15,13 @@ class WoCreateRequestedByModel extends Equatable{
     final String? firstName;
     final String? lastName;
     final String? email;
-    final List<dynamic>? disableableCredentialTypes;
+    final dynamic disableableCredentialTypes;
     final List<String>? requiredActions;
     final int? notBefore;
-    final dynamic? access;
-    final dynamic? attributes;
+    final dynamic access;
+    final dynamic attributes;
 
-    WoCreateRequestedByModel({
+    const WoCreateRequestedByModel({
         this.id,
         this.createdTimestamp,
         this.username,
@@ -37,7 +37,19 @@ class WoCreateRequestedByModel extends Equatable{
         this.access,
         this.attributes,
     });
+
     factory WoCreateRequestedByModel.fromJson(Map<String, dynamic> json) => _$WoCreateRequestedByModelFromJson(json);
+
+
+    static List<WoCreateRequestedByModel> fromJsonList(List<dynamic> json) {
+    List<WoCreateRequestedByModel> requestByModel = [];
+
+    for (var item in json) {
+      requestByModel.add(WoCreateRequestedByModel.fromJson(item));
+    }
+
+    return requestByModel;
+    }
 
     Map<String, dynamic> toJson() => _$WoCreateRequestedByModelToJson(this);
     
@@ -59,5 +71,6 @@ class WoCreateRequestedByModel extends Equatable{
         access,
         attributes,
       ];
+
 
 }

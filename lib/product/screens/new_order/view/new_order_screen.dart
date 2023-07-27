@@ -20,6 +20,7 @@ class NewOrderScreen extends StatelessWidget {
       create: (context) => WoCreateProvider(),
       child: Consumer<WoCreateProvider>(builder: (context, WoCreateProvider woCreateProvider, child) {
         woCreateProvider.locationLoading ? woCreateProvider.getLocation() : null;
+        woCreateProvider.requestedLoading ? woCreateProvider.getRequestedByPro() : null;
         return woCreateProvider.isLoading
             ? const CustomLoadingIndicator()
             : Scaffold(
@@ -41,7 +42,7 @@ class NewOrderScreen extends StatelessWidget {
                             woCreateProvider.setRequestedBy(newValue);
                           },
                           rightIcon: Icons.arrow_drop_down_rounded,
-                          dropDownArray: const ['asdasd', 'asd'],
+                          dropDownArray: woCreateProvider.getRequestedByChildren,
                         ),
                         const SizedBox(height: 15),
                         DropDownInputFields(

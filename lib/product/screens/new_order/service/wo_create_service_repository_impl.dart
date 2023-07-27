@@ -52,20 +52,23 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
     }
   }
 
-    @override
-  Future<Either<WoCreateRequestedByModel, CustomServiceException>> getRequestedBy(token) async {
-    WoCreateRequestedByModel woCreateRequestedByModel;
+  @override
+  Future<Either<List<WoCreateRequestedByModel>, CustomServiceException>> getRequestedBy(token) async {
+    List<WoCreateRequestedByModel> woCreateRequestedByModel = [];
+
     String url = 'http://localhost:3012/user?page=1&limit=100';
     try {
-      final response = await super.dio.post(
+      final response = await super.dio.get(
             url,
-            data: {"label": ['RequestType'],},
+            data: {
+              "label": ["RequestType"],
+            },
             options: Options(
               headers: {'authorization': 'Bearer $token'},
             ),
           );
-      final data = response.data['users'];
-      woCreateRequestedByModel = WoCreateRequestedByModel.fromJson(data);
+
+      woCreateRequestedByModel = WoCreateRequestedByModel.fromJsonList(response.data['users']);
       super.logger.e(woCreateRequestedByModel);
       return Left(woCreateRequestedByModel);
     } catch (error) {
