@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:vm_fm_4/feature/models/work_space/work_space_requirement_materials_list.dart';
 
 import '../../../enums/task_response_enums.dart';
 import '../../../exceptions/custom_service_exceptions.dart';
@@ -503,6 +504,68 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
           result = TaskResponseEnums.error;
         }
         return Left(result);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+      }
+    } catch (e) {
+      super.logger.i(e);
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<List<WorkSpaceRequirementMaterialsList>, CustomServiceException>> getWorkSpaceApprovedRequirementMaterialsList(
+    String taskId,
+    String token,
+  ) async {
+    List<WorkSpaceRequirementMaterialsList> workSpaceRequirementMaterialsList;
+    String url = 'http://10.0.2.2:3015/task/mobile/getMaterialRequestByTaskId/$taskId';
+
+    try {
+      final response = await super.dio.get(
+            url,
+            data: {},
+            options: Options(
+              headers: {'authorization': 'Bearer $token'},
+            ),
+          );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = response.data;
+        workSpaceRequirementMaterialsList = WorkSpaceRequirementMaterialsList.fromJsonList(data);
+
+        return Left(workSpaceRequirementMaterialsList);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+      }
+    } catch (e) {
+      super.logger.i(e);
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<List<WorkSpaceRequirementMaterialsList>, CustomServiceException>> getWorkSpaceRequirementMaterialsList(
+    String taskId,
+    String token,
+  ) async {
+    List<WorkSpaceRequirementMaterialsList> workSpaceRequirementMaterialsList;
+    String url = 'http://10.0.2.2:3015/task/mobile/getMaterialRequestByTaskId/$taskId';
+
+    try {
+      final response = await super.dio.get(
+            url,
+            data: {},
+            options: Options(
+              headers: {'authorization': 'Bearer $token'},
+            ),
+          );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = response.data;
+        workSpaceRequirementMaterialsList = WorkSpaceRequirementMaterialsList.fromJsonList(data);
+
+        return Left(workSpaceRequirementMaterialsList);
       } else {
         return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
       }

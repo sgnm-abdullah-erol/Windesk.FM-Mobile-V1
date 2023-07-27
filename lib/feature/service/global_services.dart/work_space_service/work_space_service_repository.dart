@@ -11,6 +11,7 @@ import '../../../models/work_space/work_space_detail.dart';
 import '../../../models/work_space/work_space_efforts.dart';
 import '../../../models/work_space/work_space_my_group_demand_list.dart';
 import '../../../models/work_space/work_space_requested_materials_inventory.dart';
+import '../../../models/work_space/work_space_requirement_materials_list.dart';
 import '../../../models/work_space/work_space_spareparts.dart';
 import '../../service_manager.dart';
 
@@ -61,4 +62,11 @@ abstract class WorkSpaceServiceRepository {
   Future<Either<bool, CustomServiceException>> takeItOnMe(String taskId, String currentStateId, String token);
 
   Future<Either<TaskResponseEnums, CustomServiceException>> changeWorkSpaceState(String taskId, String nextStateId, String token);
+
+  Future<Either<List<WorkSpaceRequirementMaterialsList>, CustomServiceException>> getWorkSpaceRequirementMaterialsList(String taskId, String token);
+
+  Future<Either<List<WorkSpaceRequirementMaterialsList>, CustomServiceException>> getWorkSpaceApprovedRequirementMaterialsList(
+    String taskId,
+    String token,
+  );
 }
