@@ -21,6 +21,7 @@ class NewOrderScreen extends StatelessWidget {
       child: Consumer<WoCreateProvider>(builder: (context, WoCreateProvider woCreateProvider, child) {
         woCreateProvider.locationLoading ? woCreateProvider.getLocation() : null;
         woCreateProvider.requestedLoading ? woCreateProvider.getRequestedByPro() : null;
+        woCreateProvider.typeLoading ? woCreateProvider.getType() : null;
         return woCreateProvider.isLoading
             ? const CustomLoadingIndicator()
             : Scaffold(
@@ -51,7 +52,7 @@ class NewOrderScreen extends StatelessWidget {
                             woCreateProvider.setType(newValue);
                           },
                           rightIcon: Icons.arrow_drop_down_rounded,
-                          dropDownArray: const ['asdasd', 'asd'],
+                          dropDownArray: woCreateProvider.getTypesChildren,
                         ),
                         const SizedBox(height: 15),
                         DropDownInputFields(
@@ -73,10 +74,12 @@ class NewOrderScreen extends StatelessWidget {
                                 },
                                 rightIcon: Icons.arrow_drop_down_rounded,
                                 dropDownArray: woCreateProvider.woBlockListChildren,
+                                leftIconExist: true,
+                                leftIcon: Icons.arrow_right_alt,
                               ),
                             )),
                         Padding(
-                            padding: CustomPaddings.onlyLeft,
+                            padding: CustomPaddings.onlyLeft * 2,
                             child: NullCheckWidget().isLeafFalse(
                               woCreateProvider.buildingLeaf,
                               DropDownInputFields(
@@ -86,10 +89,12 @@ class NewOrderScreen extends StatelessWidget {
                                 },
                                 rightIcon: Icons.arrow_drop_down_rounded,
                                 dropDownArray: woCreateProvider.woFloorListChildren,
+                                leftIconExist: true,
+                                leftIcon: Icons.arrow_right_alt,
                               ),
                             )),
                         Padding(
-                            padding: CustomPaddings.onlyLeft,
+                            padding: CustomPaddings.onlyLeft * 1.5,
                             child: NullCheckWidget().isLeafFalse(
                               woCreateProvider.floorLeaf,
                               DropDownInputFields(
@@ -99,6 +104,8 @@ class NewOrderScreen extends StatelessWidget {
                                 },
                                 rightIcon: Icons.arrow_drop_down_rounded,
                                 dropDownArray: woCreateProvider.woSpaceListChildren,
+                                leftIconExist: true,
+                                leftIcon: Icons.arrow_right_alt,
                               ),
                             )),
                         const SizedBox(height: 15),

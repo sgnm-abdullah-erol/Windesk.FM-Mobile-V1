@@ -54,7 +54,6 @@ class WoCreateRequestedByModel extends Equatable{
     Map<String, dynamic> toJson() => _$WoCreateRequestedByModelToJson(this);
     
       @override
-      // TODO: implement props
       List<Object?> get props => [
         id,
         createdTimestamp,

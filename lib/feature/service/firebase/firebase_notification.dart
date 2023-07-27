@@ -101,7 +101,7 @@ class FirebaseNotification {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       print('Got a message whilst in the foreground!');
       print('Message data Home: ${message.data}');
-      NotificationDetails notificationDetails = NotificationDetails(
+      NotificationDetails notificationDetails = const NotificationDetails(
         android: AndroidNotificationDetails(
           '1',
           'channel name',

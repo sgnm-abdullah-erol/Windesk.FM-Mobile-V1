@@ -18,7 +18,7 @@ class WoCreateLeafChildrenModel extends Equatable {
   final int? id;
   final bool? leaf;
 
-  WoCreateLeafChildrenModel({
+  const WoCreateLeafChildrenModel({
     this.labels,
     this.canDisplay,
     this.createdAt,
@@ -37,7 +37,6 @@ class WoCreateLeafChildrenModel extends Equatable {
   Map<String, dynamic> toJson() => _$WoCreateLeafChildrenModelToJson(this);
 
   @override
-  // TODO: implement props
   List<Object?> get props => [
         labels,
         canDisplay,

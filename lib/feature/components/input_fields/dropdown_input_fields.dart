@@ -10,12 +10,16 @@ class DropDownInputFields extends StatelessWidget {
     required this.onChangedFunction,
     required this.rightIcon,
     required this.dropDownArray,
+    this.leftIcon,
+    this.leftIconExist = false
   });
 
   final String labelText;
   final Function onChangedFunction;
   final IconData rightIcon;
   final List<String> dropDownArray;
+  final IconData? leftIcon;
+  final bool? leftIconExist;
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
@@ -31,9 +35,14 @@ class DropDownInputFields extends StatelessWidget {
       items: dropDownArray.map((String items) {
         return DropdownMenuItem(
           value: items,
-          child: Text(
-            items,
-            style: TextStyle(color: APPColors.Main.black),
+          child: Row(
+            children: [
+              leftIconExist == false ? Container() : Icon(leftIcon)  ,
+              Text(
+                items,
+                style: TextStyle(color: APPColors.Main.black),
+              ),
+            ],
           ),
         );
       }).toList(),

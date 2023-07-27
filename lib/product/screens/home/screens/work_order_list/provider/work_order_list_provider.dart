@@ -63,7 +63,6 @@ class WorkOrderListProvider extends ChangeNotifier {
       result.fold((l) {
         _workSpaceMyGroupDemandList = l;
       }, (r) {
-        // TODO hata kontrolu
       });
 
       _isMyGroupWorkOrdersDataFetched = true;
@@ -86,7 +85,6 @@ class WorkOrderListProvider extends ChangeNotifier {
       result.fold((l) {
         _myPendikWorkSpaceDetails = l;
       }, (r) {
-        // TODO hata kontrolu
       });
 
       _isMyPendikWorkOrdersDataFetched = true;

@@ -43,7 +43,7 @@ class WoCreateLeafModel extends Equatable{
     final bool? leaf;
     final List<WoCreateLeafChildrenModel>? children;
 
-    WoCreateLeafModel({
+    const WoCreateLeafModel({
         this.contractor,
         this.code,
         this.externalSiteObject,
@@ -86,7 +86,6 @@ class WoCreateLeafModel extends Equatable{
   Map<String, dynamic> toJson() => _$WoCreateLeafModelToJson(this);
     
       @override
-      // TODO: implement props
       List<Object?> get props => [
         contractor,
         code,

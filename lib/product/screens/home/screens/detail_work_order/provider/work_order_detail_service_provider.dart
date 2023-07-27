@@ -16,9 +16,6 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
   bool _isSparepartsFetched = false;
   bool get isMaterialPartsFetched => _isSparepartsFetched;
 
-  bool _isRequestedListFetched = false;
-  bool get isRequestedMaterialListFetched => _isRequestedListFetched;
-
   bool _isDocumantListFetched = false;
   bool get isDocumantListFetched => _isDocumantListFetched;
 

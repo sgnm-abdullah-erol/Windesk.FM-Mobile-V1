@@ -11,6 +11,7 @@ class NullCheckWidget {
     }
   }
 
+  // ignore: non_constant_identifier_names
   Widget isLeafFalse(bool? isLeafFalse, Widget FullFilledWidget) {
     if (isLeafFalse == true) {
       return Container();
