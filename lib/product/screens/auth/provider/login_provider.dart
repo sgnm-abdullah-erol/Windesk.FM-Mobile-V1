@@ -49,8 +49,12 @@ class LoginProvider extends ChangeNotifier {
         _isLoginSuccess = true;
         _userId = login.id.toString();
         notifyListeners();
+<<<<<<< HEAD
 
         Future.delayed(const Duration(milliseconds: 2000), () {
+=======
+        Future.delayed(const Duration(milliseconds: 1000), () {
+>>>>>>> 1853347dc24ea40cab61411742ccee7bfd93d418
           loginModel = login;
           _userToken = loginModel.accessToken ?? '';
           _userTokenName = userName;

@@ -8,6 +8,42 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:347606667309:android:e0d260b15a6b86b85aa8a4",
+        "android_client_info": {
+          "package_name": "com.example.vm_fm_4"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "347606667309-mrv1gklpoaqgal5oesj1qhsbpgi6nhsb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAemq_T6l7LEidR_yzkyjFiQet4b6DeDBY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "347606667309-mrv1gklpoaqgal5oesj1qhsbpgi6nhsb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "347606667309-3rnvc9dev6rsb47865g8t3i7pjqea5cv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.windesk.pppmobilev3tkd"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:347606667309:android:629a6559435d69965aa8a4",
         "android_client_info": {
           "package_name": "com.windesk.pppmobileantep"
@@ -271,6 +307,42 @@
         "mobilesdk_app_id": "1:347606667309:android:3d23b3777bb8e8dc5aa8a4",
         "android_client_info": {
           "package_name": "com.windesk.pppmobilev4"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "347606667309-mrv1gklpoaqgal5oesj1qhsbpgi6nhsb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAemq_T6l7LEidR_yzkyjFiQet4b6DeDBY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "347606667309-mrv1gklpoaqgal5oesj1qhsbpgi6nhsb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "347606667309-3rnvc9dev6rsb47865g8t3i7pjqea5cv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.windesk.pppmobilev3tkd"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:347606667309:android:1df03c537e24c47f5aa8a4",
+        "android_client_info": {
+          "package_name": "com.windesk.sgnmgltprt"
         }
       },
       "oauth_client": [
