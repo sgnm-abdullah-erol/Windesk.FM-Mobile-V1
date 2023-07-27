@@ -46,7 +46,11 @@ class AddDocumentsModalBottomSheet extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CustomCircularWithIconButton(
-              bgColor: APPColors.Main.blue, icon: Icons.add_box, onPressFunction: pickDocumentFunction, iconColor: APPColors.Main.white)
+            bgColor: APPColors.Main.blue,
+            icon: Icons.add_box,
+            onPressFunction: pickDocumentFunction,
+            iconColor: APPColors.Main.white,
+          )
         ],
       ),
     );

@@ -4,7 +4,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../feature/components/model_bottom_sheet/add_documents_modal_bottom_sheet.dart';
-import '../../../../../../feature/components/model_bottom_sheet/add_photo_modal_bottom_sheet.dart';
+import '../../../../../../feature/components/model_bottom_sheet/add_image_modal_bottom_sheet.dart';
 import '../../../../../../feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
 import '../../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../../feature/constants/other/app_strings.dart';
@@ -34,7 +34,7 @@ class AddDocumantAccordion extends StatelessWidget {
           header: Text(AppStrings.addImage, style: TextStyle(color: APPColors.Main.white)),
           rightIcon: const Icon(AppIcons.arrowDown, size: 0),
           onOpenSection: () {
-            ShowModalBottomSheet().show(context, AddPhotoModalBottomSheet(test, test, test, 'Açıklama'));
+            ShowModalBottomSheet().show(context, const AddImageModalBottomSheet());
           },
           content: const SizedBox(height: 0),
         ),

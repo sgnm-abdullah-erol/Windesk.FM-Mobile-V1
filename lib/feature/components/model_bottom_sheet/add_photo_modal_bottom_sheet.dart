@@ -121,6 +121,7 @@ class _PhotoStackState extends State<_PhotoStack> {
                   }).then((value) {
                     setState(() {});
                   });
+                  setState(() {});
                 },
                 child: const Icon(Icons.add, size: 36),
               ),
