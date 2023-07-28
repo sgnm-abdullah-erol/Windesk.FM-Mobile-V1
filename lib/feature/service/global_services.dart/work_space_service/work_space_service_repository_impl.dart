@@ -574,4 +574,10 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
     }
   }
+
+  @override
+  Future<Either<WorkSpaceDetail, CustomServiceException>> getWorkSpaceDetail(String taskId, String token) {
+    // TODO: implement getWorkSpaceDetail
+    throw UnimplementedError();
+  }
 }

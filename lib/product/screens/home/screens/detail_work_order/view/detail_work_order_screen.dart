@@ -146,7 +146,6 @@ class _StateChangeDropDownButton extends StatelessWidget {
             }
           });
         },
-        value: provider.dropdownValue,
         rightIcon: AppIcons.arrowDown,
         dropDownArray: provider.workSpaceUserTaskLabels,
       ),

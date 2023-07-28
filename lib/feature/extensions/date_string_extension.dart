@@ -16,4 +16,8 @@ extension DateStringExtension on String {
       return '${splitted[2]} ${splitted[3]} ${splitted[4]}';
     }
   }
+
+  String splitStringSecond(String date) {
+    return date.substring(0, 19);
+  }
 }

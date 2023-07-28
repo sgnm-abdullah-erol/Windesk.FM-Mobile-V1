@@ -39,6 +39,9 @@ class WorkOrderListProvider extends ChangeNotifier {
   List<WorkSpacePendiks> _myPendikWorkSpaceDetails = [];
   List<WorkSpacePendiks> get myPendikWorkSpaceDetails => _myPendikWorkSpaceDetails;
 
+  List<String> _pendinkNextStates = [];
+  List<String> get pendinkNextStates => _pendinkNextStates;
+
   void getMyWorkOrders() async {
     if (_isMyWorkOrdersDataFetched) return;
     String userToken = await SharedManager().getString(SharedEnum.userToken);
@@ -49,9 +52,7 @@ class WorkOrderListProvider extends ChangeNotifier {
 
     result.fold((l) {
       _myWorkSpaceDetails = l;
-    }, (r) {
-      
-    });
+    }, (r) {});
 
     _isMyWorkOrdersDataFetched = true;
     _isLoading = false;
