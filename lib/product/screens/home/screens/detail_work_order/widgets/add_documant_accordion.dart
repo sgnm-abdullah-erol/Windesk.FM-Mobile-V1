@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../../feature/components/model_bottom_sheet/add_documents_modal_bottom_sheet.dart';
+import '../../../../../../feature/components/model_bottom_sheet/add_document_modal_bottom_sheet.dart';
 import '../../../../../../feature/components/model_bottom_sheet/add_image_modal_bottom_sheet.dart';
 import '../../../../../../feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
 import '../../../../../../feature/constants/other/app_icons.dart';
@@ -16,8 +16,6 @@ import 'tables/data_table_accordion_documants.dart';
 class AddDocumantAccordion extends StatelessWidget {
   const AddDocumantAccordion({super.key, required this.provider});
   final WorkOrderDetailProvider provider;
-
-  test() {}
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +32,13 @@ class AddDocumantAccordion extends StatelessWidget {
           header: Text(AppStrings.addImage, style: TextStyle(color: APPColors.Main.white)),
           rightIcon: const Icon(AppIcons.arrowDown, size: 0),
           onOpenSection: () {
-            ShowModalBottomSheet().show(context, const AddImageModalBottomSheet());
+            ShowModalBottomSheet().show(
+              context,
+              AddImageModalBottomSheet(
+                taskId: provider.detail.task?.id.toString() ?? '',
+                taskKey: provider.detail.task?.key ?? '',
+              ),
+            );
           },
           content: const SizedBox(height: 0),
         ),
@@ -47,7 +51,13 @@ class AddDocumantAccordion extends StatelessWidget {
           header: Text(AppStrings.addPdf, style: TextStyle(color: APPColors.Main.white)),
           rightIcon: const Icon(AppIcons.arrowDown, size: 0),
           onOpenSection: () {
-            ShowModalBottomSheet().show(context, AddDocumentsModalBottomSheet(test, test, 'Açıklama', pickDocumentFunction: test));
+            ShowModalBottomSheet().show(
+              context,
+              AddDocumentsModalBottomSheet(
+                taskId: provider.detail.task?.id.toString() ?? '',
+                taskKey: provider.detail.task?.key ?? '',
+              ),
+            );
           },
           content: const SizedBox(height: 0),
         ),

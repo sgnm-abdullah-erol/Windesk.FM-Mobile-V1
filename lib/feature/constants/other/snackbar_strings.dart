@@ -16,4 +16,6 @@ class SnackbarStrings {
   static const String materialRequested = 'Malzeme talep edilmiştir.';
   static const String taskStateChange = 'Görev durumu değiştirilmiştir.';
   static const String takeItOnMeSuccess = 'Görev üzerinize alınmıştır.';
+  static const String pdfAdded = 'Pdf eklenmiştir.';
+  static const String imageAdded = 'Fotoğraf eklenmiştir.';
 }

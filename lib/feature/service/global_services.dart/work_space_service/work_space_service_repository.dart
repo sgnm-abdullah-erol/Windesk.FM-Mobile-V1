@@ -69,4 +69,14 @@ abstract class WorkSpaceServiceRepository {
     String taskId,
     String token,
   );
+
+  Future<Either<bool, CustomServiceException>> saveDocumant(
+    String filePath,
+    String fileName,
+    String description,
+    String token,
+    String taskId,
+    String taskKey,
+    String key,
+  );
 }
