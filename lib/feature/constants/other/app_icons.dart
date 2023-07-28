@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 @immutable
 class AppIcons {
+  const AppIcons._();
+  
   // HOME TAB ICONS
   static const IconData home = Icons.home;
   static const IconData addBox = Icons.add_box;

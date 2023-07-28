@@ -49,7 +49,9 @@ class WorkOrderListProvider extends ChangeNotifier {
 
     result.fold((l) {
       _myWorkSpaceDetails = l;
-    }, (r) {});
+    }, (r) {
+      
+    });
 
     _isMyWorkOrdersDataFetched = true;
     _isLoading = false;
