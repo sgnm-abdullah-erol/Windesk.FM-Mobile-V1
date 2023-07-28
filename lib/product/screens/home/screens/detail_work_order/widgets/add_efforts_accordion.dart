@@ -10,6 +10,7 @@ import 'package:vm_fm_4/feature/components/show_modal_bottom_folder/show_modal_b
 import 'package:vm_fm_4/feature/constants/other/app_strings.dart';
 import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/provider/work_order_detail_provider.dart';
 import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/widgets/tables/data_table_accordion_efforts.dart';
+import 'package:vm_fm_4/product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
 
 import '../../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../../feature/constants/other/colors.dart';
@@ -79,7 +80,7 @@ class AddEffortsAccordion extends StatelessWidget {
               });
 
               return value.isLoading
-                  ? const Center(child: CircularProgressIndicator())
+                  ? const CustomLoadingIndicator()
                   : DataTableAccordionEfforts(
                       delete: () {},
                       data: value.woEffortList ?? [],

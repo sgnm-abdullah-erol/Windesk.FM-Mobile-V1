@@ -69,6 +69,7 @@ dependencies:
   # image picker, file picker
   image_picker: ^1.0.1
   file_picker: ^5.3.3
+  path_provider: ^2.0.15
 
   # for image cropper
   http_parser: ^4.0.2
@@ -91,6 +92,9 @@ dependencies:
 
   # barcode scanner
   flutter_barcode_scanner: ^2.0.0
+
+  # file downloader
+  flutter_file_downloader: ^1.1.2
 
 dev_dependencies:
   flutter_test:

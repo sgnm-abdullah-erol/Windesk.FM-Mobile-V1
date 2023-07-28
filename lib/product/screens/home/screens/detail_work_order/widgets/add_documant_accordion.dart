@@ -9,6 +9,7 @@ import '../../../../../../feature/components/show_modal_bottom_folder/show_modal
 import '../../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../../feature/constants/other/app_strings.dart';
 import '../../../../../../feature/constants/other/colors.dart';
+import '../../work_order_list/widgets/custom_loading_indicator.dart';
 import '../provider/work_order_detail_provider.dart';
 import '../provider/work_order_detail_service_provider.dart';
 import 'tables/data_table_accordion_documants.dart';
@@ -65,20 +66,27 @@ class AddDocumantAccordion extends StatelessWidget {
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.documantScanner, color: APPColors.Main.white),
           header: Text(AppStrings.addedDocumants, style: TextStyle(color: APPColors.Main.white)),
+          onOpenSection: () {
+            Provider.of<WorkOrderDetailServiceProvider>(context, listen: false).update();
+            provider.userClickedDocumantsFunction();
+          },
           content: Consumer<WorkOrderDetailServiceProvider>(
             builder: (context, value, child) {
               SchedulerBinding.instance.addPostFrameCallback((_) {
                 provider.userClickedDocumants
                     ? value.isDocumantListFetched
                         ? null
-                        : value.fetchDocumants()
+                        : value.fetchDocumants(
+                            provider.detail.task?.id.toString() ?? '',
+                          )
                     : null;
               });
+
               return value.isLoading
-                  ? const Center(child: CircularProgressIndicator())
+                  ? const CustomLoadingIndicator()
                   : DataTableAccordionDocumants(
                       delete: () {},
-                      data: provider.woEffortList ?? [],
+                      data: value.workSpaceDocuments,
                     );
             },
           ),

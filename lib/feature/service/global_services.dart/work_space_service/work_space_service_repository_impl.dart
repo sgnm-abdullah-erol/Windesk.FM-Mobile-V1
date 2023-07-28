@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:http_parser/http_parser.dart';
+import 'package:vm_fm_4/feature/models/work_space/work_space_documents.dart';
 import 'package:vm_fm_4/feature/models/work_space/work_space_requirement_materials_list.dart';
 
 import '../../../enums/task_response_enums.dart';
@@ -654,6 +655,35 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
         workSpaceDetail = WorkSpaceDetail.fromJson(data);
 
         return Left(workSpaceDetail);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+      }
+    } catch (e) {
+      super.logger.e(e.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<List<WorkSpaceDocuments>, CustomServiceException>> getWorkSpaceDocuments(String token, String taskId) async {
+    List<WorkSpaceDocuments> workSpaceDocuments;
+
+    String url = 'http://10.0.2.2:3015/task/mobile/getDocumentsByTaskId/$taskId';
+
+    try {
+      final response = await super.dio.get(
+            url,
+            options: Options(
+              headers: {'authorization': 'Bearer $token'},
+            ),
+          );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = response.data;
+        workSpaceDocuments = WorkSpaceDocuments.fromJsonList(data);
+        super.logger.i(workSpaceDocuments);
+
+        return Left(workSpaceDocuments);
       } else {
         return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
       }

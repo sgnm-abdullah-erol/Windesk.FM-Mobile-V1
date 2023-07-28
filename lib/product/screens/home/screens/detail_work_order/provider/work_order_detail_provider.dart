@@ -65,8 +65,6 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     _userClickedDocumants = false;
   }
 
-  void getWorkOrderDetail() {}
-
   void userClickedEffortsFunction() {
     _userClickedEfforts = true;
   }

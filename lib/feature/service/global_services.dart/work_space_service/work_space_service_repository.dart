@@ -8,6 +8,7 @@ import '../../../injection.dart';
 import '../../../log/log_manager.dart';
 import '../../../models/work_space/work_space_appendings.dart';
 import '../../../models/work_space/work_space_detail.dart';
+import '../../../models/work_space/work_space_documents.dart';
 import '../../../models/work_space/work_space_efforts.dart';
 import '../../../models/work_space/work_space_my_group_demand_list.dart';
 import '../../../models/work_space/work_space_requested_materials_inventory.dart';
@@ -81,4 +82,6 @@ abstract class WorkSpaceServiceRepository {
   );
 
   Future<Either<WorkSpaceDetail, CustomServiceException>> getWorkSpaceByTaskId(String taskId, String token);
+
+  Future<Either<List<WorkSpaceDocuments>, CustomServiceException>> getWorkSpaceDocuments(String token, String taskId);
 }

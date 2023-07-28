@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_final_fields
 
 import 'package:flutter/cupertino.dart';
+import 'package:vm_fm_4/feature/models/work_space/work_space_documents.dart';
 
 import '../../../../../../feature/database/shared_manager.dart';
 import '../../../../../../feature/enums/shared_enums.dart';
@@ -43,18 +44,36 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
   List<WorkSpaceRequirementMaterialsList> _woRequestedApprovedMaterialsList = [];
   List<WorkSpaceRequirementMaterialsList> get woRequestedApprovedMaterialsList => _woRequestedApprovedMaterialsList;
 
+  List<WorkSpaceDocuments> _workSpaceDocuments = [];
+  List<WorkSpaceDocuments> get workSpaceDocuments => _workSpaceDocuments;
+
   void update() {
     notifyListeners();
   }
 
-  void fetchDocumants() {
+  void fetchDocumants(String taskID) async {
     _isLoading = true;
     _isDocumantListFetched = true;
     notifyListeners();
 
-    Future.delayed(const Duration(seconds: 5), () {
-      _isLoading = false;
-      notifyListeners();
+    String userToken = await SharedManager().getString(SharedEnum.userToken);
+    final result = await workSpaceService.getWorkSpaceDocuments(userToken, taskID);
+
+    result.fold(
+      (l) => {
+        _workSpaceDocuments = l,
+        _isDocumantListFetched = true,
+      },
+      (r) => {
+        _isDocumantListFetched = false,
+      },
+    );
+
+    _isLoading = false;
+    notifyListeners();
+
+    Future.delayed(const Duration(seconds: 2), () {
+      _isDocumantListFetched = false;
     });
   }
 
