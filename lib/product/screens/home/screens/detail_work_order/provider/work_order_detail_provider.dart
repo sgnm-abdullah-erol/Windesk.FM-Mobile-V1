@@ -16,7 +16,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     _setUserTaskLabels();
   }
 
-  final WorkSpaceDetail detail;
+  WorkSpaceDetail detail;
 
   final WorkSpaceServiceRepositoryImpl workSpaceService = Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
 
@@ -99,6 +99,26 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     });
   }
 
+  void _getTaskById() async {
+    String token = await SharedManager().getString(SharedEnum.userToken);
+
+    final result = await workSpaceService.getWorkSpaceWithSearch(detail.task?.id.toString() ?? '', token);
+
+    result.fold(
+      (l) => {
+        detail = l,
+      },
+      (r) => {},
+    );
+
+    notifyListeners();
+
+    Future.delayed(const Duration(seconds: 2), () {
+      _takeItOnMeSuccess = false;
+      _errorAccurWhileTakingOnMe = false;
+    });
+  }
+
   void takeItOnMe() async {
     _isLoading = true;
     notifyListeners();
@@ -117,12 +137,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     );
 
     _isLoading = false;
-    notifyListeners();
-
-    Future.delayed(const Duration(seconds: 2), () {
-      _errorAccurWhileTakingOnMe = false;
-      _takeItOnMeSuccess = false;
-    });
+    _getTaskById();
   }
 
   void _setUserTaskLabels() {

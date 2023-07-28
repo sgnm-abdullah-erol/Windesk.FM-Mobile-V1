@@ -58,7 +58,7 @@ class DetailWorkOrderScreen extends StatelessWidget {
 
           return Scaffold(
             key: _scaffoldKey,
-            appBar: CustomMainAppbar(title: Text('WO - ${workSpaceDetail.task?.id.toString() ?? ''}'), returnBack: true, elevation: 4),
+            appBar: CustomMainAppbar(title: Text('WO - ${woDetailProvider.detail.task?.id.toString() ?? ''}'), returnBack: true, elevation: 4),
             body: context.read<WorkOrderDetailProvider>().isLoading
                 ? const CustomLoadingIndicator()
                 : RefreshIndicator(
@@ -72,13 +72,13 @@ class DetailWorkOrderScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
                         child: Column(
                           children: [
-                            CustomWorkSpaceDetailCard(workSpaceDetail: workSpaceDetail),
+                            CustomWorkSpaceDetailCard(workSpaceDetail: woDetailProvider.detail),
                             const SizedBox(height: 10),
-                            (workSpaceDetail.task?.userId ?? '') != context.read<GlobalProvider>().userId
+                            (woDetailProvider.detail.task?.userId ?? '') != context.read<GlobalProvider>().userId
                                 ? _TakeItOnMe(provider: woDetailProvider)
                                 : _StateChangeDropDownButton(provider: woDetailProvider),
                             const SizedBox(height: 20),
-                            (workSpaceDetail.task?.userId ?? '') != context.read<GlobalProvider>().userId
+                            (woDetailProvider.detail.task?.userId ?? '') != context.read<GlobalProvider>().userId
                                 ? const SizedBox()
                                 : _customPageAccordionSection(woDetailProvider),
                           ],
