@@ -28,16 +28,12 @@ class SplashScreen extends StatelessWidget {
   }
 
   void _navigate(BuildContext context) {
-    context
-        .read<GlobalProvider>()
-        .setDeviceModel(context.read<SplashProvider>().getDeviceModel());
-    context
-        .read<GlobalProvider>()
-        .setDeviceVersion(context.read<SplashProvider>().getDeviceVersion());
+    context.read<GlobalProvider>().setDeviceModel(context.read<SplashProvider>().getDeviceModel());
+    context.read<GlobalProvider>().setDeviceVersion(context.read<SplashProvider>().getDeviceVersion());
     context.watch<SplashProvider>().isSplashFinished
         ? context.watch<SplashProvider>().isUserAlreadyLoggedIn
             ? context.router.replace(const HomeScreen())
-            : context.router.replace(const HomeScreen())
+            : context.router.replace(const LoginScreen())
         : const SizedBox();
   }
 
