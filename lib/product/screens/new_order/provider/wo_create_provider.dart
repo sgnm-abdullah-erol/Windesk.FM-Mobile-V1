@@ -9,8 +9,7 @@ import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_type_model.dart
 import 'package:vm_fm_4/product/screens/new_order/service/wo_create_service_repository_impl.dart';
 
 class WoCreateProvider extends ChangeNotifier {
-  final WoCreateServiceRepositoryImpl _woCreateServiceRepository =
-      Injection.getIt.get<WoCreateServiceRepositoryImpl>();
+  final WoCreateServiceRepositoryImpl _woCreateServiceRepository = Injection.getIt.get<WoCreateServiceRepositoryImpl>();
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -186,8 +185,7 @@ class WoCreateProvider extends ChangeNotifier {
         _woLocationList = l,
         for (var i = 0; i < (_woLocationList.children?.length ?? 0); i++)
           {
-            _woLocationListChildren
-                .add(_woLocationList.children?[i].name ?? ''),
+            _woLocationListChildren.add(_woLocationList.children?[i].name ?? ''),
             notifyListeners(),
           }
       },
@@ -253,7 +251,7 @@ class WoCreateProvider extends ChangeNotifier {
     response.fold(
       (l) => {
         _getRequestedBy = l,
-        for (var i = 0; i < (_getRequestedBy.length ?? 0); i++)
+        for (var i = 0; i < (_getRequestedBy.length); i++)
           {
             _getRequestedByChildren.add(_getRequestedBy[i].username ?? ''),
             notifyListeners(),
@@ -275,7 +273,7 @@ class WoCreateProvider extends ChangeNotifier {
     response.fold(
       (l) => {
         _getTypes = l,
-        for (var i = 0; i < (_getTypes.length ?? 0); i++)
+        for (var i = 0; i < (_getTypes.length); i++)
           {
             _getTypesChildren.add(_getTypes[i].name ?? ''),
             notifyListeners(),
