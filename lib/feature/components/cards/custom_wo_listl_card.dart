@@ -91,7 +91,7 @@ class CustomWoDetailCard extends StatelessWidget {
           style: textStyle,
         ),
         Text(
-          giveFormat ? date.splitString(date) : date,
+          giveFormat ? date.splitString(date) : date.splitStringSecond(date),
           style: textStyle,
         )
       ],

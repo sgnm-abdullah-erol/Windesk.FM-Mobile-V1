@@ -53,8 +53,7 @@ class AddDocumentsModalBottomSheet extends StatelessWidget {
           )
         ],
       ),
-    );
-  }
+    );}
 
   Expanded _buttons(context, Function add) {
     return Expanded(
