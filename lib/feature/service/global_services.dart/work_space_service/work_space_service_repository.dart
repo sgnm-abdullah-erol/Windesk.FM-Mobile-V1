@@ -79,4 +79,6 @@ abstract class WorkSpaceServiceRepository {
     String taskKey,
     String key,
   );
+
+  Future<Either<WorkSpaceDetail, CustomServiceException>> getWorkSpaceByTaskId(String taskId, String token);
 }

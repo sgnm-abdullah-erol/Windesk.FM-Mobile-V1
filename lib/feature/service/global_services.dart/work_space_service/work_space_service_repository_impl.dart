@@ -634,4 +634,32 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
     }
   }
+
+  @override
+  Future<Either<WorkSpaceDetail, CustomServiceException>> getWorkSpaceByTaskId(String taskId, String token) async {
+    WorkSpaceDetail workSpaceDetail;
+
+    final String url = 'http://10.0.2.2:3015/task/task/get/by/id/with/workspace/currentState/calendar/$taskId?page=1&limit=1';
+
+    try {
+      final response = await super.dio.get(
+            url,
+            options: Options(
+              headers: {'authorization': 'Bearer $token'},
+            ),
+          );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = response.data;
+        workSpaceDetail = WorkSpaceDetail.fromJson(data);
+
+        return Left(workSpaceDetail);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+      }
+    } catch (e) {
+      super.logger.e(e.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: '500'));
+    }
+  }
 }
