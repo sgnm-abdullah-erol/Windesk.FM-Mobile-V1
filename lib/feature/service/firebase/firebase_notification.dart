@@ -107,7 +107,10 @@ class FirebaseNotification {
         ),
       );
 
-      LocalNotification.showNotification(title: 'title', body: 'body', payload: 'asd');
+      LocalNotification.showNotification(
+          title: message.notification!.title.toString(),
+          body: message.notification!.body.toString(),
+          payload: message.data.toString());
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {

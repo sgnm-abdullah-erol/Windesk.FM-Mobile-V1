@@ -42,50 +42,50 @@ class WoCreateLeafModel extends Equatable {
   final bool? leaf;
   final List<WoCreateLeafChildrenModel>? children;
 
-  const WoCreateLeafModel({
-    this.contractor,
-    this.code,
-    this.externalSiteObject,
-    this.warrantyExpireDate,
-    this.externalFacilityObject,
-    this.description,
-    this.siteName,
-    this.isActive,
-    this.temperaturesOperator,
-    this.handoverDate,
-    this.createdAt,
-    this.isDeleted,
-    this.operationStartDate,
-    this.externalIdentifier,
-    this.canDelete,
-    this.tag,
-    this.externalFacilityIdentifier,
-    this.key,
-    this.owner,
-    this.phase,
-    this.canDisplay,
-    this.address,
-    this.siteDescription,
-    this.areaMeasurement,
-    this.nodeType,
-    this.externalSystem,
-    this.externalObject,
-    this.name,
-    this.projectDescription,
-    this.projectName,
-    this.externalSiteIdentifier,
-    this.status,
-    this.id,
-    this.leaf,
-    this.children,
-  });
+    const WoCreateLeafModel({
+        this.contractor,
+        this.code,
+        this.externalSiteObject,
+        this.warrantyExpireDate,
+        this.externalFacilityObject,
+        this.description,
+        this.siteName,
+        this.isActive,
+        this.temperaturesOperator,
+        this.handoverDate,
+        this.createdAt,
+        this.isDeleted,
+        this.operationStartDate,
+        this.externalIdentifier,
+        this.canDelete,
+        this.tag,
+        this.externalFacilityIdentifier,
+        this.key,
+        this.owner,
+        this.phase,
+        this.canDisplay,
+        this.address,
+        this.siteDescription,
+        this.areaMeasurement,
+        this.nodeType,
+        this.externalSystem,
+        this.externalObject,
+        this.name,
+        this.projectDescription,
+        this.projectName,
+        this.externalSiteIdentifier,
+        this.status,
+        this.id,
+        this.leaf,
+        this.children,
+    });
 
   factory WoCreateLeafModel.fromJson(Map<String, dynamic> json) => _$WoCreateLeafModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$WoCreateLeafModelToJson(this);
-
-  @override
-  List<Object?> get props => [
+    
+      @override
+      List<Object?> get props => [
         contractor,
         code,
         externalSiteObject,
