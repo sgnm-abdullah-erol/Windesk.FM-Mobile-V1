@@ -142,6 +142,7 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
     templatedBy,
     requestSpaceId,
     requestSpaceLabels,
+    woCategory
   ) async {
     print(
       summary+
@@ -161,16 +162,18 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
             "requestType": requestType,
             "requestedBy": [requestedBy],
             "description": description,
-            "appointmentData": appointmendData,
+            "appointmentDate": appointmendData,
             "templatedBy": [templatedBy],
             "requestedComponents": [""],
-            "requestedSpacees": [
+            "requestedSpaces": [
               {
                 "id": requestSpaceId,
                 "labels": [requestSpaceLabels]
               }
             ],
-            "isMobile": true
+            "woCategory": woCategory,
+            "isMobile": true,
+
           },
           options: Options(
             headers: {'authorization': 'Bearer $token'},

@@ -20,7 +20,7 @@ abstract class WoCreateServiceRepository {
     Future<Either<List<WoCreateTypeModel>, CustomServiceException>>  getType(String token);
     Future<Either<List<WoCreateRequestedTypeModel>, CustomServiceException>> getRequestedType(String token);
     Future<Either<List<WoCreateRequestedTypeModel>, CustomServiceException>> getCategory(String token);
-    Future<Either<dynamic, CustomServiceException>> createTask(String token, String summary, String requestType, String requestedBy, String description, String appointmendData, String templatedBy, String requestSpaceId,String requestSpaceLabels);
+    Future<Either<dynamic, CustomServiceException>> createTask(String token, String summary, String requestType, String requestedBy, String description, String appointmendData, String templatedBy, String requestSpaceId,String requestSpaceLabels, String woCategory);
 
 
 

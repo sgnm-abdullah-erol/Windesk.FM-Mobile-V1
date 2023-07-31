@@ -71,6 +71,9 @@ class WoCreateProvider extends ChangeNotifier {
   String _requestedById = '';
   String get requestedById => _requestedById;
 
+  String _woCategory = '';
+  String get woCategory => _woCategory;
+
   String _typesId = '';
   String get typesId => _typesId;
 
@@ -202,6 +205,12 @@ class WoCreateProvider extends ChangeNotifier {
 
   void setCategory(String newValue) {
     _category = newValue;
+    for (var i = 0; i < (_getCategories.length); i++) {
+      if (_getCategories[i].name == _category) {
+        _woCategory = _getCategories[i].code.toString();
+      }
+      notifyListeners();
+    }
   }
 
   void setLocation(String newValue) {
@@ -466,7 +475,7 @@ class WoCreateProvider extends ChangeNotifier {
   void createTask() async {
     final String appointmendData = _date + ' ' + _hour +':00';
     final response = await _woCreateServiceRepository.createTask(
-        key, summary, _requestTypeKey, requestedById, description, appointmendData, typesId, requestedId, requestedLabel);
+        key, summary, _requestTypeKey, requestedById, description, appointmendData, typesId, requestedId, requestedLabel, woCategory);
     response.fold(
       (l) => {
         _isWorkOrderCreate =true,
