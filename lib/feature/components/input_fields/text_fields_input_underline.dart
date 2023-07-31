@@ -37,7 +37,7 @@ class TextFieldsInputUnderline extends StatelessWidget {
       keyboardType: keyboardType ?? TextInputType.text,
       decoration: InputDecoration(
         disabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: APPColors.Main.black),
+          borderSide: BorderSide(color: APPColors.Main.grey),
         ),
         border: const UnderlineInputBorder(),
         hintText: hintText,

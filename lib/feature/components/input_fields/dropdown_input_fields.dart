@@ -5,15 +5,16 @@ import '../../constants/other/colors.dart';
 import '../../constants/style/border_radius.dart';
 
 class DropDownInputFields extends StatelessWidget {
-  const DropDownInputFields({
-    super.key,
-    required this.labelText,
-    required this.onChangedFunction,
-    required this.rightIcon,
-    required this.dropDownArray,
-    this.leftIcon,
-    this.leftIconExist = false
-  });
+  const DropDownInputFields(
+      {super.key,
+      required this.labelText,
+      required this.onChangedFunction,
+      required this.rightIcon,
+      required this.dropDownArray,
+      this.leftIcon,
+      this.leftIconExist = false,
+      this.type
+      });
 
   final String labelText;
   final Function onChangedFunction;
@@ -21,6 +22,7 @@ class DropDownInputFields extends StatelessWidget {
   final List<String> dropDownArray;
   final IconData? leftIcon;
   final bool? leftIconExist;
+  final String? type;
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
@@ -28,7 +30,7 @@ class DropDownInputFields extends StatelessWidget {
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: CustomBorderRadius.textFieldBorderRadius,
-          borderSide: BorderSide(color: APPColors.Main.black, width: 4),
+          borderSide: BorderSide(color: APPColors.Main.grey, width: 4),
         ),
         labelText: labelText,
         labelStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: FontSizes.subtitle),
@@ -38,7 +40,7 @@ class DropDownInputFields extends StatelessWidget {
           value: items,
           child: Row(
             children: [
-              leftIconExist == false ? Container() : Icon(leftIcon)  ,
+              leftIconExist == false ? Container() : Icon(leftIcon),
               Text(
                 items,
                 style: TextStyle(color: APPColors.Main.black),
@@ -47,7 +49,7 @@ class DropDownInputFields extends StatelessWidget {
           ),
         );
       }).toList(),
-      onChanged: (newValue) => onChangedFunction(newValue),
+      onChanged: (newValue) => {onChangedFunction(newValue)},
     );
   }
 }

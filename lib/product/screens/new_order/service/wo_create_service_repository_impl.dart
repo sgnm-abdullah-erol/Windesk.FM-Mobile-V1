@@ -35,18 +35,17 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
   Future<Either<WoCreateLeafModel, CustomServiceException>> getLazyLoading(token, key) async {
     WoCreateLeafModel woCreateLeafModel;
     String url = 'http://localhost:3010/jointspaces/lazyLoadingByKey';
-      final response = await super.dio.post(
-            url,
-            data: {"key": key, "leafType": "", "rootLabels": [], "childrenLabels": []},
-            options: Options(
-              headers: {'authorization': 'Bearer $token'},
-            ),
-          );
-      final data = response.data;
-      woCreateLeafModel = WoCreateLeafModel.fromJson(data);
-      super.logger.e(woCreateLeafModel);
-      return Left(woCreateLeafModel);
-   
+    final response = await super.dio.post(
+          url,
+          data: {"key": key, "leafType": "", "rootLabels": [], "childrenLabels": []},
+          options: Options(
+            headers: {'authorization': 'Bearer $token'},
+          ),
+        );
+    final data = response.data;
+    woCreateLeafModel = WoCreateLeafModel.fromJson(data);
+    super.logger.e(woCreateLeafModel);
+    return Left(woCreateLeafModel);
   }
 
   @override
@@ -78,17 +77,36 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
   Future<Either<List<WoCreateTypeModel>, CustomServiceException>> getType(token) async {
     List<WoCreateTypeModel> woCreateTypeModel = [];
 
-    String url = 'http://localhost:3015/task/task/find/task/types/related/with/workspace/469?page=1&limit=100';
-      final response = await super.dio.get(
-            url,
-            options: Options(
-              headers: {'authorization': 'Bearer $token'},
-            ),
-          );
+    String url = 'http://localhost:3015/task/task/find/task/types/related/with/workspace/493?page=1&limit=100';
+    final response = await super.dio.get(
+          url,
+          options: Options(
+            headers: {'authorization': 'Bearer $token'},
+          ),
+        );
 
-      woCreateTypeModel = WoCreateTypeModel.fromJsonList(response.data);
-      super.logger.e(woCreateTypeModel);
-      return Left(woCreateTypeModel);
-    
+    woCreateTypeModel = WoCreateTypeModel.fromJsonList(response.data);
+    super.logger.e(woCreateTypeModel);
+    return Left(woCreateTypeModel);
+  }
+
+  @override
+  Future<Either<List<WoCreateTypeModel>, CustomServiceException>> getRequestedType(token) async {
+    List<WoCreateTypeModel> woCreateTypeModel = [];
+
+    String url = 'http://localhost:3015/classification/getAClassificationByRealmAndLabelNameAndLanguage/info';
+    final response = await super.dio.post(
+          url,
+          data: {
+            "label": ["RequestType"],
+          },
+          options: Options(
+            headers: {'authorization': 'Bearer $token'},
+          ),
+        );
+
+    super.logger.e(response.data['root']['children'][0]['children']);
+    //woCreateTypeModel = WoCreateTypeModel.fromJsonList(response.data);
+    return Left(woCreateTypeModel);
   }
 }
