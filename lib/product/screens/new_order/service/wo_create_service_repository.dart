@@ -17,8 +17,6 @@ abstract class WoCreateServiceRepository {
     Future<Either<WoCreateLeafModel, CustomServiceException>>  getLazyLoading(String token, String key);
     Future<Either<List<WoCreateRequestedByModel>, CustomServiceException>>  getRequestedBy(String token);
     Future<Either<List<WoCreateTypeModel>, CustomServiceException>>  getType(String token);
-
-
-
+    Future<Either<List<WoCreateTypeModel>, CustomServiceException>>  getRequestedType(String token);
 
 }

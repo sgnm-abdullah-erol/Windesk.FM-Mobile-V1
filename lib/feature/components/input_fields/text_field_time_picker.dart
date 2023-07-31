@@ -21,6 +21,7 @@ class _TextFieldTimePickerState extends State<TextFieldTimePicker> {
       style: Theme.of(context).textTheme.bodyMedium,
       decoration: InputDecoration(
         icon: const Icon(AppIcons.time),
+        labelText: widget.label,
         hintText: widget.label,
         hintStyle: Theme.of(context).textTheme.bodyMedium,
         labelStyle: Theme.of(context).textTheme.bodyMedium,

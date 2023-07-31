@@ -20,6 +20,7 @@ class _TextFieldDatePickerState extends State<TextFieldDatePicker> {
       controller: _controller,
       style: Theme.of(context).textTheme.bodyMedium,
       decoration: InputDecoration(
+        labelText: widget.label,
         icon: const Icon(AppIcons.calendarToday),
         hintText: widget.label,
         hintStyle: Theme.of(context).textTheme.bodyMedium,
