@@ -12,7 +12,8 @@ import '../../../../../../feature/models/work_space/work_space_spareparts.dart';
 import '../../../../../../feature/service/global_services.dart/work_space_service/work_space_service_repository_impl.dart';
 
 class WorkOrderDetailServiceProvider extends ChangeNotifier {
-  final WorkSpaceServiceRepositoryImpl workSpaceService = Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
+  final WorkSpaceServiceRepositoryImpl workSpaceService =
+      Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
 
   bool _isEffortListFetched = false;
   bool get isEffortListFetched => _isEffortListFetched;
@@ -27,7 +28,8 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
   bool get isRequestedMaterialListFetched => _isRequestedListFetched;
 
   bool _isRequstedApprovedMaterialListFetched = false;
-  bool get isRequstedApprovedMaterialListFetched => _isRequstedApprovedMaterialListFetched;
+  bool get isRequstedApprovedMaterialListFetched =>
+      _isRequstedApprovedMaterialListFetched;
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -39,10 +41,13 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
   List<WorkSpaceSpareparts>? get woSpareparts => _woSpareparts;
 
   List<WorkSpaceRequirementMaterialsList> _woRequestedMaterialsList = [];
-  List<WorkSpaceRequirementMaterialsList> get woRequestedMaterialsList => _woRequestedMaterialsList;
+  List<WorkSpaceRequirementMaterialsList> get woRequestedMaterialsList =>
+      _woRequestedMaterialsList;
 
-  List<WorkSpaceRequirementMaterialsList> _woRequestedApprovedMaterialsList = [];
-  List<WorkSpaceRequirementMaterialsList> get woRequestedApprovedMaterialsList => _woRequestedApprovedMaterialsList;
+  List<WorkSpaceRequirementMaterialsList> _woRequestedApprovedMaterialsList =
+      [];
+  List<WorkSpaceRequirementMaterialsList>
+      get woRequestedApprovedMaterialsList => _woRequestedApprovedMaterialsList;
 
   List<WorkSpaceDocuments> _workSpaceDocuments = [];
   List<WorkSpaceDocuments> get workSpaceDocuments => _workSpaceDocuments;
@@ -57,7 +62,8 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
     notifyListeners();
 
     String userToken = await SharedManager().getString(SharedEnum.userToken);
-    final result = await workSpaceService.getWorkSpaceDocuments(userToken, taskID);
+    final result =
+        await workSpaceService.getWorkSpaceDocuments(userToken, taskID);
 
     result.fold(
       (l) => {
@@ -70,6 +76,7 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
     );
 
     _isLoading = false;
+
     notifyListeners();
 
     Future.delayed(const Duration(seconds: 2), () {
@@ -83,7 +90,8 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
     notifyListeners();
 
     String userToken = await SharedManager().getString(SharedEnum.userToken);
-    final result = await workSpaceService.getWorkSpaceSpareparts(taskId, userToken);
+    final result =
+        await workSpaceService.getWorkSpaceSpareparts(taskId, userToken);
 
     result.fold(
       (l) => {
@@ -109,7 +117,8 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
     notifyListeners();
 
     String userToken = await SharedManager().getString(SharedEnum.userToken);
-    final result = await workSpaceService.getWorkSpaceEfforts(taskId, userToken);
+    final result =
+        await workSpaceService.getWorkSpaceEfforts(taskId, userToken);
 
     result.fold(
       (l) => {
@@ -131,8 +140,10 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
 
     notifyListeners();
 
-    String userToken = SharedManager().getString(SharedEnum.userToken).toString();
-    final result = await workSpaceService.getWorkSpaceRequirementMaterialsList(taskId, userToken);
+    String userToken =
+        SharedManager().getString(SharedEnum.userToken).toString();
+    final result = await workSpaceService.getWorkSpaceRequirementMaterialsList(
+        taskId, userToken);
 
     result.fold(
       (l) => {
@@ -155,8 +166,10 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
 
     notifyListeners();
 
-    String userToken = SharedManager().getString(SharedEnum.userToken).toString();
-    final result = await workSpaceService.getWorkSpaceApprovedRequirementMaterialsList(taskId, userToken);
+    String userToken =
+        SharedManager().getString(SharedEnum.userToken).toString();
+    final result = await workSpaceService
+        .getWorkSpaceApprovedRequirementMaterialsList(taskId, userToken);
 
     result.fold(
       (l) => {

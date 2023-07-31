@@ -1,7 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
+import '../../../database/shared_manager.dart';
 import '../../../enums/service_response_status_enums.dart';
+import '../../../enums/shared_enums.dart';
 import '../../../exceptions/custom_service_exceptions.dart';
 import '../../../models/auth_models/check_access_token_model.dart';
 import '../../../models/auth_models/login_model.dart';
@@ -12,15 +14,18 @@ class AuthServiceRepositoryImpl extends AuthServiceRepository {
   Future<Either<LoginModel, CustomServiceException>> login(
       String username, String password) async {
     @override
-    String url = 'http://localhost:3012/user/loginMobile';
-
+    String url = 'http://10.0.2.2:3012/user/loginMobile';
+    String firebaseToken =
+        await SharedManager().getString(SharedEnum.firebaseToken);
+    print('firebaseTOKEN : : :  ');
+    print(firebaseToken);
     try {
       final response = await super.dio.post(
             url,
             data: {
               'username': username,
               'password': password,
-              "firebaseToken": "token123"
+              "firebaseToken": firebaseToken
             },
             options: Options(),
           );
@@ -39,7 +44,7 @@ class AuthServiceRepositoryImpl extends AuthServiceRepository {
   @override
   Future<Either<bool, CustomServiceException>> logout(
       String refreshToken, String token) async {
-    String url = 'http://localhost:3012/user/logout';
+    String url = 'http://10.0.2.2:3012/user/logout';
 
     try {
       final response = await super.dio.post(
@@ -74,7 +79,7 @@ class AuthServiceRepositoryImpl extends AuthServiceRepository {
   @override
   Future<Either<CheckAccesTokenModel, CustomServiceException>> checkAccessToken(
       String token) async {
-    String url = 'http://localhost:3012/user/checkAccessToken';
+    String url = 'http://10.0.2.2:3012/user/checkAccessToken';
 
     try {
       final response = await super.dio.post(url,

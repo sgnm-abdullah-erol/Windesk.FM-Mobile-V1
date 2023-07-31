@@ -11,7 +11,7 @@ class SnackbarStrings {
   static const String loginEmptyError = 'Kullanıcı Adı veya Şifre Boş Olamaz';
   static const String loginSuccess = 'Giriş Başarılı';
 
-  static const String effortAdded = 'Effor eklenmiştir.';
+  static const String effortAdded = 'Efor eklenmiştir.';
   static const String materialAdded = 'Malzeme eklenmiştir.';
   static const String materialRequested = 'Malzeme talep edilmiştir.';
   static const String taskStateChange = 'Görev durumu değiştirilmiştir.';

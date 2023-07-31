@@ -9,9 +9,10 @@ import 'package:vm_fm_4/product/screens/new_order/service/wo_create_service_repo
 
 class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
   @override
-  Future<Either<WoCreateLocationModel, CustomServiceException>> getLocation(token) async {
+  Future<Either<WoCreateLocationModel, CustomServiceException>> getLocation(
+      token) async {
     WoCreateLocationModel woCreateLocationModel;
-    String url = 'http://localhost:3010/structures';
+    String url = 'http://10.0.2.2:3010/structures';
 
     try {
       final response = await super.dio.get(
@@ -27,17 +28,24 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
       return Left(woCreateLocationModel);
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.loginError, statusCode: '400'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.loginError, statusCode: '400'));
     }
   }
 
   @override
-  Future<Either<WoCreateLeafModel, CustomServiceException>> getLazyLoading(token, key) async {
+  Future<Either<WoCreateLeafModel, CustomServiceException>> getLazyLoading(
+      token, key) async {
     WoCreateLeafModel woCreateLeafModel;
-    String url = 'http://localhost:3010/jointspaces/lazyLoadingByKey';
+    String url = 'http://10.0.2.2:3010/jointspaces/lazyLoadingByKey';
     final response = await super.dio.post(
           url,
-          data: {"key": key, "leafType": "", "rootLabels": [], "childrenLabels": []},
+          data: {
+            "key": key,
+            "leafType": "",
+            "rootLabels": [],
+            "childrenLabels": []
+          },
           options: Options(
             headers: {'authorization': 'Bearer $token'},
           ),
@@ -49,10 +57,11 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
   }
 
   @override
-  Future<Either<List<WoCreateRequestedByModel>, CustomServiceException>> getRequestedBy(token) async {
+  Future<Either<List<WoCreateRequestedByModel>, CustomServiceException>>
+      getRequestedBy(token) async {
     List<WoCreateRequestedByModel> woCreateRequestedByModel = [];
 
-    String url = 'http://localhost:3012/user?page=1&limit=100';
+    String url = 'http://10.0.2.2:3012/user?page=1&limit=100';
     try {
       final response = await super.dio.get(
             url,
@@ -64,20 +73,24 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
             ),
           );
 
-      woCreateRequestedByModel = WoCreateRequestedByModel.fromJsonList(response.data['users']);
+      woCreateRequestedByModel =
+          WoCreateRequestedByModel.fromJsonList(response.data['users']);
       super.logger.e(woCreateRequestedByModel);
       return Left(woCreateRequestedByModel);
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.loginError, statusCode: '400'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.loginError, statusCode: '400'));
     }
   }
 
   @override
-  Future<Either<List<WoCreateTypeModel>, CustomServiceException>> getType(token) async {
+  Future<Either<List<WoCreateTypeModel>, CustomServiceException>> getType(
+      token) async {
     List<WoCreateTypeModel> woCreateTypeModel = [];
 
-    String url = 'http://localhost:3015/task/task/find/task/types/related/with/workspace/493?page=1&limit=100';
+    String url =
+        'http://10.0.2.2:3015/task/task/find/task/types/related/with/workspace/493?page=1&limit=100';
     final response = await super.dio.get(
           url,
           options: Options(
@@ -91,10 +104,12 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
   }
 
   @override
-  Future<Either<List<WoCreateTypeModel>, CustomServiceException>> getRequestedType(token) async {
+  Future<Either<List<WoCreateTypeModel>, CustomServiceException>>
+      getRequestedType(token) async {
     List<WoCreateTypeModel> woCreateTypeModel = [];
 
-    String url = 'http://localhost:3015/classification/getAClassificationByRealmAndLabelNameAndLanguage/info';
+    String url =
+        'http://10.0.2.2:3015/classification/getAClassificationByRealmAndLabelNameAndLanguage/info';
     final response = await super.dio.post(
           url,
           data: {
