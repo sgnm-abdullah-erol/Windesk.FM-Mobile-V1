@@ -4,6 +4,7 @@ import 'package:vm_fm_4/feature/exceptions/custom_service_exceptions.dart';
 import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_leaf_model.dart';
 import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_location_model.dart';
 import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_requestedby_model.dart';
+import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_requestedtype_model.dart';
 import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_type_model.dart';
 import 'package:vm_fm_4/product/screens/new_order/service/wo_create_service_repository.dart';
 
@@ -91,8 +92,8 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
   }
 
   @override
-  Future<Either<List<WoCreateTypeModel>, CustomServiceException>> getRequestedType(token) async {
-    List<WoCreateTypeModel> woCreateTypeModel = [];
+  Future<Either<List<WoCreateRequestedTypeModel>, CustomServiceException>> getRequestedType(token) async {
+    List<WoCreateRequestedTypeModel> woCreateRequestedTypeModel = [];
 
     String url = 'http://localhost:3015/classification/getAClassificationByRealmAndLabelNameAndLanguage/info';
     final response = await super.dio.post(
@@ -105,8 +106,78 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
           ),
         );
 
-    super.logger.e(response.data['root']['children'][0]['children']);
-    //woCreateTypeModel = WoCreateTypeModel.fromJsonList(response.data);
-    return Left(woCreateTypeModel);
+    woCreateRequestedTypeModel = WoCreateRequestedTypeModel.fromJsonList(response.data['root']['children'][0]['children']);
+    super.logger.e(woCreateRequestedTypeModel);
+    return Left(woCreateRequestedTypeModel);
+  }
+
+  @override
+  Future<Either<List<WoCreateRequestedTypeModel>, CustomServiceException>> getCategory(token) async {
+    List<WoCreateRequestedTypeModel> woCreateLocationModel = [];
+
+    String url = 'http://localhost:3015/classification/getAClassificationByRealmAndLabelNameAndLanguage/info';
+    final response = await super.dio.post(
+          url,
+          data: {
+            "label": ["WoCategory"],
+          },
+          options: Options(
+            headers: {'authorization': 'Bearer $token'},
+          ),
+        );
+
+    woCreateLocationModel = WoCreateRequestedTypeModel.fromJsonList(response.data['root']['children'][0]['children']);
+    super.logger.e(woCreateLocationModel);
+    return Left(woCreateLocationModel);
+  }
+
+  @override
+  Future<Either<WoCreateLeafModel, CustomServiceException>> createTask(
+    token,
+    summary,
+    requestType,
+    requestedBy,
+    description,
+    appointmendData,
+    templatedBy,
+    requestSpaceId,
+    requestSpaceLabels,
+  ) async {
+    print(
+      summary+
+      requestType+
+      requestedBy+
+      description+
+      appointmendData+
+      'templated  :: ' + templatedBy+
+      'requestSpaceId  :: '+ requestSpaceId+
+      requestSpaceLabels
+    );
+    String url = 'http://localhost:3015/task';
+    final response = await super.dio.post(
+          url,
+          data: {
+            "name": summary,
+            "requestType": requestType,
+            "requestedBy": [requestedBy],
+            "description": description,
+            "appointmentData": appointmendData,
+            "templatedBy": [templatedBy],
+            "requestedComponents": [""],
+            "requestedSpacees": [
+              {
+                "id": requestSpaceId,
+                "labels": [requestSpaceLabels]
+              }
+            ],
+            "isMobile": true
+          },
+          options: Options(
+            headers: {'authorization': 'Bearer $token'},
+          ),
+        );
+    final data = response.data;
+    super.logger.e(data);
+    return Left(data);
   }
 }

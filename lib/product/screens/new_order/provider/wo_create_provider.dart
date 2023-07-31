@@ -5,11 +5,14 @@ import 'package:vm_fm_4/feature/injection.dart';
 import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_leaf_model.dart';
 import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_location_model.dart';
 import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_requestedby_model.dart';
+import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_requestedtype_model.dart';
 import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_type_model.dart';
 import 'package:vm_fm_4/product/screens/new_order/service/wo_create_service_repository_impl.dart';
 
 class WoCreateProvider extends ChangeNotifier {
   final WoCreateServiceRepositoryImpl _woCreateServiceRepository = Injection.getIt.get<WoCreateServiceRepositoryImpl>();
+  final String key =
+      'eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJyWHlXNldXZEk5UUt1Q25hcWJzcnVWeG8zZ0xJa2R6TWd0ZlNIeVpybWIwIn0.eyJleHAiOjE2OTE2NDg5MTcsImlhdCI6MTY5MDc4NDkxNywianRpIjoiNTdiMDIwMDUtYzFkNy00ZWM1LTk0ZDAtMTNkNjZmMmY0ZWM0IiwiaXNzIjoiaHR0cDovLzE3Mi4zMC45OS4xMjE6ODA4MC9hdXRoL3JlYWxtcy9JRk0iLCJhdWQiOlsicmVhbG0tbWFuYWdlbWVudCIsImFjY291bnQiXSwic3ViIjoiNGFkY2NhODYtMzk4MS00MDE2LTk0MjEtMmJhYWVhY2M1MThmIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiaWZtX2ZhY2lsaXR5X2NsaWVudCIsInNlc3Npb25fc3RhdGUiOiI4ZTgwYzExMC02NTdiLTQxYjItOTQzYy1lNzNmZTdkZWVhODQiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIioiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImFkbWluX3JvbGUiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiZGVmYXVsdC1yb2xlcy1pZm0iXX0sInJlc291cmNlX2FjY2VzcyI6eyJyZWFsbS1tYW5hZ2VtZW50Ijp7InJvbGVzIjpbInZpZXctcmVhbG0iLCJ2aWV3LWlkZW50aXR5LXByb3ZpZGVycyIsIm1hbmFnZS1pZGVudGl0eS1wcm92aWRlcnMiLCJpbXBlcnNvbmF0aW9uIiwicmVhbG0tYWRtaW4iLCJjcmVhdGUtY2xpZW50IiwibWFuYWdlLXVzZXJzIiwicXVlcnktcmVhbG1zIiwidmlldy1hdXRob3JpemF0aW9uIiwicXVlcnktY2xpZW50cyIsInF1ZXJ5LXVzZXJzIiwibWFuYWdlLWV2ZW50cyIsIm1hbmFnZS1yZWFsbSIsInZpZXctZXZlbnRzIiwidmlldy11c2VycyIsInZpZXctY2xpZW50cyIsIm1hbmFnZS1hdXRob3JpemF0aW9uIiwibWFuYWdlLWNsaWVudHMiLCJxdWVyeS1ncm91cHMiXX0sImlmbV9mYWNpbGl0eV9jbGllbnQiOnsicm9sZXMiOlsiam9pbnRzcGFjZV91cGRhdGUiLCJzeXN0ZW1fY3JlYXRlIiwidXNlcl9kZWxldGUiLCJ0YXNrX2RlbGV0ZSIsInRhc2tfdXBkYXRlIiwiam9pbnRzcGFjZV92aWV3IiwidXNlcl91cGRhdGUiLCJ2aWV3X3NhcCIsImNvbnRhY3RfdXBkYXRlIiwiem9uZV9jcmVhdGUiLCJjb21wb25lbnRfdmlldyIsInpvbmVfZXhwb3J0Iiwic3lzdGVtX2V4cG9ydCIsImdyb3VwX3ZpZXciLCJ3b3Jrc3BhY2VfbWFuYWdlciIsImpvaW50c3BhY2VfZGVsZXRlIiwiY29udGFjdF9kZWxldGUiLCJ6b25lX3ZpZXciLCJ3b3Jrc3BhY2VfdmlldyIsIndvcmtmbG93X2RlbGV0ZSIsImdyb3VwX2RlbGV0ZSIsInVzZXJfdmlldyIsInR5cGVfZGVsZXRlIiwiZmFjaWxpdHlfY2xpZW50X3JvbGVfYWRtaW4iLCJjb21wb25lbnRfY3JlYXRlIiwic3RydWN0dXJlX3VwZGF0ZSIsInNhcF9wb3N0Iiwid29ya3NwYWNlX2NyZWF0ZSIsImNvbXBvbmVudF9leHBvcnQiLCJjbGFzc2lmaWNhdGlvbl9kZWxldGUiLCJzeXN0ZW1fdmlldyIsInN5c3RlbV9kZWxldGUiLCJ3b3JrZmxvd192aWV3Iiwic3RydWN0dXJlX3ZpZXciLCJjb21wb25lbnRfdXBkYXRlIiwid29ya3NwYWNlX2FkbWluIiwiY3JlYXRlX3NhcCIsInpvbmVfdXBkYXRlIiwiam9pbnRzcGFjZV9leHBvcnQiLCJmYWNpbGl0eV9jbGllbnRfcm9sZV91c2VyIiwicm9sZV92aWV3IiwiY29udGFjdF9jcmVhdGUiLCJjb250YWN0X3ZpZXciLCJ3b3Jrc3BhY2VfdXNlcl9hZG1pbiIsImpvaW50c3BhY2VfY3JlYXRlIiwidGFza19jcmVhdGUiLCJzdHJ1Y3R1cmVfZGVsZXRlIiwiY2xhc3NpZmljYXRpb25fdmlldyIsInR5cGVfY3JlYXRlIiwidGFza192aWV3Iiwid29ya3NwYWNlX3VwZGF0ZSIsIndvcmtzcGFjZV9kZWxldGUiLCJjb250YWN0X2V4Y2VsX2V4cG9ydCIsInR5cGVfdXBkYXRlIiwieXlzX2NyZWF0ZSIsInN0cnVjdHVyZV9leHBvcnQiLCJjbGFzc2lmaWNhdGlvbl91cGRhdGUiLCJ1bWFfcHJvdGVjdGlvbiIsInN0cnVjdHVyZV9jcmVhdGUiLCJncm91cF91cGRhdGUiLCJ3b3JrZmxvd191cGRhdGUiLCJ1c2VyX2NyZWF0ZSIsInR5cGVfZXhwb3J0Iiwiem9uZV9kZWxldGUiLCJjb21wb25lbnRfZGVsZXRlIiwiZ3JvdXBfY3JlYXRlIiwid29ya2Zsb3dfY3JlYXRlIiwic3RydWN0dXJlLWFzc2V0LXZpZXciLCJkZWxldGVfc2FwIiwieXlzX3ZpZXciLCJjbGFzc2lmaWNhdGlvbl9jcmVhdGUiLCJzeXN0ZW1fdXBkYXRlIiwidHlwZV92aWV3Il19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50Iiwidmlldy1hcHBsaWNhdGlvbnMiLCJ2aWV3LWNvbnNlbnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsImRlbGV0ZS1hY2NvdW50IiwibWFuYWdlLWNvbnNlbnQiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiI4ZTgwYzExMC02NTdiLTQxYjItOTQzYy1lNzNmZTdkZWVhODQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiLEsHNtZXQgQXRhbWVyIEF0YWxheSIsInByZWZlcnJlZF91c2VybmFtZSI6InVzZXIxIiwiZ2l2ZW5fbmFtZSI6IsSwc21ldCBBdGFtZXIiLCJsb2NhbGUiOiJ0ciIsImZhbWlseV9uYW1lIjoiQXRhbGF5IiwiZW1haWwiOiJpc21ldC5hdGFtZXJAc2lnbnVtdHRlLmNvbSJ9.cOfqic4cHH5wbSTPo5LCmaMyr-B_GfaYZr7M8OtZq7JT8h1wZ_MMVw7lP-TBLKXgDL1pJw_ZOWoolndUWZDyPIbPjTqvnXldO3diBo7S1nLz2nYMhzNNWJFL3NvI2ETvgUcZGnlIPTdJAs3kCyRX41YjbpcXRTVRPanOcnV1MWnBXgmMMnrphKn9PlpLM46QasITGnTjtmz52JKKRSskFz2yiLBJKYVdKw54KEbcjos2Rg-8Sv71j6bqhn_dkrLzHnqM0heO8c6JFzuEf0HCk3_K8uOyOJL4iHGoNXvfrul4V5O0GuJdTCWfjPyesHwesFp4K3Zn0jxPtPLqQi3T3g';
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -23,14 +26,26 @@ class WoCreateProvider extends ChangeNotifier {
   bool _floorLeaf = true;
   bool get floorLeaf => _floorLeaf;
 
+  bool _requestedTypeTree1 = true;
+  bool get requestedTypeTree1 => _requestedTypeTree1;
+
+  bool _isWorkOrderCreate = false;
+  bool get isWorkOrderCreate => _isWorkOrderCreate;
+
   String _summary = '';
   String get summary => _summary;
+
+  String _description = '';
+  String get description => _description;
 
   String _requestedBy = '';
   String get requestedBy => _requestedBy;
 
   String _type = '';
   String get type => _type;
+
+  String _category = '';
+  String get category => _category;
 
   String _location = '';
   String get location => _location;
@@ -46,6 +61,38 @@ class WoCreateProvider extends ChangeNotifier {
 
   String _requestType = '';
   String get requestType => _requestType;
+
+  String _requestType1 = '';
+  String get requestType1 => _requestType1;
+
+  String _requestTypeKey = '';
+  String get requestTypeKey => _requestTypeKey;
+
+  String _requestedById = '';
+  String get requestedById => _requestedById;
+
+  String _typesId = '';
+  String get typesId => _typesId;
+
+  String _requestedId = '';
+  String get requestedId => _requestedId;
+
+  String _requestedLabel = '';
+  String get requestedLabel => _requestedLabel;
+
+  String _date = '';
+  String get date => _date;
+  set setidate(String date1) {
+    _date = date1;
+    notifyListeners();
+  }
+
+  String _hour = '';
+  String get hour => _hour;
+  set setihour(String hour1) {
+    _hour = hour1;
+    notifyListeners();
+  }
 
   String _locationKey = '';
 
@@ -67,6 +114,9 @@ class WoCreateProvider extends ChangeNotifier {
   bool _requestedTypeLoading = true;
   bool get requestedTypeLoading => _requestedTypeLoading;
 
+  bool _categoryLoading = true;
+  bool get categoryLoading => _categoryLoading;
+
   bool _lazyLoading = true;
   bool get lazyLoading => _locationLoading;
 
@@ -78,6 +128,12 @@ class WoCreateProvider extends ChangeNotifier {
 
   List<WoCreateTypeModel> _getTypes = [];
   List<WoCreateTypeModel> get getTypes => _getTypes;
+
+  List<WoCreateRequestedTypeModel> _getRequestedTypes = [];
+  List<WoCreateRequestedTypeModel> get getRequestedTypes => _getRequestedTypes;
+
+  List<WoCreateRequestedTypeModel> _getCategories = [];
+  List<WoCreateRequestedTypeModel> get getCategories => _getCategories;
 
   WoCreateLeafModel _woBlockList = const WoCreateLeafModel();
   WoCreateLeafModel get woBlockList => _woBlockList;
@@ -106,16 +162,46 @@ class WoCreateProvider extends ChangeNotifier {
   final List<String> _getTypesChildren = [];
   List<String> get getTypesChildren => _getTypesChildren;
 
+  final List<String> _getRequestedTypesChildren = [];
+  List<String> get getRequestedTypesChildren => _getRequestedTypesChildren;
+
+  final List<String> _getCategoriesChildren = [];
+  List<String> get getCategoriesChildren => _getCategoriesChildren;
+
+  final List<String> _getRequestedTypesChildrenTree1 = [];
+  List<String> get getRequestedTypesChildrenTree1 => _getRequestedTypesChildrenTree1;
+
   void setSummary(String newValue) {
     _summary = newValue;
   }
 
+  void setDescription(String newValue) {
+    _description = newValue;
+  }
+
   void setRequestedBy(String newValue) {
     _requestedBy = newValue;
+    for (var i = 0; i < (_getRequestedBy.length); i++) {
+      if (_getRequestedBy[i].username == _requestedBy) {
+        _requestedById = _getRequestedBy[i].id.toString();
+      }
+      notifyListeners();
+    }
   }
 
   void setType(String newValue) {
     _type = newValue;
+
+    for (var i = 0; i < (_getTypes.length); i++) {
+      if (_getTypes[i].name == _type) {
+        _typesId = _getTypes[i].code.toString();
+      }
+      notifyListeners();
+    }
+  }
+
+  void setCategory(String newValue) {
+    _category = newValue;
   }
 
   void setLocation(String newValue) {
@@ -127,6 +213,8 @@ class WoCreateProvider extends ChangeNotifier {
         _locationKey = _woLocationList.children?[i].key ?? '';
         _lazyType = _woLocationList.children?[i].labels?[0] ?? '';
         _locationLeaf = _woLocationList.children?[i].leaf ?? true;
+        _requestedId = _woLocationList.children![i].id.toString();
+        _requestedLabel = _woLocationList.children![i].labels![0].toString();
       }
     }
     lazyList(_locationKey, _lazyType);
@@ -141,6 +229,8 @@ class WoCreateProvider extends ChangeNotifier {
         _buildKey = _woBlockList.children?[i].key ?? '';
         _lazyType = _woBlockList.children?[i].labels?[0] ?? '';
         _buildingLeaf = _woBlockList.children?[i].leaf ?? true;
+        _requestedId = _woBlockList.children![i].id.toString();
+        _requestedLabel = _woBlockList.children![i].labels![0].toString();
       }
     }
     lazyList(_buildKey, _lazyType);
@@ -154,6 +244,8 @@ class WoCreateProvider extends ChangeNotifier {
         _floorKey = _woFloorList.children?[i].key ?? '';
         _lazyType = _woFloorList.children?[i].labels?[0] ?? '';
         _floorLeaf = _woFloorList.children?[i].leaf ?? true;
+        _requestedId = _woFloorList.children![i].id.toString();
+        _requestedLabel = _woFloorList.children![i].labels![0].toString();
       }
     }
     lazyList(_buildKey, _lazyType);
@@ -162,19 +254,56 @@ class WoCreateProvider extends ChangeNotifier {
 
   void setSpace(String newValue) {
     _space = newValue;
-    for (var i = 0; i < (_woFloorList.children?.length ?? 0); i++) {
-      if (_woFloorList.children?[i].name == newValue) {
-        _floorKey = _woFloorList.children?[i].key ?? '';
-        _lazyType = _woFloorList.children?[i].labels?[0] ?? '';
+    for (var i = 0; i < (_woSpaceList.children?.length ?? 0); i++) {
+      if (_woSpaceList.children?[i].name == newValue) {
+        //_spaceKey = _woSpaceList.children?[i].key ?? '';
+        _lazyType = _woSpaceList.children?[i].labels?[0] ?? '';
+        _requestedId = _woSpaceList.children![i].id.toString();
+        _requestedLabel = _woSpaceList.children![i].labels![0].toString();
       }
     }
     lazyList(_buildKey, _lazyType);
     notifyListeners();
   }
 
-  void setrequestType(String newValue) {
+  void setRequestType(String newValue) {
+    bool isChildrenExist;
     _requestType = newValue;
+    _getRequestedTypesChildrenTree1.clear();
     notifyListeners();
+    for (var i = 0; i < (_getRequestedTypes.length ?? 0); i++) {
+      if (_getRequestedTypes[i].name == newValue) {
+        isChildrenExist = _getRequestedTypes[i].children!.isNotEmpty ? true : false;
+        _requestTypeKey = _getRequestedTypes[i].code.toString();
+        print(_requestTypeKey);
+        _requestedTypeTree1 = !isChildrenExist;
+        notifyListeners();
+        if (isChildrenExist) {
+          for (var b = 0; b < (_getRequestedTypes[i].children!.length); b++) {
+            _getRequestedTypesChildrenTree1.add(_getRequestedTypes[i].children![b].name ?? '');
+          }
+        }
+      }
+    }
+    notifyListeners();
+  }
+
+  void setRequestType1(String newValue) {
+    bool isChildrenExist;
+    _requestType1 = newValue;
+    notifyListeners();
+    for (var i = 0; i < (_getRequestedTypes.length ?? 0); i++) {
+      if (_getRequestedTypes[i].name == _requestType) {
+        for (var b = 0; b < (_getRequestedTypes[i].children!.length); b++) {
+          if (_getRequestedTypes[i].children![b].name == _requestType1) {
+            _requestTypeKey = _getRequestedTypes[i].children![b].code.toString();
+            notifyListeners();
+          }
+          //_requestTypeKey.add(_getRequestedTypes[i].children![b].name ?? '');
+        }
+        notifyListeners();
+      }
+    }
   }
 
   void getLocation() async {
@@ -297,18 +426,54 @@ class WoCreateProvider extends ChangeNotifier {
         'eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJyWHlXNldXZEk5UUt1Q25hcWJzcnVWeG8zZ0xJa2R6TWd0ZlNIeVpybWIwIn0.eyJleHAiOjE2OTE2NDg5MTcsImlhdCI6MTY5MDc4NDkxNywianRpIjoiNTdiMDIwMDUtYzFkNy00ZWM1LTk0ZDAtMTNkNjZmMmY0ZWM0IiwiaXNzIjoiaHR0cDovLzE3Mi4zMC45OS4xMjE6ODA4MC9hdXRoL3JlYWxtcy9JRk0iLCJhdWQiOlsicmVhbG0tbWFuYWdlbWVudCIsImFjY291bnQiXSwic3ViIjoiNGFkY2NhODYtMzk4MS00MDE2LTk0MjEtMmJhYWVhY2M1MThmIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiaWZtX2ZhY2lsaXR5X2NsaWVudCIsInNlc3Npb25fc3RhdGUiOiI4ZTgwYzExMC02NTdiLTQxYjItOTQzYy1lNzNmZTdkZWVhODQiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIioiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImFkbWluX3JvbGUiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiZGVmYXVsdC1yb2xlcy1pZm0iXX0sInJlc291cmNlX2FjY2VzcyI6eyJyZWFsbS1tYW5hZ2VtZW50Ijp7InJvbGVzIjpbInZpZXctcmVhbG0iLCJ2aWV3LWlkZW50aXR5LXByb3ZpZGVycyIsIm1hbmFnZS1pZGVudGl0eS1wcm92aWRlcnMiLCJpbXBlcnNvbmF0aW9uIiwicmVhbG0tYWRtaW4iLCJjcmVhdGUtY2xpZW50IiwibWFuYWdlLXVzZXJzIiwicXVlcnktcmVhbG1zIiwidmlldy1hdXRob3JpemF0aW9uIiwicXVlcnktY2xpZW50cyIsInF1ZXJ5LXVzZXJzIiwibWFuYWdlLWV2ZW50cyIsIm1hbmFnZS1yZWFsbSIsInZpZXctZXZlbnRzIiwidmlldy11c2VycyIsInZpZXctY2xpZW50cyIsIm1hbmFnZS1hdXRob3JpemF0aW9uIiwibWFuYWdlLWNsaWVudHMiLCJxdWVyeS1ncm91cHMiXX0sImlmbV9mYWNpbGl0eV9jbGllbnQiOnsicm9sZXMiOlsiam9pbnRzcGFjZV91cGRhdGUiLCJzeXN0ZW1fY3JlYXRlIiwidXNlcl9kZWxldGUiLCJ0YXNrX2RlbGV0ZSIsInRhc2tfdXBkYXRlIiwiam9pbnRzcGFjZV92aWV3IiwidXNlcl91cGRhdGUiLCJ2aWV3X3NhcCIsImNvbnRhY3RfdXBkYXRlIiwiem9uZV9jcmVhdGUiLCJjb21wb25lbnRfdmlldyIsInpvbmVfZXhwb3J0Iiwic3lzdGVtX2V4cG9ydCIsImdyb3VwX3ZpZXciLCJ3b3Jrc3BhY2VfbWFuYWdlciIsImpvaW50c3BhY2VfZGVsZXRlIiwiY29udGFjdF9kZWxldGUiLCJ6b25lX3ZpZXciLCJ3b3Jrc3BhY2VfdmlldyIsIndvcmtmbG93X2RlbGV0ZSIsImdyb3VwX2RlbGV0ZSIsInVzZXJfdmlldyIsInR5cGVfZGVsZXRlIiwiZmFjaWxpdHlfY2xpZW50X3JvbGVfYWRtaW4iLCJjb21wb25lbnRfY3JlYXRlIiwic3RydWN0dXJlX3VwZGF0ZSIsInNhcF9wb3N0Iiwid29ya3NwYWNlX2NyZWF0ZSIsImNvbXBvbmVudF9leHBvcnQiLCJjbGFzc2lmaWNhdGlvbl9kZWxldGUiLCJzeXN0ZW1fdmlldyIsInN5c3RlbV9kZWxldGUiLCJ3b3JrZmxvd192aWV3Iiwic3RydWN0dXJlX3ZpZXciLCJjb21wb25lbnRfdXBkYXRlIiwid29ya3NwYWNlX2FkbWluIiwiY3JlYXRlX3NhcCIsInpvbmVfdXBkYXRlIiwiam9pbnRzcGFjZV9leHBvcnQiLCJmYWNpbGl0eV9jbGllbnRfcm9sZV91c2VyIiwicm9sZV92aWV3IiwiY29udGFjdF9jcmVhdGUiLCJjb250YWN0X3ZpZXciLCJ3b3Jrc3BhY2VfdXNlcl9hZG1pbiIsImpvaW50c3BhY2VfY3JlYXRlIiwidGFza19jcmVhdGUiLCJzdHJ1Y3R1cmVfZGVsZXRlIiwiY2xhc3NpZmljYXRpb25fdmlldyIsInR5cGVfY3JlYXRlIiwidGFza192aWV3Iiwid29ya3NwYWNlX3VwZGF0ZSIsIndvcmtzcGFjZV9kZWxldGUiLCJjb250YWN0X2V4Y2VsX2V4cG9ydCIsInR5cGVfdXBkYXRlIiwieXlzX2NyZWF0ZSIsInN0cnVjdHVyZV9leHBvcnQiLCJjbGFzc2lmaWNhdGlvbl91cGRhdGUiLCJ1bWFfcHJvdGVjdGlvbiIsInN0cnVjdHVyZV9jcmVhdGUiLCJncm91cF91cGRhdGUiLCJ3b3JrZmxvd191cGRhdGUiLCJ1c2VyX2NyZWF0ZSIsInR5cGVfZXhwb3J0Iiwiem9uZV9kZWxldGUiLCJjb21wb25lbnRfZGVsZXRlIiwiZ3JvdXBfY3JlYXRlIiwid29ya2Zsb3dfY3JlYXRlIiwic3RydWN0dXJlLWFzc2V0LXZpZXciLCJkZWxldGVfc2FwIiwieXlzX3ZpZXciLCJjbGFzc2lmaWNhdGlvbl9jcmVhdGUiLCJzeXN0ZW1fdXBkYXRlIiwidHlwZV92aWV3Il19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50Iiwidmlldy1hcHBsaWNhdGlvbnMiLCJ2aWV3LWNvbnNlbnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsImRlbGV0ZS1hY2NvdW50IiwibWFuYWdlLWNvbnNlbnQiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiI4ZTgwYzExMC02NTdiLTQxYjItOTQzYy1lNzNmZTdkZWVhODQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiLEsHNtZXQgQXRhbWVyIEF0YWxheSIsInByZWZlcnJlZF91c2VybmFtZSI6InVzZXIxIiwiZ2l2ZW5fbmFtZSI6IsSwc21ldCBBdGFtZXIiLCJsb2NhbGUiOiJ0ciIsImZhbWlseV9uYW1lIjoiQXRhbGF5IiwiZW1haWwiOiJpc21ldC5hdGFtZXJAc2lnbnVtdHRlLmNvbSJ9.cOfqic4cHH5wbSTPo5LCmaMyr-B_GfaYZr7M8OtZq7JT8h1wZ_MMVw7lP-TBLKXgDL1pJw_ZOWoolndUWZDyPIbPjTqvnXldO3diBo7S1nLz2nYMhzNNWJFL3NvI2ETvgUcZGnlIPTdJAs3kCyRX41YjbpcXRTVRPanOcnV1MWnBXgmMMnrphKn9PlpLM46QasITGnTjtmz52JKKRSskFz2yiLBJKYVdKw54KEbcjos2Rg-8Sv71j6bqhn_dkrLzHnqM0heO8c6JFzuEf0HCk3_K8uOyOJL4iHGoNXvfrul4V5O0GuJdTCWfjPyesHwesFp4K3Zn0jxPtPLqQi3T3g');
     _requestedTypeLoading = false;
     notifyListeners();
-
+    _getRequestedTypesChildren.clear();
+    _getRequestedTypes.clear();
     response.fold(
       (l) => {
-        _getTypes = l,
-        for (var i = 0; i < (_getTypes.length); i++)
+        _getRequestedTypes = l,
+        for (var i = 0; i < (_getRequestedTypes.length); i++)
           {
-            _getTypesChildren.add(_getTypes[i].name ?? ''),
+            _getRequestedTypesChildren.add(_getRequestedTypes[i].name ?? ''),
             notifyListeners(),
           }
       },
       (r) => {},
     );
     notifyListeners();
+  }
+
+  void getCategory() async {
+    final response = await _woCreateServiceRepository.getCategory(
+        'eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJyWHlXNldXZEk5UUt1Q25hcWJzcnVWeG8zZ0xJa2R6TWd0ZlNIeVpybWIwIn0.eyJleHAiOjE2OTE2NDg5MTcsImlhdCI6MTY5MDc4NDkxNywianRpIjoiNTdiMDIwMDUtYzFkNy00ZWM1LTk0ZDAtMTNkNjZmMmY0ZWM0IiwiaXNzIjoiaHR0cDovLzE3Mi4zMC45OS4xMjE6ODA4MC9hdXRoL3JlYWxtcy9JRk0iLCJhdWQiOlsicmVhbG0tbWFuYWdlbWVudCIsImFjY291bnQiXSwic3ViIjoiNGFkY2NhODYtMzk4MS00MDE2LTk0MjEtMmJhYWVhY2M1MThmIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiaWZtX2ZhY2lsaXR5X2NsaWVudCIsInNlc3Npb25fc3RhdGUiOiI4ZTgwYzExMC02NTdiLTQxYjItOTQzYy1lNzNmZTdkZWVhODQiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIioiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImFkbWluX3JvbGUiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiZGVmYXVsdC1yb2xlcy1pZm0iXX0sInJlc291cmNlX2FjY2VzcyI6eyJyZWFsbS1tYW5hZ2VtZW50Ijp7InJvbGVzIjpbInZpZXctcmVhbG0iLCJ2aWV3LWlkZW50aXR5LXByb3ZpZGVycyIsIm1hbmFnZS1pZGVudGl0eS1wcm92aWRlcnMiLCJpbXBlcnNvbmF0aW9uIiwicmVhbG0tYWRtaW4iLCJjcmVhdGUtY2xpZW50IiwibWFuYWdlLXVzZXJzIiwicXVlcnktcmVhbG1zIiwidmlldy1hdXRob3JpemF0aW9uIiwicXVlcnktY2xpZW50cyIsInF1ZXJ5LXVzZXJzIiwibWFuYWdlLWV2ZW50cyIsIm1hbmFnZS1yZWFsbSIsInZpZXctZXZlbnRzIiwidmlldy11c2VycyIsInZpZXctY2xpZW50cyIsIm1hbmFnZS1hdXRob3JpemF0aW9uIiwibWFuYWdlLWNsaWVudHMiLCJxdWVyeS1ncm91cHMiXX0sImlmbV9mYWNpbGl0eV9jbGllbnQiOnsicm9sZXMiOlsiam9pbnRzcGFjZV91cGRhdGUiLCJzeXN0ZW1fY3JlYXRlIiwidXNlcl9kZWxldGUiLCJ0YXNrX2RlbGV0ZSIsInRhc2tfdXBkYXRlIiwiam9pbnRzcGFjZV92aWV3IiwidXNlcl91cGRhdGUiLCJ2aWV3X3NhcCIsImNvbnRhY3RfdXBkYXRlIiwiem9uZV9jcmVhdGUiLCJjb21wb25lbnRfdmlldyIsInpvbmVfZXhwb3J0Iiwic3lzdGVtX2V4cG9ydCIsImdyb3VwX3ZpZXciLCJ3b3Jrc3BhY2VfbWFuYWdlciIsImpvaW50c3BhY2VfZGVsZXRlIiwiY29udGFjdF9kZWxldGUiLCJ6b25lX3ZpZXciLCJ3b3Jrc3BhY2VfdmlldyIsIndvcmtmbG93X2RlbGV0ZSIsImdyb3VwX2RlbGV0ZSIsInVzZXJfdmlldyIsInR5cGVfZGVsZXRlIiwiZmFjaWxpdHlfY2xpZW50X3JvbGVfYWRtaW4iLCJjb21wb25lbnRfY3JlYXRlIiwic3RydWN0dXJlX3VwZGF0ZSIsInNhcF9wb3N0Iiwid29ya3NwYWNlX2NyZWF0ZSIsImNvbXBvbmVudF9leHBvcnQiLCJjbGFzc2lmaWNhdGlvbl9kZWxldGUiLCJzeXN0ZW1fdmlldyIsInN5c3RlbV9kZWxldGUiLCJ3b3JrZmxvd192aWV3Iiwic3RydWN0dXJlX3ZpZXciLCJjb21wb25lbnRfdXBkYXRlIiwid29ya3NwYWNlX2FkbWluIiwiY3JlYXRlX3NhcCIsInpvbmVfdXBkYXRlIiwiam9pbnRzcGFjZV9leHBvcnQiLCJmYWNpbGl0eV9jbGllbnRfcm9sZV91c2VyIiwicm9sZV92aWV3IiwiY29udGFjdF9jcmVhdGUiLCJjb250YWN0X3ZpZXciLCJ3b3Jrc3BhY2VfdXNlcl9hZG1pbiIsImpvaW50c3BhY2VfY3JlYXRlIiwidGFza19jcmVhdGUiLCJzdHJ1Y3R1cmVfZGVsZXRlIiwiY2xhc3NpZmljYXRpb25fdmlldyIsInR5cGVfY3JlYXRlIiwidGFza192aWV3Iiwid29ya3NwYWNlX3VwZGF0ZSIsIndvcmtzcGFjZV9kZWxldGUiLCJjb250YWN0X2V4Y2VsX2V4cG9ydCIsInR5cGVfdXBkYXRlIiwieXlzX2NyZWF0ZSIsInN0cnVjdHVyZV9leHBvcnQiLCJjbGFzc2lmaWNhdGlvbl91cGRhdGUiLCJ1bWFfcHJvdGVjdGlvbiIsInN0cnVjdHVyZV9jcmVhdGUiLCJncm91cF91cGRhdGUiLCJ3b3JrZmxvd191cGRhdGUiLCJ1c2VyX2NyZWF0ZSIsInR5cGVfZXhwb3J0Iiwiem9uZV9kZWxldGUiLCJjb21wb25lbnRfZGVsZXRlIiwiZ3JvdXBfY3JlYXRlIiwid29ya2Zsb3dfY3JlYXRlIiwic3RydWN0dXJlLWFzc2V0LXZpZXciLCJkZWxldGVfc2FwIiwieXlzX3ZpZXciLCJjbGFzc2lmaWNhdGlvbl9jcmVhdGUiLCJzeXN0ZW1fdXBkYXRlIiwidHlwZV92aWV3Il19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50Iiwidmlldy1hcHBsaWNhdGlvbnMiLCJ2aWV3LWNvbnNlbnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsImRlbGV0ZS1hY2NvdW50IiwibWFuYWdlLWNvbnNlbnQiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiI4ZTgwYzExMC02NTdiLTQxYjItOTQzYy1lNzNmZTdkZWVhODQiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiLEsHNtZXQgQXRhbWVyIEF0YWxheSIsInByZWZlcnJlZF91c2VybmFtZSI6InVzZXIxIiwiZ2l2ZW5fbmFtZSI6IsSwc21ldCBBdGFtZXIiLCJsb2NhbGUiOiJ0ciIsImZhbWlseV9uYW1lIjoiQXRhbGF5IiwiZW1haWwiOiJpc21ldC5hdGFtZXJAc2lnbnVtdHRlLmNvbSJ9.cOfqic4cHH5wbSTPo5LCmaMyr-B_GfaYZr7M8OtZq7JT8h1wZ_MMVw7lP-TBLKXgDL1pJw_ZOWoolndUWZDyPIbPjTqvnXldO3diBo7S1nLz2nYMhzNNWJFL3NvI2ETvgUcZGnlIPTdJAs3kCyRX41YjbpcXRTVRPanOcnV1MWnBXgmMMnrphKn9PlpLM46QasITGnTjtmz52JKKRSskFz2yiLBJKYVdKw54KEbcjos2Rg-8Sv71j6bqhn_dkrLzHnqM0heO8c6JFzuEf0HCk3_K8uOyOJL4iHGoNXvfrul4V5O0GuJdTCWfjPyesHwesFp4K3Zn0jxPtPLqQi3T3g');
+    _categoryLoading = false;
+    notifyListeners();
+    _getCategoriesChildren.clear();
+    _getCategories.clear();
+    response.fold(
+      (l) => {
+        _getCategories = l,
+        for (var i = 0; i < (_getCategories.length); i++)
+          {
+            _getCategoriesChildren.add(_getCategories[i].name ?? ''),
+            notifyListeners(),
+          }
+      },
+      (r) => {},
+    );
+    notifyListeners();
+  }
+
+  void createTask() async {
+    final String appointmendData = _date + ' ' + _hour +':00';
+    final response = await _woCreateServiceRepository.createTask(
+        key, summary, _requestTypeKey, requestedById, description, appointmendData, typesId, requestedId, requestedLabel);
+    response.fold(
+      (l) => {
+        _isWorkOrderCreate =true,
+      },
+      (r) => {
+        _isWorkOrderCreate =false,
+      },
+    );
   }
 }

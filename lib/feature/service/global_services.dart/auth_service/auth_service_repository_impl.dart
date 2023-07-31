@@ -11,7 +11,7 @@ class AuthServiceRepositoryImpl extends AuthServiceRepository {
   @override
   Future<Either<LoginModel, CustomServiceException>> login(String username, String password) async {
     @override
-    String url = 'http://localhost:3012/user/loginMobile';
+    String url = 'http://localhost:3012/user/login';
 
     try {
       final response = await super.dio.post(

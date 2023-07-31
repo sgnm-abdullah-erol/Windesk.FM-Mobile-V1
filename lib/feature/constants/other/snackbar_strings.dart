@@ -18,4 +18,7 @@ class SnackbarStrings {
   static const String takeItOnMeSuccess = 'Görev üzerinize alınmıştır.';
   static const String pdfAdded = 'Pdf eklenmiştir.';
   static const String imageAdded = 'Fotoğraf eklenmiştir.';
+
+  static const String woCreate = 'İş Emri Başarıyla Oluşturuldu.';
+
 }

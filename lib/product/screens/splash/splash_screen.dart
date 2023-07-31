@@ -33,7 +33,7 @@ class SplashScreen extends StatelessWidget {
     context.watch<SplashProvider>().isSplashFinished
         ? context.watch<SplashProvider>().isUserAlreadyLoggedIn
             ? context.router.replace(const HomeScreen())
-            : context.router.replace(const HomeScreen())
+            : context.router.replace(const LoginScreen())
         : const SizedBox();
   }
 
