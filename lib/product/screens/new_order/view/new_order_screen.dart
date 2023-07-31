@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -39,6 +40,7 @@ class NewOrderScreen extends StatelessWidget {
         woCreateProvider.typeLoading ? woCreateProvider.getType() : null;
         woCreateProvider.requestedTypeLoading ? woCreateProvider.getRequestedType() : null;
         woCreateProvider.categoryLoading ? woCreateProvider.getCategory() : null;
+        woCreateProvider.componentLoading ? woCreateProvider.getComponent() : null;
         return woCreateProvider.isLoading
             ? const CustomLoadingIndicator()
             : Scaffold(
@@ -49,6 +51,18 @@ class NewOrderScreen extends StatelessWidget {
                     child: Center(
                       child: Column(
                         children: [
+                          DropdownSearch<String>(
+                            items: woCreateProvider.getComponentsChildren,
+                            onChanged: (value) {
+                              woCreateProvider.setComponent(value.toString());
+                            },
+                            selectedItem: 'Component',
+                            popupProps: PopupProps.menu(
+                              showSearchBox: true,
+                              fit: FlexFit.loose,
+                              constraints: BoxConstraints.tightFor(),
+                            ),
+                          ),
                           WoCreateCard(
                             widget1: TextFieldsInputUnderline(
                                 hintText: 'Tanım',

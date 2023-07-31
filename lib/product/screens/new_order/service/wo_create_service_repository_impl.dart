@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:vm_fm_4/feature/exceptions/custom_service_exceptions.dart';
+import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_component_model.dart';
 import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_leaf_model.dart';
 import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_location_model.dart';
 import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_requestedby_model.dart';
@@ -49,7 +50,7 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
     return Left(woCreateLeafModel);
   }
 
-  @override
+  @overrid
   Future<Either<List<WoCreateRequestedByModel>, CustomServiceException>> getRequestedBy(token) async {
     List<WoCreateRequestedByModel> woCreateRequestedByModel = [];
 
@@ -132,28 +133,25 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
   }
 
   @override
+  Future<Either<List<WoCreateComponentModel>, CustomServiceException>> getComponents(token) async {
+    List<WoCreateComponentModel> woCreatecomponentModel = [];
+
+    String url = 'http://localhost:3014/component/search/?page=1&limit=10&orderBy=DESC&orderByColumn=&searchString=';
+    final response = await super.dio.get(
+          url,
+          options: Options(
+            headers: {'authorization': 'Bearer $token'},
+          ),
+        );
+
+    woCreatecomponentModel = WoCreateComponentModel.fromJsonList(response.data['children']);
+    super.logger.e(woCreatecomponentModel);
+    return Left(woCreatecomponentModel);
+  }
+
+  @override
   Future<Either<WoCreateLeafModel, CustomServiceException>> createTask(
-    token,
-    summary,
-    requestType,
-    requestedBy,
-    description,
-    appointmendData,
-    templatedBy,
-    requestSpaceId,
-    requestSpaceLabels,
-    woCategory
-  ) async {
-    print(
-      summary+
-      requestType+
-      requestedBy+
-      description+
-      appointmendData+
-      'templated  :: ' + templatedBy+
-      'requestSpaceId  :: '+ requestSpaceId+
-      requestSpaceLabels
-    );
+      token, summary, requestType, requestedBy, description, appointmendData, templatedBy, requestSpaceId, requestSpaceLabels, woCategory, woComponent) async {
     String url = 'http://localhost:3015/task';
     final response = await super.dio.post(
           url,
@@ -164,7 +162,7 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
             "description": description,
             "appointmentDate": appointmendData,
             "templatedBy": [templatedBy],
-            "requestedComponents": [""],
+            "requestedComponents": [woComponent],
             "requestedSpaces": [
               {
                 "id": requestSpaceId,
@@ -173,7 +171,6 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
             ],
             "woCategory": woCategory,
             "isMobile": true,
-
           },
           options: Options(
             headers: {'authorization': 'Bearer $token'},
