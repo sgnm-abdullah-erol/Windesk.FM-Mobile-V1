@@ -94,7 +94,7 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
     List<WoCreateTypeModel> woCreateTypeModel = [];
 
     String url =
-        '${ServiceTools.url.workorder_url}/task/task/find/task/types/related/with/workspace/493?page=1&limit=100';
+        '${ServiceTools.url.workorder_url}/task/task/find/task/types/related/with/workspace/469?page=1&limit=100';
     final response = await super.dio.get(
           url,
           options: Options(

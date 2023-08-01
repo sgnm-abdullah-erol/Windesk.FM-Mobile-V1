@@ -14,22 +14,22 @@ class ServiceTools {
       "http://10.32.12.42/windesktest/xreadattach.php?token=$tokenV1&id=";
   static const facilityName = "İstanbul Finans Merkezi";
 
-  static const bool _isProduction = true;
+  static const bool _isProduction = false;
 
   static Url get url {
     if (_isProduction) {
       return Url(
-        facility_url: "https://facility-server.ifm.gov.tr/",
-        users_url: "https://user-server.ifm.gov.tr/",
-        asset_url: "https://asset-server.ifm.gov.tr/",
-        workorder_url: "https://workorder-server.ifm.gov.tr/",
+        facility_url: "https://facility-server.ifm.gov.tr",
+        users_url: "https://user-server.ifm.gov.tr",
+        asset_url: "https://asset-server.ifm.gov.tr",
+        workorder_url: "https://workorder-server.ifm.gov.tr",
       );
     } else {
       return Url(
-        facility_url: "http://localhost:3000/",
-        users_url: "http://localhost:3012/",
-        asset_url: "http://localhost:3014/",
-        workorder_url: "http://localhost:3015/",
+        facility_url: "http://localhost:3000",
+        users_url: "http://localhost:3012",
+        asset_url: "http://localhost:3014",
+        workorder_url: "http://localhost:3015",
       );
     }
   }
