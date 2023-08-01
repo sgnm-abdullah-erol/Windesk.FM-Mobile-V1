@@ -85,11 +85,33 @@ class _HomeScreenState extends State<HomeScreen> {
               Widget continueButton = TextButton(
                 child: Text("Detayı Gör"),
                 onPressed: () async {
-                  // searchWorkOrderProvider.setWoNumber = message.data['taskId'];
-                  // searchWorkOrderProvider.getWorkOrderWithSearch();
-                  // context.router.push(DetailWorkOrderScreen(
-                  //     workSpaceDetail: searchWorkOrderProvider.woDetailList!));
-                  print('taskId : ' + message.data['taskId'].toString());
+                  // showDialog(
+                  //     // The user CANNOT close this dialog  by pressing outsite it
+                  //     barrierDismissible: false,
+                  //     context: context,
+                  //     builder: (_) {
+                  //       return Dialog(
+                  //         // The background color
+                  //         backgroundColor: Colors.white,
+                  //         child: Padding(
+                  //           padding: const EdgeInsets.symmetric(vertical: 20),
+                  //           child: Column(
+                  //             mainAxisSize: MainAxisSize.min,
+                  //             children: const [
+                  //               // The loading indicator
+                  //               CircularProgressIndicator(),
+                  //               SizedBox(
+                  //                 height: 15,
+                  //               ),
+                  //               // Some text
+                  //               Text('Yükleniyor...')
+                  //             ],
+                  //           ),
+                  //         ),
+                  //       );
+                  //     });
+                  // Navigator.of(context, rootNavigator: true).pop();
+
                   String userToken =
                       await SharedManager().getString(SharedEnum.userToken);
                   _loading = true;
@@ -98,10 +120,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   result.fold(
                       (l) => {
-                            _loading = false,
                             context.router.push(
                                 DetailWorkOrderScreen(workSpaceDetail: l)),
-                            context.router.pop()
+                            context.router.pop(),
                           }, (r) {
                     print('hatali wo');
                   });
@@ -142,6 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
             }
 
             showAlertDialog(context);
+
             //FlutterLocalNotificationsPlugin().show(message.notification.messageId, message.notification?.title, message.notification?.body,);
           });
 
