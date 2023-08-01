@@ -51,7 +51,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     WorkSpaceMyGroupDemandList workSpaceMyGroupDemandList;
 
     String url =
-        '${ServiceTools.url.workorder_url}/classification/getRequestTypeWithTaskCount';
+        'http://localhost:3015/classification/getRequestTypeWithTaskCount';
 
     try {
       final response = await super.dio.post(
@@ -87,7 +87,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       getWorkSpacePendiks(String id, String token, int page) async {
     List<WorkSpacePendiks> workSpaceAppendings = [];
     String url =
-        '${ServiceTools.url.workorder_url}/task/workSpace/task/state/List/can/be/approve/current/user/pagination/$id';
+        'http://localhost:3015/task/workSpace/task/state/List/can/be/approve/current/user/pagination/$id';
 
     try {
       final response = await super.dio.get(
@@ -188,8 +188,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   Future<Either<List<WorkSpaceEfforts>, CustomServiceException>>
       getWorkSpaceEfforts(String taskId, String token) async {
     List<WorkSpaceEfforts> workSpaceEfforts;
-    String url =
-        '${ServiceTools.url.workorder_url}/task/mobile/getEffortsByTaskId/$taskId}';
+    String url = 'http://localhost:3015/task/mobile/getEffortsByTaskId/$taskId';
 
     try {
       final response = await super.dio.get(
