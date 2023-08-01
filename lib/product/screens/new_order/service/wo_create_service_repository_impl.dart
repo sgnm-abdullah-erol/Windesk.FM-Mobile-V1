@@ -1,9 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:vm_fm_4/feature/exceptions/custom_service_exceptions.dart';
+import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_component_model.dart';
 import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_leaf_model.dart';
 import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_location_model.dart';
 import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_requestedby_model.dart';
+import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_requestedtype_model.dart';
 import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_type_model.dart';
 import 'package:vm_fm_4/product/screens/new_order/service/wo_create_service_repository.dart';
 
@@ -104,9 +106,8 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
   }
 
   @override
-  Future<Either<List<WoCreateTypeModel>, CustomServiceException>>
-      getRequestedType(token) async {
-    List<WoCreateTypeModel> woCreateTypeModel = [];
+  Future<Either<List<WoCreateRequestedTypeModel>, CustomServiceException>> getRequestedType(token) async {
+    List<WoCreateRequestedTypeModel> woCreateRequestedTypeModel = [];
 
     String url =
         'http://10.0.2.2:3015/classification/getAClassificationByRealmAndLabelNameAndLanguage/info';
@@ -120,8 +121,84 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
           ),
         );
 
-    super.logger.e(response.data['root']['children'][0]['children']);
-    //woCreateTypeModel = WoCreateTypeModel.fromJsonList(response.data);
-    return Left(woCreateTypeModel);
+    woCreateRequestedTypeModel = WoCreateRequestedTypeModel.fromJsonList(response.data['root']['children'][0]['children']);
+    super.logger.e(woCreateRequestedTypeModel);
+    return Left(woCreateRequestedTypeModel);
+  }
+
+  @override
+  Future<Either<List<WoCreateRequestedTypeModel>, CustomServiceException>> getCategory(token) async {
+    List<WoCreateRequestedTypeModel> woCreateLocationModel = [];
+
+    String url = 'http://localhost:3015/classification/getAClassificationByRealmAndLabelNameAndLanguage/info';
+    final response = await super.dio.post(
+          url,
+          data: {
+            "label": ["WoCategory"],
+          },
+          options: Options(
+            headers: {'authorization': 'Bearer $token'},
+          ),
+        );
+
+    woCreateLocationModel = WoCreateRequestedTypeModel.fromJsonList(response.data['root']['children'][0]['children']);
+    super.logger.e(woCreateLocationModel);
+    return Left(woCreateLocationModel);
+  }
+
+  @override
+  Future<Either<List<WoCreateComponentModel>, CustomServiceException>> getComponents(token) async {
+    List<WoCreateComponentModel> woCreatecomponentModel = [];
+
+    String url = 'http://localhost:3014/component/search/?page=1&limit=10&orderBy=DESC&orderByColumn=&searchString=';
+    final response = await super.dio.get(
+          url,
+          options: Options(
+            headers: {'authorization': 'Bearer $token'},
+          ),
+        );
+
+    woCreatecomponentModel = WoCreateComponentModel.fromJsonList(response.data['children']);
+    super.logger.e(woCreatecomponentModel);
+    return Left(woCreatecomponentModel);
+  }
+
+  @override
+  Future<Either<dynamic, CustomServiceException>> createTask(
+      token, summary, requestType, requestedBy, description, appointmendData, templatedBy, requestSpaceId, requestSpaceLabels, woCategory, woComponent) async {
+    String url = 'http://localhost:3015/task';
+
+    try{
+    final response = await super.dio.post(
+          url,
+          data: {
+            "name": summary,
+            "requestType": requestType,
+            "requestedBy": [requestedBy],
+            "description": description,
+            "appointmentDate": appointmendData,
+            "templatedBy": [templatedBy],
+            "requestedComponents": [woComponent],
+            "requestedSpaces": [
+              {
+                "id": requestSpaceId,
+                "labels": [requestSpaceLabels]
+              }
+            ],
+            "woCategory": woCategory,
+            "isMobile": true,
+          },
+          options: Options(
+            headers: {'authorization': 'Bearer $token'},
+          ),
+        );
+    final data = response.data;
+    super.logger.e(data);
+    return Left(data);
+    }
+    catch(error){
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.loginError, statusCode: '400'));
+    }
   }
 }

@@ -44,6 +44,16 @@ class WoCreateRequestedTypeModel extends Equatable{
 
     factory WoCreateRequestedTypeModel.fromJson(Map<String, dynamic> json) => _$WoCreateRequestedTypeModelFromJson(json);
 
+    static List<WoCreateRequestedTypeModel> fromJsonList(List<dynamic> json) {
+    List<WoCreateRequestedTypeModel> requestByModel = [];
+
+    for (var item in json) {
+      requestByModel.add(WoCreateRequestedTypeModel.fromJson(item));
+    }
+
+    return requestByModel;
+    }
+
     Map<String, dynamic> toJson() => _$WoCreateRequestedTypeModelToJson(this);
 
     @override
