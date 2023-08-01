@@ -14,7 +14,7 @@ class AuthServiceRepositoryImpl extends AuthServiceRepository {
   Future<Either<LoginModel, CustomServiceException>> login(
       String username, String password) async {
     @override
-    String url = 'http://localhost:3012/user/login';
+    String url = 'http://10.0.2.2:3012/user/loginMobile';
     String firebaseToken =
     await SharedManager().getString(SharedEnum.firebaseToken);
 
