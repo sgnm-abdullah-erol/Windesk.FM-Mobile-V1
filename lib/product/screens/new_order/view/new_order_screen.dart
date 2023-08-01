@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:vm_fm_4/feature/components/buttons/custom_half_buttons.dart';
 import 'package:vm_fm_4/feature/components/cards/custom_wo_create_card.dart';
@@ -30,11 +29,12 @@ class NewOrderScreen extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => WoCreateProvider(),
       child: Consumer<WoCreateProvider>(builder: (context, WoCreateProvider woCreateProvider, child) {
-        SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
           if (woCreateProvider.isWorkOrderCreate) {
             snackBar(context, SnackbarStrings.woCreate, 'success');
           }
         });
+        woCreateProvider.isWorkOrderCreate ? snackBar(context, SnackbarStrings.woCreate, 'success') : null;
         woCreateProvider.locationLoading ? woCreateProvider.getLocation() : null;
         woCreateProvider.requestedLoading ? woCreateProvider.getRequestedByPro() : null;
         woCreateProvider.typeLoading ? woCreateProvider.getType() : null;
@@ -51,18 +51,6 @@ class NewOrderScreen extends StatelessWidget {
                     child: Center(
                       child: Column(
                         children: [
-                          DropdownSearch<String>(
-                            items: woCreateProvider.getComponentsChildren,
-                            onChanged: (value) {
-                              woCreateProvider.setComponent(value.toString());
-                            },
-                            selectedItem: 'Component',
-                            popupProps: PopupProps.menu(
-                              showSearchBox: true,
-                              fit: FlexFit.loose,
-                              constraints: BoxConstraints.tightFor(),
-                            ),
-                          ),
                           WoCreateCard(
                             widget1: TextFieldsInputUnderline(
                                 hintText: 'Tanım',
@@ -74,7 +62,18 @@ class NewOrderScreen extends StatelessWidget {
                                 onChanged: (String newValue) {
                                   woCreateProvider.setDescription(newValue);
                                 }),
-                            widget3: Container(),
+                            widget3: DropdownSearch<String>(
+                              items: woCreateProvider.getComponentsChildren,
+                              onChanged: (value) {
+                                woCreateProvider.setComponent(value.toString());
+                              },
+                              selectedItem: 'Component',
+                              popupProps: PopupProps.menu(
+                                showSearchBox: true,
+                                fit: FlexFit.loose,
+                                constraints: BoxConstraints.tightFor(),
+                              ),
+                            ),
                           ),
                           const SizedBox(height: 15),
                           WoCreateCard(

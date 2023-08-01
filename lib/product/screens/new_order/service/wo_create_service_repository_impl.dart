@@ -50,7 +50,7 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
     return Left(woCreateLeafModel);
   }
 
-  @overrid
+  @override
   Future<Either<List<WoCreateRequestedByModel>, CustomServiceException>> getRequestedBy(token) async {
     List<WoCreateRequestedByModel> woCreateRequestedByModel = [];
 
@@ -150,9 +150,11 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
   }
 
   @override
-  Future<Either<WoCreateLeafModel, CustomServiceException>> createTask(
+  Future<Either<dynamic, CustomServiceException>> createTask(
       token, summary, requestType, requestedBy, description, appointmendData, templatedBy, requestSpaceId, requestSpaceLabels, woCategory, woComponent) async {
     String url = 'http://localhost:3015/task';
+
+    try{
     final response = await super.dio.post(
           url,
           data: {
@@ -179,5 +181,10 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
     final data = response.data;
     super.logger.e(data);
     return Left(data);
+    }
+    catch(error){
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.loginError, statusCode: '400'));
+    }
   }
 }

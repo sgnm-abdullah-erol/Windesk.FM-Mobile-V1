@@ -521,16 +521,28 @@ class WoCreateProvider extends ChangeNotifier {
   }
 
   void createTask() async {
-    final String appointmendData = _date + ' ' + _hour +':00';
+    _isLoading = true;
+    notifyListeners();
+
+    final String appointmendData = _date + ' ' + _hour + ':00';
+
     final response = await _woCreateServiceRepository.createTask(
         key, summary, _requestTypeKey, requestedById, description, appointmendData, typesId, requestedId, requestedLabel, woCategory, componentKey);
     response.fold(
       (l) => {
-        _isWorkOrderCreate =true,
+        _isWorkOrderCreate = true,
+        notifyListeners(),
       },
       (r) => {
-        _isWorkOrderCreate =false,
+        _isWorkOrderCreate = false,
       },
     );
+    _isLoading = false;
+    notifyListeners();
+    Future.delayed(const Duration(seconds: 2), () {
+      _isWorkOrderCreate = false;
+      print(_isWorkOrderCreate);
+      notifyListeners();
+    });
   }
 }
