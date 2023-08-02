@@ -119,6 +119,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
+        print(data);
         workSpaceDetailList = WorkSpaceDetail.fromJsonList(data);
 
         return Left(workSpaceDetailList.first);

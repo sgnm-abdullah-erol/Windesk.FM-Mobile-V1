@@ -26,6 +26,8 @@ class Task extends Equatable {
   final String? templatedBy;
   final CreatedBy? requestedBy;
   final CreatedBy? requestedSpaces;
+  final CreatedBy? requestedComponents;
+
   final CreatedBy? createdBy;
   final Priority? woCategory;
   final Priority? requestType;
@@ -54,6 +56,7 @@ class Task extends Equatable {
     this.templatedBy,
     this.requestedBy,
     this.requestedSpaces,
+    this.requestedComponents,
     this.createdBy,
     this.requestType,
     this.priority,
@@ -84,6 +87,7 @@ class Task extends Equatable {
         templatedBy,
         requestedBy,
         requestedSpaces,
+        requestedComponents,
         createdBy,
         requestType,
         priority,

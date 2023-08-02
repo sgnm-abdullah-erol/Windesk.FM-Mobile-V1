@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:vm_fm_4/feature/components/buttons/custom_elevated_button_with_icon.dart';
+import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/provider/work_order_detail_provider.dart';
 import '../../../../../../feature/components/dividers/custom_wo_summary_divider.dart';
 import '../../../../../../feature/constants/other/colors.dart';
 import '../../../../../../feature/constants/style/border_radius.dart';
@@ -6,9 +10,13 @@ import '../../../../../../feature/constants/style/border_radius.dart';
 import '../../../../../../feature/models/work_space/work_space_detail.dart';
 
 class CustomWorkSpaceDetailCard extends StatelessWidget {
-  const CustomWorkSpaceDetailCard({super.key, required this.workSpaceDetail});
+  const CustomWorkSpaceDetailCard(
+      {super.key,
+      required this.workSpaceDetail,
+      required this.workOrderDetailProvider});
 
   final WorkSpaceDetail workSpaceDetail;
+  final WorkOrderDetailProvider workOrderDetailProvider;
 
   final double _elevation = 8;
   final EdgeInsets _paddingCardInside =
@@ -78,6 +86,15 @@ class CustomWorkSpaceDetailCard extends StatelessWidget {
               secondLabel: _assignedPerson,
               firstValue: workSpaceDetail.task?.woCategory?.name ?? '',
               secondValue: workSpaceDetail.task?.user ?? '',
+            ),
+            const CustomWoSummaryDivider(),
+            const SizedBox(height: 10),
+            _DoubleRowInformationComponent(
+              firstLabel: 'Varlık',
+              secondLabel: _assignedPerson,
+              firstValue: workSpaceDetail.task?.requestedComponents!.name ?? '',
+              secondValue: workSpaceDetail.task?.user ?? '',
+              workOrderDetailProvider: workOrderDetailProvider,
             ),
             const CustomWoSummaryDivider(),
           ],
@@ -167,6 +184,55 @@ class _DoubleRowInformation extends StatelessWidget {
             Text(secondLabel, style: Theme.of(context).textTheme.bodyMedium),
             Text(secondValue, style: Theme.of(context).textTheme.bodyMedium),
           ],
+        ),
+      ],
+    );
+  }
+}
+
+class _DoubleRowInformationComponent extends StatelessWidget {
+  const _DoubleRowInformationComponent(
+      {required this.firstLabel,
+      required this.secondLabel,
+      required this.firstValue,
+      required this.secondValue,
+      required this.workOrderDetailProvider});
+
+  final String firstLabel;
+  final String secondLabel;
+
+  final WorkOrderDetailProvider workOrderDetailProvider;
+
+  final String firstValue;
+  final String secondValue;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(firstLabel, style: Theme.of(context).textTheme.bodyMedium),
+            Text(firstValue, style: Theme.of(context).textTheme.bodyMedium),
+          ],
+        ),
+        const SizedBox(height: 5),
+        Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CustomElevatedButtonWithIcon(
+                  width: MediaQuery.of(context).size.width / 3,
+                  height: MediaQuery.of(context).size.height * 0.05,
+                  bgColor: APPColors.Main.white,
+                  onPressFunction: workOrderDetailProvider.scanBarcodeAndQr,
+                  textValue: 'Değiştir',
+                  textColor: APPColors.Main.white,
+                  iconColor: APPColors.Main.white,
+                  icon: Icons.qr_code)
+            ],
+          ),
         ),
       ],
     );
