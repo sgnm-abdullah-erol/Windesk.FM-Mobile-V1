@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:vm_fm_4/feature/models/home_page_models/asset_list_model.dart';
 import '../../../models/work_space/work_space_user_inventory.dart';
 
 import '../../../enums/task_response_enums.dart';
@@ -31,6 +32,8 @@ abstract class WorkSpaceServiceRepository {
   Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getWorkSpaceDetailsByRequestType(String requestId, int page, String token);
 
   Future<Either<List<WorkSpaceEfforts>, CustomServiceException>> getWorkSpaceEfforts(String taskId, String token);
+
+
 
   Future<Either<bool, CustomServiceException>> addWorkOrderEffort(
     String taskId,
@@ -84,4 +87,7 @@ abstract class WorkSpaceServiceRepository {
   Future<Either<WorkSpaceDetail, CustomServiceException>> getWorkSpaceByTaskId(String taskId, String token);
 
   Future<Either<List<WorkSpaceDocuments>, CustomServiceException>> getWorkSpaceDocuments(String token, String taskId);
+
+  Future<Either<AssetListModel, CustomServiceException>> getAssetWithSearch(String assetCode, String token);
+
 }

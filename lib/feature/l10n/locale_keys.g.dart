@@ -116,4 +116,13 @@ abstract class LocaleKeys {
 
   //WoCreate
   static const String requestBy = 'Requested By';
+
+  //Asset detail
+  static const String name = 'İsim';
+  static const String description = 'Açıklama';
+  static const String serialNo = 'Seri No';
+  static const String structureName = 'Bulunduğu Yer';
+  static const String images = 'Fotoğraflar';
+  static const String documents = 'Dökümanlar';
+  static const String assetDetail = 'Asset Detail';
 }
