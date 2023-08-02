@@ -27,12 +27,13 @@ class AssetDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: const CustomMainAppbar(title: Text(LocaleKeys.assetDetail), returnBack: true),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            WoCreateCard(
+      body: Column(
+        children: [
+          Expanded(
+            child: WoCreateCard(
               widget1: _DoubleRowInformation(
                 firstLabel: LocaleKeys.name,
                 secondLabel: LocaleKeys.description,
@@ -47,64 +48,73 @@ class AssetDetailScreen extends StatelessWidget {
                 secondValue: assetListModel.structureName ?? '',
               ),
             ),
-            imageExist
-                ? Center(
-                  child: SizedBox(
-                    height: 100,
-                    child: ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                            title: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(assetImageModel![index].name),
-                                ActivitiesPhoto(
-                                  photoAdress: assetImageModel![index].url,
-                                ),
-                              ],
-                            ),
-                            onTap: () {},
-                          );
-                        }),
-                  ),
-                )
-                : Container(),
-            documentExist
-                ? Center(
-                    child: SizedBox(
-                      height: 100,
-                      child: ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          itemBuilder: (context, index) {
-                            return ListTile(
-                              title: Link(
-                                uri: Uri.parse(assetDocumentModel![index].url),
-                                target: LinkTarget.blank,
-                                builder: (BuildContext ctx, FollowLink? openLink) {
-                                  return Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(assetDocumentModel![index].name),
-                                      TextButton.icon(
-                                        onPressed: openLink,
-                                        label: const Text('Dökümana Git : '),
-                                        icon: const Icon(Icons.read_more),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              ),
-                              onTap: () {},
-                            );
-                          }),
-                    ),
-                  )
-                : Container(),
-          ],
-        ),
+          ),
+          const SizedBox(height: 10),
+          Expanded(child: const Text(LocaleKeys.images, style: TextStyle(),)),
+          Divider(),
+          imageExist
+              ? photosListView()
+              : Container(),
+          Expanded(child: const Text(LocaleKeys.documents, style: TextStyle(),)),
+          Divider(),
+          documentExist
+              ? documentsListView()
+              : Container(),
+        ],
       ),
     );
+  }
+
+  Expanded documentsListView() {
+    return Expanded(
+              child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: assetDocumentModel!.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Link(
+                        uri: Uri.parse(assetDocumentModel![index].url),
+                        target: LinkTarget.blank,
+                        builder: (BuildContext ctx, FollowLink? openLink) {
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(assetDocumentModel![index].name),
+                              TextButton.icon(
+                                onPressed: openLink,
+                                label: const Text('Dökümana Git'),
+                                icon: const Icon(Icons.read_more),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                      onTap: () {},
+                    );
+                  }),
+            );
+  }
+
+  Expanded photosListView() {
+    return Expanded(
+              child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: assetImageModel!.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(assetImageModel![index].name),
+                          ActivitiesPhoto(
+                            photoAdress: assetImageModel![index].url,
+                          ),
+                        ],
+                      ),
+                      onTap: () {},
+                    );
+                  }),
+            );
   }
 }
 

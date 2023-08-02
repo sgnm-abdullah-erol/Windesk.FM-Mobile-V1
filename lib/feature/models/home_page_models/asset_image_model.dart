@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'asset_image_model.g.dart';
+part 'generator/asset_image_model.g.dart';
 
 @JsonSerializable()
 class AssetImageModel extends Equatable {

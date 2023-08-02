@@ -1,17 +1,17 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'asset_document_model.dart';
+part of '../asset_image_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-AssetDocumentModel _$AssetDocumentModelFromJson(Map<String, dynamic> json) =>
-    AssetDocumentModel(
+AssetImageModel _$AssetImageModelFromJson(Map<String, dynamic> json) =>
+    AssetImageModel(
       canDisplay: json['canDisplay'] as bool,
       description: json['description'] as String,
+      main: json['main'] as bool,
       className: json['className'] as String,
-      type: json['type'] as String,
       isActive: json['isActive'] as bool,
       url: json['url'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
@@ -25,12 +25,12 @@ AssetDocumentModel _$AssetDocumentModelFromJson(Map<String, dynamic> json) =>
       id: json['id'] as int,
     );
 
-Map<String, dynamic> _$AssetDocumentModelToJson(AssetDocumentModel instance) =>
+Map<String, dynamic> _$AssetImageModelToJson(AssetImageModel instance) =>
     <String, dynamic>{
       'canDisplay': instance.canDisplay,
       'description': instance.description,
+      'main': instance.main,
       'className': instance.className,
-      'type': instance.type,
       'isActive': instance.isActive,
       'url': instance.url,
       'createdAt': instance.createdAt.toIso8601String(),
