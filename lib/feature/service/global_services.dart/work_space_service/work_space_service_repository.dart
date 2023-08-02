@@ -20,17 +20,26 @@ abstract class WorkSpaceServiceRepository {
   final Dio dio = Injection.getIt.get<ServiceManager>().dio;
   final logger = Injection.getIt.get<LogManager>().logger;
 
-  Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getMyWorkSpaces(String id, String token, int page);
+  Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getMyWorkSpaces(
+      String id, String token, int page);
 
-  Future<Either<WorkSpaceMyGroupDemandList, CustomServiceException>> getMyGroupDemandList(String token);
+  Future<Either<WorkSpaceMyGroupDemandList, CustomServiceException>>
+      getMyGroupDemandList(String token);
 
-  Future<Either<List<WorkSpacePendiks>, CustomServiceException>> getWorkSpacePendiks(String id, String token, int page);
+  Future<Either<List<WorkSpacePendiks>, CustomServiceException>>
+      getWorkSpacePendiks(String id, String token, int page);
 
-  Future<Either<WorkSpaceDetail, CustomServiceException>> getWorkSpaceWithSearch(String workOrderCode, String token);
+  Future<Either<WorkSpaceDetail, CustomServiceException>>
+      getWorkSpaceWithSearch(String workOrderCode, String token);
+  Future<Either<WorkSpaceDetail, CustomServiceException>>
+      getWorkSpaceWithSearchFromGroupWorks(String workOrderCode, String token);
 
-  Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getWorkSpaceDetailsByRequestType(String requestId, int page, String token);
+  Future<Either<List<WorkSpaceDetail>, CustomServiceException>>
+      getWorkSpaceDetailsByRequestType(
+          String requestId, int page, String token);
 
-  Future<Either<List<WorkSpaceEfforts>, CustomServiceException>> getWorkSpaceEfforts(String taskId, String token);
+  Future<Either<List<WorkSpaceEfforts>, CustomServiceException>>
+      getWorkSpaceEfforts(String taskId, String token);
 
   Future<Either<bool, CustomServiceException>> addWorkOrderEffort(
     String taskId,
@@ -42,13 +51,19 @@ abstract class WorkSpaceServiceRepository {
     String effortType,
   );
 
-  Future<Either<List<WorkSpaceSpareparts>, CustomServiceException>> getWorkSpaceSpareparts(String taskId, String token);
+  Future<Either<List<WorkSpaceSpareparts>, CustomServiceException>>
+      getWorkSpaceSpareparts(String taskId, String token);
 
-  Future<Either<WorkSpaceUserInventory, CustomServiceException>> getWorkSpaceUserInventory(String token);
+  Future<Either<WorkSpaceUserInventory, CustomServiceException>>
+      getWorkSpaceUserInventory(String token);
 
-  Future<Either<bool, CustomServiceException>> addWorkSpaceSpareparts(String taskId, String token, String sparePartId, String amount);
+  Future<Either<bool, CustomServiceException>> addWorkSpaceSpareparts(
+      String taskId, String token, String sparePartId, String amount);
 
-  Future<Either<List<WorkSpaceRequestedMaterialsInventory>, CustomServiceException>> getWorkSpaceRequestedMaterialsInventory(String token, int page);
+  Future<
+      Either<List<WorkSpaceRequestedMaterialsInventory>,
+          CustomServiceException>> getWorkSpaceRequestedMaterialsInventory(
+      String token, int page);
 
   Future<Either<bool, CustomServiceException>> requestWorkSpaceMaterial(
     String workSpaceId,
@@ -60,13 +75,20 @@ abstract class WorkSpaceServiceRepository {
     String materialId,
   );
 
-  Future<Either<bool, CustomServiceException>> takeItOnMe(String taskId, String currentStateId, String token);
+  Future<Either<bool, CustomServiceException>> takeItOnMe(
+      String taskId, String currentStateId, String token);
 
-  Future<Either<TaskResponseEnums, CustomServiceException>> changeWorkSpaceState(String taskId, String nextStateId, String token);
+  Future<Either<TaskResponseEnums, CustomServiceException>>
+      changeWorkSpaceState(String taskId, String nextStateId, String token);
 
-  Future<Either<List<WorkSpaceRequirementMaterialsList>, CustomServiceException>> getWorkSpaceRequirementMaterialsList(String taskId, String token);
+  Future<
+      Either<List<WorkSpaceRequirementMaterialsList>,
+          CustomServiceException>> getWorkSpaceRequirementMaterialsList(
+      String taskId, String token);
 
-  Future<Either<List<WorkSpaceRequirementMaterialsList>, CustomServiceException>> getWorkSpaceApprovedRequirementMaterialsList(
+  Future<
+      Either<List<WorkSpaceRequirementMaterialsList>,
+          CustomServiceException>> getWorkSpaceApprovedRequirementMaterialsList(
     String taskId,
     String token,
   );
@@ -81,7 +103,9 @@ abstract class WorkSpaceServiceRepository {
     String key,
   );
 
-  Future<Either<WorkSpaceDetail, CustomServiceException>> getWorkSpaceByTaskId(String taskId, String token);
+  Future<Either<WorkSpaceDetail, CustomServiceException>> getWorkSpaceByTaskId(
+      String taskId, String token);
 
-  Future<Either<List<WorkSpaceDocuments>, CustomServiceException>> getWorkSpaceDocuments(String token, String taskId);
+  Future<Either<List<WorkSpaceDocuments>, CustomServiceException>>
+      getWorkSpaceDocuments(String token, String taskId);
 }
