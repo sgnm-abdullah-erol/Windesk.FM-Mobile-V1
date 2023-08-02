@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:vm_fm_4/feature/models/home_page_models/asset_image_model.dart';
 import 'package:vm_fm_4/feature/models/home_page_models/asset_list_model.dart';
 
 import '../../../../../../feature/database/shared_manager.dart';
@@ -18,9 +19,14 @@ class SearchMaterialProvider extends ChangeNotifier {
   bool _isSuccess = false;
   bool get isSuccess => _isSuccess;
 
+  bool _imageExist = false;
+  bool get imageExist => _imageExist;
+
   AssetListModel? _assetDetailList;
   AssetListModel? get assetDetailList => _assetDetailList;
 
+  List<AssetImageModel> _imageModel = [];
+  List<AssetImageModel> get imageModel => _imageModel;
 
   final _woNumber = TextEditingController();
   final _assetNumber = TextEditingController();
@@ -41,13 +47,29 @@ class SearchMaterialProvider extends ChangeNotifier {
 
   getAssetWithSearch() async {
     if (assetNumber.text != '') {
+      _imageModel.clear();
+      _imageExist = false;
       String userToken = await SharedManager().getString(SharedEnum.userToken);
 
       _isLoading = true;
       notifyListeners();
       final result = await workSpaceService.getAssetWithSearch(assetNumber.text, userToken);
 
-      result.fold((l) => {_assetDetailList = l, _isSuccess = true}, (r) {
+      result.fold(
+          (l) => {
+                _assetDetailList = l,
+                if (l.images!.length != 0)
+                  {
+                    for (int i = 0; i < l.images!.length; i++) {_imageModel.add(l.images![i])},
+                    _imageExist = true,
+                  },
+                // if (l.!.length != 0)
+                //   {
+                //     for (int i = 0; i < l.images!.length; i++) {_imageModel.add(l.images![i])},
+                //     _imageExist = true,
+                //   },
+                _isSuccess = true
+              }, (r) {
         _isSuccess = true;
         _assetDetailList = null;
       });
@@ -55,20 +77,6 @@ class SearchMaterialProvider extends ChangeNotifier {
       _isLoading = false;
       notifyListeners();
     }
-  }
-
-  void scanBarcodeAndQr() async {
-    String barcodeScanRes;
-
-    try {
-      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode('#ff6666', 'İptal', true, ScanMode.BARCODE);
-    } on PlatformException {
-      barcodeScanRes = 'Failed to get platform version.';
-    }
-    if (barcodeScanRes != '-1') {
-      setWoNumber = barcodeScanRes;
-    }
-    notifyListeners();
   }
 
   void scanBarcodeAndQrForAsset() async {
@@ -82,7 +90,7 @@ class SearchMaterialProvider extends ChangeNotifier {
     if (barcodeScanRes != '-1') {
       final startIndex = barcodeScanRes.indexOf(':');
       final endIndex = barcodeScanRes.indexOf(',');
-      final finalBarcode = barcodeScanRes.substring(startIndex +1, endIndex);
+      final finalBarcode = barcodeScanRes.substring(startIndex + 1, endIndex);
       setassetNumber = finalBarcode;
     }
     notifyListeners();

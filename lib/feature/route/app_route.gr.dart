@@ -10,6 +10,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i17;
 import 'package:flutter/material.dart' as _i18;
+import 'package:vm_fm_4/feature/models/home_page_models/asset_image_model.dart'
+    as _i23;
 import 'package:vm_fm_4/feature/models/home_page_models/asset_list_model.dart'
     as _i22;
 import 'package:vm_fm_4/feature/models/work_space/work_space_appendings.dart'
@@ -156,6 +158,8 @@ abstract class $AppRouter extends _i17.RootStackRouter {
         child: _i15.AssetDetailScreen(
           key: args.key,
           assetListModel: args.assetListModel,
+          assetImageModel: args.assetImageModel,
+          imageExist: args.imageExist,
         ),
       );
     },
@@ -474,12 +478,16 @@ class AssetDetailScreen extends _i17.PageRouteInfo<AssetDetailScreenArgs> {
   AssetDetailScreen({
     _i18.Key? key,
     required _i22.AssetListModel assetListModel,
+    List<_i23.AssetImageModel>? assetImageModel,
+    required bool imageExist,
     List<_i17.PageRouteInfo>? children,
   }) : super(
           AssetDetailScreen.name,
           args: AssetDetailScreenArgs(
             key: key,
             assetListModel: assetListModel,
+            assetImageModel: assetImageModel,
+            imageExist: imageExist,
           ),
           initialChildren: children,
         );
@@ -494,15 +502,21 @@ class AssetDetailScreenArgs {
   const AssetDetailScreenArgs({
     this.key,
     required this.assetListModel,
+    this.assetImageModel,
+    required this.imageExist,
   });
 
   final _i18.Key? key;
 
   final _i22.AssetListModel assetListModel;
 
+  final List<_i23.AssetImageModel>? assetImageModel;
+
+  final bool imageExist;
+
   @override
   String toString() {
-    return 'AssetDetailScreenArgs{key: $key, assetListModel: $assetListModel}';
+    return 'AssetDetailScreenArgs{key: $key, assetListModel: $assetListModel, assetImageModel: $assetImageModel, imageExist: $imageExist}';
   }
 }
 

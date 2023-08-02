@@ -29,13 +29,13 @@ class _SearchMaterialScreenState extends State<SearchMaterialScreen> {
         if (searchProvider.isSuccess) {
           if (searchProvider.assetDetailList != null) {
             context.router.push(AssetDetailScreen(
-                assetListModel: searchProvider.assetDetailList!));
+                assetListModel: searchProvider.assetDetailList!, assetImageModel: searchProvider.imageModel, imageExist: searchProvider.imageExist));
             searchProvider.clearInput();
           }
         }
 
         return Scaffold(
-          appBar: const CustomMainAppbar(title: Text(AppStrings.materialSearch), returnBack: true, elevation: 3),
+          appBar: const CustomMainAppbar(title: Text(AppStrings.materialSearch), elevation: 3),
           body: searchProvider.isLoading
               ? const CustomLoadingIndicator()
               : Center(
