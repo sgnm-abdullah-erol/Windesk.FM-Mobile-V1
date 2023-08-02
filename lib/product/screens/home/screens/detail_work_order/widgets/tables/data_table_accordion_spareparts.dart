@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/models/work_space/work_space_spareparts.dart';
+import '../../../../../../../feature/models/work_space/work_space_spareparts.dart';
 
 import '../../../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../../../feature/constants/other/colors.dart';

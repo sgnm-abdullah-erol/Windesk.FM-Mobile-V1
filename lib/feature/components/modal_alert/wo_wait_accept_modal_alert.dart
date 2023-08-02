@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/constants/style/border_radius.dart';
 
 import '../../constants/other/app_strings.dart';
+import '../../constants/style/border_radius.dart';
 
 class WoWaitAcceptModalAlert {
   Future<bool?> showAlertDialog(BuildContext context, String textData, String title) async {

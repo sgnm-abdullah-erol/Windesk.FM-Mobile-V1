@@ -16,7 +16,7 @@ class AppWrapper extends StatelessWidget {
       routes: const [
         HomeScreen(),
         NewOrderScreen(),
-        SearchScreen(),
+        SearchMaterialScreen(),
         TestScreen(),
       ],
       physics: const NeverScrollableScrollPhysics(),

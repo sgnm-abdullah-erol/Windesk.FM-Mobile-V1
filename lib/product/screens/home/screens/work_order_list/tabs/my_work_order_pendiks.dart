@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:vm_fm_4/feature/components/cards/custom_pending_card_undetail.dart';
+import '../../../../../../feature/components/cards/custom_pending_card_undetail.dart';
 
 import '../../../../../../feature/extensions/context_extension.dart';
 import '../provider/work_order_list_provider.dart';

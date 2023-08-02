@@ -85,4 +85,9 @@ class AppStrings {
 
   // alert dialog
   static const changeState = 'İş Emri Durum Değişimi';
+
+  //materialSearch
+  static const materialSearch = 'Varlık Arama';
+  static const clean = 'Temizle';
+  static const search = 'Ara';
 }

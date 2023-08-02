@@ -30,7 +30,7 @@ class AppRouter extends $AppRouter {
               ],
             ),
             AutoRoute(path: 'newOrderScreen', page: NewOrderScreen.page),
-            AutoRoute(path: 'searchScreen', page: SearchScreen.page),
+            AutoRoute(path: 'searchScreen', page: SearchMaterialScreen.page),
             AutoRoute(path: 'testScreen', page: TestScreen.page),
           ],
         ),
