@@ -14,7 +14,7 @@ class ServiceTools {
       "http://10.32.12.42/windesktest/xreadattach.php?token=$tokenV1&id=";
   static const facilityName = "İstanbul Finans Merkezi";
 
-  static const bool _isProduction = false;
+  static const bool _isProduction = true;
 
   static Url get url {
     if (_isProduction) {
