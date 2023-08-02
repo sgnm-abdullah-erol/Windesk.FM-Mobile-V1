@@ -23,7 +23,7 @@ class WoCreateCard extends StatelessWidget {
         ),
         child: Container(
           width: context.width,
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Column(
             children: [widget1, widget2, widget3],
           ),

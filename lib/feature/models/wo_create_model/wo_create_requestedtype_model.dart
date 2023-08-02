@@ -18,7 +18,7 @@ class WoCreateRequestedTypeModel extends Equatable{
     final bool? isDeleted;
     final String? name;
     final bool? canDelete;
-    final dynamic? id;
+    final dynamic id;
     final String? key;
     final DateTime? updatedAt;
     final List<WoCreateRequestedTypeModel>? children;

@@ -17,7 +17,6 @@ AssetListModel _$AssetListModelFromJson(Map<String, dynamic> json) =>
       type: json['type'] as int,
       externalNode: json['externalNode'] as bool,
       isActive: json['isActive'] as bool,
-      parentId: json['parentId'] as String,
       barCode: json['barCode'] as String,
       trId: json['trId'] as String,
       serialNo: json['serialNo'] as String,
@@ -40,6 +39,10 @@ AssetListModel _$AssetListModelFromJson(Map<String, dynamic> json) =>
       images: (json['images'] as List<dynamic>)
           .map((e) => AssetImageModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      documents: (json['documents'] as List<dynamic>)
+          .map((e) => AssetDocumentModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+
     );
 
 Map<String, dynamic> _$AssetListModelToJson(AssetListModel instance) =>
@@ -53,7 +56,6 @@ Map<String, dynamic> _$AssetListModelToJson(AssetListModel instance) =>
       'type': instance.type,
       'externalNode': instance.externalNode,
       'isActive': instance.isActive,
-      'parentId': instance.parentId,
       'barCode': instance.barCode,
       'trId': instance.trId,
       'serialNo': instance.serialNo,
@@ -74,4 +76,6 @@ Map<String, dynamic> _$AssetListModelToJson(AssetListModel instance) =>
       'warrantyGuarantorParts': instance.warrantyGuarantorParts,
       'warrantyDurationUnit': instance.warrantyDurationUnit,
       'images': instance.images,
+      'documents': instance.documents,
+
     };

@@ -10,6 +10,10 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i17;
 import 'package:flutter/material.dart' as _i18;
+import 'package:vm_fm_4/feature/models/home_page_models/asset_document_model.dart'
+    as _i24;
+import 'package:vm_fm_4/feature/models/home_page_models/asset_image_model.dart'
+    as _i23;
 import 'package:vm_fm_4/feature/models/home_page_models/asset_list_model.dart'
     as _i22;
 import 'package:vm_fm_4/feature/models/work_space/work_space_appendings.dart'
@@ -156,6 +160,10 @@ abstract class $AppRouter extends _i17.RootStackRouter {
         child: _i15.AssetDetailScreen(
           key: args.key,
           assetListModel: args.assetListModel,
+          assetImageModel: args.assetImageModel,
+          assetDocumentModel: args.assetDocumentModel,
+          imageExist: args.imageExist,
+          documentExist: args.documentExist,
         ),
       );
     },
@@ -474,12 +482,20 @@ class AssetDetailScreen extends _i17.PageRouteInfo<AssetDetailScreenArgs> {
   AssetDetailScreen({
     _i18.Key? key,
     required _i22.AssetListModel assetListModel,
+    List<_i23.AssetImageModel>? assetImageModel,
+    List<_i24.AssetDocumentModel>? assetDocumentModel,
+    required bool imageExist,
+    required bool documentExist,
     List<_i17.PageRouteInfo>? children,
   }) : super(
           AssetDetailScreen.name,
           args: AssetDetailScreenArgs(
             key: key,
             assetListModel: assetListModel,
+            assetImageModel: assetImageModel,
+            assetDocumentModel: assetDocumentModel,
+            imageExist: imageExist,
+            documentExist: documentExist,
           ),
           initialChildren: children,
         );
@@ -494,15 +510,27 @@ class AssetDetailScreenArgs {
   const AssetDetailScreenArgs({
     this.key,
     required this.assetListModel,
+    this.assetImageModel,
+    this.assetDocumentModel,
+    required this.imageExist,
+    required this.documentExist,
   });
 
   final _i18.Key? key;
 
   final _i22.AssetListModel assetListModel;
 
+  final List<_i23.AssetImageModel>? assetImageModel;
+
+  final List<_i24.AssetDocumentModel>? assetDocumentModel;
+
+  final bool imageExist;
+
+  final bool documentExist;
+
   @override
   String toString() {
-    return 'AssetDetailScreenArgs{key: $key, assetListModel: $assetListModel}';
+    return 'AssetDetailScreenArgs{key: $key, assetListModel: $assetListModel, assetImageModel: $assetImageModel, assetDocumentModel: $assetDocumentModel, imageExist: $imageExist, documentExist: $documentExist}';
   }
 }
 

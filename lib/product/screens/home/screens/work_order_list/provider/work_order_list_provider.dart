@@ -39,7 +39,7 @@ class WorkOrderListProvider extends ChangeNotifier {
   List<WorkSpacePendiks> _myPendikWorkSpaceDetails = [];
   List<WorkSpacePendiks> get myPendikWorkSpaceDetails => _myPendikWorkSpaceDetails;
 
-  List<String> _pendinkNextStates = [];
+  final List<String> _pendinkNextStates = [];
   List<String> get pendinkNextStates => _pendinkNextStates;
 
   void getMyWorkOrders() async {
