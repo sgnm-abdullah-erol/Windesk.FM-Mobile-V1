@@ -11,7 +11,7 @@ class WorkSpaceMaterialProperties extends Equatable {
   final int? type;
   final bool? externalNode;
   final bool? isActive;
-  final int? referenceId;
+  final String? referenceId;
   final String? trId;
   final DateTime? createdAt;
   final bool? isDeleted;

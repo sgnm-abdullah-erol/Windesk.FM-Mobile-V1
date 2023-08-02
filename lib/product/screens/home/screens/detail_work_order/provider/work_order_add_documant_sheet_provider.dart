@@ -11,7 +11,8 @@ import '../../../../../../feature/service/global_services.dart/work_space_servic
 
 class WorkOrderAddDocumantSheetProvider extends ChangeNotifier {
   final ImagePicker picker = ImagePicker();
-  final WorkSpaceServiceRepositoryImpl workSpaceService = Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
+  final WorkSpaceServiceRepositoryImpl workSpaceService =
+      Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
 
   XFile? image;
   File? fileImage;
@@ -51,7 +52,8 @@ class WorkOrderAddDocumantSheetProvider extends ChangeNotifier {
 
     final String token = await SharedManager().getString(SharedEnum.userToken);
 
-    final response = await workSpaceService.saveDocumant(imagePath, '', _desc, token, taskId, taskKey, 'image');
+    final response = await workSpaceService.saveDocumant(
+        imagePath, '', _desc, token, taskId, taskKey, 'image');
 
     response.fold(
       (l) => {
@@ -80,7 +82,8 @@ class WorkOrderAddDocumantSheetProvider extends ChangeNotifier {
 
     final String token = await SharedManager().getString(SharedEnum.userToken);
 
-    final response = await workSpaceService.saveDocumant(_pdfPath, _pdfName, _desc, token, taskId, taskKey, 'pdf');
+    final response = await workSpaceService.saveDocumant(
+        _pdfPath, _pdfName, _desc, token, taskId, taskKey, 'pdf');
 
     response.fold(
       (l) => {
@@ -121,6 +124,7 @@ class WorkOrderAddDocumantSheetProvider extends ChangeNotifier {
     image = await picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       imagePath = image!.path;
+      print('imagePath : ' + imagePath);
       fileImage = File(imagePath);
 
       notifyListeners();
@@ -131,6 +135,8 @@ class WorkOrderAddDocumantSheetProvider extends ChangeNotifier {
     image = await picker.pickImage(source: ImageSource.camera);
     if (image != null) {
       imagePath = image!.path;
+      print('imagePath : ' + imagePath);
+
       fileImage = File(imagePath);
 
       notifyListeners();

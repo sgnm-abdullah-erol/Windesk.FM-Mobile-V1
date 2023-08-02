@@ -7,7 +7,8 @@ import '../../../../../../feature/models/work_space/work_space_user_inventory.da
 import '../../../../../../feature/service/global_services.dart/work_space_service/work_space_service_repository_impl.dart';
 
 class WorkOrderAddMaterialSheetProvider extends ChangeNotifier {
-  final WorkSpaceServiceRepositoryImpl workSpaceService = Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
+  final WorkSpaceServiceRepositoryImpl workSpaceService =
+      Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -49,13 +50,17 @@ class WorkOrderAddMaterialSheetProvider extends ChangeNotifier {
 
     String sparePartId = '';
     for (var i = 0; i < (_userInventoryList.materials?.length ?? 0); i++) {
-      if (_userInventoryList.materials?[i].properties?.name == _choosenMaterial) {
-        sparePartId = _userInventoryList.materials?[i].properties?.referenceId.toString() ?? '';
+      if (_userInventoryList.materials?[i].properties?.name ==
+          _choosenMaterial) {
+        sparePartId = _userInventoryList.materials?[i].properties?.referenceId
+                .toString() ??
+            '';
         break;
       }
     }
 
-    final result = await workSpaceService.addWorkSpaceSpareparts(taskId, userToken, sparePartId, _wantedMaterialAmount);
+    final result = await workSpaceService.addWorkSpaceSpareparts(
+        taskId, userToken, sparePartId, _wantedMaterialAmount);
 
     result.fold(
       (l) => {
@@ -79,8 +84,10 @@ class WorkOrderAddMaterialSheetProvider extends ChangeNotifier {
     _choosenMaterial = value;
     for (var i = 0; i < (_userInventoryList.materials?.length ?? 0); i++) {
       if (_userInventoryList.materials?[i].properties?.name == value) {
-        _hintAmount = _userInventoryList.materials?[i].properties?.count.toString() ?? '';
-        _hintUnit = _userInventoryList.materials?[i].properties?.measurementUnit ?? '';
+        _hintAmount =
+            _userInventoryList.materials?[i].properties?.count.toString() ?? '';
+        _hintUnit =
+            _userInventoryList.materials?[i].properties?.measurementUnit ?? '';
         notifyListeners();
         break;
       }
@@ -101,7 +108,8 @@ class WorkOrderAddMaterialSheetProvider extends ChangeNotifier {
         _userInventoryList = l,
         for (var i = 0; i < (_userInventoryList.materials?.length ?? 0); i++)
           {
-            workSpaceUserInventoryLabelList.add(_userInventoryList.materials?[i].properties?.name ?? ''),
+            workSpaceUserInventoryLabelList
+                .add(_userInventoryList.materials?[i].properties?.name ?? ''),
           },
       },
       (r) => {},

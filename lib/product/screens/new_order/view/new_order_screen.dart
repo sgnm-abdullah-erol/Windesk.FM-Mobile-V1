@@ -28,23 +28,37 @@ class NewOrderScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => WoCreateProvider(),
-      child: Consumer<WoCreateProvider>(builder: (context, WoCreateProvider woCreateProvider, child) {
+      child: Consumer<WoCreateProvider>(
+          builder: (context, WoCreateProvider woCreateProvider, child) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (woCreateProvider.isWorkOrderCreate) {
             snackBar(context, SnackbarStrings.woCreate, 'success');
           }
         });
-        woCreateProvider.isWorkOrderCreate ? snackBar(context, SnackbarStrings.woCreate, 'success') : null;
-        woCreateProvider.locationLoading ? woCreateProvider.getLocation() : null;
-        woCreateProvider.requestedLoading ? woCreateProvider.getRequestedByPro() : null;
+        woCreateProvider.isWorkOrderCreate
+            ? snackBar(context, SnackbarStrings.woCreate, 'success')
+            : null;
+        woCreateProvider.locationLoading
+            ? woCreateProvider.getLocation()
+            : null;
+        woCreateProvider.requestedLoading
+            ? woCreateProvider.getRequestedByPro()
+            : null;
         woCreateProvider.typeLoading ? woCreateProvider.getType() : null;
-        woCreateProvider.requestedTypeLoading ? woCreateProvider.getRequestedType() : null;
-        woCreateProvider.categoryLoading ? woCreateProvider.getCategory() : null;
-        woCreateProvider.componentLoading ? woCreateProvider.getComponent() : null;
+        woCreateProvider.requestedTypeLoading
+            ? woCreateProvider.getRequestedType()
+            : null;
+        woCreateProvider.categoryLoading
+            ? woCreateProvider.getCategory()
+            : null;
+        woCreateProvider.componentLoading
+            ? woCreateProvider.getComponent()
+            : null;
         return woCreateProvider.isLoading
             ? const CustomLoadingIndicator()
             : Scaffold(
-                appBar: const CustomMainAppbar(title: Text(LocaleKeys.newWorkOrder)),
+                appBar: const CustomMainAppbar(
+                    title: Text(LocaleKeys.newWorkOrder)),
                 body: SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
@@ -83,7 +97,8 @@ class NewOrderScreen extends StatelessWidget {
                                 woCreateProvider.setRequestedBy(newValue);
                               },
                               rightIcon: Icons.arrow_drop_down_rounded,
-                              dropDownArray: woCreateProvider.getRequestedByChildren,
+                              dropDownArray:
+                                  woCreateProvider.getRequestedByChildren,
                             ),
                             widget2: DropDownInputFields(
                               labelText: 'Tip',
@@ -99,7 +114,8 @@ class NewOrderScreen extends StatelessWidget {
                                 woCreateProvider.setCategory(newValue);
                               },
                               rightIcon: Icons.arrow_drop_down_rounded,
-                              dropDownArray: woCreateProvider.getCategoriesChildren,
+                              dropDownArray:
+                                  woCreateProvider.getCategoriesChildren,
                             ),
                           ),
                           const SizedBox(height: 15),
@@ -148,7 +164,8 @@ class NewOrderScreen extends StatelessWidget {
     );
   }
 
-  Container requestType(WoCreateProvider woCreateProvider, BuildContext context) {
+  Container requestType(
+      WoCreateProvider woCreateProvider, BuildContext context) {
     return Container(
       width: context.width,
       padding: EdgeInsets.all(10),
@@ -172,7 +189,8 @@ class NewOrderScreen extends StatelessWidget {
                     //woCreateProvider.setRequestType1(newValue);
                   },
                   rightIcon: Icons.arrow_drop_down_rounded,
-                  dropDownArray: woCreateProvider.getRequestedTypesChildrenTree1,
+                  dropDownArray:
+                      woCreateProvider.getRequestedTypesChildrenTree1,
                   leftIconExist: true,
                   leftIcon: Icons.arrow_right_alt,
                 ),

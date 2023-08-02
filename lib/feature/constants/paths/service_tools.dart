@@ -25,10 +25,10 @@ class ServiceTools {
       );
     } else {
       return Url(
-        facility_url: "http://localhost:3000",
-        users_url: "http://localhost:3012",
-        asset_url: "http://localhost:3014",
-        workorder_url: "http://localhost:3015",
+        facility_url: "http://10.0.2.2:3000",
+        users_url: "http://10.0.2.2:3012",
+        asset_url: "http://10.0.2.2:3014",
+        workorder_url: "http://10.0.2.2:3015",
       );
     }
   }

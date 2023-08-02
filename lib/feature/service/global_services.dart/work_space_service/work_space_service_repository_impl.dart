@@ -144,7 +144,9 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
           );
 
       final data = response.data['properties'];
+      print('object' + data.toString());
       assetListModel = AssetListModel.fromJson(data);
+
       return Left(assetListModel);
     } catch (error) {
       super.logger.e(error.toString());
@@ -712,6 +714,39 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     } catch (e) {
       super.logger.e(e.toString());
       return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: '500'));
+    }
+  }
+  
+   @override
+  Future<Either<WorkSpaceDetail, CustomServiceException>>
+      getWorkSpaceWithSearchFromGroupWorks(
+          String workOrderCode, String token) async {
+    List<WorkSpaceDetail> workSpaceDetailList;
+    String url =
+        '${ServiceTools.url.workorder_url}/task/workSpace/task/state/List/can/be/assigned/user/pagination/swagger/search?page=1&limit=10&orderBy=DESC&searchString=$workOrderCode';
+    try {
+      final response = await super.dio.get(
+            url,
+            options: Options(
+              headers: {'authorization': 'Bearer $token'},
+            ),
+          );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = response.data;
+        workSpaceDetailList = WorkSpaceDetail.fromJsonList(data);
+
+        return Left(workSpaceDetailList.first);
+      } else {
+        return Right(CustomServiceException(
+            message: CustomServiceMessages.work,
+            statusCode: response.statusCode.toString()));
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.workOrderWorkloadError,
+          statusCode: '500'));
     }
   }
 }

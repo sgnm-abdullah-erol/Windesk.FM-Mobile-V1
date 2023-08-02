@@ -112,8 +112,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   String userToken =
                       await SharedManager().getString(SharedEnum.userToken);
                   _loading = true;
-                  final result = await workSpaceService.getWorkSpaceWithSearch(
-                      message.data['taskId'], userToken);
+                  final result = await workSpaceService
+                      .getWorkSpaceWithSearchFromGroupWorks(
+                          message.data['taskId'], userToken);
 
                   result.fold(
                       (l) => {
