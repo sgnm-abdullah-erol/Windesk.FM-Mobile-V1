@@ -140,8 +140,8 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
 
     notifyListeners();
 
-    String userToken =
-        SharedManager().getString(SharedEnum.userToken).toString();
+    String userToken = await SharedManager().getString(SharedEnum.userToken);
+
     final result = await workSpaceService.getWorkSpaceRequirementMaterialsList(
         taskId, userToken);
 
@@ -166,8 +166,7 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
 
     notifyListeners();
 
-    String userToken =
-        SharedManager().getString(SharedEnum.userToken).toString();
+    String userToken = await SharedManager().getString(SharedEnum.userToken);
     final result = await workSpaceService
         .getWorkSpaceApprovedRequirementMaterialsList(taskId, userToken);
 
