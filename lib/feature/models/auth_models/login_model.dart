@@ -13,6 +13,7 @@ class LoginModel extends Equatable {
   final int? notBeforePolicy;
   final String? sessionState;
   final String? scope;
+  final String? id;
 
   const LoginModel({
     this.accessToken,
@@ -23,6 +24,7 @@ class LoginModel extends Equatable {
     this.notBeforePolicy,
     this.sessionState,
     this.scope,
+    this.id,
   });
 
   factory LoginModel.fromJson(Map<String, dynamic> json) => _$LoginModelFromJson(json);
@@ -39,5 +41,6 @@ class LoginModel extends Equatable {
         notBeforePolicy,
         sessionState,
         scope,
+        id,
       ];
 }

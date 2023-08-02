@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../constants/other/colors.dart';
 
 class CustomWoSummaryDivider extends StatelessWidget {

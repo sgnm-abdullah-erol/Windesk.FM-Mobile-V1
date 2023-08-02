@@ -7,6 +7,8 @@ class CustomPaddings {
   static EdgeInsets onlyBottomLow = const EdgeInsets.only(bottom: 8.0);
   static EdgeInsets onlyTopLow = const EdgeInsets.only(top: 8.0);
   static EdgeInsets topAndBottomLow = const EdgeInsets.fromLTRB(0, 5, 0, 5);
+  static EdgeInsets onlyLeft = const EdgeInsets.only(left: 15);
+
 
   static EdgeInsets onlyHorizontalHigh = const EdgeInsets.symmetric(horizontal: 30.0);
   static EdgeInsets onlyBottomMedium = const EdgeInsets.only(bottom: 16.0);

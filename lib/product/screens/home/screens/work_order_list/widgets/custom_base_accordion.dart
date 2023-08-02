@@ -13,9 +13,9 @@ class CustomBaseAccordion extends StatelessWidget {
   Widget build(BuildContext context) {
     return Accordion(
       maxOpenSections: 1,
-      headerBackgroundColor: APPColors.Login.blue,
-      headerBackgroundColorOpened: Colors.black,
-      contentBorderColor: APPColors.Login.blue,
+      headerBackgroundColor: APPColors.Accent.black,
+      headerBackgroundColorOpened: APPColors.Accent.black,
+      contentBorderColor: APPColors.Accent.black,
       scaleWhenAnimating: true,
       openAndCloseAnimation: true,
       sectionOpeningHapticFeedback: SectionHapticFeedback.heavy,

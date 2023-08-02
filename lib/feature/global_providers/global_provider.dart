@@ -13,6 +13,13 @@ class GlobalProvider extends ChangeNotifier {
   String? _userName;
   String get userName => _userName ?? '';
 
+  String? _userId;
+  String get userId => _userId ?? '';
+
+  void setUserId(String userId) {
+    _userId = userId;
+  }
+
   // set functions
   void setDeviceModel(String deviceModel) {
     _deviceModel = deviceModel;

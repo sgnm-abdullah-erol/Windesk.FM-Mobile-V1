@@ -2,6 +2,7 @@
 
 import 'package:auto_route/auto_route.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vm_fm_4/feature/constants/paths/asset_paths.dart';
@@ -15,9 +16,14 @@ import '../../../../feature/constants/other/app_strings.dart';
 import '../../../../feature/constants/other/colors.dart';
 import '../../../../feature/constants/other/snackbar_strings.dart';
 import '../../../../feature/constants/paths/service_tools.dart';
+import '../../../../feature/database/shared_manager.dart';
+import '../../../../feature/enums/shared_enums.dart';
+import '../../../../feature/injection.dart';
 import '../../../../feature/l10n/locale_keys.g.dart';
 import '../../../../feature/route/app_route.gr.dart';
+import '../../../../feature/service/global_services.dart/work_space_service/work_space_service_repository_impl.dart';
 import '../provider/home_provider.dart';
+import '../screens/search_work_order/provider/search_work_order_provider.dart';
 import 'announcement_screen.dart';
 
 @RoutePage()
@@ -42,19 +48,123 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     InternetListenerClass().internetConnection(context);
 
-    return ChangeNotifierProvider(
-      create: (context) => HomeProvider(),
-      child: Consumer<HomeProvider>(
-        builder: (context, HomeProvider homeProvider, child) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<SearchWorkOrderProvider>(
+            create: (_) => SearchWorkOrderProvider()),
+        ChangeNotifierProvider<HomeProvider>(create: (_) => HomeProvider()),
+      ],
+      child: Consumer2<HomeProvider, SearchWorkOrderProvider>(
+        builder: (context, HomeProvider homeProvider,
+            SearchWorkOrderProvider searchWorkOrderProvider, child) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             if (homeProvider.logoutError) {
               snackBar(context, SnackbarStrings.logoutError, 'error');
             }
             if (homeProvider.isUserLogout) {
               snackBar(context, SnackbarStrings.logoutSuccess, 'success');
-              context.router.pushAndPopUntil(const LoginScreen(), predicate: (_) => false);
+              context.router.pushAndPopUntil(const LoginScreen(),
+                  predicate: (_) => false);
             }
           });
+          final WorkSpaceServiceRepositoryImpl workSpaceService =
+              Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
+          FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+            showAlertDialog(BuildContext context) {
+              bool _loading = false;
+              // set up the buttons
+              Widget cancelButton = TextButton(
+                child: Text("Tamam"),
+                onPressed: () {
+                  context.router.pop();
+                },
+              );
+              Widget continueButton = TextButton(
+                child: Text("Detayı Gör"),
+                onPressed: () async {
+                  // showDialog(
+                  //     // The user CANNOT close this dialog  by pressing outsite it
+                  //     barrierDismissible: false,
+                  //     context: context,
+                  //     builder: (_) {
+                  //       return Dialog(
+                  //         // The background color
+                  //         backgroundColor: Colors.white,
+                  //         child: Padding(
+                  //           padding: const EdgeInsets.symmetric(vertical: 20),
+                  //           child: Column(
+                  //             mainAxisSize: MainAxisSize.min,
+                  //             children: const [
+                  //               // The loading indicator
+                  //               CircularProgressIndicator(),
+                  //               SizedBox(
+                  //                 height: 15,
+                  //               ),
+                  //               // Some text
+                  //               Text('Yükleniyor...')
+                  //             ],
+                  //           ),
+                  //         ),
+                  //       );
+                  //     });
+                  // Navigator.of(context, rootNavigator: true).pop();
+
+                  String userToken =
+                      await SharedManager().getString(SharedEnum.userToken);
+                  _loading = true;
+                  final result = await workSpaceService
+                      .getWorkSpaceWithSearchFromGroupWorks(
+                          message.data['taskId'], userToken);
+
+                  result.fold(
+                      (l) => {
+                            context.router.push(
+                                DetailWorkOrderScreen(workSpaceDetail: l)),
+                            context.router.pop(),
+                          }, (r) {
+                    print('hatali wo');
+                  });
+                },
+              );
+
+              // set up the AlertDialog
+              AlertDialog alert = searchWorkOrderProvider.isLoading
+                  ? AlertDialog(
+                      title: Text(
+                        "Yeni bir İş Emri Oluşturuldu",
+                        style: TextStyle(color: APPColors.Main.black),
+                      ),
+                      content: const Text(
+                          "İş emri detayına gidiliyor lütfen bekleyiniz..."),
+                      actions: const [],
+                    )
+                  : AlertDialog(
+                      title: Text(
+                        "Yeni bir İş Emri Oluşturuldu",
+                        style: TextStyle(color: APPColors.Main.black),
+                      ),
+                      content: Text(
+                          "Yeni bir iş emri oluşturuldu.\n${message.data['taskName']} - ${message.data['taskId']}\n${message.data['taskDescription']}"),
+                      actions: [
+                        cancelButton,
+                        continueButton,
+                      ],
+                    );
+
+              // show the dialog
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return alert;
+                },
+              );
+            }
+
+            showAlertDialog(context);
+
+            //FlutterLocalNotificationsPlugin().show(message.notification.messageId, message.notification?.title, message.notification?.body,);
+          });
+
           return SafeArea(
             child: Scaffold(
               key: _scaffoldKey,
@@ -63,7 +173,10 @@ class _HomeScreenState extends State<HomeScreen> {
               body: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[headerTextWidget(), homePageIcons(context)],
+                  children: <Widget>[
+                    headerTextWidget(),
+                    homePageIcons(context)
+                  ],
                 ),
               ),
             ),
@@ -78,17 +191,35 @@ class _HomeScreenState extends State<HomeScreen> {
       flex: 4,
       child: Column(
         children: [
-          rowIconButtonSection(context, LocaleKeys.issueList, AppIcons.calendarMonth, const TestScreen(), LocaleKeys.issueSearch, AppIcons.attachment,
+          rowIconButtonSection(
+              context,
+              LocaleKeys.issueList,
+              AppIcons.calendarMonth,
+              const TestScreen(),
+              LocaleKeys.issueSearch,
+              AppIcons.attachment,
               const TestScreen()),
-          rowIconButtonSection(context, LocaleKeys.workOrderList, AppIcons.contentPasteSearch, const WorkOrderListScreen(),
-              LocaleKeys.workOrderSearch, AppIcons.contentPasteOff, const SearchWorkOrderScreen()),
+          rowIconButtonSection(
+              context,
+              LocaleKeys.workOrderList,
+              AppIcons.contentPasteSearch,
+              const WorkOrderListScreen(),
+              LocaleKeys.workOrderSearch,
+              AppIcons.contentPasteOff,
+              const SearchWorkOrderScreen()),
         ],
       ),
     );
   }
 
-  Expanded rowIconButtonSection(BuildContext context, String buttonTitle1, IconData buttonIcon1, PageRouteInfo<dynamic> navigateRouteName1,
-      String buttonTitle2, IconData buttonIcon2, PageRouteInfo<dynamic> navigateRouteName2) {
+  Expanded rowIconButtonSection(
+      BuildContext context,
+      String buttonTitle1,
+      IconData buttonIcon1,
+      PageRouteInfo<dynamic> navigateRouteName1,
+      String buttonTitle2,
+      IconData buttonIcon2,
+      PageRouteInfo<dynamic> navigateRouteName2) {
     return Expanded(
       child: Center(
         child: Row(
@@ -128,8 +259,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return const Expanded(
       child: Column(
         children: [
-          Text(ServiceTools.facilityName, style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400)),
-          Text(AppStrings.title, style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+          Text(ServiceTools.facilityName,
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400)),
+          Text(AppStrings.title,
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
         ],
       ),
     );
@@ -145,7 +278,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       actions: <Widget>[
         IconButton(
-          icon: Icon(AppIcons.powerSettingsOff, size: 35, color: APPColors.Main.black),
+          icon: Icon(AppIcons.powerSettingsOff,
+              size: 35, color: APPColors.Main.black),
           tooltip: AppStrings.logout,
           onPressed: () {
             provider.logOut();

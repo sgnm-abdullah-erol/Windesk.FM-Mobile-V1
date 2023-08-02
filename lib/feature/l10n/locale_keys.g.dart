@@ -101,6 +101,7 @@ abstract class LocaleKeys {
   static const String takePictureTitle = 'Fotoğraf Çek';
   static const String pictureTitle = 'Fotoğraf';
   static const String caseIComplainedDetailTitle = 'Şikayet Ettiğim Vaka  Detay';
+  static const String newWorkOrder = 'Yeni İş Emri';
 
   //woEmpty
   static const String noDescription = 'Açıklama Bulunamadı';
@@ -112,4 +113,7 @@ abstract class LocaleKeys {
 
   //woSearch
   static const String woSearch = 'Vaka Arama';
+
+  //WoCreate
+  static const String requestBy = 'Requested By';
 }

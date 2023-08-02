@@ -1,12 +1,10 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import '../../../../../../feature/extensions/context_extension.dart';
-import '../widgets/custom_loading_indicator.dart';
-import '../widgets/custom_pendinks_card.dart';
+import 'package:vm_fm_4/feature/components/cards/custom_pending_card_undetail.dart';
 
-import '../../../../../../feature/route/app_route.gr.dart';
+import '../../../../../../feature/extensions/context_extension.dart';
 import '../provider/work_order_list_provider.dart';
+import '../widgets/custom_loading_indicator.dart';
 
 class MyWorkOrderPendiks extends StatefulWidget {
   const MyWorkOrderPendiks({super.key, required this.provider});
@@ -37,20 +35,11 @@ class _MyWorkOrderPendiksState extends State<MyWorkOrderPendiks> {
               itemCount: widget.provider.myPendikWorkSpaceDetails.length,
               itemBuilder: (context, index) => Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: InkWell(
-                  onTap: () {
-                    context.router.push(PendingDetailWorkOrderScreen(workSpacePendiks: widget.provider.myPendikWorkSpaceDetails[index]));
-                  },
-                  child: CustomPendiksCard(
-                    workSpacePendiks: widget.provider.myPendikWorkSpaceDetails[index],
-                  ),
+                child: CustomPendingCardUndetail(
+                  provider: widget.provider,
+                  pendiks: widget.provider.myPendikWorkSpaceDetails[index],
+                  onTap: () {},
                 ),
-
-                // (
-                //   workSpaceDetail: widget.provider.myWorkSpaceDetails[0],
-                //   isButtonVisible: true,
-                //   provider: widget.provider,
-                // ),
               ),
             ),
           );

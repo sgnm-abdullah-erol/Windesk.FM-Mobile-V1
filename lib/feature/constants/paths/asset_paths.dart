@@ -10,4 +10,5 @@ class AssetPaths {
   static const loginPic = 'assets/images/loginPic.png';
   static const profile = 'assets/images/profile3.png';
   static const windesk = 'assets/images/windesk.jpg';
+  static const pdf = 'assets/images/pdf.png';
 }

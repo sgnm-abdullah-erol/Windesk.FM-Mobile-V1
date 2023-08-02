@@ -1,18 +1,24 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import '../../constants/other/colors.dart';
+import 'package:vm_fm_4/feature/constants/style/border_radius.dart';
 
 import '../../constants/other/app_strings.dart';
 
 class WoWaitAcceptModalAlert {
-  Future<bool?> showAlertDialog(BuildContext context, String textData) async {
+  Future<bool?> showAlertDialog(BuildContext context, String textData, String title) async {
     // show the dialog
     return await showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(AppStrings.warning, style: TextStyle(color: APPColors.Main.black)),
-          content: Text(textData, style: TextStyle(color: APPColors.Main.black)),
+          shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.mediumBorderRadius),
+          title: Text(title, style: Theme.of(context).textTheme.titleMedium),
+          content: Text(
+            textData,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  overflow: TextOverflow.visible,
+                ),
+          ),
           actions: [
             TextButton(
               child: const Text(AppStrings.reject),

@@ -15,6 +15,7 @@ LoginModel _$LoginModelFromJson(Map<String, dynamic> json) => LoginModel(
       notBeforePolicy: json['not-before-policy'] as int?,
       sessionState: json['session_state'] as String?,
       scope: json['scope'] as String?,
+      id: json['id'] as String?,
     );
 
 Map<String, dynamic> _$LoginModelToJson(LoginModel instance) => <String, dynamic>{
@@ -26,4 +27,5 @@ Map<String, dynamic> _$LoginModelToJson(LoginModel instance) => <String, dynamic
       'not-before-policy': instance.notBeforePolicy,
       'session_state': instance.sessionState,
       'scope': instance.scope,
+      'id': instance.id,
     };

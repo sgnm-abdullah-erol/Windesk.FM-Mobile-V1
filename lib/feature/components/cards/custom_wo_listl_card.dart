@@ -1,31 +1,28 @@
 // ignore_for_file:file_names, prefer_const_constructors_in_immutables,prefer_const_constructors,prefer_const_literals_to_create_immutables,use_key_in_widget_constructors
 
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:vm_fm_4/feature/constants/style/border_radius.dart';
 import 'package:vm_fm_4/feature/constants/style/font_sizes.dart';
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 import 'package:vm_fm_4/feature/extensions/date_string_extension.dart';
 import 'package:vm_fm_4/feature/models/work_space/work_space_detail.dart';
-import 'package:vm_fm_4/product/screens/home/screens/work_order_list/provider/work_order_list_provider.dart';
 
 import '../../constants/other/app_strings.dart';
 import '../../constants/other/colors.dart';
 import '../../constants/style/box_decorations.dart';
 import '../../l10n/locale_keys.g.dart';
-import '../../route/app_route.gr.dart';
 import '../buttons/custom_half_buttons.dart';
 
 class CustomWoDetailCard extends StatelessWidget {
   final WorkSpaceDetail workSpaceDetail;
-  final WorkOrderListProvider provider;
   final bool isButtonVisible;
+  final Function onTap;
 
   const CustomWoDetailCard({
     Key? key,
     required this.workSpaceDetail,
     required this.isButtonVisible,
-    required this.provider,
+    required this.onTap,
   }) : super(key: key);
 
   final double _elevation = 4;
@@ -36,7 +33,7 @@ class CustomWoDetailCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => context.router.push(DetailWorkOrderScreen(workSpaceDetail: workSpaceDetail)),
+      onTap: () => onTap(),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Card(
@@ -94,7 +91,7 @@ class CustomWoDetailCard extends StatelessWidget {
           style: textStyle,
         ),
         Text(
-          giveFormat ? date.splitString(date) : date,
+          giveFormat ? date.splitString(date) : date.splitStringSecond(date),
           style: textStyle,
         )
       ],

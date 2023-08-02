@@ -8,18 +8,18 @@ class LocalNotification {
       android: AndroidNotificationDetails(
         '1',
         'channel name',
-        'channel description',
         importance: Importance.max,
       ),
-      iOS: IOSNotificationDetails(),
+      iOS: DarwinNotificationDetails(),
     );
   }
 
   static Future showNotification({
-    int id = 0,
+    int id = 1,
     String? title,
     String? body,
     String? payload,
   }) async =>
-      _notifications.show(id, title, body, await _notificationDetails(), payload: payload);
+      _notifications.show(id, title, body, await _notificationDetails(),
+          payload: payload);
 }

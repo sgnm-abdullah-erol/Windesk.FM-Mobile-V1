@@ -22,12 +22,16 @@ class TextFieldsInputWithAction extends StatelessWidget {
       children: <Widget>[
         TextField(
           decoration: InputDecoration(
-            border: OutlineInputBorder(borderRadius: CustomBorderRadius.textFieldBorderRadius),
+            border: OutlineInputBorder(
+                borderRadius: CustomBorderRadius.textFieldBorderRadius),
             labelText: labelText,
           ),
           onChanged: (inputValue) => onChangedFunction(inputValue),
         ),
-        IconButton(icon: Icon(actionIcon), onPressed: () => actionFunction),
+        IconButton(
+          icon: Icon(actionIcon),
+          onPressed: () => actionFunction(),
+        ),
       ],
     );
   }

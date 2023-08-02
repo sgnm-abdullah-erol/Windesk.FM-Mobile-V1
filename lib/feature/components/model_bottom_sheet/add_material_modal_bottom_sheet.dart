@@ -1,128 +1,116 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
-import '../../constants/other/app_icons.dart';
-import '../../constants/other/app_strings.dart';
-import '../../extensions/context_extension.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/provider/work_order_add_material_sheet_provider.dart';
+import 'package:vm_fm_4/product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
+import '../../constants/other/snackbar_strings.dart';
 import '../buttons/custom_half_buttons.dart';
 import '../input_fields/dropdown_input_fields.dart';
-import '../input_fields/text_fields_input.dart';
+import '../input_fields/text_fields_input_underline.dart';
+
+import '../../constants/other/app_strings.dart';
+import '../../extensions/context_extension.dart';
+import '../snackBar/snackbar.dart';
 
 class AddMaterialModalBottomSheet extends StatelessWidget {
-  const AddMaterialModalBottomSheet({
-    super.key,
-    required this.wareHouseList,
-    required this.productList,
-    required this.unitList,
-    required this.selectWareHouseFunction,
-    required this.selectProductFunction,
-    required this.selectUnitFunction,
-    required this.saveAmountFunction,
-    required this.addMaterial,
-  });
-  final List<String> wareHouseList;
-  final List<String> productList;
-  final List<String> unitList;
-  final Function selectWareHouseFunction;
-  final Function selectProductFunction;
-  final Function selectUnitFunction;
-  final Function saveAmountFunction;
-  final Function addMaterial;
+  const AddMaterialModalBottomSheet({super.key, required this.taskId});
+
+  final String taskId;
+
   @override
   Widget build(BuildContext context) {
-    return _bodyWidget(context);
-  }
-
-  _bodyWidget(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.7,
+      height: MediaQuery.of(context).size.height * 0.6,
       width: context.width,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
-        child: Column(
-          children: [
-            _inputS(
-                context,
-                wareHouseList,
-                selectWareHouseFunction,
-                productList,
-                selectProductFunction,
-                unitList,
-                selectUnitFunction,
-                saveAmountFunction),
-            _buttons(context, addMaterial),
-          ],
+        child: ChangeNotifierProvider(
+          create: (context) => WorkOrderAddMaterialSheetProvider(),
+          child: Consumer<WorkOrderAddMaterialSheetProvider>(builder: ((context, value, child) {
+            SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+              value.isInventoryFetched ? null : value.getUserInventory();
+              value.isMaterialAdded ? snackBar(context, SnackbarStrings.materialAdded, 'success') : null;
+            });
+
+            return value.isLoading ? const CustomLoadingIndicator() : _bodyWidget(context, value);
+          })),
         ),
       ),
     );
   }
 
-  Expanded _inputS(context, wareHouseList, selectWareHouseFunction, productList,
-      selectProductFunction, unitList, selectUnitFunction, saveAmountFunction) {
-    return Expanded(
-      flex: 50,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Expanded(
-            child: Text(
-              AppStrings.addMaterial,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+  _bodyWidget(BuildContext context, WorkOrderAddMaterialSheetProvider value) {
+    return Column(
+      children: [
+        Expanded(flex: 70, child: _Inputs(value.workSpaceUserInventoryLabelList, value)),
+        Expanded(
+          flex: 70,
+          child: CustomHalfButtons(
+            leftTitle: const Text(AppStrings.cancel),
+            rightTitle: const Text(AppStrings.approve),
+            leftOnPressed: () {
+              Navigator.of(context).pop();
+            },
+            rightOnPressed: () {
+              value.addSparepart(taskId);
+            },
           ),
-          Expanded(
-            child: DropDownInputFields(
-                labelText: AppStrings.chooseWareHouse,
-                onChangedFunction: selectWareHouseFunction,
-                rightIcon: AppIcons.arrowDown,
-                dropDownArray: wareHouseList),
-          ),
-          Expanded(
-            child: DropDownInputFields(
-                labelText: AppStrings.chooseProduct,
-                onChangedFunction: selectProductFunction,
-                rightIcon: AppIcons.arrowDown,
-                dropDownArray: productList),
-          ),
-          Expanded(
-            child: DropDownInputFields(
-                labelText: AppStrings.chooseUnit,
-                onChangedFunction: selectUnitFunction,
-                rightIcon: AppIcons.arrowDown,
-                dropDownArray: unitList),
-          ),
-          Expanded(
-              child: TextFieldsInput(
-                  onChangedFunction: saveAmountFunction,
-                  labelText: AppStrings.enterAmount))
-        ],
-      ),
+        ),
+      ],
     );
   }
+}
 
-  Expanded _buttons(context, Function addPhotoFunction) {
-    return Expanded(
-      flex: 20,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          CustomHalfButtons(
-              leftTitle: const Text(AppStrings.cancel),
-              rightTitle: const Text(AppStrings.save),
-              leftOnPressed: () {
-                Navigator.pop(context);
-              },
-              rightOnPressed: addPhotoFunction)
-        ],
-      ),
-    );
-  }
+class _Inputs extends StatelessWidget {
+  const _Inputs(this.wareHouseList, this.value);
+
+  final List<String> wareHouseList;
+  final WorkOrderAddMaterialSheetProvider value;
+
+  final String _materialList = 'Malzeme Listesi';
+  final String _wantedMaterialAmount = 'Malzeme Miktari';
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Function>('saveEffort', addMaterial));
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Expanded(
+          flex: 30,
+          child: DropDownInputFields(
+            labelText: _materialList,
+            onChangedFunction: value.setHintTexts,
+            rightIcon: Icons.arrow_downward,
+            dropDownArray: wareHouseList.isEmpty ? [''] : wareHouseList,
+          ),
+        ),
+        Expanded(
+          flex: 20,
+          child: TextFieldsInputUnderline(
+            onChanged: (val) {},
+            hintText: value.hintAmount,
+            enabled: false,
+          ),
+        ),
+        Expanded(
+          flex: 20,
+          child: TextFieldsInputUnderline(
+            onChanged: (val) {},
+            hintText: value.hintUnit,
+            enabled: false,
+          ),
+        ),
+        Expanded(
+          flex: 20,
+          child: TextFieldsInputUnderline(
+            onChanged: value.changeWantedMaterialAmount,
+            hintText: _wantedMaterialAmount,
+            enabled: true,
+            keyboardType: TextInputType.number,
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          ),
+        ),
+      ],
+    );
   }
 }

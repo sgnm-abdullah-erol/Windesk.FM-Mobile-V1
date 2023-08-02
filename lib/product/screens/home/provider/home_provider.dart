@@ -3,15 +3,16 @@
 import 'package:flutter/material.dart';
 import 'package:vm_fm_4/feature/enums/shared_enums.dart';
 import 'package:vm_fm_4/feature/exceptions/custom_service_exceptions.dart';
-import 'package:vm_fm_4/feature/service/global_services.dart/auth_service/auth_service_repository.dart';
 import 'package:vm_fm_4/feature/service/global_services.dart/auth_service/auth_service_repository_impl.dart';
 import 'package:vm_fm_4/product/screens/home/service/home_service_repo_impl.dart';
 
 import '../../../../feature/database/shared_manager.dart';
+import '../../../../feature/injection.dart';
 import '../../../../feature/models/home_page_models/announcement_model.dart';
 
 class HomeProvider extends ChangeNotifier {
-  final AuthServiceRepository _authServiceRepository = AuthServiceRepositoryImpl();
+  final AuthServiceRepositoryImpl _authServiceRepository = Injection.getIt.get<AuthServiceRepositoryImpl>();
+
   bool _isUserLogout = false;
   bool get isUserLogout => _isUserLogout;
 

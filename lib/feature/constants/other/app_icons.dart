@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 @immutable
 class AppIcons {
+  const AppIcons._();
+
   // HOME TAB ICONS
   static const IconData home = Icons.home;
   static const IconData addBox = Icons.add_box;
@@ -18,6 +20,8 @@ class AppIcons {
 
   // INPUT ACTION ICONS
   static const IconData qr = Icons.qr_code;
+  static const IconData calendarToday = Icons.calendar_today;
+  static const IconData time = Icons.access_time;
 
   // DROPDOWN INPUT ICON
   static const IconData arrowDown = Icons.keyboard_arrow_down;
@@ -41,4 +45,5 @@ class AppIcons {
   static const IconData documantScanner = Icons.document_scanner;
   static const IconData personal = Icons.person;
   static const IconData people = Icons.people;
+  static const IconData download = Icons.download;
 }

@@ -58,6 +58,7 @@ class AppStrings {
   static const chooseShift = 'Vardiya Seçiniz';
 
   // accordion titles
+  static const approvedRequestMaterials = 'Onaylanmış Talep Malzemeleri';
   static const requstMaterial = 'Malzeme Talebi';
   static const addPiece = 'Parça Ekle';
   static const efforts = 'Eforlar';
@@ -80,4 +81,8 @@ class AppStrings {
 
   static const logout = 'Çıkış Yap';
   static const title = 'Yardım Masası Uygulaması';
+  static const takeItOnMe = 'Üzerime Al';
+
+  // alert dialog
+  static const changeState = 'İş Emri Durum Değişimi';
 }

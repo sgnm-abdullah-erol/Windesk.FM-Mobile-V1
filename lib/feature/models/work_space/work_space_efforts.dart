@@ -1,69 +1,47 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'work_space_created_by.dart';
-import 'work_space_effort.dart';
 
 part 'generator/work_space_efforts.g.dart';
 
 @JsonSerializable()
 class WorkSpaceEfforts extends Equatable {
-  final List<CreatedBy>? requestedBy;
-  final List<CreatedBy>? requestedSpaces;
-  final List<CreatedBy>? createdBy;
-  final List<WorkSpaceEffort>? effort;
-  final String? templatedBy;
-  final String? woCategory;
-  final String? woCategoryName;
-  final String? requestType;
-  final String? requestTypeName;
-  final String? priority;
-  final String? priorityName;
-  final DateTime? appointmentDate;
+  final int? id;
+  final List<String>? label;
+  final String? startDate;
+  final String? endDate;
+  final String? effortDuration;
   final String? description;
-  final DateTime? dueDate;
-  final String? name;
-  final String? templatedByName;
+  final String? effortType;
+  final String? user;
 
   const WorkSpaceEfforts({
-    this.requestedBy,
-    this.requestedSpaces,
-    this.createdBy,
-    this.effort,
-    this.templatedBy,
-    this.woCategory,
-    this.woCategoryName,
-    this.requestType,
-    this.requestTypeName,
-    this.priority,
-    this.priorityName,
-    this.appointmentDate,
+    this.id,
+    this.label,
+    this.startDate,
+    this.endDate,
+    this.effortDuration,
     this.description,
-    this.dueDate,
-    this.name,
-    this.templatedByName,
+    this.effortType,
+    this.user,
   });
 
   factory WorkSpaceEfforts.fromJson(Map<String, dynamic> json) => _$WorkSpaceEffortsFromJson(json);
+
+  static List<WorkSpaceEfforts> fromJsonList(List<dynamic> jsonList) {
+    return jsonList.map((json) => WorkSpaceEfforts.fromJson(json)).toList();
+  }
 
   Map<String, dynamic> toJson() => _$WorkSpaceEffortsToJson(this);
 
   @override
   List<Object?> get props => [
-        requestedBy,
-        requestedSpaces,
-        createdBy,
-        effort,
-        templatedBy,
-        woCategory,
-        woCategoryName,
-        requestType,
-        requestTypeName,
-        priority,
-        priorityName,
-        appointmentDate,
+        id,
+        label,
+        startDate,
+        endDate,
+        effortDuration,
         description,
-        dueDate,
-        name,
-        templatedByName,
+        effortType,
+        user,
       ];
 }

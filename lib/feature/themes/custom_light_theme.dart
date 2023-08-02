@@ -53,6 +53,11 @@ class CustomLightTheme {
       ),
       textTheme: TextTheme(
         // create basic text theme
+        titleMedium: TextStyle(
+          color: APPColors.Main.black,
+          fontSize: FontSizes.subtitle - 2,
+          fontWeight: FontWeight.w600,
+        ),
         bodyLarge: TextStyle(
           color: APPColors.Main.black,
           fontSize: FontSizes.caption + 1,
@@ -62,8 +67,9 @@ class CustomLightTheme {
         bodyMedium: TextStyle(
           color: APPColors.Main.black,
           fontSize: FontSizes.caption + 1,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.w500,
           overflow: TextOverflow.ellipsis,
+          letterSpacing: 0.5,
         ),
         bodySmall: TextStyle(
           color: APPColors.Main.black,
