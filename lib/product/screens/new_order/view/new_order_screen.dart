@@ -82,7 +82,7 @@ class NewOrderScreen extends StatelessWidget {
                                 woCreateProvider.setComponent(value.toString());
                               },
                               selectedItem: 'Component',
-                              popupProps: PopupProps.menu(
+                              popupProps: const PopupProps.menu(
                                 showSearchBox: true,
                                 fit: FlexFit.loose,
                                 constraints: BoxConstraints.tightFor(),
@@ -168,7 +168,7 @@ class NewOrderScreen extends StatelessWidget {
       WoCreateProvider woCreateProvider, BuildContext context) {
     return Container(
       width: context.width,
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       child: Column(
         children: [
           DropDownInputFields(
@@ -203,7 +203,7 @@ class NewOrderScreen extends StatelessWidget {
   Container location(WoCreateProvider woCreateProvider, BuildContext context) {
     return Container(
       width: context.width,
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       child: Column(
         children: [
           DropDownInputFields(

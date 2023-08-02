@@ -144,7 +144,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
           );
 
       final data = response.data['properties'];
-      print('object' + data.toString());
       assetListModel = AssetListModel.fromJson(data);
 
       return Left(assetListModel);
@@ -642,9 +641,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
           );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        print('girdi');
         final data = response.data;
-        print(data);
         if (data['success'] == true) {
           result = true;
           return Left(result);

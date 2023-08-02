@@ -27,7 +27,6 @@ class AssetDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: const CustomMainAppbar(title: Text(LocaleKeys.assetDetail), returnBack: true),
       body: Column(
@@ -50,13 +49,13 @@ class AssetDetailScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          Expanded(child: const Text(LocaleKeys.images, style: TextStyle(),)),
-          Divider(),
+          const Expanded(child: Text(LocaleKeys.images, style: TextStyle(),)),
+          const Divider(),
           imageExist
               ? photosListView()
               : Container(),
-          Expanded(child: const Text(LocaleKeys.documents, style: TextStyle(),)),
-          Divider(),
+          const Expanded(child: Text(LocaleKeys.documents, style: TextStyle(),)),
+          const Divider(),
           documentExist
               ? documentsListView()
               : Container(),

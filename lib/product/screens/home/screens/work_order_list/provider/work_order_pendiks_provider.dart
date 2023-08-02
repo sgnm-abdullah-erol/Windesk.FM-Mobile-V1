@@ -24,9 +24,6 @@ class WorkOrderPendiksProvider extends ChangeNotifier {
     _isLoading = true;
     notifyListeners();
 
-    print(taskId);
-    print(stateId);
-
     final token = await SharedManager().getString(SharedEnum.userToken);
 
     final response = await workSpaceService.changeWorkSpaceState(taskId, stateId, token);

@@ -7,7 +7,6 @@ import '../../../../../../feature/enums/shared_enums.dart';
 import '../../../../../../feature/injection.dart';
 import '../../../../../../feature/models/work_space/work_space_detail.dart';
 import '../../../../../../feature/service/global_services.dart/work_space_service/work_space_service_repository_impl.dart';
-import '../../detail_work_order/view/detail_work_order_screen.dart';
 
 class SearchWorkOrderProvider extends ChangeNotifier {
   final WorkSpaceServiceRepositoryImpl workSpaceService =
@@ -32,8 +31,6 @@ class SearchWorkOrderProvider extends ChangeNotifier {
 
   getWorkOrderWithSearch() async {
     if (woNumber.text != '') {
-      print('girdi getWorkOrderSearch');
-      print(_woDetailList);
       String userToken = await SharedManager().getString(SharedEnum.userToken);
 
       _isLoading = true;
@@ -42,7 +39,6 @@ class SearchWorkOrderProvider extends ChangeNotifier {
           .getWorkSpaceWithSearchFromGroupWorks(woNumber.text, userToken);
 
       result.fold((l) => {_woDetailList = l, _isSuccess = true}, (r) {
-        print('hatali wo');
         _isSuccess = true;
         _woDetailList = null;
       });
@@ -80,7 +76,6 @@ class SearchWorkOrderProvider extends ChangeNotifier {
   }
 
   void clearInput() {
-    print('girdi');
     _isSuccess = false;
     _woDetailList = null;
     setWoNumber = '';

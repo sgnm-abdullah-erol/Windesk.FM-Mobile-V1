@@ -8,7 +8,6 @@ import 'package:vm_fm_4/feature/models/home_page_models/asset_list_model.dart';
 import '../../../../../../feature/database/shared_manager.dart';
 import '../../../../../../feature/enums/shared_enums.dart';
 import '../../../../../../feature/injection.dart';
-import '../../../../../../feature/models/work_space/work_space_detail.dart';
 import '../../../../../../feature/service/global_services.dart/work_space_service/work_space_service_repository_impl.dart';
 
 class SearchMaterialProvider extends ChangeNotifier {
@@ -29,10 +28,10 @@ class SearchMaterialProvider extends ChangeNotifier {
   AssetListModel? _assetDetailList;
   AssetListModel? get assetDetailList => _assetDetailList;
 
-  List<AssetImageModel> _imageModel = [];
+  final List<AssetImageModel> _imageModel = [];
   List<AssetImageModel> get imageModel => _imageModel;
 
-  List<AssetDocumentModel> _documentModel = [];
+  final List<AssetDocumentModel> _documentModel = [];
   List<AssetDocumentModel> get documentModel => _documentModel;
 
   final _woNumber = TextEditingController();
@@ -110,7 +109,6 @@ class SearchMaterialProvider extends ChangeNotifier {
   }
 
   void clearInput() {
-    print('girdi');
     _isSuccess = false;
     _assetDetailList = null;
     setWoNumber = '';

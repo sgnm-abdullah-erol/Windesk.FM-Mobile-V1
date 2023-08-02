@@ -124,7 +124,6 @@ class WorkOrderAddDocumantSheetProvider extends ChangeNotifier {
     image = await picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       imagePath = image!.path;
-      print('imagePath : ' + imagePath);
       fileImage = File(imagePath);
 
       notifyListeners();
@@ -135,7 +134,6 @@ class WorkOrderAddDocumantSheetProvider extends ChangeNotifier {
     image = await picker.pickImage(source: ImageSource.camera);
     if (image != null) {
       imagePath = image!.path;
-      print('imagePath : ' + imagePath);
 
       fileImage = File(imagePath);
 
