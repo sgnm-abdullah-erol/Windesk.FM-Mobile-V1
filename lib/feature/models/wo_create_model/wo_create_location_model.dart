@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_location_children_model.dart';
+import 'wo_create_location_children_model.dart';
 
 part 'generator_wo_create/wo_create_location_model.g.dart';
 

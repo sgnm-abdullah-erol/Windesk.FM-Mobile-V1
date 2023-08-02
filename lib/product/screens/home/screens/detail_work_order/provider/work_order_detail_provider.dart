@@ -1,7 +1,11 @@
 // ignore_for_file: prefer_final_fields, avoid_init_to_null
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
+import '../../../../../../feature/constants/paths/service_tools.dart';
 import '../../../../../../feature/database/shared_manager.dart';
 import '../../../../../../feature/enums/shared_enums.dart';
 import '../../../../../../feature/enums/task_response_enums.dart';
@@ -18,7 +22,8 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
   WorkSpaceDetail detail;
 
-  final WorkSpaceServiceRepositoryImpl workSpaceService = Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
+  final WorkSpaceServiceRepositoryImpl workSpaceService =
+      Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
 
   // for page
   bool _isLoading = false;
@@ -34,7 +39,8 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   bool get userClickedRequestedMaterial => _userClickedRequestedMaterial;
 
   bool _userClickedRequestedApprovedMaterial = false;
-  bool get userClickedRequestedApprovedMaterial => _userClickedRequestedApprovedMaterial;
+  bool get userClickedRequestedApprovedMaterial =>
+      _userClickedRequestedApprovedMaterial;
 
   bool _userClickedDocumants = false;
   bool get userClickedDocumants => _userClickedDocumants;
@@ -100,7 +106,8 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   void _getTaskById() async {
     String token = await SharedManager().getString(SharedEnum.userToken);
 
-    final result = await workSpaceService.getWorkSpaceWithSearch(detail.task?.id.toString() ?? '', token);
+    final result = await workSpaceService.getWorkSpaceWithSearch(
+        detail.task?.id.toString() ?? '', token);
 
     result.fold(
       (l) => {
@@ -123,7 +130,10 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
     String userToken = await SharedManager().getString(SharedEnum.userToken);
 
-    final response = await workSpaceService.takeItOnMe(detail.task?.id.toString() ?? '', detail.state?.id.toString() ?? '', userToken);
+    final response = await workSpaceService.takeItOnMe(
+        detail.task?.id.toString() ?? '',
+        detail.state?.id.toString() ?? '',
+        userToken);
 
     response.fold(
       (l) => {
@@ -171,7 +181,10 @@ class WorkOrderDetailProvider extends ChangeNotifier {
             _selectedTaskState = 'grubumdakilere gönderilmiştir',
           }
         else if (l == TaskResponseEnums.pendiks)
-          {_isTaskStateChange = true, _selectedTaskState = 'onay bekleyenlere gönderilmiştir'}
+          {
+            _isTaskStateChange = true,
+            _selectedTaskState = 'onay bekleyenlere gönderilmiştir'
+          }
         else if (l == TaskResponseEnums.end)
           {
             _isTaskStateChange = true,
@@ -298,7 +311,8 @@ class WorkOrderDetailProvider extends ChangeNotifier {
         _userInventoryList = l,
         for (var i = 0; i < (_userInventoryList.materials?.length ?? 0); i++)
           {
-            workSpaceUserInventoryLabelList.add(_userInventoryList.materials?[i].properties?.name ?? ''),
+            workSpaceUserInventoryLabelList
+                .add(_userInventoryList.materials?[i].properties?.name ?? ''),
           },
       },
       (r) => {},
@@ -306,5 +320,52 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
     _isLoading = false;
     notifyListeners();
+  }
+
+  void scanBarcodeAndQr() async {
+    String barcodeScanRes;
+
+    try {
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+          '#ff6666', 'İptal', true, ScanMode.BARCODE);
+    } on PlatformException {
+      barcodeScanRes = 'Failed to get platform version.';
+    }
+    if (barcodeScanRes != '-1') {
+      print('BARCODE SCANE RES : ' + barcodeScanRes);
+      final String token =
+          await SharedManager().getString(SharedEnum.userToken);
+      print(token);
+      String url = '${ServiceTools.url.workorder_url}/task';
+      BaseOptions options = BaseOptions(
+          baseUrl: url,
+          receiveDataWhenStatusError: true,
+          connectTimeout: const Duration(seconds: 5), // 60 seconds
+          receiveTimeout: const Duration(seconds: 5) // 60 seconds
+          );
+      Dio dio = Dio(options);
+
+      final response = await dio.patch(
+        url,
+        data: [
+          {
+            "label": ["Task"],
+            "identifier": '1087',
+            "variableName": "requestedComponents",
+            "value": [7574]
+          }
+        ],
+        options: Options(
+          contentType: Headers.formUrlEncodedContentType,
+          headers: {'authorization': 'Bearer $token'},
+        ),
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        print('ok');
+      } else {
+        print('hata');
+      }
+    }
   }
 }

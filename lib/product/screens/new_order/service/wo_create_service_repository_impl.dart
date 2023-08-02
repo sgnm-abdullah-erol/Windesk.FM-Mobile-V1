@@ -1,14 +1,14 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:vm_fm_4/feature/constants/paths/service_tools.dart';
-import 'package:vm_fm_4/feature/exceptions/custom_service_exceptions.dart';
-import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_component_model.dart';
-import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_leaf_model.dart';
-import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_location_model.dart';
-import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_requestedby_model.dart';
-import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_requestedtype_model.dart';
-import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_type_model.dart';
-import 'package:vm_fm_4/product/screens/new_order/service/wo_create_service_repository.dart';
+import '../../../../feature/constants/paths/service_tools.dart';
+import '../../../../feature/exceptions/custom_service_exceptions.dart';
+import '../../../../feature/models/wo_create_model/wo_create_component_model.dart';
+import '../../../../feature/models/wo_create_model/wo_create_leaf_model.dart';
+import '../../../../feature/models/wo_create_model/wo_create_location_model.dart';
+import '../../../../feature/models/wo_create_model/wo_create_requestedby_model.dart';
+import '../../../../feature/models/wo_create_model/wo_create_requestedtype_model.dart';
+import '../../../../feature/models/wo_create_model/wo_create_type_model.dart';
+import 'wo_create_service_repository.dart';
 
 class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
   @override

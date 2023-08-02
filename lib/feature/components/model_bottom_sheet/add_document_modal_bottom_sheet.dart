@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
-import 'package:vm_fm_4/feature/components/input_fields/text_fields_input.dart';
-import 'package:vm_fm_4/product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
+import '../input_fields/text_fields_input.dart';
+import '../../../product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
 import '../../constants/other/snackbar_strings.dart';
 import '../buttons/custom_half_buttons.dart';
 import '../../extensions/context_extension.dart';

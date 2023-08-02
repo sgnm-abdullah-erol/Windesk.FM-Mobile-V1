@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:vm_fm_4/feature/exceptions/custom_service_exceptions.dart';
+import '../../../exceptions/custom_service_exceptions.dart';
 
 import '../../../injection.dart';
 import '../../../log/log_manager.dart';

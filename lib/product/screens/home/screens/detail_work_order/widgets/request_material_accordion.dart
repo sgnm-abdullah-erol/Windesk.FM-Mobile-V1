@@ -2,8 +2,8 @@ import 'package:accordion/accordion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
-import 'package:vm_fm_4/feature/components/model_bottom_sheet/request_material_modal_bottom_sheet.dart';
-import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/widgets/tables/data_table_requsted_materials.dart';
+import '../../../../../../feature/components/model_bottom_sheet/request_material_modal_bottom_sheet.dart';
+import 'tables/data_table_requsted_materials.dart';
 
 import '../../../../../../feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
 import '../../../../../../feature/constants/other/app_icons.dart';

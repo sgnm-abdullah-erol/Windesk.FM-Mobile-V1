@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:vm_fm_4/feature/models/work_space/work_space_material_properties.dart';
+import 'work_space_material_properties.dart';
 part 'generator/work_space_user_material.g.dart';
 
 @JsonSerializable()

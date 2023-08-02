@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/constants/style/font_sizes.dart';
+import '../../constants/style/font_sizes.dart';
 
 import '../../constants/other/colors.dart';
 import '../../constants/style/border_radius.dart';

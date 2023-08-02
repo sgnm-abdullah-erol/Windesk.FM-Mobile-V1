@@ -306,11 +306,10 @@ class WoCreateProvider extends ChangeNotifier {
     _requestType = newValue;
     _getRequestedTypesChildrenTree1.clear();
     notifyListeners();
-    for (var i = 0; i < (_getRequestedTypes.length ?? 0); i++) {
+    for (var i = 0; i < (_getRequestedTypes.length); i++) {
       if (_getRequestedTypes[i].name == newValue) {
         isChildrenExist = _getRequestedTypes[i].children!.isNotEmpty ? true : false;
         _requestTypeKey = _getRequestedTypes[i].code.toString();
-        print(_requestTypeKey);
         _requestedTypeTree1 = !isChildrenExist;
         notifyListeners();
         if (isChildrenExist) {
@@ -327,7 +326,7 @@ class WoCreateProvider extends ChangeNotifier {
     bool isChildrenExist;
     _requestType1 = newValue;
     notifyListeners();
-    for (var i = 0; i < (_getRequestedTypes.length ?? 0); i++) {
+    for (var i = 0; i < (_getRequestedTypes.length); i++) {
       if (_getRequestedTypes[i].name == _requestType) {
         for (var b = 0; b < (_getRequestedTypes[i].children!.length); b++) {
           if (_getRequestedTypes[i].children![b].name == _requestType1) {
@@ -527,7 +526,7 @@ class WoCreateProvider extends ChangeNotifier {
     _isLoading = true;
     notifyListeners();
 
-    final String appointmendData = _date + ' ' + _hour + ':00';
+    final String appointmendData = '$_date $_hour:00';
 
     final response = await _woCreateServiceRepository.createTask(
         token, summary, _requestTypeKey, requestedById, description, appointmendData, typesId, requestedId, requestedLabel, woCategory, componentKey);
@@ -544,7 +543,6 @@ class WoCreateProvider extends ChangeNotifier {
     notifyListeners();
     Future.delayed(const Duration(seconds: 2), () {
       _isWorkOrderCreate = false;
-      print(_isWorkOrderCreate);
       notifyListeners();
     });
   }

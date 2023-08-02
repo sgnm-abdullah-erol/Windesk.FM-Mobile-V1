@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vm_fm_4/feature/global_providers/global_provider.dart';
 
 import '../../../../feature/components/appbar/custom_main_appbar.dart';
 import '../../../../feature/components/buttons/custom_login_button.dart';
@@ -14,6 +13,7 @@ import '../../../../feature/constants/paths/asset_paths.dart';
 import '../../../../feature/constants/style/custom_paddings.dart';
 import '../../../../feature/constants/style/font_sizes.dart';
 import '../../../../feature/extensions/context_extension.dart';
+import '../../../../feature/global_providers/global_provider.dart';
 import '../../../../feature/route/app_route.gr.dart';
 import '../provider/login_provider.dart';
 

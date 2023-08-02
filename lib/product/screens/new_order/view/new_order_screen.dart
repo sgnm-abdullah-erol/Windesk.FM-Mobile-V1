@@ -2,12 +2,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vm_fm_4/feature/components/buttons/custom_half_buttons.dart';
-import 'package:vm_fm_4/feature/components/cards/custom_wo_create_card.dart';
-import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
-import 'package:vm_fm_4/feature/constants/other/colors.dart';
-import 'package:vm_fm_4/feature/constants/other/snackbar_strings.dart';
-import 'package:vm_fm_4/feature/extensions/context_extension.dart';
+import '../../../../feature/components/buttons/custom_half_buttons.dart';
+import '../../../../feature/components/cards/custom_wo_create_card.dart';
+import '../../../../feature/components/snackBar/snackbar.dart';
+import '../../../../feature/constants/other/colors.dart';
+import '../../../../feature/constants/other/snackbar_strings.dart';
+import '../../../../feature/extensions/context_extension.dart';
 
 import '../../../../feature/components/appbar/custom_main_appbar.dart';
 import '../../../../feature/components/input_fields/dropdown_input_fields.dart';
@@ -28,23 +28,37 @@ class NewOrderScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => WoCreateProvider(),
-      child: Consumer<WoCreateProvider>(builder: (context, WoCreateProvider woCreateProvider, child) {
+      child: Consumer<WoCreateProvider>(
+          builder: (context, WoCreateProvider woCreateProvider, child) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (woCreateProvider.isWorkOrderCreate) {
             snackBar(context, SnackbarStrings.woCreate, 'success');
           }
         });
-        woCreateProvider.isWorkOrderCreate ? snackBar(context, SnackbarStrings.woCreate, 'success') : null;
-        woCreateProvider.locationLoading ? woCreateProvider.getLocation() : null;
-        woCreateProvider.requestedLoading ? woCreateProvider.getRequestedByPro() : null;
+        woCreateProvider.isWorkOrderCreate
+            ? snackBar(context, SnackbarStrings.woCreate, 'success')
+            : null;
+        woCreateProvider.locationLoading
+            ? woCreateProvider.getLocation()
+            : null;
+        woCreateProvider.requestedLoading
+            ? woCreateProvider.getRequestedByPro()
+            : null;
         woCreateProvider.typeLoading ? woCreateProvider.getType() : null;
-        woCreateProvider.requestedTypeLoading ? woCreateProvider.getRequestedType() : null;
-        woCreateProvider.categoryLoading ? woCreateProvider.getCategory() : null;
-        woCreateProvider.componentLoading ? woCreateProvider.getComponent() : null;
+        woCreateProvider.requestedTypeLoading
+            ? woCreateProvider.getRequestedType()
+            : null;
+        woCreateProvider.categoryLoading
+            ? woCreateProvider.getCategory()
+            : null;
+        woCreateProvider.componentLoading
+            ? woCreateProvider.getComponent()
+            : null;
         return woCreateProvider.isLoading
             ? const CustomLoadingIndicator()
             : Scaffold(
-                appBar: const CustomMainAppbar(title: Text(LocaleKeys.newWorkOrder)),
+                appBar: const CustomMainAppbar(
+                    title: Text(LocaleKeys.newWorkOrder)),
                 body: SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
@@ -68,7 +82,7 @@ class NewOrderScreen extends StatelessWidget {
                                 woCreateProvider.setComponent(value.toString());
                               },
                               selectedItem: 'Component',
-                              popupProps: PopupProps.menu(
+                              popupProps: const PopupProps.menu(
                                 showSearchBox: true,
                                 fit: FlexFit.loose,
                                 constraints: BoxConstraints.tightFor(),
@@ -83,7 +97,8 @@ class NewOrderScreen extends StatelessWidget {
                                 woCreateProvider.setRequestedBy(newValue);
                               },
                               rightIcon: Icons.arrow_drop_down_rounded,
-                              dropDownArray: woCreateProvider.getRequestedByChildren,
+                              dropDownArray:
+                                  woCreateProvider.getRequestedByChildren,
                             ),
                             widget2: DropDownInputFields(
                               labelText: 'Tip',
@@ -99,7 +114,8 @@ class NewOrderScreen extends StatelessWidget {
                                 woCreateProvider.setCategory(newValue);
                               },
                               rightIcon: Icons.arrow_drop_down_rounded,
-                              dropDownArray: woCreateProvider.getCategoriesChildren,
+                              dropDownArray:
+                                  woCreateProvider.getCategoriesChildren,
                             ),
                           ),
                           const SizedBox(height: 15),
@@ -148,10 +164,11 @@ class NewOrderScreen extends StatelessWidget {
     );
   }
 
-  Container requestType(WoCreateProvider woCreateProvider, BuildContext context) {
+  Container requestType(
+      WoCreateProvider woCreateProvider, BuildContext context) {
     return Container(
       width: context.width,
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       child: Column(
         children: [
           DropDownInputFields(
@@ -172,7 +189,8 @@ class NewOrderScreen extends StatelessWidget {
                     //woCreateProvider.setRequestType1(newValue);
                   },
                   rightIcon: Icons.arrow_drop_down_rounded,
-                  dropDownArray: woCreateProvider.getRequestedTypesChildrenTree1,
+                  dropDownArray:
+                      woCreateProvider.getRequestedTypesChildrenTree1,
                   leftIconExist: true,
                   leftIcon: Icons.arrow_right_alt,
                 ),
@@ -185,7 +203,7 @@ class NewOrderScreen extends StatelessWidget {
   Container location(WoCreateProvider woCreateProvider, BuildContext context) {
     return Container(
       width: context.width,
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       child: Column(
         children: [
           DropDownInputFields(

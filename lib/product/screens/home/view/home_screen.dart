@@ -71,47 +71,20 @@ class _HomeScreenState extends State<HomeScreen> {
               Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
           FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
             showAlertDialog(BuildContext context) {
-              bool _loading = false;
+              bool loading = false;
               // set up the buttons
               Widget cancelButton = TextButton(
-                child: Text("Tamam"),
+                child: const Text("Tamam"),
                 onPressed: () {
                   context.router.pop();
                 },
               );
               Widget continueButton = TextButton(
-                child: Text("Detayı Gör"),
+                child: const Text("Detayı Gör"),
                 onPressed: () async {
-                  // showDialog(
-                  //     // The user CANNOT close this dialog  by pressing outsite it
-                  //     barrierDismissible: false,
-                  //     context: context,
-                  //     builder: (_) {
-                  //       return Dialog(
-                  //         // The background color
-                  //         backgroundColor: Colors.white,
-                  //         child: Padding(
-                  //           padding: const EdgeInsets.symmetric(vertical: 20),
-                  //           child: Column(
-                  //             mainAxisSize: MainAxisSize.min,
-                  //             children: const [
-                  //               // The loading indicator
-                  //               CircularProgressIndicator(),
-                  //               SizedBox(
-                  //                 height: 15,
-                  //               ),
-                  //               // Some text
-                  //               Text('Yükleniyor...')
-                  //             ],
-                  //           ),
-                  //         ),
-                  //       );
-                  //     });
-                  // Navigator.of(context, rootNavigator: true).pop();
-
                   String userToken =
                       await SharedManager().getString(SharedEnum.userToken);
-                  _loading = true;
+                  loading = true;
                   final result = await workSpaceService
                       .getWorkSpaceWithSearchFromGroupWorks(
                           message.data['taskId'], userToken);
@@ -122,7 +95,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                 DetailWorkOrderScreen(workSpaceDetail: l)),
                             context.router.pop(),
                           }, (r) {
-                    print('hatali wo');
                   });
                 },
               );
