@@ -6,23 +6,31 @@ part of '../work_space_material_properties.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-WorkSpaceMaterialProperties _$WorkSpaceMaterialPropertiesFromJson(Map<String, dynamic> json) => WorkSpaceMaterialProperties(
-      referenceLabel: (json['referenceLabel'] as List<dynamic>?)?.map((e) => e as String).toList(),
+WorkSpaceMaterialProperties _$WorkSpaceMaterialPropertiesFromJson(
+        Map<String, dynamic> json) =>
+    WorkSpaceMaterialProperties(
+      referenceLabel: (json['referenceLabel'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
       creatorId: json['creatorId'] as String?,
       description: json['description'] as String?,
       className: json['className'] as String?,
       type: json['type'] as int?,
       externalNode: json['externalNode'] as bool?,
       isActive: json['isActive'] as bool?,
-      referenceId: json['referenceId'] as int?,
+      referenceId: json['referenceId'],
       trId: json['trId'] as String?,
-      createdAt: json['createdAt'] == null ? null : DateTime.parse(json['createdAt'] as String),
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
       isDeleted: json['isDeleted'] as bool?,
       supplier: json['supplier'] as String?,
       canDelete: json['canDelete'] as bool?,
       tag: json['tag'] as List<dynamic>?,
       key: json['key'] as String?,
-      updatedAt: json['updatedAt'] == null ? null : DateTime.parse(json['updatedAt'] as String),
+      updatedAt: json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
       canDisplay: json['canDisplay'] as bool?,
       structureName: json['structureName'] as String?,
       count: json['count'] as int?,
@@ -35,7 +43,9 @@ WorkSpaceMaterialProperties _$WorkSpaceMaterialPropertiesFromJson(Map<String, dy
       category: json['category'] as String?,
     );
 
-Map<String, dynamic> _$WorkSpaceMaterialPropertiesToJson(WorkSpaceMaterialProperties instance) => <String, dynamic>{
+Map<String, dynamic> _$WorkSpaceMaterialPropertiesToJson(
+        WorkSpaceMaterialProperties instance) =>
+    <String, dynamic>{
       'referenceLabel': instance.referenceLabel,
       'creatorId': instance.creatorId,
       'description': instance.description,

@@ -366,7 +366,8 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
               headers: {'authorization': 'Bearer $token'},
             ),
           );
-
+      print('inventory list');
+      print(response.data);
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
         workSpaceUserInventory = WorkSpaceUserInventory.fromJson(data);
