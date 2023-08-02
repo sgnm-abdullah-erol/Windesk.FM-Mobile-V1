@@ -248,35 +248,39 @@ class _ResponseDates extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(_responseDate, style: Theme.of(context).textTheme.bodySmall),
-            Text(
-              workSpaceDetail.workspace?.updatedAt
-                      ?.toString()
-                      .substring(0, 19) ??
-                  '',
-              style: Theme.of(context).textTheme.bodyMedium,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ],
+        Flexible(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(_responseDate, style: Theme.of(context).textTheme.bodySmall),
+              Text(
+                workSpaceDetail.workspace?.updatedAt
+                        ?.toString()
+                        .substring(0, 19) ??
+                    '',
+                style: Theme.of(context).textTheme.bodyMedium,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
         ),
         const SizedBox(width: 10),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(_fixDate, style: Theme.of(context).textTheme.bodySmall),
-            Text(
-              workSpaceDetail.task?.updatedAt.toString().substring(0, 19) ?? '',
-              style: Theme.of(context).textTheme.bodyMedium,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ],
+        Flexible(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(_fixDate, style: Theme.of(context).textTheme.bodySmall),
+              Text(
+                workSpaceDetail.task?.updatedAt.toString().substring(0, 19) ?? '',
+                style: Theme.of(context).textTheme.bodyMedium,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
         ),
       ],
     );
