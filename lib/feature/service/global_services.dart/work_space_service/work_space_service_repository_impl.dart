@@ -262,7 +262,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     String effortType,
   ) async {
     bool result;
-    String url = '${ServiceTools.url.workorder_url}/task/add/node/to/task}';
+    String url = '${ServiceTools.url.workorder_url}/task/add/node/to/task';
 
     if (effortType == 'Working') {
       effortType = 'EffortType2';
@@ -389,7 +389,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   Future<Either<bool, CustomServiceException>> addWorkSpaceSpareparts(
       String taskId, String token, String sparePartId, String amount) async {
     bool result;
-    String url = '${ServiceTools.url.workorder_url}/task/add/node/to/task}';
+    String url = '${ServiceTools.url.workorder_url}/task/add/node/to/task';
 
     try {
       final response = await super.dio.post(
