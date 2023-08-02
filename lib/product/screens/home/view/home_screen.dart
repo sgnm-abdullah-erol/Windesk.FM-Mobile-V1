@@ -70,9 +70,6 @@ class _HomeScreenState extends State<HomeScreen> {
           final WorkSpaceServiceRepositoryImpl workSpaceService =
               Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
           FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-            print('HomePage123');
-            print('Firebase notification opened');
-
             showAlertDialog(BuildContext context) {
               bool _loading = false;
               // set up the buttons
