@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:vm_fm_4/feature/models/home_page_models/asset_document_model.dart';
 import 'package:vm_fm_4/feature/models/home_page_models/asset_image_model.dart';
 import 'package:vm_fm_4/feature/models/home_page_models/asset_list_model.dart';
 
@@ -22,11 +23,17 @@ class SearchMaterialProvider extends ChangeNotifier {
   bool _imageExist = false;
   bool get imageExist => _imageExist;
 
+  bool _documentExist = false;
+  bool get documentExist => _documentExist;
+
   AssetListModel? _assetDetailList;
   AssetListModel? get assetDetailList => _assetDetailList;
 
   List<AssetImageModel> _imageModel = [];
   List<AssetImageModel> get imageModel => _imageModel;
+
+  List<AssetDocumentModel> _documentModel = [];
+  List<AssetDocumentModel> get documentModel => _documentModel;
 
   final _woNumber = TextEditingController();
   final _assetNumber = TextEditingController();
@@ -48,7 +55,9 @@ class SearchMaterialProvider extends ChangeNotifier {
   getAssetWithSearch() async {
     if (assetNumber.text != '') {
       _imageModel.clear();
+      _documentModel.clear();
       _imageExist = false;
+      _documentExist = false;
       String userToken = await SharedManager().getString(SharedEnum.userToken);
 
       _isLoading = true;
@@ -58,16 +67,16 @@ class SearchMaterialProvider extends ChangeNotifier {
       result.fold(
           (l) => {
                 _assetDetailList = l,
-                if (l.images!.length != 0)
+                if (l.images!.isNotEmpty)
                   {
                     for (int i = 0; i < l.images!.length; i++) {_imageModel.add(l.images![i])},
                     _imageExist = true,
                   },
-                // if (l.!.length != 0)
-                //   {
-                //     for (int i = 0; i < l.images!.length; i++) {_imageModel.add(l.images![i])},
-                //     _imageExist = true,
-                //   },
+                if (l.documents!.isNotEmpty)
+                  {
+                    for (int i = 0; i < l.documents!.length; i++) {_documentModel.add(l.documents![i])},
+                    _documentExist = true,
+                  },
                 _isSuccess = true
               }, (r) {
         _isSuccess = true;

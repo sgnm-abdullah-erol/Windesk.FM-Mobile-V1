@@ -39,6 +39,10 @@ AssetListModel _$AssetListModelFromJson(Map<String, dynamic> json) =>
       images: (json['images'] as List<dynamic>)
           .map((e) => AssetImageModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      documents: (json['documents'] as List<dynamic>)
+          .map((e) => AssetDocumentModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+
     );
 
 Map<String, dynamic> _$AssetListModelToJson(AssetListModel instance) =>
@@ -72,4 +76,6 @@ Map<String, dynamic> _$AssetListModelToJson(AssetListModel instance) =>
       'warrantyGuarantorParts': instance.warrantyGuarantorParts,
       'warrantyDurationUnit': instance.warrantyDurationUnit,
       'images': instance.images,
+      'documents': instance.documents,
+
     };

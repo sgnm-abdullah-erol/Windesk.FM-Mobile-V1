@@ -29,7 +29,11 @@ class _SearchMaterialScreenState extends State<SearchMaterialScreen> {
         if (searchProvider.isSuccess) {
           if (searchProvider.assetDetailList != null) {
             context.router.push(AssetDetailScreen(
-                assetListModel: searchProvider.assetDetailList!, assetImageModel: searchProvider.imageModel, imageExist: searchProvider.imageExist));
+                assetListModel: searchProvider.assetDetailList!,
+                assetImageModel: searchProvider.imageModel,
+                imageExist: searchProvider.imageExist,
+                documentExist: searchProvider.documentExist,
+                assetDocumentModel: searchProvider.documentModel));
             searchProvider.clearInput();
           }
         }
