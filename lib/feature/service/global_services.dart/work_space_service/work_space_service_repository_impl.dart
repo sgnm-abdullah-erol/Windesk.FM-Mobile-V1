@@ -47,7 +47,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   Future<Either<WorkSpaceMyGroupDemandList, CustomServiceException>> getMyGroupDemandList(String token) async {
     WorkSpaceMyGroupDemandList workSpaceMyGroupDemandList;
 
-    String url = 'http://localhost:3015/classification/getRequestTypeWithTaskCount';
+    String url = '${ServiceTools.url.workorder_url}/classification/getRequestTypeWithTaskCount';
 
     try {
       final response = await super.dio.post(
@@ -77,7 +77,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   @override
   Future<Either<List<WorkSpacePendiks>, CustomServiceException>> getWorkSpacePendiks(String id, String token, int page) async {
     List<WorkSpacePendiks> workSpaceAppendings = [];
-    String url = 'http://localhost:3015/task/workSpace/task/state/List/can/be/approve/current/user/pagination/$id';
+    String url = '${ServiceTools.url.workorder_url}/task/workSpace/task/state/List/can/be/approve/current/user/pagination/$id';
 
     try {
       final response = await super.dio.get(
@@ -185,7 +185,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   @override
   Future<Either<List<WorkSpaceEfforts>, CustomServiceException>> getWorkSpaceEfforts(String taskId, String token) async {
     List<WorkSpaceEfforts> workSpaceEfforts;
-    String url = 'http://localhost:3015/task/mobile/getEffortsByTaskId/$taskId';
+    String url = '${ServiceTools.url.workorder_url}/task/mobile/getEffortsByTaskId/$taskId';
 
     try {
       final response = await super.dio.get(

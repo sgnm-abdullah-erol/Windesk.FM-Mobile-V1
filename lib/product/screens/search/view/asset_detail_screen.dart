@@ -49,12 +49,12 @@ class AssetDetailScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          const Expanded(child: Text(LocaleKeys.images, style: TextStyle(),)),
+          const Text(LocaleKeys.images, style: TextStyle(),),
           const Divider(),
           imageExist
               ? photosListView()
               : Container(),
-          const Expanded(child: Text(LocaleKeys.documents, style: TextStyle(),)),
+          const Text(LocaleKeys.documents, style: TextStyle(),),
           const Divider(),
           documentExist
               ? documentsListView()
