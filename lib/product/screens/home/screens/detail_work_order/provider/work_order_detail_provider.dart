@@ -14,6 +14,7 @@ import '../../../../../../feature/models/work_space/work_space_detail.dart';
 import '../../../../../../feature/models/work_space/work_space_efforts.dart';
 import '../../../../../../feature/models/work_space/work_space_user_inventory.dart';
 import '../../../../../../feature/service/global_services.dart/work_space_service/work_space_service_repository_impl.dart';
+import 'package:http/http.dart' as http;
 
 class WorkOrderDetailProvider extends ChangeNotifier {
   WorkOrderDetailProvider({required this.detail}) {
@@ -322,7 +323,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void scanBarcodeAndQr() async {
+  scanBarcodeAndQr() async {
     String barcodeScanRes;
 
     try {
@@ -333,15 +334,20 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     }
     if (barcodeScanRes != '-1') {
       print('BARCODE SCANE RES : ' + barcodeScanRes);
+      final startIndex = barcodeScanRes.indexOf(':');
+      final endIndex = barcodeScanRes.indexOf(',');
+      final finalBarcode = barcodeScanRes.substring(startIndex + 1, endIndex);
+      print('id : ' + finalBarcode);
+      String taskId = detail.task!.id.toString();
       final String token =
           await SharedManager().getString(SharedEnum.userToken);
       print(token);
-      String url = '${ServiceTools.url.workorder_url}/task';
+      const String url = 'https://workorder-server.ifm.gov.tr/task';
       BaseOptions options = BaseOptions(
           baseUrl: url,
           receiveDataWhenStatusError: true,
-          connectTimeout: const Duration(seconds: 5), // 60 seconds
-          receiveTimeout: const Duration(seconds: 5) // 60 seconds
+          connectTimeout: const Duration(seconds: 10), // 60 seconds
+          receiveTimeout: const Duration(seconds: 10) // 60 seconds
           );
       Dio dio = Dio(options);
 
@@ -350,22 +356,40 @@ class WorkOrderDetailProvider extends ChangeNotifier {
         data: [
           {
             "label": ["Task"],
-            "identifier": '1087',
+            "identifier": taskId,
             "variableName": "requestedComponents",
-            "value": [7574]
+            "value": [finalBarcode]
           }
         ],
         options: Options(
-          contentType: Headers.formUrlEncodedContentType,
           headers: {'authorization': 'Bearer $token'},
         ),
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         print('ok');
+        getDetail();
       } else {
         print('hata');
       }
     }
+  }
+
+  void getDetail() async {
+    final String token = await SharedManager().getString(SharedEnum.userToken);
+    if (token.isNotEmpty) {
+      final result = await workSpaceService.getWorkSpaceByTaskId(
+          detail.task!.id.toString(), token);
+
+      result.fold((l) {
+        print('refresh');
+        print(l);
+        detail = l;
+        notifyListeners();
+      }, (r) {});
+    }
+    _isLoading = false;
+
+    notifyListeners();
   }
 }
