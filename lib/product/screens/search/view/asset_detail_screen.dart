@@ -74,11 +74,13 @@ class AssetDetailScreen extends StatelessWidget {
                           return Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(assetDocumentModel![index].name),
-                              TextButton.icon(
-                                onPressed: openLink,
-                                label: const Text('Dökümana Git'),
-                                icon: const Icon(Icons.read_more),
+                              Expanded(child: Text(assetDocumentModel![index].name)),
+                              Expanded(
+                                child: TextButton.icon(
+                                  onPressed: openLink,
+                                  label: const Text('Dökümana Git'),
+                                  icon: const Icon(Icons.read_more),
+                                ),
                               ),
                             ],
                           );
