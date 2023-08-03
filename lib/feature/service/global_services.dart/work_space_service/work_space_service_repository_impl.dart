@@ -171,7 +171,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
         workSpaceDetailList = WorkSpaceDetail.fromJsonList(data);
-
         return Left(workSpaceDetailList);
       } else {
         return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
@@ -221,14 +220,13 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     String effortType,
   ) async {
     bool result;
-    String url = '${ServiceTools.url.workorder_url}/task/add/node/to/task}';
+    String url = '${ServiceTools.url.workorder_url}/task/add/node/to/task';
 
     if (effortType == 'Working') {
       effortType = 'EffortType2';
     } else if (effortType == 'Way') {
       effortType = 'EffortType1';
     }
-
     try {
       final response = await super.dio.post(
             url,
@@ -250,23 +248,18 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
             ],
             options: Options(
               headers: {'authorization': 'Bearer $token'},
-              contentType: Headers.jsonContentType,
             ),
           );
 
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        final data = response.data;
+      final data = response.data;
 
-        if (data == 'added') {
-          result = true;
-        } else {
-          result = false;
-        }
-
-        return Left(result);
+      if (data == 'added') {
+        result = true;
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+        result = false;
       }
+
+      return Left(result);
     } catch (e) {
       super.logger.i(e);
       return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
@@ -332,7 +325,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   @override
   Future<Either<bool, CustomServiceException>> addWorkSpaceSpareparts(String taskId, String token, String sparePartId, String amount) async {
     bool result;
-    String url = '${ServiceTools.url.workorder_url}/task/add/node/to/task}';
+    String url = '${ServiceTools.url.workorder_url}/task/add/node/to/task';
 
     try {
       final response = await super.dio.post(
@@ -714,11 +707,9 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: '500'));
     }
   }
-  
-   @override
-  Future<Either<WorkSpaceDetail, CustomServiceException>>
-      getWorkSpaceWithSearchFromGroupWorks(
-          String workOrderCode, String token) async {
+
+  @override
+  Future<Either<WorkSpaceDetail, CustomServiceException>> getWorkSpaceWithSearchFromGroupWorks(String workOrderCode, String token) async {
     List<WorkSpaceDetail> workSpaceDetailList;
     String url =
         '${ServiceTools.url.workorder_url}/task/workSpace/task/state/List/can/be/assigned/user/pagination/swagger/search?page=1&limit=10&orderBy=DESC&searchString=$workOrderCode';
@@ -736,15 +727,11 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
         return Left(workSpaceDetailList.first);
       } else {
-        return Right(CustomServiceException(
-            message: CustomServiceMessages.work,
-            statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
       }
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(
-          message: CustomServiceMessages.workOrderWorkloadError,
-          statusCode: '500'));
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
     }
   }
 }

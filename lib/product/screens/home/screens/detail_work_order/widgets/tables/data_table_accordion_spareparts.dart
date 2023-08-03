@@ -39,7 +39,7 @@ class DataTableAccordionSpareparts extends StatelessWidget {
             DataRow(cells: [
               DataCell(Text(data[i].id.toString(), style: _cellTextStyle())),
               DataCell(Text(data[i].name ?? _noAmount, style: _cellTextStyle())),
-              DataCell(Text(data[i].amount ?? _nonKnownName, style: _cellTextStyle())),
+              DataCell(Text(data[i].amount.toString() ?? _nonKnownName, style: _cellTextStyle())),
               DataCell(Text(data[i].user ?? _nonKnownName, style: _cellTextStyle())),
               DataCell(
                 IconButton(

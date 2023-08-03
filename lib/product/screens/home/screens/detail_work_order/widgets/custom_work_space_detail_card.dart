@@ -18,7 +18,7 @@ class CustomWorkSpaceDetailCard extends StatelessWidget {
   final WorkSpaceDetail workSpaceDetail;
   final WorkOrderDetailProvider workOrderDetailProvider;
 
-  final double _elevation = 8;
+  final double _elevation = 2;
   final EdgeInsets _paddingCardInside =
       const EdgeInsets.symmetric(horizontal: 15, vertical: 10);
 
@@ -92,7 +92,7 @@ class CustomWorkSpaceDetailCard extends StatelessWidget {
             _DoubleRowInformationComponent(
               firstLabel: 'Varlık',
               secondLabel: _assignedPerson,
-              firstValue: workSpaceDetail.task?.requestedComponents!.name ?? '',
+              firstValue: workSpaceDetail.task?.requestedComponents?.name ?? '',
               secondValue: workSpaceDetail.task?.user ?? '',
               workOrderDetailProvider: workOrderDetailProvider,
             ),
@@ -225,11 +225,11 @@ class _DoubleRowInformationComponent extends StatelessWidget {
               CustomElevatedButtonWithIcon(
                   width: MediaQuery.of(context).size.width / 3,
                   height: MediaQuery.of(context).size.height * 0.05,
-                  bgColor: APPColors.Main.white,
+                  bgColor: APPColors.Main.blue,
                   onPressFunction: workOrderDetailProvider.scanBarcodeAndQr,
                   textValue: 'Değiştir',
-                  textColor: APPColors.Main.white,
-                  iconColor: APPColors.Main.white,
+                  textColor: APPColors.Main.black,
+                  iconColor: APPColors.Main.black,
                   icon: Icons.qr_code)
             ],
           ),

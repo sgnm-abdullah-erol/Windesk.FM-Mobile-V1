@@ -310,6 +310,7 @@ class WoCreateProvider extends ChangeNotifier {
       if (_getRequestedTypes[i].name == newValue) {
         isChildrenExist = _getRequestedTypes[i].children!.isNotEmpty ? true : false;
         _requestTypeKey = _getRequestedTypes[i].code.toString();
+        print('object-1' + _requestTypeKey);
         _requestedTypeTree1 = !isChildrenExist;
         notifyListeners();
         if (isChildrenExist) {
@@ -331,6 +332,7 @@ class WoCreateProvider extends ChangeNotifier {
         for (var b = 0; b < (_getRequestedTypes[i].children!.length); b++) {
           if (_getRequestedTypes[i].children![b].name == _requestType1) {
             _requestTypeKey = _getRequestedTypes[i].children![b].code.toString();
+            print('object' + _requestTypeKey);
             notifyListeners();
           }
           //_requestTypeKey.add(_getRequestedTypes[i].children![b].name ?? '');
