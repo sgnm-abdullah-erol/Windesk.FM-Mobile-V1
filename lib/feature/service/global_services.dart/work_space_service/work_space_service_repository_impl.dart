@@ -135,7 +135,8 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   @override
   Future<Either<AssetListModel, CustomServiceException>> getAssetWithSearch(String assetCode, String token) async {
     AssetListModel assetListModel;
-    String url = '${ServiceTools.url.asset_url}/component/identifier/$assetCode';
+    String url =
+        '${ServiceTools.url.asset_url}/component/searchByColumn/?page=1&limit=10&orderBy=ASC&orderByColumn=&searchColumn=tagNumber&searchString=$assetCode&searchType=CONTAINS';
     try {
       final response = await super.dio.get(
             url,
@@ -144,7 +145,8 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
             ),
           );
 
-      final data = response.data['properties'];
+      final data = response.data['children'][0];
+      print('data' + data.toString());
       assetListModel = AssetListModel.fromJson(data);
 
       return Left(assetListModel);

@@ -44,7 +44,7 @@ class AssetDetailScreen extends StatelessWidget {
                 firstLabel: LocaleKeys.serialNo,
                 secondLabel: LocaleKeys.structureName,
                 firstValue: assetListModel.serialNo ?? '',
-                secondValue: assetListModel.structureName ?? '',
+                secondValue: '',
               ),
             ),
           ),

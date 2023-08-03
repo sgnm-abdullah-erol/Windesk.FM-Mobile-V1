@@ -71,11 +71,11 @@ class SearchMaterialProvider extends ChangeNotifier {
                     for (int i = 0; i < l.images!.length; i++) {_imageModel.add(l.images![i])},
                     _imageExist = true,
                   },
-                if (l.documents!.isNotEmpty)
-                  {
-                    for (int i = 0; i < l.documents!.length; i++) {_documentModel.add(l.documents![i])},
-                    _documentExist = true,
-                  },
+                // if (l.documents!.isNotEmpty)
+                //   {
+                //     for (int i = 0; i < l.documents!.length; i++) {_documentModel.add(l.documents![i])},
+                //     _documentExist = true,
+                //   },
                 _isSuccess = true
               }, (r) {
         _isSuccess = true;

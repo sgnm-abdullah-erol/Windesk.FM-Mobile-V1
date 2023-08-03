@@ -12,7 +12,7 @@ class AssetListModel extends Equatable {
   String? installationDate;
   String? description;
   String? className;
-  String? assetIdentifier;
+  dynamic? assetIdentifier;
   int? type;
   bool? externalNode;
   bool? isActive;
@@ -31,11 +31,10 @@ class AssetListModel extends Equatable {
   dynamic structure;
   String? key;
   DateTime? updatedAt;
-  String? createdBy;
-  String? structureName;
-  String? warrantyGuarantorLabor;
-  String? warrantyGuarantorParts;
-  String? warrantyDurationUnit;
+  dynamic createdBy;
+  dynamic warrantyGuarantorLabor;
+  dynamic warrantyGuarantorParts;
+  dynamic warrantyDurationUnit;
   List<AssetImageModel>? images;
   List<AssetDocumentModel>? documents;
 
@@ -68,7 +67,6 @@ class AssetListModel extends Equatable {
       this.key,
       this.updatedAt,
       this.createdBy,
-      this.structureName,
       this.warrantyGuarantorLabor,
       this.warrantyGuarantorParts,
       this.warrantyDurationUnit,
@@ -102,7 +100,6 @@ class AssetListModel extends Equatable {
         key,
         updatedAt,
         createdBy,
-        structureName,
         warrantyGuarantorLabor,
         warrantyGuarantorParts,
         warrantyDurationUnit,
