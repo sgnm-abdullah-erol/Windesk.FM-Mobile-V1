@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_final_fields, avoid_init_to_null
 
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,6 +11,7 @@ import '../../../../../../feature/database/shared_manager.dart';
 import '../../../../../../feature/enums/shared_enums.dart';
 import '../../../../../../feature/enums/task_response_enums.dart';
 import '../../../../../../feature/injection.dart';
+import '../../../../../../feature/models/home_page_models/asset_list_model.dart';
 import '../../../../../../feature/models/work_space/work_space_detail.dart';
 import '../../../../../../feature/models/work_space/work_space_efforts.dart';
 import '../../../../../../feature/models/work_space/work_space_user_inventory.dart';
@@ -325,7 +327,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
   scanBarcodeAndQr() async {
     String barcodeScanRes;
-
+    AssetListModel assetListModel;
     try {
       barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
           '#ff6666', 'İptal', true, ScanMode.BARCODE);
@@ -334,31 +336,63 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     }
     if (barcodeScanRes != '-1') {
       print('BARCODE SCANE RES : ' + barcodeScanRes);
-      final startIndex = barcodeScanRes.indexOf(':');
-      final endIndex = barcodeScanRes.indexOf(',');
-      final finalBarcode = barcodeScanRes.substring(startIndex + 1, endIndex);
-      print('id : ' + finalBarcode);
+
+      // final startIndex = barcodeScanRes.indexOf(':');
+      // final endIndex = barcodeScanRes.indexOf(',');
+      // final finalBarcode = barcodeScanRes.substring(startIndex + 1, endIndex);
+      // print('id : ' + finalBarcode);
       String taskId = detail.task!.id.toString();
+      int? qrId;
       final String token =
           await SharedManager().getString(SharedEnum.userToken);
       print(token);
-      const String url = 'https://workorder-server.ifm.gov.tr/task';
-      BaseOptions options = BaseOptions(
-          baseUrl: url,
+
+      String url =
+          '${ServiceTools.url.asset_url}/component/searchByColumn/?page=1&limit=10&orderBy=ASC&orderByColumn=&searchColumn=tagNumber&searchString=$barcodeScanRes&searchType=CONTAINS';
+      try {
+        BaseOptions options = BaseOptions(
+            baseUrl: url,
+            receiveDataWhenStatusError: true,
+            connectTimeout: const Duration(seconds: 10), // 60 seconds
+            receiveTimeout: const Duration(seconds: 10) // 60 seconds
+            );
+        Dio dio = Dio(options);
+        final response = await dio.get(
+          url,
+          options: Options(
+            headers: {'authorization': 'Bearer $token'},
+          ),
+        );
+
+        final data = response.data['children'][0];
+        print('data' + data.toString());
+        assetListModel = AssetListModel.fromJson(data);
+
+        qrId = assetListModel.id;
+        print(taskId);
+        print(qrId);
+      } catch (error) {
+        print('catch');
+      }
+
+      const String url2 = 'https://workorder-server.ifm.gov.tr/task';
+      BaseOptions options2 = BaseOptions(
+          baseUrl: url2,
           receiveDataWhenStatusError: true,
           connectTimeout: const Duration(seconds: 10), // 60 seconds
           receiveTimeout: const Duration(seconds: 10) // 60 seconds
           );
-      Dio dio = Dio(options);
-
+      Dio dio = Dio(options2);
+      print(taskId);
+      print(qrId);
       final response = await dio.patch(
-        url,
+        url2,
         data: [
           {
             "label": ["Task"],
             "identifier": taskId,
             "variableName": "requestedComponents",
-            "value": [finalBarcode]
+            "value": [qrId]
           }
         ],
         options: Options(
