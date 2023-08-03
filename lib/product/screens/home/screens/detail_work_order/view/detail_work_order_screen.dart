@@ -157,7 +157,7 @@ class _StateChangeDropDownButton extends StatelessWidget {
   const _StateChangeDropDownButton({required this.provider});
 
   final WorkOrderDetailProvider provider;
-  final String _currentState = 'Anlık İş Durumu';
+  final String _currentState = 'İşlem Girişi';
   final String _alertTextOne = 'İş emrinin anlık durumunu ';
   final String _alertTextTwo = ' durumuna almak istediğinizden emin misiniz?';
 

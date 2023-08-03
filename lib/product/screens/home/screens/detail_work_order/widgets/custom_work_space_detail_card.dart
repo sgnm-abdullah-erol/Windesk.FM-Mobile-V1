@@ -22,13 +22,13 @@ class CustomWorkSpaceDetailCard extends StatelessWidget {
   final EdgeInsets _paddingCardInside =
       const EdgeInsets.symmetric(horizontal: 15, vertical: 10);
 
-  final String _owner = 'VakaSahibi';
-  final String _tag = 'Vaka Etiketi';
+  final String _owner = 'Talep Sahibi';
+  final String _tag = 'Kategori';
   final String _openDate = 'Açılış Tarihi';
   final String _updateDate = 'Güncelleme Tarihi';
-  final String _nextUpdate = 'Sonraki Güncelleme';
+  final String _nextUpdate = 'Son Güncelleme';
   final String _assignedGroup = 'Atanan Grup';
-  final String _assignedPerson = 'Atanan Kişi';
+  final String _assignedPerson = 'Sorumlu';
 
   @override
   Widget build(BuildContext context) {
