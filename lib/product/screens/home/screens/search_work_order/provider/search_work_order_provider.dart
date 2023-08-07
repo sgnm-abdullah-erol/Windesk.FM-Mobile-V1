@@ -34,12 +34,8 @@ class SearchWorkOrderProvider extends ChangeNotifier {
 
       _isLoading = true;
       notifyListeners();
-<<<<<<< HEAD
-      final result = await workSpaceService.getWorkSpaceWithSearch(woNumber.text, userToken);
-=======
       final result = await workSpaceService
           .getWorkSpaceWithSearchFromGroupWorks(woNumber.text, userToken);
->>>>>>> 5a0652e8acebb47535bf0f8393f98e71130d6fa9
 
       result.fold((l) => {_woDetailList = l, _isSuccess = true}, (r) {
         _isSuccess = true;
