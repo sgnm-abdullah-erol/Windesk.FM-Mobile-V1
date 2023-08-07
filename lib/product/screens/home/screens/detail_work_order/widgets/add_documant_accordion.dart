@@ -30,7 +30,8 @@ class AddDocumantAccordion extends StatelessWidget {
           contentVerticalPadding: 0,
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.camera, color: APPColors.Main.white),
-          header: Text(AppStrings.addImage, style: TextStyle(color: APPColors.Main.white)),
+          header: Text(AppStrings.addImage,
+              style: TextStyle(color: APPColors.Main.white)),
           rightIcon: const Icon(AppIcons.arrowDown, size: 0),
           onOpenSection: () {
             ShowModalBottomSheet().show(
@@ -49,7 +50,8 @@ class AddDocumantAccordion extends StatelessWidget {
           contentVerticalPadding: 0,
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.pictureAsPdf, color: APPColors.Main.white),
-          header: Text(AppStrings.addPdf, style: TextStyle(color: APPColors.Main.white)),
+          header: Text(AppStrings.addPdf,
+              style: TextStyle(color: APPColors.Main.white)),
           rightIcon: const Icon(AppIcons.arrowDown, size: 0),
           onOpenSection: () {
             ShowModalBottomSheet().show(
@@ -65,9 +67,11 @@ class AddDocumantAccordion extends StatelessWidget {
         AccordionSection(
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.documantScanner, color: APPColors.Main.white),
-          header: Text(AppStrings.addedDocumants, style: TextStyle(color: APPColors.Main.white)),
+          header: Text(AppStrings.addedDocumants,
+              style: TextStyle(color: APPColors.Main.white)),
           onOpenSection: () {
-            Provider.of<WorkOrderDetailServiceProvider>(context, listen: false).update();
+            Provider.of<WorkOrderDetailServiceProvider>(context, listen: false)
+                .update();
             provider.userClickedDocumantsFunction();
           },
           content: Consumer<WorkOrderDetailServiceProvider>(

@@ -8,16 +8,15 @@ import '../../../../../../feature/service/global_services.dart/download/download
 class DownloadProvider extends ChangeNotifier {
   final DownloadServiceRepositoryImpl downloadService = Injection.getIt.get<DownloadServiceRepositoryImpl>();
 
-  bool _isLoading = false;
+  final bool _isLoading = false;
   bool get isLoading => _isLoading;
 
-  bool _isDocDownloaded = false;
+  final bool _isDocDownloaded = false;
   bool get isDocDownloaded => _isDocDownloaded;
 
-  bool _isDocDownloadedError = false;
+  final bool _isDocDownloadedError = false;
   bool get isDocDownloadedError => _isDocDownloadedError;
 
-  // // TODO FIX THIS - TYPE LAZIM, TAM CALISMIYOR,
   // void downloadFile(String filePath, String url) async {
   //   _isLoading = true;
   //   notifyListeners();
@@ -37,7 +36,6 @@ class DownloadProvider extends ChangeNotifier {
   //   );
 
   //   if (_isDocDownloaded) {
-  //     // TODO FIX THIS - TYPE LAZIM
   //     Directory('$filePath.pdf').create(recursive: false).then((Directory directory) {});
   //     File file = File(filePath);
   //   }

@@ -30,16 +30,18 @@ class SearchWorkOrderProvider extends ChangeNotifier {
 
   getWorkOrderWithSearch() async {
     if (woNumber.text != '') {
-      print('girdi getWorkOrderSearch');
-      print(_woDetailList);
       String userToken = await SharedManager().getString(SharedEnum.userToken);
 
       _isLoading = true;
       notifyListeners();
+<<<<<<< HEAD
       final result = await workSpaceService.getWorkSpaceWithSearch(woNumber.text, userToken);
+=======
+      final result = await workSpaceService
+          .getWorkSpaceWithSearchFromGroupWorks(woNumber.text, userToken);
+>>>>>>> 5a0652e8acebb47535bf0f8393f98e71130d6fa9
 
       result.fold((l) => {_woDetailList = l, _isSuccess = true}, (r) {
-        print('hatali wo');
         _isSuccess = true;
         _woDetailList = null;
       });
@@ -76,7 +78,6 @@ class SearchWorkOrderProvider extends ChangeNotifier {
   }
 
   void clearInput() {
-    print('girdi');
     _isSuccess = false;
     _woDetailList = null;
     setWoNumber = '';

@@ -18,7 +18,7 @@ class WoCreateRequestedTypeModel extends Equatable{
     final bool? isDeleted;
     final String? name;
     final bool? canDelete;
-    final dynamic? id;
+    final dynamic id;
     final String? key;
     final DateTime? updatedAt;
     final List<WoCreateRequestedTypeModel>? children;
@@ -43,6 +43,16 @@ class WoCreateRequestedTypeModel extends Equatable{
     });
 
     factory WoCreateRequestedTypeModel.fromJson(Map<String, dynamic> json) => _$WoCreateRequestedTypeModelFromJson(json);
+
+    static List<WoCreateRequestedTypeModel> fromJsonList(List<dynamic> json) {
+    List<WoCreateRequestedTypeModel> requestByModel = [];
+
+    for (var item in json) {
+      requestByModel.add(WoCreateRequestedTypeModel.fromJson(item));
+    }
+
+    return requestByModel;
+    }
 
     Map<String, dynamic> toJson() => _$WoCreateRequestedTypeModelToJson(this);
 

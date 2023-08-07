@@ -10,9 +10,9 @@ WorkSpaceSpareparts _$WorkSpaceSparepartsFromJson(Map<String, dynamic> json) => 
       id: json['id'] as String?,
       label: (json['label'] as List<dynamic>?)?.map((e) => e as String).toList(),
       name: json['name'] as String?,
-      amount: json['amount'],
+      amount: json['amount'] as dynamic,
       measurementUnit: json['measurementUnit'] as String?,
-      totalAmount: json['totalAmount'],
+      totalAmount: json['totalAmount'] as dynamic,
       materialUsedDate: json['materialUsedDate'] as String?,
       user: json['user'] as String?,
     );

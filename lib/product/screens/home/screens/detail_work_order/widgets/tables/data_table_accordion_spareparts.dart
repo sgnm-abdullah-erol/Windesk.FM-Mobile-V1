@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/models/work_space/work_space_spareparts.dart';
+import '../../../../../../../feature/models/work_space/work_space_spareparts.dart';
 
 import '../../../../../../../feature/constants/other/app_icons.dart';
 import '../../../../../../../feature/constants/other/colors.dart';
@@ -39,7 +39,7 @@ class DataTableAccordionSpareparts extends StatelessWidget {
             DataRow(cells: [
               DataCell(Text(data[i].id.toString(), style: _cellTextStyle())),
               DataCell(Text(data[i].name ?? _noAmount, style: _cellTextStyle())),
-              DataCell(Text(data[i].amount ?? _nonKnownName, style: _cellTextStyle())),
+              DataCell(Text(data[i].amount.toString() ?? _nonKnownName, style: _cellTextStyle())),
               DataCell(Text(data[i].user ?? _nonKnownName, style: _cellTextStyle())),
               DataCell(
                 IconButton(

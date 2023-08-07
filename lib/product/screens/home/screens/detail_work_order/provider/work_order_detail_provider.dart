@@ -1,11 +1,16 @@
 // ignore_for_file: prefer_final_fields, avoid_init_to_null
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
+import '../../../../../../feature/constants/paths/service_tools.dart';
 import '../../../../../../feature/database/shared_manager.dart';
 import '../../../../../../feature/enums/shared_enums.dart';
 import '../../../../../../feature/enums/task_response_enums.dart';
 import '../../../../../../feature/injection.dart';
+import '../../../../../../feature/models/home_page_models/asset_list_model.dart';
 import '../../../../../../feature/models/work_space/work_space_detail.dart';
 import '../../../../../../feature/models/work_space/work_space_efforts.dart';
 import '../../../../../../feature/models/work_space/work_space_user_inventory.dart';
@@ -18,7 +23,8 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
   WorkSpaceDetail detail;
 
-  final WorkSpaceServiceRepositoryImpl workSpaceService = Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
+  final WorkSpaceServiceRepositoryImpl workSpaceService =
+      Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
 
   // for page
   bool _isLoading = false;
@@ -34,7 +40,8 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   bool get userClickedRequestedMaterial => _userClickedRequestedMaterial;
 
   bool _userClickedRequestedApprovedMaterial = false;
-  bool get userClickedRequestedApprovedMaterial => _userClickedRequestedApprovedMaterial;
+  bool get userClickedRequestedApprovedMaterial =>
+      _userClickedRequestedApprovedMaterial;
 
   bool _userClickedDocumants = false;
   bool get userClickedDocumants => _userClickedDocumants;
@@ -100,7 +107,8 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   void _getTaskById() async {
     String token = await SharedManager().getString(SharedEnum.userToken);
 
-    final result = await workSpaceService.getWorkSpaceWithSearch(detail.task?.id.toString() ?? '', token);
+    final result = await workSpaceService.getWorkSpaceWithSearch(
+        detail.task?.id.toString() ?? '', token);
 
     result.fold(
       (l) => {
@@ -123,7 +131,10 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
     String userToken = await SharedManager().getString(SharedEnum.userToken);
 
-    final response = await workSpaceService.takeItOnMe(detail.task?.id.toString() ?? '', detail.state?.id.toString() ?? '', userToken);
+    final response = await workSpaceService.takeItOnMe(
+        detail.task?.id.toString() ?? '',
+        detail.state?.id.toString() ?? '',
+        userToken);
 
     response.fold(
       (l) => {
@@ -171,7 +182,10 @@ class WorkOrderDetailProvider extends ChangeNotifier {
             _selectedTaskState = 'grubumdakilere gönderilmiştir',
           }
         else if (l == TaskResponseEnums.pendiks)
-          {_isTaskStateChange = true, _selectedTaskState = 'onay bekleyenlere gönderilmiştir'}
+          {
+            _isTaskStateChange = true,
+            _selectedTaskState = 'onay bekleyenlere gönderilmiştir'
+          }
         else if (l == TaskResponseEnums.end)
           {
             _isTaskStateChange = true,
@@ -298,13 +312,106 @@ class WorkOrderDetailProvider extends ChangeNotifier {
         _userInventoryList = l,
         for (var i = 0; i < (_userInventoryList.materials?.length ?? 0); i++)
           {
-            workSpaceUserInventoryLabelList.add(_userInventoryList.materials?[i].properties?.name ?? ''),
+            workSpaceUserInventoryLabelList
+                .add(_userInventoryList.materials?[i].properties?.name ?? ''),
           },
       },
       (r) => {},
     );
 
     _isLoading = false;
+    notifyListeners();
+  }
+
+  scanBarcodeAndQr() async {
+    String barcodeScanRes;
+    AssetListModel assetListModel;
+    try {
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+          '#ff6666', 'İptal', true, ScanMode.BARCODE);
+    } on PlatformException {
+      barcodeScanRes = 'Failed to get platform version.';
+    }
+    if (barcodeScanRes != '-1') {
+
+      // final startIndex = barcodeScanRes.indexOf(':');
+      // final endIndex = barcodeScanRes.indexOf(',');
+      // final finalBarcode = barcodeScanRes.substring(startIndex + 1, endIndex);
+      // print('id : ' + finalBarcode);
+      String taskId = detail.task!.id.toString();
+      int? qrId;
+      final String token =
+          await SharedManager().getString(SharedEnum.userToken);
+
+      String url =
+          '${ServiceTools.url.asset_url}/component/searchByColumn/?page=1&limit=10&orderBy=ASC&orderByColumn=&searchColumn=tagNumber&searchString=$barcodeScanRes&searchType=CONTAINS';
+      try {
+        BaseOptions options = BaseOptions(
+            baseUrl: url,
+            receiveDataWhenStatusError: true,
+            connectTimeout: const Duration(seconds: 10), // 60 seconds
+            receiveTimeout: const Duration(seconds: 10) // 60 seconds
+            );
+        Dio dio = Dio(options);
+        final response = await dio.get(
+          url,
+          options: Options(
+            headers: {'authorization': 'Bearer $token'},
+          ),
+        );
+
+        final data = response.data['children'][0];
+        assetListModel = AssetListModel.fromJson(data);
+
+        qrId = assetListModel.id;
+     
+      } catch (error) {
+        
+      }
+
+      const String url2 = 'https://workorder-server.ifm.gov.tr/task';
+      BaseOptions options2 = BaseOptions(
+          baseUrl: url2,
+          receiveDataWhenStatusError: true,
+          connectTimeout: const Duration(seconds: 10), // 60 seconds
+          receiveTimeout: const Duration(seconds: 10) // 60 seconds
+          );
+      Dio dio = Dio(options2);
+    
+      final response = await dio.patch(
+        url2,
+        data: [
+          {
+            "label": ["Task"],
+            "identifier": taskId,
+            "variableName": "requestedComponents",
+            "value": [qrId]
+          }
+        ],
+        options: Options(
+          headers: {'authorization': 'Bearer $token'},
+        ),
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        getDetail();
+      } 
+    }
+  }
+
+  void getDetail() async {
+    final String token = await SharedManager().getString(SharedEnum.userToken);
+    if (token.isNotEmpty) {
+      final result = await workSpaceService.getWorkSpaceByTaskId(
+          detail.task!.id.toString(), token);
+
+      result.fold((l) {
+        detail = l;
+        notifyListeners();
+      }, (r) {});
+    }
+    _isLoading = false;
+
     notifyListeners();
   }
 }

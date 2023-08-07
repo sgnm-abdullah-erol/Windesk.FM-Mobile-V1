@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
-import 'package:vm_fm_4/feature/components/buttons/custom_half_buttons.dart';
-import 'package:vm_fm_4/feature/components/input_fields/text_fields_input.dart';
-import 'package:vm_fm_4/feature/constants/other/colors.dart';
-import 'package:vm_fm_4/feature/extensions/context_extension.dart';
-import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/provider/work_order_add_documant_sheet_provider.dart';
+import '../buttons/custom_half_buttons.dart';
+import '../input_fields/text_fields_input.dart';
+import '../../constants/other/colors.dart';
+import '../../extensions/context_extension.dart';
+import '../../../product/screens/home/screens/detail_work_order/provider/work_order_add_documant_sheet_provider.dart';
 
 import '../../../product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
 import '../../constants/other/app_strings.dart';

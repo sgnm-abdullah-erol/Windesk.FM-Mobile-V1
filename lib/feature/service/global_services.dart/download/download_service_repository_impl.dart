@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:vm_fm_4/feature/service/global_services.dart/download/download_service_repository.dart';
 
 import '../../../exceptions/custom_service_exceptions.dart';
+import 'download_service_repository.dart';
 
 class DownloadServiceRepositoryImpl extends DownloadServiceRepository {
   @override

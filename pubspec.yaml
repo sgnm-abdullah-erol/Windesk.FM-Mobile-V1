@@ -92,6 +92,7 @@ dependencies:
 
   # barcode scanner
   flutter_barcode_scanner: ^2.0.0
+  dropdown_search: ^5.0.6
 
   # file downloader
   flutter_file_downloader: ^1.1.2

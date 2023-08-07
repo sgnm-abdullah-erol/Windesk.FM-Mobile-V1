@@ -49,8 +49,8 @@ class _SearchWorkOrderScreenState extends State<SearchWorkOrderScreen> {
                             actionIcon: AppIcons.qr,
                             actionFunction: searchProvider.scanBarcodeAndQr),
                         CustomHalfButtons(
-                            leftTitle: const Text('Temizle'),
-                            rightTitle: const Text('Ara'),
+                            leftTitle: const Text('Temizle', style: TextStyle(color: Colors.white),),
+                            rightTitle: const Text('Ara',style: TextStyle(color: Colors.white),),
                             leftOnPressed: searchProvider.clearInput,
                             rightOnPressed: searchProvider.getWorkOrderWithSearch),
                       ],

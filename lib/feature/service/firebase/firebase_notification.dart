@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:rxdart/rxdart.dart';
 
+import '../../database/shared_manager.dart';
+import '../../enums/shared_enums.dart';
 import 'local_notification.dart';
 
 class FirebaseNotification {
@@ -13,11 +15,15 @@ class FirebaseNotification {
     await Firebase.initializeApp();
 
     FirebaseMessaging messaging = FirebaseMessaging.instance;
-    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+        FlutterLocalNotificationsPlugin();
     final onNotifications = BehaviorSubject<String?>();
 
-    FirebaseMessaging.onBackgroundMessage(
-        (message) => LocalNotification.showNotification(title: "message.notification?.title", body: "message.notification?.body", payload: 'asd'));
+    FirebaseMessaging.onBackgroundMessage((message) =>
+        LocalNotification.showNotification(
+            title: "message.notification?.title",
+            body: "message.notification?.body",
+            payload: 'asd'));
     FirebaseMessaging.instance.getInitialMessage().then((message) {
       if (message != null) {
         RemoteNotification? notification = message.notification;
@@ -40,8 +46,11 @@ class FirebaseNotification {
     //FirebaseMessaging.onBackgroundMessage((message) =>      NotificationApi.showNotification(title:"message.notification?.title",body:"message.notification?.body",payload:'asd'));
     print('fcm.token : ');
     print(await messaging.getToken());
+
     String? fbtoken = await messaging.getToken();
     print(fbtoken);
+    await SharedManager()
+        .setString(SharedEnum.firebaseToken, fbtoken.toString());
     FirebaseMessaging.instance.getInitialMessage().then((message) {
       if (message != null) {
         RemoteNotification? notification = message.notification;
@@ -50,7 +59,8 @@ class FirebaseNotification {
       }
     });
 
-    const AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('@mipmap/ic_launcher');
+    const AndroidInitializationSettings initializationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
     const iosInitializationSetting = DarwinInitializationSettings(
       requestAlertPermission: true,
       requestBadgePermission: true,
@@ -58,7 +68,8 @@ class FirebaseNotification {
       requestCriticalPermission: true,
     );
 
-    const InitializationSettings initializationSettings = InitializationSettings(
+    const InitializationSettings initializationSettings =
+        InitializationSettings(
       android: initializationSettingsAndroid,
       iOS: iosInitializationSetting,
     );
@@ -80,7 +91,8 @@ class FirebaseNotification {
     onNotifications.stream.listen(onClickedNotification);
 
 // Lisitnening to the background messages
-    Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+    Future<void> _firebaseMessagingBackgroundHandler(
+        RemoteMessage message) async {
       await Firebase.initializeApp();
 
       print("Handling a background message: ${message.messageId}");
@@ -114,8 +126,8 @@ class FirebaseNotification {
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print('HomePage');
-      print('Firebase notification opened');
+      // print('HomePage');
+      // print('Firebase notification opened');
 
       //FlutterLocalNotificationsPlugin().show(message.notification.messageId, message.notification?.title, message.notification?.body,);
     });

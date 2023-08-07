@@ -29,10 +29,11 @@ class WoCreateLocationChildrenModel extends Equatable {
   final bool? canDisplay;
   final String? address;
   final String? siteDescription;
-  final String? areaMeasurement;
+  final dynamic areaMeasurement;
   final String? nodeType;
   final String? externalSystem;
   final String? externalObject;
+  final dynamic updatedOn;
   final String? name;
   final String? projectDescription;
   final String? projectName;
@@ -70,6 +71,7 @@ class WoCreateLocationChildrenModel extends Equatable {
       this.nodeType,
       this.externalSystem,
       this.externalObject,
+      this.updatedOn,
       this.name,
       this.projectDescription,
       this.projectName,
@@ -112,6 +114,7 @@ class WoCreateLocationChildrenModel extends Equatable {
         nodeType,
         externalSystem,
         externalObject,
+        updatedOn,
         name,
         projectDescription,
         projectName,

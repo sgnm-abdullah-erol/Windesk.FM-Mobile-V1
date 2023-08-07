@@ -11,13 +11,15 @@ class SnackbarStrings {
   static const String loginEmptyError = 'Kullanıcı Adı veya Şifre Boş Olamaz';
   static const String loginSuccess = 'Giriş Başarılı';
 
-  static const String effortAdded = 'Effor eklenmiştir.';
+  static const String effortAdded = 'Efor eklenmiştir.';
   static const String materialAdded = 'Malzeme eklenmiştir.';
   static const String materialRequested = 'Malzeme talep edilmiştir.';
   static const String taskStateChange = 'Görev durumu değiştirilmiştir.';
   static const String takeItOnMeSuccess = 'Görev üzerinize alınmıştır.';
   static const String pdfAdded = 'Pdf eklenmiştir.';
   static const String imageAdded = 'Fotoğraf eklenmiştir.';
-  static const String fileDownloaded = 'Dosya indirilmiştir.';
-  static const String fileNotDownloaded = 'Dosya indirilememiştir.';
+  static const String fileDownloaded = 'Dosya indirildi';
+  static const String fileNotDownloaded = 'Dosya indirilemedi';
+
+  static const String woCreate = 'İş Emri Başarıyla Oluşturuldu.';
 }

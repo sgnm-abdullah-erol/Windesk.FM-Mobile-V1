@@ -29,7 +29,7 @@ class AppStrings {
   // workorder tabs
   static const myOrders = 'Üzerimdekiler';
   static const myGroups = 'Grubumdakiler';
-  static const myPendiks = 'Bekleyenler';
+  static const myPendiks = 'Onay Bekleyenler';
 
   //button
   static const start = 'Başlat';
@@ -85,4 +85,9 @@ class AppStrings {
 
   // alert dialog
   static const changeState = 'İş Emri Durum Değişimi';
+
+  //materialSearch
+  static const materialSearch = 'Varlık Arama';
+  static const clean = 'Temizle';
+  static const search = 'Ara';
 }
