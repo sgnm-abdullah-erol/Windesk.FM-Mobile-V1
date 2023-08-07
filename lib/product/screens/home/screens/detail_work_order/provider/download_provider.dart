@@ -17,7 +17,6 @@ class DownloadProvider extends ChangeNotifier {
   final bool _isDocDownloadedError = false;
   bool get isDocDownloadedError => _isDocDownloadedError;
 
-  // // TODO FIX THIS - TYPE LAZIM, TAM CALISMIYOR,
   // void downloadFile(String filePath, String url) async {
   //   _isLoading = true;
   //   notifyListeners();
@@ -37,7 +36,6 @@ class DownloadProvider extends ChangeNotifier {
   //   );
 
   //   if (_isDocDownloaded) {
-  //     // TODO FIX THIS - TYPE LAZIM
   //     Directory('$filePath.pdf').create(recursive: false).then((Directory directory) {});
   //     File file = File(filePath);
   //   }

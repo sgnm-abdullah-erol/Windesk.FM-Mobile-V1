@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:vm_fm_4/feature/models/home_page_models/asset_document_model.dart';
-import 'package:vm_fm_4/feature/models/home_page_models/asset_image_model.dart';
+import 'asset_document_model.dart';
+import 'asset_image_model.dart';
 
 part 'generator/asset_list_model.g.dart';
 
@@ -12,7 +12,7 @@ class AssetListModel extends Equatable {
   String? installationDate;
   String? description;
   String? className;
-  dynamic? assetIdentifier;
+  dynamic assetIdentifier;
   int? type;
   bool? externalNode;
   bool? isActive;

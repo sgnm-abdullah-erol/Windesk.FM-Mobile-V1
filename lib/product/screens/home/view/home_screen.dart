@@ -71,7 +71,6 @@ class _HomeScreenState extends State<HomeScreen> {
               Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
           FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
             showAlertDialog(BuildContext context) {
-              bool loading = false;
               // set up the buttons
               Widget cancelButton = TextButton(
                 child: const Text("Tamam"),
@@ -84,7 +83,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 onPressed: () async {
                   String userToken =
                       await SharedManager().getString(SharedEnum.userToken);
-                  loading = true;
                   final result = await workSpaceService
                       .getWorkSpaceWithSearchFromGroupWorks(
                           message.data['taskId'], userToken);

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'package:vm_fm_4/feature/components/buttons/custom_elevated_button_with_icon.dart';
-import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/provider/work_order_detail_provider.dart';
+import '../../../../../../feature/components/buttons/custom_elevated_button_with_icon.dart';
+import '../provider/work_order_detail_provider.dart';
 import '../../../../../../feature/components/dividers/custom_wo_summary_divider.dart';
 import '../../../../../../feature/constants/other/colors.dart';
 import '../../../../../../feature/constants/style/border_radius.dart';

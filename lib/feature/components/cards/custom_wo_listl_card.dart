@@ -27,7 +27,6 @@ class CustomWoDetailCard extends StatelessWidget {
 
   final double _elevation = 4;
   final String _labelStartDate = 'Açılma Tarihi:';
-  final String _labelUpdatedDate = 'Güncellenme Tarihi:';
   final String _labelEndDate = 'Bitiş Tarihi:';
 
   @override

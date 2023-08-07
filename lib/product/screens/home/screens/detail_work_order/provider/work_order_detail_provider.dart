@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_final_fields, avoid_init_to_null
 
-import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,7 +15,6 @@ import '../../../../../../feature/models/work_space/work_space_detail.dart';
 import '../../../../../../feature/models/work_space/work_space_efforts.dart';
 import '../../../../../../feature/models/work_space/work_space_user_inventory.dart';
 import '../../../../../../feature/service/global_services.dart/work_space_service/work_space_service_repository_impl.dart';
-import 'package:http/http.dart' as http;
 
 class WorkOrderDetailProvider extends ChangeNotifier {
   WorkOrderDetailProvider({required this.detail}) {
@@ -335,7 +333,6 @@ class WorkOrderDetailProvider extends ChangeNotifier {
       barcodeScanRes = 'Failed to get platform version.';
     }
     if (barcodeScanRes != '-1') {
-      print('BARCODE SCANE RES : ' + barcodeScanRes);
 
       // final startIndex = barcodeScanRes.indexOf(':');
       // final endIndex = barcodeScanRes.indexOf(',');
@@ -345,7 +342,6 @@ class WorkOrderDetailProvider extends ChangeNotifier {
       int? qrId;
       final String token =
           await SharedManager().getString(SharedEnum.userToken);
-      print(token);
 
       String url =
           '${ServiceTools.url.asset_url}/component/searchByColumn/?page=1&limit=10&orderBy=ASC&orderByColumn=&searchColumn=tagNumber&searchString=$barcodeScanRes&searchType=CONTAINS';
@@ -365,14 +361,12 @@ class WorkOrderDetailProvider extends ChangeNotifier {
         );
 
         final data = response.data['children'][0];
-        print('data' + data.toString());
         assetListModel = AssetListModel.fromJson(data);
 
         qrId = assetListModel.id;
-        print(taskId);
-        print(qrId);
+     
       } catch (error) {
-        print('catch');
+        
       }
 
       const String url2 = 'https://workorder-server.ifm.gov.tr/task';
@@ -383,8 +377,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
           receiveTimeout: const Duration(seconds: 10) // 60 seconds
           );
       Dio dio = Dio(options2);
-      print(taskId);
-      print(qrId);
+    
       final response = await dio.patch(
         url2,
         data: [
@@ -401,11 +394,8 @@ class WorkOrderDetailProvider extends ChangeNotifier {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        print('ok');
         getDetail();
-      } else {
-        print('hata');
-      }
+      } 
     }
   }
 
@@ -416,8 +406,6 @@ class WorkOrderDetailProvider extends ChangeNotifier {
           detail.task!.id.toString(), token);
 
       result.fold((l) {
-        print('refresh');
-        print(l);
         detail = l;
         notifyListeners();
       }, (r) {});
