@@ -25,8 +25,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
   WorkSpaceDetail detail;
 
-  final WorkSpaceServiceRepositoryImpl workSpaceService =
-      Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
+  final WorkSpaceServiceRepositoryImpl workSpaceService = Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
 
   // for page
   bool _isLoading = false;
@@ -42,8 +41,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   bool get userClickedRequestedMaterial => _userClickedRequestedMaterial;
 
   bool _userClickedRequestedApprovedMaterial = false;
-  bool get userClickedRequestedApprovedMaterial =>
-      _userClickedRequestedApprovedMaterial;
+  bool get userClickedRequestedApprovedMaterial => _userClickedRequestedApprovedMaterial;
 
   bool _userClickedDocumants = false;
   bool get userClickedDocumants => _userClickedDocumants;
@@ -109,8 +107,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   void _getTaskById() async {
     String token = await SharedManager().getString(SharedEnum.userToken);
 
-    final result = await workSpaceService.getWorkSpaceWithSearch(
-        detail.task?.id.toString() ?? '', token);
+    final result = await workSpaceService.getWorkSpaceWithSearch(detail.task?.id.toString() ?? '', token);
 
     result.fold(
       (l) => {
@@ -133,10 +130,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
     String userToken = await SharedManager().getString(SharedEnum.userToken);
 
-    final response = await workSpaceService.takeItOnMe(
-        detail.task?.id.toString() ?? '',
-        detail.state?.id.toString() ?? '',
-        userToken);
+    final response = await workSpaceService.takeItOnMe(detail.task?.id.toString() ?? '', detail.state?.id.toString() ?? '', userToken);
 
     response.fold(
       (l) => {
@@ -161,13 +155,20 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
   void changeState(String value) async {
     _isLoading = true;
+    late String? id;
     notifyListeners();
+
+    for (var i = 0; i < (detail.state?.nextStates?.length ?? 0); i++) {
+      if (detail.state?.nextStates?[i].name == value) {
+        id = detail.state?.nextStates?[i].id.toString();
+      }
+    }
 
     String userToken = await SharedManager().getString(SharedEnum.userToken);
 
     final response = await workSpaceService.changeWorkSpaceState(
       detail.task?.id.toString() ?? '',
-      detail.state?.nextStates?[0].id.toString() ?? '',
+      id ?? '',
       userToken,
     );
 
@@ -184,10 +185,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
             _selectedTaskState = 'grubumdakilere gönderilmiştir',
           }
         else if (l == TaskResponseEnums.pendiks)
-          {
-            _isTaskStateChange = true,
-            _selectedTaskState = 'onay bekleyenlere gönderilmiştir'
-          }
+          {_isTaskStateChange = true, _selectedTaskState = 'onay bekleyenlere gönderilmiştir'}
         else if (l == TaskResponseEnums.end)
           {
             _isTaskStateChange = true,
@@ -314,8 +312,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
         _userInventoryList = l,
         for (var i = 0; i < (_userInventoryList.materials?.length ?? 0); i++)
           {
-            workSpaceUserInventoryLabelList
-                .add(_userInventoryList.materials?[i].properties?.name ?? ''),
+            workSpaceUserInventoryLabelList.add(_userInventoryList.materials?[i].properties?.name ?? ''),
           },
       },
       (r) => {},
@@ -329,8 +326,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     String barcodeScanRes;
     AssetListModel assetListModel;
     try {
-      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-          '#ff6666', 'İptal', true, ScanMode.BARCODE);
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode('#ff6666', 'İptal', true, ScanMode.BARCODE);
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
     }
@@ -343,8 +339,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
       // print('id : ' + finalBarcode);
       String taskId = detail.task!.id.toString();
       int? qrId;
-      final String token =
-          await SharedManager().getString(SharedEnum.userToken);
+      final String token = await SharedManager().getString(SharedEnum.userToken);
       print(token);
 
       String url =
@@ -383,8 +378,6 @@ class WorkOrderDetailProvider extends ChangeNotifier {
           receiveTimeout: const Duration(seconds: 10) // 60 seconds
           );
       Dio dio = Dio(options2);
-      print(taskId);
-      print(qrId);
       final response = await dio.patch(
         url2,
         data: [
@@ -412,8 +405,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   void getDetail() async {
     final String token = await SharedManager().getString(SharedEnum.userToken);
     if (token.isNotEmpty) {
-      final result = await workSpaceService.getWorkSpaceByTaskId(
-          detail.task!.id.toString(), token);
+      final result = await workSpaceService.getWorkSpaceByTaskId(detail.task!.id.toString(), token);
 
       result.fold((l) {
         print('refresh');

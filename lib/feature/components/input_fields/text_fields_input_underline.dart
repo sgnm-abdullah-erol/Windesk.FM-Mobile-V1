@@ -5,17 +5,17 @@ import '../../constants/other/colors.dart';
 import '../../constants/style/font_sizes.dart';
 
 class TextFieldsInputUnderline extends StatelessWidget {
-  const TextFieldsInputUnderline({
-    super.key,
-    required this.hintText,
-    required this.onChanged,
-    this.enabled,
-    this.keyboardType,
-    this.inputFormatters,
-    this.maxLines,
-    this.textInputAction,
-    this.minLines,
-  });
+  const TextFieldsInputUnderline(
+      {super.key,
+      required this.hintText,
+      required this.onChanged,
+      this.enabled,
+      this.keyboardType,
+      this.inputFormatters,
+      this.maxLines,
+      this.textInputAction,
+      this.minLines,
+      this.controller});
 
   final String _validatorHintText = 'Lütfen bu alanı doldurunuz';
 
@@ -27,6 +27,7 @@ class TextFieldsInputUnderline extends StatelessWidget {
   final TextInputAction? textInputAction;
   final int? maxLines;
   final int? minLines;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +36,7 @@ class TextFieldsInputUnderline extends StatelessWidget {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       textInputAction: textInputAction ?? TextInputAction.next,
       keyboardType: keyboardType ?? TextInputType.text,
+      controller: controller,
       decoration: InputDecoration(
         disabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: APPColors.Main.grey),

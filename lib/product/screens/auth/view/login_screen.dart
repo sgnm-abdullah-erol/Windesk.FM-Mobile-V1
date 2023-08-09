@@ -50,28 +50,45 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-class _LoginScreenBody extends StatelessWidget {
+class _LoginScreenBody extends StatefulWidget {
   _LoginScreenBody({required this.provider});
+  final LoginProvider provider;
+
+  @override
+  State<_LoginScreenBody> createState() => _LoginScreenBodyState();
+}
+
+class _LoginScreenBodyState extends State<_LoginScreenBody> {
   final GlobalKey<ScaffoldMessengerState> _globalKey = GlobalKey<ScaffoldMessengerState>();
 
-  final LoginProvider provider;
   final String _userNameHint = 'Kullanıcı Adı';
+
   final String _passwordHint = 'Şifre';
+
   final String _login = 'Giriş Yap';
+
+  final String _rememberMe = 'Beni Hatırla';
+
+  @override
+  void initState() {
+    super.initState();
+    widget.provider.getRememberInfo();
+    print('ddddddd :::: ddd :::' + widget.provider.userNameController.text);
+  }
 
   @override
   Widget build(BuildContext context) {
-    provider.isLoginSuccess ? context.router.push(const HomeScreen()) : null;
+    widget.provider.isLoginSuccess ? context.router.push(const HomeScreen()) : null;
     return Scaffold(
       key: _globalKey,
       appBar: CustomMainAppbar(title: _loginAppbarTitle(context), returnBack: false),
-      body: provider.loading
+      body: widget.provider.loading
           ? const CustomMainLoading()
           : Column(
               children: <Widget>[
                 _loginImage(context),
                 _loginTitleWidget(),
-                _textFields(context, provider),
+                _textFields(context, widget.provider),
                 _loginButton(),
               ],
             ),
@@ -81,7 +98,7 @@ class _LoginScreenBody extends StatelessWidget {
   Expanded _loginButton() {
     return Expanded(
       flex: 2,
-      child: CustomLoginButton(title: _login, onPressed: provider.logIn),
+      child: CustomLoginButton(title: _login, onPressed: widget.provider.logIn),
     );
   }
 
@@ -95,12 +112,30 @@ class _LoginScreenBody extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                TextFieldsInputUnderline(hintText: _userNameHint, onChanged: loginProvider.setUserName),
+                TextFieldsInputUnderline(
+                  hintText: _userNameHint,
+                  onChanged: loginProvider.setUserName,
+                  controller: loginProvider.userNameController,
+                ),
                 TextInputFieldsPasswordInputUnderline(
                   hintText: _passwordHint,
                   onChanged: loginProvider.setPassword,
                   changeVisibility: provider.setShowPassword,
                   showPassword: provider.showPassword,
+                ),
+                Row(
+                  children: [
+                    Text(_rememberMe),
+                    Checkbox(
+                      checkColor: Colors.white,
+                      value: loginProvider.rememberMe,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          loginProvider.setRememberMe(value!);
+                        });
+                      },
+                    ),
+                  ],
                 ),
               ],
             ),
