@@ -25,21 +25,16 @@ class _SearchWorkOrderScreenState extends State<SearchWorkOrderScreen> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => SearchWorkOrderProvider(),
-      child: Consumer<SearchWorkOrderProvider>(
-          builder: (context, SearchWorkOrderProvider searchProvider, child) {
+      child: Consumer<SearchWorkOrderProvider>(builder: (context, SearchWorkOrderProvider searchProvider, child) {
         if (searchProvider.isSuccess) {
           if (searchProvider.woDetailList != null) {
-            context.router.push(DetailWorkOrderScreen(
-                workSpaceDetail: searchProvider.woDetailList!));
+            context.router.push(DetailWorkOrderScreen(workSpaceDetail: searchProvider.woDetailList!));
             searchProvider.clearInput();
           }
         }
 
         return Scaffold(
-          appBar: const CustomMainAppbar(
-              title: Text(AppStrings.workOrderSearch),
-              returnBack: true,
-              elevation: 3),
+          appBar: const CustomMainAppbar(title: Text(AppStrings.workOrderSearch), returnBack: true, elevation: 3),
           body: searchProvider.isLoading
               ? const CustomLoadingIndicator()
               : Center(
@@ -57,8 +52,7 @@ class _SearchWorkOrderScreenState extends State<SearchWorkOrderScreen> {
                             leftTitle: const Text('Temizle', style: TextStyle(color: Colors.white),),
                             rightTitle: const Text('Ara',style: TextStyle(color: Colors.white),),
                             leftOnPressed: searchProvider.clearInput,
-                            rightOnPressed:
-                                searchProvider.getWorkOrderWithSearch),
+                            rightOnPressed: searchProvider.getWorkOrderWithSearch),
                       ],
                     ),
                   ),

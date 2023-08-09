@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:http_parser/http_parser.dart';
-import 'package:vm_fm_4/feature/models/home_page_models/asset_list_model.dart';
+import '../../../models/home_page_models/asset_list_model.dart';
 import '../../../constants/paths/service_tools.dart';
 import '../../../models/work_space/work_space_documents.dart';
 import '../../../models/work_space/work_space_requirement_materials_list.dart';
@@ -119,7 +119,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
-        print(data);
         workSpaceDetailList = WorkSpaceDetail.fromJsonList(data);
 
         return Left(workSpaceDetailList.first);
@@ -146,7 +145,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
           );
 
       final data = response.data['children'][0];
-      print('data' + data.toString());
       assetListModel = AssetListModel.fromJson(data);
 
       return Left(assetListModel);

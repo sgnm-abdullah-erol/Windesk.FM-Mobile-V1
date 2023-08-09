@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:vm_fm_4/feature/models/home_page_models/asset_list_model.dart';
+import '../../../models/home_page_models/asset_list_model.dart';
 import '../../../models/work_space/work_space_user_inventory.dart';
 
 import '../../../enums/task_response_enums.dart';

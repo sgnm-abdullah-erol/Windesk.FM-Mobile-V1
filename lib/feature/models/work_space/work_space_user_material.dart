@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+
 import 'work_space_material_properties.dart';
+
 part 'generator/work_space_user_material.g.dart';
 
 @JsonSerializable()

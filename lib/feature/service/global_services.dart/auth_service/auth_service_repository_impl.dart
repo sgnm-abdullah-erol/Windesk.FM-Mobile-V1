@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import '../../../constants/paths/service_tools.dart';
 
+import '../../../constants/paths/service_tools.dart';
 import '../../../database/shared_manager.dart';
 import '../../../enums/service_response_status_enums.dart';
 import '../../../enums/shared_enums.dart';
