@@ -4,12 +4,25 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION"/>
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    
     <application
         android:usesCleartextTraffic="true"
         android:requestLegacyExternalStorage="true"
         android:label="vm_fm_4"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <!-- Android file download set up -->
+        <provider
+            android:name="adry.app.simple_downloader.FileProvider"
+            android:authorities="${applicationId}.simple_downloader.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_path"/>
+        </provider>  
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -38,6 +51,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
             
     </application>
 </manifest>

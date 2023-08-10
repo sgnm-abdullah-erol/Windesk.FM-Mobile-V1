@@ -628,12 +628,10 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     //     contentType: MediaType(app, extension),
     //   ),
     // });
-
     print('fileName : ' + fileName);
     if (fileName == '') {
       fileName = DateTime.now().toIso8601String() + '.png';
     }
-    
     FormData formData = FormData.fromMap({
       "document": await MultipartFile.fromFile(
         File(filePath).path,
@@ -649,6 +647,9 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
               headers: {'authorization': 'Bearer $token'},
             ),
           );
+
+      super.logger.i(response);
+
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
         if (data['success'] == true) {

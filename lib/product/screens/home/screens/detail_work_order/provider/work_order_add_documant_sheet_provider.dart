@@ -52,7 +52,6 @@ class WorkOrderAddDocumantSheetProvider extends ChangeNotifier {
     final String token = await SharedManager().getString(SharedEnum.userToken);
 
     final response = await workSpaceService.saveDocumant(imagePath, '', _desc, token, taskId, taskKey, 'image');
-    print('ddd' + response.toString());
     response.fold(
       (l) => {
         l
