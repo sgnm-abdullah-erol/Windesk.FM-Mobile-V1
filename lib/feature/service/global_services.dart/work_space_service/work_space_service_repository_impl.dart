@@ -618,11 +618,21 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     final bytes = File(filePath).readAsBytesSync();
     String extension = fileName.split(".").last;
 
-    var formData = FormData.fromMap({
-      "document": MultipartFile.fromBytes(
-        bytes,
+    // var formData = FormData.fromMap({
+    //   "document": MultipartFile.fromBytes(
+    //     bytes,
+    //     filename: fileName,
+    //     contentType: MediaType(app, extension),
+    //   ),
+    // });
+    print('fileName : ' + fileName);
+    if (fileName == '') {
+      fileName = DateTime.now().toIso8601String() + '.png';
+    }
+    FormData formData = FormData.fromMap({
+      "document": await MultipartFile.fromFile(
+        File(filePath).path,
         filename: fileName,
-        contentType: MediaType(app, extension),
       ),
     });
 
