@@ -107,6 +107,8 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
     final result = await workSpaceService.getWorkSpaceWithSearch(detail.task?.id.toString() ?? '', token);
 
+    
+
     result.fold(
       (l) => {
         detail = l,

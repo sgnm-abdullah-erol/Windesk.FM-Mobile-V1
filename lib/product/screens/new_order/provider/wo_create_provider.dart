@@ -308,6 +308,7 @@ class WoCreateProvider extends ChangeNotifier {
     notifyListeners();
     for (var i = 0; i < (_getRequestedTypes.length); i++) {
       if (_getRequestedTypes[i].name == newValue) {
+        print('xxxx' + _getRequestedTypes[i].code.toString());
         isChildrenExist = _getRequestedTypes[i].children!.isNotEmpty ? true : false;
         _requestTypeKey = _getRequestedTypes[i].code.toString();
         _requestedTypeTree1 = !isChildrenExist;
@@ -530,6 +531,26 @@ class WoCreateProvider extends ChangeNotifier {
 
     final response = await _woCreateServiceRepository.createTask(
         token, summary, _requestTypeKey, requestedById, description, appointmendData, typesId, requestedId, requestedLabel, woCategory, componentKey);
+    print(' :::: ' +
+        summary +
+        '+ :::: ' +
+        _requestTypeKey +
+        '+ :::: ' +
+        requestedById +
+        '+ :::: ' +
+        description +
+        '+ :::: ' +
+        appointmendData +
+        '+ :::: ' +
+        typesId +
+        '+ :::: ' +
+        requestedId +
+        ' :::: ' +
+        requestedLabel +
+        ' :::: ' +
+        woCategory +
+        ' :::: ' +
+        componentKey);
     response.fold(
       (l) => {
         _isWorkOrderCreate = true,

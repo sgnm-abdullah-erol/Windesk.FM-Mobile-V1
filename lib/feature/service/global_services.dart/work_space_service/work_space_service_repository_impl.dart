@@ -57,7 +57,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
               responseType: ResponseType.json,
             ),
           );
-      super.logger.i(response);
+      super.logger.e(response);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
@@ -120,6 +120,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
         workSpaceDetailList = WorkSpaceDetail.fromJsonList(data);
+        super.logger.e(response.toString());
 
         return Left(workSpaceDetailList.first);
       } else {
@@ -456,6 +457,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   Future<Either<bool, CustomServiceException>> takeItOnMe(String taskId, String currentStateId, String token) async {
     String url = '${ServiceTools.url.workorder_url}/task/add/user/to/state';
     bool result = false;
+    print('identifier' + currentStateId);
 
     try {
       final response = await super.dio.post(
@@ -492,7 +494,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   @override
   Future<Either<TaskResponseEnums, CustomServiceException>> changeWorkSpaceState(String taskId, String nextStateId, String token) async {
     print(taskId + ' :: ' + nextStateId + ' ::: ');
-    String url = '${ServiceTools.url.workorder_url}/task/change/state/of/task';
+    String url = '${ServiceTools.url.workorder_url}/task/change/approve/state/of/task';
     TaskResponseEnums result;
 
     try {
@@ -606,6 +608,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     String key,
   ) async {
     bool result = false;
+
     String url = '${ServiceTools.url.workorder_url}/task/addFiles/$taskId/$taskKey';
     String app = '';
 
@@ -618,11 +621,23 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     final bytes = File(filePath).readAsBytesSync();
     String extension = fileName.split(".").last;
 
-    var formData = FormData.fromMap({
-      "document": MultipartFile.fromBytes(
-        bytes,
+    // var formData = FormData.fromMap({
+    //   "document": MultipartFile.fromBytes(
+    //     bytes,
+    //     filename: fileName,
+    //     contentType: MediaType(app, extension),
+    //   ),
+    // });
+
+    print('fileName : ' + fileName);
+    if (fileName == '') {
+      fileName = DateTime.now().toIso8601String() + '.png';
+    }
+    
+    FormData formData = FormData.fromMap({
+      "document": await MultipartFile.fromFile(
+        File(filePath).path,
         filename: fileName,
-        contentType: MediaType(app, extension),
       ),
     });
 
@@ -634,7 +649,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
               headers: {'authorization': 'Bearer $token'},
             ),
           );
-
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
         if (data['success'] == true) {
