@@ -1,4 +1,4 @@
-// ignore_for_file: unrelated_type_equality_checks
+// ignore_for_file: unrelated_type_equality_checks, unused_local_variable
 
 import 'package:auto_route/auto_route.dart';
 import 'package:badges/badges.dart' as badges;
@@ -50,25 +50,21 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<SearchWorkOrderProvider>(
-            create: (_) => SearchWorkOrderProvider()),
+        ChangeNotifierProvider<SearchWorkOrderProvider>(create: (_) => SearchWorkOrderProvider()),
         ChangeNotifierProvider<HomeProvider>(create: (_) => HomeProvider()),
       ],
       child: Consumer2<HomeProvider, SearchWorkOrderProvider>(
-        builder: (context, HomeProvider homeProvider,
-            SearchWorkOrderProvider searchWorkOrderProvider, child) {
+        builder: (context, HomeProvider homeProvider, SearchWorkOrderProvider searchWorkOrderProvider, child) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             if (homeProvider.logoutError) {
               snackBar(context, SnackbarStrings.logoutError, 'error');
             }
             if (homeProvider.isUserLogout) {
               snackBar(context, SnackbarStrings.logoutSuccess, 'success');
-              context.router.pushAndPopUntil(const LoginScreen(),
-                  predicate: (_) => false);
+              context.router.pushAndPopUntil(const LoginScreen(), predicate: (_) => false);
             }
           });
-          final WorkSpaceServiceRepositoryImpl workSpaceService =
-              Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
+          final WorkSpaceServiceRepositoryImpl workSpaceService = Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
           FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
             showAlertDialog(BuildContext context) {
               // set up the buttons
@@ -81,19 +77,15 @@ class _HomeScreenState extends State<HomeScreen> {
               Widget continueButton = TextButton(
                 child: const Text("Detayı Gör"),
                 onPressed: () async {
-                  String userToken =
-                      await SharedManager().getString(SharedEnum.userToken);
-                  final result = await workSpaceService
-                      .getWorkSpaceWithSearchFromGroupWorks(
-                          message.data['taskId'], userToken);
+                  String userToken = await SharedManager().getString(SharedEnum.userToken);
+                  final result = await workSpaceService.getWorkSpaceWithSearchFromGroupWorks(message.data['taskId'], userToken);
 
                   result.fold(
                       (l) => {
-                            context.router.push(
-                                DetailWorkOrderScreen(workSpaceDetail: l)),
+                            context.router.push(DetailWorkOrderScreen(workSpaceDetail: l)),
                             context.router.pop(),
-                          }, (r) {
-                  });
+                          },
+                      (r) {});
                 },
               );
 
@@ -104,8 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         "Yeni bir İş Emri Oluşturuldu",
                         style: TextStyle(color: APPColors.Main.black),
                       ),
-                      content: const Text(
-                          "İş emri detayına gidiliyor lütfen bekleyiniz..."),
+                      content: const Text("İş emri detayına gidiliyor lütfen bekleyiniz..."),
                       actions: const [],
                     )
                   : AlertDialog(
@@ -143,10 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
               body: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    headerTextWidget(),
-                    homePageIcons(context)
-                  ],
+                  children: <Widget>[headerTextWidget(), homePageIcons(context)],
                 ),
               ),
             ),
@@ -161,35 +149,17 @@ class _HomeScreenState extends State<HomeScreen> {
       flex: 4,
       child: Column(
         children: [
-          rowIconButtonSection(
-              context,
-              LocaleKeys.issueList,
-              AppIcons.calendarMonth,
-              const TestScreen(),
-              LocaleKeys.issueSearch,
-              AppIcons.attachment,
+          rowIconButtonSection(context, LocaleKeys.issueList, AppIcons.calendarMonth, const TestScreen(), LocaleKeys.issueSearch, AppIcons.attachment,
               const TestScreen()),
-          rowIconButtonSection(
-              context,
-              LocaleKeys.workOrderList,
-              AppIcons.contentPasteSearch,
-              const WorkOrderListScreen(),
-              LocaleKeys.workOrderSearch,
-              AppIcons.contentPasteOff,
-              const SearchWorkOrderScreen()),
+          rowIconButtonSection(context, LocaleKeys.workOrderList, AppIcons.contentPasteSearch, const WorkOrderListScreen(),
+              LocaleKeys.workOrderSearch, AppIcons.contentPasteOff, const SearchWorkOrderScreen()),
         ],
       ),
     );
   }
 
-  Expanded rowIconButtonSection(
-      BuildContext context,
-      String buttonTitle1,
-      IconData buttonIcon1,
-      PageRouteInfo<dynamic> navigateRouteName1,
-      String buttonTitle2,
-      IconData buttonIcon2,
-      PageRouteInfo<dynamic> navigateRouteName2) {
+  Expanded rowIconButtonSection(BuildContext context, String buttonTitle1, IconData buttonIcon1, PageRouteInfo<dynamic> navigateRouteName1,
+      String buttonTitle2, IconData buttonIcon2, PageRouteInfo<dynamic> navigateRouteName2) {
     return Expanded(
       child: Center(
         child: Row(
@@ -229,10 +199,8 @@ class _HomeScreenState extends State<HomeScreen> {
     return const Expanded(
       child: Column(
         children: [
-          Text(ServiceTools.facilityName,
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400)),
-          Text(AppStrings.title,
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+          Text(ServiceTools.facilityName, style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400)),
+          Text(AppStrings.title, style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
         ],
       ),
     );
@@ -248,8 +216,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       actions: <Widget>[
         IconButton(
-          icon: Icon(AppIcons.powerSettingsOff,
-              size: 35, color: APPColors.Main.black),
+          icon: Icon(AppIcons.powerSettingsOff, size: 35, color: APPColors.Main.black),
           tooltip: AppStrings.logout,
           onPressed: () {
             provider.logOut();

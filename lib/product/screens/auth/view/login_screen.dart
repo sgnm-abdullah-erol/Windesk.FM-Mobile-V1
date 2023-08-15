@@ -51,7 +51,7 @@ class LoginScreen extends StatelessWidget {
 }
 
 class _LoginScreenBody extends StatefulWidget {
-  _LoginScreenBody({required this.provider});
+  const _LoginScreenBody({required this.provider});
   final LoginProvider provider;
 
   @override
@@ -73,7 +73,6 @@ class _LoginScreenBodyState extends State<_LoginScreenBody> {
   void initState() {
     super.initState();
     widget.provider.getRememberInfo();
-    print('ddddddd :::: ddd :::' + widget.provider.userNameController.text);
   }
 
   @override

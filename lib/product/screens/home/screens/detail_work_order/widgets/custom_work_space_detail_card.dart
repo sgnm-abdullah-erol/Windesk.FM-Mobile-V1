@@ -8,17 +8,19 @@ import '../../../../../../feature/constants/style/border_radius.dart';
 import '../../../../../../feature/models/work_space/work_space_detail.dart';
 
 class CustomWorkSpaceDetailCard extends StatelessWidget {
-  const CustomWorkSpaceDetailCard(
-      {super.key,
-      required this.workSpaceDetail,
-      required this.workOrderDetailProvider});
+  const CustomWorkSpaceDetailCard({super.key, required this.workSpaceDetail, required this.workOrderDetailProvider});
 
   final WorkSpaceDetail workSpaceDetail;
   final WorkOrderDetailProvider workOrderDetailProvider;
 
+<<<<<<< HEAD
   final double _elevation = 2;
   final EdgeInsets _paddingCardInside =
       const EdgeInsets.symmetric(horizontal: 15, vertical: 10);
+=======
+  final double _elevation = 8;
+  final EdgeInsets _paddingCardInside = const EdgeInsets.symmetric(horizontal: 15, vertical: 10);
+>>>>>>> origin
 
   final String _owner = 'Talep Sahibi';
   final String _tag = 'Kategori';
@@ -33,8 +35,7 @@ class CustomWorkSpaceDetailCard extends StatelessWidget {
     return Card(
       color: APPColors.Main.white,
       elevation: _elevation,
-      shape: RoundedRectangleBorder(
-          borderRadius: CustomBorderRadius.mediumBorderRadius),
+      shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.mediumBorderRadius),
       child: Padding(
         padding: _paddingCardInside,
         child: Column(
@@ -43,14 +44,11 @@ class CustomWorkSpaceDetailCard extends StatelessWidget {
             _ResponseDates(workSpaceDetail: workSpaceDetail),
             const CustomWoSummaryDivider(),
             const SizedBox(height: 10),
-            Text('WO ${workSpaceDetail.task?.id}',
-                style: Theme.of(context).textTheme.bodyMedium),
-            Text('${workSpaceDetail.state?.name}',
-                style: Theme.of(context).textTheme.bodyMedium),
+            Text('WO ${workSpaceDetail.task?.id}', style: Theme.of(context).textTheme.bodyMedium),
+            Text('${workSpaceDetail.state?.name}', style: Theme.of(context).textTheme.bodyMedium),
             const CustomWoSummaryDivider(),
             const SizedBox(height: 10),
-            Text(workSpaceDetail.task?.description ?? '',
-                style: Theme.of(context).textTheme.bodyMedium),
+            Text(workSpaceDetail.task?.description ?? '', style: Theme.of(context).textTheme.bodyMedium),
             const CustomWoSummaryDivider(),
             const SizedBox(height: 10),
             _DoubleRowInformation(
@@ -65,17 +63,9 @@ class CustomWorkSpaceDetailCard extends StatelessWidget {
               firstLabel: _openDate,
               secondLabel: _updateDate,
               thirdLabel: _nextUpdate,
-              firstValue: workSpaceDetail.workspace?.createdAt
-                      .toString()
-                      .substring(0, 19) ??
-                  '',
-              secondValue: workSpaceDetail.workspace?.updatedAt
-                      .toString()
-                      .substring(0, 19) ??
-                  '',
-              thirdValue:
-                  workSpaceDetail.task?.updatedAt.toString().substring(0, 19) ??
-                      '',
+              firstValue: workSpaceDetail.workspace?.createdAt.toString().substring(0, 19) ?? '',
+              secondValue: workSpaceDetail.workspace?.updatedAt.toString().substring(0, 19) ?? '',
+              thirdValue: workSpaceDetail.task?.updatedAt.toString().substring(0, 19) ?? '',
             ),
             const CustomWoSummaryDivider(),
             const SizedBox(height: 10),
@@ -152,11 +142,7 @@ class _FourRowInformation extends StatelessWidget {
 }
 
 class _DoubleRowInformation extends StatelessWidget {
-  const _DoubleRowInformation(
-      {required this.firstLabel,
-      required this.secondLabel,
-      required this.firstValue,
-      required this.secondValue});
+  const _DoubleRowInformation({required this.firstLabel, required this.secondLabel, required this.firstValue, required this.secondValue});
 
   final String firstLabel;
   final String secondLabel;
@@ -256,10 +242,7 @@ class _ResponseDates extends StatelessWidget {
             children: [
               Text(_responseDate, style: Theme.of(context).textTheme.bodySmall),
               Text(
-                workSpaceDetail.workspace?.updatedAt
-                        ?.toString()
-                        .substring(0, 19) ??
-                    '',
+                workSpaceDetail.workspace?.updatedAt?.toString().substring(0, 19) ?? '',
                 style: Theme.of(context).textTheme.bodyMedium,
                 overflow: TextOverflow.ellipsis,
               ),

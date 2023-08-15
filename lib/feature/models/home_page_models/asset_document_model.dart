@@ -6,47 +6,47 @@ import 'package:json_annotation/json_annotation.dart';
 part 'generator/asset_document_model.g.dart';
 
 @JsonSerializable()
-class AssetDocumentModel extends Equatable{
-    bool canDisplay;
-    String description;
-    String className;
-    String type;
-    bool isActive;
-    String url;
-    DateTime createdAt;
-    bool isDeleted;
-    String name;
-    bool canDelete;
-    List<dynamic> tag;
-    String componentKey;
-    String key;
-    DateTime updatedAt;
-    int id;
+class AssetDocumentModel extends Equatable {
+  final bool? canDisplay;
+  final String? description;
+  final String? className;
+  final String? type;
+  final bool? isActive;
+  final String? url;
+  final DateTime? createdAt;
+  final bool? isDeleted;
+  final String? name;
+  final bool? canDelete;
+  final List<dynamic>? tag;
+  final String? componentKey;
+  final String? key;
+  final DateTime? updatedAt;
+  final int? id;
 
-    factory AssetDocumentModel.fromJson(Map<String, dynamic> json) => _$AssetDocumentModelFromJson(json);
+  factory AssetDocumentModel.fromJson(Map<String, dynamic> json) => _$AssetDocumentModelFromJson(json);
 
-    Map<String, dynamic> toJson() => _$AssetDocumentModelToJson(this);
+  Map<String, dynamic> toJson() => _$AssetDocumentModelToJson(this);
 
-    AssetDocumentModel({
-        required this.canDisplay,
-        required this.description,
-        required this.className,
-        required this.type,
-        required this.isActive,
-        required this.url,
-        required this.createdAt,
-        required this.isDeleted,
-        required this.name,
-        required this.canDelete,
-        required this.tag,
-        required this.componentKey,
-        required this.key,
-        required this.updatedAt,
-        required this.id,
-    });
+  const AssetDocumentModel({
+    required this.canDisplay,
+    required this.description,
+    required this.className,
+    required this.type,
+    required this.isActive,
+    required this.url,
+    required this.createdAt,
+    required this.isDeleted,
+    required this.name,
+    required this.canDelete,
+    required this.tag,
+    required this.componentKey,
+    required this.key,
+    required this.updatedAt,
+    required this.id,
+  });
 
-     @override
-    List<Object?> get props => [
+  @override
+  List<Object?> get props => [
         canDisplay,
         description,
         className,
@@ -63,5 +63,4 @@ class AssetDocumentModel extends Equatable{
         updatedAt,
         id,
       ];
-
 }

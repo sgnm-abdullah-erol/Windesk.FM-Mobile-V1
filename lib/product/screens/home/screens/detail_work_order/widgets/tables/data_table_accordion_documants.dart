@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:internet_file/internet_file.dart';
 import 'package:internet_file/storage_io.dart';
@@ -93,10 +92,7 @@ class DataTableAccordionDocumants extends StatelessWidget {
         location: appDocDir.path,
       ),
       force: true,
-      progress: (receivedLength, contentLength) {
-        final percentage = receivedLength / contentLength * 100;
-        print('download progress: $receivedLength of $contentLength ($percentage%)');
-      },
+      progress: (receivedLength, contentLength) {},
     );
   }
 

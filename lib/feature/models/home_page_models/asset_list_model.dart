@@ -9,6 +9,7 @@ part 'generator/asset_list_model.g.dart';
 
 @JsonSerializable()
 class AssetListModel extends Equatable {
+<<<<<<< HEAD
   bool? canDisplay;
   int? warrantyDurationParts;
   String? installationDate;
@@ -39,6 +40,39 @@ class AssetListModel extends Equatable {
   dynamic warrantyDurationUnit;
   List<AssetImageModel>? images;
   List<AssetDocumentModel>? documents;
+=======
+  final bool? canDisplay;
+  final int? warrantyDurationParts;
+  final String? installationDate;
+  final String? description;
+  final String? className;
+  final String? assetIdentifier;
+  final int? type;
+  final bool? externalNode;
+  final bool? isActive;
+  final String? barCode;
+  final String? trId;
+  final String? serialNo;
+  final String? tagNumber;
+  final DateTime? createdAt;
+  final String? warrantyStartDate;
+  final bool? isDeleted;
+  final String? name;
+  final int? warrantyDurationLabor;
+  final bool? canDelete;
+  final int? id;
+  final dynamic tag;
+  final dynamic structure;
+  final String? key;
+  final DateTime? updatedAt;
+  final String? createdBy;
+  final String? structureName;
+  final String? warrantyGuarantorLabor;
+  final String? warrantyGuarantorParts;
+  final String? warrantyDurationUnit;
+  final List<AssetImageModel>? images;
+  final List<AssetDocumentModel>? documents;
+>>>>>>> origin
 
   factory AssetListModel.fromJson(Map<String, dynamic> json) => _$AssetListModelFromJson(json);
 

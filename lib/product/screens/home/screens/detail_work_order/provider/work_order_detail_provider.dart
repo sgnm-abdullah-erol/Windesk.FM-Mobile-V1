@@ -107,8 +107,6 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
     final result = await workSpaceService.getWorkSpaceWithSearch(detail.task?.id.toString() ?? '', token);
 
-    
-
     result.fold(
       (l) => {
         detail = l,
@@ -322,7 +320,8 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  scanBarcodeAndQr() async {
+  // [TODO SERVIS KODU SERVIS KATMANINA TASICANAK -- OZKAN AYDIN TARAFINDAN YAPILACAK]
+  void scanBarcodeAndQr() async {
     String barcodeScanRes;
     AssetListModel assetListModel;
     try {
@@ -386,8 +385,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        getDetail();
-      }
+      } else {}
     }
   }
 

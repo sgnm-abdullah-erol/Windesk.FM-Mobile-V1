@@ -117,7 +117,6 @@ class WorkOrderAddDocumantSheetProvider extends ChangeNotifier {
 
   void getImageFromGallery() async {
     image = await picker.pickImage(source: ImageSource.gallery);
-    print(image);
     if (image != null) {
       imagePath = image!.path;
       fileImage = File(imagePath);
