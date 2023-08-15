@@ -49,10 +49,16 @@ class AssetDetailScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          const Text(LocaleKeys.images, style: TextStyle(),),
+          const Text(
+            LocaleKeys.images,
+            style: TextStyle(),
+          ),
           const Divider(),
           photosListView(),
-          const Text(LocaleKeys.documents, style: TextStyle(),),
+          const Text(
+            LocaleKeys.documents,
+            style: TextStyle(),
+          ),
           const Divider(),
           documentsListView()
         ],
@@ -62,31 +68,6 @@ class AssetDetailScreen extends StatelessWidget {
 
   Expanded documentsListView() {
     return Expanded(
-<<<<<<< HEAD
-              child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: assetDocumentModel!.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Link(
-                        uri: Uri.parse(assetDocumentModel![index].url),
-                        target: LinkTarget.blank,
-                        builder: (BuildContext ctx, FollowLink? openLink) {
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(child: Text(assetDocumentModel![index].name)),
-                              Expanded(
-                                child: TextButton.icon(
-                                  onPressed: openLink,
-                                  label: const Text('Dökümana Git'),
-                                  icon: const Icon(Icons.read_more),
-                                ),
-                              ),
-                            ],
-                          );
-                        },
-=======
       child: ListView.builder(
           scrollDirection: Axis.vertical,
           itemCount: assetDocumentModel?.length ?? 0,
@@ -104,7 +85,6 @@ class AssetDetailScreen extends StatelessWidget {
                         onPressed: openLink,
                         label: const Text('Dökümana Git'),
                         icon: const Icon(Icons.read_more),
->>>>>>> origin
                       ),
                     ],
                   );

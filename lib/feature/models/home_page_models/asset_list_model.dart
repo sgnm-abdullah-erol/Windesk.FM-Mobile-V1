@@ -1,46 +1,12 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'asset_document_model.dart';
-import 'asset_image_model.dart';
+import 'package:vm_fm_4/feature/models/home_page_models/asset_document_model.dart';
+import 'package:vm_fm_4/feature/models/home_page_models/asset_image_model.dart';
 
 part 'generator/asset_list_model.g.dart';
 
 @JsonSerializable()
 class AssetListModel extends Equatable {
-<<<<<<< HEAD
-  bool? canDisplay;
-  int? warrantyDurationParts;
-  String? installationDate;
-  String? description;
-  String? className;
-  dynamic assetIdentifier;
-  int? type;
-  bool? externalNode;
-  bool? isActive;
-  String? barCode;
-  String? trId;
-  String? serialNo;
-  String? tagNumber;
-  DateTime? createdAt;
-  String? warrantyStartDate;
-  bool? isDeleted;
-  String? name;
-  int? warrantyDurationLabor;
-  bool? canDelete;
-  int? id;
-  dynamic tag;
-  dynamic structure;
-  String? key;
-  DateTime? updatedAt;
-  dynamic createdBy;
-  dynamic warrantyGuarantorLabor;
-  dynamic warrantyGuarantorParts;
-  dynamic warrantyDurationUnit;
-  List<AssetImageModel>? images;
-  List<AssetDocumentModel>? documents;
-=======
   final bool? canDisplay;
   final int? warrantyDurationParts;
   final String? installationDate;
@@ -72,13 +38,12 @@ class AssetListModel extends Equatable {
   final String? warrantyDurationUnit;
   final List<AssetImageModel>? images;
   final List<AssetDocumentModel>? documents;
->>>>>>> origin
 
   factory AssetListModel.fromJson(Map<String, dynamic> json) => _$AssetListModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$AssetListModelToJson(this);
 
-  AssetListModel(
+  const AssetListModel(
       {this.canDisplay,
       this.warrantyDurationParts,
       this.installationDate,
@@ -103,6 +68,7 @@ class AssetListModel extends Equatable {
       this.key,
       this.updatedAt,
       this.createdBy,
+      this.structureName,
       this.warrantyGuarantorLabor,
       this.warrantyGuarantorParts,
       this.warrantyDurationUnit,
@@ -136,6 +102,7 @@ class AssetListModel extends Equatable {
         key,
         updatedAt,
         createdBy,
+        structureName,
         warrantyGuarantorLabor,
         warrantyGuarantorParts,
         warrantyDurationUnit,

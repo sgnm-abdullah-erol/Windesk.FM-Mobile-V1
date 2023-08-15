@@ -13,14 +13,8 @@ class CustomWorkSpaceDetailCard extends StatelessWidget {
   final WorkSpaceDetail workSpaceDetail;
   final WorkOrderDetailProvider workOrderDetailProvider;
 
-<<<<<<< HEAD
-  final double _elevation = 2;
-  final EdgeInsets _paddingCardInside =
-      const EdgeInsets.symmetric(horizontal: 15, vertical: 10);
-=======
   final double _elevation = 8;
   final EdgeInsets _paddingCardInside = const EdgeInsets.symmetric(horizontal: 15, vertical: 10);
->>>>>>> origin
 
   final String _owner = 'Talep Sahibi';
   final String _tag = 'Kategori';
