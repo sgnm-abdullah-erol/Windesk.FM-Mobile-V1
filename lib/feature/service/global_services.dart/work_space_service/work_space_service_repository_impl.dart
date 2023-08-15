@@ -119,7 +119,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
-        print(data);
         workSpaceDetailList = WorkSpaceDetail.fromJsonList(data);
 
         return Left(workSpaceDetailList.first);
@@ -714,11 +713,9 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: '500'));
     }
   }
-  
-   @override
-  Future<Either<WorkSpaceDetail, CustomServiceException>>
-      getWorkSpaceWithSearchFromGroupWorks(
-          String workOrderCode, String token) async {
+
+  @override
+  Future<Either<WorkSpaceDetail, CustomServiceException>> getWorkSpaceWithSearchFromGroupWorks(String workOrderCode, String token) async {
     List<WorkSpaceDetail> workSpaceDetailList;
     String url =
         '${ServiceTools.url.workorder_url}/task/workSpace/task/state/List/can/be/assigned/user/pagination/swagger/search?page=1&limit=10&orderBy=DESC&searchString=$workOrderCode';
@@ -736,15 +733,11 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
         return Left(workSpaceDetailList.first);
       } else {
-        return Right(CustomServiceException(
-            message: CustomServiceMessages.work,
-            statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
       }
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(
-          message: CustomServiceMessages.workOrderWorkloadError,
-          statusCode: '500'));
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
     }
   }
 }
