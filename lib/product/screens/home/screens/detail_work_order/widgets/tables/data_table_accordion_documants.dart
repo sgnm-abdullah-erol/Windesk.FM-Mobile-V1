@@ -1,8 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_file_downloader/flutter_file_downloader.dart';
+import 'package:internet_file/internet_file.dart';
+import 'package:internet_file/storage_io.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
-import '../../../../../../../feature/components/snackBar/snackbar.dart';
-import '../../../../../../../feature/constants/other/snackbar_strings.dart';
 import '../../../../../../../feature/models/work_space/work_space_documents.dart';
 
 import '../../../../../../../feature/constants/other/app_icons.dart';
@@ -13,10 +15,12 @@ class DataTableAccordionDocumants extends StatelessWidget {
   DataTableAccordionDocumants({super.key, required this.delete, required this.data});
 
   final Function delete;
-  final List<String> _labelList = ['id', 'İsim', 'Tür', 'İndir', 'Sil'];
   final List<WorkSpaceDocuments> data;
 
+  final List<String> _labelList = ['id', 'İsim', 'Tür', 'İndir', 'Sil'];
+
   final String _nonKnownName = 'Bilinmiyor';
+
   final String _noEffortType = 'Çalışma Türü Belirtilmemiş';
 
   @override
@@ -76,19 +80,20 @@ class DataTableAccordionDocumants extends StatelessWidget {
     );
   }
 
-  void _downloadFile(BuildContext context, String url, String name) {
-    FileDownloader.downloadFile(
-        url: url,
-        name: name,
-        onProgress: (String? fileName, double progress) {
-          return Center(child: CircularProgressIndicator(value: progress));
-        },
-        onDownloadCompleted: (String path) {
-          snackBar(context, SnackbarStrings.fileDownloaded, 'success');
-        },
-        onDownloadError: (String error) {
-          snackBar(context, SnackbarStrings.fileNotDownloaded, 'error');
-        });
+  void _downloadFile(BuildContext context, String url, String name) async {
+    final storageIO = InternetFileStorageIO();
+    Directory appDocDir = await getApplicationDocumentsDirectory();
+
+    await InternetFile.get(
+      url,
+      storage: storageIO,
+      storageAdditional: storageIO.additional(
+        filename: name,
+        location: appDocDir.path,
+      ),
+      force: true,
+      progress: (receivedLength, contentLength) {},
+    );
   }
 
   TextStyle _cellTextStyle() {

@@ -6,4 +6,6 @@ enum SharedEnum {
   userToken,
   userName,
   userId,
+  password,
+  userNameLogin
 }

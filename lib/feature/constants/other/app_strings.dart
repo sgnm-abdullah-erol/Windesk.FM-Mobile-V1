@@ -29,7 +29,7 @@ class AppStrings {
   // workorder tabs
   static const myOrders = 'Üzerimdekiler';
   static const myGroups = 'Grubumdakiler';
-  static const myPendiks = 'Bekleyenler';
+  static const myPendiks = 'Onay Bekleyenler';
 
   //button
   static const start = 'Başlat';

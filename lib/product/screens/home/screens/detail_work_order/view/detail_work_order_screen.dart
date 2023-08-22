@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_interpolation_to_compose_strings
+
 import 'package:accordion/accordion.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -127,7 +129,7 @@ class _StateChangeDropDownButton extends StatelessWidget {
   const _StateChangeDropDownButton({required this.provider});
 
   final WorkOrderDetailProvider provider;
-  final String _currentState = 'Anlık İş Durumu';
+  final String _currentState = 'İşlem Girişi';
   final String _alertTextOne = 'İş emrinin anlık durumunu ';
   final String _alertTextTwo = ' durumuna almak istediğinizden emin misiniz?';
 
@@ -138,10 +140,7 @@ class _StateChangeDropDownButton extends StatelessWidget {
       child: DropDownInputFields(
         labelText: _currentState,
         onChangedFunction: (val) async {
-          await WoWaitAcceptModalAlert()
-              // ignore: prefer_interpolation_to_compose_strings
-              .showAlertDialog(context, "${"$_alertTextOne'" + val}'$_alertTextTwo", AppStrings.changeState)
-              .then((value) {
+          await WoWaitAcceptModalAlert().showAlertDialog(context, "${"$_alertTextOne'" + val}'$_alertTextTwo", AppStrings.changeState).then((value) {
             if (value == true) {
               provider.changeState(val);
             } else {

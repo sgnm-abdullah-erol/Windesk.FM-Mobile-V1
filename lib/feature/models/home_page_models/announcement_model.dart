@@ -29,7 +29,7 @@ class AnnouncementModel extends Equatable {
   }
 
   @override
-  List<Object?> get props => [
+  List<Object?> get props => [ 
         name,
         announcement,
       ];

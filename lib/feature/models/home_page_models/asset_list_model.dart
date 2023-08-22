@@ -1,7 +1,9 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:vm_fm_4/feature/models/home_page_models/asset_document_model.dart';
-import 'package:vm_fm_4/feature/models/home_page_models/asset_image_model.dart';
+import 'asset_document_model.dart';
+import 'asset_image_model.dart';
 
 part 'generator/asset_list_model.g.dart';
 
@@ -32,7 +34,6 @@ class AssetListModel extends Equatable {
   final String? key;
   final DateTime? updatedAt;
   final String? createdBy;
-  final String? structureName;
   final String? warrantyGuarantorLabor;
   final String? warrantyGuarantorParts;
   final String? warrantyDurationUnit;
@@ -43,38 +44,38 @@ class AssetListModel extends Equatable {
 
   Map<String, dynamic> toJson() => _$AssetListModelToJson(this);
 
-  AssetListModel(
-      {this.canDisplay,
-      this.warrantyDurationParts,
-      this.installationDate,
-      this.description,
-      this.className,
-      this.assetIdentifier,
-      this.type,
-      this.externalNode,
-      this.isActive,
-      this.barCode,
-      this.trId,
-      this.serialNo,
-      this.tagNumber,
-      this.createdAt,
-      this.warrantyStartDate,
-      this.isDeleted,
-      this.name,
-      this.warrantyDurationLabor,
-      this.canDelete,
-      this.id,
-      this.tag,
-      this.key,
-      this.updatedAt,
-      this.createdBy,
-      this.structureName,
-      this.warrantyGuarantorLabor,
-      this.warrantyGuarantorParts,
-      this.warrantyDurationUnit,
-      this.images,
-      this.structure,
-      this.documents});
+  const AssetListModel({
+    this.canDisplay,
+    this.warrantyDurationParts,
+    this.installationDate,
+    this.description,
+    this.className,
+    this.assetIdentifier,
+    this.type,
+    this.externalNode,
+    this.isActive,
+    this.barCode,
+    this.trId,
+    this.serialNo,
+    this.tagNumber,
+    this.createdAt,
+    this.warrantyStartDate,
+    this.isDeleted,
+    this.name,
+    this.warrantyDurationLabor,
+    this.canDelete,
+    this.id,
+    this.tag,
+    this.key,
+    this.updatedAt,
+    this.createdBy,
+    this.warrantyGuarantorLabor,
+    this.warrantyGuarantorParts,
+    this.warrantyDurationUnit,
+    this.images,
+    this.structure,
+    this.documents,
+  });
 
   @override
   List<Object?> get props => [
@@ -102,7 +103,6 @@ class AssetListModel extends Equatable {
         key,
         updatedAt,
         createdBy,
-        structureName,
         warrantyGuarantorLabor,
         warrantyGuarantorParts,
         warrantyDurationUnit,

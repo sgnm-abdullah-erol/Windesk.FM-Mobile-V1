@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vm_fm_4/feature/route/app_route.gr.dart';
-import 'package:vm_fm_4/product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
+import '../../../../feature/route/app_route.gr.dart';
+import '../../home/screens/work_order_list/widgets/custom_loading_indicator.dart';
 
 import '../../../../../../../feature/components/appbar/custom_main_appbar.dart';
 import '../../../../../../../feature/components/buttons/custom_half_buttons.dart';

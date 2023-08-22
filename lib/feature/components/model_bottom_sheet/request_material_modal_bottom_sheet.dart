@@ -64,6 +64,8 @@ class _BodyWidget extends StatelessWidget {
             },
             rightOnPressed: () {
               value.addRequestedMaterial(workSpaceId, taskId);
+              Navigator.of(context).pop();
+
             },
           ),
         ),

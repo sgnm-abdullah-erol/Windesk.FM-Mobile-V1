@@ -96,6 +96,9 @@ dependencies:
 
   # file downloader
   flutter_file_downloader: ^1.1.2
+  simple_downloader: ^0.0.3+1
+  flutter_download_manager: ^0.5.5
+  internet_file: ^1.2.0
 
 dev_dependencies:
   flutter_test:

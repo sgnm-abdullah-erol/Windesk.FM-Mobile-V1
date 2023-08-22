@@ -16,6 +16,9 @@ class LoginProvider extends ChangeNotifier {
   String _userName = '';
   String get userName => _userName;
 
+  final TextEditingController _userNameController = TextEditingController();
+  TextEditingController get userNameController => _userNameController;
+
   String _password = '';
   String get password => _password;
 
@@ -28,16 +31,33 @@ class LoginProvider extends ChangeNotifier {
   bool _textFieldEmptyError = false;
   bool get textFieldEmptyError => _textFieldEmptyError;
 
+  bool _rememberMe = false;
+  bool get rememberMe => _rememberMe;
+
   String _userToken = '';
   String _userTokenName = '';
 
   String _userId = '';
   String get userId => _userId;
 
+  void setRememberMe(bool value) {
+    _rememberMe = value;
+  }
+
+  void getRememberInfo() async {
+    _userNameController.text = await SharedManager().getString(SharedEnum.userNameLogin);
+    notifyListeners();
+  }
+
   void logIn(BuildContext context) async {
     if (_userName.isNotEmpty && _password.isNotEmpty) {
       _loading = true;
       notifyListeners();
+
+      if (_rememberMe = true) {
+        await SharedManager().setString(SharedEnum.userNameLogin, _userName);
+        await SharedManager().setString(SharedEnum.password, _password);
+      }
 
       final response = await _authService.login(userName, password);
 

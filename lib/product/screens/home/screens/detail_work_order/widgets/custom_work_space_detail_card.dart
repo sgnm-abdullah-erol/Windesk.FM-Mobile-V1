@@ -16,13 +16,13 @@ class CustomWorkSpaceDetailCard extends StatelessWidget {
   final double _elevation = 8;
   final EdgeInsets _paddingCardInside = const EdgeInsets.symmetric(horizontal: 15, vertical: 10);
 
-  final String _owner = 'VakaSahibi';
-  final String _tag = 'Vaka Etiketi';
+  final String _owner = 'Talep Sahibi';
+  final String _tag = 'Kategori';
   final String _openDate = 'Açılış Tarihi';
   final String _updateDate = 'Güncelleme Tarihi';
-  final String _nextUpdate = 'Sonraki Güncelleme';
+  final String _nextUpdate = 'Son Güncelleme';
   final String _assignedGroup = 'Atanan Grup';
-  final String _assignedPerson = 'Atanan Kişi';
+  final String _assignedPerson = 'Sorumlu';
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +74,7 @@ class CustomWorkSpaceDetailCard extends StatelessWidget {
             _DoubleRowInformationComponent(
               firstLabel: 'Varlık',
               secondLabel: _assignedPerson,
-              firstValue: workSpaceDetail.task?.requestedComponents!.name ?? '',
+              firstValue: workSpaceDetail.task?.requestedComponents?.name ?? '',
               secondValue: workSpaceDetail.task?.user ?? '',
               workOrderDetailProvider: workOrderDetailProvider,
             ),
@@ -203,11 +203,11 @@ class _DoubleRowInformationComponent extends StatelessWidget {
               CustomElevatedButtonWithIcon(
                   width: MediaQuery.of(context).size.width / 3,
                   height: MediaQuery.of(context).size.height * 0.05,
-                  bgColor: APPColors.Main.white,
+                  bgColor: APPColors.Main.blue,
                   onPressFunction: workOrderDetailProvider.scanBarcodeAndQr,
                   textValue: 'Değiştir',
-                  textColor: APPColors.Main.white,
-                  iconColor: APPColors.Main.white,
+                  textColor: APPColors.Main.black,
+                  iconColor: APPColors.Main.black,
                   icon: Icons.qr_code)
             ],
           ),

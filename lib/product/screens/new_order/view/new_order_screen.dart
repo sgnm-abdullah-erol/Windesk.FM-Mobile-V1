@@ -186,7 +186,7 @@ class NewOrderScreen extends StatelessWidget {
                 DropDownInputFields(
                   labelText: 'Tree1',
                   onChangedFunction: (String newValue) {
-                    //woCreateProvider.setRequestType1(newValue);
+                    woCreateProvider.setRequestType1(newValue);
                   },
                   rightIcon: Icons.arrow_drop_down_rounded,
                   dropDownArray:

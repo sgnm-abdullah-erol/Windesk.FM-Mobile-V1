@@ -1,9 +1,10 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:http_parser/http_parser.dart';
-import 'package:vm_fm_4/feature/models/home_page_models/asset_list_model.dart';
+import '../../../models/home_page_models/asset_list_model.dart';
 import '../../../constants/paths/service_tools.dart';
 import '../../../models/work_space/work_space_documents.dart';
 import '../../../models/work_space/work_space_requirement_materials_list.dart';
@@ -47,7 +48,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   Future<Either<WorkSpaceMyGroupDemandList, CustomServiceException>> getMyGroupDemandList(String token) async {
     WorkSpaceMyGroupDemandList workSpaceMyGroupDemandList;
 
-    String url = 'http://localhost:3015/classification/getRequestTypeWithTaskCount';
+    String url = '${ServiceTools.url.workorder_url}/classification/getRequestTypeWithTaskCount';
 
     try {
       final response = await super.dio.post(
@@ -57,7 +58,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
               responseType: ResponseType.json,
             ),
           );
-      super.logger.i(response);
+      super.logger.e(response);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
@@ -77,7 +78,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   @override
   Future<Either<List<WorkSpacePendiks>, CustomServiceException>> getWorkSpacePendiks(String id, String token, int page) async {
     List<WorkSpacePendiks> workSpaceAppendings = [];
-    String url = 'http://localhost:3015/task/workSpace/task/state/List/can/be/approve/current/user/pagination/$id';
+    String url = '${ServiceTools.url.workorder_url}/task/workSpace/task/state/List/can/be/approve/current/user/pagination/$id';
 
     try {
       final response = await super.dio.get(
@@ -120,6 +121,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
         workSpaceDetailList = WorkSpaceDetail.fromJsonList(data);
+        super.logger.e(response.toString());
 
         return Left(workSpaceDetailList.first);
       } else {
@@ -134,7 +136,8 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   @override
   Future<Either<AssetListModel, CustomServiceException>> getAssetWithSearch(String assetCode, String token) async {
     AssetListModel assetListModel;
-    String url = '${ServiceTools.url.asset_url}/component/identifier/$assetCode';
+    String url =
+        '${ServiceTools.url.asset_url}/component/searchByColumn/?page=1&limit=10&orderBy=ASC&orderByColumn=&searchColumn=tagNumber&searchString=$assetCode&searchType=CONTAINS';
     try {
       final response = await super.dio.get(
             url,
@@ -143,7 +146,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
             ),
           );
 
-      final data = response.data['properties'];
+      final data = response.data['children'][0];
       assetListModel = AssetListModel.fromJson(data);
 
       return Left(assetListModel);
@@ -170,7 +173,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
         workSpaceDetailList = WorkSpaceDetail.fromJsonList(data);
-
         return Left(workSpaceDetailList);
       } else {
         return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
@@ -184,7 +186,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   @override
   Future<Either<List<WorkSpaceEfforts>, CustomServiceException>> getWorkSpaceEfforts(String taskId, String token) async {
     List<WorkSpaceEfforts> workSpaceEfforts;
-    String url = 'http://localhost:3015/task/mobile/getEffortsByTaskId/$taskId';
+    String url = '${ServiceTools.url.workorder_url}/task/mobile/getEffortsByTaskId/$taskId';
 
     try {
       final response = await super.dio.get(
@@ -220,14 +222,13 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     String effortType,
   ) async {
     bool result;
-    String url = '${ServiceTools.url.workorder_url}/task/add/node/to/task}';
+    String url = '${ServiceTools.url.workorder_url}/task/add/node/to/task';
 
     if (effortType == 'Working') {
       effortType = 'EffortType2';
     } else if (effortType == 'Way') {
       effortType = 'EffortType1';
     }
-
     try {
       final response = await super.dio.post(
             url,
@@ -249,23 +250,18 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
             ],
             options: Options(
               headers: {'authorization': 'Bearer $token'},
-              contentType: Headers.jsonContentType,
             ),
           );
 
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        final data = response.data;
+      final data = response.data;
 
-        if (data == 'added') {
-          result = true;
-        } else {
-          result = false;
-        }
-
-        return Left(result);
+      if (data == 'added') {
+        result = true;
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+        result = false;
       }
+
+      return Left(result);
     } catch (e) {
       super.logger.i(e);
       return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
@@ -331,7 +327,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   @override
   Future<Either<bool, CustomServiceException>> addWorkSpaceSpareparts(String taskId, String token, String sparePartId, String amount) async {
     bool result;
-    String url = '${ServiceTools.url.workorder_url}/task/add/node/to/task}';
+    String url = '${ServiceTools.url.workorder_url}/task/add/node/to/task';
 
     try {
       final response = await super.dio.post(
@@ -497,7 +493,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
   @override
   Future<Either<TaskResponseEnums, CustomServiceException>> changeWorkSpaceState(String taskId, String nextStateId, String token) async {
-    String url = '${ServiceTools.url.workorder_url}/task/change/state/of/task';
+    String url = '${ServiceTools.url.workorder_url}/task/change/approve/state/of/task';
     TaskResponseEnums result;
 
     try {
@@ -611,6 +607,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     String key,
   ) async {
     bool result = false;
+
     String url = '${ServiceTools.url.workorder_url}/task/addFiles/$taskId/$taskKey';
     String app = '';
 
@@ -623,11 +620,20 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     final bytes = File(filePath).readAsBytesSync();
     String extension = fileName.split(".").last;
 
-    var formData = FormData.fromMap({
-      "document": MultipartFile.fromBytes(
-        bytes,
+    // var formData = FormData.fromMap({
+    //   "document": MultipartFile.fromBytes(
+    //     bytes,
+    //     filename: fileName,
+    //     contentType: MediaType(app, extension),
+    //   ),
+    // });
+    if (fileName == '') {
+      fileName = '${DateTime.now().toIso8601String()}.png';
+    }
+    FormData formData = FormData.fromMap({
+      "document": await MultipartFile.fromFile(
+        File(filePath).path,
         filename: fileName,
-        contentType: MediaType(app, extension),
       ),
     });
 
@@ -639,6 +645,8 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
               headers: {'authorization': 'Bearer $token'},
             ),
           );
+
+      super.logger.i(response);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
@@ -673,7 +681,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
-        workSpaceDetail = WorkSpaceDetail.fromJson(data);
+        workSpaceDetail = WorkSpaceDetail.fromJsonList(data).first;
 
         return Left(workSpaceDetail);
       } else {
