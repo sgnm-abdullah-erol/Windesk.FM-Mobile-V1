@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../feature/components/snackBar/snackbar.dart';
 import '../../../../feature/database/shared_manager.dart';
@@ -17,7 +16,7 @@ class LoginProvider extends ChangeNotifier {
   String _userName = '';
   String get userName => _userName;
 
-  TextEditingController _userNameController = TextEditingController();
+  final TextEditingController _userNameController = TextEditingController();
   TextEditingController get userNameController => _userNameController;
 
   String _password = '';

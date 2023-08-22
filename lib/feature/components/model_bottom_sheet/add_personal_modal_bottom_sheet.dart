@@ -85,7 +85,10 @@ class AddPersonalModalBottomSheet extends StatelessWidget {
               leftOnPressed: () {
                 Navigator.pop(context);
               },
-              rightOnPressed: addPhotoFunction)
+              rightOnPressed: () {
+                addPhotoFunction();
+                Navigator.of(context).pop();
+              })
         ],
       ),
     );

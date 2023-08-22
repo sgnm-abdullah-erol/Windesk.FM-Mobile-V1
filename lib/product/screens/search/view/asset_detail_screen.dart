@@ -62,56 +62,54 @@ class AssetDetailScreen extends StatelessWidget {
 
   Expanded documentsListView() {
     return Expanded(
-              child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: assetDocumentModel!.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Link(
-                        uri: Uri.parse(assetDocumentModel![index].url),
-                        target: LinkTarget.blank,
-                        builder: (BuildContext ctx, FollowLink? openLink) {
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(child: Text(assetDocumentModel![index].name)),
-                              Expanded(
-                                child: TextButton.icon(
-                                  onPressed: openLink,
-                                  label: const Text('Dökümana Git'),
-                                  icon: const Icon(Icons.read_more),
-                                ),
-                              ),
-                            ],
-                          );
-                        },
+      child: ListView.builder(
+          scrollDirection: Axis.vertical,
+          itemCount: assetDocumentModel?.length ?? 0,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Link(
+                uri: Uri.parse(assetDocumentModel?[index].url ?? ''),
+                target: LinkTarget.blank,
+                builder: (BuildContext ctx, FollowLink? openLink) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(assetDocumentModel?[index].name ?? ''),
+                      TextButton.icon(
+                        onPressed: openLink,
+                        label: const Text('Dökümana Git'),
+                        icon: const Icon(Icons.read_more),
                       ),
-                      onTap: () {},
-                    );
-                  }),
+                    ],
+                  );
+                },
+              ),
+              onTap: () {},
             );
+          }),
+    );
   }
 
   Expanded photosListView() {
     return Expanded(
-              child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: assetImageModel!.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(assetImageModel![index].name),
-                          ActivitiesPhoto(
-                            photoAdress: assetImageModel![index].url,
-                          ),
-                        ],
-                      ),
-                      onTap: () {},
-                    );
-                  }),
+      child: ListView.builder(
+          scrollDirection: Axis.vertical,
+          itemCount: assetImageModel!.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(assetImageModel![index].name),
+                  ActivitiesPhoto(
+                    photoAdress: assetImageModel![index].url,
+                  ),
+                ],
+              ),
+              onTap: () {},
             );
+          }),
+    );
   }
 }
 

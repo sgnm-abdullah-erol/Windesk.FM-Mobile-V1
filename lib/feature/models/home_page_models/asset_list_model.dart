@@ -9,72 +9,73 @@ part 'generator/asset_list_model.g.dart';
 
 @JsonSerializable()
 class AssetListModel extends Equatable {
-  bool? canDisplay;
-  int? warrantyDurationParts;
-  String? installationDate;
-  String? description;
-  String? className;
-  dynamic assetIdentifier;
-  int? type;
-  bool? externalNode;
-  bool? isActive;
-  String? barCode;
-  String? trId;
-  String? serialNo;
-  String? tagNumber;
-  DateTime? createdAt;
-  String? warrantyStartDate;
-  bool? isDeleted;
-  String? name;
-  int? warrantyDurationLabor;
-  bool? canDelete;
-  int? id;
-  dynamic tag;
-  dynamic structure;
-  String? key;
-  DateTime? updatedAt;
-  dynamic createdBy;
-  dynamic warrantyGuarantorLabor;
-  dynamic warrantyGuarantorParts;
-  dynamic warrantyDurationUnit;
-  List<AssetImageModel>? images;
-  List<AssetDocumentModel>? documents;
+  final bool? canDisplay;
+  final int? warrantyDurationParts;
+  final String? installationDate;
+  final String? description;
+  final String? className;
+  final String? assetIdentifier;
+  final int? type;
+  final bool? externalNode;
+  final bool? isActive;
+  final String? barCode;
+  final String? trId;
+  final String? serialNo;
+  final String? tagNumber;
+  final DateTime? createdAt;
+  final String? warrantyStartDate;
+  final bool? isDeleted;
+  final String? name;
+  final int? warrantyDurationLabor;
+  final bool? canDelete;
+  final int? id;
+  final dynamic tag;
+  final dynamic structure;
+  final String? key;
+  final DateTime? updatedAt;
+  final String? createdBy;
+  final String? warrantyGuarantorLabor;
+  final String? warrantyGuarantorParts;
+  final String? warrantyDurationUnit;
+  final List<AssetImageModel>? images;
+  final List<AssetDocumentModel>? documents;
 
   factory AssetListModel.fromJson(Map<String, dynamic> json) => _$AssetListModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$AssetListModelToJson(this);
 
-  AssetListModel(
-      {this.canDisplay,
-      this.warrantyDurationParts,
-      this.installationDate,
-      this.description,
-      this.className,
-      this.assetIdentifier,
-      this.type,
-      this.externalNode,
-      this.isActive,
-      this.barCode,
-      this.trId,
-      this.serialNo,
-      this.tagNumber,
-      this.createdAt,
-      this.warrantyStartDate,
-      this.isDeleted,
-      this.name,
-      this.warrantyDurationLabor,
-      this.canDelete,
-      this.id,
-      this.tag,
-      this.key,
-      this.updatedAt,
-      this.createdBy,
-      this.warrantyGuarantorLabor,
-      this.warrantyGuarantorParts,
-      this.warrantyDurationUnit,
-      this.images,
-      this.structure,
-      this.documents});
+  const AssetListModel({
+    this.canDisplay,
+    this.warrantyDurationParts,
+    this.installationDate,
+    this.description,
+    this.className,
+    this.assetIdentifier,
+    this.type,
+    this.externalNode,
+    this.isActive,
+    this.barCode,
+    this.trId,
+    this.serialNo,
+    this.tagNumber,
+    this.createdAt,
+    this.warrantyStartDate,
+    this.isDeleted,
+    this.name,
+    this.warrantyDurationLabor,
+    this.canDelete,
+    this.id,
+    this.tag,
+    this.key,
+    this.updatedAt,
+    this.createdBy,
+    this.warrantyGuarantorLabor,
+    this.warrantyGuarantorParts,
+    this.warrantyDurationUnit,
+    this.images,
+    this.structure,
+    this.documents,
+  });
 
   @override
   List<Object?> get props => [

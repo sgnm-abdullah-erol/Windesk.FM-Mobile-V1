@@ -1,8 +1,9 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:http_parser/http_parser.dart';
 import '../../../models/home_page_models/asset_list_model.dart';
 import '../../../constants/paths/service_tools.dart';
 import '../../../models/work_space/work_space_documents.dart';
@@ -457,7 +458,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   Future<Either<bool, CustomServiceException>> takeItOnMe(String taskId, String currentStateId, String token) async {
     String url = '${ServiceTools.url.workorder_url}/task/add/user/to/state';
     bool result = false;
-    print('identifier' + currentStateId);
 
     try {
       final response = await super.dio.post(
@@ -493,7 +493,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
   @override
   Future<Either<TaskResponseEnums, CustomServiceException>> changeWorkSpaceState(String taskId, String nextStateId, String token) async {
-    print(taskId + ' :: ' + nextStateId + ' ::: ');
     String url = '${ServiceTools.url.workorder_url}/task/change/approve/state/of/task';
     TaskResponseEnums result;
 
@@ -628,9 +627,8 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     //     contentType: MediaType(app, extension),
     //   ),
     // });
-    print('fileName : ' + fileName);
     if (fileName == '') {
-      fileName = DateTime.now().toIso8601String() + '.png';
+      fileName = '${DateTime.now().toIso8601String()}.png';
     }
     FormData formData = FormData.fromMap({
       "document": await MultipartFile.fromFile(

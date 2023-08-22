@@ -54,6 +54,7 @@ class AddMaterialModalBottomSheet extends StatelessWidget {
             },
             rightOnPressed: () {
               value.addSparepart(taskId);
+              Navigator.of(context).pop();
             },
           ),
         ),

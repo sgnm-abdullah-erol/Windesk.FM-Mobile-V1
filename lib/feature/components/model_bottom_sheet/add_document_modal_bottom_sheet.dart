@@ -83,6 +83,7 @@ class _ActionButtons extends StatelessWidget {
       leftOnPressed: () => Navigator.of(context).pop(),
       rightOnPressed: () {
         provider.savePdf(taskId, taskKey);
+        Navigator.of(context).pop();
       },
     );
   }

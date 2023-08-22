@@ -80,4 +80,5 @@ Map<String, dynamic> _$AssetListModelToJson(AssetListModel instance) =>
       'warrantyDurationUnit': instance.warrantyDurationUnit,
       'images': instance.images,
       'documents': instance.documents,
+
     };
