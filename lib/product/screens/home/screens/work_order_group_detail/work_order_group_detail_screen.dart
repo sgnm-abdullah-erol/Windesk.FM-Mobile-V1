@@ -4,7 +4,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../feature/components/appbar/custom_main_appbar.dart';
-import '../../../../../feature/components/cards/custom_wo_listl_card.dart';
+import '../../../../../feature/components/cards/custom_workorder_list_card.dart';
 import '../../../../../core/route/app_route.gr.dart';
 import '../work_order_list/widgets/custom_loading_indicator.dart';
 import 'work_order_group_detail_provider.dart';
@@ -46,7 +46,7 @@ class _BuildScaffold extends StatelessWidget {
     return ListView.builder(
         itemCount: provider.workSpaceGroupWorkOrdersList.length,
         itemBuilder: (context, index) {
-          return CustomWoDetailCard(
+          return CustomWorkOrderListCard(
             workSpaceDetail: provider.workSpaceGroupWorkOrdersList[index],
             isButtonVisible: false,
             onTap: () {

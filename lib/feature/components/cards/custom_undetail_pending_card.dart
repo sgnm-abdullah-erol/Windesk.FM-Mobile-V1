@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/other/colors.dart';
 import '../../../core/constants/style/border_radius.dart';
 import '../../../core/constants/style/custom_paddings.dart';
+import '../../../generated/locale_keys.g.dart';
 import '../../extensions/context_extension.dart';
 import '../../models/work_space/work_space_appendings.dart';
 import '../dividers/custom_wo_summary_divider.dart';
@@ -11,12 +13,6 @@ class CustomUndetailPendingCard extends StatelessWidget {
   const CustomUndetailPendingCard({super.key, required this.workSpacePendiks});
 
   final WorkSpacePendiks workSpacePendiks;
-
-  final String _noDesc = 'Açıklama Yok';
-  final String _noUserName = 'Kullanıcı Yok';
-  final String _noStateName = 'Durum Yok';
-  final String _noCreatedAtTime = 'Oluşturulma Tarihi Yok';
-  final String _noReferenceId = 'Referans ID Yok';
 
   @override
   Widget build(BuildContext context) {
@@ -35,17 +31,17 @@ class CustomUndetailPendingCard extends StatelessWidget {
             children: [
               Text('WO ${workSpacePendiks.task?.id.toString() ?? 0} ${workSpacePendiks.task?.name ?? ''}', style: _style()),
               const CustomWoSummaryDivider(),
-              Text(workSpacePendiks.task?.description ?? _noDesc, style: _style()),
+              Text(workSpacePendiks.task?.description ?? LocaleKeys.NoName.tr(), style: _style()),
               const CustomWoSummaryDivider(),
-              Text(workSpacePendiks.task?.user ?? _noUserName, style: _style()),
+              Text(workSpacePendiks.task?.user ?? LocaleKeys.NoName.tr(), style: _style()),
               const CustomWoSummaryDivider(),
-              Text(workSpacePendiks.state?.name ?? _noStateName, style: _style()),
+              Text(workSpacePendiks.state?.name ?? LocaleKeys.NoState.tr(), style: _style()),
               const CustomWoSummaryDivider(),
-              Text(workSpacePendiks.workspace?.createdAt.toString() ?? '', style: _style()),
+              Text(workSpacePendiks.workspace?.createdAt.toString() ?? LocaleKeys.NoCreatedAtTime.tr(), style: _style()),
               const CustomWoSummaryDivider(),
-              Text(workSpacePendiks.workSpaceUserInformation?.createdAt.toString() ?? _noCreatedAtTime, style: _style()),
+              Text(workSpacePendiks.workSpaceUserInformation?.createdAt.toString() ?? LocaleKeys.NoCreatedAtTime.tr(), style: _style()),
               const CustomWoSummaryDivider(),
-              Text(workSpacePendiks.workSpaceUserInformation?.referenceId ?? _noReferenceId, style: _style()),
+              Text(workSpacePendiks.workSpaceUserInformation?.referenceId ?? LocaleKeys.NoReferenceId.tr(), style: _style()),
               const CustomWoSummaryDivider(),
             ],
           ),
@@ -54,11 +50,5 @@ class CustomUndetailPendingCard extends StatelessWidget {
     );
   }
 
-  TextStyle _style() {
-    return TextStyle(
-      color: APPColors.Main.black,
-      fontSize: 16,
-      fontWeight: FontWeight.bold,
-    );
-  }
+  TextStyle _style() => TextStyle(color: APPColors.Main.black, fontSize: 16, fontWeight: FontWeight.bold);
 }

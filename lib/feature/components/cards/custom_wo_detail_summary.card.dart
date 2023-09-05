@@ -127,39 +127,3 @@ class WoSummary extends StatelessWidget {
     );
   }
 }
-
-
- // woModel.plannedTime == null
-              //     ? Container()
-              //     : const Padding(
-              //         padding: EdgeInsets.all(8.0),
-              //         child: Align(
-              //           alignment: Alignment.topLeft,
-              //           child: Row(
-              //             children: [
-              //               Icon(Icons.watch_later_outlined),
-              //               // Text(
-              //               //   convertSecToStringFormat(woModel.plannedTime.toString()).toString(),
-              //               //   style: TextStyle(color: APPColors.Main.black),
-              //               // ),
-              //             ],
-              //           ),
-              //         ),
-              //       ),
-              // woModel.plannedStartdate == null
-              //     ? Container()
-              //     : const Padding(
-              //         padding: EdgeInsets.all(8.0),
-              //         child: Align(
-              //           alignment: Alignment.topLeft,
-              //           child: Row(
-              //             children: [
-              //               Icon(Icons.watch_later_outlined),
-              //               // Text(
-              //               //   '${woDetailList.PLANNED_STARTDATE.toString()} --> ${woDetailList.PLANNED_ENDDATE.toString()} ',
-              //               //   style: TextStyle(color: APPColors.Main.black),
-              //               // ),
-              //             ],
-              //           ),
-              //         ),
-              //       ),

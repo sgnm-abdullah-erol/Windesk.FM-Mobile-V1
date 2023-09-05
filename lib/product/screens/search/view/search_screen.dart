@@ -8,7 +8,6 @@ import '../../../../../../../feature/components/appbar/custom_main_appbar.dart';
 import '../../../../../../../feature/components/buttons/custom_half_buttons.dart';
 import '../../../../../../../feature/components/input_fields/text_fields_input_with_action_and_controller.dart';
 import '../../../../core/constants/other/app_icons.dart';
-import '../../../../core/constants/other/app_strings.dart';
 import '../../../../core/constants/style/custom_paddings.dart';
 import '../../../../core/route/app_route.gr.dart';
 import '../../home/screens/work_order_list/widgets/custom_loading_indicator.dart';

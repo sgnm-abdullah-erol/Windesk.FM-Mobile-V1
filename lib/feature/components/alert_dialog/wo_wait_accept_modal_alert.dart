@@ -13,7 +13,7 @@ class WoWaitAcceptModalAlert {
       builder: (BuildContext context) {
         return AlertDialog(
           shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.mediumBorderRadius),
-          title: Text(title, style: Theme.of(context).textTheme.titleMedium),
+          title: Text(title, style: Theme.of(context).textTheme.titleMedium).tr(),
           content: Text(
             textData,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(overflow: TextOverflow.visible),

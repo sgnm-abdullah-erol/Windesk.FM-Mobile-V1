@@ -81,7 +81,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             floatingActionButton: FloatingActionButton(onPressed: () {
-              print(context.locale);
               if (context.locale == const Locale('en', 'US')) {
                 context.setLocale(const Locale('tr', 'TR'));
               } else {

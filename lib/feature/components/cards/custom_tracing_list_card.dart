@@ -14,19 +14,6 @@ class CustomTracingList extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: GestureDetector(
-        // onTap: () {
-        //   count.toString() == '0'
-        //       ? null
-        //       : Navigator.push(
-        //           context,
-        //           MaterialPageRoute(
-        //             builder: (context) => IssueList(
-        //               moduleCode: code,
-        //               moduleName: title,
-        //             ),
-        //           ),
-        //         );
-        // },
         child: Padding(
           padding: const EdgeInsets.fromLTRB(20, 5, 20, 10),
           child: Container(
@@ -53,7 +40,6 @@ class CustomTracingList extends StatelessWidget {
     return Expanded(
       flex: 8,
       child: Text(
-        key: const Key('listElements.name'),
         title.toString(),
         maxLines: 1,
         style: TextStyle(fontSize: 15, color: count == '0' ? APPColors.Main.grey : APPColors.Main.black),
@@ -65,7 +51,6 @@ class CustomTracingList extends StatelessWidget {
     return Expanded(
       flex: 3,
       child: Text(
-        key: const Key('listElements.count'),
         count,
         textAlign: TextAlign.right,
         style: TextStyle(fontSize: 22, color: APPColors.TracingNumber.blue),

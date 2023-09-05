@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import '../../../../../../feature/components/cards/custom_wo_listl_card.dart';
+import '../../../../../../feature/components/cards/custom_workorder_list_card.dart';
 import '../../../../../../feature/extensions/context_extension.dart';
 import '../../../../../../core/route/app_route.gr.dart';
 import '../provider/work_order_list_provider.dart';
@@ -39,7 +39,7 @@ class _MyWorkOrdersState extends State<MyWorkOrders> {
             child: ListView.builder(
               itemCount: widget.provider.myWorkSpaceDetails.length,
               itemBuilder: (context, index) {
-                return CustomWoDetailCard(
+                return CustomWorkOrderListCard(
                   workSpaceDetail: widget.provider.myWorkSpaceDetails[index],
                   isButtonVisible: false,
                   onTap: () {

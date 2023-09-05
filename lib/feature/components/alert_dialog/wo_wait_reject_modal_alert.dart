@@ -21,7 +21,7 @@ class WoWaitRejectModalAlert {
         return AlertDialog(
           title: Text(LocaleKeys.Warning, style: TextStyle(color: APPColors.Main.black)),
           content: DropDownInputFields(
-            labelText: inputArrayLabelText,
+            labelText: inputArrayLabelText.tr(),
             onChangedFunction: inputArrayOnChangedFunction,
             rightIcon: AppIcons.arrowDown,
             dropDownArray: inputArray,
@@ -29,15 +29,11 @@ class WoWaitRejectModalAlert {
           actions: [
             TextButton(
               child: const Text(LocaleKeys.Reject).tr(),
-              onPressed: () {
-                context.router.pop<bool>(false);
-              },
+              onPressed: () => context.router.pop<bool>(false),
             ),
             TextButton(
               child: const Text(LocaleKeys.Approve).tr(),
-              onPressed: () {
-                context.router.pop<bool>(true);
-              },
+              onPressed: () => context.router.pop<bool>(true),
             ),
           ],
         );

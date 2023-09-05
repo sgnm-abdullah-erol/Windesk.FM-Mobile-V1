@@ -68,12 +68,6 @@ class _Content extends StatelessWidget {
   final WorkSpacePendiks pendiks;
   final WorkOrderPendiksProvider provider;
 
-  final String _labelStartDate = 'Açılma Tarihi:';
-  final String _labelUpdatedDate = 'Güncellenme Tarihi:';
-  final String _labelEndDate = 'Bitiş Tarihi:';
-  final String _nextStatesLabel = 'Sonraki Durumlar:';
-  final String _approveWorkOrder = 'İş Emrini Onayla';
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -89,13 +83,18 @@ class _Content extends StatelessWidget {
           _woLocationText(context),
           _divider(),
           const SizedBox(height: 5),
-          _dateText(context, _labelStartDate, pendiks.calendar?.start.toString() ?? '', true),
+          _dateText(context, LocaleKeys.HintStartDate, pendiks.calendar?.start.toString() ?? '', true),
           const SizedBox(height: 5),
-          _dateText(context, _labelUpdatedDate, pendiks.task?.updatedAt.toString() ?? '', false),
+          _dateText(context, LocaleKeys.HintUpdateDate, pendiks.task?.updatedAt.toString() ?? '', false),
           const SizedBox(height: 5),
-          _dateText(context, _labelEndDate, pendiks.calendar?.end.toString() ?? '', true),
+          _dateText(context, LocaleKeys.HintEndDate, pendiks.calendar?.end.toString() ?? '', true),
           const SizedBox(height: 20),
-          _ActionButtons(pendiks: pendiks, nextStatesLabel: _nextStatesLabel, approveWorkOrder: _approveWorkOrder, provider: provider)
+          _ActionButtons(
+            pendiks: pendiks,
+            nextStatesLabel: LocaleKeys.HintNextStates,
+            approveWorkOrder: LocaleKeys.ApproveWorkOrder,
+            provider: provider,
+          )
         ],
       ),
     );
@@ -135,14 +134,8 @@ class _Content extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          label,
-          style: textStyle,
-        ),
-        Text(
-          giveFormat ? date.splitString(date) : date.splitStringSecond(date),
-          style: textStyle,
-        )
+        Text(label, style: textStyle).tr(),
+        Text(giveFormat ? date.splitString(date) : date.splitStringSecond(date), style: textStyle).tr(),
       ],
     );
   }

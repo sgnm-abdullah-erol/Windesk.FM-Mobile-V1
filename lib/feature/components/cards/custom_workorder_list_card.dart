@@ -13,12 +13,12 @@ import '../../../core/constants/other/colors.dart';
 import '../../../core/constants/style/box_decorations.dart';
 import '../buttons/custom_half_buttons.dart';
 
-class CustomWoDetailCard extends StatelessWidget {
+class CustomWorkOrderListCard extends StatelessWidget {
   final WorkSpaceDetail workSpaceDetail;
   final bool isButtonVisible;
   final Function onTap;
 
-  const CustomWoDetailCard({
+  const CustomWorkOrderListCard({
     Key? key,
     required this.workSpaceDetail,
     required this.isButtonVisible,
@@ -26,8 +26,6 @@ class CustomWoDetailCard extends StatelessWidget {
   }) : super(key: key);
 
   final double _elevation = 4;
-  final String _labelStartDate = 'Açılma Tarihi:';
-  final String _labelEndDate = 'Bitiş Tarihi:';
 
   @override
   Widget build(BuildContext context) {
@@ -62,11 +60,11 @@ class CustomWoDetailCard extends StatelessWidget {
           _woListText(workSpaceDetail.task?.description ?? LocaleKeys.NoDescription),
           _divider(),
           SizedBox(height: 5),
-          _dateText(_labelStartDate, workSpaceDetail.calendar?.start.toString() ?? '', true),
+          _dateText(LocaleKeys.HintStartDate, workSpaceDetail.calendar?.start.toString() ?? '', true),
           // SizedBox(height: 5),
           // _dateText(_labelUpdatedDate, workSpaceDetail.task?.updatedAt.toString() ?? '', false),
           SizedBox(height: 5),
-          _dateText(_labelEndDate, workSpaceDetail.calendar?.end.toString() ?? '', true),
+          _dateText(LocaleKeys.HintEndDate, workSpaceDetail.calendar?.end.toString() ?? '', true),
           SizedBox(height: 5),
           _checkButtonVisibility()
         ],
@@ -85,14 +83,8 @@ class CustomWoDetailCard extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          label,
-          style: textStyle,
-        ),
-        Text(
-          giveFormat ? date.splitString(date) : date.splitStringSecond(date),
-          style: textStyle,
-        )
+        Text(label, style: textStyle).tr(),
+        Text(giveFormat ? date.splitString(date) : date.splitStringSecond(date), style: textStyle),
       ],
     );
   }
@@ -102,15 +94,9 @@ class CustomWoDetailCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          workSpaceDetail.task?.woCategory?.name ?? '',
-          style: textStyle,
-        ),
+        Text(workSpaceDetail.task?.woCategory?.name ?? '', style: textStyle),
         SizedBox(height: 5),
-        Text(
-          workSpaceDetail.task?.requestType?.name ?? '',
-          style: textStyle,
-        ),
+        Text(workSpaceDetail.task?.requestType?.name ?? '', style: textStyle),
       ],
     );
   }

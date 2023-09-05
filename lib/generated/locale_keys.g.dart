@@ -17,6 +17,8 @@ class LocaleKeys {
   static const String NoState = 'NoState';
   static const String NoName = 'NoName';
   static const String NoDescription = 'NoDescription';
+  static const String NoCreatedAtTime = 'NoCreatedAtTime';
+  static const String NoReferenceId = 'NoReferenceId';
 
   // main title
   static const String AppTitle = 'AppTitle';
@@ -39,6 +41,11 @@ class LocaleKeys {
   static const String HintLogin = "HintLogin";
   static const String HintLogout = "HintLogout";
   static const String HintRememberMe = "HintRememberMe";
+  static const String HintStartDate = "HintStartDate";
+  static const String HintEndDate = "HintEndDate";
+  static const String HintUpdateDate = "HintUpdateDate";
+  static const String HintNextStates = 'HintNextStates';
+  static const String ApproveWorkOrder = 'ApproveWorkOrder';
   static const String Okey = 'Okey';
   static const String SeeDetail = 'SeeDetail';
   static const String TakeItOnMe = 'TakeItOnMe';
