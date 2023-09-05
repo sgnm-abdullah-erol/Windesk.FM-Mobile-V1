@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 
 import '../../../exceptions/custom_service_exceptions.dart';
 import '../../../injection.dart';
-import '../../../log/log_manager.dart';
+import '../../../../core/log/log_manager.dart';
 import '../../../models/work_order_models/work_order_added_resources_model.dart';
 import '../../../models/work_order_models/work_order_attachments_model.dart';
 import '../../../models/work_order_models/work_order_date_action_model.dart';

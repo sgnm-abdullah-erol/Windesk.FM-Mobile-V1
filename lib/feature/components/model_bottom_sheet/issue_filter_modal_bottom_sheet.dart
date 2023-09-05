@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../../constants/other/app_icons.dart';
-import '../../constants/other/app_strings.dart';
-import '../../constants/other/colors.dart';
+import '../../../core/constants/other/app_icons.dart';
+import '../../../core/constants/other/app_strings.dart';
+import '../../../core/constants/other/colors.dart';
 import '../../extensions/context_extension.dart';
 import '../buttons/custom_circular_with_text_button.dart';
 import '../buttons/custom_elevated_button_with_icon.dart';

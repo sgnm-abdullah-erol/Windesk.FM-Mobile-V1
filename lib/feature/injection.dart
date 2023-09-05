@@ -5,7 +5,7 @@ import 'service/global_services.dart/auth_service/auth_service_repository_impl.d
 import 'service/global_services.dart/work_space_service/work_space_service_repository_impl.dart';
 
 import 'global_providers/global_provider.dart';
-import 'log/log_manager.dart';
+import '../core/log/log_manager.dart';
 import 'service/global_services.dart/work_order_service/work_order_service_repository_impl.dart';
 import 'service/service_manager.dart';
 

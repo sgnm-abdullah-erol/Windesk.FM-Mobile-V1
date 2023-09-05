@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
-import '../../../../../../feature/database/shared_manager.dart';
-import '../../../../../../feature/enums/shared_enums.dart';
+import '../../../../../../core/database/shared_manager.dart';
+import '../../../../../../core/enums/shared_enums.dart';
 import '../../../../../../feature/injection.dart';
 import '../../../../../../feature/models/work_space/work_space_detail.dart';
 import '../../../../../../feature/service/global_services.dart/work_space_service/work_space_service_repository_impl.dart';
@@ -34,8 +34,7 @@ class SearchWorkOrderProvider extends ChangeNotifier {
 
       _isLoading = true;
       notifyListeners();
-      final result = await workSpaceService
-          .getWorkSpaceWithSearchFromGroupWorks(woNumber.text, userToken);
+      final result = await workSpaceService.getWorkSpaceWithSearchFromGroupWorks(woNumber.text, userToken);
 
       result.fold((l) => {_woDetailList = l, _isSuccess = true}, (r) {
         _isSuccess = true;

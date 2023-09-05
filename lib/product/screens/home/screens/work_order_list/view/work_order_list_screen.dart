@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../feature/components/appbar/custom_main_appbar.dart';
-import '../../../../../../feature/constants/other/app_strings.dart';
+import '../../../../../../core/constants/other/app_strings.dart';
 import '../provider/work_order_list_provider.dart';
 import '../tabs/my_group_work_orders.dart';
 import '../tabs/my_work_order_pendiks.dart';

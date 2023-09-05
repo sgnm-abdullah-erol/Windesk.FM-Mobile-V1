@@ -34,7 +34,7 @@ class AppRouter extends $AppRouter {
               page: EmptyRouter2.page,
               children: [
                 RedirectRoute(path: '', redirectTo: 'searchScreen'),
-                AutoRoute(path: 'searchScreen', page: SearchMaterialScreen.page,initial: true),
+                AutoRoute(path: 'searchScreen', page: SearchMaterialScreen.page, initial: true),
                 AutoRoute(path: 'assetDetailScreen', page: AssetDetailScreen.page),
               ],
             ),

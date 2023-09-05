@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../feature/database/shared_manager.dart';
-import '../../../../../../feature/enums/shared_enums.dart';
+import '../../../../../../core/database/shared_manager.dart';
+import '../../../../../../core/enums/shared_enums.dart';
 import '../../../../../../feature/injection.dart';
 import '../../../../../../feature/models/work_space/work_space_appendings.dart';
 import '../../../../../../feature/models/work_space/work_space_detail.dart';
@@ -69,8 +69,7 @@ class WorkOrderListProvider extends ChangeNotifier {
 
       result.fold((l) {
         _workSpaceMyGroupDemandList = l;
-      }, (r) {
-      });
+      }, (r) {});
 
       _isMyGroupWorkOrdersDataFetched = true;
     }
@@ -91,8 +90,7 @@ class WorkOrderListProvider extends ChangeNotifier {
 
       result.fold((l) {
         _myPendikWorkSpaceDetails = l;
-      }, (r) {
-      });
+      }, (r) {});
 
       _isMyPendikWorkOrdersDataFetched = true;
     }

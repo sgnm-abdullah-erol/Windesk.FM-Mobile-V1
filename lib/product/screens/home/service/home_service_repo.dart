@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 
 import '../../../../feature/exceptions/custom_service_exceptions.dart';
 import '../../../../feature/injection.dart';
-import '../../../../feature/log/log_manager.dart';
+import '../../../../core/log/log_manager.dart';
 import '../../../../feature/models/home_page_models/announcement_model.dart';
 import '../../../../feature/service/service_manager.dart';
 

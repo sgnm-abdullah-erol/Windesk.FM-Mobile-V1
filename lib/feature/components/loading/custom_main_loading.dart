@@ -1,7 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 
-import '../../constants/other/colors.dart';
+import '../../../core/constants/other/colors.dart';
 
 class CustomMainLoading extends StatelessWidget {
   const CustomMainLoading({super.key});

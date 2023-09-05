@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
-import '../../../constants/paths/service_tools.dart';
-import '../../../database/shared_manager.dart';
-import '../../../enums/service_response_status_enums.dart';
-import '../../../enums/shared_enums.dart';
+import '../../../../core/constants/paths/service_tools.dart';
+import '../../../../core/database/shared_manager.dart';
+import '../../../../core/enums/service_response_status_enums.dart';
+import '../../../../core/enums/shared_enums.dart';
 import '../../../exceptions/custom_service_exceptions.dart';
 import '../../../models/auth_models/check_access_token_model.dart';
 import '../../../models/auth_models/login_model.dart';

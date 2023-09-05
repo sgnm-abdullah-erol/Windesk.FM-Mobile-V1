@@ -8,13 +8,13 @@ import '../../../../feature/components/input_fields/text_fields_input_underline.
 import '../../../../feature/components/input_fields/text_fields_password_input_underline.dart';
 import '../../../../feature/components/loading/custom_main_loading.dart';
 import '../../../../feature/components/snackBar/snackbar.dart';
-import '../../../../feature/constants/other/snackbar_strings.dart';
-import '../../../../feature/constants/paths/asset_paths.dart';
-import '../../../../feature/constants/style/custom_paddings.dart';
-import '../../../../feature/constants/style/font_sizes.dart';
+import '../../../../core/constants/other/snackbar_strings.dart';
+import '../../../../core/constants/paths/asset_paths.dart';
+import '../../../../core/constants/style/custom_paddings.dart';
+import '../../../../core/constants/style/font_sizes.dart';
 import '../../../../feature/extensions/context_extension.dart';
 import '../../../../feature/global_providers/global_provider.dart';
-import '../../../../feature/route/app_route.gr.dart';
+import '../../../../core/route/app_route.gr.dart';
 import '../provider/login_provider.dart';
 
 @RoutePage()

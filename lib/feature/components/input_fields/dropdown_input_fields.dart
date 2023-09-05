@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/other/colors.dart';
-import '../../constants/style/border_radius.dart';
-import '../../constants/style/font_sizes.dart';
+import '../../../core/constants/other/colors.dart';
+import '../../../core/constants/style/border_radius.dart';
+import '../../../core/constants/style/font_sizes.dart';
 
 class DropDownInputFields extends StatelessWidget {
   const DropDownInputFields(
@@ -13,8 +13,7 @@ class DropDownInputFields extends StatelessWidget {
       required this.dropDownArray,
       this.leftIcon,
       this.leftIconExist = false,
-      this.type
-      });
+      this.type});
 
   final String labelText;
   final Function onChangedFunction;

@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
-import '../../../enums/service_response_status_enums.dart';
-import '../../../enums/service_status_enums.dart';
+import '../../../../core/enums/service_response_status_enums.dart';
+import '../../../../core/enums/service_status_enums.dart';
 import '../../../exceptions/custom_service_exceptions.dart';
 import '../../../models/work_order_models/work_order_added_resources_model.dart';
 import '../../../models/work_order_models/work_order_attachments_model.dart';

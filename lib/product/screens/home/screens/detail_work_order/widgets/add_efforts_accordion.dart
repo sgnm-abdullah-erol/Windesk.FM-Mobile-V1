@@ -7,13 +7,13 @@ import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:vm_fm_4/feature/components/model_bottom_sheet/add_efforts_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
-import 'package:vm_fm_4/feature/constants/other/app_strings.dart';
+import 'package:vm_fm_4/core/constants/other/app_strings.dart';
 import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/provider/work_order_detail_provider.dart';
 import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/widgets/tables/data_table_accordion_efforts.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
 
-import '../../../../../../feature/constants/other/app_icons.dart';
-import '../../../../../../feature/constants/other/colors.dart';
+import '../../../../../../core/constants/other/app_icons.dart';
+import '../../../../../../core/constants/other/colors.dart';
 import '../provider/work_order_detail_service_provider.dart';
 
 class AddEffortsAccordion extends StatelessWidget {

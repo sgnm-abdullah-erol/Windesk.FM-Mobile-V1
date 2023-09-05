@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../constants/other/colors.dart';
-import '../../constants/style/font_sizes.dart';
+import '../../../core/constants/other/colors.dart';
+import '../../../core/constants/style/font_sizes.dart';
 
 class TextFieldsInputUnderline extends StatelessWidget {
   const TextFieldsInputUnderline(

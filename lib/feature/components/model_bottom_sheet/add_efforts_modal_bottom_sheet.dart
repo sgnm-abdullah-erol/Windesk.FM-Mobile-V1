@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/other/app_strings.dart';
+import '../../../core/constants/other/app_strings.dart';
 import '../../extensions/context_extension.dart';
 import '../buttons/custom_half_buttons.dart';
 import '../input_fields/dropdown_input_fields.dart';

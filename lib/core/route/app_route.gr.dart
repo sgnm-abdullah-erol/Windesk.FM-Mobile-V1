@@ -10,38 +10,24 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i17;
 import 'package:flutter/material.dart' as _i18;
-import 'package:vm_fm_4/feature/models/home_page_models/asset_document_model.dart'
-    as _i21;
-import 'package:vm_fm_4/feature/models/home_page_models/asset_image_model.dart'
-    as _i20;
-import 'package:vm_fm_4/feature/models/home_page_models/asset_list_model.dart'
-    as _i19;
-import 'package:vm_fm_4/feature/models/work_space/work_space_appendings.dart'
-    as _i23;
-import 'package:vm_fm_4/feature/models/work_space/work_space_detail.dart'
-    as _i22;
-import 'package:vm_fm_4/feature/route/empty_router.dart' as _i1;
-import 'package:vm_fm_4/feature/route/empty_router2.dart' as _i2;
+import 'package:vm_fm_4/feature/models/home_page_models/asset_document_model.dart' as _i21;
+import 'package:vm_fm_4/feature/models/home_page_models/asset_image_model.dart' as _i20;
+import 'package:vm_fm_4/feature/models/home_page_models/asset_list_model.dart' as _i19;
+import 'package:vm_fm_4/feature/models/work_space/work_space_appendings.dart' as _i23;
+import 'package:vm_fm_4/feature/models/work_space/work_space_detail.dart' as _i22;
+import 'package:vm_fm_4/core/route/empty_router.dart' as _i1;
+import 'package:vm_fm_4/core/route/empty_router2.dart' as _i2;
 import 'package:vm_fm_4/product/screens/auth/view/login_screen.dart' as _i15;
-import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/view/detail_work_order_screen.dart'
-    as _i7;
-import 'package:vm_fm_4/product/screens/home/screens/pending_detail_work_order/pending_detail_work_order_screen.dart'
-    as _i8;
-import 'package:vm_fm_4/product/screens/home/screens/search_work_order/view/search_work_order_screen.dart'
-    as _i12;
-import 'package:vm_fm_4/product/screens/home/screens/work_order_group_detail/work_order_group_detail_screen.dart'
-    as _i9;
-import 'package:vm_fm_4/product/screens/home/screens/work_order_list/provider/work_order_list_provider.dart'
-    as _i24;
-import 'package:vm_fm_4/product/screens/home/screens/work_order_list/tabs/my_work_orders.dart'
-    as _i10;
-import 'package:vm_fm_4/product/screens/home/screens/work_order_list/view/work_order_list_screen.dart'
-    as _i11;
+import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/view/detail_work_order_screen.dart' as _i7;
+import 'package:vm_fm_4/product/screens/home/screens/pending_detail_work_order/pending_detail_work_order_screen.dart' as _i8;
+import 'package:vm_fm_4/product/screens/home/screens/search_work_order/view/search_work_order_screen.dart' as _i12;
+import 'package:vm_fm_4/product/screens/home/screens/work_order_group_detail/work_order_group_detail_screen.dart' as _i9;
+import 'package:vm_fm_4/product/screens/home/screens/work_order_list/provider/work_order_list_provider.dart' as _i24;
+import 'package:vm_fm_4/product/screens/home/screens/work_order_list/tabs/my_work_orders.dart' as _i10;
+import 'package:vm_fm_4/product/screens/home/screens/work_order_list/view/work_order_list_screen.dart' as _i11;
 import 'package:vm_fm_4/product/screens/home/view/home_screen.dart' as _i13;
-import 'package:vm_fm_4/product/screens/new_order/view/new_order_screen.dart'
-    as _i5;
-import 'package:vm_fm_4/product/screens/search/view/asset_detail_screen.dart'
-    as _i3;
+import 'package:vm_fm_4/product/screens/new_order/view/new_order_screen.dart' as _i5;
+import 'package:vm_fm_4/product/screens/search/view/asset_detail_screen.dart' as _i3;
 import 'package:vm_fm_4/product/screens/search/view/search_screen.dart' as _i4;
 import 'package:vm_fm_4/product/screens/splash/splash_screen.dart' as _i14;
 import 'package:vm_fm_4/product/screens/test/view/test_screen.dart' as _i6;
@@ -230,8 +216,7 @@ class AssetDetailScreen extends _i17.PageRouteInfo<AssetDetailScreenArgs> {
 
   static const String name = 'AssetDetailScreen';
 
-  static const _i17.PageInfo<AssetDetailScreenArgs> page =
-      _i17.PageInfo<AssetDetailScreenArgs>(name);
+  static const _i17.PageInfo<AssetDetailScreenArgs> page = _i17.PageInfo<AssetDetailScreenArgs>(name);
 }
 
 class AssetDetailScreenArgs {
@@ -306,8 +291,7 @@ class TestScreen extends _i17.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i7.DetailWorkOrderScreen]
-class DetailWorkOrderScreen
-    extends _i17.PageRouteInfo<DetailWorkOrderScreenArgs> {
+class DetailWorkOrderScreen extends _i17.PageRouteInfo<DetailWorkOrderScreenArgs> {
   DetailWorkOrderScreen({
     _i18.Key? key,
     required _i22.WorkSpaceDetail workSpaceDetail,
@@ -323,8 +307,7 @@ class DetailWorkOrderScreen
 
   static const String name = 'DetailWorkOrderScreen';
 
-  static const _i17.PageInfo<DetailWorkOrderScreenArgs> page =
-      _i17.PageInfo<DetailWorkOrderScreenArgs>(name);
+  static const _i17.PageInfo<DetailWorkOrderScreenArgs> page = _i17.PageInfo<DetailWorkOrderScreenArgs>(name);
 }
 
 class DetailWorkOrderScreenArgs {
@@ -345,8 +328,7 @@ class DetailWorkOrderScreenArgs {
 
 /// generated route for
 /// [_i8.PendingDetailWorkOrderScreen]
-class PendingDetailWorkOrderScreen
-    extends _i17.PageRouteInfo<PendingDetailWorkOrderScreenArgs> {
+class PendingDetailWorkOrderScreen extends _i17.PageRouteInfo<PendingDetailWorkOrderScreenArgs> {
   PendingDetailWorkOrderScreen({
     _i18.Key? key,
     required _i23.WorkSpacePendiks workSpacePendiks,
@@ -362,8 +344,7 @@ class PendingDetailWorkOrderScreen
 
   static const String name = 'PendingDetailWorkOrderScreen';
 
-  static const _i17.PageInfo<PendingDetailWorkOrderScreenArgs> page =
-      _i17.PageInfo<PendingDetailWorkOrderScreenArgs>(name);
+  static const _i17.PageInfo<PendingDetailWorkOrderScreenArgs> page = _i17.PageInfo<PendingDetailWorkOrderScreenArgs>(name);
 }
 
 class PendingDetailWorkOrderScreenArgs {
@@ -384,8 +365,7 @@ class PendingDetailWorkOrderScreenArgs {
 
 /// generated route for
 /// [_i9.WorkOrderGroupDetailScreen]
-class WorkOrderGroupDetailScreen
-    extends _i17.PageRouteInfo<WorkOrderGroupDetailScreenArgs> {
+class WorkOrderGroupDetailScreen extends _i17.PageRouteInfo<WorkOrderGroupDetailScreenArgs> {
   WorkOrderGroupDetailScreen({
     _i18.Key? key,
     required String requestCode,
@@ -403,8 +383,7 @@ class WorkOrderGroupDetailScreen
 
   static const String name = 'WorkOrderGroupDetailScreen';
 
-  static const _i17.PageInfo<WorkOrderGroupDetailScreenArgs> page =
-      _i17.PageInfo<WorkOrderGroupDetailScreenArgs>(name);
+  static const _i17.PageInfo<WorkOrderGroupDetailScreenArgs> page = _i17.PageInfo<WorkOrderGroupDetailScreenArgs>(name);
 }
 
 class WorkOrderGroupDetailScreenArgs {
@@ -444,8 +423,7 @@ class MyWorkOrders extends _i17.PageRouteInfo<MyWorkOrdersArgs> {
 
   static const String name = 'MyWorkOrders';
 
-  static const _i17.PageInfo<MyWorkOrdersArgs> page =
-      _i17.PageInfo<MyWorkOrdersArgs>(name);
+  static const _i17.PageInfo<MyWorkOrdersArgs> page = _i17.PageInfo<MyWorkOrdersArgs>(name);
 }
 
 class MyWorkOrdersArgs {

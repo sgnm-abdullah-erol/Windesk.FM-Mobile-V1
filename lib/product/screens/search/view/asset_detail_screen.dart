@@ -4,7 +4,7 @@ import 'package:url_launcher/link.dart';
 import '../../../../feature/components/appbar/custom_main_appbar.dart';
 import '../../../../feature/components/cards/custom_wo_create_card.dart';
 import '../../../../feature/components/photo_showing/photo_with_text.dart';
-import '../../../../feature/l10n/locale_keys.g.dart';
+import '../../../../core/l10n/locale_keys.g.dart';
 import '../../../../feature/models/home_page_models/asset_document_model.dart';
 import '../../../../feature/models/home_page_models/asset_image_model.dart';
 import '../../../../feature/models/home_page_models/asset_list_model.dart';
@@ -49,10 +49,16 @@ class AssetDetailScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          const Text(LocaleKeys.images, style: TextStyle(),),
+          const Text(
+            LocaleKeys.images,
+            style: TextStyle(),
+          ),
           const Divider(),
           photosListView(),
-          const Text(LocaleKeys.documents, style: TextStyle(),),
+          const Text(
+            LocaleKeys.documents,
+            style: TextStyle(),
+          ),
           const Divider(),
           documentsListView()
         ],

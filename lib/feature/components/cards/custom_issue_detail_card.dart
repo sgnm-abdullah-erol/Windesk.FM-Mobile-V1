@@ -1,12 +1,12 @@
 // ignore_for_file:file_names, prefer_const_constructors_in_immutables,prefer_const_constructors,prefer_const_literals_to_create_immutables,use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/constants/functions/null_check_widget.dart';
-import 'package:vm_fm_4/feature/constants/other/time_functions.dart';
-import 'package:vm_fm_4/feature/constants/style/custom_paddings.dart';
-import 'package:vm_fm_4/feature/l10n/locale_keys.g.dart';
+import 'package:vm_fm_4/core/constants/functions/null_check_widget.dart';
+import 'package:vm_fm_4/core/constants/other/time_functions.dart';
+import 'package:vm_fm_4/core/constants/style/custom_paddings.dart';
+import 'package:vm_fm_4/core/l10n/locale_keys.g.dart';
 
-import '../../constants/other/colors.dart';
+import '../../../core/constants/other/colors.dart';
 
 class DetailListWidget extends StatelessWidget {
   final String? code,
@@ -171,7 +171,7 @@ class DetailListWidget extends StatelessWidget {
                   issueSummaryRow(LocaleKeys.incallNumber, ani ?? ""),
                   issueSummaryRow(LocaleKeys.targetFixed, TimeClass().timeRecover(targetRDate).toString()),
                   issueSummaryRow(LocaleKeys.targetResponsed, TimeClass().timeRecover(targetFDate).toString()),
-                  issueSummaryRow(LocaleKeys.hys, hys ?? "" ),
+                  issueSummaryRow(LocaleKeys.hys, hys ?? ""),
                   issueSummaryRow(LocaleKeys.hds, hds ?? ""),
                   issueSummaryRow(LocaleKeys.assignmentGroup, assignmentGroupName ?? ""),
                   issueSummaryRow(LocaleKeys.assigneName, assigneName ?? ""),

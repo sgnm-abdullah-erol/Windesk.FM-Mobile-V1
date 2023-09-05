@@ -4,7 +4,7 @@ import 'package:flutter/scheduler.dart';
 
 import '../../../../../../feature/components/cards/custom_wo_listl_card.dart';
 import '../../../../../../feature/extensions/context_extension.dart';
-import '../../../../../../feature/route/app_route.gr.dart';
+import '../../../../../../core/route/app_route.gr.dart';
 import '../provider/work_order_list_provider.dart';
 import '../widgets/custom_loading_indicator.dart';
 

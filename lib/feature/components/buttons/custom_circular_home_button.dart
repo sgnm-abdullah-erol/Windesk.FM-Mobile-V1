@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/other/colors.dart';
-import '../../constants/style/border_radius.dart';
-import '../../constants/style/font_sizes.dart';
+import '../../../core/constants/other/colors.dart';
+import '../../../core/constants/style/border_radius.dart';
+import '../../../core/constants/style/font_sizes.dart';
 import '../../extensions/context_extension.dart';
 
 class CustomCircularHomeButton extends StatelessWidget {

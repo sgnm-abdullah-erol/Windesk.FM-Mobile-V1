@@ -2,7 +2,7 @@ import 'package:accordion/accordion.dart';
 import 'package:accordion/controllers.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../../feature/constants/other/colors.dart';
+import '../../../../../../core/constants/other/colors.dart';
 
 class CustomBaseAccordion extends StatelessWidget {
   const CustomBaseAccordion({super.key, required this.list});

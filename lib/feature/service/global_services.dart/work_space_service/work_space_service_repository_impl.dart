@@ -5,11 +5,11 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import '../../../models/home_page_models/asset_list_model.dart';
-import '../../../constants/paths/service_tools.dart';
+import '../../../../core/constants/paths/service_tools.dart';
 import '../../../models/work_space/work_space_documents.dart';
 import '../../../models/work_space/work_space_requirement_materials_list.dart';
 
-import '../../../enums/task_response_enums.dart';
+import '../../../../core/enums/task_response_enums.dart';
 import '../../../exceptions/custom_service_exceptions.dart';
 import '../../../models/work_space/work_space_appendings.dart';
 import '../../../models/work_space/work_space_detail.dart';

@@ -1,8 +1,8 @@
 // ignore_for_file: unused_field
 
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/database/shared_manager.dart';
-import 'package:vm_fm_4/feature/enums/shared_enums.dart';
+import 'package:vm_fm_4/core/database/shared_manager.dart';
+import 'package:vm_fm_4/core/enums/shared_enums.dart';
 import 'package:vm_fm_4/feature/models/work_space/work_space_detail.dart';
 
 import '../../../../../feature/injection.dart';

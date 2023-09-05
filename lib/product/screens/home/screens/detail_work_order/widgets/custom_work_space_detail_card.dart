@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../../../../../../feature/components/buttons/custom_elevated_button_with_icon.dart';
 import '../provider/work_order_detail_provider.dart';
 import '../../../../../../feature/components/dividers/custom_wo_summary_divider.dart';
-import '../../../../../../feature/constants/other/colors.dart';
-import '../../../../../../feature/constants/style/border_radius.dart';
+import '../../../../../../core/constants/other/colors.dart';
+import '../../../../../../core/constants/style/border_radius.dart';
 
 import '../../../../../../feature/models/work_space/work_space_detail.dart';
 

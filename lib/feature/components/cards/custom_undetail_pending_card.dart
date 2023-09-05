@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/other/colors.dart';
-import '../../constants/style/border_radius.dart';
-import '../../constants/style/custom_paddings.dart';
+import '../../../core/constants/other/colors.dart';
+import '../../../core/constants/style/border_radius.dart';
+import '../../../core/constants/style/custom_paddings.dart';
 import '../../extensions/context_extension.dart';
 import '../../models/work_space/work_space_appendings.dart';
 import '../dividers/custom_wo_summary_divider.dart';

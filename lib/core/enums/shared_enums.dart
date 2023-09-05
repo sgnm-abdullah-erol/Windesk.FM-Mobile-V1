@@ -7,5 +7,6 @@ enum SharedEnum {
   userName,
   userId,
   password,
-  userNameLogin
+  userNameLogin,
+  theme, // 0 light, 1 dark -- boolean check
 }

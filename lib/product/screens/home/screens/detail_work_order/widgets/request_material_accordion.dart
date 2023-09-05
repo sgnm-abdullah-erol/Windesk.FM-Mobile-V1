@@ -6,9 +6,9 @@ import '../../../../../../feature/components/model_bottom_sheet/request_material
 import 'tables/data_table_requsted_materials.dart';
 
 import '../../../../../../feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
-import '../../../../../../feature/constants/other/app_icons.dart';
-import '../../../../../../feature/constants/other/app_strings.dart';
-import '../../../../../../feature/constants/other/colors.dart';
+import '../../../../../../core/constants/other/app_icons.dart';
+import '../../../../../../core/constants/other/app_strings.dart';
+import '../../../../../../core/constants/other/colors.dart';
 import '../provider/work_order_detail_provider.dart';
 import '../provider/work_order_detail_service_provider.dart';
 

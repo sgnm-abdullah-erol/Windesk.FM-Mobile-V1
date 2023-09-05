@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../../../../../feature/models/work_space/work_space_requested_materials_inventory.dart';
 
-import '../../../../../../feature/database/shared_manager.dart';
-import '../../../../../../feature/enums/shared_enums.dart';
+import '../../../../../../core/database/shared_manager.dart';
+import '../../../../../../core/enums/shared_enums.dart';
 import '../../../../../../feature/injection.dart';
 import '../../../../../../feature/service/global_services.dart/work_space_service/work_space_service_repository_impl.dart';
 

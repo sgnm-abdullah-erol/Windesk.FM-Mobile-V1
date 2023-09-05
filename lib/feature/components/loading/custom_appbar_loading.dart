@@ -1,7 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 
-import '../../constants/other/colors.dart';
+import '../../../core/constants/other/colors.dart';
 
 class CustomAppbarLoading extends StatelessWidget {
   const CustomAppbarLoading({super.key, required this.appBar});

@@ -4,12 +4,12 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../product/screens/home/screens/detail_work_order/provider/work_order_add_material_sheet_provider.dart';
 import '../../../product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
-import '../../constants/other/snackbar_strings.dart';
+import '../../../core/constants/other/snackbar_strings.dart';
 import '../buttons/custom_half_buttons.dart';
 import '../input_fields/dropdown_input_fields.dart';
 import '../input_fields/text_fields_input_underline.dart';
 
-import '../../constants/other/app_strings.dart';
+import '../../../core/constants/other/app_strings.dart';
 import '../../extensions/context_extension.dart';
 import '../snackBar/snackbar.dart';
 

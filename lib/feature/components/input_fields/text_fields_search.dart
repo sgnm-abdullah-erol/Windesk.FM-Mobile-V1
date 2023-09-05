@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/other/colors.dart';
-import '../../l10n/locale_keys.g.dart';
+import '../../../core/constants/other/colors.dart';
+import '../../../core/l10n/locale_keys.g.dart';
 
 class TextFieldSearch extends StatefulWidget {
   const TextFieldSearch({super.key, required this.onChangedFunction});
@@ -21,8 +21,7 @@ class _TextFieldSearchState extends State<TextFieldSearch> {
       },
       maxLength: 20,
       style: TextStyle(color: APPColors.Main.black),
-      decoration: const InputDecoration(
-          label: Text(LocaleKeys.woSearch), border: OutlineInputBorder(), prefixIcon: Icon(Icons.work)),
+      decoration: const InputDecoration(label: Text(LocaleKeys.woSearch), border: OutlineInputBorder(), prefixIcon: Icon(Icons.work)),
       buildCounter: (BuildContext context, {int? currentLength, bool? isFocused, int? maxLength}) {
         return Align(
           alignment: Alignment.centerLeft,

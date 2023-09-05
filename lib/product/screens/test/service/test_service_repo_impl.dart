@@ -2,11 +2,11 @@
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:vm_fm_4/feature/constants/paths/service_tools.dart';
+import 'package:vm_fm_4/core/constants/paths/service_tools.dart';
 import 'package:vm_fm_4/product/screens/test/service/test_service_repo.dart';
 
-import '../../../../feature/enums/service_response_status_enums.dart';
-import '../../../../feature/enums/service_status_enums.dart';
+import '../../../../core/enums/service_response_status_enums.dart';
+import '../../../../core/enums/service_status_enums.dart';
 import '../../../../feature/exceptions/custom_service_exceptions.dart';
 
 class TestServiceRepositoryImpl extends TestServiceRepository {

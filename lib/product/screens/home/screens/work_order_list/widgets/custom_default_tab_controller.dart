@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../feature/constants/other/colors.dart';
-import '../../../../../../feature/constants/style/font_sizes.dart';
+import '../../../../../../core/constants/other/colors.dart';
+import '../../../../../../core/constants/style/font_sizes.dart';
 import '../provider/work_order_list_provider.dart';
 
 class CustomDefaultTabController extends StatelessWidget {

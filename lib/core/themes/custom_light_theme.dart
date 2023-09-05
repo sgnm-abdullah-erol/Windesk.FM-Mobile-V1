@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../constants/other/colors.dart';
 import '../constants/style/font_sizes.dart';
 
+@immutable
 class CustomLightTheme {
   late final ThemeData lightTheme;
 

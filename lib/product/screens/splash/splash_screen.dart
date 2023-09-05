@@ -3,10 +3,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../feature/constants/paths/asset_paths.dart';
+import '../../../core/constants/paths/asset_paths.dart';
 import '../../../feature/extensions/context_extension.dart';
 import '../../../feature/global_providers/global_provider.dart';
-import '../../../feature/route/app_route.gr.dart';
+import '../../../core/route/app_route.gr.dart';
 import 'splash_provider.dart';
 
 @RoutePage()
@@ -28,12 +28,8 @@ class SplashScreen extends StatelessWidget {
   }
 
   void _navigate(BuildContext context) {
-    context
-        .read<GlobalProvider>()
-        .setDeviceModel(context.read<SplashProvider>().getDeviceModel());
-    context
-        .read<GlobalProvider>()
-        .setDeviceVersion(context.read<SplashProvider>().getDeviceVersion());
+    context.read<GlobalProvider>().setDeviceModel(context.read<SplashProvider>().getDeviceModel());
+    context.read<GlobalProvider>().setDeviceVersion(context.read<SplashProvider>().getDeviceVersion());
     context.watch<SplashProvider>().isSplashFinished
         ? context.watch<SplashProvider>().isUserAlreadyLoggedIn
             ? context.router.replace(const HomeScreen())

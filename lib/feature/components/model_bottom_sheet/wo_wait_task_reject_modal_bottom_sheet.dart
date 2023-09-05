@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../../constants/other/app_icons.dart';
-import '../../constants/other/app_strings.dart';
-import '../../constants/other/colors.dart';
+import '../../../core/constants/other/app_icons.dart';
+import '../../../core/constants/other/app_strings.dart';
+import '../../../core/constants/other/colors.dart';
 import '../../extensions/context_extension.dart';
 import '../buttons/custom_half_buttons.dart';
 import '../input_fields/dropdown_input_fields.dart';
@@ -42,12 +42,10 @@ class WoWaitTaskRejectModalBottomSheet extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Expanded(
-                child: _inputS(textData, inputArray, inputArrayTextLabel,
-                    inputArrayOnChangedFunction),
+                child: _inputS(textData, inputArray, inputArrayTextLabel, inputArrayOnChangedFunction),
               ),
               Expanded(
-                child: _buttons(context, rejectModalAcceptFunction,
-                    reejctModalRejectFunction),
+                child: _buttons(context, rejectModalAcceptFunction, reejctModalRejectFunction),
               )
             ],
           ),
@@ -56,16 +54,14 @@ class WoWaitTaskRejectModalBottomSheet extends StatelessWidget {
     );
   }
 
-  _inputS(
-      textData, inputArray, inputArrayTextLabel, inputArrayOnChangedFunction) {
+  _inputS(textData, inputArray, inputArrayTextLabel, inputArrayOnChangedFunction) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Expanded(
           child: Text(
             textData.toString(),
-            style: TextStyle(
-                fontWeight: FontWeight.bold, color: APPColors.Main.black),
+            style: TextStyle(fontWeight: FontWeight.bold, color: APPColors.Main.black),
           ),
         ),
         Expanded(
@@ -95,7 +91,6 @@ class WoWaitTaskRejectModalBottomSheet extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(
-        DiagnosticsProperty<Function>('saveEffort', rejectModalAcceptFunction));
+    properties.add(DiagnosticsProperty<Function>('saveEffort', rejectModalAcceptFunction));
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/style/border_radius.dart';
+import '../../../core/constants/style/border_radius.dart';
 
 class TextFieldsInputWithAction extends StatelessWidget {
   const TextFieldsInputWithAction({
@@ -22,8 +22,7 @@ class TextFieldsInputWithAction extends StatelessWidget {
       children: <Widget>[
         TextField(
           decoration: InputDecoration(
-            border: OutlineInputBorder(
-                borderRadius: CustomBorderRadius.textFieldBorderRadius),
+            border: OutlineInputBorder(borderRadius: CustomBorderRadius.textFieldBorderRadius),
             labelText: labelText,
           ),
           onChanged: (inputValue) => onChangedFunction(inputValue),

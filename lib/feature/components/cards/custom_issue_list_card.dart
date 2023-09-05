@@ -4,13 +4,13 @@ import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/constants/style/color_calculator.dart';
-import 'package:vm_fm_4/feature/constants/style/custom_paddings.dart';
-import 'package:vm_fm_4/feature/constants/style/font_sizes.dart';
+import 'package:vm_fm_4/core/constants/style/color_calculator.dart';
+import 'package:vm_fm_4/core/constants/style/custom_paddings.dart';
+import 'package:vm_fm_4/core/constants/style/font_sizes.dart';
 import 'package:vm_fm_4/feature/mixins/custom_issue_list_card_mixin.dart';
 
-import '../../constants/functions/null_check_widget.dart';
-import '../../constants/other/time_functions.dart';
+import '../../../core/constants/functions/null_check_widget.dart';
+import '../../../core/constants/other/time_functions.dart';
 
 class CustomIssueListCard extends StatefulWidget {
   final String? code,

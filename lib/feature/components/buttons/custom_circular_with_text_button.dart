@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/style/border_radius.dart';
+import '../../../core/constants/style/border_radius.dart';
 import '../../extensions/context_extension.dart';
 
 class CustomCircularWithTextButton extends StatelessWidget {

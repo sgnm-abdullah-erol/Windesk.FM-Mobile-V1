@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../components/cards/custom_issue_list_card.dart';
-import '../constants/other/colors.dart';
-import '../constants/style/border_radius.dart';
-import '../constants/style/font_sizes.dart';
+import '../../core/constants/other/colors.dart';
+import '../../core/constants/style/border_radius.dart';
+import '../../core/constants/style/font_sizes.dart';
 
 mixin CustomIssueListCardConstantsMixin<T extends CustomIssueListCard> {
   final String dateTimeFormat = 'yyyyMMddhhmmss';

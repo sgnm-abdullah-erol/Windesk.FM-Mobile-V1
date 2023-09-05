@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../../feature/components/appbar/custom_main_appbar.dart';
 import '../../../../../feature/components/cards/custom_wo_listl_card.dart';
-import '../../../../../feature/route/app_route.gr.dart';
+import '../../../../../core/route/app_route.gr.dart';
 import '../work_order_list/widgets/custom_loading_indicator.dart';
 import 'work_order_group_detail_provider.dart';
 

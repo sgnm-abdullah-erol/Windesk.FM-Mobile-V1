@@ -7,8 +7,8 @@ import '../../extensions/context_extension.dart';
 import '../../../product/screens/home/screens/detail_work_order/provider/work_order_request_material_sheet_provider.dart';
 
 import '../../../product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
-import '../../constants/other/app_strings.dart';
-import '../../constants/other/snackbar_strings.dart';
+import '../../../core/constants/other/app_strings.dart';
+import '../../../core/constants/other/snackbar_strings.dart';
 import '../buttons/custom_half_buttons.dart';
 import '../input_fields/dropdown_input_fields.dart';
 import '../snackBar/snackbar.dart';
@@ -65,7 +65,6 @@ class _BodyWidget extends StatelessWidget {
             rightOnPressed: () {
               value.addRequestedMaterial(workSpaceId, taskId);
               Navigator.of(context).pop();
-
             },
           ),
         ),

@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
-import '../../../../../../feature/constants/paths/service_tools.dart';
-import '../../../../../../feature/database/shared_manager.dart';
-import '../../../../../../feature/enums/shared_enums.dart';
-import '../../../../../../feature/enums/task_response_enums.dart';
+import '../../../../../../core/constants/paths/service_tools.dart';
+import '../../../../../../core/database/shared_manager.dart';
+import '../../../../../../core/enums/shared_enums.dart';
+import '../../../../../../core/enums/task_response_enums.dart';
 import '../../../../../../feature/injection.dart';
 import '../../../../../../feature/models/home_page_models/asset_list_model.dart';
 import '../../../../../../feature/models/work_space/work_space_detail.dart';

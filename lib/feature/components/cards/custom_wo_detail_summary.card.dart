@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/functions/null_check_widget.dart';
-import '../../constants/other/colors.dart';
-import '../../constants/style/border_radius.dart';
+import '../../../core/constants/functions/null_check_widget.dart';
+import '../../../core/constants/other/colors.dart';
+import '../../../core/constants/style/border_radius.dart';
 import '../../models/work_space/work_space_detail.dart';
 
 class WoSummary extends StatelessWidget {

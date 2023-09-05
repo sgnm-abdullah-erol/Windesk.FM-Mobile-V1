@@ -7,8 +7,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import '../../../../../../../feature/models/work_space/work_space_documents.dart';
 
-import '../../../../../../../feature/constants/other/app_icons.dart';
-import '../../../../../../../feature/constants/other/colors.dart';
+import '../../../../../../../core/constants/other/app_icons.dart';
+import '../../../../../../../core/constants/other/colors.dart';
 import '../../provider/download_provider.dart';
 
 class DataTableAccordionDocumants extends StatelessWidget {

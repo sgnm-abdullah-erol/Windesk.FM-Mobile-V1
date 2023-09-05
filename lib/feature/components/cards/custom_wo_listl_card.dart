@@ -1,16 +1,16 @@
 // ignore_for_file:file_names, prefer_const_constructors_in_immutables,prefer_const_constructors,prefer_const_literals_to_create_immutables,use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/constants/style/border_radius.dart';
-import 'package:vm_fm_4/feature/constants/style/font_sizes.dart';
+import 'package:vm_fm_4/core/constants/style/border_radius.dart';
+import 'package:vm_fm_4/core/constants/style/font_sizes.dart';
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 import 'package:vm_fm_4/feature/extensions/date_string_extension.dart';
 import 'package:vm_fm_4/feature/models/work_space/work_space_detail.dart';
 
-import '../../constants/other/app_strings.dart';
-import '../../constants/other/colors.dart';
-import '../../constants/style/box_decorations.dart';
-import '../../l10n/locale_keys.g.dart';
+import '../../../core/constants/other/app_strings.dart';
+import '../../../core/constants/other/colors.dart';
+import '../../../core/constants/style/box_decorations.dart';
+import '../../../core/l10n/locale_keys.g.dart';
 import '../buttons/custom_half_buttons.dart';
 
 class CustomWoDetailCard extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../../feature/constants/other/app_icons.dart';
-import '../../../../../../../feature/constants/other/colors.dart';
+import '../../../../../../../core/constants/other/app_icons.dart';
+import '../../../../../../../core/constants/other/colors.dart';
 import '../../../../../../../feature/models/work_space/work_space_requirement_materials_list.dart';
 
 class DataTableAccordionRequstedMaterials extends StatelessWidget {

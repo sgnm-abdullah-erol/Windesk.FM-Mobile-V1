@@ -5,8 +5,8 @@ import 'package:provider/provider.dart';
 import '../../../../feature/components/buttons/custom_half_buttons.dart';
 import '../../../../feature/components/cards/custom_wo_create_card.dart';
 import '../../../../feature/components/snackBar/snackbar.dart';
-import '../../../../feature/constants/other/colors.dart';
-import '../../../../feature/constants/other/snackbar_strings.dart';
+import '../../../../core/constants/other/colors.dart';
+import '../../../../core/constants/other/snackbar_strings.dart';
 import '../../../../feature/extensions/context_extension.dart';
 
 import '../../../../feature/components/appbar/custom_main_appbar.dart';
@@ -14,9 +14,9 @@ import '../../../../feature/components/input_fields/dropdown_input_fields.dart';
 import '../../../../feature/components/input_fields/text_field_date_picker.dart';
 import '../../../../feature/components/input_fields/text_field_time_picker.dart';
 import '../../../../feature/components/input_fields/text_fields_input_underline.dart';
-import '../../../../feature/constants/functions/null_check_widget.dart';
-import '../../../../feature/constants/style/custom_paddings.dart';
-import '../../../../feature/l10n/locale_keys.g.dart';
+import '../../../../core/constants/functions/null_check_widget.dart';
+import '../../../../core/constants/style/custom_paddings.dart';
+import '../../../../core/l10n/locale_keys.g.dart';
 import '../../home/screens/work_order_list/widgets/custom_loading_indicator.dart';
 import '../provider/wo_create_provider.dart';
 
@@ -28,37 +28,23 @@ class NewOrderScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => WoCreateProvider(),
-      child: Consumer<WoCreateProvider>(
-          builder: (context, WoCreateProvider woCreateProvider, child) {
+      child: Consumer<WoCreateProvider>(builder: (context, WoCreateProvider woCreateProvider, child) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (woCreateProvider.isWorkOrderCreate) {
             snackBar(context, SnackbarStrings.woCreate, 'success');
           }
         });
-        woCreateProvider.isWorkOrderCreate
-            ? snackBar(context, SnackbarStrings.woCreate, 'success')
-            : null;
-        woCreateProvider.locationLoading
-            ? woCreateProvider.getLocation()
-            : null;
-        woCreateProvider.requestedLoading
-            ? woCreateProvider.getRequestedByPro()
-            : null;
+        woCreateProvider.isWorkOrderCreate ? snackBar(context, SnackbarStrings.woCreate, 'success') : null;
+        woCreateProvider.locationLoading ? woCreateProvider.getLocation() : null;
+        woCreateProvider.requestedLoading ? woCreateProvider.getRequestedByPro() : null;
         woCreateProvider.typeLoading ? woCreateProvider.getType() : null;
-        woCreateProvider.requestedTypeLoading
-            ? woCreateProvider.getRequestedType()
-            : null;
-        woCreateProvider.categoryLoading
-            ? woCreateProvider.getCategory()
-            : null;
-        woCreateProvider.componentLoading
-            ? woCreateProvider.getComponent()
-            : null;
+        woCreateProvider.requestedTypeLoading ? woCreateProvider.getRequestedType() : null;
+        woCreateProvider.categoryLoading ? woCreateProvider.getCategory() : null;
+        woCreateProvider.componentLoading ? woCreateProvider.getComponent() : null;
         return woCreateProvider.isLoading
             ? const CustomLoadingIndicator()
             : Scaffold(
-                appBar: const CustomMainAppbar(
-                    title: Text(LocaleKeys.newWorkOrder)),
+                appBar: const CustomMainAppbar(title: Text(LocaleKeys.newWorkOrder)),
                 body: SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
@@ -97,8 +83,7 @@ class NewOrderScreen extends StatelessWidget {
                                 woCreateProvider.setRequestedBy(newValue);
                               },
                               rightIcon: Icons.arrow_drop_down_rounded,
-                              dropDownArray:
-                                  woCreateProvider.getRequestedByChildren,
+                              dropDownArray: woCreateProvider.getRequestedByChildren,
                             ),
                             widget2: DropDownInputFields(
                               labelText: 'Tip',
@@ -114,8 +99,7 @@ class NewOrderScreen extends StatelessWidget {
                                 woCreateProvider.setCategory(newValue);
                               },
                               rightIcon: Icons.arrow_drop_down_rounded,
-                              dropDownArray:
-                                  woCreateProvider.getCategoriesChildren,
+                              dropDownArray: woCreateProvider.getCategoriesChildren,
                             ),
                           ),
                           const SizedBox(height: 15),
@@ -164,8 +148,7 @@ class NewOrderScreen extends StatelessWidget {
     );
   }
 
-  Container requestType(
-      WoCreateProvider woCreateProvider, BuildContext context) {
+  Container requestType(WoCreateProvider woCreateProvider, BuildContext context) {
     return Container(
       width: context.width,
       padding: const EdgeInsets.all(10),
@@ -189,8 +172,7 @@ class NewOrderScreen extends StatelessWidget {
                     woCreateProvider.setRequestType1(newValue);
                   },
                   rightIcon: Icons.arrow_drop_down_rounded,
-                  dropDownArray:
-                      woCreateProvider.getRequestedTypesChildrenTree1,
+                  dropDownArray: woCreateProvider.getRequestedTypesChildrenTree1,
                   leftIconExist: true,
                   leftIcon: Icons.arrow_right_alt,
                 ),

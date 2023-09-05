@@ -1,15 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../../feature/route/app_route.gr.dart';
+import '../../../../core/route/app_route.gr.dart';
 import '../../home/screens/work_order_list/widgets/custom_loading_indicator.dart';
 
 import '../../../../../../../feature/components/appbar/custom_main_appbar.dart';
 import '../../../../../../../feature/components/buttons/custom_half_buttons.dart';
 import '../../../../../../../feature/components/input_fields/text_fields_input_with_action_and_controller.dart';
-import '../../../../../../../feature/constants/other/app_icons.dart';
-import '../../../../../../../feature/constants/other/app_strings.dart';
-import '../../../../../../../feature/constants/style/custom_paddings.dart';
+import '../../../../core/constants/other/app_icons.dart';
+import '../../../../core/constants/other/app_strings.dart';
+import '../../../../core/constants/style/custom_paddings.dart';
 import '../provider/search_provider.dart';
 
 @RoutePage()

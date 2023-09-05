@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/other/colors.dart';
+import '../../../core/constants/other/colors.dart';
 import '../../extensions/context_extension.dart';
 
 class WoCreateCard extends StatelessWidget {
-  const WoCreateCard({super.key, required this.widget1, required this.widget2,required this.widget3});
+  const WoCreateCard({super.key, required this.widget1, required this.widget2, required this.widget3});
 
   final Widget widget1;
   final Widget widget2;

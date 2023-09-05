@@ -1,8 +1,8 @@
 // ignore_for_file: unused_element, unused_field, unused_local_variable
 
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/database/shared_manager.dart';
-import 'package:vm_fm_4/feature/enums/shared_enums.dart';
+import 'package:vm_fm_4/core/database/shared_manager.dart';
+import 'package:vm_fm_4/core/enums/shared_enums.dart';
 import 'package:vm_fm_4/feature/injection.dart';
 import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_component_model.dart';
 import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_leaf_model.dart';
