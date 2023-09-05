@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/other/colors.dart';
@@ -31,7 +32,7 @@ class CustomLoginButton extends StatelessWidget {
             onPressed: () {
               onPressed(context);
             },
-            child: Text(title),
+            child: Text(title).tr(),
           ),
         ),
       ),

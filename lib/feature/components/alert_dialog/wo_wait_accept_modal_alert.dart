@@ -15,9 +15,7 @@ class WoWaitAcceptModalAlert {
           title: Text(title, style: Theme.of(context).textTheme.titleMedium),
           content: Text(
             textData,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  overflow: TextOverflow.visible,
-                ),
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(overflow: TextOverflow.visible),
           ),
           actions: [
             TextButton(

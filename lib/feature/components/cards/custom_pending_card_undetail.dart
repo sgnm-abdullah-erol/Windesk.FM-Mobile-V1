@@ -16,8 +16,8 @@ import '../../extensions/date_string_extension.dart';
 import '../../../core/l10n/locale_keys.g.dart';
 import '../../models/work_space/work_space_appendings.dart';
 import '../buttons/custom_half_buttons.dart';
-import '../modal_alert/wo_wait_accept_modal_alert.dart';
-import '../modal_alert/wo_wait_reject_modal_alert.dart';
+import '../alert_dialog/wo_wait_accept_modal_alert.dart';
+import '../alert_dialog/wo_wait_reject_modal_alert.dart';
 import '../snackBar/snackbar.dart';
 
 class CustomPendingCardUndetail extends StatelessWidget {

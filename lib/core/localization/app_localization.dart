@@ -5,7 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 class AppLocalization {
   const AppLocalization._();
 
-  static String get localizationJsonPath => 'assets/localization';
+  static String get localizationJsonPath => 'assets/translations';
   static List<Locale> get supportedLocales => [
         const Locale('tr', 'TR'),
         const Locale('en', 'US'),

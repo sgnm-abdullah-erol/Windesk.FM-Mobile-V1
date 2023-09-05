@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../../../feature/components/appbar/custom_main_appbar.dart';
 import '../../../../../../feature/components/input_fields/dropdown_input_fields.dart';
-import '../../../../../../feature/components/modal_alert/wo_wait_accept_modal_alert.dart';
+import '../../../../../../feature/components/alert_dialog/wo_wait_accept_modal_alert.dart';
 import '../../../../../../feature/components/snackBar/snackbar.dart';
 import '../../../../../../core/constants/other/app_icons.dart';
 import '../../../../../../core/constants/other/app_strings.dart';

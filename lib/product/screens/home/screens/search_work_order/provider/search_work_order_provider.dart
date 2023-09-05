@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:vm_fm_4/core/route/app_route.gr.dart';
 
 import '../../../../../../core/database/shared_manager.dart';
 import '../../../../../../core/enums/shared_enums.dart';
@@ -28,7 +30,20 @@ class SearchWorkOrderProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  getWorkOrderWithSearch() async {
+  void getWorkSpaceWithSearchFromGroupWorks(BuildContext context, String taskId) async {
+    String userToken = await SharedManager().getString(SharedEnum.userToken);
+    final result = await workSpaceService.getWorkSpaceWithSearchFromGroupWorks(taskId, userToken);
+
+    result.fold(
+        (l) => {
+              context.router.push(DetailWorkOrderScreen(workSpaceDetail: l)),
+              context.router.pop(),
+            },
+        (r) {});
+    // message.data['taskId']
+  }
+
+  void getWorkOrderWithSearch() async {
     if (woNumber.text != '') {
       String userToken = await SharedManager().getString(SharedEnum.userToken);
 

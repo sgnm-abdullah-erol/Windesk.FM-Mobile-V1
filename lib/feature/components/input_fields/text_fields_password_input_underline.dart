@@ -1,3 +1,6 @@
+// ignore_for_file: prefer_null_aware_operators
+
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/other/app_icons.dart';
@@ -31,8 +34,8 @@ class TextInputFieldsPasswordInputUnderline extends StatelessWidget {
       obscureText: !showPassword,
       decoration: InputDecoration(
         border: const UnderlineInputBorder(),
-        hintText: hintText,
-        labelText: labelText,
+        hintText: hintText.tr(),
+        labelText: labelText != null ? labelText?.tr() : null,
         suffixIcon: IconButton(
           onPressed: () => changeVisibility(),
           icon: showPassword ? const Icon(AppIcons.visibilityOff) : const Icon(AppIcons.visibility),

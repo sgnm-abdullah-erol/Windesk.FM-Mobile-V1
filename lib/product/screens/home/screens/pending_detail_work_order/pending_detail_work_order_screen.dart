@@ -6,12 +6,12 @@ import 'package:provider/provider.dart';
 import 'package:vm_fm_4/feature/components/appbar/custom_main_appbar.dart';
 import 'package:vm_fm_4/feature/components/buttons/custom_half_buttons.dart';
 import 'package:vm_fm_4/feature/components/cards/custom_undetail_pending_card.dart';
-import 'package:vm_fm_4/feature/components/modal_alert/wo_wait_reject_modal_alert.dart';
+import 'package:vm_fm_4/feature/components/alert_dialog/wo_wait_reject_modal_alert.dart';
 import 'package:vm_fm_4/core/constants/other/app_strings.dart';
 import 'package:vm_fm_4/core/constants/style/custom_paddings.dart';
 import 'package:vm_fm_4/product/screens/home/screens/pending_detail_work_order/pending_detail_work_order_provider.dart';
 
-import '../../../../../feature/components/modal_alert/wo_wait_accept_modal_alert.dart';
+import '../../../../../feature/components/alert_dialog/wo_wait_accept_modal_alert.dart';
 import '../../../../../feature/models/work_space/work_space_appendings.dart';
 
 @RoutePage()
