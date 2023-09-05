@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/other/colors.dart';
@@ -44,7 +45,7 @@ class _Title extends StatelessWidget {
       title,
       style: TextStyle(fontSize: FontSizes.button, color: APPColors.Accent.blue),
       textAlign: TextAlign.center,
-    );
+    ).tr();
   }
 }
 

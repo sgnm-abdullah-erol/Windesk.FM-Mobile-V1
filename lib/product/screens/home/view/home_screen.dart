@@ -12,7 +12,6 @@ import 'package:vm_fm_4/generated/locale_keys.g.dart';
 import 'package:vm_fm_4/product/screens/home/service/home_service_repo_impl.dart';
 
 import '../../../../core/constants/other/app_icons.dart';
-import '../../../../core/constants/other/app_strings.dart';
 import '../../../../core/constants/other/colors.dart';
 import '../../../../core/constants/other/snackbar_strings.dart';
 import '../../../../core/constants/paths/service_tools.dart';
@@ -71,18 +70,24 @@ class _HomeScreenState extends State<HomeScreen> {
             //FlutterLocalNotificationsPlugin().show(message.notification.messageId, message.notification?.title, message.notification?.body,);
           });
 
-          return SafeArea(
-            child: Scaffold(
-              key: _scaffoldKey,
-              appBar: appBarWidget(context, homeProvider),
-              backgroundColor: APPColors.Main.white,
-              body: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[headerTextWidget(), homePageIcons(context)],
-                ),
+          return Scaffold(
+            key: _scaffoldKey,
+            appBar: appBarWidget(context, homeProvider),
+            backgroundColor: APPColors.Main.white,
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[headerTextWidget(), homePageIcons(context)],
               ),
             ),
+            floatingActionButton: FloatingActionButton(onPressed: () {
+              print(context.locale);
+              if (context.locale == const Locale('en', 'US')) {
+                context.setLocale(const Locale('tr', 'TR'));
+              } else {
+                context.setLocale(const Locale('en', 'US'));
+              }
+            }),
           );
         },
       ),
@@ -132,14 +137,14 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             CustomCircularHomeButton(
-              title: buttonTitle1.tr(),
+              title: buttonTitle1,
               icon: Icon(buttonIcon1, size: MediaQuery.of(context).size.width / 10),
               onPressed: () => context.router.push(navigateRouteName1),
               isBadgeVisible: false,
               badgeCount: '0',
             ),
             CustomCircularHomeButton(
-              title: buttonTitle2.tr(),
+              title: buttonTitle2,
               icon: Icon(buttonIcon2, size: MediaQuery.of(context).size.width / 10),
               onPressed: () => context.router.push(navigateRouteName2),
               isBadgeVisible: false,
@@ -152,11 +157,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Expanded headerTextWidget() {
-    return const Expanded(
+    return Expanded(
       child: Column(
         children: [
-          Text(ServiceTools.facilityName, style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400)),
-          Text(AppStrings.title, style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+          const Text(ServiceTools.facilityName, style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400)),
+          const Text(LocaleKeys.AppTitle, style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)).tr(),
         ],
       ),
     );

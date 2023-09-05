@@ -8,7 +8,7 @@ import '../../../generated/locale_keys.g.dart';
 import '../../../product/screens/home/screens/search_work_order/provider/search_work_order_provider.dart';
 
 class NotificationAlertDialog {
-  Future showNotification(BuildContext context, SearchWorkOrderProvider searchWorkOrderProvider, RemoteMessage message) async {
+  static Future showNotification(BuildContext context, SearchWorkOrderProvider searchWorkOrderProvider, RemoteMessage message) async {
     Widget cancelButton = TextButton(
       child: const Text(LocaleKeys.Okey).tr(),
       onPressed: () {

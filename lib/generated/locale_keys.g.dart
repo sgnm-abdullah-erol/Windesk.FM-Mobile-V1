@@ -10,25 +10,26 @@ class LocaleKeys {
 
   // static const ----------App---------- = '----------App----------';
   static const String AppName = 'Windesk FM Mobile V1';
-  static const String MyOrders = "Üzerimdekiler";
-  static const String MyGroups = "Grubumdakiler";
-  static const String MyPendings = "Onay Bekleyenler";
+  static const String MyOrders = "MyOrders";
+  static const String MyGroups = "MyGroups";
+  static const String MyPendings = "MyPendings";
 
   // main title
-  static const String CaseSlaList = 'Vaka-(SLA) Listesi';
-  static const String CaseSlaSearch = 'Vaka-(SLA) Arama';
-  static const String WorkOrderList = 'İş Emri Listesi';
-  static const String WorkOrderSearch = 'İş Emri Arama';
-  static const String NewWorkOrder = 'Yeni İş Emri';
+  static const String AppTitle = 'AppTitle';
+  static const String CaseSlaList = 'CaseSlaList';
+  static const String CaseSlaSearch = 'CaseSlaSearch';
+  static const String WorkOrderList = 'WorkOrderList';
+  static const String WorkOrderSearch = 'WorkOrderSearch';
+  static const String NewWorkOrder = 'NewWorkOrder';
 
   // hint and button texts
-  static const String Start = 'Başlat';
-  static const String End = 'Bitir';
-  static const String Cancel = 'Vazgeç';
-  static const String Reject = 'Reddet';
-  static const String Save = 'Kaydet';
-  static const String Approve = 'Onayla';
-  static const String Warning = 'Uyarı';
+  static const String Start = 'Start';
+  static const String End = 'End';
+  static const String Cancel = 'Cancel';
+  static const String Reject = 'Reject';
+  static const String Save = 'Save';
+  static const String Approve = 'Approve';
+  static const String Warning = 'Warning';
   static const String HintUserName = "HintUserName";
   static const String HintPassword = "HintPassword";
   static const String HintLogin = "HintLogin";
