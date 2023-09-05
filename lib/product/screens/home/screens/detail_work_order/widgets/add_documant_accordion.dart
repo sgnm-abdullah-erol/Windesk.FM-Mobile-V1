@@ -1,14 +1,15 @@
 import 'package:accordion/accordion.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../../core/constants/other/app_icons.dart';
+import '../../../../../../core/constants/other/colors.dart';
 import '../../../../../../feature/components/model_bottom_sheet/add_document_modal_bottom_sheet.dart';
 import '../../../../../../feature/components/model_bottom_sheet/add_image_modal_bottom_sheet.dart';
 import '../../../../../../feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
-import '../../../../../../core/constants/other/app_icons.dart';
-import '../../../../../../core/constants/other/app_strings.dart';
-import '../../../../../../core/constants/other/colors.dart';
+import '../../../../../../generated/locale_keys.g.dart';
 import '../../work_order_list/widgets/custom_loading_indicator.dart';
 import '../provider/work_order_detail_provider.dart';
 import '../provider/work_order_detail_service_provider.dart';
@@ -30,7 +31,7 @@ class AddDocumantAccordion extends StatelessWidget {
           contentVerticalPadding: 0,
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.camera, color: APPColors.Main.white),
-          header: Text(AppStrings.addImage, style: TextStyle(color: APPColors.Main.white)),
+          header: Text(LocaleKeys.AddImage, style: TextStyle(color: APPColors.Main.white)).tr(),
           rightIcon: const Icon(AppIcons.arrowDown, size: 0),
           onOpenSection: () {
             ShowModalBottomSheet().show(
@@ -49,7 +50,7 @@ class AddDocumantAccordion extends StatelessWidget {
           contentVerticalPadding: 0,
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.pictureAsPdf, color: APPColors.Main.white),
-          header: Text(AppStrings.addPdf, style: TextStyle(color: APPColors.Main.white)),
+          header: Text(LocaleKeys.AddPdf, style: TextStyle(color: APPColors.Main.white)).tr(),
           rightIcon: const Icon(AppIcons.arrowDown, size: 0),
           onOpenSection: () {
             ShowModalBottomSheet().show(
@@ -65,7 +66,7 @@ class AddDocumantAccordion extends StatelessWidget {
         AccordionSection(
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.documantScanner, color: APPColors.Main.white),
-          header: Text(AppStrings.addedDocumants, style: TextStyle(color: APPColors.Main.white)),
+          header: Text(LocaleKeys.AddedDocumants, style: TextStyle(color: APPColors.Main.white)).tr(),
           onOpenSection: () {
             Provider.of<WorkOrderDetailServiceProvider>(context, listen: false).update();
             provider.userClickedDocumantsFunction();
@@ -76,9 +77,7 @@ class AddDocumantAccordion extends StatelessWidget {
                 provider.userClickedDocumants
                     ? value.isDocumantListFetched
                         ? null
-                        : value.fetchDocumants(
-                            provider.detail.task?.id.toString() ?? '',
-                          )
+                        : value.fetchDocumants(provider.detail.task?.id.toString() ?? '')
                     : null;
               });
 

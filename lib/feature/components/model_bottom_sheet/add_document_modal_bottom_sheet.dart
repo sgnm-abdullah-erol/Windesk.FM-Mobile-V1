@@ -1,10 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
+import 'package:vm_fm_4/generated/locale_keys.g.dart';
 
 import '../../../product/screens/home/screens/detail_work_order/provider/work_order_add_documant_sheet_provider.dart';
 import '../../../product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
-import '../../../core/constants/other/app_strings.dart';
 import '../../../core/constants/other/colors.dart';
 import '../../../core/constants/other/snackbar_strings.dart';
 import '../../extensions/context_extension.dart';
@@ -78,8 +79,8 @@ class _ActionButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomHalfButtons(
-      leftTitle: const Text(AppStrings.cancel),
-      rightTitle: const Text(AppStrings.approve),
+      leftTitle: const Text(LocaleKeys.Cancel).tr(),
+      rightTitle: const Text(LocaleKeys.Approve).tr(),
       leftOnPressed: () => Navigator.of(context).pop(),
       rightOnPressed: () {
         provider.savePdf(taskId, taskKey);

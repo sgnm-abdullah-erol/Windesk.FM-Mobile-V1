@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/style/border_radius.dart';
@@ -17,15 +18,16 @@ class CustomCircularWithTextButton extends StatelessWidget {
       height: context.width * 0.15,
       width: context.width,
       child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: bgColor,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(CustomBorderRadius.buttonWithIconRadius)),
-          ),
-          onPressed: () => onPressFunction(),
-          child: Text(
-            textButton,
-            style: TextStyle(color: textColor),
-          )),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: bgColor,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(CustomBorderRadius.buttonWithIconRadius)),
+        ),
+        onPressed: () => onPressFunction(),
+        child: Text(
+          textButton,
+          style: TextStyle(color: textColor),
+        ).tr(),
+      ),
     );
   }
 }

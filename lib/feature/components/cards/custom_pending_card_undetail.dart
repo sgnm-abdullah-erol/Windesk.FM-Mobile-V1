@@ -1,10 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
+import 'package:vm_fm_4/generated/locale_keys.g.dart';
 
 import '../../../product/screens/home/screens/work_order_list/provider/work_order_list_provider.dart';
 import '../../../product/screens/home/screens/work_order_list/provider/work_order_pendiks_provider.dart';
-import '../../../core/constants/other/app_strings.dart';
 import '../../../core/constants/other/colors.dart';
 import '../../../core/constants/other/snackbar_strings.dart';
 import '../../../core/constants/style/border_radius.dart';
@@ -13,7 +14,6 @@ import '../../../core/constants/style/custom_paddings.dart';
 import '../../../core/constants/style/font_sizes.dart';
 import '../../extensions/context_extension.dart';
 import '../../extensions/date_string_extension.dart';
-import '../../../core/l10n/locale_keys.g.dart';
 import '../../models/work_space/work_space_appendings.dart';
 import '../buttons/custom_half_buttons.dart';
 import '../alert_dialog/wo_wait_accept_modal_alert.dart';
@@ -111,18 +111,18 @@ class _Content extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(2.0),
               child: Text(
-                'WO ${pendiks.task?.id.toString() ?? LocaleKeys.noCode}',
+                'WO ${pendiks.task?.id.toString() ?? LocaleKeys.NoCode}',
                 softWrap: true,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(color: APPColors.Secondary.black, fontSize: 15, fontFamily: "Poppins", fontWeight: FontWeight.bold),
-              ),
+              ).tr(),
             ),
             Padding(
               padding: const EdgeInsets.all(2.0),
               child: Text(
-                pendiks.state?.name.toString() ?? LocaleKeys.noState,
+                pendiks.state?.name.toString() ?? LocaleKeys.NoState,
                 style: TextStyle(fontWeight: FontWeight.bold, color: APPColors.Secondary.black, fontSize: FontSizes.caption),
-              ),
+              ).tr(),
             ),
           ],
         ),
@@ -190,8 +190,8 @@ class _ActionButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: CustomHalfButtons(
-        leftTitle: const Text(AppStrings.cancel),
-        rightTitle: const Text(AppStrings.approve),
+        leftTitle: const Text(LocaleKeys.Cancel).tr(),
+        rightTitle: const Text(LocaleKeys.Approve).tr(),
         leftOnPressed: () => _rejectButton(context),
         rightOnPressed: () => _approveButton(context),
       ),

@@ -2,12 +2,13 @@
 
 import 'package:accordion/accordion.dart';
 import 'package:accordion/controllers.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:vm_fm_4/feature/components/model_bottom_sheet/add_efforts_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
-import 'package:vm_fm_4/core/constants/other/app_strings.dart';
+import 'package:vm_fm_4/generated/locale_keys.g.dart';
 import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/provider/work_order_detail_provider.dart';
 import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/widgets/tables/data_table_accordion_efforts.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
@@ -38,7 +39,7 @@ class AddEffortsAccordion extends StatelessWidget {
           rightIcon: const Icon(AppIcons.arrowDown, size: 0),
           flipRightIconIfOpen: false,
           leftIcon: Icon(AppIcons.add, color: APPColors.Main.white),
-          header: Text(AppStrings.addEffort, style: TextStyle(color: APPColors.Main.white)),
+          header: Text(LocaleKeys.AddEfforts, style: TextStyle(color: APPColors.Main.white)).tr(),
           sectionOpeningHapticFeedback: SectionHapticFeedback.none,
           scrollIntoViewOfItems: ScrollIntoViewOfItems.slow,
           sectionClosingHapticFeedback: SectionHapticFeedback.none,
@@ -61,7 +62,7 @@ class AddEffortsAccordion extends StatelessWidget {
         AccordionSection(
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.compareRounded, color: APPColors.Main.white),
-          header: Text(AppStrings.addedEfforts, style: TextStyle(color: APPColors.Main.white)),
+          header: Text(LocaleKeys.AddedEfforts, style: TextStyle(color: APPColors.Main.white)).tr(),
           onOpenSection: () {
             Provider.of<WorkOrderDetailServiceProvider>(context, listen: false).update();
             provider.userClickedEffortsFunction();

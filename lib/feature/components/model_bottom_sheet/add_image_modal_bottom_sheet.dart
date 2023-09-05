@@ -1,15 +1,16 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
+
+import '../../../core/constants/other/colors.dart';
+import '../../../core/constants/other/snackbar_strings.dart';
+import '../../../generated/locale_keys.g.dart';
+import '../../../product/screens/home/screens/detail_work_order/provider/work_order_add_documant_sheet_provider.dart';
+import '../../../product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
+import '../../extensions/context_extension.dart';
 import '../buttons/custom_half_buttons.dart';
 import '../input_fields/text_fields_input.dart';
-import '../../../core/constants/other/colors.dart';
-import '../../extensions/context_extension.dart';
-import '../../../product/screens/home/screens/detail_work_order/provider/work_order_add_documant_sheet_provider.dart';
-
-import '../../../product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
-import '../../../core/constants/other/app_strings.dart';
-import '../../../core/constants/other/snackbar_strings.dart';
 import '../snackBar/snackbar.dart';
 
 class AddImageModalBottomSheet extends StatelessWidget {
@@ -62,8 +63,8 @@ class _ApproveButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomHalfButtons(
-      leftTitle: const Text(AppStrings.cancel),
-      rightTitle: const Text(AppStrings.approve),
+      leftTitle: const Text(LocaleKeys.Cancel).tr(),
+      rightTitle: const Text(LocaleKeys.Approve).tr(),
       leftOnPressed: () => Navigator.pop(context),
       rightOnPressed: () {
         provider.saveImage(taskId, taskKey);

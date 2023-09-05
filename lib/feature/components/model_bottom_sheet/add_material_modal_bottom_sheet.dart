@@ -1,16 +1,17 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+
+import '../../../core/constants/other/snackbar_strings.dart';
+import '../../../generated/locale_keys.g.dart';
 import '../../../product/screens/home/screens/detail_work_order/provider/work_order_add_material_sheet_provider.dart';
 import '../../../product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
-import '../../../core/constants/other/snackbar_strings.dart';
+import '../../extensions/context_extension.dart';
 import '../buttons/custom_half_buttons.dart';
 import '../input_fields/dropdown_input_fields.dart';
 import '../input_fields/text_fields_input_underline.dart';
-
-import '../../../core/constants/other/app_strings.dart';
-import '../../extensions/context_extension.dart';
 import '../snackBar/snackbar.dart';
 
 class AddMaterialModalBottomSheet extends StatelessWidget {
@@ -47,11 +48,9 @@ class AddMaterialModalBottomSheet extends StatelessWidget {
         Expanded(
           flex: 70,
           child: CustomHalfButtons(
-            leftTitle: const Text(AppStrings.cancel),
-            rightTitle: const Text(AppStrings.approve),
-            leftOnPressed: () {
-              Navigator.of(context).pop();
-            },
+            leftTitle: const Text(LocaleKeys.Cancel).tr(),
+            rightTitle: const Text(LocaleKeys.Approve).tr(),
+            leftOnPressed: () => Navigator.of(context).pop(),
             rightOnPressed: () {
               value.addSparepart(taskId);
               Navigator.of(context).pop();

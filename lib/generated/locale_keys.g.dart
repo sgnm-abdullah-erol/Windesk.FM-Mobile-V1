@@ -13,6 +13,10 @@ class LocaleKeys {
   static const String MyOrders = "MyOrders";
   static const String MyGroups = "MyGroups";
   static const String MyPendings = "MyPendings";
+  static const String NoCode = 'NoCode';
+  static const String NoState = 'NoState';
+  static const String NoName = 'NoName';
+  static const String NoDescription = 'NoDescription';
 
   // main title
   static const String AppTitle = 'AppTitle';
@@ -38,6 +42,8 @@ class LocaleKeys {
   static const String Okey = 'Okey';
   static const String SeeDetail = 'SeeDetail';
   static const String TakeItOnMe = 'TakeItOnMe';
+  static const String Search = 'Search';
+  static const String Clear = 'Clear';
 
   // tabs
   static const String HomeTab = 'HomeTab';
@@ -55,6 +61,27 @@ class LocaleKeys {
   static const String Material = 'Material';
   static const String Document = 'Document';
   static const String RequestMaterial = 'RequestMaterial';
+  static const String AddPersonal = 'AddPersonal';
+  static const String ChoosePersonal = 'ChoosePersonal';
+  static const String ChooseShift = 'ChooseShift';
+  static const String AddImage = 'AddImage';
+  static const String AddPdf = 'AddPdf';
+  static const String AddedDocumants = 'AddedDocumants';
+  static const String AddEfforts = 'AddEfforts';
+  static const String AddedEfforts = 'AddedEfforts';
+  static const String AddMaterial = 'AddMaterial';
+  static const String AddedMaterial = 'AddedMaterial';
+  static const String AddRequestMaterial = 'AddRequestMaterial';
+  static const String ApprovedRequestMaterials = 'ApprovedRequestMaterials';
+  static const String RequestedMaterials = 'RequestedMaterials';
+  static const String MaterialSearch = 'MaterialSearch';
+
+  // issue
+  static const String State = 'State';
+  static const String Build = 'Build';
+  static const String Floor = 'Floor';
+  static const String Wing = 'Wing';
+  static const String TaskForMe = 'Üzerime Atanan Vakalar';
 
   // static const --------HOME-------- = '--------HOME--------';
   static const String Home = 'Home';

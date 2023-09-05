@@ -1,16 +1,16 @@
 // ignore_for_file:file_names, prefer_const_constructors_in_immutables,prefer_const_constructors,prefer_const_literals_to_create_immutables,use_key_in_widget_constructors
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:vm_fm_4/core/constants/style/border_radius.dart';
 import 'package:vm_fm_4/core/constants/style/font_sizes.dart';
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 import 'package:vm_fm_4/feature/extensions/date_string_extension.dart';
 import 'package:vm_fm_4/feature/models/work_space/work_space_detail.dart';
+import 'package:vm_fm_4/generated/locale_keys.g.dart';
 
-import '../../../core/constants/other/app_strings.dart';
 import '../../../core/constants/other/colors.dart';
 import '../../../core/constants/style/box_decorations.dart';
-import '../../../core/l10n/locale_keys.g.dart';
 import '../buttons/custom_half_buttons.dart';
 
 class CustomWoDetailCard extends StatelessWidget {
@@ -53,13 +53,13 @@ class CustomWoDetailCard extends StatelessWidget {
         children: [
           _codeAndStatusWidget(context),
           SizedBox(height: 5),
-          _woListText(workSpaceDetail.task?.name ?? LocaleKeys.noName),
+          _woListText(workSpaceDetail.task?.name ?? LocaleKeys.NoName),
           _divider(),
           SizedBox(height: 5),
           _woLocationText(),
           _divider(),
           SizedBox(height: 5),
-          _woListText(workSpaceDetail.task?.description ?? LocaleKeys.noDescription),
+          _woListText(workSpaceDetail.task?.description ?? LocaleKeys.NoDescription),
           _divider(),
           SizedBox(height: 5),
           _dateText(_labelStartDate, workSpaceDetail.calendar?.start.toString() ?? '', true),
@@ -119,9 +119,9 @@ class CustomWoDetailCard extends StatelessWidget {
     return isButtonVisible
         ? Center(
             child: CustomHalfButtons(
-              leftTitle: Text(AppStrings.cancel, style: TextStyle(color: APPColors.Main.white)),
+              leftTitle: Text(LocaleKeys.Cancel, style: TextStyle(color: APPColors.Main.white)).tr(),
               leftOnPressed: () {},
-              rightTitle: Text(AppStrings.approve, style: TextStyle(color: APPColors.Main.white)),
+              rightTitle: Text(LocaleKeys.Approve, style: TextStyle(color: APPColors.Main.white)).tr(),
               rightOnPressed: () {},
             ),
           )
@@ -138,18 +138,18 @@ class CustomWoDetailCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(2.0),
               child: Text(
-                'WO ${workSpaceDetail.task?.id.toString() ?? LocaleKeys.noCode}',
+                'WO ${workSpaceDetail.task?.id.toString() ?? LocaleKeys.NoCode}',
                 softWrap: true,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(color: APPColors.Secondary.black, fontSize: 15, fontFamily: "Poppins", fontWeight: FontWeight.bold),
-              ),
+              ).tr(),
             ),
             Padding(
               padding: const EdgeInsets.all(2.0),
               child: Text(
-                workSpaceDetail.state?.name.toString() ?? LocaleKeys.noState,
+                workSpaceDetail.state?.name.toString() ?? LocaleKeys.NoState,
                 style: TextStyle(fontWeight: FontWeight.bold, color: APPColors.Secondary.black, fontSize: FontSizes.caption),
-              ),
+              ).tr(),
             ),
           ],
         ),
@@ -165,7 +165,10 @@ class CustomWoDetailCard extends StatelessWidget {
           children: [
             Expanded(
               flex: 2,
-              child: Text(header, style: TextStyle(color: APPColors.Secondary.black, fontWeight: FontWeight.w500, fontSize: FontSizes.caption + 1)),
+              child: Text(
+                header,
+                style: TextStyle(color: APPColors.Secondary.black, fontWeight: FontWeight.w500, fontSize: FontSizes.caption + 1),
+              ).tr(),
             ),
           ],
         ),

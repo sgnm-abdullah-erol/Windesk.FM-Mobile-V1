@@ -1,6 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/constants/other/app_strings.dart';
+import '../../../generated/locale_keys.g.dart';
 import '../../extensions/context_extension.dart';
 import '../buttons/custom_half_buttons.dart';
 import '../input_fields/dropdown_input_fields.dart';
@@ -64,12 +65,12 @@ class _InputButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomHalfButtons(
-      leftTitle: const Text(AppStrings.cancel),
-      rightTitle: const Text(AppStrings.approve),
+      leftTitle: const Text(LocaleKeys.Cancel).tr(),
+      rightTitle: const Text(LocaleKeys.Approve).tr(),
       leftOnPressed: () => Navigator.pop(context),
-      rightOnPressed: () {
-        Navigator.pop(context);
-        onPressed();
+      rightOnPressed: () => {
+        Navigator.pop(context),
+        onPressed(),
       },
     );
   }

@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../../core/route/app_route.gr.dart';
-import '../../home/screens/work_order_list/widgets/custom_loading_indicator.dart';
+import 'package:vm_fm_4/generated/locale_keys.g.dart';
 
 import '../../../../../../../feature/components/appbar/custom_main_appbar.dart';
 import '../../../../../../../feature/components/buttons/custom_half_buttons.dart';
@@ -10,6 +10,8 @@ import '../../../../../../../feature/components/input_fields/text_fields_input_w
 import '../../../../core/constants/other/app_icons.dart';
 import '../../../../core/constants/other/app_strings.dart';
 import '../../../../core/constants/style/custom_paddings.dart';
+import '../../../../core/route/app_route.gr.dart';
+import '../../home/screens/work_order_list/widgets/custom_loading_indicator.dart';
 import '../provider/search_provider.dart';
 
 @RoutePage()
@@ -39,7 +41,7 @@ class _SearchMaterialScreenState extends State<SearchMaterialScreen> {
         }
 
         return Scaffold(
-          appBar: const CustomMainAppbar(title: Text(AppStrings.materialSearch), elevation: 3),
+          appBar: CustomMainAppbar(title: const Text(LocaleKeys.MaterialSearch).tr(), elevation: 3),
           body: searchProvider.isLoading
               ? const CustomLoadingIndicator()
               : Center(
@@ -50,18 +52,12 @@ class _SearchMaterialScreenState extends State<SearchMaterialScreen> {
                       children: [
                         TextFieldsInputWithActionAndController(
                             textController: searchProvider.assetNumber,
-                            labelText: AppStrings.materialSearch,
+                            labelText: LocaleKeys.MaterialSearch,
                             actionIcon: AppIcons.qr,
                             actionFunction: searchProvider.scanBarcodeAndQrForAsset),
                         CustomHalfButtons(
-                            leftTitle: const Text(
-                              AppStrings.clean,
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            rightTitle: const Text(
-                              AppStrings.search,
-                              style: TextStyle(color: Colors.white),
-                            ),
+                            leftTitle: const Text(LocaleKeys.Clear, style: TextStyle(color: Colors.white)).tr(),
+                            rightTitle: const Text(LocaleKeys.Search, style: TextStyle(color: Colors.white)).tr(),
                             leftOnPressed: searchProvider.clearInput,
                             rightOnPressed: searchProvider.getAssetWithSearch),
                       ],

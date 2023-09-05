@@ -1,12 +1,13 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../core/constants/other/app_strings.dart';
 import '../../../core/constants/other/colors.dart';
 import '../../../core/constants/style/border_radius.dart';
+import '../../../generated/locale_keys.g.dart';
 import '../buttons/custom_circular_with_icon_button.dart';
 import '../buttons/custom_half_buttons.dart';
 
@@ -63,11 +64,9 @@ class AddDocumentsModalBottomSheet extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CustomHalfButtons(
-              leftTitle: const Text(AppStrings.cancel),
-              rightTitle: const Text(AppStrings.save),
-              leftOnPressed: () {
-                Navigator.pop(context);
-              },
+              leftTitle: const Text(LocaleKeys.Cancel).tr(),
+              rightTitle: const Text(LocaleKeys.Approve).tr(),
+              leftOnPressed: () => Navigator.pop(context),
               rightOnPressed: addDocumentFunction)
         ],
       ),

@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
+import '../../../generated/locale_keys.g.dart';
 import '../style/font_sizes.dart';
-import 'app_strings.dart';
 import 'colors.dart';
 
 @immutable
@@ -51,9 +51,9 @@ class TimeClass {
     date2 = timeRecover2(date2);
     DateTime t2 = DateTime.parse(date2);
     Duration date3 = date1.difference(t2);
-    String finalDuration = '''${date3.inDays} ${AppStrings.day} ${int.parse(date3.inHours.toString()) % 24} ${AppStrings.hour}
-         ${int.parse(date3.inMinutes.toString()) % 60} ${AppStrings.minute}.
-          ${int.parse(date3.inSeconds.toString()) % 60} ${AppStrings.second}. ''';
+    String finalDuration = '''${date3.inDays} ${LocaleKeys.Day} ${int.parse(date3.inHours.toString()) % 24} ${LocaleKeys.Hour}
+         ${int.parse(date3.inMinutes.toString()) % 60} ${LocaleKeys.Minute}.
+          ${int.parse(date3.inSeconds.toString()) % 60} ${LocaleKeys.Second}. ''';
 
     return finalDuration;
   }
@@ -80,9 +80,9 @@ class TimeClass {
     final int m = ((seconds % 3600) / 60).floor();
     final int s = ((seconds % 3600) % 60).floor();
 
-    final String hDisplay = h > 0 ? ' $h ${AppStrings.hour} ' : '';
-    final String mDisplay = m > 0 ? '$m ${AppStrings.minute} ' : '';
-    final String sDisplay = s > 0 ? '$s ${AppStrings.second} ' : '';
+    final String hDisplay = h > 0 ? ' $h ${LocaleKeys.Hour} ' : '';
+    final String mDisplay = m > 0 ? '$m ${LocaleKeys.Minute} ' : '';
+    final String sDisplay = s > 0 ? '$s ${LocaleKeys.Hour} ' : '';
 
     return hDisplay + mDisplay + sDisplay;
   }

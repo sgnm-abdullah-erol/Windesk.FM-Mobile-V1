@@ -1,9 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/constants/other/app_strings.dart';
 import '../../../core/constants/other/colors.dart';
 import '../../../core/constants/style/font_sizes.dart';
+import '../../../generated/locale_keys.g.dart';
 import '../../extensions/context_extension.dart';
 import '../buttons/custom_half_buttons.dart';
 
@@ -55,10 +56,11 @@ class WoWaitTaskAcceptModalBottomSheet extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         CustomHalfButtons(
-            leftTitle: const Text(AppStrings.cancel),
-            rightTitle: const Text(AppStrings.save),
-            leftOnPressed: rejectFunction,
-            rightOnPressed: acceptFunction)
+          leftTitle: const Text(LocaleKeys.Cancel).tr(),
+          rightTitle: const Text(LocaleKeys.Save).tr(),
+          leftOnPressed: rejectFunction,
+          rightOnPressed: acceptFunction,
+        )
       ],
     );
   }

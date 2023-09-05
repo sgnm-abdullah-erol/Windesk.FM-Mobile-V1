@@ -1,8 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/other/app_icons.dart';
-import '../../../core/constants/other/app_strings.dart';
+import '../../../generated/locale_keys.g.dart';
 import '../../extensions/context_extension.dart';
 import '../buttons/custom_half_buttons.dart';
 import '../input_fields/dropdown_input_fields.dart';
@@ -49,24 +50,24 @@ class AddPersonalModalBottomSheet extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Expanded(
-            child: Text(
-              AppStrings.addPersonal,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
+          Expanded(
+            child: const Text(LocaleKeys.AddPersonal, style: TextStyle(fontWeight: FontWeight.bold)).tr(),
+          ),
+          Expanded(
+            child: DropDownInputFields(
+              labelText: LocaleKeys.ChoosePersonal,
+              onChangedFunction: selectPersonalFunction,
+              rightIcon: AppIcons.arrowDown,
+              dropDownArray: personalList,
             ),
           ),
           Expanded(
             child: DropDownInputFields(
-                labelText: AppStrings.choosePersonal,
-                onChangedFunction: selectPersonalFunction,
-                rightIcon: AppIcons.arrowDown,
-                dropDownArray: personalList),
-          ),
-          Expanded(
-            child: DropDownInputFields(
-                labelText: AppStrings.chooseShift, onChangedFunction: selectShiftFunction, rightIcon: AppIcons.arrowDown, dropDownArray: shiftList),
+              labelText: LocaleKeys.ChooseShift,
+              onChangedFunction: selectShiftFunction,
+              rightIcon: AppIcons.arrowDown,
+              dropDownArray: shiftList,
+            ),
           ),
         ],
       ),
@@ -80,11 +81,9 @@ class AddPersonalModalBottomSheet extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CustomHalfButtons(
-              leftTitle: const Text(AppStrings.cancel),
-              rightTitle: const Text(AppStrings.save),
-              leftOnPressed: () {
-                Navigator.pop(context);
-              },
+              leftTitle: const Text(LocaleKeys.Cancel).tr(),
+              rightTitle: const Text(LocaleKeys.Approve).tr(),
+              leftOnPressed: () => Navigator.pop(context),
               rightOnPressed: () {
                 addPhotoFunction();
                 Navigator.of(context).pop();

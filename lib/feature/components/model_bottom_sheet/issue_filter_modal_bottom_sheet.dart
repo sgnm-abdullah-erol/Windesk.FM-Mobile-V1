@@ -1,9 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/other/app_icons.dart';
-import '../../../core/constants/other/app_strings.dart';
 import '../../../core/constants/other/colors.dart';
+import '../../../generated/locale_keys.g.dart';
 import '../../extensions/context_extension.dart';
 import '../buttons/custom_circular_with_text_button.dart';
 import '../buttons/custom_elevated_button_with_icon.dart';
@@ -73,23 +74,23 @@ class IssueFilterModalBottomSheet extends StatelessWidget {
               child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: CustomCircularWithTextButton(
-                bgColor: APPColors.Login.blue, onPressFunction: taskForMeFunction, textButton: AppStrings.taskForMe, textColor: APPColors.Main.white),
+                bgColor: APPColors.Login.blue, onPressFunction: taskForMeFunction, textButton: LocaleKeys.TaskForMe, textColor: APPColors.Main.white),
           )),
           Expanded(
             child: DropDownInputFields(
-                labelText: AppStrings.state, onChangedFunction: selectStateFunction, rightIcon: AppIcons.arrowDown, dropDownArray: stateList),
+                labelText: LocaleKeys.State, onChangedFunction: selectStateFunction, rightIcon: AppIcons.arrowDown, dropDownArray: stateList),
           ),
           Expanded(
             child: DropDownInputFields(
-                labelText: AppStrings.build, onChangedFunction: selectBuildFunction, rightIcon: AppIcons.arrowDown, dropDownArray: buildList),
+                labelText: LocaleKeys.Build, onChangedFunction: selectBuildFunction, rightIcon: AppIcons.arrowDown, dropDownArray: buildList),
           ),
           Expanded(
             child: DropDownInputFields(
-                labelText: AppStrings.floor, onChangedFunction: selectFloorFunction, rightIcon: AppIcons.arrowDown, dropDownArray: floorList),
+                labelText: LocaleKeys.Floor, onChangedFunction: selectFloorFunction, rightIcon: AppIcons.arrowDown, dropDownArray: floorList),
           ),
           Expanded(
             child: DropDownInputFields(
-                labelText: AppStrings.wing, onChangedFunction: selectWingFunction, rightIcon: AppIcons.arrowDown, dropDownArray: wingList),
+                labelText: LocaleKeys.Wing, onChangedFunction: selectWingFunction, rightIcon: AppIcons.arrowDown, dropDownArray: wingList),
           ),
         ],
       ),
@@ -124,11 +125,9 @@ class IssueFilterModalBottomSheet extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CustomHalfButtons(
-              leftTitle: const Text(AppStrings.cancel),
-              rightTitle: const Text(AppStrings.save),
-              leftOnPressed: () {
-                Navigator.pop(context);
-              },
+              leftTitle: const Text(LocaleKeys.Cancel).tr(),
+              rightTitle: const Text(LocaleKeys.Approve).tr(),
+              leftOnPressed: () => Navigator.pop(context),
               rightOnPressed: filterStartFunction)
         ],
       ),

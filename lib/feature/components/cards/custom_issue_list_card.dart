@@ -226,7 +226,7 @@ class _CustomIssueListCardState extends State<CustomIssueListCard> with CustomIs
             color: CustomColorCalculator().colorCalculator(dateNow.toString(), targetTime),
             fontSize: FontSizes.caption - 1,
           ),
-        ),
+        ).tr(),
       ),
     );
   }
