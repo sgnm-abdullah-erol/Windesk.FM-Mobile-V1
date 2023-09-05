@@ -12,6 +12,7 @@ import 'feature/global_providers/global_provider.dart';
 import 'feature/injection.dart';
 import 'feature/service/firebase/firebase_notification.dart';
 
+// added comment line
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Injection().initInstances();

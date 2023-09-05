@@ -20,6 +20,8 @@ class MyGroupWorkOrders extends StatefulWidget {
 }
 
 class _MyGroupWorkOrdersState extends State<MyGroupWorkOrders> {
+  int count = 0;
+
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -50,7 +52,11 @@ class _MyGroupWorkOrdersState extends State<MyGroupWorkOrders> {
   }
 
   dynamic _custom(index) {
+<<<<<<< HEAD
     if (widget.provider.workSpaceMyGroupDemandList!.children![index].children != null) {
+=======
+    if (widget.provider.workSpaceMyGroupDemandList?.children?[index].children != null) {
+>>>>>>> main
       return CustomBaseAccordion(
         list: [_accordionSection(index)],
       );
@@ -65,15 +71,34 @@ class _MyGroupWorkOrdersState extends State<MyGroupWorkOrders> {
   }
 
   AccordionSection _accordionSection(int index) {
+    int count = widget.provider.workSpaceMyGroupDemandList?.children?[index].taskCount ?? 0;
+    bool needExtra = false;
+    int i = 0;
+
+    for (int i = 0; i < (widget.provider.workSpaceMyGroupDemandList?.children?[index].children?.length.toInt() ?? 0); i++) {
+      count -= widget.provider.workSpaceMyGroupDemandList?.children?[index].children?[i].taskCount ?? 0;
+    }
+    if (count != (widget.provider.workSpaceMyGroupDemandList?.children?[index].children?.length.toInt() ?? 0)) {
+      needExtra = true;
+    }
     return AccordionSection(
       header: Row(
         children: [
           InkWell(
             onTap: () {
               if (widget.provider.workSpaceMyGroupDemandList?.children?[index].taskCount.toString() != '0') {
+<<<<<<< HEAD
                 context.router.push(WorkOrderGroupDetailScreen(
                     requestCode: widget.provider.workSpaceMyGroupDemandList?.children?[index].id.toString() ?? '',
                     appTitle: widget.provider.workSpaceMyGroupDemandList?.children?[index].name ?? ''));
+=======
+                context.router.push(
+                  WorkOrderGroupDetailScreen(
+                    requestCode: widget.provider.workSpaceMyGroupDemandList?.children?[index].id.toString() ?? '',
+                    appTitle: widget.provider.workSpaceMyGroupDemandList?.children?[index].name ?? '',
+                  ),
+                );
+>>>>>>> main
               }
             },
             child: Text(
@@ -92,12 +117,27 @@ class _MyGroupWorkOrdersState extends State<MyGroupWorkOrders> {
         maxOpenSections: 0,
         headerBackgroundColorOpened: APPColors.Accent.black,
         children: [
+<<<<<<< HEAD
           for (int i = 0; i < (widget.provider.workSpaceMyGroupDemandList?.children?[index].children?.length.toInt() ?? 0); i++) ...{
+=======
+          for (i = 0; i < (widget.provider.workSpaceMyGroupDemandList?.children?[index].children?.length.toInt() ?? 0); i++) ...{
+>>>>>>> main
             CustomBaseAccordionSections().baseAccordionSection(
               context,
               widget.provider.workSpaceMyGroupDemandList?.children?[index].children?[i].name ?? '',
               widget.provider.workSpaceMyGroupDemandList?.children?[index].children?[i].taskCount.toString() ?? '',
               widget.provider.workSpaceMyGroupDemandList?.children?[index].children?[i].id.toString() ?? '',
+<<<<<<< HEAD
+=======
+            ),
+          },
+          if (needExtra == true && i == (widget.provider.workSpaceMyGroupDemandList?.children?[index].children?.length.toInt() ?? 0)) ...{
+            CustomBaseAccordionSections().baseAccordionSection(
+              context,
+              widget.provider.workSpaceMyGroupDemandList?.children?[index].name ?? '',
+              count.toString(),
+              widget.provider.workSpaceMyGroupDemandList?.children?[index].id.toString() ?? '',
+>>>>>>> main
             ),
           }
         ],
