@@ -478,15 +478,17 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
           result = true;
           return Left(result);
         } else {
+          super.logger.i(response.data);
           result = false;
           return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
         }
       } else {
+        super.logger.i(response.data);
         result = false;
         return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
       }
     } catch (e) {
-      super.logger.i(e);
+      super.logger.e(e);
       return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
     }
   }

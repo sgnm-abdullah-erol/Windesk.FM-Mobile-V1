@@ -2,19 +2,20 @@
 
 import 'package:accordion/accordion.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
+import 'package:vm_fm_4/generated/locale_keys.g.dart';
 
-import '../../../../../../feature/components/appbar/custom_main_appbar.dart';
-import '../../../../../../feature/components/input_fields/dropdown_input_fields.dart';
-import '../../../../../../feature/components/alert_dialog/wo_wait_accept_modal_alert.dart';
-import '../../../../../../feature/components/snackBar/snackbar.dart';
 import '../../../../../../core/constants/other/app_icons.dart';
-import '../../../../../../core/constants/other/app_strings.dart';
 import '../../../../../../core/constants/other/colors.dart';
 import '../../../../../../core/constants/other/snackbar_strings.dart';
 import '../../../../../../core/constants/style/border_radius.dart';
+import '../../../../../../feature/components/alert_dialog/wo_wait_accept_modal_alert.dart';
+import '../../../../../../feature/components/appbar/custom_main_appbar.dart';
+import '../../../../../../feature/components/input_fields/dropdown_input_fields.dart';
+import '../../../../../../feature/components/snackBar/snackbar.dart';
 import '../../../../../../feature/global_providers/global_provider.dart';
 import '../../../../../../feature/models/work_space/work_space_detail.dart';
 import '../../work_order_list/widgets/custom_base_accordion.dart';
@@ -102,10 +103,10 @@ class DetailWorkOrderScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: CustomBaseAccordion(
         list: [
-          _accordionSection(AppStrings.efforts, AddEffortsAccordion(provider: woDetailProvider), AppIcons.insightsRounded),
-          _accordionSection(AppStrings.addMaterial, AddMaterialAccordion(provider: woDetailProvider), AppIcons.warehouse),
-          _accordionSection(AppStrings.requstMaterial, RequestMaterialAccordion(provider: woDetailProvider), AppIcons.tool),
-          _accordionSection(AppStrings.addDocumant, AddDocumantAccordion(provider: woDetailProvider), AppIcons.photoAlbum),
+          _accordionSection(LocaleKeys.Effort, AddEffortsAccordion(provider: woDetailProvider), AppIcons.insightsRounded),
+          _accordionSection(LocaleKeys.Material, AddMaterialAccordion(provider: woDetailProvider), AppIcons.warehouse),
+          _accordionSection(LocaleKeys.RequestMaterial, RequestMaterialAccordion(provider: woDetailProvider), AppIcons.tool),
+          _accordionSection(LocaleKeys.Document, AddDocumantAccordion(provider: woDetailProvider), AppIcons.photoAlbum),
         ],
       ),
     );
@@ -119,7 +120,7 @@ class DetailWorkOrderScreen extends StatelessWidget {
       leftIcon: Icon(icon, color: APPColors.Main.white),
       contentBorderColor: APPColors.Accent.black,
       onOpenSection: () {},
-      header: Text(title, style: TextStyle(color: APPColors.Main.white, letterSpacing: 1.5)),
+      header: Text(title, style: TextStyle(color: APPColors.Main.white, letterSpacing: 1.5)).tr(),
       content: content,
     );
   }
@@ -140,7 +141,7 @@ class _StateChangeDropDownButton extends StatelessWidget {
       child: DropDownInputFields(
         labelText: _currentState,
         onChangedFunction: (val) async {
-          await WoWaitAcceptModalAlert().showAlertDialog(context, "${"$_alertTextOne'" + val}'$_alertTextTwo", AppStrings.changeState).then((value) {
+          await WoWaitAcceptModalAlert().showAlertDialog(context, "${"$_alertTextOne'" + val}'$_alertTextTwo", LocaleKeys.ChangeState).then((value) {
             if (value == true) {
               provider.changeState(val);
             } else {
@@ -163,17 +164,15 @@ class _TakeItOnMe extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
-        provider.takeItOnMe();
-      },
+      onPressed: () => provider.takeItOnMe(),
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.mediumBorderRadius),
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       ),
       child: Text(
-        AppStrings.takeItOnMe,
+        LocaleKeys.TakeItOnMe,
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: APPColors.Main.white),
-      ),
+      ).tr(),
     );
   }
 }

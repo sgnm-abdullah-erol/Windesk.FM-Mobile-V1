@@ -1,14 +1,15 @@
 // ignore_for_file: avoid_print
 
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vm_fm_4/core/constants/style/custom_paddings.dart';
+import 'package:vm_fm_4/feature/components/alert_dialog/wo_wait_reject_modal_alert.dart';
 import 'package:vm_fm_4/feature/components/appbar/custom_main_appbar.dart';
 import 'package:vm_fm_4/feature/components/buttons/custom_half_buttons.dart';
 import 'package:vm_fm_4/feature/components/cards/custom_undetail_pending_card.dart';
-import 'package:vm_fm_4/feature/components/alert_dialog/wo_wait_reject_modal_alert.dart';
-import 'package:vm_fm_4/core/constants/other/app_strings.dart';
-import 'package:vm_fm_4/core/constants/style/custom_paddings.dart';
+import 'package:vm_fm_4/generated/locale_keys.g.dart';
 import 'package:vm_fm_4/product/screens/home/screens/pending_detail_work_order/pending_detail_work_order_provider.dart';
 
 import '../../../../../feature/components/alert_dialog/wo_wait_accept_modal_alert.dart';
@@ -49,8 +50,8 @@ class _BuildScaffold extends StatelessWidget {
             CustomUndetailPendingCard(workSpacePendiks: workSpacePendiks),
             const SizedBox(height: 20),
             CustomHalfButtons(
-              leftTitle: const Text(AppStrings.reject),
-              rightTitle: const Text(AppStrings.approve),
+              leftTitle: const Text(LocaleKeys.Reject).tr(),
+              rightTitle: const Text(LocaleKeys.Approve).tr(),
               leftOnPressed: () {
                 WoWaitRejectModalAlert().showAlertDialog(context, 'textData', 'inputArrayLabelText', ['as', 'asd', 'sad'], () {}).then((value) {
                   if (value != null) {

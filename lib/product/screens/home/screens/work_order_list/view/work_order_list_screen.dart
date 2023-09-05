@@ -1,9 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../feature/components/appbar/custom_main_appbar.dart';
-import '../../../../../../core/constants/other/app_strings.dart';
+import '../../../../../../generated/locale_keys.g.dart';
 import '../provider/work_order_list_provider.dart';
 import '../tabs/my_group_work_orders.dart';
 import '../tabs/my_work_order_pendiks.dart';
@@ -28,20 +29,20 @@ class WorkOrderListScreen extends StatelessWidget {
 }
 
 class _BuildScaffold extends StatelessWidget {
-  const _BuildScaffold({required this.provider});
+  _BuildScaffold({required this.provider});
 
   final WorkOrderListProvider provider;
 
-  final List<Widget> tabs = const [
-    Text(AppStrings.myOrders, maxLines: 1, overflow: TextOverflow.ellipsis),
-    Text(AppStrings.myGroups, maxLines: 1, overflow: TextOverflow.ellipsis),
-    Text(AppStrings.myPendiks, maxLines: 1, overflow: TextOverflow.ellipsis),
+  final List<Widget> tabs = [
+    const Text(LocaleKeys.MyOrders, maxLines: 1, overflow: TextOverflow.ellipsis).tr(),
+    const Text(LocaleKeys.MyGroups, maxLines: 1, overflow: TextOverflow.ellipsis).tr(),
+    const Text(LocaleKeys.MyPendings, maxLines: 1, overflow: TextOverflow.ellipsis).tr(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomMainAppbar(title: Text(AppStrings.workOrderList), returnBack: true, elevation: 3),
+      appBar: CustomMainAppbar(title: const Text(LocaleKeys.WorkOrderList).tr(), returnBack: true, elevation: 3),
       body: Column(
         children: [
           const SizedBox(height: 10),

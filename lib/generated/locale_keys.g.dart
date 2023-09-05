@@ -37,6 +37,7 @@ class LocaleKeys {
   static const String HintRememberMe = "HintRememberMe";
   static const String Okey = 'Okey';
   static const String SeeDetail = 'SeeDetail';
+  static const String TakeItOnMe = 'TakeItOnMe';
 
   // tabs
   static const String HomeTab = 'HomeTab';
@@ -47,6 +48,13 @@ class LocaleKeys {
   // Work Order Texts
   static const String CreatedNewWorkOrder = "CreatedNewWorkOrder";
   static const String GoingToNewWorkOrderDetailPage = "GoingToNewWorkOrderDetailPage";
+  static const String ChangeState = "ChangeState";
+
+  // accordion titles
+  static const String Effort = 'Effort';
+  static const String Material = 'Material';
+  static const String Document = 'Document';
+  static const String RequestMaterial = 'RequestMaterial';
 
   // static const --------HOME-------- = '--------HOME--------';
   static const String Home = 'Home';
@@ -120,7 +128,6 @@ class LocaleKeys {
   static const String Active = 'Active';
   static const String StartDate = 'Start Date';
   static const String EndDate = 'End Date';
-  static const String Effort = 'Effort';
   static const String EffortsNotFound = 'Efforts Not Found';
   static const String Notes = 'Notes';
   static const String UsedSpareParts = 'Used Spare Parts';
