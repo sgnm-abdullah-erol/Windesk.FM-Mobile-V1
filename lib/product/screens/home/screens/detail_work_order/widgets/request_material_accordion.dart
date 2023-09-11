@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
+import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 
 import '../../../../../../core/constants/other/app_icons.dart';
 import '../../../../../../core/constants/other/colors.dart';
@@ -47,7 +48,7 @@ class RequestMaterialAccordion extends StatelessWidget {
         AccordionSection(
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.tool, color: APPColors.Main.white),
-          header: Text(LocaleKeys.ApprovedRequestMaterials.tr(), style: TextStyle(color: APPColors.Main.white)),
+          header: Text(LocaleKeys.ApprovedRequestMaterials.tr(), style: context.labelMedium.copyWith(color: APPColors.Main.white)),
           rightIcon: const Icon(AppIcons.arrowDown, size: 0),
           onOpenSection: () {
             Provider.of<WorkOrderDetailServiceProvider>(context, listen: false).update();
@@ -74,7 +75,7 @@ class RequestMaterialAccordion extends StatelessWidget {
         AccordionSection(
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.tool, color: APPColors.Main.white),
-          header: Text(LocaleKeys.RequestedMaterials.tr(), style: TextStyle(color: APPColors.Main.white)),
+          header: Text(LocaleKeys.RequestedMaterials.tr(), style: context.labelMedium.copyWith(color: APPColors.Main.white)),
           rightIcon: const Icon(AppIcons.arrowDown, size: 0),
           onOpenSection: () {
             Provider.of<WorkOrderDetailServiceProvider>(context, listen: false).update();

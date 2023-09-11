@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 
 import '../../../../../../core/constants/other/colors.dart';
 import '../../../../../../core/constants/style/border_radius.dart';
@@ -32,11 +33,11 @@ class CustomWorkSpaceDetailCard extends StatelessWidget {
             _ResponseDates(workSpaceDetail: workSpaceDetail),
             const CustomWoSummaryDivider(),
             const SizedBox(height: 10),
-            Text('WO ${workSpaceDetail.task?.id}', style: Theme.of(context).textTheme.bodyMedium),
-            Text('${workSpaceDetail.state?.name}', style: Theme.of(context).textTheme.bodyMedium),
+            Text('WO ${workSpaceDetail.task?.id}', style: context.bodyMedium),
+            Text('${workSpaceDetail.state?.name}', style: context.bodyMedium),
             const CustomWoSummaryDivider(),
             const SizedBox(height: 10),
-            Text(workSpaceDetail.task?.description ?? '', style: Theme.of(context).textTheme.bodyMedium),
+            Text(workSpaceDetail.task?.description ?? '', style: context.bodyMedium),
             const CustomWoSummaryDivider(),
             const SizedBox(height: 10),
             _DoubleRowInformation(
@@ -104,24 +105,24 @@ class _FourRowInformation extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(firstLabel, style: Theme.of(context).textTheme.bodyMedium),
-            Text(firstValue, style: Theme.of(context).textTheme.bodyMedium),
+            Text(firstLabel, style: context.bodyMedium),
+            Text(firstValue, style: context.bodyMedium),
           ],
         ),
         const SizedBox(height: 5),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(secondLabel, style: Theme.of(context).textTheme.bodyMedium),
-            Text(secondValue, style: Theme.of(context).textTheme.bodyMedium),
+            Text(secondLabel, style: context.bodyMedium),
+            Text(secondValue, style: context.bodyMedium),
           ],
         ),
         const SizedBox(height: 5),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(thirdLabel, style: Theme.of(context).textTheme.bodyMedium),
-            Text(thirdValue, style: Theme.of(context).textTheme.bodyMedium),
+            Text(thirdLabel, style: context.bodyMedium),
+            Text(thirdValue, style: context.bodyMedium),
           ],
         ),
       ],
@@ -185,8 +186,8 @@ class _DoubleRowInformationComponent extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(firstLabel, style: Theme.of(context).textTheme.bodyMedium),
-            Text(firstValue, style: Theme.of(context).textTheme.bodyMedium),
+            Text(firstLabel, style: context.bodyMedium),
+            Text(firstValue, style: context.bodyMedium),
           ],
         ),
         const SizedBox(height: 5),
@@ -226,10 +227,10 @@ class _ResponseDates extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(LocaleKeys.ResponseDate.tr(), style: Theme.of(context).textTheme.bodySmall),
+              Text(LocaleKeys.ResponseDate.tr(), style: context.bodySmall),
               Text(
                 workSpaceDetail.workspace?.updatedAt?.toString().substring(0, 19) ?? '',
-                style: Theme.of(context).textTheme.bodyMedium,
+                style: context.bodyMedium,
                 overflow: TextOverflow.ellipsis,
               ),
             ],
@@ -240,10 +241,10 @@ class _ResponseDates extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(LocaleKeys.UpdateDate.tr(), style: Theme.of(context).textTheme.bodySmall),
+              Text(LocaleKeys.UpdateDate.tr(), style: context.bodySmall),
               Text(
                 workSpaceDetail.task?.updatedAt.toString().substring(0, 19) ?? '',
-                style: Theme.of(context).textTheme.bodyMedium,
+                style: context.bodyMedium,
                 overflow: TextOverflow.ellipsis,
               ),
             ],
