@@ -11,7 +11,6 @@ import 'core/themes/custom_light_theme.dart';
 import 'core/themes/theme_provider.dart';
 import 'feature/global_providers/global_provider.dart';
 
-// added comment line
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Init.init();

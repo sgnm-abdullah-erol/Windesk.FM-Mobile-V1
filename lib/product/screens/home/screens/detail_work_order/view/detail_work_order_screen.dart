@@ -75,10 +75,7 @@ class DetailWorkOrderScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
                         child: Column(
                           children: [
-                            CustomWorkSpaceDetailCard(
-                              workSpaceDetail: woDetailProvider.detail,
-                              workOrderDetailProvider: woDetailProvider,
-                            ),
+                            CustomWorkSpaceDetailCard(workSpaceDetail: woDetailProvider.detail, workOrderDetailProvider: woDetailProvider),
                             const SizedBox(height: 10),
                             (woDetailProvider.detail.task?.userId ?? '') != context.read<GlobalProvider>().userId
                                 ? _TakeItOnMe(provider: woDetailProvider)
@@ -130,18 +127,21 @@ class _StateChangeDropDownButton extends StatelessWidget {
   const _StateChangeDropDownButton({required this.provider});
 
   final WorkOrderDetailProvider provider;
-  final String _currentState = 'İşlem Girişi';
-  final String _alertTextOne = 'İş emrinin anlık durumunu ';
-  final String _alertTextTwo = ' durumuna almak istediğinizden emin misiniz?';
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: DropDownInputFields(
-        labelText: _currentState,
+        labelText: LocaleKeys.ProccessEntry,
         onChangedFunction: (val) async {
-          await WoWaitAcceptModalAlert().showAlertDialog(context, "${"$_alertTextOne'" + val}'$_alertTextTwo", LocaleKeys.ChangeState).then((value) {
+          await WoWaitAcceptModalAlert()
+              .showAlertDialog(
+                  context,
+                  "${"${LocaleKeys.ProccessEntryFirstALertDialog.tr()}'" + val}'${LocaleKeys.ProccessEntrySecondALertDialog.tr()}",
+                  LocaleKeys.ChangeState.tr())
+              .then((value) {
+            // check response value
             if (value == true) {
               provider.changeState(val);
             } else {
@@ -170,9 +170,9 @@ class _TakeItOnMe extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       ),
       child: Text(
-        LocaleKeys.TakeItOnMe,
+        LocaleKeys.TakeItOnMe.tr(),
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: APPColors.Main.white),
-      ).tr(),
+      ),
     );
   }
 }

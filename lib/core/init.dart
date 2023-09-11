@@ -10,7 +10,8 @@ final class Init {
 
   static Future<void> init() async {
     await Injection().initInstances();
-    await FirebaseNotification.init();
+    // firebase error occur when app is in background
+    FirebaseNotification.init();
     await AppLocalization.init();
   }
 }

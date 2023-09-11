@@ -63,6 +63,20 @@ class LocaleKeys {
   static const String CreatedNewWorkOrder = "CreatedNewWorkOrder";
   static const String GoingToNewWorkOrderDetailPage = "GoingToNewWorkOrderDetailPage";
   static const String ChangeState = "ChangeState";
+  static const String ResponseDate = "ResponseDate";
+  static const String CorrectionDate = "CorrectionDate";
+  static const String Claiment = "Claiment";
+  static const String Category = "Category";
+  static const String OpenDate = "OpenDate";
+  static const String UpdateDate = "UpdateDate";
+  static const String LastUpdateDate = "LastUpdateDate";
+  static const String AssignedGroup = "AssignedGroup";
+  static const String AssignedPerson = "AssignedPerson";
+  static const String Presence = "Presence";
+  static const String Change = "Change";
+  static const String ProccessEntry = "ProccessEntry";
+  static const String ProccessEntryFirstALertDialog = "ProccessEntryFirstALertDialog";
+  static const String ProccessEntrySecondALertDialog = "ProccessEntrySecondALertDialog";
 
   // accordion titles
   static const String Effort = 'Effort';
