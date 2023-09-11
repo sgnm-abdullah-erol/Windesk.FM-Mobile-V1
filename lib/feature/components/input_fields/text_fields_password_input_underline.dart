@@ -2,10 +2,9 @@
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 
 import '../../../core/constants/other/app_icons.dart';
-import '../../../core/constants/other/colors.dart';
-import '../../../core/constants/style/font_sizes.dart';
 
 class TextInputFieldsPasswordInputUnderline extends StatelessWidget {
   const TextInputFieldsPasswordInputUnderline({
@@ -41,7 +40,7 @@ class TextInputFieldsPasswordInputUnderline extends StatelessWidget {
           icon: showPassword ? const Icon(AppIcons.visibilityOff) : const Icon(AppIcons.visibility),
         ),
       ),
-      style: TextStyle(fontSize: FontSizes.button, fontFamily: 'Roboto', letterSpacing: 1, color: APPColors.Main.black),
+      style: context.bodyMedium,
       onChanged: (String value) => onChanged(value),
       validator: (value) {
         if (value == null || value.isEmpty) {

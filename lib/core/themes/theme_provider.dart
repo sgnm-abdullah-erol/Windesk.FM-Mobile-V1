@@ -13,17 +13,17 @@ class ThemeProvider extends ChangeNotifier {
 
   void _initPreferences() async {
     await _preferences.initInstances();
-    getPreferences();
+    await getPreferences();
   }
 
-  getPreferences() async {
+  Future<void> getPreferences() async {
     _isDark = await _preferences.getBool(SharedEnum.theme);
     notifyListeners();
   }
 
-  set isDark(bool value) {
+  void setTheme(bool value) async {
     _isDark = value;
-    _preferences.setBool(SharedEnum.theme, value);
+    await _preferences.setBool(SharedEnum.theme, value);
     notifyListeners();
   }
 }

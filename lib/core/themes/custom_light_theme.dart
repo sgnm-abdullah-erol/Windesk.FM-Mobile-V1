@@ -9,9 +9,6 @@ class CustomLightTheme {
 
   CustomLightTheme() {
     lightTheme = ThemeData.light().copyWith(
-      primaryColor: APPColors.Main.black,
-      secondaryHeaderColor: APPColors.Main.black,
-      scaffoldBackgroundColor: APPColors.Main.white,
       appBarTheme: AppBarTheme(
         color: APPColors.Main.white,
         elevation: 0,
@@ -105,7 +102,7 @@ class CustomLightTheme {
           fontSize: FontSizes.body + 2,
           fontWeight: FontWeight.w500,
           overflow: TextOverflow.ellipsis,
-          letterSpacing: 0.5,
+          letterSpacing: 0.75,
         ),
         bodySmall: TextStyle(
           color: APPColors.Main.black,

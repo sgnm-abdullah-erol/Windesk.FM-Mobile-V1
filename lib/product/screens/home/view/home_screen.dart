@@ -88,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     FloatingActionButton(
                       onPressed: () {
-                        themeProvider.isDark = !themeProvider.isDark;
+                        themeProvider.setTheme(!themeProvider.isDark);
                       },
                     ),
                     FloatingActionButton(onPressed: () {
