@@ -7,6 +7,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vm_fm_4/core/constants/paths/asset_paths.dart';
+import 'package:vm_fm_4/core/themes/theme_provider.dart';
 import 'package:vm_fm_4/feature/components/alert_dialog/notification_alert_dialog.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
 import 'package:vm_fm_4/product/screens/home/service/home_service_repo_impl.dart';
@@ -69,23 +70,35 @@ class _HomeScreenState extends State<HomeScreen> {
             //FlutterLocalNotificationsPlugin().show(message.notification.messageId, message.notification?.title, message.notification?.body,);
           });
 
-          return Scaffold(
-            key: _scaffoldKey,
-            appBar: appBarWidget(context, homeProvider),
-            backgroundColor: APPColors.Main.white,
-            body: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[headerTextWidget(), homePageIcons(context)],
-              ),
-            ),
-            floatingActionButton: FloatingActionButton(onPressed: () {
-              if (context.locale == const Locale('en', 'US')) {
-                context.setLocale(const Locale('tr', 'TR'));
-              } else {
-                context.setLocale(const Locale('en', 'US'));
-              }
-            }),
+          // TODO DUMMY THEME, CHANGE LANGUAGE BUTTON
+          return Consumer<ThemeProvider>(
+            builder: (context, ThemeProvider themeProvider, child) {
+              return Scaffold(
+                key: _scaffoldKey,
+                appBar: appBarWidget(context, homeProvider),
+                backgroundColor: APPColors.Main.white,
+                body: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[headerTextWidget(), homePageIcons(context)],
+                  ),
+                ),
+                floatingActionButton: Row(
+                  children: [
+                    FloatingActionButton(
+                      onPressed: () => themeProvider.isDark = !themeProvider.isDark,
+                    ),
+                    FloatingActionButton(onPressed: () {
+                      if (context.locale == const Locale('en', 'US')) {
+                        context.setLocale(const Locale('tr', 'TR'));
+                      } else {
+                        context.setLocale(const Locale('en', 'US'));
+                      }
+                    }),
+                  ],
+                ),
+              );
+            },
           );
         },
       ),

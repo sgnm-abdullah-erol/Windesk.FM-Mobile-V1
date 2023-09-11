@@ -53,46 +53,84 @@ class CustomLightTheme {
         ),
       ),
       textTheme: TextTheme(
-        // create basic text theme
+        // titles
+        titleLarge: TextStyle(
+          color: APPColors.Main.black,
+          fontSize: FontSizes.titleLarge,
+          fontWeight: FontWeight.w500,
+          overflow: TextOverflow.ellipsis,
+        ),
         titleMedium: TextStyle(
           color: APPColors.Main.black,
-          fontSize: FontSizes.subtitle - 2,
-          fontWeight: FontWeight.w600,
+          fontSize: FontSizes.titleLarge - 4,
+          fontWeight: FontWeight.w500,
+          overflow: TextOverflow.ellipsis,
         ),
+        titleSmall: TextStyle(
+          color: APPColors.Main.black,
+          fontSize: FontSizes.title,
+          fontWeight: FontWeight.w400,
+          overflow: TextOverflow.ellipsis,
+        ),
+
+        // display texts
+        displayLarge: TextStyle(
+          color: APPColors.Main.black,
+          fontSize: FontSizes.title,
+          fontWeight: FontWeight.w600,
+          overflow: TextOverflow.ellipsis,
+        ),
+        displayMedium: TextStyle(
+          color: APPColors.Main.black,
+          fontSize: FontSizes.title - 3,
+          fontWeight: FontWeight.w600,
+          overflow: TextOverflow.ellipsis,
+        ),
+        displaySmall: TextStyle(
+          color: APPColors.Main.black,
+          fontSize: FontSizes.title - 8,
+          fontWeight: FontWeight.w600,
+          overflow: TextOverflow.ellipsis,
+        ),
+
+        // body texts
         bodyLarge: TextStyle(
           color: APPColors.Main.black,
-          fontSize: FontSizes.caption + 1,
+          fontSize: FontSizes.body + 4,
           fontWeight: FontWeight.w600,
           overflow: TextOverflow.ellipsis,
         ),
         bodyMedium: TextStyle(
           color: APPColors.Main.black,
-          fontSize: FontSizes.caption + 1,
+          fontSize: FontSizes.body + 2,
           fontWeight: FontWeight.w500,
           overflow: TextOverflow.ellipsis,
           letterSpacing: 0.5,
         ),
         bodySmall: TextStyle(
           color: APPColors.Main.black,
-          fontSize: FontSizes.overline,
-          fontWeight: FontWeight.w600,
-          overflow: TextOverflow.ellipsis,
-        ),
-        displayLarge: TextStyle(
-          color: APPColors.Main.black,
           fontSize: FontSizes.body,
           fontWeight: FontWeight.w600,
           overflow: TextOverflow.ellipsis,
         ),
-        displayMedium: TextStyle(
+
+        // label texts
+        labelLarge: TextStyle(
           color: APPColors.Main.black,
-          fontSize: FontSizes.caption + 1,
+          fontSize: FontSizes.body + 1,
           fontWeight: FontWeight.w600,
           overflow: TextOverflow.ellipsis,
         ),
-        displaySmall: TextStyle(
+        labelMedium: TextStyle(
           color: APPColors.Main.black,
-          fontSize: FontSizes.caption + 1,
+          fontSize: FontSizes.body - 2,
+          fontWeight: FontWeight.w500,
+          overflow: TextOverflow.ellipsis,
+          letterSpacing: 0.5,
+        ),
+        labelSmall: TextStyle(
+          color: APPColors.Main.black,
+          fontSize: FontSizes.body - 4,
           fontWeight: FontWeight.w600,
           overflow: TextOverflow.ellipsis,
         ),

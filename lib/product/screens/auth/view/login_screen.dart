@@ -106,7 +106,7 @@ class _LoginScreenBodyState extends State<_LoginScreenBody> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 TextFieldsInputUnderline(
-                  hintText: LocaleKeys.HintLogin,
+                  hintText: LocaleKeys.HintUserName.tr(),
                   onChanged: loginProvider.setUserName,
                   controller: loginProvider.userNameController,
                 ),
