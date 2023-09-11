@@ -3,21 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'core/constants/other/app_strings.dart';
+import 'core/init.dart';
 import 'core/localization/app_localization.dart';
 import 'core/route/app_route.dart';
 import 'core/themes/custom_dark_theme.dart';
 import 'core/themes/custom_light_theme.dart';
 import 'core/themes/theme_provider.dart';
 import 'feature/global_providers/global_provider.dart';
-import 'feature/injection.dart';
-import 'feature/service/firebase/firebase_notification.dart';
 
 // added comment line
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Injection().initInstances();
-  FirebaseNotification.init();
-  AppLocalization.init();
+  await Init.init();
 
   runApp(
     EasyLocalization(

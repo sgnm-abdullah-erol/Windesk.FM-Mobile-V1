@@ -26,18 +26,14 @@ class CustomAppbarLoading extends StatelessWidget {
             children: [
               Text(
                 _windesk,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: APPColors.Main.blue,
-                    ),
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(color: APPColors.Main.blue),
               ),
               const SizedBox(width: 10),
               AnimatedTextKit(
                 animatedTexts: [
                   RotateAnimatedText(
                     _fm,
-                    textStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: APPColors.Login.blue,
-                        ),
+                    textStyle: Theme.of(context).textTheme.titleMedium?.copyWith(color: APPColors.Login.blue),
                   ),
                 ],
               ),

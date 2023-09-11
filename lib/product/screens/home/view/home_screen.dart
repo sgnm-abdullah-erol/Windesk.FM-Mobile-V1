@@ -14,7 +14,6 @@ import 'package:vm_fm_4/product/screens/home/service/home_service_repo_impl.dart
 import '../../../../core/constants/other/app_icons.dart';
 import '../../../../core/constants/other/colors.dart';
 import '../../../../core/constants/other/snackbar_strings.dart';
-import '../../../../core/constants/paths/service_tools.dart';
 import '../../../../core/route/app_route.gr.dart';
 import '../../../../feature/components/buttons/custom_circular_home_button.dart';
 import '../../../../feature/components/internet_conneciton/internet_connection_listener.dart';
@@ -159,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Expanded(
       child: Column(
         children: [
-          const Text(ServiceTools.facilityName, style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400)),
+          const Text(LocaleKeys.IfmName, style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400)).tr(),
           const Text(LocaleKeys.AppTitle, style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)).tr(),
         ],
       ),

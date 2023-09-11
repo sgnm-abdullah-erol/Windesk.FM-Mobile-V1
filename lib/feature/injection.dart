@@ -12,7 +12,7 @@ import 'service/service_manager.dart';
 class Injection {
   static final GetIt getIt = GetIt.instance;
 
-  void initInstances() {
+  Future<void> initInstances() async {
     getIt
       ..registerLazySingleton<ServiceManager>(() => ServiceManager())
       ..registerLazySingleton<LogManager>(() => LogManager())

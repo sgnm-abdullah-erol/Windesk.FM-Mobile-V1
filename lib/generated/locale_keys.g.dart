@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 class LocaleKeys {
   const LocaleKeys._();
 
-  // static const ----------App---------- = '----------App----------';
+  // static const ----------App---------- = '----------App----------;
+  static const String IfmName = 'IfmName';
   static const String AppName = 'Windesk FM Mobile V1';
   static const String MyOrders = "MyOrders";
   static const String MyGroups = "MyGroups";
