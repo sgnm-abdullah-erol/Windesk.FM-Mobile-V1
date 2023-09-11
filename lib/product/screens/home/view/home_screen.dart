@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:vm_fm_4/core/constants/paths/asset_paths.dart';
 import 'package:vm_fm_4/core/themes/theme_provider.dart';
 import 'package:vm_fm_4/feature/components/alert_dialog/notification_alert_dialog.dart';
+import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
 import 'package:vm_fm_4/product/screens/home/service/home_service_repo_impl.dart';
 
@@ -76,11 +77,10 @@ class _HomeScreenState extends State<HomeScreen> {
               return Scaffold(
                 key: _scaffoldKey,
                 appBar: appBarWidget(context, homeProvider),
-                backgroundColor: APPColors.Main.white,
                 body: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[headerTextWidget(), homePageIcons(context)],
+                    children: <Widget>[headerTextWidget(context), homePageIcons(context)],
                   ),
                 ),
                 floatingActionButton: Row(
@@ -152,14 +152,14 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             CustomCircularHomeButton(
               title: buttonTitle1,
-              icon: Icon(buttonIcon1, size: MediaQuery.of(context).size.width / 10),
+              icon: Icon(buttonIcon1, size: context.width / 10),
               onPressed: () => context.router.push(navigateRouteName1),
               isBadgeVisible: false,
               badgeCount: '0',
             ),
             CustomCircularHomeButton(
               title: buttonTitle2,
-              icon: Icon(buttonIcon2, size: MediaQuery.of(context).size.width / 10),
+              icon: Icon(buttonIcon2, size: context.width / 10),
               onPressed: () => context.router.push(navigateRouteName2),
               isBadgeVisible: false,
               badgeCount: '0',
@@ -170,12 +170,12 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Expanded headerTextWidget() {
+  Expanded headerTextWidget(BuildContext context) {
     return Expanded(
       child: Column(
         children: [
-          const Text(LocaleKeys.IfmName, style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400)).tr(),
-          const Text(LocaleKeys.AppTitle, style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)).tr(),
+          Text(LocaleKeys.IfmName, style: context.titleSmall.copyWith(letterSpacing: 1.5)).tr(),
+          Text(LocaleKeys.AppTitle, style: context.titleMedium.copyWith(letterSpacing: 1.5)).tr(),
         ],
       ),
     );
@@ -183,27 +183,22 @@ class _HomeScreenState extends State<HomeScreen> {
 
   AppBar appBarWidget(BuildContext context, HomeProvider provider) {
     return AppBar(
-      title: Image.asset(
-        AssetPaths.windesk,
-        width: MediaQuery.of(context).size.width / 1.2,
-        height: MediaQuery.of(context).size.width / 1.2,
-        fit: BoxFit.cover,
-      ),
+      title: Image.asset(AssetPaths.windesk, width: context.width / 1.2, height: context.width / 1.2, fit: BoxFit.cover),
       actions: <Widget>[
         IconButton(
-          icon: Icon(AppIcons.powerSettingsOff, size: 35, color: APPColors.Main.black),
+          icon: Icon(AppIcons.powerSettingsOff, size: 35, color: context.theme ? APPColors.Main.white : APPColors.Main.black),
           tooltip: LocaleKeys.HintLogout.tr(),
           onPressed: () => provider.logOut(),
         ),
       ],
       centerTitle: true,
       elevation: 0.0,
-      backgroundColor: APPColors.Main.white,
-      leading: announcementBuilder(),
+      backgroundColor: APPColors.Clear.black,
+      leading: announcementBuilder(context),
     );
   }
 
-  Builder announcementBuilder() {
+  Builder announcementBuilder(BuildContext context) {
     return Builder(
       builder: (BuildContext context) {
         return badges.Badge(
@@ -217,7 +212,7 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(
               AppIcons.notifications,
               size: 35,
-              color: APPColors.Main.black,
+              color: context.theme ? APPColors.Main.white : APPColors.Main.black,
             ),
             onPressed: () {
               context.read<HomeProvider>().totalAnnoucementCount.toString() != 0
