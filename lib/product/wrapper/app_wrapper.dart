@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 
 import '../../core/constants/other/app_icons.dart';
 import '../../core/route/app_route.gr.dart';
@@ -25,10 +26,10 @@ class AppWrapper extends StatelessWidget {
             selectedIndex: tabsRouter.activeIndex,
             onItemSelected: tabsRouter.setActiveIndex,
             items: [
-              BottomNavyBarItem(title: const Text(LocaleKeys.HomeTab).tr(), icon: const Icon(AppIcons.home)),
-              BottomNavyBarItem(title: const Text(LocaleKeys.NewOrderTab).tr(), icon: const Icon(AppIcons.addBox)),
-              BottomNavyBarItem(title: const Text(LocaleKeys.SearchTab).tr(), icon: const Icon(AppIcons.search)),
-              BottomNavyBarItem(title: const Text(LocaleKeys.TestTab).tr(), icon: const Icon(AppIcons.wifi)),
+              BottomNavyBarItem(title: Text(LocaleKeys.HomeTab, style: context.labelMedium).tr(), icon: const Icon(AppIcons.home)),
+              BottomNavyBarItem(title: Text(LocaleKeys.NewOrderTab, style: context.labelMedium).tr(), icon: const Icon(AppIcons.addBox)),
+              BottomNavyBarItem(title: Text(LocaleKeys.SearchTab, style: context.labelMedium).tr(), icon: const Icon(AppIcons.search)),
+              BottomNavyBarItem(title: Text(LocaleKeys.TestTab, style: context.labelMedium).tr(), icon: const Icon(AppIcons.wifi)),
             ],
           ),
         );

@@ -23,7 +23,7 @@ class ThemeProvider extends ChangeNotifier {
 
   void setTheme(bool value) async {
     _isDark = value;
-    await _preferences.setBool(SharedEnum.theme, value);
+    _preferences.setBool(SharedEnum.theme, value);
     notifyListeners();
   }
 }
