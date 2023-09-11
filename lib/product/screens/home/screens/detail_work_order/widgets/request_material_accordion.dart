@@ -31,7 +31,7 @@ class RequestMaterialAccordion extends StatelessWidget {
           contentVerticalPadding: 0,
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.add, color: APPColors.Main.white),
-          header: Text(LocaleKeys.RequestMaterial, style: TextStyle(color: APPColors.Main.white)).tr(),
+          header: Text(LocaleKeys.AddRequestMaterial.tr(), style: TextStyle(color: APPColors.Main.white)),
           rightIcon: const Icon(AppIcons.arrowDown, size: 0),
           onOpenSection: () {
             ShowModalBottomSheet().show(
@@ -47,7 +47,7 @@ class RequestMaterialAccordion extends StatelessWidget {
         AccordionSection(
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.tool, color: APPColors.Main.white),
-          header: Text(LocaleKeys.ApprovedRequestMaterials, style: TextStyle(color: APPColors.Main.white)).tr(),
+          header: Text(LocaleKeys.ApprovedRequestMaterials.tr(), style: TextStyle(color: APPColors.Main.white)),
           rightIcon: const Icon(AppIcons.arrowDown, size: 0),
           onOpenSection: () {
             Provider.of<WorkOrderDetailServiceProvider>(context, listen: false).update();
@@ -74,7 +74,7 @@ class RequestMaterialAccordion extends StatelessWidget {
         AccordionSection(
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.tool, color: APPColors.Main.white),
-          header: Text(LocaleKeys.RequestMaterial, style: TextStyle(color: APPColors.Main.white)).tr(),
+          header: Text(LocaleKeys.RequestedMaterials.tr(), style: TextStyle(color: APPColors.Main.white)),
           rightIcon: const Icon(AppIcons.arrowDown, size: 0),
           onOpenSection: () {
             Provider.of<WorkOrderDetailServiceProvider>(context, listen: false).update();

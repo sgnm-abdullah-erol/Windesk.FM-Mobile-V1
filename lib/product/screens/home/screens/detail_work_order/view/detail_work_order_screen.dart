@@ -100,10 +100,10 @@ class DetailWorkOrderScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: CustomBaseAccordion(
         list: [
-          _accordionSection(LocaleKeys.Effort, AddEffortsAccordion(provider: woDetailProvider), AppIcons.insightsRounded),
-          _accordionSection(LocaleKeys.Material, AddMaterialAccordion(provider: woDetailProvider), AppIcons.warehouse),
-          _accordionSection(LocaleKeys.RequestMaterial, RequestMaterialAccordion(provider: woDetailProvider), AppIcons.tool),
-          _accordionSection(LocaleKeys.Document, AddDocumantAccordion(provider: woDetailProvider), AppIcons.photoAlbum),
+          _accordionSection(LocaleKeys.Effort.tr(), AddEffortsAccordion(provider: woDetailProvider), AppIcons.insightsRounded),
+          _accordionSection(LocaleKeys.Material.tr(), AddMaterialAccordion(provider: woDetailProvider), AppIcons.warehouse),
+          _accordionSection(LocaleKeys.RequestMaterial.tr(), RequestMaterialAccordion(provider: woDetailProvider), AppIcons.tool),
+          _accordionSection(LocaleKeys.Document.tr(), AddDocumantAccordion(provider: woDetailProvider), AppIcons.photoAlbum),
         ],
       ),
     );
@@ -117,7 +117,7 @@ class DetailWorkOrderScreen extends StatelessWidget {
       leftIcon: Icon(icon, color: APPColors.Main.white),
       contentBorderColor: APPColors.Accent.black,
       onOpenSection: () {},
-      header: Text(title, style: TextStyle(color: APPColors.Main.white, letterSpacing: 1.5)).tr(),
+      header: Text(title, style: TextStyle(color: APPColors.Main.white, letterSpacing: 1.5)),
       content: content,
     );
   }

@@ -45,7 +45,7 @@ class AddMaterialAccordion extends StatelessWidget {
           isOpen: false,
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.warehouse, color: APPColors.Main.white),
-          header: Text(LocaleKeys.AddedMaterial, style: TextStyle(color: APPColors.Main.white)),
+          header: Text(LocaleKeys.AddedMaterials.tr(), style: TextStyle(color: APPColors.Main.white)),
           onOpenSection: () {
             Provider.of<WorkOrderDetailServiceProvider>(context, listen: false).update();
             provider.userClickedMaterialFunction();

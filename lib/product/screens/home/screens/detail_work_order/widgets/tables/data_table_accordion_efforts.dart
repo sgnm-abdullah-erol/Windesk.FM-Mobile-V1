@@ -1,18 +1,24 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../../core/constants/other/app_icons.dart';
 import '../../../../../../../core/constants/other/colors.dart';
 import '../../../../../../../feature/models/work_space/work_space_efforts.dart';
+import '../../../../../../../generated/locale_keys.g.dart';
 
 class DataTableAccordionEfforts extends StatelessWidget {
   DataTableAccordionEfforts({super.key, required this.delete, required this.data});
 
   final Function delete;
-  final List<String> _labelList = ['id', 'Tip', 'İsim', 'Süre', 'Sil'];
-  final List<WorkSpaceEfforts> data;
+  final List<String> _labelList = [
+    LocaleKeys.DataTableID.tr(),
+    LocaleKeys.DataTableType.tr(),
+    LocaleKeys.DataTableName.tr(),
+    LocaleKeys.DataTableDate.tr(),
+    LocaleKeys.DataTableDelete.tr(),
+  ];
 
-  final String _nonKnownName = 'Bilinmiyor';
-  final String _noEffortType = 'Çalışma Türü Belirtilmemiş';
+  final List<WorkSpaceEfforts> data;
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +44,8 @@ class DataTableAccordionEfforts extends StatelessWidget {
           for (var i = 0; i < (data.length); i++) ...{
             DataRow(cells: [
               DataCell(Text(data[i].id.toString(), style: _cellTextStyle())),
-              DataCell(Text(data[i].effortType ?? _noEffortType, style: _cellTextStyle())),
-              DataCell(Text(data[i].user ?? _nonKnownName, style: _cellTextStyle())),
+              DataCell(Text(data[i].effortType ?? "", style: _cellTextStyle())),
+              DataCell(Text(data[i].user ?? "", style: _cellTextStyle())),
               DataCell(Text(data[i].effortDuration.toString(), style: _cellTextStyle())),
               DataCell(
                 IconButton(

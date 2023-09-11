@@ -78,6 +78,19 @@ class LocaleKeys {
   static const String ProccessEntryFirstALertDialog = "ProccessEntryFirstALertDialog";
   static const String ProccessEntrySecondALertDialog = "ProccessEntrySecondALertDialog";
 
+  // Data Table Strings
+  static const String DataTableID = "DataTableID";
+  static const String DataTableName = "DataTableName";
+  static const String DataTableType = "DataTableType";
+  static const String DataTableDownload = "DataTableDownload";
+  static const String DataTableDelete = "DataTableDelete";
+  static const String DataTableDate = "DataTableDate";
+  static const String DataTableAmount = "DataTableAmount";
+  static const String DataTableMaterial = "DataTableMaterial";
+  static const String DataTableUnit = "DataTableUnit";
+  static const String DataTableUser = "DataTableUser";
+  static const String DataTableTotalAmount = "DataTableTotalAmount";
+
   // accordion titles
   static const String Effort = 'Effort';
   static const String Material = 'Material';
@@ -92,7 +105,7 @@ class LocaleKeys {
   static const String AddEfforts = 'AddEfforts';
   static const String AddedEfforts = 'AddedEfforts';
   static const String AddMaterial = 'AddMaterial';
-  static const String AddedMaterial = 'AddedMaterial';
+  static const String AddedMaterials = 'AddedMaterials';
   static const String AddRequestMaterial = 'AddRequestMaterial';
   static const String ApprovedRequestMaterials = 'ApprovedRequestMaterials';
   static const String RequestedMaterials = 'RequestedMaterials';
