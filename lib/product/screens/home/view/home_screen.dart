@@ -84,9 +84,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 floatingActionButton: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     FloatingActionButton(
-                      onPressed: () => themeProvider.isDark = !themeProvider.isDark,
+                      onPressed: () {
+                        themeProvider.isDark = !themeProvider.isDark;
+                      },
                     ),
                     FloatingActionButton(onPressed: () {
                       if (context.locale == const Locale('en', 'US')) {

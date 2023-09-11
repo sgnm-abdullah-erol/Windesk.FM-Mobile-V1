@@ -5,6 +5,6 @@ class CustomDarkTheme {
   late final ThemeData darkTheme;
 
   CustomDarkTheme() {
-    darkTheme = ThemeData.light().copyWith();
+    darkTheme = ThemeData.dark().copyWith();
   }
 }
