@@ -82,7 +82,6 @@ class CustomDarkTheme {
           fontSize: FontSizes.body - 2,
           fontWeight: FontWeight.w500,
           overflow: TextOverflow.ellipsis,
-          letterSpacing: 0.5,
         ),
         labelSmall: TextStyle(
           color: APPColors.Main.white,

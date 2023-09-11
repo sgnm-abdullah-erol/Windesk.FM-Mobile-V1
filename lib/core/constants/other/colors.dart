@@ -79,6 +79,8 @@ extension APPColorsExtension on APPColors {
         return const Color(0xFF242D31);
       case APPColors.Accent:
         return const Color(0xDD4F5D6B);
+      case APPColors.Modal:
+        return const Color.fromARGB(255, 56, 56, 56);
       case APPColors.Clear:
         return Colors.transparent;
       default:

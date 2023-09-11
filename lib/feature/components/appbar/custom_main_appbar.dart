@@ -24,13 +24,17 @@ class CustomMainAppbar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: title,
+      titleTextStyle: title is Text ? context.bodyMedium : null,
       centerTitle: true,
       leading: returnBack == true
-          ? IconButton(onPressed: () => Navigator.pop<bool>(context, true), icon: const Icon(Icons.arrow_back_ios, color: Colors.black))
+          ? IconButton(
+              onPressed: () => Navigator.pop<bool>(context, true),
+              icon: Icon(Icons.arrow_back_ios, color: context.theme ? APPColors.Clear.white : APPColors.Main.black),
+            )
           : leading,
       automaticallyImplyLeading: returnBack ?? false,
       actions: actions != null ? actions! : [],
-      backgroundColor: context.theme ? APPColors.Clear.black : APPColors.Main.white,
+      backgroundColor: context.theme ? APPColors.Modal.black : APPColors.Main.white,
       elevation: elevation ?? 0,
       systemOverlayStyle: context.theme ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark,
     );
