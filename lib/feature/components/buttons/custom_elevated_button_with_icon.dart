@@ -26,7 +26,7 @@ class CustomElevatedButtonWithIcon extends StatelessWidget {
     return ElevatedButton.icon(
       onPressed: () => onPressFunction(),
       icon: Icon(icon, color: iconColor), //icon data for elevated button
-      label: Text(textValue, style: context.bodyMedium.copyWith(color: textColor)), //label text
+      label: Text(textValue, style: context.bodySmall.copyWith(color: textColor)), //label text
     );
   }
 }

@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:vm_fm_4/generated/locale_keys.g.dart';
 import '../../../../../../feature/models/work_space/work_space_requested_materials_inventory.dart';
 
 import '../../../../../../core/database/shared_manager.dart';
@@ -24,10 +26,10 @@ class WorkOrderRequestMaterialSheetProvider extends ChangeNotifier {
   String _description = '';
   String get description => _description;
 
-  String _hintAmount = 'Malzeme Miktarı';
+  String _hintAmount = LocaleKeys.MaterialAmount.tr();
   String get hintAmount => _hintAmount;
 
-  String _hintUnit = 'Malzeme Birimi';
+  String _hintUnit = LocaleKeys.MaterialUnit.tr();
   String get hintUnit => _hintUnit;
 
   String _choosenMaterial = '';

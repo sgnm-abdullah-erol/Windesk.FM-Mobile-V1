@@ -50,13 +50,13 @@ class CustomWorkOrderListCard extends StatelessWidget {
         children: [
           _codeAndStatusWidget(context),
           SizedBox(height: 5),
-          _woListText(context, workSpaceDetail.task?.name ?? LocaleKeys.NoName),
+          _woListText(context, workSpaceDetail.task?.name ?? LocaleKeys.NoName, false),
           _divider(),
           SizedBox(height: 5),
           _woLocationText(context),
           _divider(),
           SizedBox(height: 5),
-          _woListText(context, workSpaceDetail.task?.description ?? LocaleKeys.NoDescription),
+          _woListText(context, workSpaceDetail.task?.description ?? LocaleKeys.NoDescription, true),
           _divider(),
           SizedBox(height: 5),
           _dateText(context, LocaleKeys.HintStartDate, workSpaceDetail.calendar?.start.toString() ?? '', true),
@@ -77,8 +77,8 @@ class CustomWorkOrderListCard extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label, style: context.labelMedium).tr(),
-        Text(giveFormat ? date.splitString(date) : date.splitStringSecond(date), style: context.labelMedium),
+        Text(label, style: context.bodySmall.copyWith(fontWeight: FontWeight.bold, color: APPColors.Main.black)).tr(),
+        Text(giveFormat ? date.splitString(date) : date.splitStringSecond(date), style: context.labelMedium.copyWith(color: APPColors.Main.black)),
       ],
     );
   }
@@ -87,9 +87,12 @@ class CustomWorkOrderListCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(workSpaceDetail.task?.woCategory?.name ?? '', style: context.labelMedium),
+        Text(
+          workSpaceDetail.task?.woCategory?.name ?? '',
+          style: context.bodySmall.copyWith(fontWeight: FontWeight.bold, color: APPColors.Secondary.black),
+        ),
         SizedBox(height: 5),
-        Text(workSpaceDetail.task?.requestType?.name ?? '', style: context.labelMedium),
+        Text(workSpaceDetail.task?.requestType?.name ?? '', style: context.labelMedium.copyWith(color: APPColors.Main.black)),
       ],
     );
   }
@@ -98,9 +101,9 @@ class CustomWorkOrderListCard extends StatelessWidget {
     return isButtonVisible
         ? Center(
             child: CustomHalfButtons(
-              leftTitle: Text(LocaleKeys.Cancel, style: context.bodyMedium.copyWith(color: APPColors.Main.white)).tr(),
+              leftTitle: Text(LocaleKeys.Cancel, style: context.bodySmall.copyWith(color: APPColors.Main.white)).tr(),
               leftOnPressed: () {},
-              rightTitle: Text(LocaleKeys.Approve, style: context.bodyMedium.copyWith(color: APPColors.Main.white)).tr(),
+              rightTitle: Text(LocaleKeys.Approve, style: context.bodySmall.copyWith(color: APPColors.Main.white)).tr(),
               rightOnPressed: () {},
             ),
           )
@@ -120,14 +123,14 @@ class CustomWorkOrderListCard extends StatelessWidget {
                 'WO ${workSpaceDetail.task?.id.toString() ?? LocaleKeys.NoCode.tr()}',
                 softWrap: true,
                 overflow: TextOverflow.ellipsis,
-                style: context.labelMedium.copyWith(fontWeight: FontWeight.bold, fontFamily: "Poppins"),
+                style: context.bodyMedium.copyWith(fontWeight: FontWeight.bold, fontFamily: "Poppins", color: APPColors.Main.black),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(2.0),
               child: Text(
                 workSpaceDetail.state?.name.toString() ?? LocaleKeys.NoState.tr(),
-                style: context.labelMedium.copyWith(fontWeight: FontWeight.bold, color: APPColors.Secondary.black),
+                style: context.labelMedium.copyWith(color: APPColors.Secondary.black),
               ),
             ),
           ],
@@ -136,7 +139,7 @@ class CustomWorkOrderListCard extends StatelessWidget {
     );
   }
 
-  Column _woListText(BuildContext context, String header) {
+  Column _woListText(BuildContext context, String header, bool isBold) {
     return Column(
       children: [
         Row(
@@ -144,7 +147,11 @@ class CustomWorkOrderListCard extends StatelessWidget {
           children: [
             Expanded(
               flex: 2,
-              child: Text(header.tr(), style: context.labelMedium.copyWith(fontWeight: FontWeight.bold, color: APPColors.Secondary.black)),
+              child: Text(header.tr(),
+                  style: context.labelMedium.copyWith(
+                    color: APPColors.Secondary.black,
+                    fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
+                  )),
             ),
           ],
         ),

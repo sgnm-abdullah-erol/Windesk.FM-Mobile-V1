@@ -33,11 +33,11 @@ class CustomWorkSpaceDetailCard extends StatelessWidget {
             _ResponseDates(workSpaceDetail: workSpaceDetail),
             const CustomWoSummaryDivider(),
             const SizedBox(height: 10),
-            Text('WO ${workSpaceDetail.task?.id}', style: context.bodyMedium),
-            Text('${workSpaceDetail.state?.name}', style: context.bodyMedium),
+            Text('WO ${workSpaceDetail.task?.id}', style: context.bodySmall.copyWith(color: APPColors.Main.black)),
+            Text('${workSpaceDetail.state?.name}', style: context.labelMedium.copyWith(color: APPColors.Main.black)),
             const CustomWoSummaryDivider(),
             const SizedBox(height: 10),
-            Text(workSpaceDetail.task?.description ?? '', style: context.bodyMedium),
+            Text(workSpaceDetail.task?.description ?? '', style: context.labelMedium.copyWith(color: APPColors.Main.black)),
             const CustomWoSummaryDivider(),
             const SizedBox(height: 10),
             _DoubleRowInformation(
@@ -105,24 +105,24 @@ class _FourRowInformation extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(firstLabel, style: context.bodyMedium),
-            Text(firstValue, style: context.bodyMedium),
+            Text(firstLabel, style: context.bodySmall.copyWith(color: APPColors.Main.black)),
+            Text(firstValue, style: context.labelMedium.copyWith(color: APPColors.Main.black)),
           ],
         ),
         const SizedBox(height: 5),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(secondLabel, style: context.bodyMedium),
-            Text(secondValue, style: context.bodyMedium),
+            Text(secondLabel, style: context.bodySmall.copyWith(color: APPColors.Main.black)),
+            Text(secondValue, style: context.labelMedium.copyWith(color: APPColors.Main.black)),
           ],
         ),
         const SizedBox(height: 5),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(thirdLabel, style: context.bodyMedium),
-            Text(thirdValue, style: context.bodyMedium),
+            Text(thirdLabel, style: context.bodySmall.copyWith(color: APPColors.Main.black)),
+            Text(thirdValue, style: context.labelMedium.copyWith(color: APPColors.Main.black)),
           ],
         ),
       ],
@@ -146,16 +146,16 @@ class _DoubleRowInformation extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(firstLabel, style: Theme.of(context).textTheme.bodyMedium),
-            Text(firstValue, style: Theme.of(context).textTheme.bodyMedium),
+            Text(firstLabel, style: context.bodySmall.copyWith(color: APPColors.Main.black)),
+            Text(firstValue, style: context.labelMedium.copyWith(color: APPColors.Main.black)),
           ],
         ),
         const SizedBox(height: 5),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(secondLabel, style: Theme.of(context).textTheme.bodyMedium),
-            Text(secondValue, style: Theme.of(context).textTheme.bodyMedium),
+            Text(secondLabel, style: context.bodySmall.copyWith(color: APPColors.Main.black)),
+            Text(secondValue, style: context.labelMedium.copyWith(color: APPColors.Main.black)),
           ],
         ),
       ],
@@ -186,8 +186,11 @@ class _DoubleRowInformationComponent extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(firstLabel, style: context.bodyMedium),
-            Text(firstValue, style: context.bodyMedium),
+            Text(firstLabel, style: context.bodySmall.copyWith(color: APPColors.Main.black)),
+            Text(
+              firstValue,
+              style: context.labelMedium.copyWith(color: APPColors.Main.black),
+            )
           ],
         ),
         const SizedBox(height: 5),
@@ -196,13 +199,13 @@ class _DoubleRowInformationComponent extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomElevatedButtonWithIcon(
-                width: MediaQuery.of(context).size.width / 3,
-                height: MediaQuery.of(context).size.height * 0.05,
+                width: context.width / 3,
+                height: context.height * 0.05,
                 bgColor: APPColors.Main.blue,
                 onPressFunction: workOrderDetailProvider.scanBarcodeAndQr,
                 textValue: LocaleKeys.Change.tr(),
-                textColor: APPColors.Main.black,
-                iconColor: APPColors.Main.black,
+                textColor: APPColors.Main.white,
+                iconColor: APPColors.Main.white,
                 icon: Icons.qr_code,
               )
             ],
@@ -227,10 +230,10 @@ class _ResponseDates extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(LocaleKeys.ResponseDate.tr(), style: context.bodySmall),
+              Text(LocaleKeys.ResponseDate.tr(), style: context.bodySmall.copyWith(color: APPColors.Main.black)),
               Text(
                 workSpaceDetail.workspace?.updatedAt?.toString().substring(0, 19) ?? '',
-                style: context.bodyMedium,
+                style: context.labelMedium.copyWith(color: APPColors.Main.black),
                 overflow: TextOverflow.ellipsis,
               ),
             ],
@@ -241,10 +244,10 @@ class _ResponseDates extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(LocaleKeys.UpdateDate.tr(), style: context.bodySmall),
+              Text(LocaleKeys.UpdateDate.tr(), style: context.bodySmall.copyWith(color: APPColors.Main.black)),
               Text(
                 workSpaceDetail.task?.updatedAt.toString().substring(0, 19) ?? '',
-                style: context.bodyMedium,
+                style: context.labelMedium.copyWith(color: APPColors.Main.black),
                 overflow: TextOverflow.ellipsis,
               ),
             ],

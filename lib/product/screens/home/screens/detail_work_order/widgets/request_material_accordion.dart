@@ -26,13 +26,14 @@ class RequestMaterialAccordion extends StatelessWidget {
       headerBackgroundColorOpened: APPColors.Accent.black,
       children: [
         AccordionSection(
+          headerPadding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
           isOpen: false,
           contentBorderWidth: 0,
           contentHorizontalPadding: 0,
           contentVerticalPadding: 0,
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.add, color: APPColors.Main.white),
-          header: Text(LocaleKeys.AddRequestMaterial.tr(), style: context.bodyMedium.copyWith(color: APPColors.Main.white)),
+          header: Text(LocaleKeys.AddRequestMaterial.tr(), style: context.labelMedium.copyWith(color: APPColors.Main.white)),
           rightIcon: const Icon(AppIcons.arrowDown, size: 0),
           onOpenSection: () {
             ShowModalBottomSheet().show(
@@ -46,6 +47,7 @@ class RequestMaterialAccordion extends StatelessWidget {
           content: const SizedBox(height: 0),
         ),
         AccordionSection(
+          headerPadding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.tool, color: APPColors.Main.white),
           header: Text(LocaleKeys.ApprovedRequestMaterials.tr(), style: context.labelMedium.copyWith(color: APPColors.Main.white)),
@@ -73,6 +75,7 @@ class RequestMaterialAccordion extends StatelessWidget {
           ),
         ),
         AccordionSection(
+          headerPadding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.tool, color: APPColors.Main.white),
           header: Text(LocaleKeys.RequestedMaterials.tr(), style: context.labelMedium.copyWith(color: APPColors.Main.white)),

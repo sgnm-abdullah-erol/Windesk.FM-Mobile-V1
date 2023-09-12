@@ -26,6 +26,7 @@ class AddMaterialAccordion extends StatelessWidget {
       headerBackgroundColorOpened: APPColors.Accent.black,
       children: [
         AccordionSection(
+          headerPadding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
           isOpen: false,
           contentBorderWidth: 0,
           contentHorizontalPadding: 0,
@@ -43,6 +44,7 @@ class AddMaterialAccordion extends StatelessWidget {
           content: const SizedBox(height: 0),
         ),
         AccordionSection(
+          headerPadding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
           isOpen: false,
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.warehouse, color: APPColors.Main.white),

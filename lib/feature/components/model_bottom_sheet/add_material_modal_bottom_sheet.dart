@@ -68,9 +68,6 @@ class _Inputs extends StatelessWidget {
   final List<String> wareHouseList;
   final WorkOrderAddMaterialSheetProvider value;
 
-  final String _materialList = 'Malzeme Listesi';
-  final String _wantedMaterialAmount = 'Malzeme Miktari';
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -78,7 +75,7 @@ class _Inputs extends StatelessWidget {
         Expanded(
           flex: 30,
           child: DropDownInputFields(
-            labelText: _materialList,
+            labelText: LocaleKeys.MaterialList.tr(),
             onChangedFunction: value.setHintTexts,
             rightIcon: Icons.arrow_downward,
             dropDownArray: wareHouseList.isEmpty ? [''] : wareHouseList,
@@ -104,7 +101,7 @@ class _Inputs extends StatelessWidget {
           flex: 20,
           child: TextFieldsInputUnderline(
             onChanged: value.changeWantedMaterialAmount,
-            hintText: _wantedMaterialAmount,
+            hintText: LocaleKeys.WantedMaterialAmount.tr(),
             enabled: true,
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],

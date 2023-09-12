@@ -58,12 +58,11 @@ class _DescField extends StatelessWidget {
   const _DescField(this.provider);
 
   final WorkOrderAddDocumantSheetProvider provider;
-  final String _description = 'Açıklama giriniz.';
 
   @override
   Widget build(BuildContext context) {
     return TextFieldsInput(
-      labelText: _description,
+      labelText: LocaleKeys.EnterDescription,
       onChangedFunction: (val) => provider.changeDesc,
     );
   }

@@ -30,6 +30,7 @@ class AddEffortsAccordion extends StatelessWidget {
       maxOpenSections: 1,
       children: [
         AccordionSection(
+          headerPadding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
           isOpen: false,
           headerBackgroundColor: APPColors.Accent.black,
           contentBackgroundColor: APPColors.Accent.black,
@@ -60,6 +61,7 @@ class AddEffortsAccordion extends StatelessWidget {
           content: const SizedBox(height: 0),
         ),
         AccordionSection(
+          headerPadding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.compareRounded, color: APPColors.Main.white),
           header: Text(LocaleKeys.AddedEfforts, style: context.labelMedium.copyWith(color: APPColors.Main.white)).tr(),

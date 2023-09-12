@@ -31,8 +31,7 @@ class _TextFieldTimePickerState extends State<TextFieldTimePicker> {
         final TimeOfDay? timeOfDay = await _timePicker(context);
         if (timeOfDay != null) {
           setState(() {
-            final temp = timeOfDay.format(context);
-            temp.split(' ')[1] == 'AM' ? _controller.text = temp.split(' ')[0] : _controller.text = '${timeOfDay.hour}:${timeOfDay.minute}';
+            _controller.text = '${timeOfDay.hour}:${timeOfDay.minute}';
           });
           widget.onTap(_controller.text);
         }

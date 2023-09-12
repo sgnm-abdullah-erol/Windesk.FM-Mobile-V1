@@ -112,6 +112,7 @@ class DetailWorkOrderScreen extends StatelessWidget {
 
   AccordionSection _accordionSection(BuildContext context, String title, Widget content, IconData icon) {
     return AccordionSection(
+      headerPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
       isOpen: false,
       headerBackgroundColor: APPColors.Accent.black,
       headerBackgroundColorOpened: APPColors.Accent.black,
@@ -171,7 +172,7 @@ class _TakeItOnMe extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.mediumBorderRadius),
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       ),
-      child: Text(LocaleKeys.TakeItOnMe.tr(), style: context.bodyMedium.copyWith(color: APPColors.Main.white)),
+      child: Text(LocaleKeys.TakeItOnMe.tr(), style: context.bodySmall.copyWith(color: APPColors.Main.white)),
     );
   }
 }

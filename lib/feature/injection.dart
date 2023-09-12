@@ -6,7 +6,6 @@ import 'service/global_services.dart/work_space_service/work_space_service_repos
 
 import 'global_providers/global_provider.dart';
 import '../core/log/log_manager.dart';
-import 'service/global_services.dart/work_order_service/work_order_service_repository_impl.dart';
 import 'service/service_manager.dart';
 
 class Injection {
@@ -19,7 +18,6 @@ class Injection {
       ..registerLazySingleton<GlobalProvider>(() => GlobalProvider())
 
       // services
-      ..registerLazySingleton<WorkOrderServiceRepositoryImpl>(() => WorkOrderServiceRepositoryImpl())
       ..registerLazySingleton<AuthServiceRepositoryImpl>(() => AuthServiceRepositoryImpl())
       ..registerLazySingleton<WorkSpaceServiceRepositoryImpl>(() => WorkSpaceServiceRepositoryImpl())
       ..registerLazySingleton<WoCreateServiceRepositoryImpl>(() => WoCreateServiceRepositoryImpl())

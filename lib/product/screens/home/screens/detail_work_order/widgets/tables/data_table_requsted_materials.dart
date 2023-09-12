@@ -62,5 +62,5 @@ class DataTableAccordionRequstedMaterials extends StatelessWidget {
     );
   }
 
-  TextStyle _cellTextStyle(BuildContext context) => context.labelMedium;
+  TextStyle _cellTextStyle(BuildContext context) => context.labelMedium.copyWith(color: APPColors.Main.black);
 }

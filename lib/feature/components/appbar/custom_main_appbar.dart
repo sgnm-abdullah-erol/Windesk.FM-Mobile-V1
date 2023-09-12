@@ -24,7 +24,7 @@ class CustomMainAppbar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: title,
-      titleTextStyle: title is Text ? context.bodyMedium : null,
+      titleTextStyle: title is Text ? context.bodyMedium.copyWith(fontWeight: FontWeight.bold) : null,
       centerTitle: true,
       leading: returnBack == true
           ? IconButton(

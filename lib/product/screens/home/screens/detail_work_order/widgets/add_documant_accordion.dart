@@ -27,6 +27,7 @@ class AddDocumantAccordion extends StatelessWidget {
       maxOpenSections: 1,
       children: [
         AccordionSection(
+          headerPadding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
           contentBorderWidth: 0,
           contentHorizontalPadding: 0,
           contentVerticalPadding: 0,
@@ -46,6 +47,7 @@ class AddDocumantAccordion extends StatelessWidget {
           content: const SizedBox(height: 0),
         ),
         AccordionSection(
+          headerPadding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
           contentBorderWidth: 0,
           contentHorizontalPadding: 0,
           contentVerticalPadding: 0,
@@ -65,6 +67,7 @@ class AddDocumantAccordion extends StatelessWidget {
           content: const SizedBox(height: 0),
         ),
         AccordionSection(
+          headerPadding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.documantScanner, color: APPColors.Main.white),
           header: Text(LocaleKeys.AddedDocumants, style: context.labelMedium.copyWith(color: APPColors.Main.white)).tr(),

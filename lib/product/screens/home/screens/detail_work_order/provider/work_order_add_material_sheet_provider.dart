@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:vm_fm_4/generated/locale_keys.g.dart';
 
 import '../../../../../../core/database/shared_manager.dart';
 import '../../../../../../core/enums/shared_enums.dart';
@@ -18,10 +20,10 @@ class WorkOrderAddMaterialSheetProvider extends ChangeNotifier {
   bool _isMaterialAdded = false;
   bool get isMaterialAdded => _isMaterialAdded;
 
-  String _hintAmount = 'Malzeme miktari';
+  String _hintAmount = LocaleKeys.MaterialAmount.tr();
   String get hintAmount => _hintAmount;
 
-  String _hintUnit = 'Malzeme unit';
+  String _hintUnit = LocaleKeys.MaterialUnit.tr();
   String get hintUnit => _hintUnit;
 
   String _choosenMaterial = '';

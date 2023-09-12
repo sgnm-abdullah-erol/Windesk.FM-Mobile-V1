@@ -35,7 +35,7 @@ class DropDownInputFields extends StatelessWidget {
           borderSide: BorderSide(color: APPColors.Main.grey, width: 4),
         ),
         labelText: labelText.tr(),
-        labelStyle: context.labelMedium.copyWith(color: context.theme ? APPColors.Main.white : APPColors.Main.black),
+        labelStyle: context.bodySmall.copyWith(color: context.theme ? APPColors.Main.white : APPColors.Main.black),
       ),
       items: dropDownArray.map(
         (String items) {

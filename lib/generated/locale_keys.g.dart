@@ -204,6 +204,16 @@ class LocaleKeys {
   static const String DeliveryUser = 'Delivery User';
   static const String Efforts = 'Efforts';
   static const String CreateTask = 'Create Task';
+  static const String EffortDuration = 'EffortDuration';
+  static const String EffortType = 'EffortType';
+  static const String EnterDescription = 'EnterDescription';
+  static const String Way = 'Way';
+  static const String Work = 'Work';
+  static const String MaterialList = 'MaterialList';
+  static const String WantedMaterialAmount = 'WantedMaterialAmount';
+  static const String MaterialAmount = 'MaterialAmount';
+  static const String MaterialUnit = 'MaterialUnit';
+  static const String Subject = 'Subject';
   // // static String const ----------MAİNTENANCE---------- = '----------MAİNTENANCE----------';
   // static const Manage Check List = 'Manage Check List';
   // static const Add Check List = 'Add Check List';
