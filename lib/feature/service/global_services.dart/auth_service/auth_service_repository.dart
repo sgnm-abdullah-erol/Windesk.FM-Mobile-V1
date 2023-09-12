@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
+import '../../../../core/log/log_manager.dart';
 import '../../../exceptions/custom_service_exceptions.dart';
 import '../../../injection.dart';
-import '../../../../core/log/log_manager.dart';
 import '../../../models/auth_models/check_access_token_model.dart';
 import '../../../models/auth_models/login_model.dart';
 import '../../service_manager.dart';

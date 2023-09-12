@@ -5,6 +5,7 @@ import 'package:flutter/scheduler.dart';
 
 import '../../../../../../core/constants/other/colors.dart';
 import '../../../../../../core/route/app_route.gr.dart';
+import '../../../../../../feature/extensions/context_extension.dart';
 import '../provider/work_order_list_provider.dart';
 import '../widgets/custom_base_accordion.dart';
 import '../widgets/custom_base_accordion_section.dart';
@@ -36,8 +37,8 @@ class _MyGroupWorkOrdersState extends State<MyGroupWorkOrders> {
       child: widget.provider.isLoading
           ? const CustomLoadingIndicator()
           : SizedBox(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
+              height: context.height,
+              width: context.width,
               child: ListView.builder(
                 itemCount: widget.provider.workSpaceMyGroupDemandList?.children?.length ?? 0,
                 itemBuilder: (context, index) {
@@ -51,11 +52,9 @@ class _MyGroupWorkOrdersState extends State<MyGroupWorkOrders> {
     );
   }
 
-  dynamic _custom(index) {
+  Widget _custom(index) {
     if (widget.provider.workSpaceMyGroupDemandList?.children?[index].children != null) {
-      return CustomBaseAccordion(
-        list: [_accordionSection(index)],
-      );
+      return CustomBaseAccordion(list: [_accordionSection(index)]);
     } else {
       return CustomBaseAccordionSections().rootAccordionSection(
         context,
@@ -78,6 +77,9 @@ class _MyGroupWorkOrdersState extends State<MyGroupWorkOrders> {
       needExtra = true;
     }
     return AccordionSection(
+      headerPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      contentBackgroundColor: context.theme ? APPColors.Main.black : APPColors.Main.white,
+      isOpen: false,
       header: Row(
         children: [
           InkWell(
@@ -91,21 +93,22 @@ class _MyGroupWorkOrdersState extends State<MyGroupWorkOrders> {
                 );
               }
             },
-            child: Text(
-              widget.provider.workSpaceMyGroupDemandList?.children?[index].name ?? '',
-              style: TextStyle(color: APPColors.Main.white, letterSpacing: 1.5),
-            ),
+            child: Text(widget.provider.workSpaceMyGroupDemandList?.children?[index].name ?? '',
+                style: context.bodySmall.copyWith(
+                  color: APPColors.Main.white,
+                )),
           ),
           const Spacer(),
-          Text(
-            widget.provider.workSpaceMyGroupDemandList?.children?[index].taskCount.toString() ?? '',
-            style: TextStyle(color: APPColors.Main.white),
-          ),
+          Text(widget.provider.workSpaceMyGroupDemandList?.children?[index].taskCount.toString() ?? '',
+              style: context.bodySmall.copyWith(
+                color: APPColors.Main.white,
+              )),
         ],
       ),
       content: Accordion(
         maxOpenSections: 0,
-        headerBackgroundColorOpened: APPColors.Accent.black,
+        headerPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        headerBackgroundColorOpened: APPColors.Main.black,
         children: [
           for (i = 0; i < (widget.provider.workSpaceMyGroupDemandList?.children?[index].children?.length.toInt() ?? 0); i++) ...{
             CustomBaseAccordionSections().baseAccordionSection(

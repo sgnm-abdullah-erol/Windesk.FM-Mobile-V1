@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/functions/null_check_widget.dart';
-import '../../../core/constants/other/colors.dart';
 import '../../../core/constants/style/border_radius.dart';
+import '../../extensions/context_extension.dart';
 import '../../models/work_space/work_space_detail.dart';
 
 class WoSummary extends StatelessWidget {
@@ -24,49 +24,34 @@ class WoSummary extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  _workSpaceDetailName(),
-                  _workSpaceDetailText(),
+                  _workSpaceDetailName(context),
+                  _workSpaceDetailText(context),
                   NullCheckWidget().nullCheckWidget(
                     workSpaceDetail.state?.isActive.toString() ?? '',
                     Container(),
-                    woSummaryTextWidget(
-                      Icons.navigation_rounded,
-                      workSpaceDetail.state?.isActive.toString() ?? '',
-                    ),
+                    woSummaryTextWidget(context, Icons.navigation_rounded, workSpaceDetail.state?.isActive.toString() ?? ''),
                   ),
                   NullCheckWidget().nullCheckWidget(
                     workSpaceDetail.task?.id.toString() ?? '',
                     Container(),
-                    woSummaryTextWidget(
-                      Icons.apartment_outlined,
-                      workSpaceDetail.task?.id.toString() ?? '',
-                    ),
+                    woSummaryTextWidget(context, Icons.apartment_outlined, workSpaceDetail.task?.id.toString() ?? ''),
                   ),
                   NullCheckWidget().nullCheckWidget(
                     workSpaceDetail.task?.name ?? '',
                     Container(),
-                    woSummaryTextWidget(
-                      Icons.apartment_outlined,
-                      workSpaceDetail.task?.name ?? '',
-                    ),
+                    woSummaryTextWidget(context, Icons.apartment_outlined, workSpaceDetail.task?.name ?? ''),
                   ),
                   NullCheckWidget().nullCheckWidget(
                     workSpaceDetail.task?.createdBy?.name ?? '',
                     Container(),
-                    woSummaryTextWidget(
-                      Icons.apartment_outlined,
-                      workSpaceDetail.task?.createdBy?.name ?? '',
-                    ),
+                    woSummaryTextWidget(context, Icons.apartment_outlined, workSpaceDetail.task?.createdBy?.name ?? ''),
                   ),
                   NullCheckWidget().nullCheckWidget(
                     workSpaceDetail.task?.owner ?? '',
                     Container(),
-                    woSummaryTextWidget(
-                      Icons.person_outline,
-                      workSpaceDetail.task?.owner ?? '',
-                    ),
+                    woSummaryTextWidget(context, Icons.person_outline, workSpaceDetail.task?.owner ?? ''),
                   ),
-                  _workSpaceCreatedDate(),
+                  _workSpaceCreatedDate(context),
                 ],
               ),
             ],
@@ -76,40 +61,37 @@ class WoSummary extends StatelessWidget {
     );
   }
 
-  Padding _workSpaceCreatedDate() {
+  Padding _workSpaceCreatedDate(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Align(
         alignment: Alignment.topLeft,
-        child: Text(workSpaceDetail.task?.createdAt.toString() ?? '', style: TextStyle(color: APPColors.Main.black)),
+        child: Text(workSpaceDetail.task?.createdAt.toString() ?? '', style: context.bodyMedium),
       ),
     );
   }
 
-  Padding _workSpaceDetailName() {
+  Padding _workSpaceDetailName(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Align(
         alignment: Alignment.topLeft,
-        child: Text(
-          workSpaceDetail.task?.name ?? '',
-          style: TextStyle(color: APPColors.Main.black, fontWeight: FontWeight.bold),
-        ),
+        child: Text(workSpaceDetail.task?.name ?? '', style: context.bodyMedium),
       ),
     );
   }
 
-  Padding _workSpaceDetailText() {
+  Padding _workSpaceDetailText(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Align(
         alignment: Alignment.topLeft,
-        child: Text(workSpaceDetail.task?.description ?? '', style: TextStyle(color: APPColors.Main.black)),
+        child: Text(workSpaceDetail.task?.description ?? '', style: context.bodyMedium),
       ),
     );
   }
 
-  Padding woSummaryTextWidget(IconData icon, String text) {
+  Padding woSummaryTextWidget(BuildContext context, IconData icon, String text) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Align(
@@ -117,10 +99,7 @@ class WoSummary extends StatelessWidget {
         child: Row(
           children: [
             Icon(icon),
-            Text(
-              text,
-              style: TextStyle(color: APPColors.Main.black),
-            ),
+            Text(text, style: context.bodyMedium),
           ],
         ),
       ),

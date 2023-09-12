@@ -29,19 +29,19 @@ class CustomUndetailPendingCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('WO ${workSpacePendiks.task?.id.toString() ?? 0} ${workSpacePendiks.task?.name ?? ''}', style: _style()),
+              Text('WO ${workSpacePendiks.task?.id.toString() ?? 0} ${workSpacePendiks.task?.name ?? ''}', style: _style(context)),
               const CustomWoSummaryDivider(),
-              Text(workSpacePendiks.task?.description ?? LocaleKeys.NoName.tr(), style: _style()),
+              Text(workSpacePendiks.task?.description ?? LocaleKeys.NoName.tr(), style: _style(context)),
               const CustomWoSummaryDivider(),
-              Text(workSpacePendiks.task?.user ?? LocaleKeys.NoName.tr(), style: _style()),
+              Text(workSpacePendiks.task?.user ?? LocaleKeys.NoName.tr(), style: _style(context)),
               const CustomWoSummaryDivider(),
-              Text(workSpacePendiks.state?.name ?? LocaleKeys.NoState.tr(), style: _style()),
+              Text(workSpacePendiks.state?.name ?? LocaleKeys.NoState.tr(), style: _style(context)),
               const CustomWoSummaryDivider(),
-              Text(workSpacePendiks.workspace?.createdAt.toString() ?? LocaleKeys.NoCreatedAtTime.tr(), style: _style()),
+              Text(workSpacePendiks.workspace?.createdAt.toString() ?? LocaleKeys.NoCreatedAtTime.tr(), style: _style(context)),
               const CustomWoSummaryDivider(),
-              Text(workSpacePendiks.workSpaceUserInformation?.createdAt.toString() ?? LocaleKeys.NoCreatedAtTime.tr(), style: _style()),
+              Text(workSpacePendiks.workSpaceUserInformation?.createdAt.toString() ?? LocaleKeys.NoCreatedAtTime.tr(), style: _style(context)),
               const CustomWoSummaryDivider(),
-              Text(workSpacePendiks.workSpaceUserInformation?.referenceId ?? LocaleKeys.NoReferenceId.tr(), style: _style()),
+              Text(workSpacePendiks.workSpaceUserInformation?.referenceId ?? LocaleKeys.NoReferenceId.tr(), style: _style(context)),
               const CustomWoSummaryDivider(),
             ],
           ),
@@ -50,5 +50,5 @@ class CustomUndetailPendingCard extends StatelessWidget {
     );
   }
 
-  TextStyle _style() => TextStyle(color: APPColors.Main.black, fontSize: 16, fontWeight: FontWeight.bold);
+  TextStyle _style(BuildContext context) => context.labelLarge.copyWith(color: APPColors.Main.black);
 }

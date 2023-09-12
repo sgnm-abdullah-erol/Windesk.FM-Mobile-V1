@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
+import '../../../../core/log/log_manager.dart';
 import '../../../exceptions/custom_service_exceptions.dart';
 import '../../../injection.dart';
-import '../../../../core/log/log_manager.dart';
 import '../../service_manager.dart';
 
 abstract class DownloadServiceRepository {

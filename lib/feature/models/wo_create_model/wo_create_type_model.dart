@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+
 part 'generator_wo_create/wo_create_type_model.g.dart';
 
 @JsonSerializable()
@@ -54,20 +55,20 @@ class WoCreateTypeModel extends Equatable {
 
   @override
   List<Object?> get props => [
-    owner,
-    canDisplay,
-    code,
-    language,
-    type,
-    isActive,
-    trId,
-    createdAt,
-    isDeleted,
-    name,
-    canDelete,
-    key,
-    updatedAt,
-    id,
-    labels,
+        owner,
+        canDisplay,
+        code,
+        language,
+        type,
+        isActive,
+        trId,
+        createdAt,
+        isDeleted,
+        name,
+        canDelete,
+        key,
+        updatedAt,
+        id,
+        labels,
       ];
 }

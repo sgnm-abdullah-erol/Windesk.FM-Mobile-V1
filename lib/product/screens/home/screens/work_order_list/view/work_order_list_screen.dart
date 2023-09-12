@@ -19,11 +19,7 @@ class WorkOrderListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => WorkOrderListProvider(),
-      child: Consumer(
-        builder: (context, WorkOrderListProvider provider, _) {
-          return _BuildScaffold(provider: provider);
-        },
-      ),
+      child: Consumer(builder: (context, WorkOrderListProvider provider, _) => _BuildScaffold(provider: provider)),
     );
   }
 }
@@ -42,7 +38,7 @@ class _BuildScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomMainAppbar(title: const Text(LocaleKeys.WorkOrderList).tr(), returnBack: true, elevation: 3),
+      appBar: CustomMainAppbar(title: Text(LocaleKeys.WorkOrderList.tr()), returnBack: true, elevation: 3),
       body: Column(
         children: [
           const SizedBox(height: 10),

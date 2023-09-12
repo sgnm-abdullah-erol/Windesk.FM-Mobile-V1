@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../core/constants/other/colors.dart';
-import '../../../core/constants/style/font_sizes.dart';
+import '../../extensions/context_extension.dart';
 
 class TextFieldsInputUnderline extends StatelessWidget {
   const TextFieldsInputUnderline(
@@ -48,7 +48,7 @@ class TextFieldsInputUnderline extends StatelessWidget {
       maxLines: maxLines ?? 1,
       minLines: minLines ?? 1,
       onChanged: (inputValue) => onChanged(inputValue),
-      style: TextStyle(fontSize: FontSizes.body, letterSpacing: 1, fontFamily: 'Roboto', color: APPColors.Main.black),
+      style: context.bodyMedium,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return _validatorHintText;

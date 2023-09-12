@@ -77,7 +77,6 @@ class _Description extends StatelessWidget {
   const _Description(this.provider);
 
   final WorkOrderAddDocumantSheetProvider provider;
-  final String _descriptionHint = 'Açıklama giriniz.';
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +84,7 @@ class _Description extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 4.0),
       child: TextFieldsInput(
         onChangedFunction: (val) => provider.setDesc,
-        labelText: _descriptionHint,
+        labelText: LocaleKeys.EnterDescription,
       ),
     );
   }

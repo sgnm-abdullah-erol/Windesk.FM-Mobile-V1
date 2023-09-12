@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:vm_fm_4/core/constants/other/colors.dart';
+import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 
 class CustomMainAppbar extends StatelessWidget implements PreferredSizeWidget {
   const CustomMainAppbar({
@@ -22,14 +24,19 @@ class CustomMainAppbar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: title,
+      titleTextStyle: title is Text ? context.bodyMedium.copyWith(fontWeight: FontWeight.bold) : null,
       centerTitle: true,
       leading: returnBack == true
-          ? IconButton(onPressed: () => Navigator.pop<bool>(context, true), icon: const Icon(Icons.arrow_back_ios, color: Colors.black))
+          ? IconButton(
+              onPressed: () => Navigator.pop<bool>(context, true),
+              icon: Icon(Icons.arrow_back_ios, color: context.theme ? APPColors.Clear.white : APPColors.Main.black),
+            )
           : leading,
       automaticallyImplyLeading: returnBack ?? false,
       actions: actions != null ? actions! : [],
-      backgroundColor: APPColors.Main.white,
+      backgroundColor: context.theme ? APPColors.Modal.black : APPColors.Main.white,
       elevation: elevation ?? 0,
+      systemOverlayStyle: context.theme ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark,
     );
   }
 

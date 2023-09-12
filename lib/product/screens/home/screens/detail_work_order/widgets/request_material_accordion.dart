@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
+import '../../../../../../feature/extensions/context_extension.dart';
 
 import '../../../../../../core/constants/other/app_icons.dart';
 import '../../../../../../core/constants/other/colors.dart';
@@ -25,13 +26,14 @@ class RequestMaterialAccordion extends StatelessWidget {
       headerBackgroundColorOpened: APPColors.Accent.black,
       children: [
         AccordionSection(
+          headerPadding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
           isOpen: false,
           contentBorderWidth: 0,
           contentHorizontalPadding: 0,
           contentVerticalPadding: 0,
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.add, color: APPColors.Main.white),
-          header: Text(LocaleKeys.RequestMaterial, style: TextStyle(color: APPColors.Main.white)).tr(),
+          header: Text(LocaleKeys.AddRequestMaterial.tr(), style: context.labelMedium.copyWith(color: APPColors.Main.white)),
           rightIcon: const Icon(AppIcons.arrowDown, size: 0),
           onOpenSection: () {
             ShowModalBottomSheet().show(
@@ -45,9 +47,10 @@ class RequestMaterialAccordion extends StatelessWidget {
           content: const SizedBox(height: 0),
         ),
         AccordionSection(
+          headerPadding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.tool, color: APPColors.Main.white),
-          header: Text(LocaleKeys.ApprovedRequestMaterials, style: TextStyle(color: APPColors.Main.white)).tr(),
+          header: Text(LocaleKeys.ApprovedRequestMaterials.tr(), style: context.labelMedium.copyWith(color: APPColors.Main.white)),
           rightIcon: const Icon(AppIcons.arrowDown, size: 0),
           onOpenSection: () {
             Provider.of<WorkOrderDetailServiceProvider>(context, listen: false).update();
@@ -72,9 +75,10 @@ class RequestMaterialAccordion extends StatelessWidget {
           ),
         ),
         AccordionSection(
+          headerPadding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.tool, color: APPColors.Main.white),
-          header: Text(LocaleKeys.RequestMaterial, style: TextStyle(color: APPColors.Main.white)).tr(),
+          header: Text(LocaleKeys.RequestedMaterials.tr(), style: context.labelMedium.copyWith(color: APPColors.Main.white)),
           rightIcon: const Icon(AppIcons.arrowDown, size: 0),
           onOpenSection: () {
             Provider.of<WorkOrderDetailServiceProvider>(context, listen: false).update();

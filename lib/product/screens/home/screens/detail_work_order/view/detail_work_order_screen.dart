@@ -6,6 +6,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
+import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
 
 import '../../../../../../core/constants/other/app_icons.dart';
@@ -75,10 +76,7 @@ class DetailWorkOrderScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
                         child: Column(
                           children: [
-                            CustomWorkSpaceDetailCard(
-                              workSpaceDetail: woDetailProvider.detail,
-                              workOrderDetailProvider: woDetailProvider,
-                            ),
+                            CustomWorkSpaceDetailCard(workSpaceDetail: woDetailProvider.detail, workOrderDetailProvider: woDetailProvider),
                             const SizedBox(height: 10),
                             (woDetailProvider.detail.task?.userId ?? '') != context.read<GlobalProvider>().userId
                                 ? _TakeItOnMe(provider: woDetailProvider)
@@ -86,7 +84,7 @@ class DetailWorkOrderScreen extends StatelessWidget {
                             const SizedBox(height: 20),
                             (woDetailProvider.detail.task?.userId ?? '') != context.read<GlobalProvider>().userId
                                 ? const SizedBox()
-                                : _customPageAccordionSection(woDetailProvider),
+                                : _customPageAccordionSection(context, woDetailProvider),
                           ],
                         ),
                       ),
@@ -98,29 +96,31 @@ class DetailWorkOrderScreen extends StatelessWidget {
     );
   }
 
-  Padding _customPageAccordionSection(WorkOrderDetailProvider woDetailProvider) {
+  Padding _customPageAccordionSection(BuildContext context, WorkOrderDetailProvider woDetailProvider) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: CustomBaseAccordion(
         list: [
-          _accordionSection(LocaleKeys.Effort, AddEffortsAccordion(provider: woDetailProvider), AppIcons.insightsRounded),
-          _accordionSection(LocaleKeys.Material, AddMaterialAccordion(provider: woDetailProvider), AppIcons.warehouse),
-          _accordionSection(LocaleKeys.RequestMaterial, RequestMaterialAccordion(provider: woDetailProvider), AppIcons.tool),
-          _accordionSection(LocaleKeys.Document, AddDocumantAccordion(provider: woDetailProvider), AppIcons.photoAlbum),
+          _accordionSection(context, LocaleKeys.Effort.tr(), AddEffortsAccordion(provider: woDetailProvider), AppIcons.insightsRounded),
+          _accordionSection(context, LocaleKeys.Material.tr(), AddMaterialAccordion(provider: woDetailProvider), AppIcons.warehouse),
+          _accordionSection(context, LocaleKeys.RequestMaterial.tr(), RequestMaterialAccordion(provider: woDetailProvider), AppIcons.tool),
+          _accordionSection(context, LocaleKeys.Document.tr(), AddDocumantAccordion(provider: woDetailProvider), AppIcons.photoAlbum),
         ],
       ),
     );
   }
 
-  AccordionSection _accordionSection(String title, Widget content, IconData icon) {
+  AccordionSection _accordionSection(BuildContext context, String title, Widget content, IconData icon) {
     return AccordionSection(
+      headerPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
       isOpen: false,
       headerBackgroundColor: APPColors.Accent.black,
       headerBackgroundColorOpened: APPColors.Accent.black,
+      contentBackgroundColor: context.theme ? APPColors.Accent.black : APPColors.Accent.white,
       leftIcon: Icon(icon, color: APPColors.Main.white),
       contentBorderColor: APPColors.Accent.black,
       onOpenSection: () {},
-      header: Text(title, style: TextStyle(color: APPColors.Main.white, letterSpacing: 1.5)).tr(),
+      header: Text(title, style: context.labelMedium.copyWith(color: APPColors.Main.white)),
       content: content,
     );
   }
@@ -130,18 +130,21 @@ class _StateChangeDropDownButton extends StatelessWidget {
   const _StateChangeDropDownButton({required this.provider});
 
   final WorkOrderDetailProvider provider;
-  final String _currentState = 'İşlem Girişi';
-  final String _alertTextOne = 'İş emrinin anlık durumunu ';
-  final String _alertTextTwo = ' durumuna almak istediğinizden emin misiniz?';
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: DropDownInputFields(
-        labelText: _currentState,
+        labelText: LocaleKeys.ProccessEntry,
         onChangedFunction: (val) async {
-          await WoWaitAcceptModalAlert().showAlertDialog(context, "${"$_alertTextOne'" + val}'$_alertTextTwo", LocaleKeys.ChangeState).then((value) {
+          await WoWaitAcceptModalAlert()
+              .showAlertDialog(
+                  context,
+                  "${"${LocaleKeys.ProccessEntryFirstALertDialog.tr()}'" + val}'${LocaleKeys.ProccessEntrySecondALertDialog.tr()}",
+                  LocaleKeys.ChangeState.tr())
+              .then((value) {
+            // check response value
             if (value == true) {
               provider.changeState(val);
             } else {
@@ -169,10 +172,7 @@ class _TakeItOnMe extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.mediumBorderRadius),
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       ),
-      child: Text(
-        LocaleKeys.TakeItOnMe,
-        style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: APPColors.Main.white),
-      ).tr(),
+      child: Text(LocaleKeys.TakeItOnMe.tr(), style: context.bodySmall.copyWith(color: APPColors.Main.white)),
     );
   }
 }

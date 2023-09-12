@@ -77,11 +77,6 @@ class _Inputs extends StatelessWidget {
 
   final WorkOrderRequestMaterialSheetProvider value;
 
-  final String _subjectHint = 'Konu';
-  final String _descriptionHint = 'Açıklama';
-  final String _materialList = 'Malzeme Listesi';
-  final String _wantedMaterialAmount = 'İstenen Malzeme Miktarı';
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -90,21 +85,21 @@ class _Inputs extends StatelessWidget {
           flex: 15,
           child: TextFieldsInputUnderline(
             onChanged: value.changeSubject,
-            hintText: _subjectHint,
+            hintText: LocaleKeys.Subject.tr(),
           ),
         ),
         Expanded(
           flex: 20,
           child: TextFieldsInputUnderline(
             onChanged: value.changeSubject,
-            hintText: _descriptionHint,
+            hintText: LocaleKeys.EnterDescription.tr(),
             maxLines: 3,
           ),
         ),
         Expanded(
           flex: 30,
           child: DropDownInputFields(
-            labelText: _materialList,
+            labelText: LocaleKeys.MaterialList.tr(),
             onChangedFunction: value.changeHintTexts,
             rightIcon: Icons.arrow_downward,
             dropDownArray: value.workSpaceUserInventoryLabelList,
@@ -130,7 +125,7 @@ class _Inputs extends StatelessWidget {
           flex: 20,
           child: TextFieldsInputUnderline(
             onChanged: value.changeWantedMaterialAmount,
-            hintText: _wantedMaterialAmount,
+            hintText: LocaleKeys.WantedMaterialAmount.tr(),
             enabled: true,
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],

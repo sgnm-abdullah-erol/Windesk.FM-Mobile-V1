@@ -70,10 +70,3 @@ class CustomHalfButtons extends StatelessWidget {
     );
   }
 }
-// title text olursa style olarak bu kullanılabilir
-//  TextStyle(
-//         fontSize: FontSizes.button,
-//         color: APPColors.Main.white,
-//       ),
-
-

@@ -2,12 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
-import 'package:vm_fm_4/generated/locale_keys.g.dart';
 
-import '../../../product/screens/home/screens/detail_work_order/provider/work_order_add_documant_sheet_provider.dart';
-import '../../../product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
 import '../../../core/constants/other/colors.dart';
 import '../../../core/constants/other/snackbar_strings.dart';
+import '../../../generated/locale_keys.g.dart';
+import '../../../product/screens/home/screens/detail_work_order/provider/work_order_add_documant_sheet_provider.dart';
+import '../../../product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
 import '../../extensions/context_extension.dart';
 import '../buttons/custom_circular_with_icon_button.dart';
 import '../buttons/custom_half_buttons.dart';
@@ -58,12 +58,11 @@ class _DescField extends StatelessWidget {
   const _DescField(this.provider);
 
   final WorkOrderAddDocumantSheetProvider provider;
-  final String _description = 'Açıklama giriniz.';
 
   @override
   Widget build(BuildContext context) {
     return TextFieldsInput(
-      labelText: _description,
+      labelText: LocaleKeys.EnterDescription,
       onChangedFunction: (val) => provider.changeDesc,
     );
   }

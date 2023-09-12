@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../../../core/constants/other/colors.dart';
 import '../../../core/constants/style/border_radius.dart';
-import '../../../core/constants/style/font_sizes.dart';
 import '../../extensions/context_extension.dart';
 
 class CustomCircularHomeButton extends StatelessWidget {
@@ -43,7 +42,7 @@ class _Title extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title,
-      style: TextStyle(fontSize: FontSizes.button, color: APPColors.Accent.blue),
+      style: context.bodySmall.copyWith(color: context.theme ? APPColors.Main.white : APPColors.Accent.blue),
       textAlign: TextAlign.center,
     ).tr();
   }
@@ -65,20 +64,17 @@ class _Stack extends StatelessWidget {
       width: context.height / 8,
       child: Stack(
         alignment: Alignment.center,
-        children: [
-          _elevatedButton(context),
-          isBadgeVisible ? _badge() : const SizedBox(),
-        ],
+        children: [_elevatedButton(context), isBadgeVisible ? _badge(context) : const SizedBox()],
       ),
     );
   }
 
-  Align _badge() {
+  Align _badge(BuildContext context) {
     return Align(
       alignment: Alignment.topRight,
       child: CircleAvatar(
         backgroundColor: APPColors.Main.red,
-        child: Text(badgeCount, style: TextStyle(color: APPColors.Main.white)),
+        child: Text(badgeCount, style: context.bodyMedium.copyWith(color: APPColors.Main.white)),
       ),
     );
   }

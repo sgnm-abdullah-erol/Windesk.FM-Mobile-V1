@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../../core/constants/other/colors.dart';
-import '../../../../../../core/constants/style/font_sizes.dart';
+import '../../../../../../feature/extensions/context_extension.dart';
 import '../provider/work_order_list_provider.dart';
 
 class CustomDefaultTabController extends StatelessWidget {
@@ -18,25 +18,15 @@ class CustomDefaultTabController extends StatelessWidget {
       child: SizedBox(
         height: 50,
         child: TabBar(
-          indicatorColor: APPColors.Main.black,
+          indicatorColor: context.theme ? APPColors.Main.white : APPColors.Main.black,
           onTap: (value) => provider.changeTab(value),
           indicatorSize: TabBarIndicatorSize.label,
-          labelColor: APPColors.Main.blue,
-          labelStyle: _labelStyle(),
-          unselectedLabelStyle: _labelStyle(),
+          labelColor: context.theme ? APPColors.Main.white : APPColors.Main.blue,
+          labelStyle: context.labelMedium,
+          unselectedLabelStyle: context.labelMedium,
           tabs: tabs,
         ),
       ),
-    );
-  }
-
-  TextStyle _labelStyle() {
-    return TextStyle(
-      color: APPColors.Login.blue,
-      fontWeight: FontWeight.bold,
-      fontSize: FontSizes.caption,
-      fontFamily: 'Roboto',
-      letterSpacing: 0.5,
     );
   }
 }

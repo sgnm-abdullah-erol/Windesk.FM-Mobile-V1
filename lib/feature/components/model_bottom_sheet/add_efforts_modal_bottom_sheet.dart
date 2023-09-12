@@ -27,13 +27,11 @@ class AddEffortsModalBottomSheet extends StatelessWidget {
   final Function addEffortFunction;
 
   @override
-  Widget build(BuildContext context) {
-    return _bodyWidget(context);
-  }
+  Widget build(BuildContext context) => _bodyWidget(context);
 
-  _bodyWidget(BuildContext context) {
+  Widget _bodyWidget(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.6,
+      height: MediaQuery.of(context).size.height * 0.66,
       width: context.width,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
@@ -91,11 +89,6 @@ class _Inputs extends StatelessWidget {
   final Function selectedEffortType;
   final Function selectedDescription;
 
-  final String _entryDate = 'Başlangıç Tarihi';
-  final String _endDate = 'Bitiş Tarihi';
-  final String _efortType = 'Çalışma Türü';
-  final String _efortDuration = 'Çalışma Süresi';
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -103,37 +96,38 @@ class _Inputs extends StatelessWidget {
         Expanded(
           flex: 10,
           child: TextFieldDatePicker(
-            label: _entryDate,
+            label: LocaleKeys.StartDate.tr(),
             onTap: (value) => selectedStartDate(value),
           ),
         ),
         Expanded(
           flex: 10,
           child: TextFieldDatePicker(
-            label: _endDate,
+            label: LocaleKeys.EndDate.tr(),
             onTap: (value) => selectedEndDate(value),
           ),
         ),
         Expanded(
           flex: 10,
           child: TextFieldTimePicker(
-            label: _efortDuration,
+            label: LocaleKeys.EffortDuration.tr(),
             onTap: (value) => selectedEffortDuration(value),
           ),
         ),
+        SizedBox(height: context.height * 0.02),
         Expanded(
           flex: 10,
           child: DropDownInputFields(
-            labelText: _efortType,
+            labelText: LocaleKeys.EffortType.tr(),
             onChangedFunction: (value) => selectedEffortType(value),
             rightIcon: Icons.arrow_downward,
-            dropDownArray: const ['Way', 'Working'],
+            dropDownArray: [LocaleKeys.Way.tr(), LocaleKeys.Work.tr()],
           ),
         ),
         Expanded(
           flex: 10,
           child: TextFieldsInputUnderline(
-            hintText: 'Açıklama',
+            hintText: LocaleKeys.EnterDescription.tr(),
             onChanged: (value) => selectedDescription(value),
           ),
         )
