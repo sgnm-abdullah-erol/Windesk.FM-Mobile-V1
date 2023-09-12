@@ -115,7 +115,7 @@ class _CustomIssueListCardState extends State<CustomIssueListCard> with CustomIs
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              codeWidget(size),
+              codeWidget(context, size),
               statusNameWidget(size),
               NullCheckWidget().nullCheckWidget(
                 widget.location.toString(),
