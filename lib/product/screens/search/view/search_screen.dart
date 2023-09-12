@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
 
 import '../../../../../../../feature/components/appbar/custom_main_appbar.dart';
@@ -55,8 +56,8 @@ class _SearchMaterialScreenState extends State<SearchMaterialScreen> {
                             actionIcon: AppIcons.qr,
                             actionFunction: searchProvider.scanBarcodeAndQrForAsset),
                         CustomHalfButtons(
-                            leftTitle: const Text(LocaleKeys.Clear, style: TextStyle(color: Colors.white)).tr(),
-                            rightTitle: const Text(LocaleKeys.Search, style: TextStyle(color: Colors.white)).tr(),
+                            leftTitle: Text(LocaleKeys.Clear.tr(), style: context.bodyMedium),
+                            rightTitle: Text(LocaleKeys.Search.tr(), style: context.bodyMedium),
                             leftOnPressed: searchProvider.clearInput,
                             rightOnPressed: searchProvider.getAssetWithSearch),
                       ],

@@ -6,7 +6,8 @@ import 'package:internet_file/internet_file.dart';
 import 'package:internet_file/storage_io.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:vm_fm_4/generated/locale_keys.g.dart';
+import '../../../../../../../feature/extensions/context_extension.dart';
+import '../../../../../../../generated/locale_keys.g.dart';
 import '../../../../../../../feature/models/work_space/work_space_documents.dart';
 
 import '../../../../../../../core/constants/other/app_icons.dart';
@@ -41,7 +42,7 @@ class DataTableAccordionDocumants extends StatelessWidget {
             DataColumn(
               label: Text(
                 _labelList[i],
-                style: _cellTextStyle(),
+                style: _cellTextStyle(context),
               ),
               numeric: false,
             )
@@ -50,9 +51,9 @@ class DataTableAccordionDocumants extends StatelessWidget {
         rows: [
           for (var i = 0; i < (data.length); i++) ...{
             DataRow(cells: [
-              DataCell(Text(data[i].id.toString(), style: _cellTextStyle())),
-              DataCell(Text(data[i].name ?? "", style: _cellTextStyle())),
-              DataCell(Text(data[i].url?.split('.').last ?? "", style: _cellTextStyle())),
+              DataCell(Text(data[i].id.toString(), style: _cellTextStyle(context))),
+              DataCell(Text(data[i].name ?? "", style: _cellTextStyle(context))),
+              DataCell(Text(data[i].url?.split('.').last ?? "", style: _cellTextStyle(context))),
               DataCell(
                 ChangeNotifierProvider(
                   create: (context) => DownloadProvider(),
@@ -100,7 +101,5 @@ class DataTableAccordionDocumants extends StatelessWidget {
     );
   }
 
-  TextStyle _cellTextStyle() {
-    return const TextStyle(color: Colors.black);
-  }
+  TextStyle _cellTextStyle(BuildContext context) => context.labelMedium;
 }

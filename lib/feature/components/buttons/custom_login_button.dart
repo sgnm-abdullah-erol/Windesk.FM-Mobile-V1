@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 
 import '../../../core/constants/other/colors.dart';
 import '../../../core/constants/style/border_radius.dart';
@@ -25,10 +26,11 @@ class CustomLoginButton extends StatelessWidget {
           width: _buttonWidth,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-                backgroundColor: APPColors.Main.blue,
-                foregroundColor: APPColors.Main.white,
-                shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.largeBorderRadius),
-                textStyle: const TextStyle(fontSize: FontSizes.button, fontFamily: 'Roboto', letterSpacing: 1)),
+              backgroundColor: APPColors.Main.blue,
+              foregroundColor: APPColors.Main.white,
+              shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.largeBorderRadius),
+              textStyle: context.labelLarge.copyWith(color: APPColors.Main.white, fontSize: FontSizes.button, letterSpacing: 1),
+            ),
             onPressed: () {
               onPressed(context);
             },

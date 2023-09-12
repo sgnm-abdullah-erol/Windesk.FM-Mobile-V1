@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:vm_fm_4/core/constants/style/color_calculator.dart';
 import 'package:vm_fm_4/core/constants/style/custom_paddings.dart';
 import 'package:vm_fm_4/core/constants/style/font_sizes.dart';
+import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 import 'package:vm_fm_4/feature/mixins/custom_issue_list_card_mixin.dart';
 
 import '../../../core/constants/functions/null_check_widget.dart';
@@ -261,7 +262,7 @@ class _CustomIssueListCardState extends State<CustomIssueListCard> with CustomIs
     );
   }
 
-  Flexible codeWidget(Size size) {
+  Flexible codeWidget(BuildContext context, Size size) {
     return Flexible(
       child: SizedBox(
         width: size.width / 2.0,
@@ -271,7 +272,7 @@ class _CustomIssueListCardState extends State<CustomIssueListCard> with CustomIs
             widget.code.toString(),
             softWrap: true,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(color: Color(0xff025273), fontSize: FontSizes.caption, fontFamily: "Poppins", fontWeight: FontWeight.bold),
+            style: context.labelMedium.copyWith(fontWeight: FontWeight.bold, fontFamily: "Poppins", color: Color(0xff025273)),
           ),
         ),
       ),

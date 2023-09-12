@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import '../../../../../../../feature/extensions/context_extension.dart';
 
 import '../../../../../../../core/constants/other/app_icons.dart';
 import '../../../../../../../core/constants/other/colors.dart';
@@ -32,10 +33,7 @@ class DataTableAccordionEfforts extends StatelessWidget {
         columns: [
           for (var i = 0; i < _labelList.length; i++) ...{
             DataColumn(
-              label: Text(
-                _labelList[i],
-                style: _cellTextStyle(),
-              ),
+              label: Text(_labelList[i], style: _cellTextStyle(context)),
               numeric: false,
             )
           }
@@ -43,10 +41,10 @@ class DataTableAccordionEfforts extends StatelessWidget {
         rows: [
           for (var i = 0; i < (data.length); i++) ...{
             DataRow(cells: [
-              DataCell(Text(data[i].id.toString(), style: _cellTextStyle())),
-              DataCell(Text(data[i].effortType ?? "", style: _cellTextStyle())),
-              DataCell(Text(data[i].user ?? "", style: _cellTextStyle())),
-              DataCell(Text(data[i].effortDuration.toString(), style: _cellTextStyle())),
+              DataCell(Text(data[i].id.toString(), style: _cellTextStyle(context))),
+              DataCell(Text(data[i].effortType ?? "", style: _cellTextStyle(context))),
+              DataCell(Text(data[i].user ?? "", style: _cellTextStyle(context))),
+              DataCell(Text(data[i].effortDuration.toString(), style: _cellTextStyle(context))),
               DataCell(
                 IconButton(
                   onPressed: () => delete(),
@@ -60,7 +58,5 @@ class DataTableAccordionEfforts extends StatelessWidget {
     );
   }
 
-  TextStyle _cellTextStyle() {
-    return const TextStyle(color: Colors.black);
-  }
+  TextStyle _cellTextStyle(BuildContext context) => context.labelMedium;
 }

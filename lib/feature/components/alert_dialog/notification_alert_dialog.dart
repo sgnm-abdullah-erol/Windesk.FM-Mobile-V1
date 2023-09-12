@@ -3,9 +3,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/constants/other/colors.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../../product/screens/home/screens/search_work_order/provider/search_work_order_provider.dart';
+import '../../extensions/context_extension.dart';
 
 class NotificationAlertDialog {
   static Future showNotification(BuildContext context, SearchWorkOrderProvider searchWorkOrderProvider, RemoteMessage message) async {
@@ -24,15 +24,15 @@ class NotificationAlertDialog {
 
     AlertDialog alert = searchWorkOrderProvider.isLoading
         ? AlertDialog(
-            title: Text(LocaleKeys.CreatedNewWorkOrder, style: TextStyle(color: APPColors.Main.black)).tr(),
+            title: Text(LocaleKeys.CreatedNewWorkOrder, style: context.bodyMedium).tr(),
             content: const Text(LocaleKeys.GoingToNewWorkOrderDetailPage).tr(),
             actions: const [],
           )
         : AlertDialog(
-            title: Text(LocaleKeys.CreatedNewWorkOrder, style: TextStyle(color: APPColors.Main.black)).tr(),
+            title: Text(LocaleKeys.CreatedNewWorkOrder, style: context.bodyMedium).tr(),
             content: Column(
               children: [
-                Text(LocaleKeys.CreatedNewWorkOrder, style: TextStyle(color: APPColors.Main.black)).tr(),
+                Text(LocaleKeys.CreatedNewWorkOrder, style: context.bodyMedium).tr(),
                 const SizedBox(height: 5),
                 Text("${message.data['taskName']} - ${message.data['taskId']}\n${message.data['taskDescription']}"),
               ],

@@ -67,7 +67,7 @@ class AddDocumantAccordion extends StatelessWidget {
         AccordionSection(
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.documantScanner, color: APPColors.Main.white),
-          header: Text(LocaleKeys.AddedDocumants, style: TextStyle(color: APPColors.Main.white)).tr(),
+          header: Text(LocaleKeys.AddedDocumants, style: context.labelMedium.copyWith(color: APPColors.Main.white)).tr(),
           onOpenSection: () {
             Provider.of<WorkOrderDetailServiceProvider>(context, listen: false).update();
             provider.userClickedDocumantsFunction();

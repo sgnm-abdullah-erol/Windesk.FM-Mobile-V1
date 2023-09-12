@@ -32,7 +32,7 @@ class RequestMaterialAccordion extends StatelessWidget {
           contentVerticalPadding: 0,
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.add, color: APPColors.Main.white),
-          header: Text(LocaleKeys.AddRequestMaterial.tr(), style: TextStyle(color: APPColors.Main.white)),
+          header: Text(LocaleKeys.AddRequestMaterial.tr(), style: context.bodyMedium.copyWith(color: APPColors.Main.white)),
           rightIcon: const Icon(AppIcons.arrowDown, size: 0),
           onOpenSection: () {
             ShowModalBottomSheet().show(

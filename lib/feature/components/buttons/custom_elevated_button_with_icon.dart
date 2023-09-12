@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 
 class CustomElevatedButtonWithIcon extends StatelessWidget {
   const CustomElevatedButtonWithIcon(
@@ -20,16 +21,12 @@ class CustomElevatedButtonWithIcon extends StatelessWidget {
   final double? width;
   final double? height;
 
-
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
       onPressed: () => onPressFunction(),
       icon: Icon(icon, color: iconColor), //icon data for elevated button
-      label: Text(
-    textValue,
-    style: TextStyle(color: textColor),
-      ), //label text
+      label: Text(textValue, style: context.bodyMedium.copyWith(color: textColor)), //label text
     );
   }
 }

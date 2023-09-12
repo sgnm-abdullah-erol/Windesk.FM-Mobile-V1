@@ -205,7 +205,7 @@ class _HomeScreenState extends State<HomeScreen> {
           position: badges.BadgePosition.topEnd(top: 10, end: 10),
           badgeContent: Text(
             context.read<HomeProvider>().totalAnnoucementCount.toString(),
-            style: TextStyle(color: APPColors.Main.white),
+            style: context.labelMedium.copyWith(color: APPColors.Main.white),
           ),
           onTap: () {},
           child: IconButton(
