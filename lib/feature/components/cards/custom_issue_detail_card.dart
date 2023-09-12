@@ -5,6 +5,7 @@ import 'package:vm_fm_4/core/constants/functions/null_check_widget.dart';
 import 'package:vm_fm_4/core/constants/other/time_functions.dart';
 import 'package:vm_fm_4/core/constants/style/custom_paddings.dart';
 import 'package:vm_fm_4/core/l10n/locale_keys.g.dart';
+import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 
 import '../../../core/constants/other/colors.dart';
 
@@ -159,22 +160,22 @@ class DetailListWidget extends StatelessWidget {
                     ],
                   ),
                   Divider(height: 15, color: APPColors.Main.black),
-                  issueSummaryRow(code.toString(), description ?? ""),
-                  issueSummaryRow(LocaleKeys.issueSituation, statusName ?? ""),
-                  issueSummaryRow(LocaleKeys.explanation, description ?? ""),
-                  issueSummaryRow(LocaleKeys.issueOwner, contactName ?? ""),
-                  issueSummaryRow(LocaleKeys.space, locName ?? ""),
-                  issueSummaryRow(LocaleKeys.spaceLoc, locTree ?? ""),
-                  issueSummaryRow(LocaleKeys.callReason, title ?? ""),
-                  issueSummaryRow(LocaleKeys.callReason, cmdb ?? ""),
-                  issueSummaryRow(LocaleKeys.openingDate, idate ?? ""),
-                  issueSummaryRow(LocaleKeys.incallNumber, ani ?? ""),
-                  issueSummaryRow(LocaleKeys.targetFixed, TimeClass().timeRecover(targetRDate).toString()),
-                  issueSummaryRow(LocaleKeys.targetResponsed, TimeClass().timeRecover(targetFDate).toString()),
-                  issueSummaryRow(LocaleKeys.hys, hys ?? ""),
-                  issueSummaryRow(LocaleKeys.hds, hds ?? ""),
-                  issueSummaryRow(LocaleKeys.assignmentGroup, assignmentGroupName ?? ""),
-                  issueSummaryRow(LocaleKeys.assigneName, assigneName ?? ""),
+                  issueSummaryRow(context, code.toString(), description ?? ""),
+                  issueSummaryRow(context, LocaleKeys.issueSituation, statusName ?? ""),
+                  issueSummaryRow(context, LocaleKeys.explanation, description ?? ""),
+                  issueSummaryRow(context, LocaleKeys.issueOwner, contactName ?? ""),
+                  issueSummaryRow(context, LocaleKeys.space, locName ?? ""),
+                  issueSummaryRow(context, LocaleKeys.spaceLoc, locTree ?? ""),
+                  issueSummaryRow(context, LocaleKeys.callReason, title ?? ""),
+                  issueSummaryRow(context, LocaleKeys.callReason, cmdb ?? ""),
+                  issueSummaryRow(context, LocaleKeys.openingDate, idate ?? ""),
+                  issueSummaryRow(context, LocaleKeys.incallNumber, ani ?? ""),
+                  issueSummaryRow(context, LocaleKeys.targetFixed, TimeClass().timeRecover(targetRDate).toString()),
+                  issueSummaryRow(context, LocaleKeys.targetResponsed, TimeClass().timeRecover(targetFDate).toString()),
+                  issueSummaryRow(context, LocaleKeys.hys, hys ?? ""),
+                  issueSummaryRow(context, LocaleKeys.hds, hds ?? ""),
+                  issueSummaryRow(context, LocaleKeys.assignmentGroup, assignmentGroupName ?? ""),
+                  issueSummaryRow(context, LocaleKeys.assigneName, assigneName ?? ""),
                 ],
               ),
             ),
@@ -204,7 +205,7 @@ class DetailListWidget extends StatelessWidget {
     );
   }
 
-  Column issueSummaryRow(header, description) {
+  Column issueSummaryRow(BuildContext context, header, description) {
     return Column(
       children: [
         Row(
@@ -228,7 +229,7 @@ class DetailListWidget extends StatelessWidget {
                   Text(LocaleKeys.noInfo),
                   Text(
                     description,
-                    style: TextStyle(color: APPColors.Secondary.black, fontSize: 14, fontWeight: FontWeight.w400),
+                    style: context.labelMedium.copyWith(color: APPColors.Secondary.black),
                   ),
                 )),
           ],

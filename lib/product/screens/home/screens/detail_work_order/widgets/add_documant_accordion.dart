@@ -9,6 +9,7 @@ import '../../../../../../core/constants/other/colors.dart';
 import '../../../../../../feature/components/model_bottom_sheet/add_document_modal_bottom_sheet.dart';
 import '../../../../../../feature/components/model_bottom_sheet/add_image_modal_bottom_sheet.dart';
 import '../../../../../../feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
+import '../../../../../../feature/extensions/context_extension.dart';
 import '../../../../../../generated/locale_keys.g.dart';
 import '../../work_order_list/widgets/custom_loading_indicator.dart';
 import '../provider/work_order_detail_provider.dart';
@@ -26,12 +27,13 @@ class AddDocumantAccordion extends StatelessWidget {
       maxOpenSections: 1,
       children: [
         AccordionSection(
+          headerPadding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
           contentBorderWidth: 0,
           contentHorizontalPadding: 0,
           contentVerticalPadding: 0,
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.camera, color: APPColors.Main.white),
-          header: Text(LocaleKeys.AddImage, style: TextStyle(color: APPColors.Main.white)).tr(),
+          header: Text(LocaleKeys.AddImage.tr(), style: context.labelMedium.copyWith(color: APPColors.Main.white)),
           rightIcon: const Icon(AppIcons.arrowDown, size: 0),
           onOpenSection: () {
             ShowModalBottomSheet().show(
@@ -45,12 +47,13 @@ class AddDocumantAccordion extends StatelessWidget {
           content: const SizedBox(height: 0),
         ),
         AccordionSection(
+          headerPadding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
           contentBorderWidth: 0,
           contentHorizontalPadding: 0,
           contentVerticalPadding: 0,
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.pictureAsPdf, color: APPColors.Main.white),
-          header: Text(LocaleKeys.AddPdf, style: TextStyle(color: APPColors.Main.white)).tr(),
+          header: Text(LocaleKeys.AddPdf.tr(), style: context.labelMedium.copyWith(color: APPColors.Main.white)),
           rightIcon: const Icon(AppIcons.arrowDown, size: 0),
           onOpenSection: () {
             ShowModalBottomSheet().show(
@@ -64,9 +67,10 @@ class AddDocumantAccordion extends StatelessWidget {
           content: const SizedBox(height: 0),
         ),
         AccordionSection(
+          headerPadding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.documantScanner, color: APPColors.Main.white),
-          header: Text(LocaleKeys.AddedDocumants, style: TextStyle(color: APPColors.Main.white)).tr(),
+          header: Text(LocaleKeys.AddedDocumants, style: context.labelMedium.copyWith(color: APPColors.Main.white)).tr(),
           onOpenSection: () {
             Provider.of<WorkOrderDetailServiceProvider>(context, listen: false).update();
             provider.userClickedDocumantsFunction();

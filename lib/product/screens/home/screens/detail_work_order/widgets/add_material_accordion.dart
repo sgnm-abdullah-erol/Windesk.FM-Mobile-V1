@@ -8,6 +8,7 @@ import '../../../../../../core/constants/other/app_icons.dart';
 import '../../../../../../core/constants/other/colors.dart';
 import '../../../../../../feature/components/model_bottom_sheet/add_material_modal_bottom_sheet.dart';
 import '../../../../../../feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
+import '../../../../../../feature/extensions/context_extension.dart';
 import '../../../../../../generated/locale_keys.g.dart';
 import '../provider/work_order_detail_provider.dart';
 import '../provider/work_order_detail_service_provider.dart';
@@ -25,13 +26,14 @@ class AddMaterialAccordion extends StatelessWidget {
       headerBackgroundColorOpened: APPColors.Accent.black,
       children: [
         AccordionSection(
+          headerPadding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
           isOpen: false,
           contentBorderWidth: 0,
           contentHorizontalPadding: 0,
           contentVerticalPadding: 0,
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.add, color: APPColors.Main.white),
-          header: Text(LocaleKeys.AddMaterial, style: TextStyle(color: APPColors.Main.white)).tr(),
+          header: Text(LocaleKeys.AddMaterial, style: context.labelMedium.copyWith(color: APPColors.Main.white)).tr(),
           rightIcon: const Icon(AppIcons.arrowDown, size: 0),
           onOpenSection: () async {
             ShowModalBottomSheet().show(
@@ -42,10 +44,11 @@ class AddMaterialAccordion extends StatelessWidget {
           content: const SizedBox(height: 0),
         ),
         AccordionSection(
+          headerPadding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
           isOpen: false,
           headerBackgroundColor: APPColors.Accent.black,
           leftIcon: Icon(AppIcons.warehouse, color: APPColors.Main.white),
-          header: Text(LocaleKeys.AddedMaterial, style: TextStyle(color: APPColors.Main.white)),
+          header: Text(LocaleKeys.AddedMaterials.tr(), style: context.labelMedium.copyWith(color: APPColors.Main.white)),
           onOpenSection: () {
             Provider.of<WorkOrderDetailServiceProvider>(context, listen: false).update();
             provider.userClickedMaterialFunction();

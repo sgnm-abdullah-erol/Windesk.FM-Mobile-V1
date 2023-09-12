@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/constants/other/colors.dart';
 import '../../../core/constants/style/border_radius.dart';
-import '../../../core/constants/style/font_sizes.dart';
+import '../../extensions/context_extension.dart';
 
 class DropDownInputFields extends StatelessWidget {
   const DropDownInputFields({
@@ -35,7 +35,7 @@ class DropDownInputFields extends StatelessWidget {
           borderSide: BorderSide(color: APPColors.Main.grey, width: 4),
         ),
         labelText: labelText.tr(),
-        labelStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: FontSizes.subtitle),
+        labelStyle: context.bodySmall.copyWith(color: context.theme ? APPColors.Main.white : APPColors.Main.black),
       ),
       items: dropDownArray.map(
         (String items) {
@@ -44,7 +44,10 @@ class DropDownInputFields extends StatelessWidget {
             child: Row(
               children: [
                 leftIconExist == false ? Container() : Icon(leftIcon),
-                Text(items, style: TextStyle(color: APPColors.Main.black)),
+                Text(
+                  items,
+                  style: context.labelMedium.copyWith(color: context.theme ? APPColors.Main.white : APPColors.Main.black),
+                ),
               ],
             ),
           );

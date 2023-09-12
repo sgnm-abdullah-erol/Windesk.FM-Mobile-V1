@@ -11,7 +11,7 @@ import '../../../core/enums/shared_enums.dart';
 import 'local_notification.dart';
 
 class FirebaseNotification {
-  static void init() async {
+  static Future<void> init() async {
     await Firebase.initializeApp();
 
     FirebaseMessaging messaging = FirebaseMessaging.instance;

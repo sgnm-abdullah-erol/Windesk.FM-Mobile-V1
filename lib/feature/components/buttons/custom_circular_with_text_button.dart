@@ -23,10 +23,7 @@ class CustomCircularWithTextButton extends StatelessWidget {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(CustomBorderRadius.buttonWithIconRadius)),
         ),
         onPressed: () => onPressFunction(),
-        child: Text(
-          textButton,
-          style: TextStyle(color: textColor),
-        ).tr(),
+        child: Text(textButton.tr(), style: context.bodyMedium.copyWith(color: textColor)),
       ),
     );
   }

@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 class LocaleKeys {
   const LocaleKeys._();
 
-  // static const ----------App---------- = '----------App----------';
+  // static const ----------App---------- = '----------App----------;
+  static const String IfmName = 'IfmName';
   static const String AppName = 'Windesk FM Mobile V1';
   static const String MyOrders = "MyOrders";
   static const String MyGroups = "MyGroups";
@@ -62,6 +63,33 @@ class LocaleKeys {
   static const String CreatedNewWorkOrder = "CreatedNewWorkOrder";
   static const String GoingToNewWorkOrderDetailPage = "GoingToNewWorkOrderDetailPage";
   static const String ChangeState = "ChangeState";
+  static const String ResponseDate = "ResponseDate";
+  static const String CorrectionDate = "CorrectionDate";
+  static const String Claiment = "Claiment";
+  static const String Category = "Category";
+  static const String OpenDate = "OpenDate";
+  static const String UpdateDate = "UpdateDate";
+  static const String LastUpdateDate = "LastUpdateDate";
+  static const String AssignedGroup = "AssignedGroup";
+  static const String AssignedPerson = "AssignedPerson";
+  static const String Presence = "Presence";
+  static const String Change = "Change";
+  static const String ProccessEntry = "ProccessEntry";
+  static const String ProccessEntryFirstALertDialog = "ProccessEntryFirstALertDialog";
+  static const String ProccessEntrySecondALertDialog = "ProccessEntrySecondALertDialog";
+
+  // Data Table Strings
+  static const String DataTableID = "DataTableID";
+  static const String DataTableName = "DataTableName";
+  static const String DataTableType = "DataTableType";
+  static const String DataTableDownload = "DataTableDownload";
+  static const String DataTableDelete = "DataTableDelete";
+  static const String DataTableDate = "DataTableDate";
+  static const String DataTableAmount = "DataTableAmount";
+  static const String DataTableMaterial = "DataTableMaterial";
+  static const String DataTableUnit = "DataTableUnit";
+  static const String DataTableUser = "DataTableUser";
+  static const String DataTableTotalAmount = "DataTableTotalAmount";
 
   // accordion titles
   static const String Effort = 'Effort';
@@ -77,7 +105,7 @@ class LocaleKeys {
   static const String AddEfforts = 'AddEfforts';
   static const String AddedEfforts = 'AddedEfforts';
   static const String AddMaterial = 'AddMaterial';
-  static const String AddedMaterial = 'AddedMaterial';
+  static const String AddedMaterials = 'AddedMaterials';
   static const String AddRequestMaterial = 'AddRequestMaterial';
   static const String ApprovedRequestMaterials = 'ApprovedRequestMaterials';
   static const String RequestedMaterials = 'RequestedMaterials';
@@ -176,6 +204,16 @@ class LocaleKeys {
   static const String DeliveryUser = 'Delivery User';
   static const String Efforts = 'Efforts';
   static const String CreateTask = 'Create Task';
+  static const String EffortDuration = 'EffortDuration';
+  static const String EffortType = 'EffortType';
+  static const String EnterDescription = 'EnterDescription';
+  static const String Way = 'Way';
+  static const String Work = 'Work';
+  static const String MaterialList = 'MaterialList';
+  static const String WantedMaterialAmount = 'WantedMaterialAmount';
+  static const String MaterialAmount = 'MaterialAmount';
+  static const String MaterialUnit = 'MaterialUnit';
+  static const String Subject = 'Subject';
   // // static String const ----------MAİNTENANCE---------- = '----------MAİNTENANCE----------';
   // static const Manage Check List = 'Manage Check List';
   // static const Add Check List = 'Add Check List';

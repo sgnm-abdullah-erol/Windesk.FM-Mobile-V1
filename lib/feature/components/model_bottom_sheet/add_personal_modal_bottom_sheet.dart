@@ -44,14 +44,20 @@ class AddPersonalModalBottomSheet extends StatelessWidget {
     );
   }
 
-  Expanded _inputS(context, personalList, shiftList, selectPersonalFunction, selectShiftFunction) {
+  Expanded _inputS(
+    BuildContext context,
+    List<String> personalList,
+    List<String> shiftList,
+    Function selectPersonalFunction,
+    Function selectShiftFunction,
+  ) {
     return Expanded(
       flex: 50,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
-            child: const Text(LocaleKeys.AddPersonal, style: TextStyle(fontWeight: FontWeight.bold)).tr(),
+            child: Text(LocaleKeys.AddPersonal.tr(), style: const TextStyle(fontWeight: FontWeight.bold)),
           ),
           Expanded(
             child: DropDownInputFields(

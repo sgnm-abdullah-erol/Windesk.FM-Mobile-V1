@@ -1,14 +1,17 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:internet_file/internet_file.dart';
 import 'package:internet_file/storage_io.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
-import '../../../../../../../feature/models/work_space/work_space_documents.dart';
 
 import '../../../../../../../core/constants/other/app_icons.dart';
 import '../../../../../../../core/constants/other/colors.dart';
+import '../../../../../../../feature/extensions/context_extension.dart';
+import '../../../../../../../feature/models/work_space/work_space_documents.dart';
+import '../../../../../../../generated/locale_keys.g.dart';
 import '../../provider/download_provider.dart';
 
 class DataTableAccordionDocumants extends StatelessWidget {
@@ -17,11 +20,13 @@ class DataTableAccordionDocumants extends StatelessWidget {
   final Function delete;
   final List<WorkSpaceDocuments> data;
 
-  final List<String> _labelList = ['id', 'İsim', 'Tür', 'İndir', 'Sil'];
-
-  final String _nonKnownName = 'Bilinmiyor';
-
-  final String _noEffortType = 'Çalışma Türü Belirtilmemiş';
+  final List<String> _labelList = [
+    LocaleKeys.DataTableID.tr(),
+    LocaleKeys.DataTableName.tr(),
+    LocaleKeys.DataTableType.tr(),
+    LocaleKeys.DataTableDownload.tr(),
+    LocaleKeys.DataTableDelete.tr(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +42,7 @@ class DataTableAccordionDocumants extends StatelessWidget {
             DataColumn(
               label: Text(
                 _labelList[i],
-                style: _cellTextStyle(),
+                style: _cellTextStyle(context),
               ),
               numeric: false,
             )
@@ -46,9 +51,9 @@ class DataTableAccordionDocumants extends StatelessWidget {
         rows: [
           for (var i = 0; i < (data.length); i++) ...{
             DataRow(cells: [
-              DataCell(Text(data[i].id.toString(), style: _cellTextStyle())),
-              DataCell(Text(data[i].name ?? _noEffortType, style: _cellTextStyle())),
-              DataCell(Text(data[i].url?.split('.').last ?? _nonKnownName, style: _cellTextStyle())),
+              DataCell(Text(data[i].id.toString(), style: _cellTextStyle(context))),
+              DataCell(Text(data[i].name ?? "", style: _cellTextStyle(context))),
+              DataCell(Text(data[i].url?.split('.').last ?? "", style: _cellTextStyle(context))),
               DataCell(
                 ChangeNotifierProvider(
                   create: (context) => DownloadProvider(),
@@ -96,7 +101,5 @@ class DataTableAccordionDocumants extends StatelessWidget {
     );
   }
 
-  TextStyle _cellTextStyle() {
-    return const TextStyle(color: Colors.black);
-  }
+  TextStyle _cellTextStyle(BuildContext context) => context.labelMedium.copyWith(color: APPColors.Main.black);
 }

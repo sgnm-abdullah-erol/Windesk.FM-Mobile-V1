@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../../feature/components/snackBar/snackbar.dart';
 import '../../../../core/database/shared_manager.dart';
 import '../../../../core/enums/shared_enums.dart';
+import '../../../../feature/components/snackBar/snackbar.dart';
 import '../../../../feature/injection.dart';
 import '../../../../feature/models/auth_models/login_model.dart';
 import '../../../../feature/service/global_services.dart/auth_service/auth_service_repository_impl.dart';

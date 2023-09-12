@@ -10,13 +10,13 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i17;
 import 'package:flutter/material.dart' as _i18;
+import 'package:vm_fm_4/core/route/empty_router.dart' as _i1;
+import 'package:vm_fm_4/core/route/empty_router2.dart' as _i2;
 import 'package:vm_fm_4/feature/models/home_page_models/asset_document_model.dart' as _i21;
 import 'package:vm_fm_4/feature/models/home_page_models/asset_image_model.dart' as _i20;
 import 'package:vm_fm_4/feature/models/home_page_models/asset_list_model.dart' as _i19;
 import 'package:vm_fm_4/feature/models/work_space/work_space_appendings.dart' as _i23;
 import 'package:vm_fm_4/feature/models/work_space/work_space_detail.dart' as _i22;
-import 'package:vm_fm_4/core/route/empty_router.dart' as _i1;
-import 'package:vm_fm_4/core/route/empty_router2.dart' as _i2;
 import 'package:vm_fm_4/product/screens/auth/view/login_screen.dart' as _i15;
 import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/view/detail_work_order_screen.dart' as _i7;
 import 'package:vm_fm_4/product/screens/home/screens/pending_detail_work_order/pending_detail_work_order_screen.dart' as _i8;

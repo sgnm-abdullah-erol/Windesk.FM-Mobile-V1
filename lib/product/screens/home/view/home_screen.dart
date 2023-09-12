@@ -7,14 +7,15 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vm_fm_4/core/constants/paths/asset_paths.dart';
+import 'package:vm_fm_4/core/themes/theme_provider.dart';
 import 'package:vm_fm_4/feature/components/alert_dialog/notification_alert_dialog.dart';
+import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
 import 'package:vm_fm_4/product/screens/home/service/home_service_repo_impl.dart';
 
 import '../../../../core/constants/other/app_icons.dart';
 import '../../../../core/constants/other/colors.dart';
 import '../../../../core/constants/other/snackbar_strings.dart';
-import '../../../../core/constants/paths/service_tools.dart';
 import '../../../../core/route/app_route.gr.dart';
 import '../../../../feature/components/buttons/custom_circular_home_button.dart';
 import '../../../../feature/components/internet_conneciton/internet_connection_listener.dart';
@@ -70,23 +71,37 @@ class _HomeScreenState extends State<HomeScreen> {
             //FlutterLocalNotificationsPlugin().show(message.notification.messageId, message.notification?.title, message.notification?.body,);
           });
 
-          return Scaffold(
-            key: _scaffoldKey,
-            appBar: appBarWidget(context, homeProvider),
-            backgroundColor: APPColors.Main.white,
-            body: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[headerTextWidget(), homePageIcons(context)],
-              ),
-            ),
-            floatingActionButton: FloatingActionButton(onPressed: () {
-              if (context.locale == const Locale('en', 'US')) {
-                context.setLocale(const Locale('tr', 'TR'));
-              } else {
-                context.setLocale(const Locale('en', 'US'));
-              }
-            }),
+          // TODO DUMMY THEME, CHANGE LANGUAGE BUTTON
+          return Consumer<ThemeProvider>(
+            builder: (context, ThemeProvider themeProvider, child) {
+              return Scaffold(
+                key: _scaffoldKey,
+                appBar: appBarWidget(context, homeProvider),
+                body: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[headerTextWidget(context), homePageIcons(context)],
+                  ),
+                ),
+                floatingActionButton: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    FloatingActionButton(
+                      onPressed: () {
+                        themeProvider.setTheme(!themeProvider.isDark);
+                      },
+                    ),
+                    FloatingActionButton(onPressed: () {
+                      if (context.locale == const Locale('en', 'US')) {
+                        context.setLocale(const Locale('tr', 'TR'));
+                      } else {
+                        context.setLocale(const Locale('en', 'US'));
+                      }
+                    }),
+                  ],
+                ),
+              );
+            },
           );
         },
       ),
@@ -137,14 +152,14 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             CustomCircularHomeButton(
               title: buttonTitle1,
-              icon: Icon(buttonIcon1, size: MediaQuery.of(context).size.width / 10),
+              icon: Icon(buttonIcon1, size: context.width / 10),
               onPressed: () => context.router.push(navigateRouteName1),
               isBadgeVisible: false,
               badgeCount: '0',
             ),
             CustomCircularHomeButton(
               title: buttonTitle2,
-              icon: Icon(buttonIcon2, size: MediaQuery.of(context).size.width / 10),
+              icon: Icon(buttonIcon2, size: context.width / 10),
               onPressed: () => context.router.push(navigateRouteName2),
               isBadgeVisible: false,
               badgeCount: '0',
@@ -155,12 +170,12 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Expanded headerTextWidget() {
+  Expanded headerTextWidget(BuildContext context) {
     return Expanded(
       child: Column(
         children: [
-          const Text(ServiceTools.facilityName, style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400)),
-          const Text(LocaleKeys.AppTitle, style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)).tr(),
+          Text(LocaleKeys.IfmName, style: context.titleSmall.copyWith(letterSpacing: 1.5)).tr(),
+          Text(LocaleKeys.AppTitle, style: context.titleMedium.copyWith(letterSpacing: 1.5)).tr(),
         ],
       ),
     );
@@ -168,41 +183,36 @@ class _HomeScreenState extends State<HomeScreen> {
 
   AppBar appBarWidget(BuildContext context, HomeProvider provider) {
     return AppBar(
-      title: Image.asset(
-        AssetPaths.windesk,
-        width: MediaQuery.of(context).size.width / 1.2,
-        height: MediaQuery.of(context).size.width / 1.2,
-        fit: BoxFit.cover,
-      ),
+      title: Image.asset(AssetPaths.windesk, width: context.width / 1.2, height: context.width / 1.2, fit: BoxFit.cover),
       actions: <Widget>[
         IconButton(
-          icon: Icon(AppIcons.powerSettingsOff, size: 35, color: APPColors.Main.black),
+          icon: Icon(AppIcons.powerSettingsOff, size: 35, color: context.theme ? APPColors.Main.white : APPColors.Main.black),
           tooltip: LocaleKeys.HintLogout.tr(),
           onPressed: () => provider.logOut(),
         ),
       ],
       centerTitle: true,
       elevation: 0.0,
-      backgroundColor: APPColors.Main.white,
-      leading: announcementBuilder(),
+      backgroundColor: APPColors.Clear.black,
+      leading: announcementBuilder(context),
     );
   }
 
-  Builder announcementBuilder() {
+  Builder announcementBuilder(BuildContext context) {
     return Builder(
       builder: (BuildContext context) {
         return badges.Badge(
           position: badges.BadgePosition.topEnd(top: 10, end: 10),
           badgeContent: Text(
             context.read<HomeProvider>().totalAnnoucementCount.toString(),
-            style: TextStyle(color: APPColors.Main.white),
+            style: context.labelMedium.copyWith(color: APPColors.Main.white),
           ),
           onTap: () {},
           child: IconButton(
             icon: Icon(
               AppIcons.notifications,
               size: 35,
-              color: APPColors.Main.black,
+              color: context.theme ? APPColors.Main.white : APPColors.Main.black,
             ),
             onPressed: () {
               context.read<HomeProvider>().totalAnnoucementCount.toString() != 0
