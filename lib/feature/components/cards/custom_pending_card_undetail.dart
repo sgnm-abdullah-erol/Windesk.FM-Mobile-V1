@@ -110,18 +110,18 @@ class _Content extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(2.0),
               child: Text(
-                'WO ${pendiks.task?.id.toString() ?? LocaleKeys.NoCode}',
+                'WO ${pendiks.task?.id.toString() ?? LocaleKeys.NoCode.tr()}',
                 softWrap: true,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(color: APPColors.Secondary.black, fontSize: 15, fontFamily: "Poppins", fontWeight: FontWeight.bold),
-              ).tr(),
+                style: context.labelMedium.copyWith(color: APPColors.Secondary.black, fontSize: FontSizes.caption),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(2.0),
               child: Text(
-                pendiks.state?.name.toString() ?? LocaleKeys.NoState,
-                style: TextStyle(fontWeight: FontWeight.bold, color: APPColors.Secondary.black, fontSize: FontSizes.caption),
-              ).tr(),
+                pendiks.state?.name.toString() ?? LocaleKeys.NoState.tr(),
+                style: context.labelMedium.copyWith(color: APPColors.Secondary.black),
+              ),
             ),
           ],
         ),
@@ -130,34 +130,26 @@ class _Content extends StatelessWidget {
   }
 
   Widget _dateText(BuildContext context, String label, String date, bool giveFormat) {
-    var textStyle = Theme.of(context).textTheme.bodyMedium;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label, style: textStyle).tr(),
-        Text(giveFormat ? date.splitString(date) : date.splitStringSecond(date), style: textStyle).tr(),
+        Text(label.tr(), style: context.bodyMedium).tr(),
+        Text(giveFormat ? date.splitString(date) : date.splitStringSecond(date), style: context.bodyMedium).tr(),
       ],
     );
   }
 
   Widget _desc(BuildContext context) {
-    return Text(pendiks.task?.description ?? '', style: Theme.of(context).textTheme.bodyMedium);
+    return Text(pendiks.task?.description ?? '', style: context.bodyMedium);
   }
 
   Column _woLocationText(BuildContext context) {
-    var textStyle = Theme.of(context).textTheme.bodyMedium;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          pendiks.workspace?.owner ?? '',
-          style: textStyle,
-        ),
+        Text(pendiks.workspace?.owner ?? '', style: context.bodyMedium),
         const SizedBox(height: 5),
-        Text(
-          pendiks.workspace?.name ?? '',
-          style: textStyle,
-        ),
+        Text(pendiks.workspace?.name ?? '', style: context.bodyMedium),
       ],
     );
   }

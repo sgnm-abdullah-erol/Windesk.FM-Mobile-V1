@@ -27,7 +27,7 @@ class CustomTracingList extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [_title(), _count()],
+                children: [_title(context), _count(context)],
               ),
             ),
           ),
@@ -36,25 +36,21 @@ class CustomTracingList extends StatelessWidget {
     );
   }
 
-  Expanded _title() {
+  Expanded _title(BuildContext context) {
     return Expanded(
       flex: 8,
       child: Text(
         title.toString(),
         maxLines: 1,
-        style: TextStyle(fontSize: 15, color: count == '0' ? APPColors.Main.grey : APPColors.Main.black),
+        style: context.labelMedium.copyWith(color: count == '0' ? APPColors.Main.grey : APPColors.Main.black),
       ),
     );
   }
 
-  Expanded _count() {
+  Expanded _count(BuildContext context) {
     return Expanded(
       flex: 3,
-      child: Text(
-        count,
-        textAlign: TextAlign.right,
-        style: TextStyle(fontSize: 22, color: APPColors.TracingNumber.blue),
-      ),
+      child: Text(count, textAlign: TextAlign.right, style: context.titleSmall.copyWith(color: APPColors.TracingNumber.blue)),
     );
   }
 }
