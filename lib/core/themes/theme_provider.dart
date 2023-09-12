@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/core/database/shared_manager.dart';
-import 'package:vm_fm_4/core/enums/shared_enums.dart';
+import '../database/shared_manager.dart';
+import '../enums/shared_enums.dart';
 
 class ThemeProvider extends ChangeNotifier {
   final SharedManager _preferences = SharedManager();

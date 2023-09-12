@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
-import 'package:vm_fm_4/generated/locale_keys.g.dart';
+import '../../../generated/locale_keys.g.dart';
 
 import '../../../product/screens/home/screens/work_order_list/provider/work_order_list_provider.dart';
 import '../../../product/screens/home/screens/work_order_list/provider/work_order_pendiks_provider.dart';

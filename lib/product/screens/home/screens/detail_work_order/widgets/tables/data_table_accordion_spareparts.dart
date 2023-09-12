@@ -1,11 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/extensions/context_extension.dart';
-import 'package:vm_fm_4/generated/locale_keys.g.dart';
-import '../../../../../../../feature/models/work_space/work_space_spareparts.dart';
 
 import '../../../../../../../core/constants/other/app_icons.dart';
 import '../../../../../../../core/constants/other/colors.dart';
+import '../../../../../../../feature/extensions/context_extension.dart';
+import '../../../../../../../feature/models/work_space/work_space_spareparts.dart';
+import '../../../../../../../generated/locale_keys.g.dart';
 
 class DataTableAccordionSpareparts extends StatelessWidget {
   DataTableAccordionSpareparts({super.key, required this.delete, required this.data});

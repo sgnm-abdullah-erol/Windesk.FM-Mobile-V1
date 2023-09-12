@@ -2,8 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vm_fm_4/feature/extensions/context_extension.dart';
-import 'package:vm_fm_4/generated/locale_keys.g.dart';
+import '../../../../feature/extensions/context_extension.dart';
+import '../../../../generated/locale_keys.g.dart';
 
 import '../../../../../../../feature/components/appbar/custom_main_appbar.dart';
 import '../../../../../../../feature/components/buttons/custom_half_buttons.dart';

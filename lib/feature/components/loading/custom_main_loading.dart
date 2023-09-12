@@ -1,8 +1,8 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 
 import '../../../core/constants/other/colors.dart';
+import '../../extensions/context_extension.dart';
 
 class CustomMainLoading extends StatelessWidget {
   const CustomMainLoading({super.key});

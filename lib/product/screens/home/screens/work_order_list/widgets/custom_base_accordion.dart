@@ -1,7 +1,7 @@
 import 'package:accordion/accordion.dart';
 import 'package:accordion/controllers.dart';
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/extensions/context_extension.dart';
+import '../../../../../../feature/extensions/context_extension.dart';
 
 import '../../../../../../core/constants/other/colors.dart';
 
