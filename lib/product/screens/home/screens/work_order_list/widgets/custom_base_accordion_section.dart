@@ -11,7 +11,6 @@ class CustomBaseAccordionSections {
     return AccordionSection(
       headerPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       headerBackgroundColor: APPColors.Accent.black,
-      contentBackgroundColor: Colors.red,
       rightIcon: const Icon(Icons.arrow_drop_down, size: 0),
       isOpen: false,
       onOpenSection: () {

@@ -78,7 +78,7 @@ class _MyGroupWorkOrdersState extends State<MyGroupWorkOrders> {
     }
     return AccordionSection(
       headerPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      contentBackgroundColor: APPColors.Accent.black,
+      contentBackgroundColor: context.theme ? APPColors.Main.black : APPColors.Main.white,
       isOpen: false,
       header: Row(
         children: [
