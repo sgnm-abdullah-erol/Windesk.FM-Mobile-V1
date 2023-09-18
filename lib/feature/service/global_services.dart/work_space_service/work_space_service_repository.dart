@@ -88,4 +88,9 @@ abstract class WorkSpaceServiceRepository {
   Future<Either<List<WorkSpaceDocuments>, CustomServiceException>> getWorkSpaceDocuments(String token, String taskId);
 
   Future<Either<AssetListModel, CustomServiceException>> getAssetWithSearch(String assetCode, String token);
+
+  Future<bool> deleteEffort(String effortId);
+  Future<bool> deleteMaterial(String materialId);
+  Future<bool> deleteMaterialRequest(String materialRequestId);
+  Future<bool> deleteDocument(String documentId);
 }

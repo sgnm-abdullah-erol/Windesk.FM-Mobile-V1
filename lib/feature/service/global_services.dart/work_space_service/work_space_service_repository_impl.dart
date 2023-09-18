@@ -750,4 +750,28 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
     }
   }
+
+  @override
+  Future<bool> deleteDocument(String documentId) {
+    // TODO: implement deleteDocument
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> deleteEffort(String effortId) {
+    // TODO: implement deleteEffort
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> deleteMaterial(String materialId) {
+    // TODO: implement deleteMaterial
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> deleteMaterialRequest(String materialRequestId) {
+    // TODO: implement deleteMaterialRequest
+    throw UnimplementedError();
+  }
 }
