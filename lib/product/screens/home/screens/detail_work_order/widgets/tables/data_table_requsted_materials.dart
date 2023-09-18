@@ -19,7 +19,6 @@ class DataTableAccordionRequstedMaterials extends StatelessWidget {
     LocaleKeys.DataTableAmount.tr(),
     LocaleKeys.DataTableUser.tr(),
     LocaleKeys.DataTableTotalAmount.tr(),
-    LocaleKeys.DataTableDelete.tr(),
   ];
 
   final List<WorkSpaceRequirementMaterialsList> data;

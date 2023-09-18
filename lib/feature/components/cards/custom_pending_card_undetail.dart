@@ -189,6 +189,7 @@ class _ActionButtons extends StatelessWidget {
 
   void _approveButton(BuildContext context) {
     final String nextStateName = pendiks.state?.nextStates?[0].name ?? '';
+    // TODO LOCALIZATION
     final String nextStateDesc = 'İş emrinin anlık durumunu $nextStateName durumuna almak istediğinizden emin misiniz?';
     WoWaitAcceptModalAlert().showAlertDialog(context, nextStateDesc, _approveWorkOrder).then((value) {
       if (value != null) {
