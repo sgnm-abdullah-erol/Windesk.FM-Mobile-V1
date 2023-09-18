@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../../../core/constants/other/app_icons.dart';
 import '../../../../../../../core/constants/other/colors.dart';
 import '../../../../../../../feature/extensions/context_extension.dart';
 import '../../../../../../../feature/models/work_space/work_space_requirement_materials_list.dart';
@@ -51,12 +50,6 @@ class DataTableAccordionRequstedMaterials extends StatelessWidget {
               DataCell(Text(data[i].amount.toString(), style: _cellTextStyle(context))),
               DataCell(Text(data[i].user.toString(), style: _cellTextStyle(context))),
               DataCell(Text(data[i].totalAmount.toString(), style: _cellTextStyle(context))),
-              DataCell(
-                IconButton(
-                  onPressed: () async {},
-                  icon: Icon(AppIcons.delete, color: APPColors.Login.red),
-                ),
-              ),
             ]),
           },
         ],

@@ -6,6 +6,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
 import '../../../../core/constants/paths/service_tools.dart';
+import '../../../../core/enums/task_node_enums.dart';
 import '../../../../core/enums/task_response_enums.dart';
 import '../../../exceptions/custom_service_exceptions.dart';
 import '../../../models/home_page_models/asset_list_model.dart';
@@ -752,26 +753,46 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   }
 
   @override
-  Future<bool> deleteDocument(String documentId) {
-    // TODO: implement deleteDocument
-    throw UnimplementedError();
-  }
+  Future<bool> deleteNodeFromTask(String userToken, String taskId, String labelId, TaskNodeEnums labelType) async {
+    bool result = false;
+    String url = '${ServiceTools.url.workorder_url}/task/delete/node/from/task';
+    try {
+      final response = await super.dio.post(
+            url,
+            data: {
+              "deleteNodeFromTaskInput": [
+                {
+                  "childId": labelId,
+                  "childLabel": [
+                    labelType.name // Effort , Spare, Document
+                  ],
+                  "rootId": "1023",
+                  "rootLabel": ["Task"],
+                  "variableName": labelType.variableName // effort , usedSpareOf, attachedDocuments
+                }
+              ]
+            },
+            options: Options(
+              headers: {'authorization': 'Bearer $userToken'},
+            ),
+          );
 
-  @override
-  Future<bool> deleteEffort(String effortId) {
-    // TODO: implement deleteEffort
-    throw UnimplementedError();
-  }
+      super.logger.i(response);
 
-  @override
-  Future<bool> deleteMaterial(String materialId) {
-    // TODO: implement deleteMaterial
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<bool> deleteMaterialRequest(String materialRequestId) {
-    // TODO: implement deleteMaterialRequest
-    throw UnimplementedError();
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = response.data;
+        if (data['success'] == true) {
+          result = true;
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return false;
+    }
   }
 }

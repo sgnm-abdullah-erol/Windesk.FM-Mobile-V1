@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
+import '../../../../core/enums/task_node_enums.dart';
 import '../../../../core/enums/task_response_enums.dart';
 import '../../../../core/log/log_manager.dart';
 import '../../../exceptions/custom_service_exceptions.dart';
@@ -89,8 +90,5 @@ abstract class WorkSpaceServiceRepository {
 
   Future<Either<AssetListModel, CustomServiceException>> getAssetWithSearch(String assetCode, String token);
 
-  Future<bool> deleteEffort(String effortId);
-  Future<bool> deleteMaterial(String materialId);
-  Future<bool> deleteMaterialRequest(String materialRequestId);
-  Future<bool> deleteDocument(String documentId);
+  Future<bool> deleteNodeFromTask(String userToken, String taskId, String labelId, TaskNodeEnums labelType);
 }

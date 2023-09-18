@@ -217,6 +217,10 @@ class LocaleKeys {
   static const String Subject = 'Subject';
   static const String DeleteWorkOrderItem = 'DeleteWorkOrderItem';
   static const String DeleteWorkOrderItemLabel = 'DeleteWorkOrderItemLabel';
+  static const String DeleteError = 'DeleteError';
+  static const String DeleteEffort = 'DeleteEffort';
+  static const String DeleteMaterial = 'DeleteMaterial';
+  static const String DeleteDocument = 'DeleteDocument';
   // // static String const ----------MAİNTENANCE---------- = '----------MAİNTENANCE----------';
   // static const Manage Check List = 'Manage Check List';
   // static const Add Check List = 'Add Check List';

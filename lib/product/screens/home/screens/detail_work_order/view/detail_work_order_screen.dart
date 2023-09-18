@@ -41,7 +41,7 @@ class DetailWorkOrderScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => WorkOrderDetailServiceProvider()),
+        ChangeNotifierProvider(create: (context) => WorkOrderDetailServiceProvider(detail: workSpaceDetail)),
         ChangeNotifierProvider(create: (context) => WorkOrderDetailProvider(detail: workSpaceDetail)),
       ],
       child: Consumer<WorkOrderDetailProvider>(

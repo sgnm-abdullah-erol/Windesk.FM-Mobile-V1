@@ -1,8 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:vm_fm_4/feature/components/alert_dialog/work_order_delete_item_alert_dialog.dart';
 
 import '../../../../../../../core/constants/other/app_icons.dart';
 import '../../../../../../../core/constants/other/colors.dart';
+import '../../../../../../../core/enums/task_node_enums.dart';
 import '../../../../../../../feature/extensions/context_extension.dart';
 import '../../../../../../../feature/models/work_space/work_space_spareparts.dart';
 import '../../../../../../../generated/locale_keys.g.dart';
@@ -48,7 +50,15 @@ class DataTableAccordionSpareparts extends StatelessWidget {
               DataCell(Text(data[i].user ?? "", style: _cellTextStyle(context))),
               DataCell(
                 IconButton(
-                  onPressed: () async {},
+                  onPressed: () async {
+                    final response = await WorkOrderDeleteItemAlertDialog.deleteWorkOrderAlertDialog(
+                        context, DeleteItemType.material, int.tryParse(data[i].id ?? "") ?? 0);
+
+                    if (response == true) {
+                      // ignore: use_build_context_synchronously
+                      provider.deleteNode(context, data[i].id.toString(), provider.detail.task?.id.toString() ?? '', TaskNodeEnums.spare);
+                    }
+                  },
                   icon: Icon(AppIcons.delete, color: APPColors.Login.red),
                 ),
               ),

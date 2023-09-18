@@ -11,6 +11,7 @@ import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/provider/
 
 import '../../../../../../../core/constants/other/app_icons.dart';
 import '../../../../../../../core/constants/other/colors.dart';
+import '../../../../../../../core/enums/task_node_enums.dart';
 import '../../../../../../../feature/extensions/context_extension.dart';
 import '../../../../../../../feature/models/work_space/work_space_documents.dart';
 import '../../../../../../../generated/locale_keys.g.dart';
@@ -81,10 +82,8 @@ class DataTableAccordionDocumants extends StatelessWidget {
                         await WorkOrderDeleteItemAlertDialog.deleteWorkOrderAlertDialog(context, DeleteItemType.documant, data[i].id ?? 0);
                     if (response == true) {
                       // ignore: use_build_context_synchronously
-                      provider.deleteDocumant(context);
-                    } else {
-                      print("false");
-                    }
+                      provider.deleteNode(context, data[i].id.toString(), provider.detail.task?.id.toString() ?? '', TaskNodeEnums.document);
+                    } else {}
                   },
                   icon: Icon(AppIcons.delete, color: APPColors.Login.red),
                 ),

@@ -1,7 +1,12 @@
-// ignore_for_file: prefer_final_fields
+// ignore_for_file: prefer_final_fields, use_build_context_synchronously
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:vm_fm_4/core/enums/task_node_enums.dart';
+import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
+import 'package:vm_fm_4/feature/models/work_space/work_space_detail.dart';
 import 'package:vm_fm_4/feature/models/work_space/work_space_documents.dart';
+import 'package:vm_fm_4/generated/locale_keys.g.dart';
 
 import '../../../../../../core/database/shared_manager.dart';
 import '../../../../../../core/enums/shared_enums.dart';
@@ -13,8 +18,11 @@ import '../../../../../../feature/service/global_services.dart/work_space_servic
 
 class WorkOrderDetailServiceProvider extends ChangeNotifier {
   final WorkSpaceServiceRepositoryImpl workSpaceService = Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
+  final WorkSpaceDetail detail;
+  WorkOrderDetailServiceProvider({required this.detail});
 
   bool _isEffortListFetched = false;
+
   bool get isEffortListFetched => _isEffortListFetched;
 
   bool _isSparepartsFetched = false;
@@ -47,8 +55,27 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
   List<WorkSpaceDocuments> _workSpaceDocuments = [];
   List<WorkSpaceDocuments> get workSpaceDocuments => _workSpaceDocuments;
 
-  void deleteDocumant(BuildContext context) async {
-    print('delete clicked');
+  void deleteNode(BuildContext context, String labelId, String taskId, TaskNodeEnums labelType) async {
+    String userToken = await SharedManager().getString(SharedEnum.userToken);
+
+    final response = await workSpaceService.deleteNodeFromTask(userToken, taskId, labelId, labelType);
+
+    if (response == true) {
+      if (labelType == TaskNodeEnums.effort) {
+        fetchEfforts(taskId, detail.state?.nextStates?.first.id.toString() ?? '');
+        snackBar(context, LocaleKeys.DeleteEffort.tr(), 'success');
+      }
+      if (labelType == TaskNodeEnums.spare) {
+        fetchSpareparts(taskId);
+        snackBar(context, LocaleKeys.DeleteMaterial.tr(), 'success');
+      }
+      if (labelType == TaskNodeEnums.document) {
+        fetchDocumants(taskId);
+        snackBar(context, LocaleKeys.DeleteDocument.tr(), 'success');
+      }
+    } else if (response == false) {
+      snackBar(context, LocaleKeys.DeleteError.tr(), 'error');
+    }
   }
 
   void update() {
