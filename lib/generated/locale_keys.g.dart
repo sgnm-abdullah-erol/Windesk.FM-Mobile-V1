@@ -20,6 +20,7 @@ class LocaleKeys {
   static const String NoDescription = 'NoDescription';
   static const String NoCreatedAtTime = 'NoCreatedAtTime';
   static const String NoReferenceId = 'NoReferenceId';
+  static const String Delete = 'Delete';
 
   // main title
   static const String AppTitle = 'AppTitle';
@@ -214,7 +215,8 @@ class LocaleKeys {
   static const String MaterialAmount = 'MaterialAmount';
   static const String MaterialUnit = 'MaterialUnit';
   static const String Subject = 'Subject';
-  static const String DeleteProccess = 'DeleteProccess';
+  static const String DeleteWorkOrderItem = 'DeleteWorkOrderItem';
+  static const String DeleteWorkOrderItemLabel = 'DeleteWorkOrderItemLabel';
   // // static String const ----------MAİNTENANCE---------- = '----------MAİNTENANCE----------';
   // static const Manage Check List = 'Manage Check List';
   // static const Add Check List = 'Add Check List';

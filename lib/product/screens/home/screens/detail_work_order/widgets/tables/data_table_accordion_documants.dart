@@ -6,6 +6,8 @@ import 'package:internet_file/internet_file.dart';
 import 'package:internet_file/storage_io.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:vm_fm_4/feature/components/alert_dialog/work_order_delete_item_alert_dialog.dart';
+import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/provider/work_order_detail_service_provider.dart';
 
 import '../../../../../../../core/constants/other/app_icons.dart';
 import '../../../../../../../core/constants/other/colors.dart';
@@ -15,9 +17,9 @@ import '../../../../../../../generated/locale_keys.g.dart';
 import '../../provider/download_provider.dart';
 
 class DataTableAccordionDocumants extends StatelessWidget {
-  DataTableAccordionDocumants({super.key, required this.delete, required this.data});
+  DataTableAccordionDocumants({super.key, required this.data, required this.provider});
 
-  final Function delete;
+  final WorkOrderDetailServiceProvider provider;
   final List<WorkSpaceDocuments> data;
 
   final List<String> _labelList = [
@@ -74,7 +76,16 @@ class DataTableAccordionDocumants extends StatelessWidget {
               ),
               DataCell(
                 IconButton(
-                  onPressed: () => delete(),
+                  onPressed: () async {
+                    final response =
+                        await WorkOrderDeleteItemAlertDialog.deleteWorkOrderAlertDialog(context, DeleteItemType.documant, data[i].id ?? 0);
+                    if (response == true) {
+                      // ignore: use_build_context_synchronously
+                      provider.deleteDocumant(context);
+                    } else {
+                      print("false");
+                    }
+                  },
                   icon: Icon(AppIcons.delete, color: APPColors.Login.red),
                 ),
               ),

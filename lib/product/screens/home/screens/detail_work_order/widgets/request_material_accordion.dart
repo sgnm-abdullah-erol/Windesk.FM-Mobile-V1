@@ -68,7 +68,7 @@ class RequestMaterialAccordion extends StatelessWidget {
               return value.isLoading
                   ? const Center(child: CircularProgressIndicator())
                   : DataTableAccordionRequstedMaterials(
-                      delete: () {},
+                      provider: value,
                       data: value.woRequestedMaterialsList,
                     );
             },
@@ -96,7 +96,7 @@ class RequestMaterialAccordion extends StatelessWidget {
               return value.isLoading
                   ? const Center(child: CircularProgressIndicator())
                   : DataTableAccordionRequstedMaterials(
-                      delete: () {},
+                      provider: value,
                       data: value.woRequestedApprovedMaterialsList,
                     );
             },

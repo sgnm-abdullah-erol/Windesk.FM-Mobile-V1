@@ -82,7 +82,7 @@ class AddEffortsAccordion extends StatelessWidget {
                     : null;
               });
 
-              return value.isLoading ? const CustomLoadingIndicator() : DataTableAccordionEfforts(delete: () {}, data: value.woEffortList ?? []);
+              return value.isLoading ? const CustomLoadingIndicator() : DataTableAccordionEfforts(data: value.woEffortList ?? [], provider: value);
             },
           ),
         )

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../extensions/context_extension.dart';
 
 import '../../../core/constants/other/colors.dart';
+import '../../extensions/context_extension.dart';
 
 class CustomExitButton extends StatelessWidget {
   const CustomExitButton({required this.title, required this.onTap, super.key});

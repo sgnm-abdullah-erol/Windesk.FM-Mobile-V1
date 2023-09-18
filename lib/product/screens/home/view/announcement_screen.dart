@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/link.dart';
 
-import '../../../../feature/components/buttons/custom_exit_button.dart';
 import '../../../../core/constants/other/colors.dart';
+import '../../../../feature/components/buttons/custom_exit_button.dart';
 import '../../../../feature/models/home_page_models/announcement_model.dart';
 import '../provider/home_provider.dart';
 

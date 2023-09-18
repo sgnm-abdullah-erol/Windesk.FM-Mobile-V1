@@ -66,7 +66,7 @@ class AddMaterialAccordion extends StatelessWidget {
               return value.isLoading
                   ? const Center(child: CircularProgressIndicator())
                   : DataTableAccordionSpareparts(
-                      delete: () {},
+                      provider: value,
                       data: value.woSpareparts ?? [],
                     );
             }),

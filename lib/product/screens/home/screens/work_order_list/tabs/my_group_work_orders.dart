@@ -41,10 +41,10 @@ class _MyGroupWorkOrdersState extends State<MyGroupWorkOrders> {
               width: context.width,
               child: ListView.builder(
                 itemCount: widget.provider.workSpaceMyGroupDemandList?.children?.length ?? 0,
-                itemBuilder: (context, index) {
+                itemBuilder: (context, int index) {
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                    child: _custom(index),
+                    child: _customPreferAccordion(index),
                   );
                 },
               ),
@@ -52,11 +52,11 @@ class _MyGroupWorkOrdersState extends State<MyGroupWorkOrders> {
     );
   }
 
-  Widget _custom(index) {
+  Widget _customPreferAccordion(int index) {
     if (widget.provider.workSpaceMyGroupDemandList?.children?[index].children != null) {
       return CustomBaseAccordion(list: [_accordionSection(index)]);
     } else {
-      return CustomBaseAccordionSections().rootAccordionSection(
+      return CustomBaseAccordionSections.rootAccordionSection(
         context,
         widget.provider.workSpaceMyGroupDemandList?.children?[index].name ?? '',
         widget.provider.workSpaceMyGroupDemandList?.children?[index].taskCount.toString() ?? '',
@@ -111,7 +111,7 @@ class _MyGroupWorkOrdersState extends State<MyGroupWorkOrders> {
         headerBackgroundColorOpened: APPColors.Main.black,
         children: [
           for (i = 0; i < (widget.provider.workSpaceMyGroupDemandList?.children?[index].children?.length.toInt() ?? 0); i++) ...{
-            CustomBaseAccordionSections().baseAccordionSection(
+            CustomBaseAccordionSections.baseAccordionSection(
               context,
               widget.provider.workSpaceMyGroupDemandList?.children?[index].children?[i].name ?? '',
               widget.provider.workSpaceMyGroupDemandList?.children?[index].children?[i].taskCount.toString() ?? '',
@@ -119,7 +119,7 @@ class _MyGroupWorkOrdersState extends State<MyGroupWorkOrders> {
             ),
           },
           if (needExtra == true && i == (widget.provider.workSpaceMyGroupDemandList?.children?[index].children?.length.toInt() ?? 0)) ...{
-            CustomBaseAccordionSections().baseAccordionSection(
+            CustomBaseAccordionSections.baseAccordionSection(
               context,
               widget.provider.workSpaceMyGroupDemandList?.children?[index].name ?? '',
               count.toString(),

@@ -6,11 +6,13 @@ import '../../../../../../../core/constants/other/colors.dart';
 import '../../../../../../../feature/extensions/context_extension.dart';
 import '../../../../../../../feature/models/work_space/work_space_requirement_materials_list.dart';
 import '../../../../../../../generated/locale_keys.g.dart';
+import '../../provider/work_order_detail_service_provider.dart';
 
 class DataTableAccordionRequstedMaterials extends StatelessWidget {
-  DataTableAccordionRequstedMaterials({super.key, required this.delete, required this.data});
+  DataTableAccordionRequstedMaterials({super.key, required this.data, required this.provider});
 
-  final Function delete;
+  final WorkOrderDetailServiceProvider provider;
+
   final List<String> _labelList = [
     LocaleKeys.DataTableID.tr(),
     LocaleKeys.DataTableName.tr(),
@@ -51,7 +53,7 @@ class DataTableAccordionRequstedMaterials extends StatelessWidget {
               DataCell(Text(data[i].totalAmount.toString(), style: _cellTextStyle(context))),
               DataCell(
                 IconButton(
-                  onPressed: () => delete(),
+                  onPressed: () async {},
                   icon: Icon(AppIcons.delete, color: APPColors.Login.red),
                 ),
               ),

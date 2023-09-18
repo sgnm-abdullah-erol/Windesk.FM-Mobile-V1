@@ -2,22 +2,22 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
-import '../../../generated/locale_keys.g.dart';
 
-import '../../../product/screens/home/screens/work_order_list/provider/work_order_list_provider.dart';
-import '../../../product/screens/home/screens/work_order_list/provider/work_order_pendiks_provider.dart';
 import '../../../core/constants/other/colors.dart';
 import '../../../core/constants/other/snackbar_strings.dart';
 import '../../../core/constants/style/border_radius.dart';
 import '../../../core/constants/style/box_decorations.dart';
 import '../../../core/constants/style/custom_paddings.dart';
 import '../../../core/constants/style/font_sizes.dart';
+import '../../../generated/locale_keys.g.dart';
+import '../../../product/screens/home/screens/work_order_list/provider/work_order_list_provider.dart';
+import '../../../product/screens/home/screens/work_order_list/provider/work_order_pendiks_provider.dart';
 import '../../extensions/context_extension.dart';
 import '../../extensions/date_string_extension.dart';
 import '../../models/work_space/work_space_appendings.dart';
-import '../buttons/custom_half_buttons.dart';
 import '../alert_dialog/wo_wait_accept_modal_alert.dart';
 import '../alert_dialog/wo_wait_reject_modal_alert.dart';
+import '../buttons/custom_half_buttons.dart';
 import '../snackBar/snackbar.dart';
 
 class CustomPendingCardUndetail extends StatelessWidget {

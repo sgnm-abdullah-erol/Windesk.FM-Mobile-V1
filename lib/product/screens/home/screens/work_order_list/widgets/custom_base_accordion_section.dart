@@ -7,7 +7,7 @@ import '../../../../../../core/route/app_route.gr.dart';
 import '../../../../../../feature/extensions/context_extension.dart';
 
 class CustomBaseAccordionSections {
-  AccordionSection baseAccordionSection(BuildContext context, String header, String taskCount, String requestId) {
+  static AccordionSection baseAccordionSection(BuildContext context, String header, String taskCount, String requestId) {
     return AccordionSection(
       headerPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       headerBackgroundColor: APPColors.Accent.black,
@@ -29,7 +29,7 @@ class CustomBaseAccordionSections {
     );
   }
 
-  AccordionSection rootAccordionSection(BuildContext context, String header, String taskCount, String requestId) {
+  static AccordionSection rootAccordionSection(BuildContext context, String header, String taskCount, String requestId) {
     return AccordionSection(
       headerPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       headerBackgroundColor: APPColors.Accent.black,

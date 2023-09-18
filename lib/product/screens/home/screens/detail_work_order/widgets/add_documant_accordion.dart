@@ -85,12 +85,7 @@ class AddDocumantAccordion extends StatelessWidget {
                     : null;
               });
 
-              return value.isLoading
-                  ? const CustomLoadingIndicator()
-                  : DataTableAccordionDocumants(
-                      delete: () {},
-                      data: value.workSpaceDocuments,
-                    );
+              return value.isLoading ? const CustomLoadingIndicator() : DataTableAccordionDocumants(provider: value, data: value.workSpaceDocuments);
             },
           ),
         )

@@ -6,11 +6,14 @@ import '../../../../../../../core/constants/other/colors.dart';
 import '../../../../../../../feature/extensions/context_extension.dart';
 import '../../../../../../../feature/models/work_space/work_space_spareparts.dart';
 import '../../../../../../../generated/locale_keys.g.dart';
+import '../../provider/work_order_detail_service_provider.dart';
 
 class DataTableAccordionSpareparts extends StatelessWidget {
-  DataTableAccordionSpareparts({super.key, required this.delete, required this.data});
+  DataTableAccordionSpareparts({super.key, required this.data, required this.provider});
 
-  final Function delete;
+  final List<WorkSpaceSpareparts> data;
+  final WorkOrderDetailServiceProvider provider;
+
   final List<String> _labelList = [
     LocaleKeys.DataTableID.tr(),
     LocaleKeys.DataTableMaterial.tr(),
@@ -18,8 +21,6 @@ class DataTableAccordionSpareparts extends StatelessWidget {
     LocaleKeys.DataTableName.tr(),
     LocaleKeys.DataTableDelete.tr(),
   ];
-
-  final List<WorkSpaceSpareparts> data;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,7 @@ class DataTableAccordionSpareparts extends StatelessWidget {
               DataCell(Text(data[i].user ?? "", style: _cellTextStyle(context))),
               DataCell(
                 IconButton(
-                  onPressed: () => delete(),
+                  onPressed: () async {},
                   icon: Icon(AppIcons.delete, color: APPColors.Login.red),
                 ),
               ),

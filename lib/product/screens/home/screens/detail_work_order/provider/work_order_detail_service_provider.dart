@@ -47,6 +47,10 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
   List<WorkSpaceDocuments> _workSpaceDocuments = [];
   List<WorkSpaceDocuments> get workSpaceDocuments => _workSpaceDocuments;
 
+  void deleteDocumant(BuildContext context) async {
+    print('delete clicked');
+  }
+
   void update() {
     notifyListeners();
   }

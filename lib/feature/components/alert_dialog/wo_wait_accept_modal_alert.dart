@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import '../../../generated/locale_keys.g.dart';
 
 import '../../../core/constants/style/border_radius.dart';
+import '../../../generated/locale_keys.g.dart';
 
 class WoWaitAcceptModalAlert {
   Future<bool?> showAlertDialog(BuildContext context, String textData, String title) async {
