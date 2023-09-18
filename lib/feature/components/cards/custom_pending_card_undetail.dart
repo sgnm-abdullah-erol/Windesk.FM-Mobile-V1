@@ -42,6 +42,7 @@ class CustomPendingCardUndetail extends StatelessWidget {
               SchedulerBinding.instance.addPostFrameCallback(
                 (timeStamp) {
                   if (value.isTaskStateChange) {
+                    // TODO LOCALIZATION
                     snackBar(context, '${SnackbarStrings.taskStateChange} Yeni görev ${value.selectedTaskState}', 'success');
                   }
                 },
@@ -133,23 +134,26 @@ class _Content extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label.tr(), style: context.bodyMedium).tr(),
-        Text(giveFormat ? date.splitString(date) : date.splitStringSecond(date), style: context.bodyMedium).tr(),
+        Text(label.tr(), style: context.bodySmall.copyWith(color: APPColors.Main.black)).tr(),
+        Text(giveFormat ? date.splitString(date) : date.splitStringSecond(date),
+            style: context.labelMedium.copyWith(
+              color: APPColors.Main.black,
+            )).tr(),
       ],
     );
   }
 
   Widget _desc(BuildContext context) {
-    return Text(pendiks.task?.description ?? '', style: context.bodyMedium);
+    return Text(pendiks.task?.description ?? '', style: context.labelMedium.copyWith(color: APPColors.Secondary.black));
   }
 
   Column _woLocationText(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(pendiks.workspace?.owner ?? '', style: context.bodyMedium),
+        Text(pendiks.workspace?.owner ?? '', style: context.labelMedium.copyWith(color: APPColors.Secondary.black)),
         const SizedBox(height: 5),
-        Text(pendiks.workspace?.name ?? '', style: context.bodyMedium),
+        Text(pendiks.workspace?.name ?? '', style: context.labelMedium.copyWith(color: APPColors.Secondary.black)),
       ],
     );
   }
