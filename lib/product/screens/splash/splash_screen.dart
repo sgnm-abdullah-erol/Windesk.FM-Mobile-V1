@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/constants/paths/asset_paths.dart';
+import '../../../core/route/app_route.gr.dart';
 import '../../../feature/extensions/context_extension.dart';
 import '../../../feature/global_providers/global_provider.dart';
-import '../../../core/route/app_route.gr.dart';
 import 'splash_provider.dart';
 
 @RoutePage()

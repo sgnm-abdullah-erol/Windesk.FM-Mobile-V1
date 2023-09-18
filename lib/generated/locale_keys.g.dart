@@ -214,6 +214,7 @@ class LocaleKeys {
   static const String MaterialAmount = 'MaterialAmount';
   static const String MaterialUnit = 'MaterialUnit';
   static const String Subject = 'Subject';
+  static const String DeleteProccess = 'DeleteProccess';
   // // static String const ----------MAİNTENANCE---------- = '----------MAİNTENANCE----------';
   // static const Manage Check List = 'Manage Check List';
   // static const Add Check List = 'Add Check List';

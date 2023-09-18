@@ -1,10 +1,10 @@
 import 'package:accordion/accordion_section.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import '../../../../../../feature/extensions/context_extension.dart';
-import '../../../../../../core/constants/other/colors.dart';
 
+import '../../../../../../core/constants/other/colors.dart';
 import '../../../../../../core/route/app_route.gr.dart';
+import '../../../../../../feature/extensions/context_extension.dart';
 
 class CustomBaseAccordionSections {
   AccordionSection baseAccordionSection(BuildContext context, String header, String taskCount, String requestId) {

@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+
 import 'asset_document_model.dart';
 import 'asset_image_model.dart';
 

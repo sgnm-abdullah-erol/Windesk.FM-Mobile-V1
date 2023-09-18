@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../core/route/app_route.gr.dart';
 import '../../../../../feature/components/appbar/custom_main_appbar.dart';
 import '../../../../../feature/components/cards/custom_workorder_list_card.dart';
-import '../../../../../core/route/app_route.gr.dart';
 import '../work_order_list/widgets/custom_loading_indicator.dart';
 import 'work_order_group_detail_provider.dart';
 

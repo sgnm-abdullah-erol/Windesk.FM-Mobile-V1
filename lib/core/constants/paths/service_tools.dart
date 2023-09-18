@@ -19,30 +19,31 @@ class ServiceTools {
 
   static Url get url {
     if (_isProduction) {
-      return Url(
+      return const Url(
         facility_url: "https://facility-server.ifm.gov.tr",
         users_url: "https://user-server.ifm.gov.tr",
         asset_url: "https://asset-server.ifm.gov.tr",
         workorder_url: "https://workorder-server.ifm.gov.tr",
       );
     } else {
-      return Url(
-        facility_url: "http://localhost:3000",
-        users_url: "http://localhost:3012",
-        asset_url: "http://localhost:3014",
-        workorder_url: "http://localhost:3015",
+      return const Url(
+        facility_url: "http://10.0.2.2:3000",
+        users_url: "http://10.0.2.2:3012",
+        asset_url: "http://10.0.2.2:3014",
+        workorder_url: "http://10.0.2.2:3015",
       );
     }
   }
 }
 
+@immutable
 class Url {
   final String facility_url;
   final String users_url;
   final String asset_url;
   final String workorder_url;
 
-  Url({
+  const Url({
     required this.facility_url,
     required this.users_url,
     required this.asset_url,
