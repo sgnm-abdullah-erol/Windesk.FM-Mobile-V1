@@ -39,10 +39,6 @@ class AddEffortsAccordion extends StatelessWidget {
           contentVerticalPadding: 0,
           contentBorderColor: APPColors.Main.white,
           rightIcon: const Icon(AppIcons.arrowDown, size: 0),
-<<<<<<< HEAD
-          // flipRightIconIfOpen: false,
-=======
->>>>>>> feature
           leftIcon: Icon(AppIcons.add, color: APPColors.Main.white),
           header: Text(LocaleKeys.AddEfforts, style: context.labelMedium.copyWith(color: APPColors.Main.white)).tr(),
           sectionOpeningHapticFeedback: SectionHapticFeedback.none,
