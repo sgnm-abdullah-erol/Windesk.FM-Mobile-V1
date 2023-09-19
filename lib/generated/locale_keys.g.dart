@@ -48,6 +48,9 @@ class LocaleKeys {
   static const String EmptyPdfPath = 'EmptyPdfPath';
   static const String EmptyImagePath = 'EmptyImagePath';
 
+  static const String NextStateLabel1 = 'NextStateLabel1';
+  static const String NextStateLabel2 = 'NextStateLabel2';
+
   // main title
   static const String AppTitle = 'AppTitle';
   static const String CaseSlaList = 'CaseSlaList';

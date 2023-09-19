@@ -40,6 +40,8 @@
 	"EmptyRequestMaterialFields": "Please Fill All Request Material Fields",
 	"EmptyPdfPath": "Please Select Pdf",
 	"EmptyImagePath": "Please Select Image",
+	"NextStateLabel1": "Are you sure you want to change the instant status of the work order to ",
+	"NextStateLabel2": " ?",
 	"----------------HINT AND BUTTON TEXTS----------": "-----------HINT AND BUTTON TEXTS--------------",
 	"HintUserName": "User Name",
 	"HintPassword": "Password",

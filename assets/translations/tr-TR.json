@@ -40,6 +40,8 @@
 	"EmptyRequestMaterialFields": "Malzeme adı, istenen miktar ve birim boş olamaz.",
 	"EmptyPdfPath": "Pdf adresi boş olamaz.",
 	"EmptyImagePath": "Fotoğraf adresi boş olamaz.",
+	"NextStateLabel1": "İş emrinin anlık durumunu ",
+	"NextStateLabel2": " olarak değiştirmek istediğinize emin misiniz?",
 	"----------------HINT AND BUTTON TEXTS----------": "-----------HINT AND BUTTON TEXTS--------------",
 	"HintUserName": "Kullanıcı Adı",
 	"HintPassword": "Parola",
