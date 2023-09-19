@@ -55,7 +55,7 @@ class _DescField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFieldsInput(
-      labelText: LocaleKeys.EnterDescription,
+      labelText: LocaleKeys.EnterDescription.tr(),
       onChangedFunction: (val) => provider.changeDesc,
     );
   }

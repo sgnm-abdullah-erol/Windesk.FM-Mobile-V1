@@ -80,7 +80,7 @@ class _Description extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 4.0),
       child: TextFieldsInput(
         onChangedFunction: (val) => provider.setDesc,
-        labelText: LocaleKeys.EnterDescription,
+        labelText: LocaleKeys.EnterDescription.tr(),
       ),
     );
   }

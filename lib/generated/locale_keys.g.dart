@@ -22,6 +22,32 @@ class LocaleKeys {
   static const String NoReferenceId = 'NoReferenceId';
   static const String Delete = 'Delete';
 
+  // static const ----------SNACKBAR---------- = '----------SNACKBAR----------;
+  static const String NoInternetConnection = 'NoInternetConnection';
+  static const String LoginError = 'LoginError';
+  static const String LogoutSuccess = 'LogoutSuccess';
+  static const String LogoutError = 'LogoutError';
+  static const String LoginEmptyError = 'LoginEmptyError';
+  static const String LoginSuccess = 'LoginSuccess';
+
+  static const String EffortAdded = 'EffortAdded';
+  static const String MaterialAdded = 'MaterialAdded';
+  static const String MaterialRequested = 'MaterialRequested';
+  static const String TaskStateChange = 'TaskStateChange';
+  static const String TakeItOnMeSuccess = 'TakeItOnMeSuccess';
+  static const String PdfAdded = 'PdfAdded';
+  static const String ImageAdded = 'ImageAdded';
+  static const String FileDownloaded = 'FileDownloaded';
+  static const String FileNotDownloaded = 'FileNotDownloaded';
+  static const String NewTask = 'NewTask';
+
+  static const String WoCreate = 'WoCreate';
+  static const String EmptyEffortFields = 'EmptyEffortFields';
+  static const String EmptyMaterialWantedAmount = 'EmptyMaterialWantedAmount';
+  static const String EmptyRequestMaterialFields = 'EmptyRequestMaterialFields';
+  static const String EmptyPdfPath = 'EmptyPdfPath';
+  static const String EmptyImagePath = 'EmptyImagePath';
+
   // main title
   static const String AppTitle = 'AppTitle';
   static const String CaseSlaList = 'CaseSlaList';

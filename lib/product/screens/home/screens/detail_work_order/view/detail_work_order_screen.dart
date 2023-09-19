@@ -11,7 +11,6 @@ import 'package:vm_fm_4/generated/locale_keys.g.dart';
 
 import '../../../../../../core/constants/other/app_icons.dart';
 import '../../../../../../core/constants/other/colors.dart';
-import '../../../../../../core/constants/other/snackbar_strings.dart';
 import '../../../../../../core/constants/style/border_radius.dart';
 import '../../../../../../feature/components/alert_dialog/wo_wait_accept_modal_alert.dart';
 import '../../../../../../feature/components/appbar/custom_main_appbar.dart';
@@ -48,28 +47,28 @@ class DetailWorkOrderScreen extends StatelessWidget {
         builder: (context, WorkOrderDetailProvider woDetailProvider, child) {
           SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
             if (woDetailProvider.effortAdded) {
-              snackBar(context, SnackbarStrings.effortAdded, 'success');
+              snackBar(context, LocaleKeys.EffortAdded.tr(), 'success');
             }
             if (woDetailProvider.isMaterialAdded) {
-              snackBar(context, SnackbarStrings.materialAdded, 'success');
+              snackBar(context, LocaleKeys.MaterialAdded.tr(), 'success');
             }
             if (woDetailProvider.isMaterialRequested) {
-              snackBar(context, SnackbarStrings.materialRequested, 'success');
+              snackBar(context, LocaleKeys.MaterialRequested.tr(), 'success');
             }
             if (woDetailProvider.isDocumantAdded) {
-              snackBar(context, SnackbarStrings.pdfAdded, 'success');
+              snackBar(context, LocaleKeys.PdfAdded.tr(), 'success');
             }
             if (woDetailProvider.isImageAdded) {
-              snackBar(context, SnackbarStrings.imageAdded, 'success');
+              snackBar(context, LocaleKeys.ImageAdded.tr(), 'success');
             }
 
             if (woDetailProvider.isTaskStateChange) {
-              snackBar(context, '${SnackbarStrings.taskStateChange} Yeni görev ${woDetailProvider.selectedTaskState}', 'success');
+              snackBar(context, '${LocaleKeys.TaskStateChange.tr()} ${LocaleKeys.NewTask.tr()} ${woDetailProvider.selectedTaskState}', 'success');
               context.router.pop<bool>(true);
             }
 
             if (woDetailProvider.takeItOnMeSuccess) {
-              snackBar(context, SnackbarStrings.takeItOnMeSuccess, 'success');
+              snackBar(context, LocaleKeys.TakeItOnMeSuccess.tr(), 'success');
             }
           });
 

@@ -3,7 +3,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../core/constants/other/snackbar_strings.dart';
 import '../../../../core/constants/paths/asset_paths.dart';
 import '../../../../core/constants/style/custom_paddings.dart';
 import '../../../../core/route/app_route.gr.dart';
@@ -33,13 +32,13 @@ class LoginScreen extends StatelessWidget {
         builder: (context, LoginProvider loginProvider, child) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             if (loginProvider.isErrorActive) {
-              snackBar(context, SnackbarStrings.loginError, 'error');
+              snackBar(context, LocaleKeys.LoginError.tr(), 'error');
             }
             if (loginProvider.textFieldEmptyError) {
-              snackBar(context, SnackbarStrings.loginEmptyError, 'error');
+              snackBar(context, LocaleKeys.LogoutError.tr(), 'error');
             }
             if (loginProvider.isLoginSuccess) {
-              snackBar(context, SnackbarStrings.loginSuccess, 'success');
+              snackBar(context, LocaleKeys.LoginSuccess.tr(), 'success');
               context.read<GlobalProvider>().setUserId(loginProvider.userId);
             }
           });

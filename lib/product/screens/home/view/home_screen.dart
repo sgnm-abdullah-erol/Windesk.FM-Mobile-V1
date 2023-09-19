@@ -15,7 +15,6 @@ import 'package:vm_fm_4/product/screens/home/service/home_service_repo_impl.dart
 
 import '../../../../core/constants/other/app_icons.dart';
 import '../../../../core/constants/other/colors.dart';
-import '../../../../core/constants/other/snackbar_strings.dart';
 import '../../../../core/route/app_route.gr.dart';
 import '../../../../feature/components/buttons/custom_circular_home_button.dart';
 import '../../../../feature/components/internet_conneciton/internet_connection_listener.dart';
@@ -57,10 +56,10 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (context, HomeProvider homeProvider, SearchWorkOrderProvider searchWorkOrderProvider, child) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             if (homeProvider.logoutError) {
-              snackBar(context, SnackbarStrings.logoutError, 'error');
+              snackBar(context, LocaleKeys.LogoutError.tr(), 'error');
             }
             if (homeProvider.isUserLogout) {
-              snackBar(context, SnackbarStrings.logoutSuccess, 'success');
+              snackBar(context, LocaleKeys.LogoutSuccess.tr(), 'success');
               context.router.pushAndPopUntil(const LoginScreen(), predicate: (_) => false);
             }
           });

@@ -4,7 +4,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/constants/other/colors.dart';
-import '../../../core/constants/other/snackbar_strings.dart';
 import '../../../core/constants/style/border_radius.dart';
 import '../../../core/constants/style/box_decorations.dart';
 import '../../../core/constants/style/custom_paddings.dart';
@@ -42,8 +41,7 @@ class CustomPendingCardUndetail extends StatelessWidget {
               SchedulerBinding.instance.addPostFrameCallback(
                 (timeStamp) {
                   if (value.isTaskStateChange) {
-                    // TODO LOCALIZATION
-                    snackBar(context, '${SnackbarStrings.taskStateChange} Yeni görev ${value.selectedTaskState}', 'success');
+                    snackBar(context, '${LocaleKeys.TaskStateChange.tr()} ${LocaleKeys.NewTask.tr()} ${value.selectedTaskState}', 'success');
                   }
                 },
               );

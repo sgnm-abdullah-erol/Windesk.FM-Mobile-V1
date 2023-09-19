@@ -4,8 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'package:vm_fm_4/core/constants/other/snackbar_strings.dart';
 import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
+import 'package:vm_fm_4/generated/locale_keys.g.dart';
 
 import '../../../../../../core/constants/paths/service_tools.dart';
 import '../../../../../../core/database/shared_manager.dart';
@@ -362,7 +362,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   void addEffort(BuildContext context) async {
     // service add effort
     if (_startEffortDate.isEmpty || _endEffortDate.isEmpty || _effortDuration.isEmpty || _effortType.isEmpty) {
-      snackBar(context, 'sss', 'error'); //TODO
+      snackBar(context, LocaleKeys.EmptyEffortFields, 'error');
       return;
     }
 
@@ -400,9 +400,10 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
   void addSparepart(BuildContext context, String wantedMaterialAmount, String choosenMaterial, String taskId) async {
     if (wantedMaterialAmount == '0' || wantedMaterialAmount.isEmpty || choosenMaterial.isEmpty) {
-      snackBar(context, 'sss', 'error'); //TODO
+      snackBar(context, LocaleKeys.EmptyMaterialWantedAmount, 'error');
       return;
     }
+
     _isLoading = true;
     notifyListeners();
 
@@ -420,7 +421,6 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
     result.fold(
       (l) => {
-        snackBar(context, SnackbarStrings.materialAdded, 'success'), // TODO
         _isMaterialAdded = true,
       },
       (r) => {
@@ -449,7 +449,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     String taskId,
   ) async {
     if (wantedMaterialAmount == '0' || wantedMaterialAmount.isEmpty || subject.isEmpty || hintAmount.isEmpty || hintAmount == '0') {
-      // TODO ADD SNACKBAR -- ERROR
+      snackBar(context, LocaleKeys.EmptyRequestMaterialFields, 'error');
       return;
     }
 
@@ -499,7 +499,10 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   }
 
   void savePdf(BuildContext context, String pdfPath, String pdfName, String desc, String taskId, String taskKey) async {
-    if (pdfPath.isEmpty) return;
+    if (pdfPath.isEmpty) {
+      snackBar(context, LocaleKeys.EmptyPdfPath, 'error');
+      return;
+    }
     _isLoading = true;
     notifyListeners();
 
@@ -529,7 +532,10 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   }
 
   void saveImage(BuildContext context, String imagePath, String desc, String taskId, String taskKey) async {
-    if (imagePath.isEmpty) return;
+    if (imagePath.isEmpty) {
+      snackBar(context, LocaleKeys.EmptyImagePath, 'error');
+      return;
+    }
     _isLoading = true;
     notifyListeners();
 
