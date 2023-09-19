@@ -115,6 +115,7 @@ class NewOrderScreen extends StatelessWidget {
                               onTap: (String date) {
                                 woCreateProvider.setidate = date;
                               },
+                              initialDate: DateTime.now(),
                             ),
                             widget2: TextFieldTimePicker(
                               label: 'Randevu Saati',

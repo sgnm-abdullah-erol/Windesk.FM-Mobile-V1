@@ -241,7 +241,12 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   void setEffortDescription(String value) => _effortDescription = value;
   void setEffortType(String value) => _effortType = value;
   void setEffortDuration(String value) => _effortDuration = value;
-  void setStartEffortDate(String value) => _startEffortDate = value;
+
+  void setStartEffortDate(String value) {
+    _startEffortDate = value;
+    notifyListeners();
+  }
+
   void setEndEffortDate(String value) => _endEffortDate = value;
 
   // for spareparts

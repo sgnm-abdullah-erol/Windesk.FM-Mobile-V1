@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 
 import '../../../core/constants/other/app_icons.dart';
 
 class TextFieldDatePicker extends StatefulWidget {
-  const TextFieldDatePicker({super.key, required this.label, required this.onTap});
+  const TextFieldDatePicker({super.key, required this.label, required this.onTap, required this.initialDate, this.initialControllerFunction});
 
   final String label;
   final Function onTap;
+  final DateTime initialDate;
+  final Function? initialControllerFunction;
 
   @override
   State<TextFieldDatePicker> createState() => _TextFieldDatePickerState();
@@ -19,20 +22,25 @@ class _TextFieldDatePickerState extends State<TextFieldDatePicker> {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: _controller,
-      style: Theme.of(context).textTheme.bodyMedium,
+      style: context.bodyMedium,
       decoration: InputDecoration(
         labelText: widget.label,
         icon: const Icon(AppIcons.calendarToday),
         hintText: widget.label,
-        hintStyle: Theme.of(context).textTheme.bodyMedium,
-        labelStyle: Theme.of(context).textTheme.bodyMedium,
+        hintStyle: context.bodyMedium,
+        labelStyle: context.bodyMedium,
       ),
       readOnly: true,
       onTap: () async {
-        final DateTime? date = await _datePicker(context);
+        final DateTime? date = await _datePicker(context, widget.initialDate);
+        print('date: ');
+        print(date);
 
         if (date != null) {
           setState(() {
+            if (widget.initialControllerFunction != null) {
+              widget.initialControllerFunction!(date.toLocal().toString());
+            }
             _controller.text = date.toString().split(' ')[0];
           });
         }
@@ -41,11 +49,12 @@ class _TextFieldDatePickerState extends State<TextFieldDatePicker> {
     );
   }
 
-  Future<DateTime?> _datePicker(BuildContext context) {
+  Future<DateTime?> _datePicker(BuildContext context, DateTime initialDate) {
+    print(initialDate);
     return showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2010),
+      firstDate: initialDate,
       lastDate: DateTime.now(),
     );
   }

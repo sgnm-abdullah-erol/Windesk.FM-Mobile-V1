@@ -74,7 +74,7 @@ class _InputButton extends StatelessWidget {
   }
 }
 
-class _Inputs extends StatelessWidget {
+class _Inputs extends StatefulWidget {
   const _Inputs({
     required this.selectedStartDate,
     required this.selectedEndDate,
@@ -90,6 +90,19 @@ class _Inputs extends StatelessWidget {
   final Function selectedDescription;
 
   @override
+  State<_Inputs> createState() => _InputsState();
+}
+
+class _InputsState extends State<_Inputs> {
+  final TextEditingController _initialController = TextEditingController();
+
+  void setInitialController(String value) => setState(() {
+        print('sssssssss');
+        _initialController.text = value;
+        print(_initialController.text);
+      });
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
@@ -97,21 +110,24 @@ class _Inputs extends StatelessWidget {
           flex: 10,
           child: TextFieldDatePicker(
             label: LocaleKeys.StartDate.tr(),
-            onTap: (value) => selectedStartDate(value),
+            onTap: (value) => widget.selectedStartDate(value),
+            initialDate: DateTime(2015),
+            initialControllerFunction: setInitialController,
           ),
         ),
         Expanded(
           flex: 10,
           child: TextFieldDatePicker(
             label: LocaleKeys.EndDate.tr(),
-            onTap: (value) => selectedEndDate(value),
+            onTap: (value) => widget.selectedEndDate(value),
+            initialDate: _initialController.text.isEmpty ? DateTime.now() : DateTime.parse(_initialController.text),
           ),
         ),
         Expanded(
           flex: 10,
           child: TextFieldTimePicker(
             label: LocaleKeys.EffortDuration.tr(),
-            onTap: (value) => selectedEffortDuration(value),
+            onTap: (value) => widget.selectedEffortDuration(value),
           ),
         ),
         SizedBox(height: context.height * 0.02),
@@ -119,7 +135,7 @@ class _Inputs extends StatelessWidget {
           flex: 10,
           child: DropDownInputFields(
             labelText: LocaleKeys.EffortType.tr(),
-            onChangedFunction: (value) => selectedEffortType(value),
+            onChangedFunction: (value) => widget.selectedEffortType(value),
             rightIcon: Icons.arrow_downward,
             dropDownArray: [LocaleKeys.Way.tr(), LocaleKeys.Work.tr()],
           ),
@@ -128,7 +144,7 @@ class _Inputs extends StatelessWidget {
           flex: 10,
           child: TextFieldsInputUnderline(
             hintText: LocaleKeys.EnterDescription.tr(),
-            onChanged: (value) => selectedDescription(value),
+            onChanged: (value) => widget.selectedDescription(value),
           ),
         )
       ],
