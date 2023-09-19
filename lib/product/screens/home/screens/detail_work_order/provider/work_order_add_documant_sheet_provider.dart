@@ -23,9 +23,6 @@ class WorkOrderAddDocumantSheetProvider extends ChangeNotifier {
   bool _isImageAdded = false;
   bool get isImageAdded => _isImageAdded;
 
-  bool _isPdfAdded = false;
-  bool get isPdfAdded => _isPdfAdded;
-
   bool _isPdfPicked = false;
   bool get isPdfPicked => _isPdfPicked;
 
@@ -33,6 +30,7 @@ class WorkOrderAddDocumantSheetProvider extends ChangeNotifier {
   String get pdfPath => _pdfPath;
 
   String _pdfName = '';
+  String get pdfName => _pdfName;
 
   String _desc = '';
   String get desc => _desc;
@@ -45,7 +43,7 @@ class WorkOrderAddDocumantSheetProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void saveImage(String taskId, String taskKey) async {
+  Future<void> saveImage(String taskId, String taskKey) async {
     _isLoading = true;
     notifyListeners();
 
@@ -70,35 +68,6 @@ class WorkOrderAddDocumantSheetProvider extends ChangeNotifier {
 
     Future.delayed(const Duration(seconds: 2), () {
       _isImageAdded = false;
-    });
-  }
-
-  void savePdf(String taskId, String taskKey) async {
-    _isLoading = true;
-    notifyListeners();
-
-    final String token = await SharedManager().getString(SharedEnum.userToken);
-
-    final response = await workSpaceService.saveDocumant(_pdfPath, _pdfName, _desc, token, taskId, taskKey, 'pdf');
-
-    response.fold(
-      (l) => {
-        l
-            ? {
-                _isPdfAdded = true,
-              }
-            : {
-                _isPdfAdded = false,
-              }
-      },
-      (r) => {},
-    );
-
-    _isLoading = false;
-    notifyListeners();
-
-    Future.delayed(const Duration(seconds: 2), () {
-      _isPdfAdded = false;
     });
   }
 

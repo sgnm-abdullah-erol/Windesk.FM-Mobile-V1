@@ -4,6 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:vm_fm_4/core/constants/other/snackbar_strings.dart';
+import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
 
 import '../../../../../../core/constants/paths/service_tools.dart';
 import '../../../../../../core/database/shared_manager.dart';
@@ -13,6 +15,7 @@ import '../../../../../../feature/injection.dart';
 import '../../../../../../feature/models/home_page_models/asset_list_model.dart';
 import '../../../../../../feature/models/work_space/work_space_detail.dart';
 import '../../../../../../feature/models/work_space/work_space_efforts.dart';
+import '../../../../../../feature/models/work_space/work_space_requested_materials_inventory.dart';
 import '../../../../../../feature/models/work_space/work_space_user_inventory.dart';
 import '../../../../../../feature/service/global_services.dart/work_space_service/work_space_service_repository_impl.dart';
 
@@ -70,25 +73,11 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     _userClickedDocumants = false;
   }
 
-  void userClickedEffortsFunction() {
-    _userClickedEfforts = true;
-  }
-
-  void userClickedMaterialFunction() {
-    _userClickedMaterial = true;
-  }
-
-  void userClickedRequestedMaterialFunction() {
-    _userClickedRequestedMaterial = true;
-  }
-
-  void userClickedDocumantsFunction() {
-    _userClickedDocumants = true;
-  }
-
-  void userClickedApprovedRequestedMaterialFunction() {
-    _userClickedRequestedApprovedMaterial = true;
-  }
+  void userClickedEffortsFunction() => _userClickedEfforts = true;
+  void userClickedMaterialFunction() => _userClickedMaterial = true;
+  void userClickedRequestedMaterialFunction() => _userClickedRequestedMaterial = true;
+  void userClickedDocumantsFunction() => _userClickedDocumants = true;
+  void userClickedApprovedRequestedMaterialFunction() => _userClickedRequestedApprovedMaterial = true;
 
   List<String> _workSpaceUserTaskLabels = [];
   List<String> get workSpaceUserTaskLabels => _workSpaceUserTaskLabels;
@@ -222,6 +211,18 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   bool _effortAdded = false;
   bool get effortAdded => _effortAdded;
 
+  bool _isMaterialAdded = false;
+  bool get isMaterialAdded => _isMaterialAdded;
+
+  bool _isMaterialRequested = false;
+  bool get isMaterialRequested => _isMaterialRequested;
+
+  bool _isDocumantAdded = false;
+  bool get isDocumantAdded => _isDocumantAdded;
+
+  bool _isImageAdded = false;
+  bool get isImageAdded => _isImageAdded;
+
   String _startEffortDate = '';
   String get startEffortDate => _startEffortDate;
 
@@ -237,59 +238,11 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   String _effortDescription = '';
   String get effortDescription => _effortDescription;
 
-  void setEffortDescription(String value) {
-    _effortDescription = value;
-  }
-
-  void setEffortType(String value) {
-    _effortType = value;
-  }
-
-  void setEffortDuration(String value) {
-    _effortDuration = value;
-  }
-
-  void setStartEffortDate(String value) {
-    _startEffortDate = value;
-  }
-
-  void setEndEffortDate(String value) {
-    _endEffortDate = value;
-  }
-
-  void addEffort() async {
-    // service add effort
-    String userToken = await SharedManager().getString(SharedEnum.userToken);
-
-    _isLoading = true;
-    notifyListeners();
-
-    final result = await workSpaceService.addWorkOrderEffort(
-      detail.task?.id.toString() ?? '',
-      userToken,
-      _effortDescription,
-      _effortDuration,
-      _startEffortDate,
-      _endEffortDate,
-      _effortType,
-    );
-
-    result.fold(
-      (l) => {
-        _effortAdded = true,
-      },
-      (r) => {
-        _effortAdded = false,
-      },
-    );
-
-    _isLoading = false;
-    notifyListeners();
-
-    Future.delayed(const Duration(seconds: 2), () {
-      _effortAdded = false;
-    });
-  }
+  void setEffortDescription(String value) => _effortDescription = value;
+  void setEffortType(String value) => _effortType = value;
+  void setEffortDuration(String value) => _effortDuration = value;
+  void setStartEffortDate(String value) => _startEffortDate = value;
+  void setEndEffortDate(String value) => _endEffortDate = value;
 
   // for spareparts
   WorkSpaceUserInventory _userInventoryList = const WorkSpaceUserInventory();
@@ -402,5 +355,205 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     _isLoading = false;
 
     notifyListeners();
+  }
+
+  // ADD FONKSIYONLARINI BURAYA EKLE
+
+  void addEffort(BuildContext context) async {
+    // service add effort
+    if (_startEffortDate.isEmpty || _endEffortDate.isEmpty || _effortDuration.isEmpty || _effortType.isEmpty) {
+      snackBar(context, 'sss', 'error'); //TODO
+      return;
+    }
+
+    String userToken = await SharedManager().getString(SharedEnum.userToken);
+
+    _isLoading = true;
+    notifyListeners();
+
+    final result = await workSpaceService.addWorkOrderEffort(
+      detail.task?.id.toString() ?? '',
+      userToken,
+      _effortDescription,
+      _effortDuration,
+      _startEffortDate,
+      _endEffortDate,
+      _effortType,
+    );
+
+    result.fold(
+      (l) => {
+        _effortAdded = true,
+      },
+      (r) => {
+        _effortAdded = false,
+      },
+    );
+
+    _isLoading = false;
+    notifyListeners();
+
+    Future.delayed(const Duration(seconds: 2), () {
+      _effortAdded = false;
+    });
+  }
+
+  void addSparepart(BuildContext context, String wantedMaterialAmount, String choosenMaterial, String taskId) async {
+    if (wantedMaterialAmount == '0' || wantedMaterialAmount.isEmpty || choosenMaterial.isEmpty) {
+      snackBar(context, 'sss', 'error'); //TODO
+      return;
+    }
+    _isLoading = true;
+    notifyListeners();
+
+    String userToken = await SharedManager().getString(SharedEnum.userToken);
+
+    String sparePartId = '';
+    for (var i = 0; i < (_userInventoryList.materials?.length ?? 0); i++) {
+      if (_userInventoryList.materials?[i].properties?.name == choosenMaterial) {
+        sparePartId = _userInventoryList.materials?[i].properties?.referenceId.toString() ?? '';
+        break;
+      }
+    }
+
+    final result = await workSpaceService.addWorkSpaceSpareparts(taskId, userToken, sparePartId, wantedMaterialAmount);
+
+    result.fold(
+      (l) => {
+        snackBar(context, SnackbarStrings.materialAdded, 'success'), // TODO
+        _isMaterialAdded = true,
+      },
+      (r) => {
+        _isMaterialAdded = false,
+      },
+    );
+
+    _isLoading = false;
+    notifyListeners();
+
+    Future.delayed(const Duration(milliseconds: 2000), () {
+      _isMaterialAdded = false;
+      notifyListeners();
+    });
+  }
+
+  void addRequestedMaterial(
+    BuildContext context,
+    List<WorkSpaceRequestedMaterialsInventory> workSpaceRequestedMaterialsInventory,
+    String wantedMaterialAmount,
+    String subject,
+    String hintAmount,
+    String workSpaceId,
+    String choosenMaterial,
+    String description,
+    String taskId,
+  ) async {
+    if (wantedMaterialAmount == '0' || wantedMaterialAmount.isEmpty || subject.isEmpty || hintAmount.isEmpty || hintAmount == '0') {
+      // TODO ADD SNACKBAR -- ERROR
+      return;
+    }
+
+    _isLoading = true;
+    notifyListeners();
+
+    String userToken = await SharedManager().getString(SharedEnum.userToken);
+
+    String materialId = '';
+
+    for (var i = 0; i < workSpaceRequestedMaterialsInventory.length; i++) {
+      if (workSpaceRequestedMaterialsInventory[i].name == choosenMaterial) {
+        materialId = workSpaceRequestedMaterialsInventory[i].id.toString();
+        break;
+      }
+    }
+
+    if (materialId.isEmpty) return;
+
+    await workSpaceService
+        .requestWorkSpaceMaterial(
+          workSpaceId,
+          taskId,
+          userToken,
+          subject,
+          description,
+          wantedMaterialAmount,
+          materialId,
+        )
+        .then(
+          (value) => value.fold(
+            (l) => {
+              _isMaterialRequested = true,
+            },
+            (r) => {
+              _isMaterialRequested = false,
+            },
+          ),
+        );
+
+    _isLoading = false;
+    notifyListeners();
+
+    Future.delayed(const Duration(seconds: 2), () {
+      _isMaterialRequested = false;
+    });
+  }
+
+  void savePdf(BuildContext context, String pdfPath, String pdfName, String desc, String taskId, String taskKey) async {
+    if (pdfPath.isEmpty) return;
+    _isLoading = true;
+    notifyListeners();
+
+    final String token = await SharedManager().getString(SharedEnum.userToken);
+
+    final response = await workSpaceService.saveDocumant(pdfPath, pdfName, desc, token, taskId, taskKey, 'pdf');
+
+    response.fold(
+      (l) => {
+        l
+            ? {
+                _isDocumantAdded = true,
+              }
+            : {
+                _isDocumantAdded = false,
+              }
+      },
+      (r) => {},
+    );
+
+    _isLoading = false;
+    notifyListeners();
+
+    Future.delayed(const Duration(seconds: 2), () {
+      _isDocumantAdded = false;
+    });
+  }
+
+  void saveImage(BuildContext context, String imagePath, String desc, String taskId, String taskKey) async {
+    if (imagePath.isEmpty) return;
+    _isLoading = true;
+    notifyListeners();
+
+    final String token = await SharedManager().getString(SharedEnum.userToken);
+
+    final response = await workSpaceService.saveDocumant(imagePath, '', desc, token, taskId, taskKey, 'image');
+    response.fold(
+      (l) => {
+        l
+            ? {
+                _isImageAdded = true,
+              }
+            : {
+                _isImageAdded = false,
+              }
+      },
+      (r) => {},
+    );
+
+    _isLoading = false;
+    notifyListeners();
+
+    Future.delayed(const Duration(seconds: 2), () {
+      _isImageAdded = false;
+    });
   }
 }

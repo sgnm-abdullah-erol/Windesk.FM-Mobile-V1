@@ -1,10 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/constants/other/colors.dart';
-import '../../../core/constants/other/snackbar_strings.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../../product/screens/home/screens/detail_work_order/provider/work_order_add_documant_sheet_provider.dart';
 import '../../../product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
@@ -12,13 +10,13 @@ import '../../extensions/context_extension.dart';
 import '../buttons/custom_circular_with_icon_button.dart';
 import '../buttons/custom_half_buttons.dart';
 import '../input_fields/text_fields_input.dart';
-import '../snackBar/snackbar.dart';
 
 class AddDocumentsModalBottomSheet extends StatelessWidget {
-  const AddDocumentsModalBottomSheet({super.key, required this.taskId, required this.taskKey});
+  const AddDocumentsModalBottomSheet({super.key, required this.taskId, required this.taskKey, required this.function});
 
   final String taskId;
   final String taskKey;
+  final Function function;
 
   @override
   Widget build(BuildContext context) {
@@ -31,11 +29,6 @@ class AddDocumentsModalBottomSheet extends StatelessWidget {
           create: (context) => WorkOrderAddDocumantSheetProvider(),
           child: Consumer<WorkOrderAddDocumantSheetProvider>(
             builder: (context, value, child) {
-              SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-                if (value.isPdfAdded) {
-                  snackBar(context, SnackbarStrings.pdfAdded, 'success');
-                }
-              });
               return value.isLoading
                   ? const Center(child: CustomLoadingIndicator())
                   : Column(
@@ -43,7 +36,7 @@ class AddDocumentsModalBottomSheet extends StatelessWidget {
                         Expanded(flex: 20, child: _PickPdf(provider: value)),
                         value.isPdfPicked ? Expanded(flex: 20, child: Text(value.pdfPath.split('/').last)) : const SizedBox(),
                         Expanded(flex: 20, child: _DescField(value)),
-                        Expanded(flex: 40, child: _ActionButtons(value, taskId, taskKey)),
+                        Expanded(flex: 40, child: _ActionButtons(value, taskId, taskKey, function)),
                       ],
                     );
             },
@@ -69,8 +62,9 @@ class _DescField extends StatelessWidget {
 }
 
 class _ActionButtons extends StatelessWidget {
-  const _ActionButtons(this.provider, this.taskId, this.taskKey);
+  const _ActionButtons(this.provider, this.taskId, this.taskKey, this.function);
 
+  final Function function;
   final String taskId;
   final String taskKey;
   final WorkOrderAddDocumantSheetProvider provider;
@@ -82,8 +76,8 @@ class _ActionButtons extends StatelessWidget {
       rightTitle: const Text(LocaleKeys.Approve).tr(),
       leftOnPressed: () => Navigator.of(context).pop(),
       rightOnPressed: () {
-        provider.savePdf(taskId, taskKey);
         Navigator.of(context).pop();
+        function(context, provider.pdfPath, provider.pdfName, provider.desc, taskId, taskKey);
       },
     );
   }

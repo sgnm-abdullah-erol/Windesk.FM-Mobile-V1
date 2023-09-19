@@ -1,22 +1,21 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/constants/other/colors.dart';
-import '../../../core/constants/other/snackbar_strings.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../../product/screens/home/screens/detail_work_order/provider/work_order_add_documant_sheet_provider.dart';
 import '../../../product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
 import '../../extensions/context_extension.dart';
 import '../buttons/custom_half_buttons.dart';
 import '../input_fields/text_fields_input.dart';
-import '../snackBar/snackbar.dart';
 
 class AddImageModalBottomSheet extends StatelessWidget {
-  const AddImageModalBottomSheet({super.key, required this.taskId, required this.taskKey});
+  const AddImageModalBottomSheet({super.key, required this.taskId, required this.taskKey, required this.saveImage});
+
   final String taskId;
   final String taskKey;
+  final Function saveImage;
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +28,6 @@ class AddImageModalBottomSheet extends StatelessWidget {
           create: (context) => WorkOrderAddDocumantSheetProvider(),
           child: Consumer<WorkOrderAddDocumantSheetProvider>(
             builder: (context, value, child) {
-              SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-                if (value.isImageAdded) {
-                  snackBar(context, SnackbarStrings.imageAdded, 'success');
-                }
-              });
               return value.isLoading
                   ? const Center(child: CustomLoadingIndicator())
                   : Column(
@@ -42,7 +36,7 @@ class AddImageModalBottomSheet extends StatelessWidget {
                         const SizedBox(height: 10),
                         Expanded(flex: 20, child: _Description(value)),
                         const SizedBox(height: 10),
-                        Expanded(flex: 20, child: _ApproveButton(value, taskId, taskKey)),
+                        Expanded(flex: 20, child: _ApproveButton(value, taskId, taskKey, saveImage)),
                       ],
                     );
             },
@@ -54,9 +48,10 @@ class AddImageModalBottomSheet extends StatelessWidget {
 }
 
 class _ApproveButton extends StatelessWidget {
-  const _ApproveButton(this.provider, this.taskId, this.taskKey);
+  const _ApproveButton(this.provider, this.taskId, this.taskKey, this.saveImage);
 
   final WorkOrderAddDocumantSheetProvider provider;
+  final Function saveImage;
   final String taskId;
   final String taskKey;
 
@@ -66,8 +61,9 @@ class _ApproveButton extends StatelessWidget {
       leftTitle: const Text(LocaleKeys.Cancel).tr(),
       rightTitle: const Text(LocaleKeys.Approve).tr(),
       leftOnPressed: () => Navigator.pop(context),
-      rightOnPressed: () {
-        provider.saveImage(taskId, taskKey);
+      rightOnPressed: () async {
+        Navigator.of(context).pop();
+        saveImage(context, provider.imagePath, provider.desc, taskId, taskKey);
       },
     );
   }

@@ -4,7 +4,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../../../core/constants/other/snackbar_strings.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../../product/screens/home/screens/detail_work_order/provider/work_order_request_material_sheet_provider.dart';
 import '../../../product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
@@ -12,11 +11,11 @@ import '../../extensions/context_extension.dart';
 import '../buttons/custom_half_buttons.dart';
 import '../input_fields/dropdown_input_fields.dart';
 import '../input_fields/text_fields_input_underline.dart';
-import '../snackBar/snackbar.dart';
 
 class RequestMaterialBottomSheet extends StatelessWidget {
-  const RequestMaterialBottomSheet({super.key, required this.taskId, required this.workSpaceId});
+  const RequestMaterialBottomSheet({super.key, required this.taskId, required this.workSpaceId, required this.function});
 
+  final Function function;
   final String taskId;
   final String workSpaceId;
 
@@ -32,10 +31,16 @@ class RequestMaterialBottomSheet extends StatelessWidget {
           child: Consumer<WorkOrderRequestMaterialSheetProvider>(builder: ((context, value, child) {
             SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
               value.isInventoryFetched ? null : value.fetchRequestedMaterials();
-              value.isWorkOrderMaterialRequested ? snackBar(context, SnackbarStrings.materialRequested, 'success') : null;
             });
 
-            return value.isLoading ? const CustomLoadingIndicator() : _BodyWidget(value: value, workSpaceId: workSpaceId, taskId: taskId);
+            return value.isLoading
+                ? const CustomLoadingIndicator()
+                : _BodyWidget(
+                    value: value,
+                    workSpaceId: workSpaceId,
+                    taskId: taskId,
+                    function: function,
+                  );
           })),
         ),
       ),
@@ -44,9 +49,10 @@ class RequestMaterialBottomSheet extends StatelessWidget {
 }
 
 class _BodyWidget extends StatelessWidget {
-  const _BodyWidget({required this.value, required this.workSpaceId, required this.taskId});
+  const _BodyWidget({required this.value, required this.workSpaceId, required this.taskId, required this.function});
 
   final WorkOrderRequestMaterialSheetProvider value;
+  final Function function;
   final String workSpaceId;
   final String taskId;
 
@@ -62,8 +68,18 @@ class _BodyWidget extends StatelessWidget {
             rightTitle: const Text(LocaleKeys.Approve).tr(),
             leftOnPressed: () => Navigator.of(context).pop(),
             rightOnPressed: () {
-              value.addRequestedMaterial(workSpaceId, taskId);
-              Navigator.of(context).pop();
+              Navigator.pop(context);
+              function(
+                context,
+                value.workSpaceRequestedMaterialsInventory,
+                value.wantedMaterialAmount,
+                value.subject,
+                value.hintAmount,
+                workSpaceId,
+                value.choosenMaterial,
+                value.description,
+                taskId,
+              );
             },
           ),
         ),

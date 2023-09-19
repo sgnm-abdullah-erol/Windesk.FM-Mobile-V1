@@ -38,7 +38,7 @@ class AddMaterialAccordion extends StatelessWidget {
           onOpenSection: () async {
             ShowModalBottomSheet().show(
               context,
-              AddMaterialModalBottomSheet(taskId: provider.detail.task?.id.toString() ?? '0'),
+              AddMaterialModalBottomSheet(taskId: provider.detail.task?.id.toString() ?? '0', function: provider.addSparepart),
             );
           },
           content: const SizedBox(height: 0),

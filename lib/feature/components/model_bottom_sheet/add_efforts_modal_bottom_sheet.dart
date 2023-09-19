@@ -67,8 +67,8 @@ class _InputButton extends StatelessWidget {
       rightTitle: const Text(LocaleKeys.Approve).tr(),
       leftOnPressed: () => Navigator.pop(context),
       rightOnPressed: () => {
+        onPressed(context),
         Navigator.pop(context),
-        onPressed(),
       },
     );
   }

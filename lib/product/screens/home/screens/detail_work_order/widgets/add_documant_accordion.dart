@@ -41,6 +41,7 @@ class AddDocumantAccordion extends StatelessWidget {
               AddImageModalBottomSheet(
                 taskId: provider.detail.task?.id.toString() ?? '',
                 taskKey: provider.detail.task?.key ?? '',
+                saveImage: provider.saveImage,
               ),
             );
           },
@@ -61,6 +62,7 @@ class AddDocumantAccordion extends StatelessWidget {
               AddDocumentsModalBottomSheet(
                 taskId: provider.detail.task?.id.toString() ?? '',
                 taskKey: provider.detail.task?.key ?? '',
+                function: provider.savePdf,
               ),
             );
           },

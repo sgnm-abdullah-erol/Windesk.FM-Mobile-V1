@@ -41,6 +41,7 @@ class RequestMaterialAccordion extends StatelessWidget {
               RequestMaterialBottomSheet(
                 taskId: provider.detail.task?.id.toString() ?? '',
                 workSpaceId: provider.detail.workspace?.id.toString() ?? '',
+                function: provider.addRequestedMaterial,
               ),
             );
           },

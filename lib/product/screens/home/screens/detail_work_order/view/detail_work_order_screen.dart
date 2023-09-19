@@ -50,6 +50,19 @@ class DetailWorkOrderScreen extends StatelessWidget {
             if (woDetailProvider.effortAdded) {
               snackBar(context, SnackbarStrings.effortAdded, 'success');
             }
+            if (woDetailProvider.isMaterialAdded) {
+              snackBar(context, SnackbarStrings.materialAdded, 'success');
+            }
+            if (woDetailProvider.isMaterialRequested) {
+              snackBar(context, SnackbarStrings.materialRequested, 'success');
+            }
+            if (woDetailProvider.isDocumantAdded) {
+              snackBar(context, SnackbarStrings.pdfAdded, 'success');
+            }
+            if (woDetailProvider.isImageAdded) {
+              snackBar(context, SnackbarStrings.imageAdded, 'success');
+            }
+
             if (woDetailProvider.isTaskStateChange) {
               snackBar(context, '${SnackbarStrings.taskStateChange} Yeni görev ${woDetailProvider.selectedTaskState}', 'success');
               context.router.pop<bool>(true);

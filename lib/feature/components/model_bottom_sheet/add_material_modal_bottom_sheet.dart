@@ -4,7 +4,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import '../../../core/constants/other/snackbar_strings.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../../product/screens/home/screens/detail_work_order/provider/work_order_add_material_sheet_provider.dart';
 import '../../../product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
@@ -12,12 +11,12 @@ import '../../extensions/context_extension.dart';
 import '../buttons/custom_half_buttons.dart';
 import '../input_fields/dropdown_input_fields.dart';
 import '../input_fields/text_fields_input_underline.dart';
-import '../snackBar/snackbar.dart';
 
 class AddMaterialModalBottomSheet extends StatelessWidget {
-  const AddMaterialModalBottomSheet({super.key, required this.taskId});
+  const AddMaterialModalBottomSheet({super.key, required this.taskId, required this.function});
 
   final String taskId;
+  final Function function;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +30,6 @@ class AddMaterialModalBottomSheet extends StatelessWidget {
           child: Consumer<WorkOrderAddMaterialSheetProvider>(builder: ((context, value, child) {
             SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
               value.isInventoryFetched ? null : value.getUserInventory();
-              value.isMaterialAdded ? snackBar(context, SnackbarStrings.materialAdded, 'success') : null;
             });
 
             return value.isLoading ? const CustomLoadingIndicator() : _bodyWidget(context, value);
@@ -48,12 +46,12 @@ class AddMaterialModalBottomSheet extends StatelessWidget {
         Expanded(
           flex: 70,
           child: CustomHalfButtons(
-            leftTitle: const Text(LocaleKeys.Cancel).tr(),
-            rightTitle: const Text(LocaleKeys.Approve).tr(),
+            leftTitle: Text(LocaleKeys.Cancel.tr()),
+            rightTitle: Text(LocaleKeys.Approve.tr()),
             leftOnPressed: () => Navigator.of(context).pop(),
-            rightOnPressed: () {
-              value.addSparepart(taskId);
+            rightOnPressed: () async {
               Navigator.of(context).pop();
+              function(context, value.wantedMaterialAmount, value.choosenMaterial, taskId);
             },
           ),
         ),
