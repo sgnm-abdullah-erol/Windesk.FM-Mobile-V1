@@ -8,6 +8,12 @@ import '../../../../../../feature/service/global_services.dart/work_space_servic
 class WorkOrderPendiksProvider extends ChangeNotifier {
   final WorkSpaceServiceRepositoryImpl workSpaceService = Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
 
+  bool _isRejected = false;
+  bool get isRejected => _isRejected;
+
+  bool _isApproved = false;
+  bool get isApproved => _isApproved;
+
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
@@ -20,28 +26,31 @@ class WorkOrderPendiksProvider extends ChangeNotifier {
     selectedTaskState = val;
   }
 
-  void changeState(String taskId, String stateId) async {
+  void changeState(String taskId, String stateId, bool isReject) async {
     _isLoading = true;
     notifyListeners();
 
     final token = await SharedManager().getString(SharedEnum.userToken);
-
     final response = await workSpaceService.changeWorkSpaceState(taskId, stateId, token);
 
     response.fold(
       (l) => {
-        _isTaskStateChange = true,
+        if (isReject) _isRejected = true else _isApproved = true,
       },
       (r) => {
         _isTaskStateChange = false,
+        _isApproved = false,
+        _isRejected = false,
       },
     );
 
     _isLoading = false;
     notifyListeners();
 
-    Future.delayed(const Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 2), () {
       _isTaskStateChange = false;
+      _isRejected = false;
+      _isApproved = false;
     });
   }
 }

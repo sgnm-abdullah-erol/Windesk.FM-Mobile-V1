@@ -27,9 +27,6 @@ class WorkOrderListProvider extends ChangeNotifier {
   bool _isMyGroupWorkOrdersDataFetched = false;
   bool get isMyGroupWorkOrdersDataFetched => _isMyGroupWorkOrdersDataFetched;
 
-  bool _isMyPendikWorkOrdersDataFetched = false;
-  bool get isMyPendikWorkOrdersDataFetched => _isMyPendikWorkOrdersDataFetched;
-
   List<WorkSpaceDetail> _myWorkSpaceDetails = [];
   List<WorkSpaceDetail> get myWorkSpaceDetails => _myWorkSpaceDetails;
 
@@ -79,8 +76,6 @@ class WorkOrderListProvider extends ChangeNotifier {
   }
 
   void getMyPendikWorkOrders() async {
-    if (_isMyPendikWorkOrdersDataFetched) return;
-
     _isLoading = true;
     notifyListeners();
 
@@ -91,15 +86,10 @@ class WorkOrderListProvider extends ChangeNotifier {
       result.fold((l) {
         _myPendikWorkSpaceDetails = l;
       }, (r) {});
-
-      _isMyPendikWorkOrdersDataFetched = true;
     }
 
-    Future.delayed(const Duration(seconds: 2), () {
-      _isMyPendikWorkOrdersDataFetched = true;
-      _isLoading = false;
-      notifyListeners();
-    });
+    _isLoading = false;
+    notifyListeners();
   }
 
   void changeTab(int index) {

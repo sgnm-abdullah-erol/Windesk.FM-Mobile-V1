@@ -50,6 +50,8 @@ class LocaleKeys {
 
   static const String NextStateLabel1 = 'NextStateLabel1';
   static const String NextStateLabel2 = 'NextStateLabel2';
+  static const String TaskStateRejected = 'TaskStateRejected';
+  static const String TaskStateApproved = 'TaskStateApproved';
 
   // main title
   static const String AppTitle = 'AppTitle';
@@ -82,7 +84,7 @@ class LocaleKeys {
   static const String TakeItOnMe = 'TakeItOnMe';
   static const String Search = 'Search';
   static const String Clear = 'Clear';
-
+  static const String RejectTaskState = 'RejectTaskState';
   // tabs
   static const String HomeTab = 'HomeTab';
   static const String NewOrderTab = 'NewOrderTab';

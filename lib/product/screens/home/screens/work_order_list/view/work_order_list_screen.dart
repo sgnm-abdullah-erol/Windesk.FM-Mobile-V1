@@ -19,7 +19,9 @@ class WorkOrderListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => WorkOrderListProvider(),
-      child: Consumer(builder: (context, WorkOrderListProvider provider, _) => _BuildScaffold(provider: provider)),
+      child: Consumer(
+        builder: (context, WorkOrderListProvider provider, _) => _BuildScaffold(provider: provider),
+      ),
     );
   }
 }

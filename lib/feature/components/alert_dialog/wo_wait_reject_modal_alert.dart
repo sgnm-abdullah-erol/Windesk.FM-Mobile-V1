@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/constants/other/app_icons.dart';
 import '../../../core/constants/other/colors.dart';
+import '../../../core/constants/style/border_radius.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../extensions/context_extension.dart';
 import '../input_fields/dropdown_input_fields.dart';
@@ -20,7 +21,8 @@ class WoWaitRejectModalAlert {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(LocaleKeys.Warning.tr(), style: context.bodyMedium.copyWith(color: APPColors.Main.red)),
+          shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.mediumBorderRadius),
+          title: Text(LocaleKeys.RejectTaskState.tr(), style: context.bodyMedium.copyWith(color: APPColors.Main.red)),
           content: DropDownInputFields(
             labelText: inputArrayLabelText.tr(),
             onChangedFunction: inputArrayOnChangedFunction,
@@ -29,7 +31,7 @@ class WoWaitRejectModalAlert {
           ),
           actions: [
             TextButton(
-              child: const Text(LocaleKeys.Reject).tr(),
+              child: const Text(LocaleKeys.Cancel).tr(),
               onPressed: () => context.router.pop<bool>(false),
             ),
             TextButton(

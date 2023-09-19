@@ -43,6 +43,14 @@ class CustomPendingCardUndetail extends StatelessWidget {
                   if (value.isTaskStateChange) {
                     snackBar(context, '${LocaleKeys.TaskStateChange.tr()} ${LocaleKeys.NewTask.tr()} ${value.selectedTaskState}', 'success');
                   }
+                  if (value.isApproved) {
+                    snackBar(context, LocaleKeys.TaskStateApproved.tr(), 'success');
+                    provider.getMyPendikWorkOrders();
+                  }
+                  if (value.isRejected) {
+                    snackBar(context, LocaleKeys.TaskStateRejected.tr(), 'success');
+                    provider.getMyPendikWorkOrders();
+                  }
                 },
               );
               return Card(
@@ -191,8 +199,7 @@ class _ActionButtons extends StatelessWidget {
     WoWaitAcceptModalAlert().showAlertDialog(context, nextStateDesc, _approveWorkOrder).then((value) {
       if (value != null) {
         if (value == true) {
-          // TODO : ChangeState, CALISIYOR MU EMIN DEGILIM
-          provider.changeState(pendiks.state?.id.toString() ?? '0', pendiks.state?.nextStates?[0].id.toString() ?? '');
+          provider.changeState(pendiks.task?.id.toString() ?? '0', pendiks.state?.nextStates?.first.id.toString() ?? '', false);
         }
       }
     });
@@ -210,7 +217,7 @@ class _ActionButtons extends StatelessWidget {
         if (value == true) {
           for (var i = 0; i < (pendiks.state?.nextStates?.length ?? 0); i++) {
             if (pendiks.state?.nextStates?[i].name == provider.selectedTaskState) {
-              provider.changeState(pendiks.task?.id.toString() ?? '', pendiks.state?.nextStates?[i].id.toString() ?? '');
+              provider.changeState(pendiks.task?.id.toString() ?? '', pendiks.state?.nextStates?[i].id.toString() ?? '', true);
             }
           }
         }
