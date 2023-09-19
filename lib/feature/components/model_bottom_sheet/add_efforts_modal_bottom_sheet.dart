@@ -97,9 +97,7 @@ class _InputsState extends State<_Inputs> {
   final TextEditingController _initialController = TextEditingController();
 
   void setInitialController(String value) => setState(() {
-        print('sssssssss');
         _initialController.text = value;
-        print(_initialController.text);
       });
 
   @override

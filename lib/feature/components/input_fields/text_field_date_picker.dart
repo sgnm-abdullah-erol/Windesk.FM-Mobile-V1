@@ -33,8 +33,6 @@ class _TextFieldDatePickerState extends State<TextFieldDatePicker> {
       readOnly: true,
       onTap: () async {
         final DateTime? date = await _datePicker(context, widget.initialDate);
-        print('date: ');
-        print(date);
 
         if (date != null) {
           setState(() {
@@ -50,7 +48,6 @@ class _TextFieldDatePickerState extends State<TextFieldDatePicker> {
   }
 
   Future<DateTime?> _datePicker(BuildContext context, DateTime initialDate) {
-    print(initialDate);
     return showDatePicker(
       context: context,
       initialDate: DateTime.now(),
