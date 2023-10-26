@@ -16,7 +16,6 @@ class AuthServiceRepositoryImpl extends AuthServiceRepository {
     @override
     String url = '${ServiceTools.url.users_url}/user/loginMobile';
     String firebaseToken = await SharedManager().getString(SharedEnum.firebaseToken);
-
     try {
       final response = await super.dio.post(
             url,

@@ -46,6 +46,7 @@ class LoginProvider extends ChangeNotifier {
 
   void getRememberInfo() async {
     _userNameController.text = await SharedManager().getString(SharedEnum.userNameLogin);
+    _userName = _userNameController.text;
     notifyListeners();
   }
 
