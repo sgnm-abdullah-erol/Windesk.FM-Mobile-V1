@@ -818,4 +818,31 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       return false;
     }
   }
+
+  @override
+  Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getGroupWorkOrders(String userToken) async {
+    String url =
+        '${ServiceTools.url.workorder_url}/task/workSpace/task/state/List/can/be/assigned/user/pagination/swagger?page=1&limit=8&orderBy=DESC&orderByColumn%5B0%5D=updatedAt';
+    List<WorkSpaceDetail> workSpaceDetailList = [];
+    try {
+      final response = await super.dio.get(
+            url,
+            options: Options(
+              headers: {'authorization': 'Bearer $userToken'},
+            ),
+          );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = response.data;
+        workSpaceDetailList = WorkSpaceDetail.fromJsonList(data);
+
+        return Left(workSpaceDetailList);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+    }
+  }
 }
