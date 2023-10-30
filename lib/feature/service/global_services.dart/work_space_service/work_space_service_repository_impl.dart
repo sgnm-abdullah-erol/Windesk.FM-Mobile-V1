@@ -160,8 +160,9 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   @override
   Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getWorkSpaceDetailsByRequestType(String requestId, int page, String token) async {
     List<WorkSpaceDetail> workSpaceDetailList = [];
+    //TODO test it
     String url =
-        '${ServiceTools.url.workorder_url}/task/mobile/getTasksByRequestType/swagger/$requestId?page=$page&limit=999&orderBy=DESC&orderByColumn=updateAt';
+        '${ServiceTools.url.workorder_url}/task/mobile/getTasksByRequestType/swagger/$requestId?page=$page&limit=999&orderBy=DESC&orderByColumn=updateAt&withSpare=true';
     try {
       final response = await super.dio.get(
             url,
@@ -355,6 +356,8 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
             ),
           );
 
+      super.logger.i(response);
+
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
 
@@ -383,16 +386,30 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     int page,
   ) async {
     List<WorkSpaceRequestedMaterialsInventory> workSpaceRequestedMaterials;
-    String url =
-        '${ServiceTools.url.asset_url}/types/getMobileAllTypesWithMeasurementUnitAndAmount?page=$page&limit=10&orderBy=ASC&orderByColumn=name&superSet=Spare';
+    String url = '${ServiceTools.url.asset_url}/types/getMobileAllTypesWithMeasurementUnitAndAmount';
+
+    print(url);
     try {
       final response = await super.dio.get(
             url,
-            data: {},
+            data: {
+              "options": {
+                "page": 1,
+                "limit": 10000,
+                "orderBy": "ASC",
+                "orderByColumn": "name",
+                "superSet": "All",
+                "withSpare": true,
+              }
+            },
             options: Options(
-              headers: {'authorization': 'Bearer $token'},
+              headers: {
+                'authorization': 'Bearer $token',
+              },
             ),
           );
+
+      super.logger.d(response);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
@@ -799,6 +816,33 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     } catch (error) {
       super.logger.e(error.toString());
       return false;
+    }
+  }
+
+  @override
+  Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getGroupWorkOrders(String userToken) async {
+    String url =
+        '${ServiceTools.url.workorder_url}/task/workSpace/task/state/List/can/be/assigned/user/pagination/swagger?page=1&limit=8&orderBy=DESC&orderByColumn%5B0%5D=updatedAt';
+    List<WorkSpaceDetail> workSpaceDetailList = [];
+    try {
+      final response = await super.dio.get(
+            url,
+            options: Options(
+              headers: {'authorization': 'Bearer $userToken'},
+            ),
+          );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = response.data;
+        workSpaceDetailList = WorkSpaceDetail.fromJsonList(data);
+
+        return Left(workSpaceDetailList);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
     }
   }
 }

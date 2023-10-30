@@ -50,8 +50,9 @@ class AddMaterialModalBottomSheet extends StatelessWidget {
             rightTitle: Text(LocaleKeys.Approve.tr()),
             leftOnPressed: () => Navigator.of(context).pop(),
             rightOnPressed: () async {
-              Navigator.of(context).pop();
-              function(context, value.wantedMaterialAmount, value.choosenMaterial, taskId);
+              // Navigator.of(context).pop();
+              value.addSparepart(context, taskId);
+              // function(context, value.wantedMaterialAmount, value.choosenMaterial, taskId);
             },
           ),
         ),

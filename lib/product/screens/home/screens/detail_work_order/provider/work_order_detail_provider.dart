@@ -104,7 +104,6 @@ class WorkOrderDetailProvider extends ChangeNotifier {
       (r) => {},
     );
 
-    print(detail);
     _setUserTaskLabels();
 
     notifyListeners();
@@ -266,7 +265,6 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     String userToken = await SharedManager().getString(SharedEnum.userToken);
 
     final result = await workSpaceService.getWorkSpaceUserInventory(userToken);
-
     result.fold(
       (l) => {
         _userInventoryList = l,
@@ -407,44 +405,50 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     });
   }
 
-  void addSparepart(BuildContext context, String wantedMaterialAmount, String choosenMaterial, String taskId) async {
-    if (wantedMaterialAmount == '0' || wantedMaterialAmount.isEmpty || choosenMaterial.isEmpty) {
-      snackBar(context, LocaleKeys.EmptyMaterialWantedAmount, 'error');
-      return;
-    }
+  // void addSparepart(BuildContext context, String wantedMaterialAmount, String choosenMaterial, String taskId) async {
+  //   if (wantedMaterialAmount == '0' || wantedMaterialAmount.isEmpty || choosenMaterial.isEmpty) {
+  //     snackBar(context, LocaleKeys.EmptyMaterialWantedAmount, 'error');
+  //     return;
+  //   }
 
-    _isLoading = true;
-    notifyListeners();
+  //   _isLoading = true;
+  //   notifyListeners();
 
-    String userToken = await SharedManager().getString(SharedEnum.userToken);
+  //   String userToken = await SharedManager().getString(SharedEnum.userToken);
+  //   print('AAAAAAAAAAAAAAAAAAA');
+  //   print(choosenMaterial);
+  //   print(_userInventoryList.materials);
+  //   print(workSpaceUserInventoryLabelList);
+  //   print('BBBBBBBBBBBBBBBBBBBBBBBBBBBB');
+  //   String sparePartId = '';
+  //   for (var i = 0; i < (_userInventoryList.materials?.length ?? 0); i++) {
+  //     if (_userInventoryList.materials?[i].properties?.name == choosenMaterial) {
+  //       sparePartId = _userInventoryList.materials?[i].properties?.referenceId.toString() ?? '';
+  //       break;
+  //     }
+  //   }
 
-    String sparePartId = '';
-    for (var i = 0; i < (_userInventoryList.materials?.length ?? 0); i++) {
-      if (_userInventoryList.materials?[i].properties?.name == choosenMaterial) {
-        sparePartId = _userInventoryList.materials?[i].properties?.referenceId.toString() ?? '';
-        break;
-      }
-    }
+  //   print(sparePartId);
 
-    final result = await workSpaceService.addWorkSpaceSpareparts(taskId, userToken, sparePartId, wantedMaterialAmount);
+  //   final result = await workSpaceService.addWorkSpaceSpareparts(taskId, userToken, sparePartId, wantedMaterialAmount);
 
-    result.fold(
-      (l) => {
-        _isMaterialAdded = true,
-      },
-      (r) => {
-        _isMaterialAdded = false,
-      },
-    );
+  //   result.fold(
+  //     (l) => {
+  //       _isMaterialAdded = true,
+  //     },
+  //     (r) => {
+  //       _isMaterialAdded = false,
+  //     },
+  //   );
 
-    _isLoading = false;
-    notifyListeners();
+  //   _isLoading = false;
+  //   notifyListeners();
 
-    Future.delayed(const Duration(milliseconds: 2000), () {
-      _isMaterialAdded = false;
-      notifyListeners();
-    });
-  }
+  //   Future.delayed(const Duration(milliseconds: 2000), () {
+  //     _isMaterialAdded = false;
+  //     notifyListeners();
+  //   });
+  // }
 
   void addRequestedMaterial(
     BuildContext context,

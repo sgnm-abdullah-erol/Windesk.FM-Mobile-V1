@@ -21,6 +21,7 @@ class LocaleKeys {
   static const String NoCreatedAtTime = 'NoCreatedAtTime';
   static const String NoReferenceId = 'NoReferenceId';
   static const String Delete = 'Delete';
+  static const String LoginTextFieldsEmpty = 'LoginTextFieldsEmpty';
 
   // static const ----------SNACKBAR---------- = '----------SNACKBAR----------;
   static const String NoInternetConnection = 'NoInternetConnection';
@@ -252,6 +253,7 @@ class LocaleKeys {
   static const String DeleteEffort = 'DeleteEffort';
   static const String DeleteMaterial = 'DeleteMaterial';
   static const String DeleteDocument = 'DeleteDocument';
+  static const String MaterialError = 'MaterialError';
   // // static String const ----------MAİNTENANCE---------- = '----------MAİNTENANCE----------';
   // static const Manage Check List = 'Manage Check List';
   // static const Add Check List = 'Add Check List';

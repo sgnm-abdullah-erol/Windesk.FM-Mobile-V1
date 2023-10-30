@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
             }
             if (homeProvider.isUserLogout) {
               snackBar(context, LocaleKeys.LogoutSuccess.tr(), 'success');
-              context.router.pushAndPopUntil(const LoginScreen(), predicate: (_) => false);
+              context.router.pushAndPopUntil(LoginScreen(userName: homeProvider.userName), predicate: (_) => false);
             }
           });
           final WorkSpaceServiceRepositoryImpl workSpaceService = Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
@@ -86,17 +86,21 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     FloatingActionButton(
+                      heroTag: "1",
                       onPressed: () {
                         themeProvider.setTheme(!themeProvider.isDark);
                       },
                     ),
-                    FloatingActionButton(onPressed: () {
-                      if (context.locale == const Locale('en', 'US')) {
-                        context.setLocale(const Locale('tr', 'TR'));
-                      } else {
-                        context.setLocale(const Locale('en', 'US'));
-                      }
-                    }),
+                    FloatingActionButton(
+                      heroTag: "2",
+                      onPressed: () {
+                        if (context.locale == const Locale('en', 'US')) {
+                          context.setLocale(const Locale('tr', 'TR'));
+                        } else {
+                          context.setLocale(const Locale('en', 'US'));
+                        }
+                      },
+                    ),
                   ],
                 ),
               );
@@ -187,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> {
         IconButton(
           icon: Icon(AppIcons.powerSettingsOff, size: 35, color: context.theme ? APPColors.Main.white : APPColors.Main.black),
           tooltip: LocaleKeys.HintLogout.tr(),
-          onPressed: () => provider.logOut(),
+          onPressed: () => provider.logOut(context),
         ),
       ],
       centerTitle: true,

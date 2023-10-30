@@ -30,6 +30,9 @@ class WorkOrderListProvider extends ChangeNotifier {
   List<WorkSpaceDetail> _myWorkSpaceDetails = [];
   List<WorkSpaceDetail> get myWorkSpaceDetails => _myWorkSpaceDetails;
 
+  List<WorkSpaceDetail> _myGroupWorkSpaceDetails = [];
+  List<WorkSpaceDetail> get myGroupWorkSpaceDetails => _myGroupWorkSpaceDetails;
+
   WorkSpaceMyGroupDemandList? _workSpaceMyGroupDemandList;
   WorkSpaceMyGroupDemandList? get workSpaceMyGroupDemandList => _workSpaceMyGroupDemandList;
 
@@ -53,6 +56,26 @@ class WorkOrderListProvider extends ChangeNotifier {
 
     _isMyWorkOrdersDataFetched = true;
     _isLoading = false;
+    notifyListeners();
+  }
+
+  void getMyGroupWorkOrdersSecond() async {
+    if (_isMyGroupWorkOrdersDataFetched) return;
+    _isLoading = true;
+    notifyListeners();
+    final String token = await SharedManager().getString(SharedEnum.userToken);
+    if (token.isNotEmpty) {
+      final result = await workSpaceService.getGroupWorkOrders(token);
+
+      result.fold((l) {
+        _myGroupWorkSpaceDetails = l;
+      }, (r) {});
+
+      print(_myGroupWorkSpaceDetails);
+      _isMyGroupWorkOrdersDataFetched = true;
+    }
+    _isLoading = false;
+
     notifyListeners();
   }
 

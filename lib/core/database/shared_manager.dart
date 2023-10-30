@@ -31,7 +31,9 @@ class SharedManager {
     return _sharedPreferences!.getBool(key.toString()) ?? false;
   }
 
-  Future<bool> clearAll() async {
-    return await _sharedPreferences!.clear();
+  Future<void> clearAllWithoutUserName() async {
+    final username = await SharedManager().getString(SharedEnum.userName);
+    await _sharedPreferences!.clear();
+    await SharedManager().setString(SharedEnum.userName, username);
   }
 }

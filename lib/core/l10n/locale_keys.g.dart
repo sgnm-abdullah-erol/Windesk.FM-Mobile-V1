@@ -124,5 +124,5 @@ abstract class LocaleKeys {
   static const String structureName = 'Bulunduğu Yer';
   static const String images = 'Fotoğraflar';
   static const String documents = 'Dökümanlar';
-  static const String assetDetail = 'Asset Detay';
+  static const String assetDetail = 'Asset Detail';
 }
