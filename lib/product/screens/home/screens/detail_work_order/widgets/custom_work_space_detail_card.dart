@@ -34,7 +34,7 @@ class CustomWorkSpaceDetailCard extends StatelessWidget {
             const CustomWoSummaryDivider(),
             const SizedBox(height: 10),
             Text('WO ${workSpaceDetail.task?.id}', style: context.bodySmall.copyWith(color: APPColors.Main.black)),
-            Text('${workSpaceDetail.state?.name}', style: context.labelMedium.copyWith(color: APPColors.Main.black)),
+            // Text('${workSpaceDetail.state?.name}', style: context.labelMedium.copyWith(color: APPColors.Main.black)),
             const CustomWoSummaryDivider(),
             const SizedBox(height: 10),
             Text(workSpaceDetail.task?.description ?? '', style: context.labelMedium.copyWith(color: APPColors.Main.black)),
