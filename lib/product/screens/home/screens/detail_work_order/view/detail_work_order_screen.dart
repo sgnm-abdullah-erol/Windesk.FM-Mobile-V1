@@ -79,9 +79,7 @@ class DetailWorkOrderScreen extends StatelessWidget {
                 ? const CustomLoadingIndicator()
                 : RefreshIndicator(
                     onRefresh: () async {
-                      await Future.delayed(const Duration(seconds: 1), () {
-                        woDetailProvider.setStateToBeginning();
-                      });
+                      await Future.delayed(const Duration(seconds: 1), () => woDetailProvider.setStateToBeginning());
                     },
                     child: SingleChildScrollView(
                       child: Padding(

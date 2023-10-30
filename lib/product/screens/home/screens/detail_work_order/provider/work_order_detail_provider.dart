@@ -104,6 +104,9 @@ class WorkOrderDetailProvider extends ChangeNotifier {
       (r) => {},
     );
 
+    print(detail);
+    _setUserTaskLabels();
+
     notifyListeners();
 
     Future.delayed(const Duration(seconds: 2), () {
@@ -123,6 +126,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     response.fold(
       (l) => {
         _takeItOnMeSuccess = true,
+        _getTaskById(),
       },
       (r) => {
         _errorAccurWhileTakingOnMe = true,
@@ -130,7 +134,6 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     );
 
     _isLoading = false;
-    _getTaskById();
   }
 
   void _setUserTaskLabels() {
