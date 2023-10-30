@@ -232,6 +232,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     } else if (effortType == 'Way') {
       effortType = 'EffortType1';
     }
+
     try {
       final response = await super.dio.post(
             url,
@@ -263,7 +264,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       } else {
         result = false;
       }
-
+      super.logger.i(data);
       return Left(result);
     } catch (e) {
       super.logger.i(e);
@@ -354,8 +355,13 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
             ),
           );
 
+      print('aaaaaaaaaaaaaaa');
+      print(response);
+
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
+
+        super.logger.d(response);
 
         if (data == 'added') {
           result = true;
@@ -363,6 +369,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
           result = false;
         }
 
+        super.logger.i(data);
         return Left(result);
       } else {
         return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
