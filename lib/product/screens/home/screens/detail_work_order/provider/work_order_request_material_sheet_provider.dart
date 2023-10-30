@@ -76,7 +76,6 @@ class WorkOrderRequestMaterialSheetProvider extends ChangeNotifier {
 
     String userToken = await SharedManager().getString(SharedEnum.userToken);
     final result = await workSpaceService.getWorkSpaceRequestedMaterialsInventory(userToken, 1);
-    print(result);
 
     result.fold(
       (l) => {

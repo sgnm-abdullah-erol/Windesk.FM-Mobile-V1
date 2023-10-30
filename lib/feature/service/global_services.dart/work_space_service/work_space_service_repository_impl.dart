@@ -355,9 +355,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
             ),
           );
 
-      print('aaaaaaaaaaaaaaa');
-      print(response);
-
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
 
