@@ -8,9 +8,16 @@ import '../../../../feature/models/auth_models/login_model.dart';
 import '../../../../feature/service/global_services.dart/auth_service/auth_service_repository_impl.dart';
 
 class LoginProvider extends ChangeNotifier {
+  LoginProvider({required this.userNameFromPage}) {
+    getRememberInfo();
+  }
+
+  final String userNameFromPage;
+
   final AuthServiceRepositoryImpl _authService = Injection.getIt.get<AuthServiceRepositoryImpl>();
 
   bool _loading = false;
+
   bool get loading => _loading;
 
   String _userName = '';
@@ -55,18 +62,12 @@ class LoginProvider extends ChangeNotifier {
       _loading = true;
       notifyListeners();
 
-      if (_rememberMe = true) {
-        await SharedManager().setString(SharedEnum.userNameLogin, _userName);
-        await SharedManager().setString(SharedEnum.password, _password);
-      }
-
       final response = await _authService.login(userName, password);
 
       LoginModel loginModel;
 
       response.fold((login) {
         // _setUserName(context);
-
         _isLoginSuccess = true;
         _userId = login.id.toString();
         notifyListeners();
@@ -75,6 +76,8 @@ class LoginProvider extends ChangeNotifier {
           loginModel = login;
           _userToken = loginModel.accessToken ?? '';
           _userTokenName = userName;
+
+          //  save the token to preferences
           _setTokenToPreferences(login.refreshToken ?? '', login.id.toString());
 
           _setField();
@@ -105,10 +108,12 @@ class LoginProvider extends ChangeNotifier {
 
   void _setTokenToPreferences(String refreshToken, String userId) async {
     if (_userToken != '' && _userName != '' && refreshToken != '' && userId != '' && userId != 'null') {
+      await SharedManager().setString(SharedEnum.userNameLogin, _userName);
       await SharedManager().setString(SharedEnum.userToken, _userToken);
       await SharedManager().setString(SharedEnum.userName, _userTokenName);
       await SharedManager().setString(SharedEnum.refreshToken, refreshToken);
       await SharedManager().setString(SharedEnum.userId, userId);
+      await SharedManager().setBool(SharedEnum.rememberMe, _rememberMe);
     }
   }
 
@@ -117,7 +122,6 @@ class LoginProvider extends ChangeNotifier {
   // }
 
   void _setField() {
-    _userName = "";
     _password = "";
   }
 

@@ -1,8 +1,10 @@
 // ignore_for_file: unused_element
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:vm_fm_4/core/enums/shared_enums.dart';
 import 'package:vm_fm_4/feature/exceptions/custom_service_exceptions.dart';
+import 'package:vm_fm_4/feature/global_providers/global_provider.dart';
 import 'package:vm_fm_4/feature/service/global_services.dart/auth_service/auth_service_repository_impl.dart';
 import 'package:vm_fm_4/product/screens/home/service/home_service_repo_impl.dart';
 
@@ -21,6 +23,10 @@ class HomeProvider extends ChangeNotifier {
 
   List<AnnouncementModel> _announcementList = [];
   List<AnnouncementModel> get announcementList => _announcementList;
+
+  String _userName = '';
+  String get userName => _userName;
+
   set setiannouncementList(List<AnnouncementModel> announcementList) {
     _announcementList = announcementList;
     notifyListeners();
@@ -52,7 +58,7 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void logOut() async {
+  void logOut(BuildContext context) async {
     final String refreshToken = await SharedManager().getString(SharedEnum.refreshToken);
     final String token = await SharedManager().getString(SharedEnum.userToken);
 
@@ -60,26 +66,29 @@ class HomeProvider extends ChangeNotifier {
       final response = await _authServiceRepository.logout(refreshToken, token);
       response.fold(
         (l) => {
+          _setUserNameToGlobalProvider(context),
           _isUserLogout = true,
           _clearShared(),
           notifyListeners(),
-          Future.delayed(const Duration(seconds: 1), () {
-            _isUserLogout = false;
-          }),
+          Future.delayed(const Duration(seconds: 1), () => _isUserLogout = false),
         },
         (r) => {
           _isUserLogout = false,
           _logoutError = true,
           notifyListeners(),
-          Future.delayed(const Duration(seconds: 1), () {
-            _logoutError = false;
-          })
+          Future.delayed(const Duration(seconds: 1), () => _logoutError = false),
         },
       );
     }
   }
 
+  void _setUserNameToGlobalProvider(BuildContext context) async {
+    _userName = await SharedManager().getString(SharedEnum.userName);
+    // ignore: use_build_context_synchronously
+    Provider.of<GlobalProvider>(context, listen: false).setUserName(_userName);
+  }
+
   void _clearShared() async {
-    await SharedManager().clearAll();
+    await SharedManager().clearAllWithoutUserName();
   }
 }

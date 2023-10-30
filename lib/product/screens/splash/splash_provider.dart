@@ -80,27 +80,33 @@ class SplashProvider extends ChangeNotifier {
     _getDeviceInformation();
     // _getFirebaseInformation();
 
-    final String userName = await SharedManager().getString(SharedEnum.userName);
+    final bool rememberMe = await SharedManager().getBool(SharedEnum.rememberMe);
 
-    if (userName.isNotEmpty) {
-      final String userToken = await SharedManager().getString(SharedEnum.userToken);
-      await _authService.checkAccessToken(userToken).then((value) {
-        value.fold((l) {
-          if (l.isTokenValid == true) {
-            _isUserAlreadyLoggedIn = true;
-          } else {
+    if (rememberMe) {
+      final String userName = await SharedManager().getString(SharedEnum.userName);
+
+      if (userName.isNotEmpty) {
+        final String userToken = await SharedManager().getString(SharedEnum.userToken);
+        await _authService.checkAccessToken(userToken).then((value) {
+          value.fold((l) {
+            if (l.isTokenValid == true) {
+              _isUserAlreadyLoggedIn = true;
+            } else {
+              _isUserAlreadyLoggedIn = false;
+            }
+          }, (r) {
             _isUserAlreadyLoggedIn = false;
-          }
-        }, (r) {
-          _isUserAlreadyLoggedIn = false;
+          });
         });
-      });
 
-      // set global properties
-      String userName = await SharedManager().getString(SharedEnum.userName);
-      String userId = await SharedManager().getString(SharedEnum.userId);
-      context.read<GlobalProvider>().setUserName(userName);
-      context.read<GlobalProvider>().setUserId(userId);
+        // set global properties
+        String userName = await SharedManager().getString(SharedEnum.userName);
+        String userId = await SharedManager().getString(SharedEnum.userId);
+        context.read<GlobalProvider>().setUserName(userName);
+        context.read<GlobalProvider>().setUserId(userId);
+      } else {
+        _isUserAlreadyLoggedIn = false;
+      }
     } else {
       _isUserAlreadyLoggedIn = false;
     }

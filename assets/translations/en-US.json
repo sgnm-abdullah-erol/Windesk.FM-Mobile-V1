@@ -23,6 +23,7 @@
 	"LoginError": "Cant Login, Please Try Again",
 	"LogoutSuccess": "Logout Success",
 	"LogoutError": "Cant Logout, Please Try Again",
+	"LoginTextFieldsEmpty": "Please Enter Username and Password",
 	"LoginEmptyError": "Please Enter Username and Password",
 	"LoginSuccess": "Login Success",
 	"EffortAdded": "Effort Added",
