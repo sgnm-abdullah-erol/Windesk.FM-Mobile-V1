@@ -1,5 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:vm_fm_4/core/route/app_route.gr.dart';
+import 'package:vm_fm_4/feature/components/cards/custom_workorder_list_card.dart';
 
 import '../../../../../../feature/extensions/context_extension.dart';
 import '../provider/work_order_list_provider.dart';
@@ -34,11 +37,18 @@ class _MyGroupWorkOrdersState extends State<MyGroupWorkOrders> {
               height: context.height,
               width: context.width,
               child: ListView.builder(
-                itemCount: widget.provider.workSpaceMyGroupDemandList?.children?.length ?? 0,
-                itemBuilder: (context, int index) {
-                  return const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                    child: SizedBox(),
+                itemCount: widget.provider.myGroupWorkSpaceDetails.length,
+                itemBuilder: (context, index) {
+                  return CustomWorkOrderListCard(
+                    workSpaceDetail: widget.provider.myGroupWorkSpaceDetails[index],
+                    isButtonVisible: false,
+                    onTap: () {
+                      context.router.push(DetailWorkOrderScreen(workSpaceDetail: widget.provider.myGroupWorkSpaceDetails[index])).then((value) {
+                        if (value == true) {
+                          widget.provider.getMyGroupWorkOrdersSecond();
+                        }
+                      });
+                    },
                   );
                 },
               ),

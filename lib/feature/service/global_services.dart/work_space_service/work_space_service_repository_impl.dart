@@ -388,7 +388,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     List<WorkSpaceRequestedMaterialsInventory> workSpaceRequestedMaterials;
     String url = '${ServiceTools.url.asset_url}/types/getMobileAllTypesWithMeasurementUnitAndAmount';
 
-    print(url);
     try {
       final response = await super.dio.get(
             url,
