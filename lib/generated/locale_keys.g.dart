@@ -252,6 +252,7 @@ class LocaleKeys {
   static const String DeleteEffort = 'DeleteEffort';
   static const String DeleteMaterial = 'DeleteMaterial';
   static const String DeleteDocument = 'DeleteDocument';
+  static const String MaterialError = 'MaterialError';
   // // static String const ----------MAİNTENANCE---------- = '----------MAİNTENANCE----------';
   // static const Manage Check List = 'Manage Check List';
   // static const Add Check List = 'Add Check List';

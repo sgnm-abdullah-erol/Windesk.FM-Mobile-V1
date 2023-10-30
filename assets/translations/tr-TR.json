@@ -17,6 +17,7 @@
 	"WorkOrderSearch": "İş Emri Arama",
 	"NewWorkOrder": "Yeni İş Emri",
 	"Delete": "Sil",
+	"MaterialError": "Malzeme Bulunamadı",
 	"----------------SNACKBAR----------": "-----------SNACKBAR--------------",
 	"NoInternetConnection": "İnternet Bağlantısı Yok",
 	"LoginError": "Giriş Yapılamadı, Lütfen Tekrar Deneyiniz",

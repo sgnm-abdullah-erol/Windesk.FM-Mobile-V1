@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
 
 import '../../../../../../core/database/shared_manager.dart';
 import '../../../../../../core/enums/shared_enums.dart';
@@ -35,6 +36,9 @@ class WorkOrderAddMaterialSheetProvider extends ChangeNotifier {
 
   List<String> workSpaceUserInventoryLabelList = [];
 
+  void setChoosenMaterial(String val) => _choosenMaterial = val;
+  void setWantedMaterialAmount(String val) => _wantedMaterialAmount = wantedMaterialAmount;
+
   void changeWantedMaterialAmount(String value) {
     _wantedMaterialAmount = value;
   }
@@ -69,6 +73,43 @@ class WorkOrderAddMaterialSheetProvider extends ChangeNotifier {
           },
       },
       (r) => {},
+    );
+
+    _isLoading = false;
+    notifyListeners();
+  }
+
+  void addSparepart(BuildContext context, String taskId) async {
+    if (wantedMaterialAmount == '0' || wantedMaterialAmount.isEmpty || choosenMaterial.isEmpty) {
+      snackBar(context, LocaleKeys.EmptyMaterialWantedAmount, 'error');
+      Navigator.of(context).pop();
+
+      return;
+    }
+
+    _isLoading = true;
+    notifyListeners();
+
+    String userToken = await SharedManager().getString(SharedEnum.userToken);
+    String sparePartId = '';
+    for (var i = 0; i < (_userInventoryList.materials?.length ?? 0); i++) {
+      if (_userInventoryList.materials?[i].properties?.name == _choosenMaterial) {
+        sparePartId = _userInventoryList.materials?[i].properties?.referenceId.toString() ?? '';
+        break;
+      }
+    }
+
+    final result = await workSpaceService.addWorkSpaceSpareparts(taskId, userToken, sparePartId, wantedMaterialAmount);
+
+    result.fold(
+      (l) => {
+        snackBar(context, LocaleKeys.MaterialAdded.tr(), 'true'),
+        Navigator.of(context).pop(),
+      },
+      (r) => {
+        snackBar(context, LocaleKeys.MaterialError, 'error'),
+        Navigator.of(context).pop(),
+      },
     );
 
     _isLoading = false;

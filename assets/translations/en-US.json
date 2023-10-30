@@ -17,6 +17,7 @@
 	"WorkOrderSearch": "Work Order Search",
 	"NewWorkOrder": "New Work Order",
 	"Delete": "Delete",
+	"MaterialError": "Material Error",
 	"----------------SNACKBAR----------": "-----------SNACKBAR--------------",
 	"NoInternetConnection": "No Internet Connection",
 	"LoginError": "Cant Login, Please Try Again",
