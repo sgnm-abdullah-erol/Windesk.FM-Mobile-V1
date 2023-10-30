@@ -21,6 +21,7 @@ class LocaleKeys {
   static const String NoCreatedAtTime = 'NoCreatedAtTime';
   static const String NoReferenceId = 'NoReferenceId';
   static const String Delete = 'Delete';
+  static const String LoginTextFieldsEmpty = 'LoginTextFieldsEmpty';
 
   // static const ----------SNACKBAR---------- = '----------SNACKBAR----------;
   static const String NoInternetConnection = 'NoInternetConnection';

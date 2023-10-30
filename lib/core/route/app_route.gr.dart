@@ -101,9 +101,13 @@ abstract class $AppRouter extends _i17.RootStackRouter {
       );
     },
     LoginScreen.name: (routeData) {
+      final args = routeData.argsAs<LoginScreenArgs>();
       return _i17.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i7.LoginScreen(),
+        child: _i7.LoginScreen(
+          key: args.key,
+          userName: args.userName,
+        ),
       );
     },
     MyWorkOrders.name: (routeData) {
@@ -331,16 +335,40 @@ class HomeScreen extends _i17.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i7.LoginScreen]
-class LoginScreen extends _i17.PageRouteInfo<void> {
-  const LoginScreen({List<_i17.PageRouteInfo>? children})
-      : super(
+class LoginScreen extends _i17.PageRouteInfo<LoginScreenArgs> {
+  LoginScreen({
+    _i18.Key? key,
+    required String userName,
+    List<_i17.PageRouteInfo>? children,
+  }) : super(
           LoginScreen.name,
+          args: LoginScreenArgs(
+            key: key,
+            userName: userName,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'LoginScreen';
 
-  static const _i17.PageInfo<void> page = _i17.PageInfo<void>(name);
+  static const _i17.PageInfo<LoginScreenArgs> page =
+      _i17.PageInfo<LoginScreenArgs>(name);
+}
+
+class LoginScreenArgs {
+  const LoginScreenArgs({
+    this.key,
+    required this.userName,
+  });
+
+  final _i18.Key? key;
+
+  final String userName;
+
+  @override
+  String toString() {
+    return 'LoginScreenArgs{key: $key, userName: $userName}';
+  }
 }
 
 /// generated route for

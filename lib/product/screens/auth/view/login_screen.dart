@@ -19,23 +19,26 @@ import '../provider/login_provider.dart';
 
 @RoutePage()
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  const LoginScreen({super.key, required this.userName});
+
+  final String userName;
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => LoginPassword()),
-        ChangeNotifierProvider(create: (context) => LoginProvider()),
+        ChangeNotifierProvider(create: (context) => LoginProvider(userNameFromPage: userName), lazy: false),
       ],
       child: Consumer<LoginProvider>(
         builder: (context, LoginProvider loginProvider, child) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
+            loginProvider.setUserName(userName);
             if (loginProvider.isErrorActive) {
               snackBar(context, LocaleKeys.LoginError.tr(), 'error');
             }
             if (loginProvider.textFieldEmptyError) {
-              snackBar(context, LocaleKeys.LogoutError.tr(), 'error');
+              snackBar(context, LocaleKeys.LoginTextFieldsEmpty.tr(), 'error');
             }
             if (loginProvider.isLoginSuccess) {
               snackBar(context, LocaleKeys.LoginSuccess.tr(), 'success');
@@ -43,7 +46,7 @@ class LoginScreen extends StatelessWidget {
             }
           });
 
-          return _LoginScreenBody(provider: loginProvider);
+          return _LoginScreenBody(provider: loginProvider, userName: userName);
         },
       ),
     );
@@ -51,8 +54,9 @@ class LoginScreen extends StatelessWidget {
 }
 
 class _LoginScreenBody extends StatefulWidget {
-  const _LoginScreenBody({required this.provider});
+  const _LoginScreenBody({required this.provider, required this.userName});
   final LoginProvider provider;
+  final String userName;
 
   @override
   State<_LoginScreenBody> createState() => _LoginScreenBodyState();
@@ -122,7 +126,7 @@ class _LoginScreenBodyState extends State<_LoginScreenBody> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 TextFieldsInputUnderline(
-                  hintText: LocaleKeys.HintUserName.tr(),
+                  hintText: widget.userName.isEmpty ? LocaleKeys.HintUserName.tr() : widget.userName,
                   onChanged: loginProvider.setUserName,
                   controller: loginProvider.userNameController,
                 ),

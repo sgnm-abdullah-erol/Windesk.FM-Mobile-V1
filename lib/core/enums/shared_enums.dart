@@ -9,4 +9,5 @@ enum SharedEnum {
   password,
   userNameLogin,
   theme, // 0 light, 1 dark -- boolean check
+  rememberMe,
 }
