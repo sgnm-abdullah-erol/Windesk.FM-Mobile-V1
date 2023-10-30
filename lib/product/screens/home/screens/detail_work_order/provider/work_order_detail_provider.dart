@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_final_fields, avoid_init_to_null, empty_catches
 
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
@@ -367,7 +368,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   void addEffort(BuildContext context) async {
     // service add effort
     if (_startEffortDate.isEmpty || _endEffortDate.isEmpty || _effortDuration.isEmpty || _effortType.isEmpty) {
-      snackBar(context, LocaleKeys.EmptyEffortFields, 'error');
+      snackBar(context, LocaleKeys.EmptyEffortFields.tr(), 'error');
       return;
     }
 
