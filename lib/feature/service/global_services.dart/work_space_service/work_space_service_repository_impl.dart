@@ -386,16 +386,30 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     int page,
   ) async {
     List<WorkSpaceRequestedMaterialsInventory> workSpaceRequestedMaterials;
-    String url =
-        '${ServiceTools.url.asset_url}/types/getMobileAllTypesWithMeasurementUnitAndAmount?page=$page&limit=10&orderBy=ASC&orderByColumn=name&superSet=Spare';
+    String url = '${ServiceTools.url.asset_url}/types/getMobileAllTypesWithMeasurementUnitAndAmount';
+
+    print(url);
     try {
       final response = await super.dio.get(
             url,
-            data: {},
+            data: {
+              "options": {
+                "page": 1,
+                "limit": 10000,
+                "orderBy": "ASC",
+                "orderByColumn": "name",
+                "superSet": "All",
+                "withSpare": true,
+              }
+            },
             options: Options(
-              headers: {'authorization': 'Bearer $token'},
+              headers: {
+                'authorization': 'Bearer $token',
+              },
             ),
           );
+
+      super.logger.d(response);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
