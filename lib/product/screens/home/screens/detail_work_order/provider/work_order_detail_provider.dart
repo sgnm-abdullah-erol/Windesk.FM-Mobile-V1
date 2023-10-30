@@ -134,7 +134,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   }
 
   void _setUserTaskLabels() {
-    _workSpaceUserTaskLabels.add(detail.state?.name.toString() ?? '');
+    // _workSpaceUserTaskLabels.add(detail.state?.name.toString() ?? '');
 
     for (var i = 0; i < (detail.state?.nextStates?.length ?? 0); i++) {
       _workSpaceUserTaskLabels.add(detail.state?.nextStates?[i].name ?? '');
