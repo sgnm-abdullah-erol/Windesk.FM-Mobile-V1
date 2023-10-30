@@ -455,7 +455,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     String taskId,
   ) async {
     if (wantedMaterialAmount == '0' || wantedMaterialAmount.isEmpty || subject.isEmpty || hintAmount.isEmpty || hintAmount == '0') {
-      snackBar(context, LocaleKeys.EmptyRequestMaterialFields, 'error');
+      snackBar(context, LocaleKeys.EmptyRequestMaterialFields.tr(), 'error');
       return;
     }
 
