@@ -386,21 +386,12 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     int page,
   ) async {
     List<WorkSpaceRequestedMaterialsInventory> workSpaceRequestedMaterials;
-    String url = '${ServiceTools.url.asset_url}/types/getMobileAllTypesWithMeasurementUnitAndAmount';
+    String url = '${ServiceTools.url.asset_url}/types/getMobileAllTypesWithMeasurementUnitAndAmount?page=1&limit=1000&orderBy=ASC&orderByColumn=name&decision=true&superSet=Spare';
 
     try {
       final response = await super.dio.get(
             url,
-            data: {
-              "options": {
-                "page": 1,
-                "limit": 10000,
-                "orderBy": "ASC",
-                "orderByColumn": "name",
-                "superSet": "All",
-                "withSpare": true,
-              }
-            },
+            data: {},
             options: Options(
               headers: {
                 'authorization': 'Bearer $token',
@@ -413,7 +404,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
         workSpaceRequestedMaterials = WorkSpaceRequestedMaterialsInventory.fromJsonList(data) ?? [];
-
         return Left(workSpaceRequestedMaterials);
       } else {
         return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
@@ -479,6 +469,8 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
   @override
   Future<Either<bool, CustomServiceException>> takeItOnMe(String taskId, String currentStateId, String token) async {
+    //print('asdasdsaads' + taskId +':::'+ currentStateId +' ::::'+ token);
+
     String url = '${ServiceTools.url.workorder_url}/task/add/user/to/state';
     bool result = false;
 
