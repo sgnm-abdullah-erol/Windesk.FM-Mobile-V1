@@ -23,9 +23,7 @@ class _MyWorkOrdersState extends State<MyWorkOrders> {
 
   @override
   void initState() {
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      widget.provider.getMyWorkOrders();
-    });
+    SchedulerBinding.instance.addPostFrameCallback((_) => widget.provider.getMyWorkOrders());
     super.initState();
   }
 
