@@ -291,6 +291,8 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
         final data = response.data;
         workSpaceSpareparts = WorkSpaceSpareparts.fromJsonList(data);
 
+        super.logger.d(response);
+
         return Left(workSpaceSpareparts);
       } else {
         return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
@@ -778,6 +780,9 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   Future<bool> deleteNodeFromTask(String userToken, String taskId, String labelId, TaskNodeEnums labelType) async {
     bool result = false;
     String url = '${ServiceTools.url.workorder_url}/task/delete/node/from/task';
+
+    // attachedDocuments
+
     try {
       final response = await super.dio.post(
             url,
@@ -788,7 +793,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
                   "childLabel": [
                     labelType.name // Effort , Spare, Document
                   ],
-                  "rootId": "1023",
+                  "rootId": taskId,
                   "rootLabel": ["Task"],
                   "variableName": labelType.variableName // effort , usedSpareOf, attachedDocuments
                 }

@@ -10,7 +10,7 @@ extension TaskResponseEnumsExtension on TaskResponseEnums {
       case TaskResponseEnums.pendiks:
         return 'pendiks';
       case TaskResponseEnums.end:
-        return 'end';
+        return 'finished';
       case TaskResponseEnums.error:
         return 'error';
       default:
