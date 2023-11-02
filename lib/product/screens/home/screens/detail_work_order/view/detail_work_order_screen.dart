@@ -8,6 +8,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
+import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/widgets/add_notes_accordion.dart';
 
 import '../../../../../../core/constants/other/app_icons.dart';
 import '../../../../../../core/constants/other/colors.dart';
@@ -108,13 +109,14 @@ class DetailWorkOrderScreen extends StatelessWidget {
 
   Padding _customPageAccordionSection(BuildContext context, WorkOrderDetailProvider woDetailProvider) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 22),
       child: CustomBaseAccordion(
         list: [
           _accordionSection(context, LocaleKeys.Effort.tr(), AddEffortsAccordion(provider: woDetailProvider), AppIcons.insightsRounded),
           _accordionSection(context, LocaleKeys.Material.tr(), AddMaterialAccordion(provider: woDetailProvider), AppIcons.warehouse),
           _accordionSection(context, LocaleKeys.RequestMaterial.tr(), RequestMaterialAccordion(provider: woDetailProvider), AppIcons.tool),
           _accordionSection(context, LocaleKeys.Document.tr(), AddDocumantAccordion(provider: woDetailProvider), AppIcons.photoAlbum),
+          _accordionSection(context, LocaleKeys.Notes.tr(), AddNotesAccordion(provider: woDetailProvider), AppIcons.note),
         ],
       ),
     );

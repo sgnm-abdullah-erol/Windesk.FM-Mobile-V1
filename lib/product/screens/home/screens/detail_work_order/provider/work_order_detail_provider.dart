@@ -405,6 +405,11 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     });
   }
 
+  // notes
+  bool userClickedNotes = false;
+  void userClickedNotesFunction() => userClickedNotes = true;
+  bool isNotesFetched = false;
+
   // void addSparepart(BuildContext context, String wantedMaterialAmount, String choosenMaterial, String taskId) async {
   //   if (wantedMaterialAmount == '0' || wantedMaterialAmount.isEmpty || choosenMaterial.isEmpty) {
   //     snackBar(context, LocaleKeys.EmptyMaterialWantedAmount, 'error');

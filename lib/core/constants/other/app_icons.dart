@@ -9,6 +9,7 @@ class AppIcons {
   static const IconData addBox = Icons.add_box;
   static const IconData search = Icons.search;
   static const IconData wifi = Icons.wifi;
+  static const IconData note = Icons.note;
 
   // HOME CIRCULAR BUTTON ICONS
   static const IconData calendarMonth = Icons.calendar_month;

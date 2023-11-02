@@ -12,6 +12,7 @@ import '../../../../../../core/database/shared_manager.dart';
 import '../../../../../../core/enums/shared_enums.dart';
 import '../../../../../../feature/injection.dart';
 import '../../../../../../feature/models/work_space/work_space_efforts.dart';
+import '../../../../../../feature/models/work_space/work_space_note.dart';
 import '../../../../../../feature/models/work_space/work_space_requirement_materials_list.dart';
 import '../../../../../../feature/models/work_space/work_space_spareparts.dart';
 import '../../../../../../feature/service/global_services.dart/work_space_service/work_space_service_repository_impl.dart';
@@ -40,6 +41,9 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
+  bool _isNotesFetched = false;
+  bool get isNotesFetched => _isNotesFetched;
+
   List<WorkSpaceEfforts>? _woEffortList;
   List<WorkSpaceEfforts>? get woEffortList => _woEffortList;
 
@@ -54,6 +58,9 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
 
   List<WorkSpaceDocuments> _workSpaceDocuments = [];
   List<WorkSpaceDocuments> get workSpaceDocuments => _workSpaceDocuments;
+
+  List<WorkSpaceNote> _workSpaceNotes = [];
+  List<WorkSpaceNote> get workSpaceNotes => _workSpaceNotes;
 
   void deleteNode(BuildContext context, String labelId, String taskId, TaskNodeEnums labelType) async {
     String userToken = await SharedManager().getString(SharedEnum.userToken);
@@ -82,6 +89,29 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void fetchNotes(String taskId) async {
+    _isLoading = true;
+    _isNotesFetched = true;
+    notifyListeners();
+
+    String userToken = await SharedManager().getString(SharedEnum.userToken);
+    final response = await workSpaceService.getWorkSpaceNotes(taskId, userToken);
+
+    if (response.isEmpty) {
+      _workSpaceNotes = [];
+    } else {
+      _workSpaceNotes = response;
+    }
+
+    _isLoading = false;
+    _isNotesFetched = true;
+    notifyListeners();
+
+    Future.delayed(const Duration(seconds: 2), () {
+      _isNotesFetched = false;
+    });
+  }
+
   void fetchDocumants(String taskID) async {
     _isLoading = true;
     _isDocumantListFetched = true;
@@ -101,7 +131,6 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
     );
 
     _isLoading = false;
-
     notifyListeners();
 
     Future.delayed(const Duration(seconds: 2), () {
