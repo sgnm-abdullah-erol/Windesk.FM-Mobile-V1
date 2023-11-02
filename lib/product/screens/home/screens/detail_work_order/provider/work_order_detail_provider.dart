@@ -165,11 +165,20 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     response.fold(
       (l) => {
         if (l == TaskResponseEnums.my)
-          {_isTaskStateChange = true, _selectedTaskState = LocaleKeys.StateGoToMe.tr()}
+          {
+            _isTaskStateChange = true,
+            _selectedTaskState = LocaleKeys.StateGoToMe.tr(),
+          }
         else if (l == TaskResponseEnums.our)
-          {_isTaskStateChange = true, _selectedTaskState = LocaleKeys.StateGoToGroup.tr()}
+          {
+            _isTaskStateChange = true,
+            _selectedTaskState = LocaleKeys.StateGoToGroup.tr(),
+          }
         else if (l == TaskResponseEnums.pending)
-          {_isTaskStateChange = true, _selectedTaskState = LocaleKeys.StateGoToPending.tr()}
+          {
+            _isTaskStateChange = true,
+            _selectedTaskState = LocaleKeys.StateGoToPending.tr(),
+          }
         else if (l == TaskResponseEnums.end)
           {
             _isTaskStateChange = true,
