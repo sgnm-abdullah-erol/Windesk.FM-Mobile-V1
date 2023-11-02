@@ -74,6 +74,7 @@ class _BodyWidget extends StatelessWidget {
             keyboardType: TextInputType.multiline,
             maxLines: null,
             expands: true,
+            style: Theme.of(context).textTheme.bodyMedium,
             decoration: InputDecoration(
               hintText: LocaleKeys.EnterYourNotes.tr(),
               border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
