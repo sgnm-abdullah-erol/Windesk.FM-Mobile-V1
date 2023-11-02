@@ -238,7 +238,6 @@ class NewOrderScreen extends StatelessWidget {
                 DropDownInputFields(
                   labelText: 'Alan',
                   onChangedFunction: (String newValue) {
-                    print('sddsaasdads' + newValue);
                     woCreateProvider.setSpace(newValue);
                   },
                   rightIcon: Icons.arrow_drop_down_rounded,

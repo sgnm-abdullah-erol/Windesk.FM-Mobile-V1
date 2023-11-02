@@ -44,9 +44,12 @@ class DropDownInputFields extends StatelessWidget {
             child: Row(
               children: [
                 leftIconExist == false ? Container() : Icon(leftIcon),
-                Text(
-                  items,
-                  style: context.labelMedium.copyWith(color: context.theme ? APPColors.Main.white : APPColors.Main.black),
+                Flexible(
+                  child: Text(
+                    items,
+                    style: context.labelMedium.copyWith(color: context.theme ? APPColors.Main.white : APPColors.Main.black),
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ],
             ),

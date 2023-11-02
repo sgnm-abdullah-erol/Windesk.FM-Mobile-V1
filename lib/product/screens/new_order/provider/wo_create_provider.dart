@@ -293,7 +293,7 @@ class WoCreateProvider extends ChangeNotifier {
   void setSpace(String newValue) {
     _space = newValue;
     for (var i = 0; i < (_woSpaceList.children?.length ?? 0); i++) {
-      if (_woSpaceList.children?[i].name == newValue) {
+      if ('${_woSpaceList.children?[i].name}-${_woSpaceList.children?[i].key}' == newValue) {
         //_spaceKey = _woSpaceList.children?[i].key ?? '';
         _lazyType = _woSpaceList.children?[i].labels?[0] ?? '';
         _requestedId = _woSpaceList.children?[i].id.toString() ?? '';
@@ -402,7 +402,7 @@ class WoCreateProvider extends ChangeNotifier {
           _woSpaceList = l,
           for (var i = 0; i < (_woSpaceList.children?.length ?? 0); i++)
             {
-              _woSpaceListChildren.add(_woSpaceList.children?[i].name ?? ''),
+              _woSpaceListChildren.add('${_woSpaceList.children?[i].name}-${_woSpaceList.children?[i].key}' ?? ''),
             }
         },
         (r) => {},
