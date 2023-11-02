@@ -231,21 +231,22 @@ class NewOrderScreen extends StatelessWidget {
                   leftIcon: Icons.arrow_right_alt,
                 ),
               )),
-          // Padding(
-          //     padding: CustomPaddings.onlyLeft * 1.5,
-          //     child: NullCheckWidget().isLeafFalse(
-          //       woCreateProvider.floorLeaf,
-          //       DropDownInputFields(
-          //         labelText: 'Alan',
-          //         onChangedFunction: (String newValue) {
-          //           woCreateProvider.setSpace(newValue);
-          //         },
-          //         rightIcon: Icons.arrow_drop_down_rounded,
-          //         dropDownArray: woCreateProvider.woSpaceListChildren,
-          //         leftIconExist: true,
-          //         leftIcon: Icons.arrow_right_alt,
-          //       ),
-          //     )),
+          Padding(
+              padding: CustomPaddings.onlyLeft * 4.5,
+              child: NullCheckWidget().isLeafFalse(
+                woCreateProvider.floorLeaf,
+                DropDownInputFields(
+                  labelText: 'Alan',
+                  onChangedFunction: (String newValue) {
+                    print('sddsaasdads' + newValue);
+                    woCreateProvider.setSpace(newValue);
+                  },
+                  rightIcon: Icons.arrow_drop_down_rounded,
+                  dropDownArray: woCreateProvider.woSpaceListChildren,
+                  leftIconExist: true,
+                  leftIcon: Icons.arrow_right_alt,
+                ),
+              )),
         ],
       ),
     );
