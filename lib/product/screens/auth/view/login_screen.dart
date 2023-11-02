@@ -85,28 +85,28 @@ class _LoginScreenBodyState extends State<_LoginScreenBody> {
                 const SizedBox(height: 20),
                 _loginTitleWidget(context),
                 _textFields(context, widget.provider),
-                _rememberMeButton(context),
+                //_rememberMeButton(context),
                 _loginButton(),
               ],
             ),
     );
   }
 
-  Padding _rememberMeButton(BuildContext context) {
-    return Padding(
-      padding: CustomPaddings.onlyHorizontalHigh,
-      child: Row(
-        children: [
-          Text(LocaleKeys.HintRememberMe, style: context.bodyMedium).tr(),
-          Checkbox(
-            checkColor: Colors.white,
-            value: widget.provider.rememberMe,
-            onChanged: (bool? value) => (value != null) ? setState(() => widget.provider.setRememberMe(value)) : null,
-          ),
-        ],
-      ),
-    );
-  }
+  // Padding _rememberMeButton(BuildContext context) {
+  //   return Padding(
+  //     padding: CustomPaddings.onlyHorizontalHigh,
+  //     child: Row(
+  //       children: [
+  //         Text(LocaleKeys.HintRememberMe, style: context.bodyMedium).tr(),
+  //         Checkbox(
+  //           checkColor: Colors.white,
+  //           value: widget.provider.rememberMe,
+  //           onChanged: (bool? value) => (value != null) ? setState(() => widget.provider.setRememberMe(value)) : null,
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Expanded _loginButton() {
     return Expanded(

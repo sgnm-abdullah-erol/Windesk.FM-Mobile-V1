@@ -22,4 +22,6 @@ class SnackbarStrings {
   static const String fileNotDownloaded = 'Dosya indirilemedi';
 
   static const String woCreate = 'İş Emri Başarıyla Oluşturuldu.';
+  static const String woCreateError = 'İş Emri Oluşturulurken Hata Oluştu.';
+
 }

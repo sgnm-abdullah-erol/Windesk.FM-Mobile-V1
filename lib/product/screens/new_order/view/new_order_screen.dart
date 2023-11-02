@@ -35,6 +35,7 @@ class NewOrderScreen extends StatelessWidget {
           }
         });
         woCreateProvider.isWorkOrderCreate ? snackBar(context, SnackbarStrings.woCreate, 'success') : null;
+        woCreateProvider.createTaskError ? snackBar(context, SnackbarStrings.woCreateError, 'error') : null;
         woCreateProvider.locationLoading ? woCreateProvider.getLocation() : null;
         woCreateProvider.requestedLoading ? woCreateProvider.getRequestedByPro() : null;
         woCreateProvider.typeLoading ? woCreateProvider.getType() : null;
