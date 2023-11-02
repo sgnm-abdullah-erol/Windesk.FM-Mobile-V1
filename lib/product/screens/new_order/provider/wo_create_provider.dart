@@ -18,6 +18,9 @@ class WoCreateProvider extends ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
+  bool _createTaskError = false;
+  bool get createTaskError => _createTaskError;
+
   bool _locationLeaf = true;
   bool get locationLeaf => _locationLeaf;
 
@@ -537,12 +540,14 @@ class WoCreateProvider extends ChangeNotifier {
         notifyListeners(),
       },
       (r) => {
+        _createTaskError = true,
         _isWorkOrderCreate = false,
       },
     );
     _isLoading = false;
     notifyListeners();
     Future.delayed(const Duration(seconds: 2), () {
+      _createTaskError = false;
       _isWorkOrderCreate = false;
       notifyListeners();
     });

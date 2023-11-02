@@ -72,6 +72,7 @@ class LoginProvider extends ChangeNotifier {
         // _setUserName(context);
         _isLoginSuccess = true;
         _userId = login.id.toString();
+        print(('objectlogib' + login.id.toString()));
         notifyListeners();
         print(_userId);
 
@@ -110,12 +111,8 @@ class LoginProvider extends ChangeNotifier {
   }
 
   Future<void> _setTokenToPreferences(String refreshToken, String userId) async {
-    print('userToken: $_userToken');
-    print('userName: $_userNameController.text');
-    print('refreshToken: $refreshToken');
-    print('userId: $userId');
-    
     if (_userToken != '' && _userNameController.text != '' && refreshToken != '' && userId != '' && userId != 'null') {
+
       await SharedManager().setString(SharedEnum.userNameLogin, _userNameController.text);
       await SharedManager().setString(SharedEnum.userToken, _userToken);
       await SharedManager().setString(SharedEnum.userName, _userNameController.text);

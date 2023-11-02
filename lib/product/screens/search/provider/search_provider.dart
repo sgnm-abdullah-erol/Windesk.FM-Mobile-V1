@@ -112,6 +112,7 @@ class SearchMaterialProvider extends ChangeNotifier {
     _isSuccess = false;
     _assetDetailList = null;
     setWoNumber = '';
+    assetNumber.text = '';
     notifyListeners();
   }
 }

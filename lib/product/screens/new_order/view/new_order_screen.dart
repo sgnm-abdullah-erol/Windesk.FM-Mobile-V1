@@ -33,8 +33,12 @@ class NewOrderScreen extends StatelessWidget {
           if (woCreateProvider.isWorkOrderCreate) {
             snackBar(context, SnackbarStrings.woCreate, 'success');
           }
+          if (woCreateProvider.createTaskError) {
+            snackBar(context, SnackbarStrings.woCreateError, 'error');
+          }
         });
-        woCreateProvider.isWorkOrderCreate ? snackBar(context, SnackbarStrings.woCreate, 'success') : null;
+        //woCreateProvider.isWorkOrderCreate ? snackBar(context, SnackbarStrings.woCreate, 'success') : null;
+        //woCreateProvider.createTaskError ? snackBar(context, SnackbarStrings.woCreateError, 'error') : null;
         woCreateProvider.locationLoading ? woCreateProvider.getLocation() : null;
         woCreateProvider.requestedLoading ? woCreateProvider.getRequestedByPro() : null;
         woCreateProvider.typeLoading ? woCreateProvider.getType() : null;
@@ -67,7 +71,7 @@ class NewOrderScreen extends StatelessWidget {
                               onChanged: (value) {
                                 woCreateProvider.setComponent(value.toString());
                               },
-                              selectedItem: 'Component',
+                              selectedItem: 'Bileşen',
                               popupProps: const PopupProps.menu(
                                 showSearchBox: true,
                                 fit: FlexFit.loose,
@@ -227,21 +231,21 @@ class NewOrderScreen extends StatelessWidget {
                   leftIcon: Icons.arrow_right_alt,
                 ),
               )),
-          Padding(
-              padding: CustomPaddings.onlyLeft * 1.5,
-              child: NullCheckWidget().isLeafFalse(
-                woCreateProvider.floorLeaf,
-                DropDownInputFields(
-                  labelText: 'Alan',
-                  onChangedFunction: (String newValue) {
-                    woCreateProvider.setSpace(newValue);
-                  },
-                  rightIcon: Icons.arrow_drop_down_rounded,
-                  dropDownArray: woCreateProvider.woSpaceListChildren,
-                  leftIconExist: true,
-                  leftIcon: Icons.arrow_right_alt,
-                ),
-              )),
+          // Padding(
+          //     padding: CustomPaddings.onlyLeft * 1.5,
+          //     child: NullCheckWidget().isLeafFalse(
+          //       woCreateProvider.floorLeaf,
+          //       DropDownInputFields(
+          //         labelText: 'Alan',
+          //         onChangedFunction: (String newValue) {
+          //           woCreateProvider.setSpace(newValue);
+          //         },
+          //         rightIcon: Icons.arrow_drop_down_rounded,
+          //         dropDownArray: woCreateProvider.woSpaceListChildren,
+          //         leftIconExist: true,
+          //         leftIcon: Icons.arrow_right_alt,
+          //       ),
+          //     )),
         ],
       ),
     );
