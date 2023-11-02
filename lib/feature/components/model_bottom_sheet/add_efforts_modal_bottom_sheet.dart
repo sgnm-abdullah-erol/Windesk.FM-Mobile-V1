@@ -6,7 +6,6 @@ import '../../extensions/context_extension.dart';
 import '../buttons/custom_half_buttons.dart';
 import '../input_fields/dropdown_input_fields.dart';
 import '../input_fields/text_field_date_picker.dart';
-import '../input_fields/text_field_time_picker.dart';
 import '../input_fields/text_fields_input_underline.dart';
 
 class AddEffortsModalBottomSheet extends StatelessWidget {
@@ -122,12 +121,16 @@ class _InputsState extends State<_Inputs> {
           ),
         ),
         Expanded(
-          flex: 10,
-          child: TextFieldTimePicker(
-            label: LocaleKeys.EffortDuration.tr(),
-            onTap: (value) => widget.selectedEffortDuration(value),
-          ),
-        ),
+            flex: 10,
+            child: TextFieldsInputUnderline(
+              hintText: LocaleKeys.EffortDuration.tr(),
+              onChanged: (value) => widget.selectedEffortDuration(value),
+            )
+            // child: TextFieldTimePicker(
+            //   label: LocaleKeys.EffortDuration.tr(),
+            //   onTap: (value) => widget.selectedEffortDuration(value),
+            // ),
+            ),
         SizedBox(height: context.height * 0.02),
         Expanded(
           flex: 10,
