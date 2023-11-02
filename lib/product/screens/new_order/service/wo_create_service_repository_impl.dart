@@ -156,51 +156,50 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
       requestSpaceId, requestSpaceLabels, woCategory, woComponent) async {
     String url = '${ServiceTools.url.workorder_url}/task';
 
+    print('wocreate' +
+        ':::' +
+        summary +
+        ':::' +
+        requestType +
+        ':::' +
+        requestedBy +
+        ':::' +
+        description +
+        ':::' +
+        appointmendData +
+        ':::' +
+        templatedBy +
+        ':::' +
+        requestSpaceId +
+        ':::' +
+        requestSpaceLabels +
+        ':::' +
+        woCategory +
+        ':::' +
+        woComponent);
     //backenddeki sorundan dolayı yeniden düzenlenecektir. Datalar mock gibi gönderiliyor. Userın ne gönderdiği önemli değil.
     //TODO
     try {
       final response = await super.dio.post(
             url,
             data: {
-              "idLabel": {
-                "label": ["WorkSpace"],
-                "identifier": "412"
-              },
               "name": summary,
-              "requestType": "RequestType4",
-              "woCategory": "WoCategory2",
-              "requestedBy": ["db5dfb94-75b0-4a3e-928c-d38cbb72c976"],
-              "description": "ddddd",
-              "priority": "Priority3",
-              "appointmentDate": "2023-11-28 10:33:14",
-              "templatedBy": ["Fault001"],
-              "requestedComponents": [""],
+              "requestType": requestType,
+              "requestedBy": [requestedBy],
+              "description": description,
+              "appointmentDate": appointmendData,
+              "templatedBy": ['Fault001'],
+              //"requestedComponents": [woComponent],
               "requestedSpaces": [
                 {
-                  "id": "704",
-                  "labels": ["Building"]
+                  "id": requestSpaceId,
+                  "labels": [requestSpaceLabels]
                 }
               ],
-              "isMyWork": false,
+              "woCategory": woCategory,
+              "isMobile": true,
               "depended_on": ["416"]
             },
-            // data: {
-            //   "name": summary,
-            //   "requestType": requestType,
-            //   "requestedBy": [requestedBy],
-            //   "description": description,
-            //   "appointmentDate": appointmendData,
-            //   "templatedBy": [templatedBy],
-            //   //"requestedComponents": [woComponent],
-            //   "requestedSpaces": [
-            //     {
-            //       "id": requestSpaceId,
-            //       "labels": [requestSpaceLabels]
-            //     }
-            //   ],
-            //   "woCategory": woCategory,
-            //   "isMobile": true,
-            // },
             options: Options(
               headers: {'authorization': 'Bearer $token'},
             ),
