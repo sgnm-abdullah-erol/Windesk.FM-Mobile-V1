@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: await_only_futures
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../enums/shared_enums.dart';
 
-@immutable
 class SharedManager {
   static SharedPreferences? _sharedPreferences;
 
@@ -24,11 +24,11 @@ class SharedManager {
   }
 
   Future<String> getString(SharedEnum key) async {
-    return _sharedPreferences!.getString(key.toString()) ?? '';
+    return await _sharedPreferences!.getString(key.toString()) ?? '';
   }
 
   Future<bool> getBool(SharedEnum key) async {
-    return _sharedPreferences!.getBool(key.toString()) ?? false;
+    return await _sharedPreferences!.getBool(key.toString()) ?? false;
   }
 
   Future<void> clearAllWithoutUserName() async {

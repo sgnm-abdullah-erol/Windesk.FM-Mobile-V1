@@ -71,7 +71,6 @@ class WorkOrderListProvider extends ChangeNotifier {
         _myGroupWorkSpaceDetails = l;
       }, (r) {});
 
-      print(_myGroupWorkSpaceDetails);
       _isMyGroupWorkOrdersDataFetched = true;
     }
     _isLoading = false;
