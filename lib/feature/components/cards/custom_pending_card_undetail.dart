@@ -20,7 +20,11 @@ import '../buttons/custom_half_buttons.dart';
 import '../snackBar/snackbar.dart';
 
 class CustomPendingCardUndetail extends StatelessWidget {
-  const CustomPendingCardUndetail({super.key, required this.pendiks, required this.onTap, required this.provider});
+  const CustomPendingCardUndetail(
+      {super.key,
+      required this.pendiks,
+      required this.onTap,
+      required this.provider});
 
   final WorkOrderListProvider provider;
   final WorkSpacePendiks pendiks;
@@ -41,20 +45,26 @@ class CustomPendingCardUndetail extends StatelessWidget {
               SchedulerBinding.instance.addPostFrameCallback(
                 (timeStamp) {
                   if (value.isTaskStateChange) {
-                    snackBar(context, '${LocaleKeys.TaskStateChange.tr()} ${LocaleKeys.NewTask.tr()} ${value.selectedTaskState}', 'success');
+                    snackBar(
+                        context,
+                        '${LocaleKeys.TaskStateChange.tr()} ${LocaleKeys.NewTask.tr()} ${value.selectedTaskState}',
+                        'success');
                   }
                   if (value.isApproved) {
-                    snackBar(context, LocaleKeys.TaskStateApproved.tr(), 'success');
+                    snackBar(
+                        context, LocaleKeys.TaskStateApproved.tr(), 'success');
                     provider.getMyPendikWorkOrders();
                   }
                   if (value.isRejected) {
-                    snackBar(context, LocaleKeys.TaskStateRejected.tr(), 'success');
+                    snackBar(
+                        context, LocaleKeys.TaskStateRejected.tr(), 'success');
                     provider.getMyPendikWorkOrders();
                   }
                 },
               );
               return Card(
-                shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.mediumBorderRadius),
+                shape: RoundedRectangleBorder(
+                    borderRadius: CustomBorderRadius.mediumBorderRadius),
                 elevation: _elevation,
                 child: Container(
                   width: context.width / 1.2,
@@ -90,11 +100,14 @@ class _Content extends StatelessWidget {
           _woLocationText(context),
           _divider(),
           const SizedBox(height: 5),
-          _dateText(context, LocaleKeys.HintStartDate, pendiks.calendar?.start.toString() ?? '', true),
+          _dateText(context, LocaleKeys.HintStartDate,
+              pendiks.calendar?.start.toString() ?? '', true),
           const SizedBox(height: 5),
-          _dateText(context, LocaleKeys.HintUpdateDate, pendiks.task?.updatedAt.toString() ?? '', false),
+          _dateText(context, LocaleKeys.HintUpdateDate,
+              pendiks.task?.updatedAt.toString() ?? '', false),
           const SizedBox(height: 5),
-          _dateText(context, LocaleKeys.HintEndDate, pendiks.calendar?.end.toString() ?? '', true),
+          _dateText(context, LocaleKeys.HintEndDate,
+              pendiks.calendar?.end.toString() ?? '', true),
           const SizedBox(height: 20),
           _ActionButtons(
             pendiks: pendiks,
@@ -120,14 +133,17 @@ class _Content extends StatelessWidget {
                 'WO ${pendiks.task?.id.toString() ?? LocaleKeys.NoCode.tr()}',
                 softWrap: true,
                 overflow: TextOverflow.ellipsis,
-                style: context.labelMedium.copyWith(color: APPColors.Secondary.black, fontSize: FontSizes.caption),
+                style: context.labelMedium.copyWith(
+                    color: APPColors.Secondary.black,
+                    fontSize: FontSizes.caption),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(2.0),
               child: Text(
                 pendiks.state?.name.toString() ?? LocaleKeys.NoState.tr(),
-                style: context.labelMedium.copyWith(color: APPColors.Secondary.black),
+                style: context.labelMedium
+                    .copyWith(color: APPColors.Secondary.black),
               ),
             ),
           ],
@@ -136,11 +152,14 @@ class _Content extends StatelessWidget {
     );
   }
 
-  Widget _dateText(BuildContext context, String label, String date, bool giveFormat) {
+  Widget _dateText(
+      BuildContext context, String label, String date, bool giveFormat) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label.tr(), style: context.bodySmall.copyWith(color: APPColors.Main.black)).tr(),
+        Text(label.tr(),
+                style: context.bodySmall.copyWith(color: APPColors.Main.black))
+            .tr(),
         Text(giveFormat ? date.splitString(date) : date.splitStringSecond(date),
             style: context.labelMedium.copyWith(
               color: APPColors.Main.black,
@@ -150,21 +169,27 @@ class _Content extends StatelessWidget {
   }
 
   Widget _desc(BuildContext context) {
-    return Text(pendiks.task?.description ?? '', style: context.labelMedium.copyWith(color: APPColors.Secondary.black));
+    return Text(pendiks.task?.description ?? '',
+        style: context.labelMedium.copyWith(color: APPColors.Secondary.black));
   }
 
   Column _woLocationText(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(pendiks.workspace?.owner ?? '', style: context.labelMedium.copyWith(color: APPColors.Secondary.black)),
+        Text(pendiks.workspace?.owner ?? '',
+            style:
+                context.labelMedium.copyWith(color: APPColors.Secondary.black)),
         const SizedBox(height: 5),
-        Text(pendiks.workspace?.name ?? '', style: context.labelMedium.copyWith(color: APPColors.Secondary.black)),
+        Text(pendiks.workspace?.name ?? '',
+            style:
+                context.labelMedium.copyWith(color: APPColors.Secondary.black)),
       ],
     );
   }
 
-  Divider _divider() => Divider(height: 10, thickness: 0.5, color: APPColors.Secondary.black);
+  Divider _divider() =>
+      Divider(height: 10, thickness: 0.5, color: APPColors.Secondary.black);
 }
 
 class _ActionButtons extends StatelessWidget {
@@ -195,11 +220,17 @@ class _ActionButtons extends StatelessWidget {
 
   void _approveButton(BuildContext context) {
     final String nextStateName = pendiks.state?.nextStates?[0].name ?? '';
-    final String nextStateDesc = '${LocaleKeys.NextStateLabel1.tr()} $nextStateName ${LocaleKeys.NextStateLabel2.tr()}';
-    WoWaitAcceptModalAlert().showAlertDialog(context, nextStateDesc, _approveWorkOrder).then((value) {
+    final String nextStateDesc =
+        '${LocaleKeys.NextStateLabel1.tr()} $nextStateName ${LocaleKeys.NextStateLabel2.tr()}';
+    WoWaitAcceptModalAlert()
+        .showAlertDialog(context, nextStateDesc, _approveWorkOrder)
+        .then((value) {
       if (value != null) {
         if (value == true) {
-          provider.changeState(pendiks.task?.id.toString() ?? '0', pendiks.state?.nextStates?.first.id.toString() ?? '', false);
+          print('Next state ID : ');
+          print(pendiks.state?.nextStates?.first.id.toString());
+          provider.changeState(pendiks.task?.id.toString() ?? '0',
+              pendiks.state?.nextStates?.first.id.toString() ?? '479', false);
         }
       }
     });
@@ -211,13 +242,16 @@ class _ActionButtons extends StatelessWidget {
       pendikNextStateLabels.add(pendiks.state?.nextStates?[i].name ?? '');
     }
     WoWaitRejectModalAlert()
-        .showAlertDialog(context, 'textData', _nextStatesLabel, pendikNextStateLabels, provider.onChangedSelectedTask)
+        .showAlertDialog(context, 'textData', _nextStatesLabel,
+            pendikNextStateLabels, provider.onChangedSelectedTask)
         .then((value) {
       if (value != null) {
         if (value == true) {
           for (var i = 0; i < (pendiks.state?.nextStates?.length ?? 0); i++) {
-            if (pendiks.state?.nextStates?[i].name == provider.selectedTaskState) {
-              provider.changeState(pendiks.task?.id.toString() ?? '', pendiks.state?.nextStates?[i].id.toString() ?? '', true);
+            if (pendiks.state?.nextStates?[i].name ==
+                provider.selectedTaskState) {
+              provider.changeState(pendiks.task?.id.toString() ?? '',
+                  pendiks.state?.nextStates?[i].id.toString() ?? '', true);
             }
           }
         }

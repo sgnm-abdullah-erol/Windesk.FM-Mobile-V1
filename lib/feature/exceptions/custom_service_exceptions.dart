@@ -46,4 +46,6 @@ class CustomServiceMessages {
 
   // home page
   static const String announcementViewError = 'Error while fetching Announcements';
+  //test page
+  static const String getServerTimeError = 'Sunucu zamanı hatası';
 }

@@ -8,5 +8,9 @@ enum SharedEnum {
   userId,
   password,
   userNameLogin,
+  deviceModel,
+  ipAdress,
+  osVersion,
+  appVersion,
   theme, // 0 light, 1 dark -- boolean check
 }
