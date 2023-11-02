@@ -153,9 +153,10 @@ class _StateChangeDropDownButton extends StatelessWidget {
         onChangedFunction: (val) async {
           await WoWaitAcceptModalAlert()
               .showAlertDialog(
-                  context,
-                  "${"${LocaleKeys.ProccessEntryFirstALertDialog.tr()}'" + val}'${LocaleKeys.ProccessEntrySecondALertDialog.tr()}",
-                  LocaleKeys.ChangeState.tr())
+            context,
+            "${"${LocaleKeys.ProccessEntryFirstALertDialog.tr()}'" + val}'${LocaleKeys.ProccessEntrySecondALertDialog.tr()}",
+            LocaleKeys.ChangeState.tr(),
+          )
               .then((value) {
             // check response value
             if (value == true) {

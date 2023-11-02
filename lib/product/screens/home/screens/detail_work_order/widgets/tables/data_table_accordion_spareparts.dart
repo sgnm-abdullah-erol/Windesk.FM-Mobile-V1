@@ -52,11 +52,14 @@ class DataTableAccordionSpareparts extends StatelessWidget {
                 IconButton(
                   onPressed: () async {
                     final response = await WorkOrderDeleteItemAlertDialog.deleteWorkOrderAlertDialog(
-                        context, DeleteItemType.material, int.tryParse(data[i].id ?? "") ?? 0);
+                      context,
+                      DeleteItemType.material,
+                      int.tryParse(data[i].nodeId.toString()) ?? 0,
+                    );
 
                     if (response == true) {
                       // ignore: use_build_context_synchronously
-                      provider.deleteNode(context, data[i].id.toString(), provider.detail.task?.id.toString() ?? '', TaskNodeEnums.spare);
+                      provider.deleteNode(context, data[i].nodeId.toString(), provider.detail.task?.id.toString() ?? '', TaskNodeEnums.spare);
                     }
                   },
                   icon: Icon(AppIcons.delete, color: APPColors.Login.red),

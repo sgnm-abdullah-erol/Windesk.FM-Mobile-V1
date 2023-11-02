@@ -24,6 +24,11 @@
 	"EnterYourNotes": "Notunuzu Giriniz",
 	"NoteAdded" : "Not Eklendi",
 	"AddNoteError": "Not Eklenemedi",
+	"StateGoToGroup" : "grubumdakilere gönderilmiştir",
+	"StateGoToMe" : "kendi grubuma gönderilmiştir",
+	"StateGoToPending" : "onay bekleyenlere gönderilmiştir",
+	"StateFinished" : "işlem tamamlanmıştı",
+	"StateError": "Durum Bulunamadı",
 
 	"----------------SNACKBAR----------": "-----------SNACKBAR--------------",
 	"NoInternetConnection": "İnternet bağlantısı yok",

@@ -28,6 +28,12 @@ class LocaleKeys {
   static const String AddNoteError = 'AddNoteError';
   static const String EnterYourNotes = 'EnterYourNotes';
   static const String NoteAdded = 'NoteAdded';
+  static const String StateGoToGroup = 'StateGoToFinished';
+  static const String StateGoToMe = 'StateGoToMe';
+  static const String StateGoToPending = 'StateGoToPending';
+  static const String StateGoToOur = 'StateGoToOur';
+  static const String StateError = 'StateError';
+  static const String stateFinished = 'StateFinished';
 
   // static const ----------SNACKBAR---------- = '----------SNACKBAR----------;
   static const String NoInternetConnection = 'NoInternetConnection';

@@ -68,15 +68,15 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
     final response = await workSpaceService.deleteNodeFromTask(userToken, taskId, labelId, labelType);
 
     if (response == true) {
-      if (labelType == TaskNodeEnums.effort) {
+      if (labelType.variableName == 'effort') {
         fetchEfforts(taskId, detail.state?.nextStates?.first.id.toString() ?? '');
         snackBar(context, LocaleKeys.DeleteEffort.tr(), 'success');
       }
-      if (labelType == TaskNodeEnums.spare) {
+      if (labelType.variableName == 'usedSpareOf') {
         fetchSpareparts(taskId);
         snackBar(context, LocaleKeys.DeleteMaterial.tr(), 'success');
       }
-      if (labelType == TaskNodeEnums.document) {
+      if (labelType.variableName == 'attachedDocuments') {
         fetchDocumants(taskId);
         snackBar(context, LocaleKeys.DeleteDocument.tr(), 'success');
       }

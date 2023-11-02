@@ -21,7 +21,7 @@ extension TaskNodeExtension on TaskNodeEnums {
       case TaskNodeEnums.spare:
         return 'usedSpareOf';
       case TaskNodeEnums.document:
-        return 'attachedDocuments ';
+        return 'attachedDocuments';
       default:
         return '';
     }

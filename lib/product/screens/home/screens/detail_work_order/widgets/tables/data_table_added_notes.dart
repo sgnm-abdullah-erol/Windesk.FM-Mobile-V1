@@ -39,7 +39,7 @@ class DataTableAcordionNotes extends StatelessWidget {
           for (var i = 0; i < data.length; i++) ...{
             DataRow(cells: [
               DataCell(Text(data[i].id.toString(), style: _cellTextStyle(context))),
-              DataCell(Text(data[i].note ?? "", style: _cellTextStyle(context))),
+              DataCell(Text(data[i].note?.replaceAll("<p>", '').replaceAll("</p>", "") ?? "", style: _cellTextStyle(context))),
             ]),
           },
         ],

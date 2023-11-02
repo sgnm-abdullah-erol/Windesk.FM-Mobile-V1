@@ -167,30 +167,33 @@ class WorkOrderDetailProvider extends ChangeNotifier {
         if (l == TaskResponseEnums.my)
           {
             _isTaskStateChange = true,
-            _selectedTaskState = 'kendi grubuma gönderilmiştir',
+            _selectedTaskState = LocaleKeys.StateGoToMe.tr(),
           }
         else if (l == TaskResponseEnums.our)
           {
             _isTaskStateChange = true,
-            _selectedTaskState = 'grubumdakilere gönderilmiştir',
+            _selectedTaskState = LocaleKeys.StateGoToGroup.tr(),
           }
-        else if (l == TaskResponseEnums.pendiks)
-          {_isTaskStateChange = true, _selectedTaskState = 'onay bekleyenlere gönderilmiştir'}
+        else if (l == TaskResponseEnums.pending)
+          {
+            _isTaskStateChange = true,
+            _selectedTaskState = LocaleKeys.StateGoToPending.tr(),
+          }
         else if (l == TaskResponseEnums.end)
           {
             _isTaskStateChange = true,
             _finishTask = true,
-            _selectedTaskState = 'işlem tamamlanmıştır',
+            _selectedTaskState = LocaleKeys.stateFinished.tr(),
           }
         else if (l == TaskResponseEnums.error)
           {
             _isTaskStateChange = false,
-            _selectedTaskState = 'hata oluştu',
+            _selectedTaskState = LocaleKeys.StateError.tr(),
           }
         else
           {
             _isTaskStateChange = false,
-            _selectedTaskState = 'hata oluştu',
+            _selectedTaskState = LocaleKeys.StateError.tr(),
           },
       },
       (r) => {

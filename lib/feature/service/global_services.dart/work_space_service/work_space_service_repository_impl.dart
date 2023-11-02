@@ -291,6 +291,8 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
         final data = response.data;
         workSpaceSpareparts = WorkSpaceSpareparts.fromJsonList(data);
 
+        super.logger.d(response);
+
         return Left(workSpaceSpareparts);
       } else {
         return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
@@ -414,7 +416,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
         workSpaceRequestedMaterials = WorkSpaceRequestedMaterialsInventory.fromJsonList(data) ?? [];
-
         return Left(workSpaceRequestedMaterials);
       } else {
         return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
@@ -480,6 +481,8 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
   @override
   Future<Either<bool, CustomServiceException>> takeItOnMe(String taskId, String currentStateId, String token) async {
+    //print('asdasdsaads' + taskId +':::'+ currentStateId +' ::::'+ token);
+
     String url = '${ServiceTools.url.workorder_url}/task/add/user/to/state';
     bool result = false;
 
@@ -545,8 +548,8 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
           result = TaskResponseEnums.my;
         } else if (response.data == TaskResponseEnums.our.rawValue) {
           result = TaskResponseEnums.our;
-        } else if (response.data == TaskResponseEnums.pendiks.rawValue) {
-          result = TaskResponseEnums.pendiks;
+        } else if (response.data == TaskResponseEnums.pending.rawValue) {
+          result = TaskResponseEnums.pending;
         } else {
           result = TaskResponseEnums.error;
         }
@@ -779,6 +782,9 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   Future<bool> deleteNodeFromTask(String userToken, String taskId, String labelId, TaskNodeEnums labelType) async {
     bool result = false;
     String url = '${ServiceTools.url.workorder_url}/task/delete/node/from/task';
+
+    // attachedDocuments
+
     try {
       final response = await super.dio.post(
             url,
@@ -789,7 +795,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
                   "childLabel": [
                     labelType.name // Effort , Spare, Document
                   ],
-                  "rootId": "1023",
+                  "rootId": taskId,
                   "rootLabel": ["Task"],
                   "variableName": labelType.variableName // effort , usedSpareOf, attachedDocuments
                 }

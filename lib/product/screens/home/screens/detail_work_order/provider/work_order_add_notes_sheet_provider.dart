@@ -18,7 +18,7 @@ class WorkOrderAddNotesProvider extends ChangeNotifier {
     notifyListeners();
 
     String userToken = await SharedManager().getString(SharedEnum.userToken);
-    final response = await workSpaceService.addNoteToWorkOrder(userToken, '1', content);
+    final response = await workSpaceService.addNoteToWorkOrder(userToken, taskId, content);
 
     isLoading = false;
     notifyListeners();

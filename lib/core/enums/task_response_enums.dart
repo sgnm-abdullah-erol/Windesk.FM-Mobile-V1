@@ -1,4 +1,4 @@
-enum TaskResponseEnums { my, our, pendiks, end, error }
+enum TaskResponseEnums { my, our, pending, end, error }
 
 extension TaskResponseEnumsExtension on TaskResponseEnums {
   String get rawValue {
@@ -7,10 +7,10 @@ extension TaskResponseEnumsExtension on TaskResponseEnums {
         return 'my';
       case TaskResponseEnums.our:
         return 'our';
-      case TaskResponseEnums.pendiks:
-        return 'pendiks';
+      case TaskResponseEnums.pending:
+        return 'pending';
       case TaskResponseEnums.end:
-        return 'end';
+        return 'finished';
       case TaskResponseEnums.error:
         return 'error';
       default:

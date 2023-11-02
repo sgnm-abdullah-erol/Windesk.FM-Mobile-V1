@@ -5,6 +5,7 @@ part 'generator/work_space_spareparts.g.dart';
 
 @JsonSerializable()
 class WorkSpaceSpareparts extends Equatable {
+  final int? nodeId;
   final String? id;
   final List<String>? label;
   final String? name;
@@ -15,6 +16,7 @@ class WorkSpaceSpareparts extends Equatable {
   final String? user;
 
   const WorkSpaceSpareparts({
+    this.nodeId,
     this.id,
     this.label,
     this.name,
@@ -39,6 +41,7 @@ class WorkSpaceSpareparts extends Equatable {
 
   @override
   List<Object?> get props => [
+        nodeId,
         id,
         label,
         name,
