@@ -62,7 +62,7 @@ class LoginProvider extends ChangeNotifier {
       _loading = true;
       notifyListeners();
 
-      final response = await _authService.login(userName, password);
+      final response = await _authService.login(userNameController.text, password);
 
       LoginModel loginModel;
 
