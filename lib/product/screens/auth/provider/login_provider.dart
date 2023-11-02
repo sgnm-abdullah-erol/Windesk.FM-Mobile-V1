@@ -72,9 +72,7 @@ class LoginProvider extends ChangeNotifier {
         // _setUserName(context);
         _isLoginSuccess = true;
         _userId = login.id.toString();
-        print(('objectlogib' + login.id.toString()));
         notifyListeners();
-        print(_userId);
 
         Future.delayed(const Duration(milliseconds: 2000), () async {
           loginModel = login;
@@ -111,7 +109,6 @@ class LoginProvider extends ChangeNotifier {
   }
 
   Future<void> _setTokenToPreferences(String refreshToken, String userId) async {
-
       await SharedManager().setString(SharedEnum.userNameLogin, _userNameController.text);
       await SharedManager().setString(SharedEnum.userToken, _userToken);
       await SharedManager().setString(SharedEnum.userName, _userNameController.text);

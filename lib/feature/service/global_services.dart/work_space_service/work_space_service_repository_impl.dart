@@ -161,7 +161,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   @override
   Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getWorkSpaceDetailsByRequestType(String requestId, int page, String token) async {
     List<WorkSpaceDetail> workSpaceDetailList = [];
-    //TODO test it
     String url =
         '${ServiceTools.url.workorder_url}/task/mobile/getTasksByRequestType/swagger/$requestId?page=$page&limit=999&orderBy=DESC&orderByColumn=updateAt&withSpare=true';
     try {

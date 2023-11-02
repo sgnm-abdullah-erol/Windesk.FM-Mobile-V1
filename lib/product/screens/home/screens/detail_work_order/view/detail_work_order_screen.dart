@@ -17,7 +17,6 @@ import '../../../../../../feature/components/alert_dialog/wo_wait_accept_modal_a
 import '../../../../../../feature/components/appbar/custom_main_appbar.dart';
 import '../../../../../../feature/components/input_fields/dropdown_input_fields.dart';
 import '../../../../../../feature/components/snackBar/snackbar.dart';
-import '../../../../../../feature/global_providers/global_provider.dart';
 import '../../../../../../feature/models/work_space/work_space_detail.dart';
 import '../../work_order_list/widgets/custom_base_accordion.dart';
 import '../../work_order_list/widgets/custom_loading_indicator.dart';
@@ -89,7 +88,7 @@ class DetailWorkOrderScreen extends StatelessWidget {
                           children: [
                             CustomWorkSpaceDetailCard(workSpaceDetail: woDetailProvider.detail, workOrderDetailProvider: woDetailProvider),
                             const SizedBox(height: 10),
-                            //deneme için eklendi. Servis sorunundan sonra düzeltilecek context.read<GlobalProvider>().userId 
+                            //deneme için eklendi. Servis sorunundan sonra düzeltilecek context.read<GlobalProvider>().userId
                             //TODO
                             (woDetailProvider.detail.task?.user ?? '') != 'user1'
                                 ? _TakeItOnMe(provider: woDetailProvider)

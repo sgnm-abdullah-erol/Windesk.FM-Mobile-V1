@@ -6,7 +6,6 @@ import 'package:vm_fm_4/core/constants/other/app_strings.dart';
 import 'package:vm_fm_4/core/constants/other/colors.dart';
 import 'package:vm_fm_4/core/constants/paths/service_tools.dart';
 import 'package:vm_fm_4/feature/components/appbar/custom_main_appbar.dart';
-import 'package:vm_fm_4/generated/locale_keys.g.dart';
 
 import '../../../../feature/extensions/context_extension.dart';
 import '../../../../feature/global_providers/global_provider.dart';
@@ -23,18 +22,14 @@ class TestScreen extends StatefulWidget {
 }
 
 class _TestScreenState extends State<TestScreen> {
-  final RoundedLoadingButtonController _controllerButton =
-      RoundedLoadingButtonController();
+  final RoundedLoadingButtonController _controllerButton = RoundedLoadingButtonController();
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => TestProvider(),
-      child: Consumer<TestProvider>(
-          builder: (context, TestProvider testProvider, child) {
-        testProvider.getInfoLoad == false
-            ? testProvider.getTestScreenInfo()
-            : null;
+      child: Consumer<TestProvider>(builder: (context, TestProvider testProvider, child) {
+        testProvider.getInfoLoad == false ? testProvider.getTestScreenInfo() : null;
         return Scaffold(
           appBar: const CustomMainAppbar(title: Text('Test')),
           body: Center(child: _bodyWidget(context, testProvider)),
@@ -74,7 +69,7 @@ class _TestScreenState extends State<TestScreen> {
         child: Column(
           children: [
             _pictureWidget(context),
-            Text(
+            const Text(
               AppStrings.ifmHelp,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
@@ -89,7 +84,7 @@ class _TestScreenState extends State<TestScreen> {
     return Expanded(
       child: Column(
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.all(8.0),
             child: Text(
               ServiceTools.facilityName,
@@ -98,18 +93,15 @@ class _TestScreenState extends State<TestScreen> {
           ),
           Padding(
             padding: const EdgeInsets.all(5.0),
-            child: Text(AppStrings.device +
-                context.read<TestProvider>().deviceModel.toString()),
+            child: Text(AppStrings.device + context.read<TestProvider>().deviceModel.toString()),
           ),
           Padding(
             padding: const EdgeInsets.all(5.0),
-            child: Text(AppStrings.os +
-                context.read<TestProvider>().deviceOS.toString()),
+            child: Text(AppStrings.os + context.read<TestProvider>().deviceOS.toString()),
           ),
           Padding(
             padding: const EdgeInsets.all(5.0),
-            child: Text(AppStrings.appVersion +
-                context.read<TestProvider>().appVersion.toString()),
+            child: Text(AppStrings.appVersion + context.read<TestProvider>().appVersion.toString()),
           ),
           Expanded(
             flex: 4,
@@ -117,7 +109,7 @@ class _TestScreenState extends State<TestScreen> {
               padding: const EdgeInsets.all(10.0),
               child: Column(
                 children: [
-                  Text(
+                  const Text(
                     AppStrings.connectionTime,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
@@ -132,15 +124,13 @@ class _TestScreenState extends State<TestScreen> {
     );
   }
 
-  Widget _buttonsAndTestResultWidget(
-      BuildContext context, TestProvider testProvider) {
+  Widget _buttonsAndTestResultWidget(BuildContext context, TestProvider testProvider) {
     return Expanded(
       child: Column(
         children: [
           // buttonNotify(context, AppStrings.issueNotify, onPressFunction,
           //     _controllerButton),
-          buttonTest(context, AppStrings.accessTest.tr(), testProvider,
-              _controllerButton),
+          buttonTest(context, AppStrings.accessTest.tr(), testProvider, _controllerButton),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -186,8 +176,7 @@ class _TestScreenState extends State<TestScreen> {
   }
 }
 
-SizedBox buttonTest(BuildContext context, String buttonText,
-    TestProvider testProvider, controllerButton) {
+SizedBox buttonTest(BuildContext context, String buttonText, TestProvider testProvider, controllerButton) {
   return SizedBox(
     width: context.width * 0.7,
     child: Padding(
@@ -206,19 +195,15 @@ SizedBox buttonTest(BuildContext context, String buttonText,
         valueColor: Colors.white,
         borderRadius: 12,
         child: Center(
-          child: Text(
-              buttonText == AppStrings.accessTest
-                  ? AppStrings.accessTest
-                  : AppStrings.accessTest,
-              style: const TextStyle(color: Colors.white)),
+          child:
+              Text(buttonText == AppStrings.accessTest ? AppStrings.accessTest : AppStrings.accessTest, style: const TextStyle(color: Colors.white)),
         ),
       ),
     ),
   );
 }
 
-SizedBox buttonNotify(BuildContext context, String buttonText, onPressFunction,
-    controllerButton) {
+SizedBox buttonNotify(BuildContext context, String buttonText, onPressFunction, controllerButton) {
   return SizedBox(
     width: context.width * 0.7,
     child: Padding(
@@ -231,11 +216,8 @@ SizedBox buttonNotify(BuildContext context, String buttonText, onPressFunction,
         valueColor: Colors.white,
         borderRadius: 12,
         child: Center(
-          child: Text(
-              buttonText == AppStrings.accessTest
-                  ? AppStrings.accessTest
-                  : AppStrings.accessTest,
-              style: const TextStyle(color: Colors.white)),
+          child:
+              Text(buttonText == AppStrings.accessTest ? AppStrings.accessTest : AppStrings.accessTest, style: const TextStyle(color: Colors.white)),
         ),
       ),
     ),
