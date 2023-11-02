@@ -225,7 +225,7 @@
 	"Delivery User": "Delivery User",
 	"Efforts": "Efforts",
 	"Create Task": "Create Task",
-	"EffortDuration": "Effort Duration",
+	"EffortDuration": "Effort Duration like hour:minute",
 	"EffortType": "Effort Type",
 	"EnterDescription": "Enter Description",
 	"MaterialList": "Material List",

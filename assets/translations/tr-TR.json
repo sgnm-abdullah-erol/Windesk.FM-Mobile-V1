@@ -227,7 +227,7 @@
 	"Recording Date": "Kayıt Tarihi",
 	"Requesting User": "Talep Eden Kullanıcı",
 	"Delivery User": "Teslimat Kullanıcısı",
-	"EffortDuration": "Effor Süresi",
+	"EffortDuration": "Effor Süresini giriniz saat:dakika seklinde",
 	"EffortType": "Effort Türü",
 	"EnterDescription": "Açıklama Giriniz",
 	"MaterialList": "Malzeme Listesi",
