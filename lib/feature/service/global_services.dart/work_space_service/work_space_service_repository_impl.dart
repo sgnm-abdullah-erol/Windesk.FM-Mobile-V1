@@ -388,7 +388,8 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     int page,
   ) async {
     List<WorkSpaceRequestedMaterialsInventory> workSpaceRequestedMaterials;
-    String url = '${ServiceTools.url.asset_url}/types/getMobileAllTypesWithMeasurementUnitAndAmount?page=1&limit=1000&orderBy=ASC&orderByColumn=name&decision=true&superSet=Spare';
+    String url =
+        '${ServiceTools.url.asset_url}/types/getMobileAllTypesWithMeasurementUnitAndAmount?page=1&limit=1000&orderBy=ASC&orderByColumn=name&decision=true&superSet=Spare';
 
     try {
       final response = await super.dio.get(
@@ -538,8 +539,8 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
           result = TaskResponseEnums.my;
         } else if (response.data == TaskResponseEnums.our.rawValue) {
           result = TaskResponseEnums.our;
-        } else if (response.data == TaskResponseEnums.pendiks.rawValue) {
-          result = TaskResponseEnums.pendiks;
+        } else if (response.data == TaskResponseEnums.pending.rawValue) {
+          result = TaskResponseEnums.pending;
         } else {
           result = TaskResponseEnums.error;
         }

@@ -24,6 +24,11 @@
 	"EnterYourNotes": "Enter Your Notes",
 	"NoteAdded" : "Note Added",
 	"AddNoteError": "Add Note Error",
+	"StateGoToGroup" : "sends to my group",
+	"StateGoToMe" : "sends to me",
+	"StateGoToPending" : "sends to pending",
+	"StateGoToOur" : "sends to our",
+	"StateError": "State Error",
 
 	"----------------SNACKBAR----------": "-----------SNACKBAR--------------",
 	"NoInternetConnection": "No Internet Connection",
