@@ -20,7 +20,7 @@
 	"MaterialError": "Malzeme bulunamadı",
 	"----------------SNACKBAR----------": "-----------SNACKBAR--------------",
 	"NoInternetConnection": "İnternet bağlantısı yok",
-	"LoginError": "Giriş yapılamadı, lütfen Tekrar deneyiniz",
+	"LoginError": "Giriş yapılamadı, lütfen tekrar deneyiniz",
 	"LogoutSuccess": "Çıkış Yapıldı",
 	"LogoutError": "Çıkış yapılamadı, lütfen tekrar deneyiniz",
 	"LoginTextFieldsEmpty": "Kullanıcı Adı ve Şifre Boş Olamaz",
