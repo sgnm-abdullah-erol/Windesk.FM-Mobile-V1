@@ -10,4 +10,7 @@ enum SharedEnum {
   userNameLogin,
   theme, // 0 light, 1 dark -- boolean check
   rememberMe,
+  deviceModel,
+  appVersion,
+  
 }

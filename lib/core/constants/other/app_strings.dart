@@ -90,4 +90,15 @@ class AppStrings {
   static const materialSearch = 'Varlık Arama';
   static const clean = 'Temizle';
   static const search = 'Ara';
+
+  static const ifmHelp = 'IFM';
+  static const device = 'Cihaz : ';
+  static const os = 'OS : ';
+  static const appVersion = 'Uygulama Versiyonu : ';
+  static const connectionTime = 'Bağlantı Zamanı : ';
+  static const phoneTime = 'Telefon Saati : ';
+  static const accessTest = 'Bağlantı Testi';
+  static const ifmSuccess = 'IFM : Erişim Başarılı';
+  static const ifmConnFail = 'IFM : Erişim Başarısız';
+  static const ifmConnWait = 'IFM : Erişim Bekleniyor';
 }
