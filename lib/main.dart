@@ -11,7 +11,6 @@ import 'core/themes/custom_light_theme.dart';
 import 'core/themes/theme_provider.dart';
 import 'feature/global_providers/global_provider.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Init.init();
@@ -45,7 +44,9 @@ class MyApp extends StatelessWidget {
             locale: context.locale,
             routerConfig: _appRouter.config(),
             title: AppStrings.appName,
-            theme: value.isDark ? CustomDarkTheme().darkTheme : CustomLightTheme().lightTheme,
+            theme: value.isDark
+                ? CustomDarkTheme().darkTheme
+                : CustomLightTheme().lightTheme,
           );
         },
       ),
