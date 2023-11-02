@@ -156,26 +156,63 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
       requestSpaceId, requestSpaceLabels, woCategory, woComponent) async {
     String url = '${ServiceTools.url.workorder_url}/task';
 
+    //backenddeki sorundan dolayı yeniden düzenlenecektir. Datalar mock gibi gönderiliyor. Userın ne gönderdiği önemli değil.
+    //TODO
     try {
       final response = await super.dio.post(
             url,
             data: {
-              "name": summary,
-              "requestType": requestType,
-              "requestedBy": [requestedBy],
-              "description": description,
-              "appointmentDate": appointmendData,
-              "templatedBy": [templatedBy],
-              //"requestedComponents": [woComponent],
-              "requestedSpaces": [
-                {
-                  "id": requestSpaceId,
-                  "labels": [requestSpaceLabels]
-                }
-              ],
-              "woCategory": woCategory,
-              "isMobile": true,
-            },
+    "idLabel": {
+        "label": [
+            "WorkSpace"
+        ],
+        "identifier": "412"
+    },
+    "name": summary,
+    "requestType": "RequestType4",
+    "woCategory": "WoCategory2",
+    "requestedBy": [
+        "db5dfb94-75b0-4a3e-928c-d38cbb72c976"
+    ],
+    "description": "ddddd",
+    "priority": "Priority3",
+    "appointmentDate": "2023-11-28 10:33:14",
+    "templatedBy": [
+        "Fault001"
+    ],
+    "requestedComponents": [
+        ""
+    ],
+    "requestedSpaces": [
+        {
+            "id": "704",
+            "labels": [
+                "Building"
+            ]
+        }
+    ],
+    "isMyWork": false,
+    "depended_on": [
+        "416"
+    ]
+},
+            // data: {
+            //   "name": summary,
+            //   "requestType": requestType,
+            //   "requestedBy": [requestedBy],
+            //   "description": description,
+            //   "appointmentDate": appointmendData,
+            //   "templatedBy": [templatedBy],
+            //   //"requestedComponents": [woComponent],
+            //   "requestedSpaces": [
+            //     {
+            //       "id": requestSpaceId,
+            //       "labels": [requestSpaceLabels]
+            //     }
+            //   ],
+            //   "woCategory": woCategory,
+            //   "isMobile": true,
+            // },
             options: Options(
               headers: {'authorization': 'Bearer $token'},
             ),
