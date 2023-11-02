@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'package:flutter/material.dart';
 
 import '../../../../core/database/shared_manager.dart';
@@ -62,7 +64,7 @@ class LoginProvider extends ChangeNotifier {
       _loading = true;
       notifyListeners();
 
-      final response = await _authService.login(userName, password);
+      final response = await _authService.login(userNameController.text, password);
 
       LoginModel loginModel;
 
@@ -72,6 +74,7 @@ class LoginProvider extends ChangeNotifier {
         _userId = login.id.toString();
         print(('objectlogib' + login.id.toString()));
         notifyListeners();
+        print(_userId);
 
         Future.delayed(const Duration(milliseconds: 2000), () async {
           loginModel = login;

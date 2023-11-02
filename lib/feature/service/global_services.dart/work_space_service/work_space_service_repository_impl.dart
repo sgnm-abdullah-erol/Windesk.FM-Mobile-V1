@@ -15,6 +15,7 @@ import '../../../models/work_space/work_space_detail.dart';
 import '../../../models/work_space/work_space_documents.dart';
 import '../../../models/work_space/work_space_efforts.dart';
 import '../../../models/work_space/work_space_my_group_demand_list.dart';
+import '../../../models/work_space/work_space_note.dart';
 import '../../../models/work_space/work_space_requested_materials_inventory.dart';
 import '../../../models/work_space/work_space_requirement_materials_list.dart';
 import '../../../models/work_space/work_space_spareparts.dart';
@@ -842,6 +843,73 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     } catch (error) {
       super.logger.e(error.toString());
       return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<bool> addNoteToWorkOrder(String userToken, String taskId, String value) async {
+    String url = '${ServiceTools.url.workorder_url}/task/add/node/to/task';
+    List<WorkSpaceDetail> workSpaceDetailList = [];
+    try {
+      final response = await super.dio.post(url,
+          options: Options(
+            headers: {'authorization': 'Bearer $userToken'},
+          ),
+          data: [
+            {
+              "label": [
+                "Task",
+              ],
+              "identifier": taskId,
+              "variableName": "note",
+              "value": [
+                value,
+              ],
+            }
+          ]);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = response.data;
+        super.logger.d(data);
+        if (data == 'added') {
+          return true;
+        } else {}
+        return false;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return false;
+    }
+  }
+
+  @override
+  Future<List<WorkSpaceNote>> getWorkSpaceNotes(String taskId, String userToken) async {
+    String url = '${ServiceTools.url.workorder_url}/task/$taskId';
+    List<WorkSpaceDetail> workSpaceDetailList = [];
+    try {
+      final response = await super.dio.get(
+            url,
+            options: Options(
+              headers: {'authorization': 'Bearer $userToken'},
+            ),
+          );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = response.data;
+        super.logger.d(data);
+        if (data['note'] != null) {
+          return WorkSpaceNote.fromJsonList(data['note']);
+        } else {
+          return [];
+        }
+      } else {
+        return [];
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return [];
     }
   }
 }

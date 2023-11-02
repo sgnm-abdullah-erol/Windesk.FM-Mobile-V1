@@ -22,6 +22,12 @@ class LocaleKeys {
   static const String NoReferenceId = 'NoReferenceId';
   static const String Delete = 'Delete';
   static const String LoginTextFieldsEmpty = 'LoginTextFieldsEmpty';
+  static const String Notes = 'Notes';
+  static const String AddNotes = 'AddNotes';
+  static const String AddedNotes = 'AddedNotes';
+  static const String AddNoteError = 'AddNoteError';
+  static const String EnterYourNotes = 'EnterYourNotes';
+  static const String NoteAdded = 'NoteAdded';
 
   // static const ----------SNACKBAR---------- = '----------SNACKBAR----------;
   static const String NoInternetConnection = 'NoInternetConnection';
@@ -224,7 +230,6 @@ class LocaleKeys {
   static const String StartDate = 'Start Date';
   static const String EndDate = 'End Date';
   static const String EffortsNotFound = 'Efforts Not Found';
-  static const String Notes = 'Notes';
   static const String UsedSpareParts = 'Used Spare Parts';
   static const String UsedAmount = 'Used Amount';
   static const String MaterialRequests = 'Material Requests';

@@ -81,7 +81,7 @@ class WorkOrderAddMaterialSheetProvider extends ChangeNotifier {
 
   void addSparepart(BuildContext context, String taskId) async {
     if (wantedMaterialAmount == '0' || wantedMaterialAmount.isEmpty || choosenMaterial.isEmpty) {
-      snackBar(context, LocaleKeys.EmptyMaterialWantedAmount, 'error');
+      snackBar(context, LocaleKeys.EmptyMaterialWantedAmount.tr(), 'error');
       Navigator.of(context).pop();
 
       return;

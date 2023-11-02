@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:vm_fm_4/feature/models/work_space/work_space_note.dart';
 
 import '../../../../core/enums/task_node_enums.dart';
 import '../../../../core/enums/task_response_enums.dart';
@@ -93,4 +94,8 @@ abstract class WorkSpaceServiceRepository {
   Future<bool> deleteNodeFromTask(String userToken, String taskId, String labelId, TaskNodeEnums labelType);
 
   Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getGroupWorkOrders(String userToken);
+
+  Future<bool> addNoteToWorkOrder(String userToken, String taskId, String value);
+
+  Future<List<WorkSpaceNote>> getWorkSpaceNotes(String taskId, String userToken);
 }
