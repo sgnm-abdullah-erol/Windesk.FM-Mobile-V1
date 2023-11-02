@@ -372,7 +372,6 @@ class WorkOrderDetailProvider extends ChangeNotifier {
       snackBar(context, LocaleKeys.EmptyEffortFields.tr(), 'error');
       return;
     }
-
     String userToken = await SharedManager().getString(SharedEnum.userToken);
 
     _isLoading = true;

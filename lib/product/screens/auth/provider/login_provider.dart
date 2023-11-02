@@ -109,15 +109,13 @@ class LoginProvider extends ChangeNotifier {
 
   Future<void> _setTokenToPreferences(String refreshToken, String userId) async {
 
-    if (_userToken != '' && _userNameController.text != '' && refreshToken != '' && userId != '' && userId != 'null') {
-
       await SharedManager().setString(SharedEnum.userNameLogin, _userNameController.text);
       await SharedManager().setString(SharedEnum.userToken, _userToken);
       await SharedManager().setString(SharedEnum.userName, _userNameController.text);
       await SharedManager().setString(SharedEnum.refreshToken, refreshToken);
       await SharedManager().setString(SharedEnum.userId, userId);
       await SharedManager().setBool(SharedEnum.rememberMe, _rememberMe);
-    }
+    
   }
 
   // void _setUserName(BuildContext context) async {

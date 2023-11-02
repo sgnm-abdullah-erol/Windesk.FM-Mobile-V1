@@ -88,11 +88,13 @@ class DetailWorkOrderScreen extends StatelessWidget {
                           children: [
                             CustomWorkSpaceDetailCard(workSpaceDetail: woDetailProvider.detail, workOrderDetailProvider: woDetailProvider),
                             const SizedBox(height: 10),
-                            (woDetailProvider.detail.task?.userId ?? '') != context.read<GlobalProvider>().userId
+                            //deneme için eklendi. Servis sorunundan sonra düzeltilecek context.read<GlobalProvider>().userId 
+                            //TODO
+                            (woDetailProvider.detail.task?.user ?? '') != 'user1'
                                 ? _TakeItOnMe(provider: woDetailProvider)
                                 : _StateChangeDropDownButton(provider: woDetailProvider),
                             const SizedBox(height: 20),
-                            (woDetailProvider.detail.task?.userId ?? '') != context.read<GlobalProvider>().userId
+                            (woDetailProvider.detail.task?.user ?? '') != 'user1'
                                 ? const SizedBox()
                                 : _customPageAccordionSection(context, woDetailProvider),
                           ],
