@@ -286,7 +286,7 @@ class WoCreateProvider extends ChangeNotifier {
         _requestedLabel = _woFloorList.children![i].labels![0].toString();
       }
     }
-    lazyList(_buildKey, _lazyType);
+    lazyList(_floorKey, _lazyType);
     notifyListeners();
   }
 
@@ -296,11 +296,11 @@ class WoCreateProvider extends ChangeNotifier {
       if (_woSpaceList.children?[i].name == newValue) {
         //_spaceKey = _woSpaceList.children?[i].key ?? '';
         _lazyType = _woSpaceList.children?[i].labels?[0] ?? '';
-        _requestedId = _woSpaceList.children![i].id.toString();
-        _requestedLabel = _woSpaceList.children![i].labels![0].toString();
+        _requestedId = _woSpaceList.children?[i].id.toString() ?? '';
+        _requestedLabel = _woSpaceList.children?[i].labels?[0].toString() ?? '';
       }
     }
-    lazyList(_buildKey, _lazyType);
+    //lazyList(_buildKey, _lazyType);
     notifyListeners();
   }
 

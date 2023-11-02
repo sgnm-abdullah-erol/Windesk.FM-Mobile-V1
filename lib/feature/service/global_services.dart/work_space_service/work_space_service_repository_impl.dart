@@ -398,8 +398,8 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
               //   "limit": 10000,
               //   "orderBy": "ASC",
               //   "orderByColumn": "name",
-              //   "superSet": "Spare",
-              //   "withSpare": true,
+              //   "decision": "true",
+              //   "superSet": Spare,
               // }
             },
             options: Options(
