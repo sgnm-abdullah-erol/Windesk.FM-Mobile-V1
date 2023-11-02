@@ -155,6 +155,27 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
   Future<Either<dynamic, CustomServiceException>> createTask(token, summary, requestType, requestedBy, description, appointmendData, templatedBy,
       requestSpaceId, requestSpaceLabels, woCategory, woComponent) async {
     String url = '${ServiceTools.url.workorder_url}/task';
+    print('adsasdsdasadasdasdsda' +
+        '::: ' +
+        summary.toString() +
+        '::: ' +
+        requestType.toString() +
+        '::: ' +
+        requestedBy.toString() +
+        '::: ' +
+        description.toString() +
+        '::: ' +
+        appointmendData.toString() +
+        '::: ' +
+        templatedBy.toString() +
+        '::: ' +
+        requestSpaceId.toString() +
+        '::: ' +
+        requestSpaceLabels.toString() +
+        '::: ' +
+        woCategory.toString() +
+        '::: ' +
+        woComponent);
 
     try {
       final response = await super.dio.post(
@@ -166,7 +187,7 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
               "description": description,
               "appointmentDate": appointmendData,
               "templatedBy": [templatedBy],
-              "requestedComponents": [woComponent],
+              //"requestedComponents": [woComponent],
               "requestedSpaces": [
                 {
                   "id": requestSpaceId,

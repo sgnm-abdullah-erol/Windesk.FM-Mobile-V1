@@ -13,8 +13,9 @@ import 'auth_service_repository.dart';
 class AuthServiceRepositoryImpl extends AuthServiceRepository {
   @override
   Future<Either<LoginModel, CustomServiceException>> login(String username, String password) async {
+
     @override
-    String url = '${ServiceTools.url.users_url}/user/loginMobile';
+    String url = '${ServiceTools.url.users_url}/user/login';
     String firebaseToken = await SharedManager().getString(SharedEnum.firebaseToken);
     try {
       final response = await super.dio.post(
