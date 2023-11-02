@@ -394,7 +394,16 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     try {
       final response = await super.dio.get(
             url,
-            data: {},
+            data: {
+              // "options": {
+              //   "page": 1,
+              //   "limit": 10000,
+              //   "orderBy": "ASC",
+              //   "orderByColumn": "name",
+              //   "superSet": "Spare",
+              //   "withSpare": true,
+              // }
+            },
             options: Options(
               headers: {
                 'authorization': 'Bearer $token',
