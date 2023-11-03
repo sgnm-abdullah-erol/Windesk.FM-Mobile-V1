@@ -183,13 +183,13 @@ class WorkOrderDetailProvider extends ChangeNotifier {
           {
             _isTaskStateChange = true,
             _finishTask = true,
-            _selectedTaskState = LocaleKeys.stateFinished.tr(),
+            _selectedTaskState = LocaleKeys.StateFinished.tr(),
           }
         else if (l == TaskResponseEnums.end)
           {
             _isTaskStateChange = true,
             _finishTask = true,
-            _selectedTaskState = LocaleKeys.stateFinished.tr(),
+            _selectedTaskState = LocaleKeys.StateFinished.tr(),
           }
         else if (l == TaskResponseEnums.error)
           {
@@ -252,10 +252,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
   void setEffortDescription(String value) => _effortDescription = value;
   void setEffortType(String value) => _effortType = value;
-  void setEffortDuration(String value) {
-    _effortDuration = value;
-    print(_effortDuration);
-  }
+  void setEffortDuration(String value) => _effortDuration = value;
 
   void setStartEffortDate(String value) {
     _startEffortDate = value;

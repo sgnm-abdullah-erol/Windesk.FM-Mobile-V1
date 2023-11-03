@@ -525,9 +525,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     String url = '${ServiceTools.url.workorder_url}/task/change/approve/state/of/task';
     TaskResponseEnums result;
 
-    print(taskId);
-    print(nextStateId);
-
     try {
       final response = await super.dio.post(
             url,
@@ -864,8 +861,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   Future<bool> addNoteToWorkOrder(String userToken, String taskId, String value) async {
     String url = '${ServiceTools.url.workorder_url}/task/add/node/to/task';
     List<WorkSpaceDetail> workSpaceDetailList = [];
-    print(taskId);
-    print(value);
     try {
       final response = await super.dio.post(url,
           options: Options(
@@ -904,7 +899,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   Future<List<WorkSpaceNote>> getWorkSpaceNotes(String taskId, String userToken) async {
     String url = '${ServiceTools.url.workorder_url}/task/$taskId';
     List<WorkSpaceDetail> workSpaceDetailList = [];
-    print(taskId);
     try {
       final response = await super.dio.get(
             url,

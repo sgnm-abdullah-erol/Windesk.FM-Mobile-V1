@@ -1,4 +1,4 @@
-enum TaskNodeEnums { effort, spare, document }
+enum TaskNodeEnums { effort, spare, document, note }
 
 extension TaskNodeExtension on TaskNodeEnums {
   String get name {
@@ -9,6 +9,8 @@ extension TaskNodeExtension on TaskNodeEnums {
         return 'Spare';
       case TaskNodeEnums.document:
         return 'Document';
+      case TaskNodeEnums.note:
+        return 'Note';
       default:
         return '';
     }
@@ -22,6 +24,8 @@ extension TaskNodeExtension on TaskNodeEnums {
         return 'usedSpareOf';
       case TaskNodeEnums.document:
         return 'attachedDocuments';
+      case TaskNodeEnums.note:
+        return 'note';
       default:
         return '';
     }

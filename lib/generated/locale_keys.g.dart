@@ -33,7 +33,9 @@ class LocaleKeys {
   static const String StateGoToPending = 'StateGoToPending';
   static const String StateGoToOur = 'StateGoToOur';
   static const String StateError = 'StateError';
-  static const String stateFinished = 'StateFinished';
+  static const String StateFinished = 'StateFinished';
+  static const String DeleteNote = 'DeleteNote';
+  static const String Note = 'Note';
 
   // static const ----------SNACKBAR---------- = '----------SNACKBAR----------;
   static const String NoInternetConnection = 'NoInternetConnection';

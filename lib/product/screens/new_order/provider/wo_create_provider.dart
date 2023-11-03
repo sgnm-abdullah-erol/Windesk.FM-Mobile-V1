@@ -402,7 +402,7 @@ class WoCreateProvider extends ChangeNotifier {
           _woSpaceList = l,
           for (var i = 0; i < (_woSpaceList.children?.length ?? 0); i++)
             {
-              _woSpaceListChildren.add('${_woSpaceList.children?[i].name}-${_woSpaceList.children?[i].key}' ?? ''),
+              _woSpaceListChildren.add('${_woSpaceList.children?[i].name}-${_woSpaceList.children?[i].key}'),
             }
         },
         (r) => {},

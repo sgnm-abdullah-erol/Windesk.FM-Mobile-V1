@@ -29,7 +29,8 @@
 	"StateGoToPending" : "sends to pending",
 	"StateGoToOur" : "sends to our",
 	"StateError": "State Error",
-
+	"DeleteNote": "Delete Note",
+	"Note": "Note",
 	"----------------SNACKBAR----------": "-----------SNACKBAR--------------",
 	"NoInternetConnection": "No Internet Connection",
 	"LoginError": "Cant Login, Please Try Again",

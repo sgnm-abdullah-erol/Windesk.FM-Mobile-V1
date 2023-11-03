@@ -29,7 +29,8 @@
 	"StateGoToPending" : "onay bekleyenlere gönderilmiştir",
 	"StateFinished" : "işlem tamamlanmıştı",
 	"StateError": "Durum Bulunamadı",
-
+	"DeleteNote": "Not Sil",
+	"Note": "Not",
 	"----------------SNACKBAR----------": "-----------SNACKBAR--------------",
 	"NoInternetConnection": "İnternet bağlantısı yok",
 	"LoginError": "Giriş yapılamadı, lütfen tekrar deneyiniz",

@@ -156,29 +156,7 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
       requestSpaceId, requestSpaceLabels, woCategory, woComponent) async {
     String url = '${ServiceTools.url.workorder_url}/task';
 
-    print('wocreate' +
-        ':::' +
-        summary +
-        ':::' +
-        requestType +
-        ':::' +
-        requestedBy +
-        ':::' +
-        description +
-        ':::' +
-        appointmendData +
-        ':::' +
-        templatedBy +
-        ':::' +
-        requestSpaceId +
-        ':::' +
-        requestSpaceLabels +
-        ':::' +
-        woCategory +
-        ':::' +
-        woComponent);
     //backenddeki sorundan dolayı yeniden düzenlenecektir. Datalar mock gibi gönderiliyor. Userın ne gönderdiği önemli değil.
-    //TODO
     try {
       final response = await super.dio.post(
             url,
