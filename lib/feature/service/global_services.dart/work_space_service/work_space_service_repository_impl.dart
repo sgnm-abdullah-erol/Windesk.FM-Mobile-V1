@@ -525,6 +525,9 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     String url = '${ServiceTools.url.workorder_url}/task/change/approve/state/of/task';
     TaskResponseEnums result;
 
+    print(taskId);
+    print(nextStateId);
+
     try {
       final response = await super.dio.post(
             url,
@@ -539,17 +542,22 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
             ),
           );
 
+      super.logger.d(response);
+      // TODO bazilarindan end geliyor bazilarindan finished
+
       if (response.statusCode == 200 || response.statusCode == 201) {
         super.logger.i(response.data);
 
-        if (response.data == TaskResponseEnums.end.rawValue) {
-          result = TaskResponseEnums.end;
+        if (response.data == TaskResponseEnums.finished.rawValue) {
+          result = TaskResponseEnums.finished;
         } else if (response.data == TaskResponseEnums.my.rawValue) {
           result = TaskResponseEnums.my;
         } else if (response.data == TaskResponseEnums.our.rawValue) {
           result = TaskResponseEnums.our;
         } else if (response.data == TaskResponseEnums.pending.rawValue) {
           result = TaskResponseEnums.pending;
+        } else if (response.data == TaskResponseEnums.end.rawValue) {
+          result = TaskResponseEnums.end;
         } else {
           result = TaskResponseEnums.error;
         }
@@ -856,6 +864,8 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   Future<bool> addNoteToWorkOrder(String userToken, String taskId, String value) async {
     String url = '${ServiceTools.url.workorder_url}/task/add/node/to/task';
     List<WorkSpaceDetail> workSpaceDetailList = [];
+    print(taskId);
+    print(value);
     try {
       final response = await super.dio.post(url,
           options: Options(
@@ -894,6 +904,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   Future<List<WorkSpaceNote>> getWorkSpaceNotes(String taskId, String userToken) async {
     String url = '${ServiceTools.url.workorder_url}/task/$taskId';
     List<WorkSpaceDetail> workSpaceDetailList = [];
+    print(taskId);
     try {
       final response = await super.dio.get(
             url,
