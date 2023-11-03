@@ -47,4 +47,5 @@ class AppIcons {
   static const IconData personal = Icons.person;
   static const IconData people = Icons.people;
   static const IconData download = Icons.download;
+  static const IconData change = Icons.change_circle;
 }
