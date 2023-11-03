@@ -147,7 +147,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
               headers: {'authorization': 'Bearer $token'},
             ),
           );
-
       final data = response.data['children'][0];
       assetListModel = AssetListModel.fromJson(data);
 

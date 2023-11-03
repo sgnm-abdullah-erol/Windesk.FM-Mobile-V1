@@ -155,30 +155,7 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
   Future<Either<dynamic, CustomServiceException>> createTask(token, summary, requestType, requestedBy, description, appointmendData, templatedBy,
       requestSpaceId, requestSpaceLabels, woCategory, woComponent) async {
     String url = '${ServiceTools.url.workorder_url}/task';
-
-    print('wocreate' +
-        ':::' +
-        summary +
-        ':::' +
-        requestType +
-        ':::' +
-        requestedBy +
-        ':::' +
-        description +
-        ':::' +
-        appointmendData +
-        ':::' +
-        templatedBy +
-        ':::' +
-        requestSpaceId +
-        ':::' +
-        requestSpaceLabels +
-        ':::' +
-        woCategory +
-        ':::' +
-        woComponent);
-    //backenddeki sorundan dolayı yeniden düzenlenecektir. Datalar mock gibi gönderiliyor. Userın ne gönderdiği önemli değil.
-    //TODO
+    //templatedBy kısmı direkt olarak gönderilmektedir. kullanıcıdan gelen bilgiyle değiştirilecek
     try {
       final response = await super.dio.post(
             url,
