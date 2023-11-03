@@ -157,6 +157,7 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
     String url = '${ServiceTools.url.workorder_url}/task';
 
     //backenddeki sorundan dolayı yeniden düzenlenecektir. Datalar mock gibi gönderiliyor. Userın ne gönderdiği önemli değil.
+    //templatedBy kısmı direkt olarak gönderilmektedir. kullanıcıdan gelen bilgiyle değiştirilecek
     try {
       final response = await super.dio.post(
             url,

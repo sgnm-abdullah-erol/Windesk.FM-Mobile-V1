@@ -19,6 +19,9 @@ class SearchMaterialProvider extends ChangeNotifier {
   bool _isSuccess = false;
   bool get isSuccess => _isSuccess;
 
+  bool _errorAccure = false;
+  bool get errorAccure => _errorAccure;
+
   bool _imageExist = false;
   bool get imageExist => _imageExist;
 
@@ -51,7 +54,7 @@ class SearchMaterialProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  getAssetWithSearch() async {
+  void getAssetWithSearch() async {
     if (assetNumber.text != '') {
       _imageModel.clear();
       _documentModel.clear();
@@ -66,6 +69,7 @@ class SearchMaterialProvider extends ChangeNotifier {
       result.fold(
           (l) => {
                 _assetDetailList = l,
+                _isSuccess = true,
                 if (l.images!.isNotEmpty)
                   {
                     for (int i = 0; i < l.images!.length; i++) {_imageModel.add(l.images![i])},
@@ -76,14 +80,19 @@ class SearchMaterialProvider extends ChangeNotifier {
                     for (int i = 0; i < l.documents!.length; i++) {_documentModel.add(l.documents![i])},
                     _documentExist = true,
                   },
-                _isSuccess = true
               }, (r) {
-        _isSuccess = true;
+        _errorAccure = true;
         _assetDetailList = null;
       });
 
       _isLoading = false;
       notifyListeners();
+
+      Future.delayed(const Duration(seconds: 2), () {
+        _isSuccess = false;
+        _errorAccure = false;
+        notifyListeners();
+      });
     }
   }
 

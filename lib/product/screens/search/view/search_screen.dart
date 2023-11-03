@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
 
 import '../../../../../../../feature/components/appbar/custom_main_appbar.dart';
 import '../../../../../../../feature/components/buttons/custom_half_buttons.dart';
@@ -28,7 +29,9 @@ class _SearchMaterialScreenState extends State<SearchMaterialScreen> {
     return ChangeNotifierProvider(
       create: (context) => SearchMaterialProvider(),
       child: Consumer<SearchMaterialProvider>(builder: (context, SearchMaterialProvider searchProvider, child) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
         if (searchProvider.isSuccess) {
+          snackBar(context, LocaleKeys.assetSearchSuccess, 'success');
           if (searchProvider.assetDetailList != null) {
             context.router.push(AssetDetailScreen(
                 assetListModel: searchProvider.assetDetailList!,
@@ -39,7 +42,10 @@ class _SearchMaterialScreenState extends State<SearchMaterialScreen> {
             searchProvider.clearInput();
           }
         }
-
+        if (searchProvider.errorAccure) {
+          snackBar(context, LocaleKeys.assetSearchError, 'error');
+        }
+        });
         return Scaffold(
           appBar: CustomMainAppbar(title: const Text(LocaleKeys.MaterialSearch).tr(), elevation: 3),
           body: searchProvider.isLoading

@@ -108,6 +108,6 @@ class AssetListModel extends Equatable {
         warrantyGuarantorParts,
         warrantyDurationUnit,
         structure,
-        documents
+        documents,
       ];
 }

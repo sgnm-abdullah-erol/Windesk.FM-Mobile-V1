@@ -45,7 +45,7 @@ class AssetDetailScreen extends StatelessWidget {
                 firstLabel: LocaleKeys.serialNo,
                 secondLabel: LocaleKeys.structureName,
                 firstValue: assetListModel.serialNo ?? '',
-                secondValue: '',
+                secondValue: assetListModel.structure['properties']['name'],
               ),
             ),
           ),
@@ -138,8 +138,12 @@ class _DoubleRowInformation extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(secondLabel, style: Theme.of(context).textTheme.bodyMedium),
-            Text(secondValue, style: Theme.of(context).textTheme.bodyMedium),
+            Text(
+              secondLabel,
+              style: Theme.of(context).textTheme.bodyMedium,
+              overflow: TextOverflow.ellipsis,
+            ),
+            Flexible(child: Text(secondValue, style: Theme.of(context).textTheme.bodyMedium, overflow: TextOverflow.ellipsis)),
           ],
         ),
       ],

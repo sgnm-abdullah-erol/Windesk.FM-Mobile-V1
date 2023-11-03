@@ -8,6 +8,11 @@ import 'package:flutter/material.dart';
 class LocaleKeys {
   const LocaleKeys._();
 
+  // asset search
+  static const String assetSearchSuccess = 'Malzeme Arama Başarılı';
+  static const String assetSearchError = 'Malzeme Arama Başarısız';
+
+
   // static const ----------App---------- = '----------App----------;
   static const String IfmName = 'IfmName';
   static const String AppName = 'Windesk FM Mobile V1';
