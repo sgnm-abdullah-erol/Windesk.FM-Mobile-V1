@@ -1,4 +1,6 @@
-enum TaskResponseEnums { my, our, pending, end, error }
+import 'package:vm_fm_4/feature/models/work_space/work_space_task.dart';
+
+enum TaskResponseEnums { my, our, pending, finished, error, end }
 
 extension TaskResponseEnumsExtension on TaskResponseEnums {
   String get rawValue {
@@ -9,8 +11,10 @@ extension TaskResponseEnumsExtension on TaskResponseEnums {
         return 'our';
       case TaskResponseEnums.pending:
         return 'pending';
-      case TaskResponseEnums.end:
+      case TaskResponseEnums.finished:
         return 'finished';
+      case TaskResponseEnums.end:
+        return 'end';
       case TaskResponseEnums.error:
         return 'error';
       default:

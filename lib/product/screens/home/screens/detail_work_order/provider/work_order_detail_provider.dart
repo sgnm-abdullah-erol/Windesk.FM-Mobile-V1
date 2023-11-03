@@ -179,6 +179,12 @@ class WorkOrderDetailProvider extends ChangeNotifier {
             _isTaskStateChange = true,
             _selectedTaskState = LocaleKeys.StateGoToPending.tr(),
           }
+        else if (l == TaskResponseEnums.finished)
+          {
+            _isTaskStateChange = true,
+            _finishTask = true,
+            _selectedTaskState = LocaleKeys.stateFinished.tr(),
+          }
         else if (l == TaskResponseEnums.end)
           {
             _isTaskStateChange = true,

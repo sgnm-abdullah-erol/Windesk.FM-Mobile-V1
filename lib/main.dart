@@ -44,9 +44,7 @@ class MyApp extends StatelessWidget {
             locale: context.locale,
             routerConfig: _appRouter.config(),
             title: AppStrings.appName,
-            theme: value.isDark
-                ? CustomDarkTheme().darkTheme
-                : CustomLightTheme().lightTheme,
+            theme: value.isDark ? CustomDarkTheme().darkTheme : CustomLightTheme().lightTheme,
           );
         },
       ),
