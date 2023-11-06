@@ -256,7 +256,6 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
   void setStartEffortDate(String value) {
     _startEffortDate = value;
-    notifyListeners();
   }
 
   void setEndEffortDate(String value) => _endEffortDate = value;

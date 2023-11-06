@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import '../../../core/constants/other/app_icons.dart';
 
 class TextFieldTimePicker extends StatefulWidget {
-  const TextFieldTimePicker({super.key, required this.label, required this.onTap});
+  const TextFieldTimePicker({super.key, required this.label, required this.onTap, this.disable});
 
+  final bool? disable;
   final String label;
   final Function onTap;
 
@@ -20,6 +21,7 @@ class _TextFieldTimePickerState extends State<TextFieldTimePicker> {
     return TextFormField(
       controller: _controller,
       style: Theme.of(context).textTheme.bodyMedium,
+      enabled: widget.disable ?? true,
       decoration: InputDecoration(
         icon: const Icon(AppIcons.time),
         labelText: widget.label,

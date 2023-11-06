@@ -205,10 +205,10 @@ class LocaleKeys {
   static const String Username = 'Username: ';
   static const String Timezone = 'Timezone: ';
   // time
-  static const String Day = 'day';
-  static const String Hour = 'hour';
-  static const String Minute = 'minute';
-  static const String Second = 'second';
+  static const String Day = 'Day';
+  static const String Hour = 'Hour';
+  static const String Minute = 'Minute';
+  static const String Second = 'Second';
 
   // static const --------WORKORDER-------- = '--------WORKORDER--------';
   static const String MyWorks = 'My Works';

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:numberpicker/numberpicker.dart';
 
 import '../../../generated/locale_keys.g.dart';
 import '../../extensions/context_extension.dart';
@@ -29,25 +30,27 @@ class AddEffortsModalBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) => _bodyWidget(context);
 
   Widget _bodyWidget(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.66,
-      width: context.width,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
-        child: Column(
-          children: [
-            Expanded(
-              flex: 70,
-              child: _Inputs(
-                selectedStartDate: selectedStartDate,
-                selectedEndDate: selectedEndtDate,
-                selectedEffortDuration: selectedEffortDuration,
-                selectedEffortType: selectedEffortType,
-                selectedDescription: selectedDescription,
+    return SingleChildScrollView(
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.75,
+        width: context.width,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
+          child: Column(
+            children: [
+              Expanded(
+                flex: 80,
+                child: _Inputs(
+                  selectedStartDate: selectedStartDate,
+                  selectedEndDate: selectedEndtDate,
+                  selectedEffortDuration: selectedEffortDuration,
+                  selectedEffortType: selectedEffortType,
+                  selectedDescription: selectedDescription,
+                ),
               ),
-            ),
-            Expanded(flex: 30, child: _InputButton(onPressed: addEffortFunction)),
-          ],
+              Expanded(flex: 20, child: _InputButton(onPressed: addEffortFunction)),
+            ],
+          ),
         ),
       ),
     );
@@ -94,6 +97,8 @@ class _Inputs extends StatefulWidget {
 
 class _InputsState extends State<_Inputs> {
   final TextEditingController _initialController = TextEditingController();
+  int _hour = 0;
+  int _minute = 0;
 
   void setInitialController(String value) => setState(() {
         _initialController.text = value;
@@ -120,17 +125,48 @@ class _InputsState extends State<_Inputs> {
             initialDate: _initialController.text.isEmpty ? DateTime.now() : DateTime.parse(_initialController.text),
           ),
         ),
+        SizedBox(height: context.height * 0.02),
         Expanded(
-            flex: 10,
-            child: TextFieldsInputUnderline(
-              hintText: LocaleKeys.EffortDuration.tr(),
-              onChanged: (value) => widget.selectedEffortDuration(value),
-            )
-            // child: TextFieldTimePicker(
-            //   label: LocaleKeys.EffortDuration.tr(),
-            //   onTap: (value) => widget.selectedEffortDuration(value),
-            // ),
-            ),
+          flex: 25,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                children: [
+                  Text(LocaleKeys.Hour.tr()),
+                  NumberPicker(
+                    minValue: 0,
+                    maxValue: 999,
+                    value: _hour,
+                    onChanged: (val) {
+                      setState(() {
+                        _hour = val;
+                      });
+                      _setEffortDuration();
+                    },
+                  ),
+                ],
+              ),
+              const SizedBox(width: 25),
+              Column(
+                children: [
+                  Text(LocaleKeys.Minute.tr()),
+                  NumberPicker(
+                    minValue: 0,
+                    maxValue: 59,
+                    value: _minute,
+                    onChanged: (val) {
+                      setState(() {
+                        _minute = val;
+                      });
+                      _setEffortDuration();
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
         SizedBox(height: context.height * 0.02),
         Expanded(
           flex: 10,
@@ -150,5 +186,11 @@ class _InputsState extends State<_Inputs> {
         )
       ],
     );
+  }
+
+  void _setEffortDuration() {
+    String formattedMinute = _minute < 10 ? '0$_minute' : '$_minute';
+    String formattedHour = _hour < 10 ? '0$_hour' : '$_hour';
+    widget.selectedEffortDuration('$formattedHour:$formattedMinute');
   }
 }
