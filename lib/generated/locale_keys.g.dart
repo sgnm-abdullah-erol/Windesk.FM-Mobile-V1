@@ -41,6 +41,7 @@ class LocaleKeys {
   static const String DeleteNote = 'DeleteNote';
   static const String Note = 'Note';
   static const String Location = 'Location';
+  static const String WantedMaterialAmountBiggerThanHintAmount = 'WantedMaterialAmountBiggerThanHintAmount';
 
   // static const ----------SNACKBAR---------- = '----------SNACKBAR----------;
   static const String NoInternetConnection = 'NoInternetConnection';

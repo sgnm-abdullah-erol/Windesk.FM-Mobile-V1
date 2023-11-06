@@ -32,6 +32,7 @@
 	"DeleteNote": "Delete Note",
 	"Note": "Note",
 	"Location": "Location",
+	"WantedMaterialAmountBiggerThanHintAmount": "Wanted Material Amount Bigger Than Current Amount",
 	"----------------SNACKBAR----------": "-----------SNACKBAR--------------",
 	"NoInternetConnection": "No Internet Connection",
 	"LoginError": "Cant Login, Please Try Again",

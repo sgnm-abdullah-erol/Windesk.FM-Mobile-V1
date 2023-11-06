@@ -479,6 +479,11 @@ class WorkOrderDetailProvider extends ChangeNotifier {
       return;
     }
 
+    if ((int.tryParse(wantedMaterialAmount) ?? 0) > (int.tryParse(hintAmount) ?? 0)) {
+      snackBar(context, LocaleKeys.WantedMaterialAmountBiggerThanHintAmount.tr(), 'error');
+      return;
+    }
+
     _isLoading = true;
     notifyListeners();
 
