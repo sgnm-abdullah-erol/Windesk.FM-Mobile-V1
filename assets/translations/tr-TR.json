@@ -36,6 +36,8 @@
 	"EditNoteError" : "Not Düzenlenemedi",
 	"EditNoteSuccess" : "Not Düzenlendi",
 	"EditYourNotes": "Notunuzu Düzenleyiniz",
+	"ChangeLocale" : "Konum Değiştir",
+	"ChangeLocaleText" : "Konum değiştirmek istediğinizden emin misiniz?",
 	"----------------SNACKBAR----------": "-----------SNACKBAR--------------",
 	"NoInternetConnection": "İnternet bağlantısı yok",
 	"LoginError": "Giriş yapılamadı, lütfen tekrar deneyiniz",

@@ -4,6 +4,8 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:vm_fm_4/feature/models/work_space/child_location_structure.dart';
+import 'package:vm_fm_4/feature/models/work_space/main_location_structure.dart';
 
 import '../../../../core/constants/paths/service_tools.dart';
 import '../../../../core/enums/task_node_enums.dart';
@@ -911,6 +913,71 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
         super.logger.d(data);
         if (data['note'] != null) {
           return WorkSpaceNote.fromJsonList(data['note']);
+        } else {
+          return [];
+        }
+      } else {
+        return [];
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return [];
+    }
+  }
+
+  @override
+  Future<MainLocationStructure> getMainLocationStructure(String userToken) async {
+    String url = '${ServiceTools.url.location_url}/structures';
+    try {
+      final response = await super.dio.get(
+            url,
+            options: Options(
+              headers: {'authorization': 'Bearer $userToken'},
+            ),
+          );
+
+      print('halooo');
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = response.data;
+        super.logger.d(data);
+        if (data != null) {
+          return MainLocationStructure.fromJson(data);
+        } else {
+          return const MainLocationStructure();
+        }
+      } else {
+        return const MainLocationStructure();
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return const MainLocationStructure();
+    }
+  }
+
+  @override
+  Future<List<ChildLocationStructure>> getChildLocationStructure(String userToken, String key, String label) async {
+    String url = '${ServiceTools.url.location_url}/jointspaces/lazyLoadingByKey/';
+    try {
+      final response = await super.dio.post(
+        url,
+        options: Options(
+          headers: {'authorization': 'Bearer $userToken'},
+        ),
+        data: {
+          "key": key,
+          "leafType": "Space",
+          "rootLabels": [label],
+          "childrenLabels": [],
+        },
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = response.data;
+        super.logger.d(data);
+        if (data != null) {
+          final main = MainLocationStructure.fromJson(data);
+          return main.children ?? [];
         } else {
           return [];
         }

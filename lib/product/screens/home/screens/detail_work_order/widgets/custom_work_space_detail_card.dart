@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:vm_fm_4/core/constants/other/app_icons.dart';
+import 'package:vm_fm_4/feature/components/model_bottom_sheet/change_location_leaf_model_bottom_sheet.dart';
+import 'package:vm_fm_4/feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 
 import '../../../../../../core/constants/other/colors.dart';
@@ -108,7 +110,17 @@ class _LocationInformation extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                IconButton(onPressed: () {}, icon: const Icon(AppIcons.change)),
+                IconButton(
+                  onPressed: () async {
+                    await ShowModalBottomSheet().show(
+                      context,
+                      ChangeLocationLeafModelBottomSheet(
+                        rootTitle: workSpaceDetail.task?.requestedSpaces?.name ?? '',
+                      ),
+                    );
+                  },
+                  icon: const Icon(AppIcons.change),
+                ),
                 Text(
                   workSpaceDetail.task?.requestedSpaces?.name ?? '',
                   style: context.labelMedium.copyWith(color: APPColors.Main.black),

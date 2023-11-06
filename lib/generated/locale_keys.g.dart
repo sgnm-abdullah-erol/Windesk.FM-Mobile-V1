@@ -46,6 +46,8 @@ class LocaleKeys {
   static const String EditNoteError = 'EditNoteError';
   static const String EditNoteSuccess = 'EditNoteSuccess';
   static const String Edit = 'Edit';
+  static const String ChangeLocale = 'ChangeLocale';
+  static const String ChangeLocaleText = 'ChangeLocaleText';
 
   // static const ----------SNACKBAR---------- = '----------SNACKBAR----------;
   static const String NoInternetConnection = 'NoInternetConnection';
