@@ -41,20 +41,13 @@ class LeafLocationProvider extends ChangeNotifier {
 
       _isLoading = false;
       notifyListeners();
-      print(structure);
     }
   }
 
   Future<List<TreeNodeData>> load(TreeNodeData parent) async {
-    print(parent);
-    print(parent.extra);
-
     String userToken = await SharedManager().getString(SharedEnum.userToken);
-    print(parent.extra.split('!!!!')[0]);
-    print(parent.extra.split('!!!!')[1]);
 
     final data = await workSpaceService.getChildLocationStructure(userToken, parent.extra?.split('!!!!')[0], parent.extra?.split('!!!!')[1]);
-    print(data);
 
     List<TreeNodeData> treeNodes = [];
     List<ChildLocationStructure> children = data;
