@@ -12,7 +12,6 @@ class LocaleKeys {
   static const String assetSearchSuccess = 'Malzeme Arama Başarılı';
   static const String assetSearchError = 'Malzeme Arama Başarısız';
 
-
   // static const ----------App---------- = '----------App----------;
   static const String IfmName = 'IfmName';
   static const String AppName = 'Windesk FM Mobile V1';
@@ -32,13 +31,21 @@ class LocaleKeys {
   static const String AddedNotes = 'AddedNotes';
   static const String AddNoteError = 'AddNoteError';
   static const String EnterYourNotes = 'EnterYourNotes';
+  static const String EditYourNotes = 'EditYourNotes';
   static const String NoteAdded = 'NoteAdded';
   static const String StateGoToGroup = 'StateGoToFinished';
   static const String StateGoToMe = 'StateGoToMe';
   static const String StateGoToPending = 'StateGoToPending';
   static const String StateGoToOur = 'StateGoToOur';
   static const String StateError = 'StateError';
-  static const String stateFinished = 'StateFinished';
+  static const String StateFinished = 'StateFinished';
+  static const String DeleteNote = 'DeleteNote';
+  static const String Note = 'Note';
+  static const String Location = 'Location';
+  static const String WantedMaterialAmountBiggerThanHintAmount = 'WantedMaterialAmountBiggerThanHintAmount';
+  static const String EditNoteError = 'EditNoteError';
+  static const String EditNoteSuccess = 'EditNoteSuccess';
+  static const String Edit = 'Edit';
 
   // static const ----------SNACKBAR---------- = '----------SNACKBAR----------;
   static const String NoInternetConnection = 'NoInternetConnection';
@@ -198,10 +205,10 @@ class LocaleKeys {
   static const String Username = 'Username: ';
   static const String Timezone = 'Timezone: ';
   // time
-  static const String Day = 'day';
-  static const String Hour = 'hour';
-  static const String Minute = 'minute';
-  static const String Second = 'second';
+  static const String Day = 'Day';
+  static const String Hour = 'Hour';
+  static const String Minute = 'Minute';
+  static const String Second = 'Second';
 
   // static const --------WORKORDER-------- = '--------WORKORDER--------';
   static const String MyWorks = 'My Works';

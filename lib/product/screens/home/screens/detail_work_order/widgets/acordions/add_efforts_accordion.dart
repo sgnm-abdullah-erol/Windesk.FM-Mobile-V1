@@ -14,9 +14,9 @@ import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/provider/
 import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/widgets/tables/data_table_accordion_efforts.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
 
-import '../../../../../../core/constants/other/app_icons.dart';
-import '../../../../../../core/constants/other/colors.dart';
-import '../provider/work_order_detail_service_provider.dart';
+import '../../../../../../../core/constants/other/app_icons.dart';
+import '../../../../../../../core/constants/other/colors.dart';
+import '../../provider/work_order_detail_service_provider.dart';
 
 class AddEffortsAccordion extends StatelessWidget {
   const AddEffortsAccordion({super.key, required this.provider});

@@ -6,7 +6,7 @@ import '../../../generated/locale_keys.g.dart';
 
 import '../../../core/constants/style/border_radius.dart';
 
-enum DeleteItemType { effort, material, materialRequest, documant }
+enum DeleteItemType { effort, material, materialRequest, documant, note }
 
 extension DeleteItemTypeExtension on DeleteItemType {
   String rawText(BuildContext context) {
@@ -19,6 +19,8 @@ extension DeleteItemTypeExtension on DeleteItemType {
         return LocaleKeys.MaterialRequests.tr();
       case DeleteItemType.documant:
         return LocaleKeys.Document.tr();
+      case DeleteItemType.note:
+        return LocaleKeys.Note.tr();
       default:
         return "";
     }

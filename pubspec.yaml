@@ -94,6 +94,9 @@ dependencies:
   flutter_barcode_scanner: ^2.0.0
   dropdown_search: ^5.0.6
 
+  # number picker
+  numberpicker: ^2.1.2
+
   # file downloader
   flutter_file_downloader: ^1.1.2
   simple_downloader: ^0.0.3+1

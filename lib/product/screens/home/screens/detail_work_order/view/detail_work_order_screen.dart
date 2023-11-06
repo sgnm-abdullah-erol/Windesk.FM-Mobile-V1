@@ -8,7 +8,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
-import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/widgets/add_notes_accordion.dart';
 
 import '../../../../../../core/constants/other/app_icons.dart';
 import '../../../../../../core/constants/other/colors.dart';
@@ -22,11 +21,12 @@ import '../../work_order_list/widgets/custom_base_accordion.dart';
 import '../../work_order_list/widgets/custom_loading_indicator.dart';
 import '../provider/work_order_detail_provider.dart';
 import '../provider/work_order_detail_service_provider.dart';
-import '../widgets/add_documant_accordion.dart';
-import '../widgets/add_efforts_accordion.dart';
-import '../widgets/add_material_accordion.dart';
+import '../widgets/acordions/add_documant_accordion.dart';
+import '../widgets/acordions/add_efforts_accordion.dart';
+import '../widgets/acordions/add_material_accordion.dart';
+import '../widgets/acordions/add_notes_accordion.dart';
 import '../widgets/custom_work_space_detail_card.dart';
-import '../widgets/request_material_accordion.dart';
+import '../widgets/acordions/request_material_accordion.dart';
 
 @RoutePage()
 class DetailWorkOrderScreen extends StatelessWidget {

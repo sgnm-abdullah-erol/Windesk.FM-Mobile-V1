@@ -1,11 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:vm_fm_4/core/constants/other/app_icons.dart';
+import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 
 import '../../../../../../core/constants/other/colors.dart';
 import '../../../../../../core/constants/style/border_radius.dart';
 import '../../../../../../feature/components/buttons/custom_elevated_button_with_icon.dart';
 import '../../../../../../feature/components/dividers/custom_wo_summary_divider.dart';
-import '../../../../../../feature/extensions/context_extension.dart';
 import '../../../../../../feature/models/work_space/work_space_detail.dart';
 import '../../../../../../generated/locale_keys.g.dart';
 import '../provider/work_order_detail_provider.dart';
@@ -66,6 +67,14 @@ class CustomWorkSpaceDetailCard extends StatelessWidget {
             ),
             const CustomWoSummaryDivider(),
             const SizedBox(height: 10),
+            // location
+            _LocationInformation(
+              workSpaceDetail,
+              workOrderDetailProvider,
+            ),
+            const SizedBox(height: 10),
+            const CustomWoSummaryDivider(),
+            const SizedBox(height: 10),
             _DoubleRowInformationComponent(
               firstLabel: LocaleKeys.Presence.tr(),
               secondLabel: LocaleKeys.AssignedPerson.tr(),
@@ -77,6 +86,38 @@ class CustomWorkSpaceDetailCard extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _LocationInformation extends StatelessWidget {
+  const _LocationInformation(this.workSpaceDetail, this.workOrderDetailProvider);
+
+  final WorkSpaceDetail workSpaceDetail;
+  final WorkOrderDetailProvider workOrderDetailProvider;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(flex: 1, child: Text(LocaleKeys.Location.tr(), style: context.bodySmall.copyWith(color: APPColors.Main.black))),
+        Expanded(
+          flex: 2,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                IconButton(onPressed: () {}, icon: const Icon(AppIcons.change)),
+                Text(
+                  workSpaceDetail.task?.requestedSpaces?.name ?? '',
+                  style: context.labelMedium.copyWith(color: APPColors.Main.black),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

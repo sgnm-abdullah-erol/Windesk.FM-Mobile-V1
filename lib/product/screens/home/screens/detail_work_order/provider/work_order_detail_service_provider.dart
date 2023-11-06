@@ -71,14 +71,15 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
       if (labelType.variableName == 'effort') {
         fetchEfforts(taskId, detail.state?.nextStates?.first.id.toString() ?? '');
         snackBar(context, LocaleKeys.DeleteEffort.tr(), 'success');
-      }
-      if (labelType.variableName == 'usedSpareOf') {
+      } else if (labelType.variableName == 'usedSpareOf') {
         fetchSpareparts(taskId);
         snackBar(context, LocaleKeys.DeleteMaterial.tr(), 'success');
-      }
-      if (labelType.variableName == 'attachedDocuments') {
+      } else if (labelType.variableName == 'attachedDocuments') {
         fetchDocumants(taskId);
         snackBar(context, LocaleKeys.DeleteDocument.tr(), 'success');
+      } else if (labelType.variableName == 'note') {
+        fetchNotes(taskId);
+        snackBar(context, LocaleKeys.DeleteNote.tr(), 'success');
       }
     } else if (response == false) {
       snackBar(context, LocaleKeys.DeleteError.tr(), 'error');

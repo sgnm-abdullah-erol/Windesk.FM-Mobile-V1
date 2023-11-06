@@ -107,7 +107,7 @@ class WorkOrderAddMaterialSheetProvider extends ChangeNotifier {
         Navigator.of(context).pop(),
       },
       (r) => {
-        snackBar(context, LocaleKeys.MaterialError, 'error'),
+        snackBar(context, LocaleKeys.MaterialError.tr(), 'error'),
         Navigator.of(context).pop(),
       },
     );

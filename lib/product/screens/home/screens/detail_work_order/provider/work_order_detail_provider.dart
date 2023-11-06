@@ -183,13 +183,13 @@ class WorkOrderDetailProvider extends ChangeNotifier {
           {
             _isTaskStateChange = true,
             _finishTask = true,
-            _selectedTaskState = LocaleKeys.stateFinished.tr(),
+            _selectedTaskState = LocaleKeys.StateFinished.tr(),
           }
         else if (l == TaskResponseEnums.end)
           {
             _isTaskStateChange = true,
             _finishTask = true,
-            _selectedTaskState = LocaleKeys.stateFinished.tr(),
+            _selectedTaskState = LocaleKeys.StateFinished.tr(),
           }
         else if (l == TaskResponseEnums.error)
           {
@@ -252,14 +252,10 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
   void setEffortDescription(String value) => _effortDescription = value;
   void setEffortType(String value) => _effortType = value;
-  void setEffortDuration(String value) {
-    _effortDuration = value;
-    print(_effortDuration);
-  }
+  void setEffortDuration(String value) => _effortDuration = value;
 
   void setStartEffortDate(String value) {
     _startEffortDate = value;
-    notifyListeners();
   }
 
   void setEndEffortDate(String value) => _endEffortDate = value;
@@ -482,6 +478,11 @@ class WorkOrderDetailProvider extends ChangeNotifier {
       return;
     }
 
+    if ((int.tryParse(wantedMaterialAmount) ?? 0) > (int.tryParse(hintAmount) ?? 0)) {
+      snackBar(context, LocaleKeys.WantedMaterialAmountBiggerThanHintAmount.tr(), 'error');
+      return;
+    }
+
     _isLoading = true;
     notifyListeners();
 
@@ -529,7 +530,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
   void savePdf(BuildContext context, String pdfPath, String pdfName, String desc, String taskId, String taskKey) async {
     if (pdfPath.isEmpty) {
-      snackBar(context, LocaleKeys.EmptyPdfPath, 'error');
+      snackBar(context, LocaleKeys.EmptyPdfPath.tr(), 'error');
       return;
     }
     _isLoading = true;
@@ -562,7 +563,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
   void saveImage(BuildContext context, String imagePath, String desc, String taskId, String taskKey) async {
     if (imagePath.isEmpty) {
-      snackBar(context, LocaleKeys.EmptyImagePath, 'error');
+      snackBar(context, LocaleKeys.EmptyImagePath.tr(), 'error');
       return;
     }
     _isLoading = true;

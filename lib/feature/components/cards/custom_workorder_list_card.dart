@@ -28,7 +28,6 @@ class CustomWorkOrderListCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(workSpaceDetail);
     return InkWell(
       onTap: () => onTap(),
       child: Padding(
