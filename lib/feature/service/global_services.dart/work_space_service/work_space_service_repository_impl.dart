@@ -26,7 +26,8 @@ import 'work_space_service_repository.dart';
 
 class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   @override
-  Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getMyWorkSpaces(String id, String token, int page) async {
+  Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getMyWorkSpaces(
+      String id, String token, int page) async {
     List<WorkSpaceDetail> workSpaceDetailList = [];
 
     String url =
@@ -44,15 +45,19 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
       return Left(workSpaceDetailList);
     } else {
-      return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.work,
+          statusCode: response.statusCode.toString()));
     }
   }
 
   @override
-  Future<Either<WorkSpaceMyGroupDemandList, CustomServiceException>> getMyGroupDemandList(String token) async {
+  Future<Either<WorkSpaceMyGroupDemandList, CustomServiceException>>
+      getMyGroupDemandList(String token) async {
     WorkSpaceMyGroupDemandList workSpaceMyGroupDemandList;
 
-    String url = '${ServiceTools.url.workorder_url}/classification/getRequestTypeWithTaskCount';
+    String url =
+        '${ServiceTools.url.workorder_url}/classification/getRequestTypeWithTaskCount';
 
     try {
       final response = await super.dio.post(
@@ -71,18 +76,24 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
         return Left(workSpaceMyGroupDemandList);
       } else {
         super.logger.e(response.statusCode);
-        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(
+            message: CustomServiceMessages.work,
+            statusCode: response.statusCode.toString()));
       }
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.workOrderWorkloadError,
+          statusCode: '500'));
     }
   }
 
   @override
-  Future<Either<List<WorkSpacePendiks>, CustomServiceException>> getWorkSpacePendiks(String id, String token, int page) async {
+  Future<Either<List<WorkSpacePendiks>, CustomServiceException>>
+      getWorkSpacePendiks(String id, String token, int page) async {
     List<WorkSpacePendiks> workSpaceAppendings = [];
-    String url = '${ServiceTools.url.workorder_url}/task/workSpace/task/state/List/can/be/approve/current/user/pagination/$id';
+    String url =
+        '${ServiceTools.url.workorder_url}/task/workSpace/task/state/List/can/be/approve/current/user/pagination/$id';
 
     try {
       final response = await super.dio.get(
@@ -101,16 +112,21 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
         workSpaceAppendings = WorkSpacePendiks.fromJsonList(data);
         return Left(workSpaceAppendings);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(
+            message: CustomServiceMessages.work,
+            statusCode: response.statusCode.toString()));
       }
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.workOrderWorkloadError,
+          statusCode: '500'));
     }
   }
 
   @override
-  Future<Either<WorkSpaceDetail, CustomServiceException>> getWorkSpaceWithSearch(String workOrderCode, String token) async {
+  Future<Either<WorkSpaceDetail, CustomServiceException>>
+      getWorkSpaceWithSearch(String workOrderCode, String token) async {
     List<WorkSpaceDetail> workSpaceDetailList;
     String url =
         '${ServiceTools.url.workorder_url}/task/workSpace/task/state/List/for/assigned/user/pagination/swagger/search?&searchString=$workOrderCode';
@@ -129,16 +145,21 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
         return Left(workSpaceDetailList.first);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(
+            message: CustomServiceMessages.work,
+            statusCode: response.statusCode.toString()));
       }
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.workOrderWorkloadError,
+          statusCode: '500'));
     }
   }
 
   @override
-  Future<Either<AssetListModel, CustomServiceException>> getAssetWithSearch(String assetCode, String token) async {
+  Future<Either<AssetListModel, CustomServiceException>> getAssetWithSearch(
+      String assetCode, String token) async {
     AssetListModel assetListModel;
     String url =
         '${ServiceTools.url.asset_url}/component/searchByColumn/?page=1&limit=10&orderBy=ASC&orderByColumn=&searchColumn=tagNumber&searchString=$assetCode&searchType=CONTAINS';
@@ -155,12 +176,16 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       return Left(assetListModel);
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.workOrderWorkloadError,
+          statusCode: '500'));
     }
   }
 
   @override
-  Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getWorkSpaceDetailsByRequestType(String requestId, int page, String token) async {
+  Future<Either<List<WorkSpaceDetail>, CustomServiceException>>
+      getWorkSpaceDetailsByRequestType(
+          String requestId, int page, String token) async {
     List<WorkSpaceDetail> workSpaceDetailList = [];
     String url =
         '${ServiceTools.url.workorder_url}/task/mobile/getTasksByRequestType/swagger/$requestId?page=$page&limit=999&orderBy=DESC&orderByColumn=updateAt&withSpare=true';
@@ -180,18 +205,24 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
         workSpaceDetailList = WorkSpaceDetail.fromJsonList(data);
         return Left(workSpaceDetailList);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(
+            message: CustomServiceMessages.work,
+            statusCode: response.statusCode.toString()));
       }
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.workOrderWorkloadError,
+          statusCode: '500'));
     }
   }
 
   @override
-  Future<Either<List<WorkSpaceEfforts>, CustomServiceException>> getWorkSpaceEfforts(String taskId, String token) async {
+  Future<Either<List<WorkSpaceEfforts>, CustomServiceException>>
+      getWorkSpaceEfforts(String taskId, String token) async {
     List<WorkSpaceEfforts> workSpaceEfforts;
-    String url = '${ServiceTools.url.workorder_url}/task/mobile/getEffortsByTaskId/$taskId';
+    String url =
+        '${ServiceTools.url.workorder_url}/task/mobile/getEffortsByTaskId/$taskId';
 
     try {
       final response = await super.dio.get(
@@ -208,11 +239,15 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
         return Left(workSpaceEfforts);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(
+            message: CustomServiceMessages.work,
+            statusCode: response.statusCode.toString()));
       }
     } catch (e) {
       super.logger.i(e);
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.workOrderWorkloadError,
+          statusCode: '500'));
     }
   }
 
@@ -270,14 +305,18 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       return Left(result);
     } catch (e) {
       super.logger.i(e);
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.workOrderWorkloadError,
+          statusCode: '500'));
     }
   }
 
   @override
-  Future<Either<List<WorkSpaceSpareparts>, CustomServiceException>> getWorkSpaceSpareparts(String taskId, String token) async {
+  Future<Either<List<WorkSpaceSpareparts>, CustomServiceException>>
+      getWorkSpaceSpareparts(String taskId, String token) async {
     List<WorkSpaceSpareparts> workSpaceSpareparts;
-    String url = '${ServiceTools.url.workorder_url}/task/mobile/getSparesByTaskId/$taskId';
+    String url =
+        '${ServiceTools.url.workorder_url}/task/mobile/getSparesByTaskId/$taskId';
 
     try {
       final response = await super.dio.get(
@@ -296,16 +335,21 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
         return Left(workSpaceSpareparts);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(
+            message: CustomServiceMessages.work,
+            statusCode: response.statusCode.toString()));
       }
     } catch (e) {
       super.logger.i(e);
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.workOrderWorkloadError,
+          statusCode: '500'));
     }
   }
 
   @override
-  Future<Either<WorkSpaceUserInventory, CustomServiceException>> getWorkSpaceUserInventory(String token) async {
+  Future<Either<WorkSpaceUserInventory, CustomServiceException>>
+      getWorkSpaceUserInventory(String token) async {
     WorkSpaceUserInventory workSpaceUserInventory;
     String url = '${ServiceTools.url.users_url}/inventory/userInventory';
 
@@ -324,16 +368,21 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
         return Left(workSpaceUserInventory);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(
+            message: CustomServiceMessages.work,
+            statusCode: response.statusCode.toString()));
       }
     } catch (e) {
       super.logger.i(e);
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.workOrderWorkloadError,
+          statusCode: '500'));
     }
   }
 
   @override
-  Future<Either<bool, CustomServiceException>> addWorkSpaceSpareparts(String taskId, String token, String sparePartId, String amount) async {
+  Future<Either<bool, CustomServiceException>> addWorkSpaceSpareparts(
+      String taskId, String token, String sparePartId, String amount) async {
     bool result;
     String url = '${ServiceTools.url.workorder_url}/task/add/node/to/task';
 
@@ -375,16 +424,22 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
         super.logger.i(data);
         return Left(result);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(
+            message: CustomServiceMessages.work,
+            statusCode: response.statusCode.toString()));
       }
     } catch (e) {
       super.logger.i(e);
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.workOrderWorkloadError,
+          statusCode: '500'));
     }
   }
 
   @override
-  Future<Either<List<WorkSpaceRequestedMaterialsInventory>, CustomServiceException>> getWorkSpaceRequestedMaterialsInventory(
+  Future<
+      Either<List<WorkSpaceRequestedMaterialsInventory>,
+          CustomServiceException>> getWorkSpaceRequestedMaterialsInventory(
     String token,
     int page,
   ) async {
@@ -416,14 +471,19 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
-        workSpaceRequestedMaterials = WorkSpaceRequestedMaterialsInventory.fromJsonList(data) ?? [];
+        workSpaceRequestedMaterials =
+            WorkSpaceRequestedMaterialsInventory.fromJsonList(data) ?? [];
         return Left(workSpaceRequestedMaterials);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(
+            message: CustomServiceMessages.work,
+            statusCode: response.statusCode.toString()));
       }
     } catch (e) {
       super.logger.i(e);
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.workOrderWorkloadError,
+          statusCode: '500'));
     }
   }
 
@@ -472,16 +532,21 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
         return Left(result);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(
+            message: CustomServiceMessages.work,
+            statusCode: response.statusCode.toString()));
       }
     } catch (e) {
       super.logger.i(e);
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.workOrderWorkloadError,
+          statusCode: '500'));
     }
   }
 
   @override
-  Future<Either<bool, CustomServiceException>> takeItOnMe(String taskId, String currentStateId, String token) async {
+  Future<Either<bool, CustomServiceException>> takeItOnMe(
+      String taskId, String currentStateId, String token) async {
     //print('asdasdsaads' + taskId +':::'+ currentStateId +' ::::'+ token);
 
     String url = '${ServiceTools.url.workorder_url}/task/add/user/to/state';
@@ -508,22 +573,31 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
         } else {
           super.logger.i(response.data);
           result = false;
-          return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+          return Right(CustomServiceException(
+              message: CustomServiceMessages.work,
+              statusCode: response.statusCode.toString()));
         }
       } else {
         super.logger.i(response.data);
         result = false;
-        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(
+            message: CustomServiceMessages.work,
+            statusCode: response.statusCode.toString()));
       }
     } catch (e) {
       super.logger.e(e);
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.workOrderWorkloadError,
+          statusCode: '500'));
     }
   }
 
   @override
-  Future<Either<TaskResponseEnums, CustomServiceException>> changeWorkSpaceState(String taskId, String nextStateId, String token) async {
-    String url = '${ServiceTools.url.workorder_url}/task/change/approve/state/of/task';
+  Future<Either<TaskResponseEnums, CustomServiceException>>
+      changeWorkSpaceState(
+          String taskId, String nextStateId, String token) async {
+    String url =
+        '${ServiceTools.url.workorder_url}/task/change/approve/state/of/task';
     TaskResponseEnums result;
 
     try {
@@ -561,21 +635,28 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
         }
         return Left(result);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(
+            message: CustomServiceMessages.work,
+            statusCode: response.statusCode.toString()));
       }
     } catch (e) {
       super.logger.i(e);
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.workOrderWorkloadError,
+          statusCode: '500'));
     }
   }
 
   @override
-  Future<Either<List<WorkSpaceRequirementMaterialsList>, CustomServiceException>> getWorkSpaceApprovedRequirementMaterialsList(
+  Future<
+      Either<List<WorkSpaceRequirementMaterialsList>,
+          CustomServiceException>> getWorkSpaceApprovedRequirementMaterialsList(
     String taskId,
     String token,
   ) async {
     List<WorkSpaceRequirementMaterialsList> workSpaceRequirementMaterialsList;
-    String url = '${ServiceTools.url.workorder_url}/task/mobile/getMaterialRequestByTaskId/$taskId';
+    String url =
+        '${ServiceTools.url.workorder_url}/task/mobile/getMaterialRequestByTaskId/$taskId';
 
     try {
       final response = await super.dio.get(
@@ -588,25 +669,33 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
-        workSpaceRequirementMaterialsList = WorkSpaceRequirementMaterialsList.fromJsonList(data);
+        workSpaceRequirementMaterialsList =
+            WorkSpaceRequirementMaterialsList.fromJsonList(data);
 
         return Left(workSpaceRequirementMaterialsList);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(
+            message: CustomServiceMessages.work,
+            statusCode: response.statusCode.toString()));
       }
     } catch (e) {
       super.logger.i(e);
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.workOrderWorkloadError,
+          statusCode: '500'));
     }
   }
 
   @override
-  Future<Either<List<WorkSpaceRequirementMaterialsList>, CustomServiceException>> getWorkSpaceRequirementMaterialsList(
+  Future<
+      Either<List<WorkSpaceRequirementMaterialsList>,
+          CustomServiceException>> getWorkSpaceRequirementMaterialsList(
     String taskId,
     String token,
   ) async {
     List<WorkSpaceRequirementMaterialsList> workSpaceRequirementMaterialsList;
-    String url = '${ServiceTools.url.workorder_url}/task/mobile/getMaterialRequestByTaskId/$taskId';
+    String url =
+        '${ServiceTools.url.workorder_url}/task/mobile/getMaterialRequestByTaskId/$taskId';
 
     try {
       final response = await super.dio.get(
@@ -619,15 +708,20 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
-        workSpaceRequirementMaterialsList = WorkSpaceRequirementMaterialsList.fromJsonList(data);
+        workSpaceRequirementMaterialsList =
+            WorkSpaceRequirementMaterialsList.fromJsonList(data);
 
         return Left(workSpaceRequirementMaterialsList);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(
+            message: CustomServiceMessages.work,
+            statusCode: response.statusCode.toString()));
       }
     } catch (e) {
       super.logger.i(e);
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.workOrderWorkloadError,
+          statusCode: '500'));
     }
   }
 
@@ -643,7 +737,8 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   ) async {
     bool result = false;
 
-    String url = '${ServiceTools.url.workorder_url}/task/addFiles/$taskId/$taskKey';
+    String url =
+        '${ServiceTools.url.workorder_url}/task/addFiles/$taskId/$taskKey';
     String app = '';
 
     if (key == 'image') {
@@ -693,19 +788,25 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
           return Left(result);
         }
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(
+            message: CustomServiceMessages.work,
+            statusCode: response.statusCode.toString()));
       }
     } catch (e) {
       super.logger.i(e.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.workOrderWorkloadError,
+          statusCode: '500'));
     }
   }
 
   @override
-  Future<Either<WorkSpaceDetail, CustomServiceException>> getWorkSpaceByTaskId(String taskId, String token) async {
+  Future<Either<WorkSpaceDetail, CustomServiceException>> getWorkSpaceByTaskId(
+      String taskId, String token) async {
     WorkSpaceDetail workSpaceDetail;
 
-    final String url = '${ServiceTools.url.workorder_url}/task/task/get/by/id/with/workspace/currentState/calendar/$taskId?page=1&limit=1';
+    final String url =
+        '${ServiceTools.url.workorder_url}/task/task/get/by/id/with/workspace/currentState/calendar/$taskId?page=1&limit=1';
     try {
       final response = await super.dio.get(
             url,
@@ -720,19 +821,24 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
         return Left(workSpaceDetail);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(
+            message: CustomServiceMessages.work,
+            statusCode: response.statusCode.toString()));
       }
     } catch (e) {
       super.logger.e(e.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: '500'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.work, statusCode: '500'));
     }
   }
 
   @override
-  Future<Either<List<WorkSpaceDocuments>, CustomServiceException>> getWorkSpaceDocuments(String token, String taskId) async {
+  Future<Either<List<WorkSpaceDocuments>, CustomServiceException>>
+      getWorkSpaceDocuments(String token, String taskId) async {
     List<WorkSpaceDocuments> workSpaceDocuments;
 
-    String url = '${ServiceTools.url.workorder_url}/task/mobile/getDocumentsByTaskId/$taskId';
+    String url =
+        '${ServiceTools.url.workorder_url}/task/mobile/getDocumentsByTaskId/$taskId';
 
     try {
       final response = await super.dio.get(
@@ -749,16 +855,21 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
         return Left(workSpaceDocuments);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(
+            message: CustomServiceMessages.work,
+            statusCode: response.statusCode.toString()));
       }
     } catch (e) {
       super.logger.e(e.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: '500'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.work, statusCode: '500'));
     }
   }
 
   @override
-  Future<Either<WorkSpaceDetail, CustomServiceException>> getWorkSpaceWithSearchFromGroupWorks(String workOrderCode, String token) async {
+  Future<Either<WorkSpaceDetail, CustomServiceException>>
+      getWorkSpaceWithSearchFromGroupWorks(
+          String workOrderCode, String token) async {
     List<WorkSpaceDetail> workSpaceDetailList;
     String url =
         '${ServiceTools.url.workorder_url}/task/workSpace/task/state/List/can/be/assigned/user/pagination/swagger/search?page=1&limit=10&orderBy=DESC&searchString=$workOrderCode';
@@ -776,16 +887,21 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
         return Left(workSpaceDetailList.first);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(
+            message: CustomServiceMessages.work,
+            statusCode: response.statusCode.toString()));
       }
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.workOrderWorkloadError,
+          statusCode: '500'));
     }
   }
 
   @override
-  Future<bool> deleteNodeFromTask(String userToken, String taskId, String labelId, TaskNodeEnums labelType) async {
+  Future<bool> deleteNodeFromTask(String userToken, String taskId,
+      String labelId, TaskNodeEnums labelType) async {
     bool result = false;
     String url = '${ServiceTools.url.workorder_url}/task/delete/node/from/task';
 
@@ -803,7 +919,8 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
                   ],
                   "rootId": taskId,
                   "rootLabel": ["Task"],
-                  "variableName": labelType.variableName // effort , usedSpareOf, attachedDocuments
+                  "variableName": labelType
+                      .variableName // effort , usedSpareOf, attachedDocuments
                 }
               ]
             },
@@ -832,7 +949,8 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   }
 
   @override
-  Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getGroupWorkOrders(String userToken) async {
+  Future<Either<List<WorkSpaceDetail>, CustomServiceException>>
+      getGroupWorkOrders(String userToken) async {
     String url =
         '${ServiceTools.url.workorder_url}/task/workSpace/task/state/List/can/be/assigned/user/pagination/swagger?page=1&limit=8&orderBy=DESC&orderByColumn%5B0%5D=updatedAt';
     List<WorkSpaceDetail> workSpaceDetailList = [];
@@ -850,19 +968,24 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
         return Left(workSpaceDetailList);
       } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(
+            message: CustomServiceMessages.work,
+            statusCode: response.statusCode.toString()));
       }
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.workOrderWorkloadError,
+          statusCode: '500'));
     }
   }
 
   @override
-  Future<bool> addNoteToWorkOrder(String userToken, String taskId, String value) async {
+  Future<bool> addNoteToWorkOrder(
+      String userToken, String taskId, String value) async {
     String url = '${ServiceTools.url.workorder_url}/task/add/node/to/task';
     List<WorkSpaceDetail> workSpaceDetailList = [];
-    print('addurlnote' + url+ ' : '+ taskId + ' : '+value);
+    print('addurlnote' + url + ' : ' + taskId + ' : ' + value);
     try {
       final response = await super.dio.post(url,
           options: Options(
@@ -898,7 +1021,8 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   }
 
   @override
-  Future<List<WorkSpaceNote>> getWorkSpaceNotes(String taskId, String userToken) async {
+  Future<List<WorkSpaceNote>> getWorkSpaceNotes(
+      String taskId, String userToken) async {
     String url = '${ServiceTools.url.workorder_url}/task/$taskId';
     List<WorkSpaceDetail> workSpaceDetailList = [];
     try {
@@ -927,7 +1051,8 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   }
 
   @override
-  Future<MainLocationStructure> getMainLocationStructure(String userToken) async {
+  Future<MainLocationStructure> getMainLocationStructure(
+      String userToken) async {
     String url = '${ServiceTools.url.location_url}/structures';
     try {
       final response = await super.dio.get(
@@ -957,8 +1082,10 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   }
 
   @override
-  Future<List<ChildLocationStructure>> getChildLocationStructure(String userToken, String key, String label) async {
-    String url = '${ServiceTools.url.location_url}/jointspaces/lazyLoadingByKey/';
+  Future<List<ChildLocationStructure>> getChildLocationStructure(
+      String userToken, String key, String label) async {
+    String url =
+        '${ServiceTools.url.location_url}/jointspaces/lazyLoadingByKey/';
     try {
       final response = await super.dio.post(
         url,
