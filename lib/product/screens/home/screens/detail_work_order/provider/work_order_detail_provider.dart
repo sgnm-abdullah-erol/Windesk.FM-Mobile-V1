@@ -526,7 +526,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
   void savePdf(BuildContext context, String pdfPath, String pdfName, String desc, String taskId, String taskKey) async {
     if (pdfPath.isEmpty) {
-      snackBar(context, LocaleKeys.EmptyPdfPath, 'error');
+      snackBar(context, LocaleKeys.EmptyPdfPath.tr(), 'error');
       return;
     }
     _isLoading = true;
@@ -559,7 +559,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
   void saveImage(BuildContext context, String imagePath, String desc, String taskId, String taskKey) async {
     if (imagePath.isEmpty) {
-      snackBar(context, LocaleKeys.EmptyImagePath, 'error');
+      snackBar(context, LocaleKeys.EmptyImagePath.tr(), 'error');
       return;
     }
     _isLoading = true;
