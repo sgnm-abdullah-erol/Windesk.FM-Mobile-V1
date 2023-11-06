@@ -31,6 +31,7 @@ class LocaleKeys {
   static const String AddedNotes = 'AddedNotes';
   static const String AddNoteError = 'AddNoteError';
   static const String EnterYourNotes = 'EnterYourNotes';
+  static const String EditYourNotes = 'EditYourNotes';
   static const String NoteAdded = 'NoteAdded';
   static const String StateGoToGroup = 'StateGoToFinished';
   static const String StateGoToMe = 'StateGoToMe';
@@ -42,6 +43,9 @@ class LocaleKeys {
   static const String Note = 'Note';
   static const String Location = 'Location';
   static const String WantedMaterialAmountBiggerThanHintAmount = 'WantedMaterialAmountBiggerThanHintAmount';
+  static const String EditNoteError = 'EditNoteError';
+  static const String EditNoteSuccess = 'EditNoteSuccess';
+  static const String Edit = 'Edit';
 
   // static const ----------SNACKBAR---------- = '----------SNACKBAR----------;
   static const String NoInternetConnection = 'NoInternetConnection';

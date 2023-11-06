@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:vm_fm_4/feature/components/model_bottom_sheet/edit_note_modal_bottom_sheet.dart';
+import 'package:vm_fm_4/feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/models/work_space/work_space_note.dart';
 
 import '../../../../../../../core/constants/other/app_icons.dart';
@@ -19,6 +21,7 @@ class DataTableAcordionNotes extends StatelessWidget {
   final List<String> _labelList = [
     LocaleKeys.DataTableID.tr(),
     LocaleKeys.Notes.tr(),
+    LocaleKeys.Edit.tr(),
     LocaleKeys.Delete.tr(),
   ];
 
@@ -45,6 +48,21 @@ class DataTableAcordionNotes extends StatelessWidget {
               cells: [
                 DataCell(Text(data[i].id.toString(), style: _cellTextStyle(context))),
                 DataCell(Text(data[i].note?.replaceAll("<p>", '').replaceAll("</p>", "") ?? "", style: _cellTextStyle(context))),
+                DataCell(
+                  IconButton(
+                    onPressed: () async {
+                      ShowModalBottomSheet().show(
+                        context,
+                        EditNoteModalBottomSheet(
+                          taskId: provider.detail.task?.id.toString() ?? '',
+                          labelId: data[i].id.toString(),
+                          hint: data[i].note?.replaceAll("<p>", '').replaceAll("</p>", "") ?? '',
+                        ),
+                      );
+                    },
+                    icon: Icon(AppIcons.edit, color: APPColors.Login.green),
+                  ),
+                ),
                 DataCell(
                   IconButton(
                     onPressed: () async {
