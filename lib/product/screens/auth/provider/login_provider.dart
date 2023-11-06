@@ -10,11 +10,6 @@ import '../../../../feature/models/auth_models/login_model.dart';
 import '../../../../feature/service/global_services.dart/auth_service/auth_service_repository_impl.dart';
 
 class LoginProvider extends ChangeNotifier {
-  LoginProvider({required this.userNameFromPage}) {
-    getRememberInfo();
-  }
-
-  final String userNameFromPage;
 
   final AuthServiceRepositoryImpl _authService = Injection.getIt.get<AuthServiceRepositoryImpl>();
 
@@ -49,15 +44,6 @@ class LoginProvider extends ChangeNotifier {
   String _userId = '';
   String get userId => _userId;
 
-  void setRememberMe(bool value) {
-    _rememberMe = value;
-  }
-
-  void getRememberInfo() async {
-    _userNameController.text = await SharedManager().getString(SharedEnum.userNameLogin);
-    _userName = _userNameController.text;
-    notifyListeners();
-  }
 
   void logIn(BuildContext context) async {
     if (_userName.isNotEmpty && _password.isNotEmpty) {

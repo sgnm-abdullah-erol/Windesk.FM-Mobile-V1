@@ -862,6 +862,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   Future<bool> addNoteToWorkOrder(String userToken, String taskId, String value) async {
     String url = '${ServiceTools.url.workorder_url}/task/add/node/to/task';
     List<WorkSpaceDetail> workSpaceDetailList = [];
+    print('addurlnote' + url+ ' : '+ taskId + ' : '+value);
     try {
       final response = await super.dio.post(url,
           options: Options(

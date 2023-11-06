@@ -28,7 +28,7 @@ class LoginScreen extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => LoginPassword()),
-        ChangeNotifierProvider(create: (context) => LoginProvider(userNameFromPage: userName), lazy: false),
+        ChangeNotifierProvider(create: (context) => LoginProvider(), lazy: false),
       ],
       child: Consumer<LoginProvider>(
         builder: (context, LoginProvider loginProvider, child) {
@@ -64,12 +64,6 @@ class _LoginScreenBody extends StatefulWidget {
 
 class _LoginScreenBodyState extends State<_LoginScreenBody> {
   final GlobalKey<ScaffoldMessengerState> _globalKey = GlobalKey<ScaffoldMessengerState>();
-
-  @override
-  void initState() {
-    super.initState();
-    widget.provider.getRememberInfo();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +120,7 @@ class _LoginScreenBodyState extends State<_LoginScreenBody> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 TextFieldsInputUnderline(
-                  hintText: widget.userName.isEmpty ? LocaleKeys.HintUserName.tr() : widget.userName,
+                  hintText: LocaleKeys.HintUserName.tr(),
                   onChanged: loginProvider.setUserName,
                   controller: loginProvider.userNameController,
                 ),
