@@ -66,6 +66,14 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   String? _dropdownValue = null;
   String? get dropdownValue => _dropdownValue;
 
+  void getWorkOrderDetailDetail() {
+    _isLoading = true;
+    notifyListeners();
+
+    _isLoading = false;
+    notifyListeners();
+  }
+
   void setStateToBeginning() {
     _userClickedEfforts = false;
     _userClickedMaterial = false;

@@ -45,6 +45,7 @@ class DetailWorkOrderScreen extends StatelessWidget {
       ],
       child: Consumer<WorkOrderDetailProvider>(
         builder: (context, WorkOrderDetailProvider woDetailProvider, child) {
+          
           SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
             if (woDetailProvider.effortAdded) {
               snackBar(context, LocaleKeys.EffortAdded.tr(), 'success');
