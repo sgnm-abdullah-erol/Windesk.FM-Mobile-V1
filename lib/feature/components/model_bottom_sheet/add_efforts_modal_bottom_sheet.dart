@@ -35,7 +35,7 @@ class AddEffortsModalBottomSheet extends StatelessWidget {
         height: MediaQuery.of(context).size.height * 0.75,
         width: context.width,
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
+          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0),
           child: Column(
             children: [
               Expanded(
@@ -127,7 +127,7 @@ class _InputsState extends State<_Inputs> {
         ),
         SizedBox(height: context.height * 0.02),
         Expanded(
-          flex: 25,
+          flex: 30,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -169,7 +169,7 @@ class _InputsState extends State<_Inputs> {
         ),
         SizedBox(height: context.height * 0.02),
         Expanded(
-          flex: 10,
+          flex: 8,
           child: DropDownInputFields(
             labelText: LocaleKeys.EffortType.tr(),
             onChangedFunction: (value) => widget.selectedEffortType(value),
@@ -178,7 +178,7 @@ class _InputsState extends State<_Inputs> {
           ),
         ),
         Expanded(
-          flex: 10,
+          flex: 8,
           child: TextFieldsInputUnderline(
             hintText: LocaleKeys.EnterDescription.tr(),
             onChanged: (value) => widget.selectedDescription(value),
