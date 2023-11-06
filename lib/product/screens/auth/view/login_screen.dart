@@ -126,7 +126,7 @@ class _LoginScreenBodyState extends State<_LoginScreenBody> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 TextFieldsInputUnderline(
-                  hintText: widget.userName.isEmpty ? LocaleKeys.HintUserName.tr() : widget.userName,
+                  hintText: LocaleKeys.HintUserName.tr(),
                   onChanged: loginProvider.setUserName,
                   controller: loginProvider.userNameController,
                 ),
