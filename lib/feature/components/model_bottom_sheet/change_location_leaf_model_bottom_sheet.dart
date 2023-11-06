@@ -86,7 +86,9 @@ class ChangeLocationLeafModelBottomSheet extends StatelessWidget {
 
                                   if (response == false || response == null) {
                                     checked = false;
-                                  } else if (response == true) {}
+                                  } else if (response == true) {
+                                    // update location
+                                  }
                                 }
                               },
                             ),
