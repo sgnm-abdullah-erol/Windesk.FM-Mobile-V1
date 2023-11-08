@@ -138,6 +138,7 @@ class LocaleKeys {
   static const String ProccessEntrySecondALertDialog = "ProccessEntrySecondALertDialog";
   static const String SelectGroup = "SelectGroup";
   static const String SelectGroupForContinue = "SelectGroupForContinue";
+  static const String ErrorChangeStateWithGroup = 'ErrorChangeStateWithGroup';
 
   // Data Table Strings
   static const String DataTableID = "DataTableID";

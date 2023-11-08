@@ -70,7 +70,12 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   String? _dropdownValue = null;
   String? get dropdownValue => _dropdownValue;
 
-  String? groupId;
+  String? _groupId = '';
+  String? get groupId => _groupId;
+
+  void setGroupIdDefault() {
+    _groupId = '';
+  }
 
   void setStateToBeginning() {
     _userClickedEfforts = false;
@@ -211,7 +216,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
       if (_workSpaceStateGroups?.nextStates?[i].userGroups?.isNotEmpty ?? false) {
         for (var b = 0; b < (_workSpaceStateGroups?.nextStates?[i].userGroups?.length ?? 0); b++) {
           if (_workSpaceStateGroups?.nextStates?[i].userGroups?[b].name == value) {
-            groupId = _workSpaceStateGroups?.nextStates?[i].userGroups?[b].id.toString() ?? '';
+            _groupId = _workSpaceStateGroups?.nextStates?[i].userGroups?[b].id.toString() ?? '';
           }
         }
       }

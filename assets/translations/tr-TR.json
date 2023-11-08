@@ -114,7 +114,7 @@
 	"ProccessEntrySecondALertDialog": " olarak değiştirmek istediğinize emin misiniz",
 	"SelectGroup": "Grup Seçiniz",
 	"SelectGroupForContinue": "Devam etmek için grup seçiniz",
-
+	"ErrorChangeStateWithGroup" : "Lütfen grup seçimi yaparak devam ediniz",
 
 	"----------------DATATABLE----------": "------------DATATABLE-------------",
 	"DataTableID": "ID",

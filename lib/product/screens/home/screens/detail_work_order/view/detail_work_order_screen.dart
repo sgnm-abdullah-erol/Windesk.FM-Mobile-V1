@@ -45,7 +45,6 @@ class DetailWorkOrderScreen extends StatelessWidget {
       ],
       child: Consumer<WorkOrderDetailProvider>(
         builder: (context, WorkOrderDetailProvider woDetailProvider, child) {
-          
           SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
             if (woDetailProvider.effortAdded) {
               snackBar(context, LocaleKeys.EffortAdded.tr(), 'success');
@@ -151,6 +150,7 @@ class _StateChangeDropDownButton extends StatelessWidget {
       child: DropDownInputFields(
         labelText: LocaleKeys.ProccessEntry,
         onChangedFunction: (val) async {
+          provider.setGroupIdDefault();
           provider.stateGroupExist(val);
           provider.isGroupExist
               ? await WoWaitAcceptModalAlert().showAlertDialogWithDropdown(
@@ -163,7 +163,7 @@ class _StateChangeDropDownButton extends StatelessWidget {
                 }).then((value) {
                   // check response value
                   if (value == true) {
-                    provider.changeState(val);
+                    provider.groupId != '' ? provider.changeState(val) : snackBar(context, LocaleKeys.ErrorChangeStateWithGroup.tr(), 'error');
                   } else {
                     // fix this
                   }
