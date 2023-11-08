@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:vm_fm_4/feature/models/work_space/work_space_current_state.dart';
 
 import '../../../../core/constants/paths/service_tools.dart';
 import '../../../../core/enums/task_node_enums.dart';
@@ -520,17 +521,23 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   }
 
   @override
-  Future<Either<TaskResponseEnums, CustomServiceException>> changeWorkSpaceState(String taskId, String nextStateId, String token) async {
+  Future<Either<TaskResponseEnums, CustomServiceException>> changeWorkSpaceState(String taskId, String nextStateId, String token, String? groupId) async {
     String url = '${ServiceTools.url.workorder_url}/task/change/approve/state/of/task';
     TaskResponseEnums result;
 
     try {
       final response = await super.dio.post(
             url,
-            data: {
+            data: groupId != '' ? {
               "label": ["Task"],
               "identifier": taskId, // task id
-              "identifier_target": nextStateId // next state id
+              "identifier_target": nextStateId, // next state id
+              "identifier_target_target": groupId ?? '' //group id
+            } : 
+            {
+              "label": ["Task"],
+              "identifier": taskId, // task id
+              "identifier_target": nextStateId, // next state id
             },
             options: Options(
               headers: {'authorization': 'Bearer $token'},
@@ -921,6 +928,38 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     } catch (error) {
       super.logger.e(error.toString());
       return [];
+    }
+  }
+
+  @override
+  Future<Either<CurrentState, CustomServiceException>> getWorkSpaceStateGroups(
+    String taskId,
+    String workSpaceId,
+    String token,
+  ) async {
+    CurrentState currentState;
+    String url = '${ServiceTools.url.workorder_url}/task/task/current/state/$workSpaceId/$taskId';
+
+    try {
+      final response = await super.dio.get(
+            url,
+            data: {},
+            options: Options(
+              headers: {'authorization': 'Bearer $token'},
+            ),
+          );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = response.data['currentState'];
+        currentState = CurrentState.fromJson(data);
+
+        return Left(currentState);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.stateGroups, statusCode: response.statusCode.toString()));
+      }
+    } catch (e) {
+      super.logger.i(e);
+      return Right(CustomServiceException(message: CustomServiceMessages.stateGroups, statusCode: '500'));
     }
   }
 }

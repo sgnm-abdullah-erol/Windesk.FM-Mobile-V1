@@ -110,6 +110,10 @@
 	"ProccessEntry": "İşlem Girişi",
 	"ProccessEntryFirstALertDialog": "İş emrinin anlık durumunu ",
 	"ProccessEntrySecondALertDialog": " olarak değiştirmek istediğinize emin misiniz",
+	"SelectGroup": "Grup Seçiniz",
+	"SelectGroupForContinue": "Devam etmek için grup seçiniz",
+
+
 	"----------------DATATABLE----------": "------------DATATABLE-------------",
 	"DataTableID": "ID",
 	"DataTableName": "İsim",

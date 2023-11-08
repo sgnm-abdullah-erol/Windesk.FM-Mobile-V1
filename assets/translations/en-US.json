@@ -110,6 +110,10 @@
 	"ProccessEntry": "Proccess Entry",
 	"ProccessEntryFirstALertDialog": "Are you sure you want to change the instant status of the work order to ",
 	"ProccessEntrySecondALertDialog": " ?",
+	"SelectGroup": "Select a group",
+	"SelectGroupForContinue": "Select a group for continue",
+
+
 	"----------------DATATABLE----------": "------------DATATABLE-------------",
 	"DataTableID": "ID",
 	"DataTableName": "Name",

@@ -18,7 +18,7 @@ class Task extends Equatable {
   final bool? isDeleted;
   final String? name;
   final bool? canDelete;
-  final DateTime? appointmentDate;
+  final String? appointmentDate;
   final String? key;
   final DateTime? updatedAt;
   final int? id;

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
+import 'package:vm_fm_4/feature/models/work_space/work_space_current_state.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
 
 import '../../../../../../core/constants/paths/service_tools.dart';
@@ -32,6 +33,9 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   // for page
   bool _isLoading = false;
   bool get isLoading => _isLoading;
+
+  bool _isGroupExist = false;
+  bool get isGroupExist => _isGroupExist;
 
   bool _userClickedEfforts = false;
   bool get userClickedEfforts => _userClickedEfforts;
@@ -66,6 +70,8 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   String? _dropdownValue = null;
   String? get dropdownValue => _dropdownValue;
 
+  String? groupId;
+
   void setStateToBeginning() {
     _userClickedEfforts = false;
     _userClickedMaterial = false;
@@ -82,6 +88,12 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
   List<String> _workSpaceUserTaskLabels = [];
   List<String> get workSpaceUserTaskLabels => _workSpaceUserTaskLabels;
+
+  List<String> _stateGroupList = [];
+  List<String> get stateGroupList => _stateGroupList;
+
+  CurrentState? _workSpaceStateGroups = CurrentState();
+  CurrentState? get workSpaceStateGroups => _workSpaceStateGroups;
 
   void setDropdown() {
     _dropdownValue = _workSpaceUserTaskLabels[0];
@@ -135,12 +147,76 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     _isLoading = false;
   }
 
-  void _setUserTaskLabels() {
-    // _workSpaceUserTaskLabels.add(detail.state?.name.toString() ?? '');
+  void getStateUserGroups() async {
+    _isLoading = true;
+    notifyListeners();
 
-    for (var i = 0; i < (detail.state?.nextStates?.length ?? 0); i++) {
-      _workSpaceUserTaskLabels.add(detail.state?.nextStates?[i].name ?? '');
+    String userToken = await SharedManager().getString(SharedEnum.userToken);
+
+    final response =
+        await workSpaceService.getWorkSpaceStateGroups(detail.task?.id.toString() ?? '', detail.workspace?.id.toString() ?? '', userToken);
+
+    response.fold(
+      (l) => {_workSpaceStateGroups = l},
+      (r) => {
+        _errorAccurWhileTakingOnMe = true,
+      },
+    );
+    notifyListeners();
+
+    _isLoading = false;
+  }
+
+  void _setUserTaskLabels() async {
+    _isLoading = true;
+    notifyListeners();
+
+    String userToken = await SharedManager().getString(SharedEnum.userToken);
+
+    final response =
+        await workSpaceService.getWorkSpaceStateGroups(detail.task?.id.toString() ?? '', detail.workspace?.id.toString() ?? '', userToken);
+
+    response.fold(
+      (l) => {
+        _workSpaceStateGroups = l,
+        for (var i = 0; i < (_workSpaceStateGroups?.nextStates?.length ?? 0); i++)
+          {_workSpaceUserTaskLabels.add(_workSpaceStateGroups?.nextStates?[i].name ?? '')}
+      },
+      (r) => {
+        _errorAccurWhileTakingOnMe = true,
+      },
+    );
+    _isLoading = false;
+    notifyListeners();
+  }
+
+  void stateGroupExist(String value) {
+    _isGroupExist = false;
+    _stateGroupList.clear();
+    for (var i = 0; i < (_workSpaceStateGroups?.nextStates?.length ?? 0); i++) {
+      if (_workSpaceStateGroups?.nextStates?[i].name == value) {
+        _isGroupExist = _workSpaceStateGroups?.nextStates?[i].userGroups?.isNotEmpty ?? false;
+        if (_isGroupExist) {
+          for (var b = 0; b < (_workSpaceStateGroups?.nextStates?[i].userGroups?.length ?? 0); b++) {
+            _stateGroupList.add(_workSpaceStateGroups?.nextStates?[i].userGroups?[b].name ?? '');
+          }
+        }
+      }
     }
+    notifyListeners();
+  }
+
+  void setGroupId(String value) {
+    for (var i = 0; i < (_workSpaceStateGroups?.nextStates?.length ?? 0); i++) {
+      if (_workSpaceStateGroups?.nextStates?[i].userGroups?.isNotEmpty ?? false) {
+        for (var b = 0; b < (_workSpaceStateGroups?.nextStates?[i].userGroups?.length ?? 0); b++) {
+          if (_workSpaceStateGroups?.nextStates?[i].userGroups?[b].name == value) {
+            groupId = _workSpaceStateGroups?.nextStates?[i].userGroups?[b].id.toString() ?? '';
+          }
+        }
+      }
+    }
+    notifyListeners();
   }
 
   void changeState(String value) async {
@@ -148,19 +224,15 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     late String? id;
     notifyListeners();
 
-    for (var i = 0; i < (detail.state?.nextStates?.length ?? 0); i++) {
-      if (detail.state?.nextStates?[i].name == value) {
-        id = detail.state?.nextStates?[i].id.toString();
+    for (var i = 0; i < (_workSpaceStateGroups?.nextStates?.length ?? 0); i++) {
+      if (_workSpaceStateGroups?.nextStates?[i].name == value) {
+        id = _workSpaceStateGroups?.nextStates?[i].id.toString();
       }
     }
 
     String userToken = await SharedManager().getString(SharedEnum.userToken);
 
-    final response = await workSpaceService.changeWorkSpaceState(
-      detail.task?.id.toString() ?? '',
-      id ?? '',
-      userToken,
-    );
+    final response = await workSpaceService.changeWorkSpaceState(detail.task?.id.toString() ?? '', id ?? '', userToken, groupId);
 
     response.fold(
       (l) => {

@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../work_space_next_state.dart';
+part of '../work_space_current_state.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-NextState _$NextStateFromJson(Map<String, dynamic> json) => NextState(
+CurrentState _$CurrentStateFromJson(Map<String, dynamic> json) => CurrentState(
       canDisplay: json['canDisplay'] as bool?,
       description: json['description'] as String?,
       className: json['className'] as String?,
@@ -27,14 +27,15 @@ NextState _$NextStateFromJson(Map<String, dynamic> json) => NextState(
           ? null
           : DateTime.parse(json['updatedAt'] as String),
       id: json['id'] as int?,
-      label:
-          (json['label'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      userGroups: (json['userGroups'] as List<dynamic>?)
-          ?.map((e) => WorkSpaceUserGroups.fromJson(e as Map<String, dynamic>))
+      labels:
+          (json['labels'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      nextStates: (json['nextStates'] as List<dynamic>?)
+          ?.map((e) => NextState.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$NextStateToJson(NextState instance) => <String, dynamic>{
+Map<String, dynamic> _$CurrentStateToJson(CurrentState instance) =>
+    <String, dynamic>{
       'canDisplay': instance.canDisplay,
       'description': instance.description,
       'className': instance.className,
@@ -51,6 +52,6 @@ Map<String, dynamic> _$NextStateToJson(NextState instance) => <String, dynamic>{
       'key': instance.key,
       'updatedAt': instance.updatedAt?.toIso8601String(),
       'id': instance.id,
-      'label': instance.label,
-      'userGroups': instance.userGroups,
+      'labels': instance.labels,
+      'nextStates': instance.nextStates,
     };

@@ -66,7 +66,6 @@ class DetailWorkOrderScreen extends StatelessWidget {
               snackBar(context, '${LocaleKeys.TaskStateChange.tr()} ${LocaleKeys.NewTask.tr()} ${woDetailProvider.selectedTaskState}', 'success');
               context.router.pop<bool>(true);
             }
-
             if (woDetailProvider.takeItOnMeSuccess) {
               snackBar(context, LocaleKeys.TakeItOnMeSuccess.tr(), 'success');
             }
@@ -151,20 +150,37 @@ class _StateChangeDropDownButton extends StatelessWidget {
       child: DropDownInputFields(
         labelText: LocaleKeys.ProccessEntry,
         onChangedFunction: (val) async {
-          await WoWaitAcceptModalAlert()
-              .showAlertDialog(
-            context,
-            "${"${LocaleKeys.ProccessEntryFirstALertDialog.tr()}'" + val}'${LocaleKeys.ProccessEntrySecondALertDialog.tr()}",
-            LocaleKeys.ChangeState.tr(),
-          )
-              .then((value) {
-            // check response value
-            if (value == true) {
-              provider.changeState(val);
-            } else {
-              // fix this
-            }
-          });
+          provider.stateGroupExist(val);
+          provider.isGroupExist
+              ? await WoWaitAcceptModalAlert().showAlertDialogWithDropdown(
+                  context,
+                  "${"${LocaleKeys.ProccessEntryFirstALertDialog.tr()}'" + val}'${LocaleKeys.ProccessEntrySecondALertDialog.tr()}",
+                  LocaleKeys.ChangeState.tr(),
+                  LocaleKeys.SelectGroupForContinue.tr(),
+                  provider.stateGroupList, (String value) {
+                  provider.setGroupId(value);
+                }).then((value) {
+                  // check response value
+                  if (value == true) {
+                    provider.changeState(val);
+                  } else {
+                    // fix this
+                  }
+                })
+              : await WoWaitAcceptModalAlert()
+                  .showAlertDialog(
+                  context,
+                  "${"${LocaleKeys.ProccessEntryFirstALertDialog.tr()}'" + val}'${LocaleKeys.ProccessEntrySecondALertDialog.tr()}",
+                  LocaleKeys.ChangeState.tr(),
+                )
+                  .then((value) {
+                  // check response value
+                  if (value == true) {
+                    provider.changeState(val);
+                  } else {
+                    // fix this
+                  }
+                });
         },
         rightIcon: AppIcons.arrowDown,
         dropDownArray: provider.workSpaceUserTaskLabels,
