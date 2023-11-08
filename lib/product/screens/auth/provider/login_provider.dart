@@ -10,8 +10,8 @@ import '../../../../feature/models/auth_models/login_model.dart';
 import '../../../../feature/service/global_services.dart/auth_service/auth_service_repository_impl.dart';
 
 class LoginProvider extends ChangeNotifier {
-
-  final AuthServiceRepositoryImpl _authService = Injection.getIt.get<AuthServiceRepositoryImpl>();
+  final AuthServiceRepositoryImpl _authService =
+      Injection.getIt.get<AuthServiceRepositoryImpl>();
 
   bool _loading = false;
 
@@ -44,13 +44,24 @@ class LoginProvider extends ChangeNotifier {
   String _userId = '';
   String get userId => _userId;
 
+  void setRememberMe(bool value) {
+    _rememberMe = value;
+  }
+
+  void getRememberInfo() async {
+    _userNameController.text =
+        await SharedManager().getString(SharedEnum.userNameLogin);
+    _userName = _userNameController.text;
+    notifyListeners();
+  }
 
   void logIn(BuildContext context) async {
     if (_userName.isNotEmpty && _password.isNotEmpty) {
       _loading = true;
       notifyListeners();
 
-      final response = await _authService.login(userNameController.text, password);
+      final response =
+          await _authService.login(userNameController.text, password);
 
       LoginModel loginModel;
 
@@ -63,10 +74,12 @@ class LoginProvider extends ChangeNotifier {
         Future.delayed(const Duration(milliseconds: 2000), () async {
           loginModel = login;
           _userToken = loginModel.accessToken ?? '';
+
           _userTokenName = userName;
 
           //  save the token to preferences
-          await _setTokenToPreferences(login.refreshToken ?? '', login.id.toString());
+          await _setTokenToPreferences(
+              login.refreshToken ?? '', login.id.toString());
 
           _setField();
         });
@@ -94,14 +107,16 @@ class LoginProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> _setTokenToPreferences(String refreshToken, String userId) async {
-      await SharedManager().setString(SharedEnum.userNameLogin, _userNameController.text);
-      await SharedManager().setString(SharedEnum.userToken, _userToken);
-      await SharedManager().setString(SharedEnum.userName, _userNameController.text);
-      await SharedManager().setString(SharedEnum.refreshToken, refreshToken);
-      await SharedManager().setString(SharedEnum.userId, userId);
-      await SharedManager().setBool(SharedEnum.rememberMe, _rememberMe);
-    
+  Future<void> _setTokenToPreferences(
+      String refreshToken, String userId) async {
+    await SharedManager()
+        .setString(SharedEnum.userNameLogin, _userNameController.text);
+    await SharedManager().setString(SharedEnum.userToken, _userToken);
+    await SharedManager()
+        .setString(SharedEnum.userName, _userNameController.text);
+    await SharedManager().setString(SharedEnum.refreshToken, refreshToken);
+    await SharedManager().setString(SharedEnum.userId, userId);
+    await SharedManager().setBool(SharedEnum.rememberMe, _rememberMe);
   }
 
   // void _setUserName(BuildContext context) async {

@@ -49,24 +49,32 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<SearchWorkOrderProvider>(create: (_) => SearchWorkOrderProvider()),
+        ChangeNotifierProvider<SearchWorkOrderProvider>(
+            create: (_) => SearchWorkOrderProvider()),
         ChangeNotifierProvider<HomeProvider>(create: (_) => HomeProvider()),
       ],
       child: Consumer2<HomeProvider, SearchWorkOrderProvider>(
-        builder: (context, HomeProvider homeProvider, SearchWorkOrderProvider searchWorkOrderProvider, child) {
+        builder: (context, HomeProvider homeProvider,
+            SearchWorkOrderProvider searchWorkOrderProvider, child) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             if (homeProvider.logoutError) {
               snackBar(context, LocaleKeys.LogoutError.tr(), 'error');
             }
             if (homeProvider.isUserLogout) {
               snackBar(context, LocaleKeys.LogoutSuccess.tr(), 'success');
-              context.router.pushAndPopUntil(LoginScreen(userName: homeProvider.userName), predicate: (_) => false);
+              context.router.pushAndPopUntil(
+                  LoginScreen(userName: homeProvider.userName),
+                  predicate: (_) => false);
             }
           });
-          final WorkSpaceServiceRepositoryImpl workSpaceService = Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
+          final WorkSpaceServiceRepositoryImpl workSpaceService =
+              Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
           FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
             //TODO MESSAGE PARSE
-            NotificationAlertDialog.showNotification(context, searchWorkOrderProvider, message);
+            print('Opened2');
+
+            NotificationAlertDialog.showNotification(
+                context, searchWorkOrderProvider, message);
             //FlutterLocalNotificationsPlugin().show(message.notification.messageId, message.notification?.title, message.notification?.body,);
           });
 
@@ -79,7 +87,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 body: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[headerTextWidget(context), homePageIcons(context)],
+                    children: <Widget>[
+                      headerTextWidget(context),
+                      homePageIcons(context)
+                    ],
                   ),
                 ),
                 floatingActionButton: Row(
@@ -177,8 +188,12 @@ class _HomeScreenState extends State<HomeScreen> {
     return Expanded(
       child: Column(
         children: [
-          Text(LocaleKeys.IfmName, style: context.titleSmall.copyWith(letterSpacing: 1.5)).tr(),
-          Text(LocaleKeys.AppTitle, style: context.titleMedium.copyWith(letterSpacing: 1.5)).tr(),
+          Text(LocaleKeys.IfmName,
+                  style: context.titleSmall.copyWith(letterSpacing: 1.5))
+              .tr(),
+          Text(LocaleKeys.AppTitle,
+                  style: context.titleMedium.copyWith(letterSpacing: 1.5))
+              .tr(),
         ],
       ),
     );
@@ -186,10 +201,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
   AppBar appBarWidget(BuildContext context, HomeProvider provider) {
     return AppBar(
-      title: Image.asset(AssetPaths.windesk, width: context.width / 1.2, height: context.width / 1.2, fit: BoxFit.cover),
+      title: Image.asset(AssetPaths.windesk,
+          width: context.width / 1.2,
+          height: context.width / 1.2,
+          fit: BoxFit.cover),
       actions: <Widget>[
         IconButton(
-          icon: Icon(AppIcons.powerSettingsOff, size: 35, color: context.theme ? APPColors.Main.white : APPColors.Main.black),
+          icon: Icon(AppIcons.powerSettingsOff,
+              size: 35,
+              color:
+                  context.theme ? APPColors.Main.white : APPColors.Main.black),
           tooltip: LocaleKeys.HintLogout.tr(),
           onPressed: () => provider.logOut(context),
         ),
@@ -215,7 +236,8 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(
               AppIcons.notifications,
               size: 35,
-              color: context.theme ? APPColors.Main.white : APPColors.Main.black,
+              color:
+                  context.theme ? APPColors.Main.white : APPColors.Main.black,
             ),
             onPressed: () {
               context.read<HomeProvider>().totalAnnoucementCount.toString() != 0

@@ -184,6 +184,8 @@
 	"Hour": "Hour",
 	"Minute": "Minute",
 	"Second": "Second",
+	"ChangeLocale" : "Change Locale",
+	"ChangeLocaleText" : "Are you sure you want to change the locale?",
 	"--------WORKORDER--------": "--------WORKORDER--------",
 	"My Works": "My Works",
 	"Our Works": "Our Works",

@@ -28,48 +28,58 @@ class _SearchMaterialScreenState extends State<SearchMaterialScreen> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => SearchMaterialProvider(),
-      child: Consumer<SearchMaterialProvider>(builder: (context, SearchMaterialProvider searchProvider, child) {
+      child: Consumer<SearchMaterialProvider>(
+          builder: (context, SearchMaterialProvider searchProvider, child) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (searchProvider.isSuccess) {
-          snackBar(context, LocaleKeys.assetSearchSuccess, 'success');
-          if (searchProvider.assetDetailList != null) {
-            context.router.push(AssetDetailScreen(
-                assetListModel: searchProvider.assetDetailList!,
-                assetImageModel: searchProvider.imageModel,
-                imageExist: searchProvider.imageExist,
-                documentExist: searchProvider.documentExist,
-                assetDocumentModel: searchProvider.documentModel));
-            searchProvider.clearInput();
+          if (searchProvider.isSuccess) {
+            snackBar(context, LocaleKeys.assetSearchSuccess, 'success');
+            if (searchProvider.assetDetailList != null) {
+              context.router.push(AssetDetailScreen(
+                  assetListModel: searchProvider.assetDetailList!,
+                  assetImageModel: searchProvider.imageModel,
+                  imageExist: searchProvider.imageExist,
+                  documentExist: searchProvider.documentExist,
+                  assetDocumentModel: searchProvider.documentModel));
+              searchProvider.clearInput();
+            }
           }
-        }
-        if (searchProvider.errorAccure) {
-          snackBar(context, LocaleKeys.assetSearchError, 'error');
-        }
+          if (searchProvider.errorAccure) {
+            snackBar(context, LocaleKeys.assetSearchError, 'error');
+          }
         });
-        return Scaffold(
-          appBar: CustomMainAppbar(title: const Text(LocaleKeys.MaterialSearch).tr(), elevation: 3),
-          body: searchProvider.isLoading
-              ? const CustomLoadingIndicator()
-              : Center(
-                  child: Padding(
-                    padding: CustomPaddings.pageNormal,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        TextFieldsInputWithActionAndController(
-                            textController: searchProvider.assetNumber,
-                            labelText: LocaleKeys.MaterialSearch,
-                            actionIcon: AppIcons.qr,
-                            actionFunction: searchProvider.scanBarcodeAndQrForAsset),
-                        CustomHalfButtons(
-                            leftTitle: Text(LocaleKeys.Clear.tr(), style: context.bodyMedium),
-                            rightTitle: Text(LocaleKeys.Search.tr(), style: context.bodyMedium),
-                            leftOnPressed: searchProvider.clearInput,
-                            rightOnPressed: searchProvider.getAssetWithSearch),
-                      ],
+        return WillPopScope(
+          child: Scaffold(
+            appBar: CustomMainAppbar(
+                title: const Text(LocaleKeys.MaterialSearch).tr(),
+                elevation: 3),
+            body: searchProvider.isLoading
+                ? const CustomLoadingIndicator()
+                : Center(
+                    child: Padding(
+                      padding: CustomPaddings.pageNormal,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          TextFieldsInputWithActionAndController(
+                              textController: searchProvider.assetNumber,
+                              labelText: LocaleKeys.MaterialSearch,
+                              actionIcon: AppIcons.qr,
+                              actionFunction:
+                                  searchProvider.scanBarcodeAndQrForAsset),
+                          CustomHalfButtons(
+                              leftTitle: Text(LocaleKeys.Clear.tr(),
+                                  style: context.bodyMedium),
+                              rightTitle: Text(LocaleKeys.Search.tr(),
+                                  style: context.bodyMedium),
+                              leftOnPressed: searchProvider.clearInput,
+                              rightOnPressed:
+                                  searchProvider.getAssetWithSearch),
+                        ],
+                      ),
                     ),
                   ),
-                ),
+          ),
+          onWillPop: () async => false,
         );
       }),
     );

@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:vm_fm_4/feature/models/work_space/work_space_current_state.dart';
+import 'package:vm_fm_4/feature/models/work_space/child_location_structure.dart';
+import 'package:vm_fm_4/feature/models/work_space/main_location_structure.dart';
 import 'package:vm_fm_4/feature/models/work_space/work_space_note.dart';
 
 import '../../../../core/enums/task_node_enums.dart';
@@ -102,4 +104,7 @@ abstract class WorkSpaceServiceRepository {
 
   Future<Either<CurrentState, CustomServiceException>> getWorkSpaceStateGroups(String taskId,String workSpaceId,String token);
 
+  Future<MainLocationStructure> getMainLocationStructure(String userToken);
+
+  Future<List<ChildLocationStructure>> getChildLocationStructure(String userToken, String key, String label);
 }
