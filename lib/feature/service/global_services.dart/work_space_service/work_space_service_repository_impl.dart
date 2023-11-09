@@ -33,8 +33,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     String url =
         '${ServiceTools.url.workorder_url}/task/workSpace/task/state/List/for/assigned/user/pagination/swagger?page=$page&limit=10&orderBy=DESC&orderByColumn%5B0%5D=updatedAt';
 
-    print(url);
-
     final response = await super.dio.get(
           url,
           options: Options(
@@ -986,6 +984,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     }
   }
 
+  @override
   Future<MainLocationStructure> getMainLocationStructure(String userToken) async {
     String url = '${ServiceTools.url.location_url}/structures';
     try {

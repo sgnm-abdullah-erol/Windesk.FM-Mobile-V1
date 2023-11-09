@@ -1,10 +1,9 @@
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:vm_fm_4/core/constants/other/colors.dart';
+import 'package:vm_fm_4/feature/components/search_dropdown/custom_search_dropdown_menu.dart';
 
 import '../../../generated/locale_keys.g.dart';
 import '../../../product/screens/home/screens/detail_work_order/provider/work_order_request_material_sheet_provider.dart';
@@ -115,33 +114,11 @@ class _Inputs extends StatelessWidget {
         ),
         Expanded(
           flex: 30,
-          child: DropdownSearch<String>(
-            popupProps: PopupProps.menu(
-              searchDelay: const Duration(milliseconds: 0),
-              showSearchBox: true,
-              showSelectedItems: true,
-              listViewProps: const ListViewProps(scrollDirection: Axis.vertical, shrinkWrap: true),
-              itemBuilder: (BuildContext context, String item, bool isSelected) {
-                return ListTile(
-                  title: Text(
-                    item,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: isSelected ? APPColors.Main.red : APPColors.Main.black),
-                  ),
-                );
-              },
-            ),
-            items: value.workSpaceUserInventoryLabelList,
-            dropdownDecoratorProps: DropDownDecoratorProps(
-              baseStyle: Theme.of(context).textTheme.bodySmall,
-              textAlign: TextAlign.left,
-              dropdownSearchDecoration: InputDecoration(
-                labelStyle: Theme.of(context).textTheme.bodySmall,
-                labelText: LocaleKeys.MaterialList.tr(),
-              ),
-            ),
-            onChanged: (String? val) {
-              if (val != null) value.changeHintTexts(val);
-            },
+          child: CustomSearchDropDownMenu(
+            list: value.workSpaceUserInventoryLabelList,
+            labelText: LocaleKeys.MaterialList.tr(),
+            error: LocaleKeys.NoMaterial.tr(),
+            onChanged: value.changeHintTexts,
           ),
         ),
         Expanded(
