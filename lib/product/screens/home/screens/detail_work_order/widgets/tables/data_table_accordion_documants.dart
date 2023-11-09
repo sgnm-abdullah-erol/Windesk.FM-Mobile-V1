@@ -102,7 +102,7 @@ class DataTableAccordionDocumants extends StatelessWidget {
   void _downloadFile(BuildContext context, String url, String name, String type, DownloadProvider provider) async {
     try {
       final http.Response response = await http.get(
-        Uri.parse('https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'),
+        Uri.parse(url),
       );
 
       final dir = await getTemporaryDirectory();
@@ -129,9 +129,7 @@ class DataTableAccordionDocumants extends StatelessWidget {
 
   void _downloadImage(BuildContext context, String url, String name, String type, DownloadProvider provider) async {
     try {
-      final http.Response response = await http.get(
-        Uri.parse('https://upload.wikimedia.org/wikipedia/commons/3/3f/Walking_tiger_female.jpg'),
-      );
+      final http.Response response = await http.get(Uri.parse(url));
 
       final dir = await getTemporaryDirectory();
 
