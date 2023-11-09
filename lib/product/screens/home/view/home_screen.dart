@@ -173,12 +173,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text('Ayarlar'),
+                            const Text('Ayarlar'),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Icon(Icons.dark_mode),
+                                const Icon(Icons.dark_mode),
                                 Switch(
                                   value: themeProvider.isDark,
                                   onChanged: (value) {
@@ -191,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Icon(Icons.language),
+                                const Icon(Icons.language),
                                 Switch(
                                   value: context.locale == const Locale('en', 'US'),
                                   onChanged: (value) {
