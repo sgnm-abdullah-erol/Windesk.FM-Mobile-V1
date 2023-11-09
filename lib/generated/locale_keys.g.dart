@@ -139,6 +139,7 @@ class LocaleKeys {
   static const String SelectGroup = "SelectGroup";
   static const String SelectGroupForContinue = "SelectGroupForContinue";
   static const String ErrorChangeStateWithGroup = 'ErrorChangeStateWithGroup';
+  static const String LocationChangeSuccessfull = 'LocationChangeSuccessfull';
 
   // Data Table Strings
   static const String DataTableID = "DataTableID";

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tree/flutter_tree.dart';
 import 'package:vm_fm_4/core/database/shared_manager.dart';
@@ -267,10 +268,13 @@ class LeafLocationProvider extends ChangeNotifier {
     response.fold(
       (l) => {
         _changeLocationSuccess = true,
-        snackBar(context, LocaleKeys.Active, 'success'),
+        snackBar(context, LocaleKeys.LocationChangeSuccessfull.tr(), 'success'),
         Navigator.of(context).pop<bool>(true),
       },
-      (r) => {},
+      (r) => {
+        snackBar(context, LocaleKeys.Active, 'success'),
+
+      },
     );
     _isLoading = false;
     notifyListeners();

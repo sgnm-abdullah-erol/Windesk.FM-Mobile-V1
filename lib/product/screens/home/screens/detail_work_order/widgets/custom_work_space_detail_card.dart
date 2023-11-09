@@ -124,7 +124,6 @@ class _LocationInformation extends StatelessWidget {
                       ),
                     );
                     if (result == true) {
-                      context.router.pop();
                       context.router.popAndPush(DetailWorkOrderScreen(workSpaceDetail: workSpaceDetail));
                     }
                   },

@@ -115,6 +115,7 @@
 	"SelectGroup": "Grup Seçiniz",
 	"SelectGroupForContinue": "Devam etmek için grup seçiniz",
 	"ErrorChangeStateWithGroup" : "Lütfen grup seçimi yaparak devam ediniz",
+	"LocationChangeSuccessfull": " Lokasyon güncelleme başarılı",
 
 	"----------------DATATABLE----------": "------------DATATABLE-------------",
 	"DataTableID": "ID",
