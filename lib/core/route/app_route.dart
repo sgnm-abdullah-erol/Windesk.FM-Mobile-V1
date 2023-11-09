@@ -9,7 +9,8 @@ class AppRouter extends $AppRouter {
 
   @override
   List<AutoRoute> get routes => [
-        AutoRoute(page: SplashScreen.page, path: '/splashScreen', initial: true),
+        AutoRoute(
+            page: SplashScreen.page, path: '/splashScreen', initial: true),
         AutoRoute(path: '/loginScreen', page: LoginScreen.page),
         AutoRoute(path: '/workorderList', page: WorkOrderListScreen.page),
         AutoRoute(
@@ -21,12 +22,23 @@ class AppRouter extends $AppRouter {
               page: EmptyRouter.page,
               children: [
                 RedirectRoute(path: '', redirectTo: 'homeScreen'),
-                AutoRoute(path: 'homeScreen', page: HomeScreen.page, initial: true),
-                AutoRoute(path: 'workOrderListScreen', page: WorkOrderListScreen.page),
-                AutoRoute(path: 'detailWorkOrderScreen', page: DetailWorkOrderScreen.page),
-                AutoRoute(path: 'searchWorkOrderScreen', page: SearchWorkOrderScreen.page),
-                AutoRoute(path: 'pendingDetailWorkOrderScreen', page: PendingDetailWorkOrderScreen.page),
-                AutoRoute(path: 'workOrderGroupDetailScreen', page: WorkOrderGroupDetailScreen.page),
+                AutoRoute(
+                    path: 'homeScreen', page: HomeScreen.page, initial: true),
+                AutoRoute(
+                    path: 'workOrderListScreen',
+                    page: WorkOrderListScreen.page),
+                AutoRoute(
+                    path: 'detailWorkOrderScreen',
+                    page: DetailWorkOrderScreen.page),
+                AutoRoute(
+                    path: 'searchWorkOrderScreen',
+                    page: SearchWorkOrderScreen.page),
+                AutoRoute(
+                    path: 'pendingDetailWorkOrderScreen',
+                    page: PendingDetailWorkOrderScreen.page),
+                AutoRoute(
+                    path: 'workOrderGroupDetailScreen',
+                    page: WorkOrderGroupDetailScreen.page),
               ],
             ),
             AutoRoute(
@@ -34,8 +46,16 @@ class AppRouter extends $AppRouter {
               page: EmptyRouter2.page,
               children: [
                 RedirectRoute(path: '', redirectTo: 'searchScreen'),
-                AutoRoute(path: 'searchScreen', page: SearchMaterialScreen.page, initial: true),
-                AutoRoute(path: 'assetDetailScreen', page: AssetDetailScreen.page),
+                AutoRoute(
+                    path: 'searchScreen',
+                    page: SearchScreen.page,
+                    initial: true),
+                AutoRoute(
+                    path: 'assetSearchScreen', page: AssetSearchScreen.page),
+                AutoRoute(
+                    path: 'spaceSearchScreen', page: SpaceSearchScreen.page),
+                AutoRoute(
+                    path: 'assetDetailScreen', page: AssetDetailScreen.page),
               ],
             ),
             AutoRoute(path: 'newOrderScreen', page: NewOrderScreen.page),

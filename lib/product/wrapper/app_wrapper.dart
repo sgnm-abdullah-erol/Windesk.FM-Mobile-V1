@@ -15,7 +15,12 @@ class AppWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AutoTabsRouter.pageView(
-      routes: const [HomeScreen(), NewOrderScreen(), SearchMaterialScreen(), TestScreen()],
+      routes: const [
+        HomeScreen(),
+        NewOrderScreen(),
+        SearchScreen(),
+        TestScreen()
+      ],
       physics: const NeverScrollableScrollPhysics(),
       builder: (context, child, _) {
         final tabsRouter = AutoTabsRouter.of(context);
@@ -26,10 +31,23 @@ class AppWrapper extends StatelessWidget {
             selectedIndex: tabsRouter.activeIndex,
             onItemSelected: tabsRouter.setActiveIndex,
             items: [
-              BottomNavyBarItem(title: Text(LocaleKeys.HomeTab, style: context.labelMedium).tr(), icon: const Icon(AppIcons.home)),
-              BottomNavyBarItem(title: Text(LocaleKeys.NewOrderTab, style: context.labelMedium).tr(), icon: const Icon(AppIcons.addBox)),
-              BottomNavyBarItem(title: Text(LocaleKeys.SearchTab, style: context.labelMedium).tr(), icon: const Icon(AppIcons.search)),
-              BottomNavyBarItem(title: Text(LocaleKeys.TestTab, style: context.labelMedium).tr(), icon: const Icon(AppIcons.wifi)),
+              BottomNavyBarItem(
+                  title:
+                      Text(LocaleKeys.HomeTab, style: context.labelMedium).tr(),
+                  icon: const Icon(AppIcons.home)),
+              BottomNavyBarItem(
+                  title:
+                      Text(LocaleKeys.NewOrderTab, style: context.labelMedium)
+                          .tr(),
+                  icon: const Icon(AppIcons.addBox)),
+              BottomNavyBarItem(
+                  title: Text(LocaleKeys.SearchTab, style: context.labelMedium)
+                      .tr(),
+                  icon: const Icon(AppIcons.search)),
+              BottomNavyBarItem(
+                  title:
+                      Text(LocaleKeys.TestTab, style: context.labelMedium).tr(),
+                  icon: const Icon(AppIcons.wifi)),
             ],
           ),
         );
