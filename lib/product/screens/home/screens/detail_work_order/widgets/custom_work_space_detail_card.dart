@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:vm_fm_4/core/constants/other/app_icons.dart';
+import 'package:vm_fm_4/core/route/app_route.gr.dart';
 import 'package:vm_fm_4/feature/components/model_bottom_sheet/change_location_leaf_model_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/components/model_bottom_sheet/get_task_history_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
@@ -117,12 +119,20 @@ class _LocationInformation extends StatelessWidget {
               children: [
                 IconButton(
                   onPressed: () async {
-                    await ShowModalBottomSheet().show(
+                    final result = await ShowModalBottomSheet().show(
                       context,
                       ChangeLocationLeafModelBottomSheet(
                         rootTitle: workSpaceDetail.task?.requestedSpaces?.name ?? '',
+                        taskId: workSpaceDetail.task?.id.toString() ?? '',
+                        templatedBy: workSpaceDetail.task?.templatedBy ?? '',
+                        dependedOn: workSpaceDetail.task?.depended_on.toString() ?? '',
                       ),
                     );
+                    print('resultttt' + result.toString());
+                    if (result != '') {
+                      workSpaceDetail.task?.requestedSpaces?.name = result ?? '';
+                      //context.router.popAndPush(DetailWorkOrderScreen(workSpaceDetail: workSpaceDetail));
+                    }
                   },
                   icon: const Icon(AppIcons.change),
                 ),

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
+import 'package:vm_fm_4/feature/global_providers/global_provider.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
 
 import '../../../../../../core/constants/other/app_icons.dart';
@@ -89,11 +90,11 @@ class DetailWorkOrderScreen extends StatelessWidget {
                             const SizedBox(height: 10),
                             //deneme için eklendi. Servis sorunundan sonra düzeltilecek context.read<GlobalProvider>().userId
                             //TODO
-                            (woDetailProvider.detail.task?.user ?? '') != 'user1'
+                            (woDetailProvider.detail.task?.userId ?? '') != context.read<GlobalProvider>().userId
                                 ? _TakeItOnMe(provider: woDetailProvider)
                                 : _StateChangeDropDownButton(provider: woDetailProvider),
                             const SizedBox(height: 20),
-                            (woDetailProvider.detail.task?.user ?? '') != 'user1'
+                            (woDetailProvider.detail.task?.userId ?? '') != context.read<GlobalProvider>().userId
                                 ? const SizedBox()
                                 : _customPageAccordionSection(context, woDetailProvider),
                           ],
@@ -173,8 +174,7 @@ class _StateChangeDropDownButton extends StatelessWidget {
                   context,
                   "${"${LocaleKeys.ProccessEntryFirstALertDialog.tr()}'" + val}'${LocaleKeys.ProccessEntrySecondALertDialog.tr()}",
                   LocaleKeys.ChangeState.tr(),
-                )
-                  .then((value) {
+                ) .then((value) {
                   // check response value
                   if (value == true) {
                     provider.changeState(val);

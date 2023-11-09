@@ -108,11 +108,8 @@ class WoCreateProvider extends ChangeNotifier {
   }
 
   String _locationKey = '';
-
   String _buildKey = '';
-
   String _floorKey = '';
-
   String _lazyType = '';
 
   bool _locationLoading = true;
@@ -293,7 +290,7 @@ class WoCreateProvider extends ChangeNotifier {
   void setSpace(String newValue) {
     _space = newValue;
     for (var i = 0; i < (_woSpaceList.children?.length ?? 0); i++) {
-      if ('${_woSpaceList.children?[i].name}-${_woSpaceList.children?[i].key}' == newValue) {
+      if ('${_woSpaceList.children?[i].code}-${_woSpaceList.children?[i].name}' == newValue) {
         //_spaceKey = _woSpaceList.children?[i].key ?? '';
         _lazyType = _woSpaceList.children?[i].labels?[0] ?? '';
         _requestedId = _woSpaceList.children?[i].id.toString() ?? '';
@@ -402,7 +399,7 @@ class WoCreateProvider extends ChangeNotifier {
           _woSpaceList = l,
           for (var i = 0; i < (_woSpaceList.children?.length ?? 0); i++)
             {
-              _woSpaceListChildren.add('${_woSpaceList.children?[i].name}-${_woSpaceList.children?[i].key}'),
+              _woSpaceListChildren.add('${_woSpaceList.children?[i].code}-${_woSpaceList.children?[i].name}'),
             }
         },
         (r) => {},

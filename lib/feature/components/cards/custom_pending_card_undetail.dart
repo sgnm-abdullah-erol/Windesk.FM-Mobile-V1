@@ -39,6 +39,7 @@ class CustomPendingCardUndetail extends StatelessWidget {
           child: Consumer<WorkOrderPendiksProvider>(
             builder: (context, value, child) {
               SchedulerBinding.instance.addPostFrameCallback(
+                
                 (timeStamp) {
                   if (value.isTaskStateChange) {
                     snackBar(context, '${LocaleKeys.TaskStateChange.tr()} ${LocaleKeys.NewTask.tr()} ${value.selectedTaskState}', 'success');
@@ -77,6 +78,9 @@ class _Content extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    provider.isFetchGroupIds ?
+    provider.getStateUserGroups(pendiks.task?.id.toString() ?? '', pendiks.workspace?.id.toString() ?? '') : null;
+
     return Padding(
       padding: const EdgeInsets.only(top: 8, left: 12, right: 8, bottom: 8),
       child: Column(
@@ -207,17 +211,17 @@ class _ActionButtons extends StatelessWidget {
 
   void _rejectButton(BuildContext context) async {
     List<String> pendikNextStateLabels = [];
-    for (var i = 0; i < (pendiks.state?.nextStates?.length ?? 0); i++) {
-      pendikNextStateLabels.add(pendiks.state?.nextStates?[i].name ?? '');
+    for (var i = 0; i < (provider.workSpaceStateGroups?.rejectStates?.length ?? 0); i++) {
+      pendikNextStateLabels.add(provider.workSpaceStateGroups?.rejectStates?[i].name ?? '');
     }
     WoWaitRejectModalAlert()
         .showAlertDialog(context, 'textData', _nextStatesLabel, pendikNextStateLabels, provider.onChangedSelectedTask)
         .then((value) {
       if (value != null) {
         if (value == true) {
-          for (var i = 0; i < (pendiks.state?.nextStates?.length ?? 0); i++) {
-            if (pendiks.state?.nextStates?[i].name == provider.selectedTaskState) {
-              provider.changeState(pendiks.task?.id.toString() ?? '', pendiks.state?.nextStates?[i].id.toString() ?? '', true);
+          for (var i = 0; i < (provider.workSpaceStateGroups?.rejectStates?.length ?? 0); i++) {
+            if (provider.workSpaceStateGroups?.rejectStates?[i].name == provider.selectedTaskState) {
+              provider.changeState(pendiks.task?.id.toString() ?? '', provider.workSpaceStateGroups?.rejectStates?[i].id.toString() ?? '', true);
             }
           }
         }

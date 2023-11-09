@@ -113,7 +113,7 @@
 	"SelectGroup": "Select a group",
 	"SelectGroupForContinue": "Select a group for continue",
 	"ErrorChangeStateWithGroup": "You have to select a group",
-
+	"LocationChangeSuccessfull": " Location Change Succesfull",
 
 	"----------------DATATABLE----------": "------------DATATABLE-------------",
 	"DataTableID": "ID",

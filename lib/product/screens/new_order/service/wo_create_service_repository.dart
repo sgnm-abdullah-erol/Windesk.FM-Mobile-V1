@@ -25,4 +25,5 @@ abstract class WoCreateServiceRepository {
   Future<Either<List<WoCreateComponentModel>, CustomServiceException>> getComponents(String token);
   Future<Either<dynamic, CustomServiceException>> createTask(String token, String summary, String requestType, String requestedBy, String description,
       String appointmendData, String templatedBy, String requestSpaceId, String requestSpaceLabels, String woCategory, String woComponent);
+  Future<Either<dynamic, CustomServiceException>> updateTask(String token,String taskId,String requestedId,String requestedLabel, String templatedBy, String depended);
 }

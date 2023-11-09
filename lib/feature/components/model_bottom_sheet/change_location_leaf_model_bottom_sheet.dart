@@ -1,18 +1,27 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_tree/flutter_tree.dart';
 import 'package:provider/provider.dart';
+import 'package:vm_fm_4/core/constants/functions/null_check_widget.dart';
 import 'package:vm_fm_4/core/constants/other/colors.dart';
+import 'package:vm_fm_4/core/constants/style/custom_paddings.dart';
+import 'package:vm_fm_4/feature/components/buttons/custom_half_buttons.dart';
+import 'package:vm_fm_4/feature/components/input_fields/dropdown_input_fields.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
 import 'package:vm_fm_4/product/screens/home/screens/detail_work_order/provider/leaf_location_provider.dart';
 
 import '../../extensions/context_extension.dart';
 
 class ChangeLocationLeafModelBottomSheet extends StatelessWidget {
-  const ChangeLocationLeafModelBottomSheet({super.key, required this.rootTitle});
+  const ChangeLocationLeafModelBottomSheet(
+      {super.key, required this.rootTitle, required this.taskId, required this.templatedBy, required this.dependedOn});
 
   final String rootTitle;
+  final String taskId;
+  final String templatedBy;
+  final String dependedOn;
 
   @override
   Widget build(BuildContext context) {
@@ -29,69 +38,38 @@ class ChangeLocationLeafModelBottomSheet extends StatelessWidget {
               builder: (context, value, child) {
                 SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
                   value.getMainStructure();
+                  value.locationLoading ? value.getLocation() : null;
+                  if (value.changeLocationSucces) {
+
+                  }
                 });
                 return value.isLoading
                     ? Center(child: CircularProgressIndicator(color: APPColors.Main.blue))
                     : SingleChildScrollView(
                         child: Column(
                           children: [
-                            TreeView(
-                              data: [value.root],
-                              lazy: true,
-                              load: value.load,
-                              showCheckBox: true,
-                              showFilter: true,
-                              onCheck: (checked, node) async {
-                                if (checked == true) {
-                                  final response = await showDialog<bool>(
-                                    context: context,
-                                    builder: (context) {
-                                      return AlertDialog(
-                                        title: Text(
-                                          LocaleKeys.ChangeLocale.tr(),
-                                          style: Theme.of(context).textTheme.bodyMedium,
-                                        ),
-                                        content: Flexible(
-                                          flex: 2,
-                                          child: Text(
-                                            '${LocaleKeys.ChangeLocaleText.tr()} ${node.title}',
-                                            style: Theme.of(context).textTheme.bodyMedium,
-                                            overflow: TextOverflow.visible,
-                                            maxLines: 10,
-                                          ),
-                                        ),
-                                        actions: [
-                                          TextButton(
-                                            onPressed: () {
-                                              Navigator.pop(context, false);
-                                            },
-                                            child: Text(
-                                              LocaleKeys.Cancel.tr(),
-                                              style: Theme.of(context).textTheme.bodyMedium,
-                                            ),
-                                          ),
-                                          TextButton(
-                                            onPressed: () {
-                                              Navigator.pop(context, true);
-                                            },
-                                            child: Text(
-                                              LocaleKeys.Approve.tr(),
-                                              style: Theme.of(context).textTheme.bodyMedium,
-                                            ),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
-
-                                  if (response == false || response == null) {
-                                    checked = false;
-                                  } else if (response == true) {
-                                    // update location
-                                  }
-                                }
-                              },
+                            Text('Select a location'),
+                            location(value, context),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text('Seçili lokasyon ${value.selectedLocationName} olarak değiştirilecektir.'),
                             ),
+                            CustomHalfButtons(
+                              leftTitle: Text(
+                                LocaleKeys.Cancel.tr(),
+                                style: TextStyle(color: APPColors.Main.white),
+                              ),
+                              rightTitle: Text(
+                                LocaleKeys.Approve.tr(),
+                                style: TextStyle(color: APPColors.Main.white),
+                              ),
+                              leftOnPressed: () {
+                                context.router.pop();
+                              },
+                              rightOnPressed: () {
+                                value.changeLocation(taskId.toString(), templatedBy.toString(), dependedOn, context);
+                              },
+                            )
                           ],
                         ),
                       );
@@ -99,6 +77,70 @@ class ChangeLocationLeafModelBottomSheet extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Container location(LeafLocationProvider leafLocationProvider, BuildContext context) {
+    return Container(
+      width: context.width,
+      padding: const EdgeInsets.all(10),
+      child: Column(
+        children: [
+          DropDownInputFields(
+            labelText: 'Lokasyon',
+            onChangedFunction: (String newValue) {
+              leafLocationProvider.setLocation(newValue);
+            },
+            rightIcon: Icons.arrow_drop_down_rounded,
+            dropDownArray: leafLocationProvider.woLocationListChildren,
+          ),
+          Padding(
+              padding: CustomPaddings.onlyLeft * 1.5,
+              child: NullCheckWidget().isLeafFalse(
+                leafLocationProvider.locationLeaf,
+                DropDownInputFields(
+                  labelText: 'Blok',
+                  onChangedFunction: (String newValue) {
+                    leafLocationProvider.setBlock(newValue);
+                  },
+                  rightIcon: Icons.arrow_drop_down_rounded,
+                  dropDownArray: leafLocationProvider.woBlockListChildren,
+                  leftIconExist: true,
+                  leftIcon: Icons.arrow_right_alt,
+                ),
+              )),
+          Padding(
+              padding: CustomPaddings.onlyLeft * 3,
+              child: NullCheckWidget().isLeafFalse(
+                leafLocationProvider.buildingLeaf,
+                DropDownInputFields(
+                  labelText: 'Kat',
+                  onChangedFunction: (String newValue) {
+                    leafLocationProvider.setFloor(newValue);
+                  },
+                  rightIcon: Icons.arrow_drop_down_rounded,
+                  dropDownArray: leafLocationProvider.woFloorListChildren,
+                  leftIconExist: true,
+                  leftIcon: Icons.arrow_right_alt,
+                ),
+              )),
+          Padding(
+              padding: CustomPaddings.onlyLeft * 4.5,
+              child: NullCheckWidget().isLeafFalse(
+                leafLocationProvider.floorLeaf,
+                DropDownInputFields(
+                  labelText: 'Alan',
+                  onChangedFunction: (String newValue) {
+                    leafLocationProvider.setSpace(newValue);
+                  },
+                  rightIcon: Icons.arrow_drop_down_rounded,
+                  dropDownArray: leafLocationProvider.woSpaceListChildren,
+                  leftIconExist: true,
+                  leftIcon: Icons.arrow_right_alt,
+                ),
+              )),
+        ],
       ),
     );
   }
