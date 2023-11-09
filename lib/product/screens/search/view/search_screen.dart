@@ -1,87 +1,73 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
+import 'package:vm_fm_4/core/constants/other/app_icons.dart';
+import 'package:vm_fm_4/core/constants/other/app_strings.dart';
+import 'package:vm_fm_4/core/constants/paths/service_tools.dart';
+import 'package:vm_fm_4/feature/components/appbar/custom_main_appbar.dart';
+import 'package:vm_fm_4/feature/components/buttons/custom_circular_home_button.dart';
+import 'package:vm_fm_4/generated/locale_keys.g.dart';
 
-import '../../../../../../../feature/components/appbar/custom_main_appbar.dart';
-import '../../../../../../../feature/components/buttons/custom_half_buttons.dart';
-import '../../../../../../../feature/components/input_fields/text_fields_input_with_action_and_controller.dart';
-import '../../../../core/constants/other/app_icons.dart';
-import '../../../../core/constants/style/custom_paddings.dart';
 import '../../../../core/route/app_route.gr.dart';
-import '../../../../feature/extensions/context_extension.dart';
-import '../../../../generated/locale_keys.g.dart';
-import '../../home/screens/work_order_list/widgets/custom_loading_indicator.dart';
-import '../provider/search_provider.dart';
 
 @RoutePage()
-class SearchMaterialScreen extends StatefulWidget {
-  const SearchMaterialScreen({super.key});
+class SearchScreen extends StatelessWidget {
+  const SearchScreen({super.key});
 
-  @override
-  State<SearchMaterialScreen> createState() => _SearchMaterialScreenState();
-}
-
-class _SearchMaterialScreenState extends State<SearchMaterialScreen> {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => SearchMaterialProvider(),
-      child: Consumer<SearchMaterialProvider>(
-          builder: (context, SearchMaterialProvider searchProvider, child) {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          if (searchProvider.isSuccess) {
-            snackBar(context, LocaleKeys.assetSearchSuccess, 'success');
-            if (searchProvider.assetDetailList != null) {
-              context.router.push(AssetDetailScreen(
-                  assetListModel: searchProvider.assetDetailList!,
-                  assetImageModel: searchProvider.imageModel,
-                  imageExist: searchProvider.imageExist,
-                  documentExist: searchProvider.documentExist,
-                  assetDocumentModel: searchProvider.documentModel));
-              searchProvider.clearInput();
-            }
-          }
-          if (searchProvider.errorAccure) {
-            snackBar(context, LocaleKeys.assetSearchError, 'error');
-          }
-        });
-        return WillPopScope(
-          child: Scaffold(
-            appBar: CustomMainAppbar(
-                title: const Text(LocaleKeys.MaterialSearch).tr(),
-                elevation: 3),
-            body: searchProvider.isLoading
-                ? const CustomLoadingIndicator()
-                : Center(
-                    child: Padding(
-                      padding: CustomPaddings.pageNormal,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          TextFieldsInputWithActionAndController(
-                              textController: searchProvider.assetNumber,
-                              labelText: LocaleKeys.MaterialSearch,
-                              actionIcon: AppIcons.qr,
-                              actionFunction:
-                                  searchProvider.scanBarcodeAndQrForAsset),
-                          CustomHalfButtons(
-                              leftTitle: Text(LocaleKeys.Clear.tr(),
-                                  style: context.bodyMedium),
-                              rightTitle: Text(LocaleKeys.Search.tr(),
-                                  style: context.bodyMedium),
-                              leftOnPressed: searchProvider.clearInput,
-                              rightOnPressed:
-                                  searchProvider.getAssetWithSearch),
-                        ],
-                      ),
+    return Scaffold(appBar: const CustomMainAppbar(title: Text(AppStrings.searchTab)), body: Center(child: _bodyWidget(context)));
+  }
+
+  Widget _bodyWidget(context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        SizedBox(
+          height: MediaQuery.of(context).size.height / 8,
+        ),
+        rowIconButtonSection(context, LocaleKeys.assetSearch, AppIcons.search, const AssetSearchScreen(), LocaleKeys.spaceSearch, AppIcons.search,
+            const SpaceSearchScreen(), ServiceTools.isWorkOrderExist),
+      ],
+    );
+  }
+
+  Widget rowIconButtonSection(BuildContext context, String buttonTitle1, IconData buttonIcon1, PageRouteInfo<dynamic> navigateRouteName1,
+      String buttonTitle2, IconData buttonIcon2, PageRouteInfo<dynamic> navigateRouteName2, bool secondButtonExist) {
+    return Expanded(
+      child: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            CustomCircularHomeButton(
+              title: buttonTitle1,
+              icon: Icon(
+                buttonIcon1,
+                size: MediaQuery.of(context).size.width / 10,
+              ),
+              onPressed: () {
+                context.router.push(navigateRouteName1);
+              },
+              isBadgeVisible: false,
+              badgeCount: '0',
+            ),
+            secondButtonExist
+                ? CustomCircularHomeButton(
+                    title: buttonTitle2,
+                    icon: Icon(
+                      buttonIcon2,
+                      size: MediaQuery.of(context).size.width / 10,
                     ),
-                  ),
-          ),
-          onWillPop: () async => false,
-        );
-      }),
+                    onPressed: () {
+                      context.router.push(navigateRouteName2);
+                    },
+                    isBadgeVisible: false,
+                    badgeCount: '0',
+                  )
+                : Container(),
+          ],
+        ),
+      ),
     );
   }
 }

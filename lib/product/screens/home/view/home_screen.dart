@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:vm_fm_4/core/constants/paths/asset_paths.dart';
 import 'package:vm_fm_4/core/themes/theme_provider.dart';
 import 'package:vm_fm_4/feature/components/alert_dialog/notification_alert_dialog.dart';
+import 'package:vm_fm_4/feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
 import 'package:vm_fm_4/product/screens/home/service/home_service_repo_impl.dart';
@@ -49,32 +50,25 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<SearchWorkOrderProvider>(
-            create: (_) => SearchWorkOrderProvider()),
+        ChangeNotifierProvider<SearchWorkOrderProvider>(create: (_) => SearchWorkOrderProvider()),
         ChangeNotifierProvider<HomeProvider>(create: (_) => HomeProvider()),
       ],
       child: Consumer2<HomeProvider, SearchWorkOrderProvider>(
-        builder: (context, HomeProvider homeProvider,
-            SearchWorkOrderProvider searchWorkOrderProvider, child) {
+        builder: (context, HomeProvider homeProvider, SearchWorkOrderProvider searchWorkOrderProvider, child) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             if (homeProvider.logoutError) {
               snackBar(context, LocaleKeys.LogoutError.tr(), 'error');
             }
             if (homeProvider.isUserLogout) {
               snackBar(context, LocaleKeys.LogoutSuccess.tr(), 'success');
-              context.router.pushAndPopUntil(
-                  LoginScreen(userName: homeProvider.userName),
-                  predicate: (_) => false);
+              context.router.pushAndPopUntil(LoginScreen(userName: homeProvider.userName), predicate: (_) => false);
             }
           });
-          final WorkSpaceServiceRepositoryImpl workSpaceService =
-              Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
+          final WorkSpaceServiceRepositoryImpl workSpaceService = Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
           FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
             //TODO MESSAGE PARSE
-            print('Opened2');
 
-            NotificationAlertDialog.showNotification(
-                context, searchWorkOrderProvider, message);
+            NotificationAlertDialog.showNotification(context, searchWorkOrderProvider, message);
             //FlutterLocalNotificationsPlugin().show(message.notification.messageId, message.notification?.title, message.notification?.body,);
           });
 
@@ -87,32 +81,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 body: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      headerTextWidget(context),
-                      homePageIcons(context)
-                    ],
+                    children: <Widget>[headerTextWidget(context, themeProvider), homePageIcons(context)],
                   ),
-                ),
-                floatingActionButton: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    FloatingActionButton(
-                      heroTag: "1",
-                      onPressed: () {
-                        themeProvider.setTheme(!themeProvider.isDark);
-                      },
-                    ),
-                    FloatingActionButton(
-                      heroTag: "2",
-                      onPressed: () {
-                        if (context.locale == const Locale('en', 'US')) {
-                          context.setLocale(const Locale('tr', 'TR'));
-                        } else {
-                          context.setLocale(const Locale('en', 'US'));
-                        }
-                      },
-                    ),
-                  ],
                 ),
               );
             },
@@ -184,33 +154,98 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Expanded headerTextWidget(BuildContext context) {
+  Expanded headerTextWidget(BuildContext context, ThemeProvider themeProvider) {
     return Expanded(
       child: Column(
         children: [
-          Text(LocaleKeys.IfmName,
-                  style: context.titleSmall.copyWith(letterSpacing: 1.5))
-              .tr(),
-          Text(LocaleKeys.AppTitle,
-                  style: context.titleMedium.copyWith(letterSpacing: 1.5))
-              .tr(),
+          Text(LocaleKeys.IfmName, style: context.titleSmall.copyWith(letterSpacing: 1.5)).tr(),
+          Text(LocaleKeys.AppTitle, style: context.titleMedium.copyWith(letterSpacing: 1.5)).tr(),
+          Row(
+            children: [
+              IconButton(
+                icon: Icon(Icons.settings, size: 35, color: context.theme ? APPColors.Main.white : APPColors.Main.black),
+                tooltip: LocaleKeys.HintLogout.tr(),
+                onPressed: () => ShowModalBottomSheet().show(
+                    this.context,
+                    SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.2,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Text('Ayarlar'),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const Icon(Icons.dark_mode),
+                                Switch(
+                                  value: themeProvider.isDark,
+                                  onChanged: (value) {
+                                    themeProvider.setTheme(!themeProvider.isDark);
+                                  },
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const Icon(Icons.language),
+                                Switch(
+                                  value: context.locale == const Locale('en', 'US'),
+                                  onChanged: (value) {
+                                    if (context.locale == const Locale('en', 'US')) {
+                                      context.setLocale(const Locale('tr', 'TR'));
+                                    } else {
+                                      context.setLocale(const Locale('en', 'US'));
+                                    }
+                                  },
+                                ),
+                              ],
+                            )
+                          ],
+                        ))),
+              ),
+            ],
+          )
         ],
       ),
     );
   }
 
+  // Column(
+  //               children: [
+  //                 Icon(Icons.dark_mode),
+  //                 Switch(
+  //                   value: themeProvider.isDark,
+  //                   onChanged: (value) {
+  //                     themeProvider.setTheme(!themeProvider.isDark);
+  //                   },
+  //                 ),
+  //               ],
+  //             ),
+  //             Column(
+  //               children: [
+  //                 Icon(Icons.language),
+  //                 Switch(
+  //                   value: context.locale == const Locale('en', 'US'),
+  //                   onChanged: (value) {
+  //                     if (context.locale == const Locale('en', 'US')) {
+  //                       context.setLocale(const Locale('tr', 'TR'));
+  //                     } else {
+  //                       context.setLocale(const Locale('en', 'US'));
+  //                     }
+  //                   },
+  //                 ),
+  //               ],
+  //             )
   AppBar appBarWidget(BuildContext context, HomeProvider provider) {
     return AppBar(
-      title: Image.asset(AssetPaths.windesk,
-          width: context.width / 1.2,
-          height: context.width / 1.2,
-          fit: BoxFit.cover),
+      title: Image.asset(AssetPaths.windesk, width: context.width / 1.2, height: context.width / 1.2, fit: BoxFit.cover),
       actions: <Widget>[
         IconButton(
-          icon: Icon(AppIcons.powerSettingsOff,
-              size: 35,
-              color:
-                  context.theme ? APPColors.Main.white : APPColors.Main.black),
+          icon: Icon(AppIcons.powerSettingsOff, size: 35, color: context.theme ? APPColors.Main.white : APPColors.Main.black),
           tooltip: LocaleKeys.HintLogout.tr(),
           onPressed: () => provider.logOut(context),
         ),
@@ -225,31 +260,34 @@ class _HomeScreenState extends State<HomeScreen> {
   Builder announcementBuilder(BuildContext context) {
     return Builder(
       builder: (BuildContext context) {
-        return badges.Badge(
-          position: badges.BadgePosition.topEnd(top: 10, end: 10),
-          badgeContent: Text(
-            context.read<HomeProvider>().totalAnnoucementCount.toString(),
-            style: context.labelMedium.copyWith(color: APPColors.Main.white),
-          ),
-          onTap: () {},
-          child: IconButton(
-            icon: Icon(
-              AppIcons.notifications,
-              size: 35,
-              color:
-                  context.theme ? APPColors.Main.white : APPColors.Main.black,
+        return Column(
+          children: [
+            badges.Badge(
+              position: badges.BadgePosition.topEnd(top: 10, end: 10),
+              badgeContent: Text(
+                context.read<HomeProvider>().totalAnnoucementCount.toString(),
+                style: context.labelMedium.copyWith(color: APPColors.Main.white),
+              ),
+              onTap: () {},
+              child: IconButton(
+                icon: Icon(
+                  AppIcons.notifications,
+                  size: 35,
+                  color: context.theme ? APPColors.Main.white : APPColors.Main.black,
+                ),
+                onPressed: () {
+                  context.read<HomeProvider>().totalAnnoucementCount.toString() != 0
+                      ? showModalBottomSheet<void>(
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          elevation: 10,
+                          context: context,
+                          builder: (context) => const AnnouncementList())
+                      : null;
+                },
+              ),
             ),
-            onPressed: () {
-              context.read<HomeProvider>().totalAnnoucementCount.toString() != 0
-                  ? showModalBottomSheet<void>(
-                      isScrollControlled: true,
-                      backgroundColor: Colors.transparent,
-                      elevation: 10,
-                      context: context,
-                      builder: (context) => const AnnouncementList())
-                  : null;
-            },
-          ),
+          ],
         );
       },
     );

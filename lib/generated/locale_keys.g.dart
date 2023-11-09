@@ -9,8 +9,17 @@ class LocaleKeys {
   const LocaleKeys._();
 
   // asset search
+  static const String assetSearch = 'Malzeme Arama';
+
   static const String assetSearchSuccess = 'Malzeme Arama Başarılı';
   static const String assetSearchError = 'Malzeme Arama Başarısız';
+
+
+//space search
+ static const String spaceSearch = 'Mahal Arama';
+
+  static const String spaceSearchSuccess = 'Mahal Arama Başarılı';
+  static const String spaceSearchError = 'Mahal Arama Başarısız';
 
   // static const ----------App---------- = '----------App----------;
   static const String IfmName = 'IfmName';
@@ -42,12 +51,15 @@ class LocaleKeys {
   static const String DeleteNote = 'DeleteNote';
   static const String Note = 'Note';
   static const String Location = 'Location';
-  static const String WantedMaterialAmountBiggerThanHintAmount = 'WantedMaterialAmountBiggerThanHintAmount';
+  static const String WantedMaterialAmountBiggerThanHintAmount =
+      'WantedMaterialAmountBiggerThanHintAmount';
   static const String EditNoteError = 'EditNoteError';
   static const String EditNoteSuccess = 'EditNoteSuccess';
   static const String Edit = 'Edit';
   static const String ChangeLocale = 'ChangeLocale';
   static const String ChangeLocaleText = 'ChangeLocaleText';
+  static const String NoMaterial = 'NoMaterial';
+  static const String ErrorAccurWhileDownloadFile = 'ErrorAccurWhileDownloadFile';
 
   // static const ----------SNACKBAR---------- = '----------SNACKBAR----------;
   static const String NoInternetConnection = 'NoInternetConnection';
@@ -120,7 +132,8 @@ class LocaleKeys {
 
   // Work Order Texts
   static const String CreatedNewWorkOrder = "CreatedNewWorkOrder";
-  static const String GoingToNewWorkOrderDetailPage = "GoingToNewWorkOrderDetailPage";
+  static const String GoingToNewWorkOrderDetailPage =
+      "GoingToNewWorkOrderDetailPage";
   static const String ChangeState = "ChangeState";
   static const String ResponseDate = "ResponseDate";
   static const String CorrectionDate = "CorrectionDate";
@@ -134,8 +147,10 @@ class LocaleKeys {
   static const String Presence = "Presence";
   static const String Change = "Change";
   static const String ProccessEntry = "ProccessEntry";
-  static const String ProccessEntryFirstALertDialog = "ProccessEntryFirstALertDialog";
-  static const String ProccessEntrySecondALertDialog = "ProccessEntrySecondALertDialog";
+  static const String ProccessEntryFirstALertDialog =
+      "ProccessEntryFirstALertDialog";
+  static const String ProccessEntrySecondALertDialog =
+      "ProccessEntrySecondALertDialog";
   static const String SelectGroup = "SelectGroup";
   static const String SelectGroupForContinue = "SelectGroupForContinue";
   static const String ErrorChangeStateWithGroup = 'ErrorChangeStateWithGroup';
@@ -220,10 +235,12 @@ class LocaleKeys {
   static const String MyWorks = 'My Works';
   static const String OurWorks = 'Our Works';
   static const String PendingWorks = 'Pending Works';
-  static const String FaultWorkOrdersInMyGroup = 'Fault Work Orders in My Group';
+  static const String FaultWorkOrdersInMyGroup =
+      'Fault Work Orders in My Group';
   static const String Appearance = 'Appearance';
   static const String ListView = 'List View';
-  static const String DecisionModelNotationsableView = 'Decision Model Notationsable View';
+  static const String DecisionModelNotationsableView =
+      'Decision Model Notationsable View';
   static const String WOID = 'WO ID';
   static const String WOStatus = 'WO Status';
   static const String RequestedBy = 'Requested By';
@@ -231,9 +248,11 @@ class LocaleKeys {
   static const String Priority = 'Priority';
   static const String DueDate = 'Due Date';
   static const String RelationalSearch = 'Relational Search';
-  static const String CreateDecisionModelNotationsask = 'Create Decision Model Notationsask';
+  static const String CreateDecisionModelNotationsask =
+      'Create Decision Model Notationsask';
   static const String SelectRequestedBy = 'Select Requested By';
-  static const String SelectDecisionModelNotationsype = 'Select Decision Model Notationsype';
+  static const String SelectDecisionModelNotationsype =
+      'Select Decision Model Notationsype';
   static const String Building = 'Building';
   static const String AppointmentDate = 'Appointment Date';
   static const String Choose = 'Choose';
@@ -246,8 +265,10 @@ class LocaleKeys {
   static const String WONo = 'WO No';
   static const String Space = 'Space';
   static const String FaultCategory = 'Fault Category';
-  static const String DecisionModelNotationsaskInformation = 'Decision Model Notationsask Information';
-  static const String WorkOrderDecisionModelNotationsype = 'Work Order Decision Model Notationsype';
+  static const String DecisionModelNotationsaskInformation =
+      'Decision Model Notationsask Information';
+  static const String WorkOrderDecisionModelNotationsype =
+      'Work Order Decision Model Notationsype';
   static const String Detail = 'Detail';
   static const String History = 'History';
   static const String Active = 'Active';

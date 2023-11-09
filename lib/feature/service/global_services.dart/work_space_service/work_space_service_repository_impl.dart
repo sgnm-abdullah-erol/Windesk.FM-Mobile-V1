@@ -32,8 +32,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
     String url =
         '${ServiceTools.url.workorder_url}/task/workSpace/task/state/List/for/assigned/user/pagination/swagger?page=$page&limit=10&orderBy=DESC&orderByColumn%5B0%5D=updatedAt';
-    print(url);
-    print(token);
+
     final response = await super.dio.get(
           url,
           options: Options(
@@ -44,8 +43,27 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     if (response.statusCode == 200 || response.statusCode == 201) {
       final data = response.data;
       workSpaceDetailList = WorkSpaceDetail.fromJsonList(data);
-
+      super.logger.w(response);
       return Left(workSpaceDetailList);
+    } else {
+      super.logger.wtf(response);
+      return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+    }
+  }
+
+  Future<Either<List, CustomServiceException>> getTaskHistoryApi(String id, String token) async {
+    String url = '${ServiceTools.url.workorder_url}/task/one/task/state/List/with/user/approver/date/hour/second/status/$id';
+    final response = await super.dio.get(
+          url,
+          options: Options(
+            headers: {'authorization': 'Bearer $token'},
+          ),
+        );
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      final data = response.data;
+
+      return Left(data);
     } else {
       return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
     }
@@ -773,8 +791,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     List<WorkSpaceDetail> workSpaceDetailList;
     String url =
         '${ServiceTools.url.workorder_url}/task/workSpace/task/state/List/can/be/assigned/user/pagination/swagger/search?page=1&limit=10&orderBy=DESC&searchString=$workOrderCode';
-    print(url);
-    print(token);
     try {
       final response = await super.dio.get(
             url,
@@ -859,7 +875,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
         workSpaceDetailList = WorkSpaceDetail.fromJsonList(data);
-        print(workSpaceDetailList);
         return Left(workSpaceDetailList);
       } else {
         return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
@@ -874,7 +889,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   Future<bool> addNoteToWorkOrder(String userToken, String taskId, String value) async {
     String url = '${ServiceTools.url.workorder_url}/task/add/node/to/task';
     List<WorkSpaceDetail> workSpaceDetailList = [];
-    print('addurlnote' + url + ' : ' + taskId + ' : ' + value);
     try {
       final response = await super.dio.post(url,
           options: Options(
@@ -970,6 +984,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     }
   }
 
+  @override
   Future<MainLocationStructure> getMainLocationStructure(String userToken) async {
     String url = '${ServiceTools.url.location_url}/structures';
     try {
@@ -979,8 +994,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
               headers: {'authorization': 'Bearer $userToken'},
             ),
           );
-
-      print('halooo');
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;

@@ -8,10 +8,7 @@ import '../../../product/screens/home/screens/search_work_order/provider/search_
 import '../../extensions/context_extension.dart';
 
 class NotificationAlertDialog {
-  static Future showNotification(
-      BuildContext context,
-      SearchWorkOrderProvider searchWorkOrderProvider,
-      RemoteMessage message) async {
+  static Future showNotification(BuildContext context, SearchWorkOrderProvider searchWorkOrderProvider, RemoteMessage message) async {
     Widget cancelButton = TextButton(
       child: const Text(LocaleKeys.Okey).tr(),
       onPressed: () {
@@ -21,25 +18,19 @@ class NotificationAlertDialog {
     Widget continueButton = TextButton(
       child: const Text(LocaleKeys.SeeDetail).tr(),
       onPressed: () {
-        searchWorkOrderProvider.getWorkSpaceWithSearchFromGroupWorks(
-            context, message.data['taskId']);
+        searchWorkOrderProvider.getWorkSpaceWithSearchFromGroupWorks(context, message.data['taskId']);
       },
     );
 
     AlertDialog alert = searchWorkOrderProvider.isLoading
         ? AlertDialog(
-            title:
-                Text(LocaleKeys.CreatedNewWorkOrder, style: context.bodyMedium)
-                    .tr(),
+            title: Text(LocaleKeys.CreatedNewWorkOrder, style: context.bodyMedium).tr(),
             content: const Text(LocaleKeys.GoingToNewWorkOrderDetailPage).tr(),
             actions: const [],
           )
         : AlertDialog(
-            title:
-                Text(LocaleKeys.CreatedNewWorkOrder, style: context.bodyMedium)
-                    .tr(),
-            content: Text(
-                "${message.data['taskName']} - ${message.data['taskId']}\n${message.data['taskDescription']}"),
+            title: Text(LocaleKeys.CreatedNewWorkOrder, style: context.bodyMedium).tr(),
+            content: Text("${message.data['taskName']} - ${message.data['taskId']}\n${message.data['taskDescription']}"),
             actions: [cancelButton, continueButton],
           );
     return showDialog(context: context, builder: (context) => alert);

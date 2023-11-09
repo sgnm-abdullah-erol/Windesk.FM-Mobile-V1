@@ -73,6 +73,11 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   String? _groupId = '';
   String? get groupId => _groupId;
 
+  List? _taskHistoryData = [];
+  List? get taskHistoryData => _taskHistoryData;
+  bool _isTaskHistoryLoading = false;
+  bool get isTaskHistoryLoading => _isTaskHistoryLoading;
+
   void setGroupIdDefault() {
     _groupId = '';
   }
@@ -97,7 +102,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   List<String> _stateGroupList = [];
   List<String> get stateGroupList => _stateGroupList;
 
-  CurrentState? _workSpaceStateGroups = CurrentState();
+  CurrentState? _workSpaceStateGroups = const CurrentState();
   CurrentState? get workSpaceStateGroups => _workSpaceStateGroups;
 
   void setDropdown() {
@@ -441,6 +446,27 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
       result.fold((l) {
         detail = l;
+        notifyListeners();
+      }, (r) {});
+    }
+    _isLoading = false;
+
+    notifyListeners();
+  }
+
+  Future getTaskHistory(taskId) async {
+    _isTaskHistoryLoading = false;
+    final String token = await SharedManager().getString(SharedEnum.userToken);
+    if (token.isNotEmpty) {
+      final result = await workSpaceService.getTaskHistoryApi(detail.task!.id.toString(), token);
+
+      result.fold((l) {
+        var dataList = [];
+        for (var i = 0; i < l.length; i++) {
+          dataList.add([l[i]['state']['name'], l[i]['state']['stateDate'], l[i]['state']['stateUser']]);
+        }
+        _isTaskHistoryLoading = true;
+        _taskHistoryData = dataList;
         notifyListeners();
       }, (r) {});
     }

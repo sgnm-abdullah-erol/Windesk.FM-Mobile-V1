@@ -1,9 +1,7 @@
 import 'dart:io';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:internet_file/internet_file.dart';
-import 'package:internet_file/storage_io.dart';
+import 'package:flutter_file_dialog/flutter_file_dialog.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:vm_fm_4/feature/components/alert_dialog/work_order_delete_item_alert_dialog.dart';
@@ -16,6 +14,7 @@ import '../../../../../../../feature/extensions/context_extension.dart';
 import '../../../../../../../feature/models/work_space/work_space_documents.dart';
 import '../../../../../../../generated/locale_keys.g.dart';
 import '../../provider/download_provider.dart';
+import 'package:http/http.dart' as http;
 
 class DataTableAccordionDocumants extends StatelessWidget {
   DataTableAccordionDocumants({super.key, required this.data, required this.provider});
@@ -65,10 +64,15 @@ class DataTableAccordionDocumants extends StatelessWidget {
                         ? const Center(child: CircularProgressIndicator())
                         : IconButton(
                             onPressed: () async {
-                              _downloadFile(context, data[i].url ?? '', data[i].name ?? '');
-                              // Directory appDocDirectory = await getApplicationDocumentsDirectory();
-
-                              // provider.downloadFile(("${appDocDirectory.path}/${data[i].name ?? ''}"), data[i].url ?? '');
+                              String type = data[i].url?.split('.').last ?? '';
+                              if (type == 'jpg' || type == 'png' || type == 'jpeg') {
+                                _downloadImage(context, data[i].url ?? '', data[i].name ?? '', type, provider);
+                              } else if (type == 'pdf') {
+                                _downloadFile(context, data[i].url ?? '', data[i].name ?? '', type, provider);
+                              } else {
+                                // error dialog
+                                provider.errorAccurWhileDownloadingFile(context);
+                              }
                             },
                             icon: Icon(AppIcons.download, color: APPColors.Login.green),
                           ),
@@ -95,20 +99,58 @@ class DataTableAccordionDocumants extends StatelessWidget {
     );
   }
 
-  void _downloadFile(BuildContext context, String url, String name) async {
-    final storageIO = InternetFileStorageIO();
-    Directory appDocDir = await getApplicationDocumentsDirectory();
+  void _downloadFile(BuildContext context, String url, String name, String type, DownloadProvider provider) async {
+    try {
+      final http.Response response = await http.get(
+        Uri.parse(url),
+      );
 
-    await InternetFile.get(
-      url,
-      storage: storageIO,
-      storageAdditional: storageIO.additional(
-        filename: name,
-        location: appDocDir.path,
-      ),
-      force: true,
-      progress: (receivedLength, contentLength) {},
-    );
+      final dir = await getTemporaryDirectory();
+
+      // Create an image name
+      var filename = '${dir.path}/$name.pdf';
+
+      // Save to filesystem
+      final file = File(filename);
+      await file.writeAsBytes(response.bodyBytes, flush: true);
+
+      // Ask the user to save it
+      final params = SaveFileDialogParams(sourceFilePath: file.path);
+      final finalPath = await FlutterFileDialog.saveFile(params: params);
+
+      if (finalPath != null) {
+        debugPrint('pdf saved to $finalPath');
+      }
+    } catch (e) {
+      // ignore: use_build_context_synchronously
+      provider.errorAccurWhileDownloadingFile(context);
+    }
+  }
+
+  void _downloadImage(BuildContext context, String url, String name, String type, DownloadProvider provider) async {
+    try {
+      final http.Response response = await http.get(Uri.parse(url));
+
+      final dir = await getTemporaryDirectory();
+
+      // Create an image name
+      var filename = '${dir.path}/$name.$type';
+
+      // Save to filesystem
+      final file = File(filename);
+      await file.writeAsBytes(response.bodyBytes);
+
+      // Ask the user to save it
+      final params = SaveFileDialogParams(sourceFilePath: file.path);
+      final finalPath = await FlutterFileDialog.saveFile(params: params);
+
+      if (finalPath != null) {
+        debugPrint('image saved to $finalPath');
+      }
+    } catch (e) {
+      // ignore: use_build_context_synchronously
+      provider.errorAccurWhileDownloadingFile(context);
+    }
   }
 
   TextStyle _cellTextStyle(BuildContext context) => context.labelMedium.copyWith(color: APPColors.Main.black);

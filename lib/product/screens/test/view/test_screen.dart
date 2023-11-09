@@ -5,6 +5,7 @@ import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:vm_fm_4/core/constants/other/app_strings.dart';
 import 'package:vm_fm_4/core/constants/other/colors.dart';
 import 'package:vm_fm_4/core/constants/paths/service_tools.dart';
+import 'package:vm_fm_4/core/themes/theme_provider.dart';
 import 'package:vm_fm_4/feature/components/appbar/custom_main_appbar.dart';
 
 import '../../../../feature/extensions/context_extension.dart';
@@ -26,24 +27,34 @@ class _TestScreenState extends State<TestScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => TestProvider(),
-      child: Consumer<TestProvider>(builder: (context, TestProvider testProvider, child) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => TestProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ThemeProvider(),
+        )
+      ],
+      child: Consumer2<TestProvider, ThemeProvider>(builder: (context, TestProvider testProvider, ThemeProvider themeProvider, child) {
         testProvider.getInfoLoad == false ? testProvider.getTestScreenInfo() : null;
-        return Scaffold(
-          appBar: const CustomMainAppbar(title: Text('Test')),
-          body: Center(child: _bodyWidget(context, testProvider)),
+        return WillPopScope(
+          child: Scaffold(
+            appBar: const CustomMainAppbar(title: Text('Test')),
+            body: Center(child: _bodyWidget(context, testProvider, themeProvider)),
+          ),
+          onWillPop: () async => false,
         );
       }),
     );
   }
 
-  _bodyWidget(BuildContext context, TestProvider testProvider) {
+  _bodyWidget(BuildContext context, TestProvider testProvider, ThemeProvider themeProvider) {
     return Column(
       children: [
         _headerWidget(context),
         _infoWidget(context, testProvider),
-        _buttonsAndTestResultWidget(context, testProvider),
+        _buttonsAndTestResultWidget(context, testProvider, themeProvider),
       ],
     );
   }
@@ -124,12 +135,21 @@ class _TestScreenState extends State<TestScreen> {
     );
   }
 
-  Widget _buttonsAndTestResultWidget(BuildContext context, TestProvider testProvider) {
+  Widget _buttonsAndTestResultWidget(BuildContext context, TestProvider testProvider, ThemeProvider themeProvider) {
     return Expanded(
       child: Column(
         children: [
           // buttonNotify(context, AppStrings.issueNotify, onPressFunction,
           //     _controllerButton),
+          // CustomElevatedButtonWithIcon(
+          //     bgColor: Colors.greenAccent,
+          //     onPressFunction: () {
+          //       themeProvider.setTheme(!themeProvider.isDark);
+          //     },
+          //     textValue: 'Dark theme',
+          //     textColor: Colors.red,
+          //     iconColor: Colors.black,
+          //     icon: Icons.abc),
           buttonTest(context, AppStrings.accessTest.tr(), testProvider, _controllerButton),
           Padding(
             padding: const EdgeInsets.all(8.0),

@@ -119,7 +119,6 @@ class LeafLocationProvider extends ChangeNotifier {
 
       _isLoading = false;
       notifyListeners();
-      print(structure);
     }
   }
 

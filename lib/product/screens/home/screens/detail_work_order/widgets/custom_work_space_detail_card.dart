@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:vm_fm_4/core/constants/other/app_icons.dart';
 import 'package:vm_fm_4/core/route/app_route.gr.dart';
 import 'package:vm_fm_4/feature/components/model_bottom_sheet/change_location_leaf_model_bottom_sheet.dart';
+import 'package:vm_fm_4/feature/components/model_bottom_sheet/get_task_history_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 
@@ -71,13 +72,17 @@ class CustomWorkSpaceDetailCard extends StatelessWidget {
             ),
             const CustomWoSummaryDivider(),
             const SizedBox(height: 10),
+
             // location
             _LocationInformation(
               workSpaceDetail,
               workOrderDetailProvider,
             ),
-            const SizedBox(height: 10),
             const CustomWoSummaryDivider(),
+
+            _TaskHistory(workSpaceDetail, workOrderDetailProvider),
+
+            const SizedBox(height: 10),
             const SizedBox(height: 10),
             _DoubleRowInformationComponent(
               firstLabel: LocaleKeys.Presence.tr(),
@@ -132,6 +137,48 @@ class _LocationInformation extends StatelessWidget {
                 Text(
                   workSpaceDetail.task?.requestedSpaces?.name ?? '',
                   style: context.labelMedium.copyWith(color: APPColors.Main.black),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _TaskHistory extends StatelessWidget {
+  const _TaskHistory(this.workSpaceDetail, this.workOrderDetailProvider);
+
+  final WorkSpaceDetail workSpaceDetail;
+  final WorkOrderDetailProvider workOrderDetailProvider;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(flex: 1, child: Text('Tarihçe', style: context.bodySmall.copyWith(color: APPColors.Main.black))),
+        Expanded(
+          flex: 2,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                CustomElevatedButtonWithIcon(
+                  width: context.width / 3,
+                  height: context.height * 0.03,
+                  bgColor: APPColors.Accent.black,
+                  onPressFunction: () async {
+                    await workOrderDetailProvider.getTaskHistory(workSpaceDetail.task?.id);
+
+                    // ignore: use_build_context_synchronously
+                    GetTaskHistoryModalBottomSheet().showAlertDialog(context, workOrderDetailProvider, 'textData', 'Tarihçe');
+                  },
+                  textValue: 'İncele',
+                  textColor: APPColors.Main.white,
+                  iconColor: APPColors.Main.white,
+                  icon: Icons.qr_code,
                 ),
               ],
             ),
@@ -262,7 +309,7 @@ class _DoubleRowInformationComponent extends StatelessWidget {
               CustomElevatedButtonWithIcon(
                 width: context.width / 3,
                 height: context.height * 0.05,
-                bgColor: APPColors.Main.blue,
+                bgColor: APPColors.Accent.black,
                 onPressFunction: workOrderDetailProvider.scanBarcodeAndQr,
                 textValue: LocaleKeys.Change.tr(),
                 textColor: APPColors.Main.white,

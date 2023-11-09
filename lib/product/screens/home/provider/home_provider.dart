@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vm_fm_4/core/enums/shared_enums.dart';
 import 'package:vm_fm_4/feature/exceptions/custom_service_exceptions.dart';
 import 'package:vm_fm_4/feature/global_providers/global_provider.dart';
@@ -14,8 +13,7 @@ import '../../../../feature/injection.dart';
 import '../../../../feature/models/home_page_models/announcement_model.dart';
 
 class HomeProvider extends ChangeNotifier {
-  final AuthServiceRepositoryImpl _authServiceRepository =
-      Injection.getIt.get<AuthServiceRepositoryImpl>();
+  final AuthServiceRepositoryImpl _authServiceRepository = Injection.getIt.get<AuthServiceRepositoryImpl>();
 
   bool _isUserLogout = false;
   bool get isUserLogout => _isUserLogout;
@@ -61,8 +59,7 @@ class HomeProvider extends ChangeNotifier {
   }
 
   void logOut(BuildContext context) async {
-    final String refreshToken =
-        await SharedManager().getString(SharedEnum.refreshToken);
+    final String refreshToken = await SharedManager().getString(SharedEnum.refreshToken);
     final String token = await SharedManager().getString(SharedEnum.userToken);
 
     if (token.isNotEmpty && refreshToken.isNotEmpty) {
@@ -73,15 +70,13 @@ class HomeProvider extends ChangeNotifier {
           _isUserLogout = true,
           _clearShared(),
           notifyListeners(),
-          Future.delayed(
-              const Duration(seconds: 1), () => _isUserLogout = false),
+          Future.delayed(const Duration(seconds: 1), () => _isUserLogout = false),
         },
         (r) => {
           _isUserLogout = false,
           _logoutError = true,
           notifyListeners(),
-          Future.delayed(
-              const Duration(seconds: 1), () => _logoutError = false),
+          Future.delayed(const Duration(seconds: 1), () => _logoutError = false),
         },
       );
     }

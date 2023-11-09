@@ -15,6 +15,7 @@ class ServiceTools {
   static const attachPathLive =
       "http://10.32.12.42/windesktest/xreadattach.php?token=$tokenV1&id=";
   static const facilityName = "İstanbul Finans Merkezi";
+  static const isWorkOrderExist = true;
 
   static const bool _isProduction = true;
 

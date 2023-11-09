@@ -1,6 +1,9 @@
 // ignore_for_file: unused_local_variable
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
+import 'package:vm_fm_4/generated/locale_keys.g.dart';
 
 import '../../../../../../feature/injection.dart';
 import '../../../../../../feature/service/global_services.dart/download/download_service_repository_impl.dart';
@@ -16,6 +19,10 @@ class DownloadProvider extends ChangeNotifier {
 
   final bool _isDocDownloadedError = false;
   bool get isDocDownloadedError => _isDocDownloadedError;
+
+  void errorAccurWhileDownloadingFile(BuildContext context) {
+    snackBar(context, LocaleKeys.ErrorAccurWhileDownloadFile.tr(), 'error');
+  }
 
   // void downloadFile(String filePath, String url) async {
   //   _isLoading = true;

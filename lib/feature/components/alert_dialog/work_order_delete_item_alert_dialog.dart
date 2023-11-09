@@ -32,7 +32,7 @@ class WorkOrderDeleteItemAlertDialog {
     return await showDialog(
       context: context,
       builder: (context) {
-        return AlertDialog.adaptive(
+        return AlertDialog(
           shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.mediumBorderRadius),
           title: Text(LocaleKeys.DeleteWorkOrderItem.tr(), style: context.bodyMedium),
           content: Flexible(

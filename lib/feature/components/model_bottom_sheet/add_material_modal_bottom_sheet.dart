@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:vm_fm_4/feature/components/search_dropdown/custom_search_dropdown_menu.dart';
 
 import '../../../generated/locale_keys.g.dart';
 import '../../../product/screens/home/screens/detail_work_order/provider/work_order_add_material_sheet_provider.dart';
 import '../../../product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
 import '../../extensions/context_extension.dart';
 import '../buttons/custom_half_buttons.dart';
-import '../input_fields/dropdown_input_fields.dart';
 import '../input_fields/text_fields_input_underline.dart';
 
 class AddMaterialModalBottomSheet extends StatelessWidget {
@@ -73,11 +73,11 @@ class _Inputs extends StatelessWidget {
       children: [
         Expanded(
           flex: 30,
-          child: DropDownInputFields(
+          child: CustomSearchDropDownMenu(
+            list: wareHouseList,
             labelText: LocaleKeys.MaterialList.tr(),
-            onChangedFunction: value.setHintTexts,
-            rightIcon: Icons.arrow_downward,
-            dropDownArray: wareHouseList.isEmpty ? [''] : wareHouseList,
+            error: LocaleKeys.NoMaterial.tr(),
+            onChanged: value.setHintTexts,
           ),
         ),
         Expanded(
