@@ -32,6 +32,9 @@ CurrentState _$CurrentStateFromJson(Map<String, dynamic> json) => CurrentState(
       nextStates: (json['nextStates'] as List<dynamic>?)
           ?.map((e) => NextState.fromJson(e as Map<String, dynamic>))
           .toList(),
+      rejectStates: (json['rejectStates'] as List<dynamic>?)
+          ?.map((e) => NextState.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$CurrentStateToJson(CurrentState instance) =>
@@ -54,4 +57,5 @@ Map<String, dynamic> _$CurrentStateToJson(CurrentState instance) =>
       'id': instance.id,
       'labels': instance.labels,
       'nextStates': instance.nextStates,
+      'rejectStates': instance.rejectStates,
     };

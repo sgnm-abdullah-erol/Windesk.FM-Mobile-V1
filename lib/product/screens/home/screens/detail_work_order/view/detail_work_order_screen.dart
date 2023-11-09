@@ -173,8 +173,7 @@ class _StateChangeDropDownButton extends StatelessWidget {
                   context,
                   "${"${LocaleKeys.ProccessEntryFirstALertDialog.tr()}'" + val}'${LocaleKeys.ProccessEntrySecondALertDialog.tr()}",
                   LocaleKeys.ChangeState.tr(),
-                )
-                  .then((value) {
+                ) .then((value) {
                   // check response value
                   if (value == true) {
                     provider.changeState(val);

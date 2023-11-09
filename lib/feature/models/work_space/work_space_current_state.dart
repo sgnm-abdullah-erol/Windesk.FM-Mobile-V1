@@ -25,6 +25,7 @@ class CurrentState extends Equatable {
   final int? id;
   final List<String>? labels;
   final List<NextState>? nextStates;
+  final List<NextState>? rejectStates;
 
   const CurrentState({
         this.canDisplay,
@@ -45,6 +46,7 @@ class CurrentState extends Equatable {
         this.id,
     this.labels,
     this.nextStates,
+    this.rejectStates
   });
 
   factory CurrentState.fromJson(Map<String, dynamic> json) => _$CurrentStateFromJson(json);
@@ -69,5 +71,6 @@ class CurrentState extends Equatable {
       id,
       labels,
       nextStates,
+      rejectStates
       ];
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vm_fm_4/feature/models/work_space/work_space_current_state.dart';
 
 import '../../../../../../core/database/shared_manager.dart';
 import '../../../../../../core/enums/shared_enums.dart';
@@ -14,6 +15,9 @@ class WorkOrderPendiksProvider extends ChangeNotifier {
   bool _isApproved = false;
   bool get isApproved => _isApproved;
 
+  bool _isFetchGroupIds = true;
+  bool get isFetchGroupIds => _isFetchGroupIds;
+
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
@@ -22,8 +26,35 @@ class WorkOrderPendiksProvider extends ChangeNotifier {
   bool _isTaskStateChange = false;
   bool get isTaskStateChange => _isTaskStateChange;
 
+  bool errorWhileGetuserGroups = false;
+
+  CurrentState? _workSpaceStateGroups = CurrentState();
+  CurrentState? get workSpaceStateGroups => _workSpaceStateGroups;
+
   void onChangedSelectedTask(String val) {
     selectedTaskState = val;
+  }
+
+  void getStateUserGroups(String taskId, String workSpaceId) async {
+    _isFetchGroupIds = false;
+    _isLoading = true;
+    notifyListeners();
+
+    String userToken = await SharedManager().getString(SharedEnum.userToken);
+
+    final response = await workSpaceService.getWorkSpaceStateGroups(taskId, workSpaceId, userToken);
+
+    print('dataaaa' + response.toString());
+
+    response.fold(
+      (l) => {_workSpaceStateGroups = l},
+      (r) => {
+        errorWhileGetuserGroups = true,
+      },
+    );
+    notifyListeners();
+
+    _isLoading = false;
   }
 
   void changeState(String taskId, String stateId, bool isReject) async {

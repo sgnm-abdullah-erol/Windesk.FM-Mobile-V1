@@ -189,4 +189,52 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
       return Right(CustomServiceException(message: CustomServiceMessages.loginError, statusCode: '400'));
     }
   }
+
+  @override
+  Future<Either<dynamic, CustomServiceException>> updateTask(
+      String token, String taskId, String requestedId, String requestedLabel, String templatedByy, String depended) async {
+    String url = '${ServiceTools.url.workorder_url}/task';
+
+    try {
+      final response = await super.dio.patch(
+            url,
+            data: [
+    {
+      "label": ["Task"],
+      "identifier": taskId,
+      "variableName": "requestedSpaces",
+      "value": [
+        {
+          "id": requestedId,
+          "labels": [requestedLabel]
+        }
+      ]
+    },
+      {
+        "label": ["Task"],
+        "identifier": taskId,
+        "variableName": "templatedBy",
+        "value": [templatedByy]
+      },
+    
+    {
+      "label": ["Task"],
+      "identifier": taskId,
+      "variableName": "depended_on",
+      "value": [depended]
+    }
+            ],
+            options: Options(
+              headers: {'authorization': 'Bearer $token'},
+            ),
+          );
+
+      final data = response.data;
+      super.logger.e(data);
+      return Left(data);
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.loginError, statusCode: '400'));
+    }
+  }
 }

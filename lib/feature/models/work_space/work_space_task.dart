@@ -24,6 +24,7 @@ class Task extends Equatable {
   final int? id;
   final List<String>? labels;
   final String? templatedBy;
+  final int? depended_on;
   final CreatedBy? requestedBy;
   final CreatedBy? requestedSpaces;
   final CreatedBy? requestedComponents;
@@ -63,6 +64,7 @@ class Task extends Equatable {
     this.userFirstNameLastName,
     this.user,
     this.userId,
+    this.depended_on
   });
 
   factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
@@ -94,5 +96,6 @@ class Task extends Equatable {
         userFirstNameLastName,
         user,
         userId,
+        depended_on
       ];
 }

@@ -55,6 +55,7 @@ Task _$TaskFromJson(Map<String, dynamic> json) => Task(
       userFirstNameLastName: json['userFirstNameLastName'] as String?,
       user: json['user'] as String?,
       userId: json['userId'] as String?,
+      depended_on: json['depended_on'] as int?,
     );
 
 Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
@@ -74,6 +75,7 @@ Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
       'id': instance.id,
       'labels': instance.labels,
       'templatedBy': instance.templatedBy,
+      'depended_on': instance.depended_on,
       'requestedBy': instance.requestedBy,
       'requestedSpaces': instance.requestedSpaces,
       'requestedComponents': instance.requestedComponents,
