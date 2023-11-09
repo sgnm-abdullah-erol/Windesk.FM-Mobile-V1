@@ -15,7 +15,9 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: const CustomMainAppbar(title: Text(AppStrings.searchTab)), body: Center(child: _bodyWidget(context)));
+    return Scaffold(
+        appBar: const CustomMainAppbar(title: Text(AppStrings.searchTab)),
+        body: Center(child: _bodyWidget(context)));
   }
 
   Widget _bodyWidget(context) {
@@ -26,14 +28,28 @@ class SearchScreen extends StatelessWidget {
         SizedBox(
           height: MediaQuery.of(context).size.height / 8,
         ),
-        rowIconButtonSection(context, LocaleKeys.assetSearch, AppIcons.search, const AssetSearchScreen(), LocaleKeys.spaceSearch, AppIcons.search,
-            const SpaceSearchScreen(), ServiceTools.isWorkOrderExist),
+        rowIconButtonSection(
+            context,
+            LocaleKeys.assetSearch,
+            AppIcons.assetSearch,
+            const AssetSearchScreen(),
+            LocaleKeys.spaceSearch,
+            AppIcons.spaceSearch,
+            const SpaceSearchScreen(),
+            ServiceTools.isWorkOrderExist),
       ],
     );
   }
 
-  Widget rowIconButtonSection(BuildContext context, String buttonTitle1, IconData buttonIcon1, PageRouteInfo<dynamic> navigateRouteName1,
-      String buttonTitle2, IconData buttonIcon2, PageRouteInfo<dynamic> navigateRouteName2, bool secondButtonExist) {
+  Widget rowIconButtonSection(
+      BuildContext context,
+      String buttonTitle1,
+      IconData buttonIcon1,
+      PageRouteInfo<dynamic> navigateRouteName1,
+      String buttonTitle2,
+      IconData buttonIcon2,
+      PageRouteInfo<dynamic> navigateRouteName2,
+      bool secondButtonExist) {
     return Expanded(
       child: Center(
         child: Row(
