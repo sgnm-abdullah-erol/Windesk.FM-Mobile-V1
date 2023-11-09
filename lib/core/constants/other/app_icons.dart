@@ -8,6 +8,9 @@ class AppIcons {
   static const IconData home = Icons.home;
   static const IconData addBox = Icons.add_box;
   static const IconData search = Icons.search;
+    static const IconData assetSearch = Icons.manage_search;
+    static const IconData spaceSearch = Icons.location_searching;
+
   static const IconData wifi = Icons.wifi;
   static const IconData note = Icons.note;
 
