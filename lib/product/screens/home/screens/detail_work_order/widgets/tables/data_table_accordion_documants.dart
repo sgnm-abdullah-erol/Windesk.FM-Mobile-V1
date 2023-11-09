@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +32,6 @@ class DataTableAccordionDocumants extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(data);
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: DataTable(
@@ -69,10 +66,13 @@ class DataTableAccordionDocumants extends StatelessWidget {
                             onPressed: () async {
                               String type = data[i].url?.split('.').last ?? '';
                               if (type == 'jpg' || type == 'png' || type == 'jpeg') {
-                                _downloadImage(context, data[i].url ?? '', data[i].name ?? '', type);
+                                _downloadImage(context, data[i].url ?? '', data[i].name ?? '', type, provider);
                               } else if (type == 'pdf') {
-                                _downloadFile(context, data[i].url ?? '', data[i].name ?? '', type);
-                              } else {}
+                                _downloadFile(context, data[i].url ?? '', data[i].name ?? '', type, provider);
+                              } else {
+                                // error dialog
+                                provider.errorAccurWhileDownloadingFile(context);
+                              }
                             },
                             icon: Icon(AppIcons.download, color: APPColors.Login.green),
                           ),
@@ -99,69 +99,61 @@ class DataTableAccordionDocumants extends StatelessWidget {
     );
   }
 
-  void _downloadFile(BuildContext context, String url, String name, String type) async {
-    final http.Response response = await http.get(
-      Uri.parse('https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'),
-    );
+  void _downloadFile(BuildContext context, String url, String name, String type, DownloadProvider provider) async {
+    try {
+      final http.Response response = await http.get(
+        Uri.parse('https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'),
+      );
 
-    final dir = await getTemporaryDirectory();
+      final dir = await getTemporaryDirectory();
 
-    // Create an image name
-    var filename = '${dir.path}/downloadPdf.pdf';
+      // Create an image name
+      var filename = '${dir.path}/$name.pdf';
 
-    // Save to filesystem
-    final file = File(filename);
-    await file.writeAsBytes(response.bodyBytes, flush: true);
+      // Save to filesystem
+      final file = File(filename);
+      await file.writeAsBytes(response.bodyBytes, flush: true);
 
-    // Ask the user to save it
-    final params = SaveFileDialogParams(sourceFilePath: file.path);
-    final finalPath = await FlutterFileDialog.saveFile(params: params);
+      // Ask the user to save it
+      final params = SaveFileDialogParams(sourceFilePath: file.path);
+      final finalPath = await FlutterFileDialog.saveFile(params: params);
 
-    if (finalPath != null) {
-      print('pdf saved to $finalPath');
+      if (finalPath != null) {
+        debugPrint('pdf saved to $finalPath');
+      }
+    } catch (e) {
+      // ignore: use_build_context_synchronously
+      provider.errorAccurWhileDownloadingFile(context);
     }
   }
 
-  void _downloadImage(BuildContext context, String url, String name, String type) async {
-    final http.Response response = await http.get(
-      Uri.parse('https://upload.wikimedia.org/wikipedia/commons/3/3f/Walking_tiger_female.jpg'),
-    );
+  void _downloadImage(BuildContext context, String url, String name, String type, DownloadProvider provider) async {
+    try {
+      final http.Response response = await http.get(
+        Uri.parse('https://upload.wikimedia.org/wikipedia/commons/3/3f/Walking_tiger_female.jpg'),
+      );
 
-    final dir = await getTemporaryDirectory();
+      final dir = await getTemporaryDirectory();
 
-    // Create an image name
-    var filename = '${dir.path}/SaveImage100.jpg';
+      // Create an image name
+      var filename = '${dir.path}/$name.$type';
 
-    // Save to filesystem
-    final file = File(filename);
-    await file.writeAsBytes(response.bodyBytes);
+      // Save to filesystem
+      final file = File(filename);
+      await file.writeAsBytes(response.bodyBytes);
 
-    // Ask the user to save it
-    final params = SaveFileDialogParams(sourceFilePath: file.path);
-    final finalPath = await FlutterFileDialog.saveFile(params: params);
+      // Ask the user to save it
+      final params = SaveFileDialogParams(sourceFilePath: file.path);
+      final finalPath = await FlutterFileDialog.saveFile(params: params);
 
-    if (finalPath != null) {
-      print('image saved to $finalPath');
-    } else {
-      print('sssssssssssssssssss');
+      if (finalPath != null) {
+        debugPrint('image saved to $finalPath');
+      }
+    } catch (e) {
+      // ignore: use_build_context_synchronously
+      provider.errorAccurWhileDownloadingFile(context);
     }
   }
-
-  // void _downloadFile(BuildContext context, String url, String name) async {
-  //   final storageIO = InternetFileStorageIO();
-  //   Directory appDocDir = await getApplicationDocumentsDirectory();
-
-  //   await InternetFile.get(
-  //     url,
-  //     storage: storageIO,
-  //     storageAdditional: storageIO.additional(
-  //       filename: name,
-  //       location: appDocDir.path,
-  //     ),
-  //     force: true,
-  //     progress: (receivedLength, contentLength) {},
-  //   );
-  // }
 
   TextStyle _cellTextStyle(BuildContext context) => context.labelMedium.copyWith(color: APPColors.Main.black);
 }

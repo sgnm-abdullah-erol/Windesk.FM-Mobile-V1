@@ -49,6 +49,7 @@ class LocaleKeys {
   static const String ChangeLocale = 'ChangeLocale';
   static const String ChangeLocaleText = 'ChangeLocaleText';
   static const String NoMaterial = 'NoMaterial';
+  static const String ErrorAccurWhileDownloadFile = 'ErrorAccurWhileDownloadFile';
 
   // static const ----------SNACKBAR---------- = '----------SNACKBAR----------;
   static const String NoInternetConnection = 'NoInternetConnection';

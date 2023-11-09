@@ -253,6 +253,7 @@
 	"DeleteEffort": "Effort Deleted Successfully",
 	"DeleteMaterial": "Material Deleted Successfully",
 	"DeleteDocument": "Document Deleted Successfully",
+	"ErrorAccurWhileDownloadFile": "Error Accured While Downloading File",
 	"----------MAİNTENANCE----------": "------------MAİNTENANCE------------",
 	"Manage Check List": "Manage Check List",
 	"Add Check List": "Add Check List",

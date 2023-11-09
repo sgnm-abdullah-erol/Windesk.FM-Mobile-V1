@@ -39,6 +39,7 @@
 	"ChangeLocale" : "Konum Değiştir",
 	"ChangeLocaleText" : "Konum değiştirmek istediğinizden emin misiniz?",
 	"NoMaterial": "Malzeme Bulunamadı",
+	"ErrorAccurWhileDownloadFile": "Dosya indirilirken hata oluştu",
 	"----------------SNACKBAR----------": "-----------SNACKBAR--------------",
 	"NoInternetConnection": "İnternet bağlantısı yok",
 	"LoginError": "Giriş yapılamadı, lütfen tekrar deneyiniz",
