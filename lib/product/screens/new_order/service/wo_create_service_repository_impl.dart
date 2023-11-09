@@ -192,37 +192,36 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
 
   @override
   Future<Either<dynamic, CustomServiceException>> updateTask(
-      String token, String taskId, String requestedId, String requestedLabel, String templatedByy, String depended) async {
+      String token, String taskId, String requestedId, String requestedLabel, String templatedBy, String depended) async {
     String url = '${ServiceTools.url.workorder_url}/task';
 
     try {
       final response = await super.dio.patch(
             url,
             data: [
-    {
-      "label": ["Task"],
-      "identifier": taskId,
-      "variableName": "requestedSpaces",
-      "value": [
-        {
-          "id": requestedId,
-          "labels": [requestedLabel]
-        }
-      ]
-    },
-      {
-        "label": ["Task"],
-        "identifier": taskId,
-        "variableName": "templatedBy",
-        "value": [templatedByy]
-      },
-    
-    {
-      "label": ["Task"],
-      "identifier": taskId,
-      "variableName": "depended_on",
-      "value": [depended]
-    }
+              {
+                "label": ["Task"],
+                "identifier": taskId,
+                "variableName": "requestedSpaces",
+                "value": [
+                  {
+                    "id": requestedId,
+                    "labels": [requestedLabel]
+                  }
+                ]
+              },
+              {
+                "label": ["Task"],
+                "identifier": taskId,
+                "variableName": "templatedBy",
+                "value": [templatedBy]
+              },
+              {
+                "label": ["Task"],
+                "identifier": taskId,
+                "variableName": "depended_on",
+                "value": [depended]
+              }
             ],
             options: Options(
               headers: {'authorization': 'Bearer $token'},

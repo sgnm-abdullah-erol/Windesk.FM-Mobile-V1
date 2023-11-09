@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:vm_fm_4/feature/models/work_order_models/delivered_spare_of_model.dart';
 import 'package:vm_fm_4/feature/models/work_space/work_space_current_state.dart';
 import 'package:vm_fm_4/feature/models/work_space/child_location_structure.dart';
 import 'package:vm_fm_4/feature/models/work_space/main_location_structure.dart';
@@ -599,17 +600,16 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   }
 
   @override
-  Future<Either<List<WorkSpaceRequirementMaterialsList>, CustomServiceException>> getWorkSpaceApprovedRequirementMaterialsList(
+  Future<Either<List<DeliveredSpareOfModel>, CustomServiceException>> getWorkSpaceApprovedRequirementMaterialsList(
     String taskId,
     String token,
   ) async {
-    List<WorkSpaceRequirementMaterialsList> workSpaceRequirementMaterialsList;
-    String url = '${ServiceTools.url.workorder_url}/task/mobile/getMaterialRequestByTaskId/$taskId';
+    List<DeliveredSpareOfModel> workSpaceRequirementMaterialsList;
+    String url = '${ServiceTools.url.workorder_url}/task/$taskId';
 
     try {
       final response = await super.dio.get(
             url,
-            data: {},
             options: Options(
               headers: {'authorization': 'Bearer $token'},
             ),
@@ -617,7 +617,9 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
-        workSpaceRequirementMaterialsList = WorkSpaceRequirementMaterialsList.fromJsonList(data);
+        workSpaceRequirementMaterialsList = DeliveredSpareOfModel.fromJsonList(data['deliveredSpareOf']);
+
+        super.logger.wtf(workSpaceRequirementMaterialsList);
 
         return Left(workSpaceRequirementMaterialsList);
       } else {

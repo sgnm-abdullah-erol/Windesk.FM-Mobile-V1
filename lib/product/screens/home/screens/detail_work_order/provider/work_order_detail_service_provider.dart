@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:vm_fm_4/core/enums/task_node_enums.dart';
 import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
+import 'package:vm_fm_4/feature/models/work_order_models/delivered_spare_of_model.dart';
 import 'package:vm_fm_4/feature/models/work_space/work_space_detail.dart';
 import 'package:vm_fm_4/feature/models/work_space/work_space_documents.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
@@ -53,8 +54,8 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
   List<WorkSpaceRequirementMaterialsList> _woRequestedMaterialsList = [];
   List<WorkSpaceRequirementMaterialsList> get woRequestedMaterialsList => _woRequestedMaterialsList;
 
-  List<WorkSpaceRequirementMaterialsList> _woRequestedApprovedMaterialsList = [];
-  List<WorkSpaceRequirementMaterialsList> get woRequestedApprovedMaterialsList => _woRequestedApprovedMaterialsList;
+  List<DeliveredSpareOfModel> _woRequestedApprovedMaterialsList = [];
+  List<DeliveredSpareOfModel> get woRequestedApprovedMaterialsList => _woRequestedApprovedMaterialsList;
 
   List<WorkSpaceDocuments> _workSpaceDocuments = [];
   List<WorkSpaceDocuments> get workSpaceDocuments => _workSpaceDocuments;
@@ -213,6 +214,7 @@ class WorkOrderDetailServiceProvider extends ChangeNotifier {
   }
 
   void fetchRequstedApprovedMaterials(String taskId) async {
+    print('ssssssss');
     _isRequstedApprovedMaterialListFetched = true;
     _isLoading = true;
 

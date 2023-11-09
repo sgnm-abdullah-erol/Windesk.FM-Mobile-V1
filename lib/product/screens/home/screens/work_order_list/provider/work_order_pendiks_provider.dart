@@ -28,7 +28,7 @@ class WorkOrderPendiksProvider extends ChangeNotifier {
 
   bool errorWhileGetuserGroups = false;
 
-  CurrentState? _workSpaceStateGroups = CurrentState();
+  CurrentState? _workSpaceStateGroups = const CurrentState();
   CurrentState? get workSpaceStateGroups => _workSpaceStateGroups;
 
   void onChangedSelectedTask(String val) {
@@ -44,7 +44,7 @@ class WorkOrderPendiksProvider extends ChangeNotifier {
 
     final response = await workSpaceService.getWorkSpaceStateGroups(taskId, workSpaceId, userToken);
 
-    print('dataaaa' + response.toString());
+    print('dataaaa$response');
 
     response.fold(
       (l) => {_workSpaceStateGroups = l},
