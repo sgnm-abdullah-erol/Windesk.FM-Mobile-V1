@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:vm_fm_4/feature/models/work_space/work_space_user_groups.dart';
 
 part 'generator/work_space_next_state.g.dart';
 
@@ -21,7 +22,8 @@ class NextState extends Equatable {
   final String? key;
   final DateTime? updatedAt;
   final int? id;
-  final List<String>? labels;
+  final List<String>? label;
+  final List<WorkSpaceUserGroups>? userGroups;
 
   const NextState({
     this.canDisplay,
@@ -40,7 +42,8 @@ class NextState extends Equatable {
     this.key,
     this.updatedAt,
     this.id,
-    this.labels,
+    this.label,
+    this.userGroups
   });
 
   factory NextState.fromJson(Map<String, dynamic> json) => _$NextStateFromJson(json);
@@ -63,6 +66,7 @@ class NextState extends Equatable {
         key,
         updatedAt,
         id,
-        labels,
+        label,
+        userGroups
       ];
 }

@@ -28,7 +28,8 @@ class NewOrderScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => WoCreateProvider(),
-      child: Consumer<WoCreateProvider>(builder: (context, WoCreateProvider woCreateProvider, child) {
+      child: Consumer<WoCreateProvider>(
+          builder: (context, WoCreateProvider woCreateProvider, child) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (woCreateProvider.isWorkOrderCreate) {
             snackBar(context, SnackbarStrings.woCreate, 'success');
@@ -39,121 +40,140 @@ class NewOrderScreen extends StatelessWidget {
         });
         //woCreateProvider.isWorkOrderCreate ? snackBar(context, SnackbarStrings.woCreate, 'success') : null;
         //woCreateProvider.createTaskError ? snackBar(context, SnackbarStrings.woCreateError, 'error') : null;
-        woCreateProvider.locationLoading ? woCreateProvider.getLocation() : null;
-        woCreateProvider.requestedLoading ? woCreateProvider.getRequestedByPro() : null;
+        woCreateProvider.locationLoading
+            ? woCreateProvider.getLocation()
+            : null;
+        woCreateProvider.requestedLoading
+            ? woCreateProvider.getRequestedByPro()
+            : null;
         woCreateProvider.typeLoading ? woCreateProvider.getType() : null;
-        woCreateProvider.requestedTypeLoading ? woCreateProvider.getRequestedType() : null;
-        woCreateProvider.categoryLoading ? woCreateProvider.getCategory() : null;
-        woCreateProvider.componentLoading ? woCreateProvider.getComponent() : null;
+        woCreateProvider.requestedTypeLoading
+            ? woCreateProvider.getRequestedType()
+            : null;
+        woCreateProvider.categoryLoading
+            ? woCreateProvider.getCategory()
+            : null;
+        woCreateProvider.componentLoading
+            ? woCreateProvider.getComponent()
+            : null;
         return woCreateProvider.isLoading
             ? const CustomLoadingIndicator()
-            : Scaffold(
-                appBar: const CustomMainAppbar(title: Text(LocaleKeys.newWorkOrder)),
-                body: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Center(
-                      child: Column(
-                        children: [
-                          WoCreateCard(
-                            widget1: TextFieldsInputUnderline(
-                                hintText: 'Tanım',
-                                onChanged: (String newValue) {
-                                  woCreateProvider.setSummary(newValue);
-                                }),
-                            widget2: TextFieldsInputUnderline(
-                                hintText: 'Açıklama',
-                                onChanged: (String newValue) {
-                                  woCreateProvider.setDescription(newValue);
-                                }),
-                            widget3: DropdownSearch<String>(
-                              items: woCreateProvider.getComponentsChildren,
-                              onChanged: (value) {
-                                woCreateProvider.setComponent(value.toString());
-                              },
-                              selectedItem: 'Bileşen',
-                              popupProps: const PopupProps.menu(
-                                showSearchBox: true,
-                                fit: FlexFit.loose,
-                                constraints: BoxConstraints.tightFor(),
+            : WillPopScope(
+                child: Scaffold(
+                  appBar: const CustomMainAppbar(
+                      title: Text(LocaleKeys.newWorkOrder)),
+                  body: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Center(
+                        child: Column(
+                          children: [
+                            WoCreateCard(
+                              widget1: TextFieldsInputUnderline(
+                                  hintText: 'Tanım',
+                                  onChanged: (String newValue) {
+                                    woCreateProvider.setSummary(newValue);
+                                  }),
+                              widget2: TextFieldsInputUnderline(
+                                  hintText: 'Açıklama',
+                                  onChanged: (String newValue) {
+                                    woCreateProvider.setDescription(newValue);
+                                  }),
+                              widget3: DropdownSearch<String>(
+                                items: woCreateProvider.getComponentsChildren,
+                                onChanged: (value) {
+                                  woCreateProvider
+                                      .setComponent(value.toString());
+                                },
+                                selectedItem: 'Bileşen',
+                                popupProps: const PopupProps.menu(
+                                  showSearchBox: true,
+                                  fit: FlexFit.loose,
+                                  constraints: BoxConstraints.tightFor(),
+                                ),
                               ),
                             ),
-                          ),
-                          const SizedBox(height: 15),
-                          WoCreateCard(
-                            widget1: DropDownInputFields(
-                              labelText: 'Talep Sahibi',
-                              onChangedFunction: (String newValue) {
-                                woCreateProvider.setRequestedBy(newValue);
+                            const SizedBox(height: 15),
+                            WoCreateCard(
+                              widget1: DropDownInputFields(
+                                labelText: 'Talep Sahibi',
+                                onChangedFunction: (String newValue) {
+                                  woCreateProvider.setRequestedBy(newValue);
+                                },
+                                rightIcon: Icons.arrow_drop_down_rounded,
+                                dropDownArray:
+                                    woCreateProvider.getRequestedByChildren,
+                              ),
+                              widget2: DropDownInputFields(
+                                labelText: 'Tip',
+                                onChangedFunction: (String newValue) {
+                                  woCreateProvider.setType(newValue);
+                                },
+                                rightIcon: Icons.arrow_drop_down_rounded,
+                                dropDownArray:
+                                    woCreateProvider.getTypesChildren,
+                              ),
+                              widget3: DropDownInputFields(
+                                labelText: 'Kategori',
+                                onChangedFunction: (String newValue) {
+                                  woCreateProvider.setCategory(newValue);
+                                },
+                                rightIcon: Icons.arrow_drop_down_rounded,
+                                dropDownArray:
+                                    woCreateProvider.getCategoriesChildren,
+                              ),
+                            ),
+                            const SizedBox(height: 15),
+                            WoCreateCard(
+                              widget1: location(woCreateProvider, context),
+                              widget2: requestType(woCreateProvider, context),
+                              widget3: Container(),
+                            ),
+                            const SizedBox(height: 15),
+                            WoCreateCard(
+                              widget1: TextFieldDatePicker(
+                                label: 'Randevu Tarihi',
+                                onTap: (String date) {
+                                  woCreateProvider.setidate = date;
+                                },
+                                initialDate: DateTime.now(),
+                              ),
+                              widget2: TextFieldTimePicker(
+                                label: 'Randevu Saati',
+                                onTap: (String hour) {
+                                  woCreateProvider.setihour = hour;
+                                },
+                              ),
+                              widget3: Container(),
+                            ),
+                            CustomHalfButtons(
+                              leftTitle: Text(
+                                'Vazgeç',
+                                style: TextStyle(color: APPColors.Main.white),
+                              ),
+                              rightTitle: Text(
+                                'Kaydet',
+                                style: TextStyle(color: APPColors.Main.white),
+                              ),
+                              leftOnPressed: () {},
+                              rightOnPressed: () {
+                                woCreateProvider.createTask();
                               },
-                              rightIcon: Icons.arrow_drop_down_rounded,
-                              dropDownArray: woCreateProvider.getRequestedByChildren,
-                            ),
-                            widget2: DropDownInputFields(
-                              labelText: 'Tip',
-                              onChangedFunction: (String newValue) {
-                                woCreateProvider.setType(newValue);
-                              },
-                              rightIcon: Icons.arrow_drop_down_rounded,
-                              dropDownArray: woCreateProvider.getTypesChildren,
-                            ),
-                            widget3: DropDownInputFields(
-                              labelText: 'Kategori',
-                              onChangedFunction: (String newValue) {
-                                woCreateProvider.setCategory(newValue);
-                              },
-                              rightIcon: Icons.arrow_drop_down_rounded,
-                              dropDownArray: woCreateProvider.getCategoriesChildren,
-                            ),
-                          ),
-                          const SizedBox(height: 15),
-                          WoCreateCard(
-                            widget1: location(woCreateProvider, context),
-                            widget2: requestType(woCreateProvider, context),
-                            widget3: Container(),
-                          ),
-                          const SizedBox(height: 15),
-                          WoCreateCard(
-                            widget1: TextFieldDatePicker(
-                              label: 'Randevu Tarihi',
-                              onTap: (String date) {
-                                woCreateProvider.setidate = date;
-                              },
-                              initialDate: DateTime.now(),
-                            ),
-                            widget2: TextFieldTimePicker(
-                              label: 'Randevu Saati',
-                              onTap: (String hour) {
-                                woCreateProvider.setihour = hour;
-                              },
-                            ),
-                            widget3: Container(),
-                          ),
-                          CustomHalfButtons(
-                            leftTitle: Text(
-                              'Vazgeç',
-                              style: TextStyle(color: APPColors.Main.white),
-                            ),
-                            rightTitle: Text(
-                              'Kaydet',
-                              style: TextStyle(color: APPColors.Main.white),
-                            ),
-                            leftOnPressed: () {},
-                            rightOnPressed: () {
-                              woCreateProvider.createTask();
-                            },
-                          )
-                        ],
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
+                onWillPop: () async => false,
               );
       }),
     );
   }
 
-  Container requestType(WoCreateProvider woCreateProvider, BuildContext context) {
+  Container requestType(
+      WoCreateProvider woCreateProvider, BuildContext context) {
     return Container(
       width: context.width,
       padding: const EdgeInsets.all(10),
@@ -177,7 +197,8 @@ class NewOrderScreen extends StatelessWidget {
                     woCreateProvider.setRequestType1(newValue);
                   },
                   rightIcon: Icons.arrow_drop_down_rounded,
-                  dropDownArray: woCreateProvider.getRequestedTypesChildrenTree1,
+                  dropDownArray:
+                      woCreateProvider.getRequestedTypesChildrenTree1,
                   leftIconExist: true,
                   leftIcon: Icons.arrow_right_alt,
                 ),

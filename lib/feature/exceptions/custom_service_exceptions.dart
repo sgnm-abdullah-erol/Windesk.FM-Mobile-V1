@@ -16,6 +16,9 @@ class CustomServiceException implements Exception {
 class CustomServiceMessages {
   const CustomServiceMessages._();
 
+  // group Id
+  static const String stateGroups = 'Error while fetching State Groups';
+
   // work space
   static const String work = 'Error while fetching workspaces';
 

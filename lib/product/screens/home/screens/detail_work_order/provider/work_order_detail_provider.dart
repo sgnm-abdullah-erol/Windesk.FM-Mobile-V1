@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
+import 'package:vm_fm_4/feature/models/work_space/work_space_current_state.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
 
 import '../../../../../../core/constants/paths/service_tools.dart';
@@ -27,11 +28,15 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
   WorkSpaceDetail detail;
 
-  final WorkSpaceServiceRepositoryImpl workSpaceService = Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
+  final WorkSpaceServiceRepositoryImpl workSpaceService =
+      Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
 
   // for page
   bool _isLoading = false;
   bool get isLoading => _isLoading;
+
+  bool _isGroupExist = false;
+  bool get isGroupExist => _isGroupExist;
 
   bool _userClickedEfforts = false;
   bool get userClickedEfforts => _userClickedEfforts;
@@ -43,7 +48,8 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   bool get userClickedRequestedMaterial => _userClickedRequestedMaterial;
 
   bool _userClickedRequestedApprovedMaterial = false;
-  bool get userClickedRequestedApprovedMaterial => _userClickedRequestedApprovedMaterial;
+  bool get userClickedRequestedApprovedMaterial =>
+      _userClickedRequestedApprovedMaterial;
 
   bool _userClickedDocumants = false;
   bool get userClickedDocumants => _userClickedDocumants;
@@ -66,12 +72,16 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   String? _dropdownValue = null;
   String? get dropdownValue => _dropdownValue;
 
-  void getWorkOrderDetailDetail() {
-    _isLoading = true;
-    notifyListeners();
+  String? _groupId = '';
+  String? get groupId => _groupId;
 
-    _isLoading = false;
-    notifyListeners();
+  List? _taskHistoryData = [];
+  List? get taskHistoryData => _taskHistoryData;
+  bool _isTaskHistoryLoading = false;
+  bool get isTaskHistoryLoading => _isTaskHistoryLoading;
+
+  void setGroupIdDefault() {
+    _groupId = '';
   }
 
   void setStateToBeginning() {
@@ -84,12 +94,20 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
   void userClickedEffortsFunction() => _userClickedEfforts = true;
   void userClickedMaterialFunction() => _userClickedMaterial = true;
-  void userClickedRequestedMaterialFunction() => _userClickedRequestedMaterial = true;
+  void userClickedRequestedMaterialFunction() =>
+      _userClickedRequestedMaterial = true;
   void userClickedDocumantsFunction() => _userClickedDocumants = true;
-  void userClickedApprovedRequestedMaterialFunction() => _userClickedRequestedApprovedMaterial = true;
+  void userClickedApprovedRequestedMaterialFunction() =>
+      _userClickedRequestedApprovedMaterial = true;
 
   List<String> _workSpaceUserTaskLabels = [];
   List<String> get workSpaceUserTaskLabels => _workSpaceUserTaskLabels;
+
+  List<String> _stateGroupList = [];
+  List<String> get stateGroupList => _stateGroupList;
+
+  CurrentState? _workSpaceStateGroups = CurrentState();
+  CurrentState? get workSpaceStateGroups => _workSpaceStateGroups;
 
   void setDropdown() {
     _dropdownValue = _workSpaceUserTaskLabels[0];
@@ -103,7 +121,8 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   void _getTaskById() async {
     String token = await SharedManager().getString(SharedEnum.userToken);
 
-    final result = await workSpaceService.getWorkSpaceWithSearch(detail.task?.id.toString() ?? '', token);
+    final result = await workSpaceService.getWorkSpaceWithSearch(
+        detail.task?.id.toString() ?? '', token);
 
     result.fold(
       (l) => {
@@ -128,7 +147,10 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
     String userToken = await SharedManager().getString(SharedEnum.userToken);
 
-    final response = await workSpaceService.takeItOnMe(detail.task?.id.toString() ?? '', detail.state?.id.toString() ?? '', userToken);
+    final response = await workSpaceService.takeItOnMe(
+        detail.task?.id.toString() ?? '',
+        detail.state?.id.toString() ?? '',
+        userToken);
 
     response.fold(
       (l) => {
@@ -143,12 +165,99 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     _isLoading = false;
   }
 
-  void _setUserTaskLabels() {
-    // _workSpaceUserTaskLabels.add(detail.state?.name.toString() ?? '');
+  void getStateUserGroups() async {
+    _isLoading = true;
+    notifyListeners();
 
-    for (var i = 0; i < (detail.state?.nextStates?.length ?? 0); i++) {
-      _workSpaceUserTaskLabels.add(detail.state?.nextStates?[i].name ?? '');
+    String userToken = await SharedManager().getString(SharedEnum.userToken);
+
+    final response = await workSpaceService.getWorkSpaceStateGroups(
+        detail.task?.id.toString() ?? '',
+        detail.workspace?.id.toString() ?? '',
+        userToken);
+
+    response.fold(
+      (l) => {_workSpaceStateGroups = l},
+      (r) => {
+        _errorAccurWhileTakingOnMe = true,
+      },
+    );
+    notifyListeners();
+
+    _isLoading = false;
+  }
+
+  void _setUserTaskLabels() async {
+    _isLoading = true;
+    notifyListeners();
+
+    String userToken = await SharedManager().getString(SharedEnum.userToken);
+
+    final response = await workSpaceService.getWorkSpaceStateGroups(
+        detail.task?.id.toString() ?? '',
+        detail.workspace?.id.toString() ?? '',
+        userToken);
+
+    response.fold(
+      (l) => {
+        _workSpaceStateGroups = l,
+        for (var i = 0;
+            i < (_workSpaceStateGroups?.nextStates?.length ?? 0);
+            i++)
+          {
+            _workSpaceUserTaskLabels
+                .add(_workSpaceStateGroups?.nextStates?[i].name ?? '')
+          }
+      },
+      (r) => {
+        _errorAccurWhileTakingOnMe = true,
+      },
+    );
+    _isLoading = false;
+    notifyListeners();
+  }
+
+  void stateGroupExist(String value) {
+    _isGroupExist = false;
+    _stateGroupList.clear();
+    for (var i = 0; i < (_workSpaceStateGroups?.nextStates?.length ?? 0); i++) {
+      if (_workSpaceStateGroups?.nextStates?[i].name == value) {
+        _isGroupExist =
+            _workSpaceStateGroups?.nextStates?[i].userGroups?.isNotEmpty ??
+                false;
+        if (_isGroupExist) {
+          for (var b = 0;
+              b <
+                  (_workSpaceStateGroups?.nextStates?[i].userGroups?.length ??
+                      0);
+              b++) {
+            _stateGroupList.add(
+                _workSpaceStateGroups?.nextStates?[i].userGroups?[b].name ??
+                    '');
+          }
+        }
+      }
     }
+    notifyListeners();
+  }
+
+  void setGroupId(String value) {
+    for (var i = 0; i < (_workSpaceStateGroups?.nextStates?.length ?? 0); i++) {
+      if (_workSpaceStateGroups?.nextStates?[i].userGroups?.isNotEmpty ??
+          false) {
+        for (var b = 0;
+            b < (_workSpaceStateGroups?.nextStates?[i].userGroups?.length ?? 0);
+            b++) {
+          if (_workSpaceStateGroups?.nextStates?[i].userGroups?[b].name ==
+              value) {
+            _groupId = _workSpaceStateGroups?.nextStates?[i].userGroups?[b].id
+                    .toString() ??
+                '';
+          }
+        }
+      }
+    }
+    notifyListeners();
   }
 
   void changeState(String value) async {
@@ -156,19 +265,16 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     late String? id;
     notifyListeners();
 
-    for (var i = 0; i < (detail.state?.nextStates?.length ?? 0); i++) {
-      if (detail.state?.nextStates?[i].name == value) {
-        id = detail.state?.nextStates?[i].id.toString();
+    for (var i = 0; i < (_workSpaceStateGroups?.nextStates?.length ?? 0); i++) {
+      if (_workSpaceStateGroups?.nextStates?[i].name == value) {
+        id = _workSpaceStateGroups?.nextStates?[i].id.toString();
       }
     }
 
     String userToken = await SharedManager().getString(SharedEnum.userToken);
 
     final response = await workSpaceService.changeWorkSpaceState(
-      detail.task?.id.toString() ?? '',
-      id ?? '',
-      userToken,
-    );
+        detail.task?.id.toString() ?? '', id ?? '', userToken, groupId);
 
     response.fold(
       (l) => {
@@ -286,7 +392,8 @@ class WorkOrderDetailProvider extends ChangeNotifier {
         _userInventoryList = l,
         for (var i = 0; i < (_userInventoryList.materials?.length ?? 0); i++)
           {
-            workSpaceUserInventoryLabelList.add(_userInventoryList.materials?[i].properties?.name ?? ''),
+            workSpaceUserInventoryLabelList
+                .add(_userInventoryList.materials?[i].properties?.name ?? ''),
           },
       },
       (r) => {},
@@ -301,7 +408,8 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     String barcodeScanRes;
     AssetListModel assetListModel;
     try {
-      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode('#ff6666', 'İptal', true, ScanMode.BARCODE);
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+          '#ff6666', 'İptal', true, ScanMode.BARCODE);
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
     }
@@ -312,7 +420,8 @@ class WorkOrderDetailProvider extends ChangeNotifier {
       // print('id : ' + finalBarcode);
       String taskId = detail.task!.id.toString();
       int? qrId;
-      final String token = await SharedManager().getString(SharedEnum.userToken);
+      final String token =
+          await SharedManager().getString(SharedEnum.userToken);
 
       String url =
           '${ServiceTools.url.asset_url}/component/searchByColumn/?page=1&limit=10&orderBy=ASC&orderByColumn=&searchColumn=tagNumber&searchString=$barcodeScanRes&searchType=CONTAINS';
@@ -368,10 +477,37 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   void getDetail() async {
     final String token = await SharedManager().getString(SharedEnum.userToken);
     if (token.isNotEmpty) {
-      final result = await workSpaceService.getWorkSpaceByTaskId(detail.task!.id.toString(), token);
+      final result = await workSpaceService.getWorkSpaceByTaskId(
+          detail.task!.id.toString(), token);
 
       result.fold((l) {
         detail = l;
+        notifyListeners();
+      }, (r) {});
+    }
+    _isLoading = false;
+
+    notifyListeners();
+  }
+
+  Future getTaskHistory(taskId) async {
+    _isTaskHistoryLoading = false;
+    final String token = await SharedManager().getString(SharedEnum.userToken);
+    if (token.isNotEmpty) {
+      final result = await workSpaceService.getTaskHistoryApi(
+          detail.task!.id.toString(), token);
+
+      result.fold((l) {
+        var dataList = [];
+        for (var i = 0; i < l.length; i++) {
+          dataList.add([
+            l[i]['state']['name'],
+            l[i]['state']['stateDate'],
+            l[i]['state']['stateUser']
+          ]);
+        }
+        _isTaskHistoryLoading = true;
+        _taskHistoryData = dataList;
         notifyListeners();
       }, (r) {});
     }
@@ -384,7 +520,10 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
   void addEffort(BuildContext context) async {
     // service add effort
-    if (_startEffortDate.isEmpty || _endEffortDate.isEmpty || _effortDuration.isEmpty || _effortType.isEmpty) {
+    if (_startEffortDate.isEmpty ||
+        _endEffortDate.isEmpty ||
+        _effortDuration.isEmpty ||
+        _effortType.isEmpty) {
       snackBar(context, LocaleKeys.EmptyEffortFields.tr(), 'error');
       return;
     }
@@ -472,7 +611,8 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
   void addRequestedMaterial(
     BuildContext context,
-    List<WorkSpaceRequestedMaterialsInventory> workSpaceRequestedMaterialsInventory,
+    List<WorkSpaceRequestedMaterialsInventory>
+        workSpaceRequestedMaterialsInventory,
     String wantedMaterialAmount,
     String subject,
     String hintAmount,
@@ -481,13 +621,19 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     String description,
     String taskId,
   ) async {
-    if (wantedMaterialAmount == '0' || wantedMaterialAmount.isEmpty || subject.isEmpty || hintAmount.isEmpty || hintAmount == '0') {
+    if (wantedMaterialAmount == '0' ||
+        wantedMaterialAmount.isEmpty ||
+        subject.isEmpty ||
+        hintAmount.isEmpty ||
+        hintAmount == '0') {
       snackBar(context, LocaleKeys.EmptyRequestMaterialFields.tr(), 'error');
       return;
     }
 
-    if ((int.tryParse(wantedMaterialAmount) ?? 0) > (int.tryParse(hintAmount) ?? 0)) {
-      snackBar(context, LocaleKeys.WantedMaterialAmountBiggerThanHintAmount.tr(), 'error');
+    if ((int.tryParse(wantedMaterialAmount) ?? 0) >
+        (int.tryParse(hintAmount) ?? 0)) {
+      snackBar(context,
+          LocaleKeys.WantedMaterialAmountBiggerThanHintAmount.tr(), 'error');
       return;
     }
 
@@ -536,7 +682,8 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     });
   }
 
-  void savePdf(BuildContext context, String pdfPath, String pdfName, String desc, String taskId, String taskKey) async {
+  void savePdf(BuildContext context, String pdfPath, String pdfName,
+      String desc, String taskId, String taskKey) async {
     if (pdfPath.isEmpty) {
       snackBar(context, LocaleKeys.EmptyPdfPath.tr(), 'error');
       return;
@@ -546,7 +693,8 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
     final String token = await SharedManager().getString(SharedEnum.userToken);
 
-    final response = await workSpaceService.saveDocumant(pdfPath, pdfName, desc, token, taskId, taskKey, 'pdf');
+    final response = await workSpaceService.saveDocumant(
+        pdfPath, pdfName, desc, token, taskId, taskKey, 'pdf');
 
     response.fold(
       (l) => {
@@ -569,7 +717,8 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     });
   }
 
-  void saveImage(BuildContext context, String imagePath, String desc, String taskId, String taskKey) async {
+  void saveImage(BuildContext context, String imagePath, String desc,
+      String taskId, String taskKey) async {
     if (imagePath.isEmpty) {
       snackBar(context, LocaleKeys.EmptyImagePath.tr(), 'error');
       return;
@@ -579,7 +728,8 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
     final String token = await SharedManager().getString(SharedEnum.userToken);
 
-    final response = await workSpaceService.saveDocumant(imagePath, '', desc, token, taskId, taskKey, 'image');
+    final response = await workSpaceService.saveDocumant(
+        imagePath, '', desc, token, taskId, taskKey, 'image');
     response.fold(
       (l) => {
         l

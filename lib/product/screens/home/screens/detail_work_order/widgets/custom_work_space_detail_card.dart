@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:vm_fm_4/core/constants/other/app_icons.dart';
 import 'package:vm_fm_4/feature/components/model_bottom_sheet/change_location_leaf_model_bottom_sheet.dart';
+import 'package:vm_fm_4/feature/components/model_bottom_sheet/get_task_history_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 
@@ -14,20 +15,25 @@ import '../../../../../../generated/locale_keys.g.dart';
 import '../provider/work_order_detail_provider.dart';
 
 class CustomWorkSpaceDetailCard extends StatelessWidget {
-  const CustomWorkSpaceDetailCard({super.key, required this.workSpaceDetail, required this.workOrderDetailProvider});
+  const CustomWorkSpaceDetailCard(
+      {super.key,
+      required this.workSpaceDetail,
+      required this.workOrderDetailProvider});
 
   final WorkSpaceDetail workSpaceDetail;
   final WorkOrderDetailProvider workOrderDetailProvider;
 
   final double _elevation = 8;
-  final EdgeInsets _paddingCardInside = const EdgeInsets.symmetric(horizontal: 15, vertical: 10);
+  final EdgeInsets _paddingCardInside =
+      const EdgeInsets.symmetric(horizontal: 15, vertical: 10);
 
   @override
   Widget build(BuildContext context) {
     return Card(
       color: APPColors.Main.white,
       elevation: _elevation,
-      shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.mediumBorderRadius),
+      shape: RoundedRectangleBorder(
+          borderRadius: CustomBorderRadius.mediumBorderRadius),
       child: Padding(
         padding: _paddingCardInside,
         child: Column(
@@ -36,11 +42,14 @@ class CustomWorkSpaceDetailCard extends StatelessWidget {
             _ResponseDates(workSpaceDetail: workSpaceDetail),
             const CustomWoSummaryDivider(),
             const SizedBox(height: 10),
-            Text('WO ${workSpaceDetail.task?.id}', style: context.bodySmall.copyWith(color: APPColors.Main.black)),
+            Text('WO ${workSpaceDetail.task?.id}',
+                style: context.bodySmall.copyWith(color: APPColors.Main.black)),
             // Text('${workSpaceDetail.state?.name}', style: context.labelMedium.copyWith(color: APPColors.Main.black)),
             const CustomWoSummaryDivider(),
             const SizedBox(height: 10),
-            Text(workSpaceDetail.task?.description ?? '', style: context.labelMedium.copyWith(color: APPColors.Main.black)),
+            Text(workSpaceDetail.task?.description ?? '',
+                style:
+                    context.labelMedium.copyWith(color: APPColors.Main.black)),
             const CustomWoSummaryDivider(),
             const SizedBox(height: 10),
             _DoubleRowInformation(
@@ -55,9 +64,17 @@ class CustomWorkSpaceDetailCard extends StatelessWidget {
               firstLabel: LocaleKeys.OpenDate.tr(),
               secondLabel: LocaleKeys.UpdateDate.tr(),
               thirdLabel: LocaleKeys.LastUpdateDate.tr(),
-              firstValue: workSpaceDetail.workspace?.createdAt.toString().substring(0, 19) ?? '',
-              secondValue: workSpaceDetail.workspace?.updatedAt.toString().substring(0, 19) ?? '',
-              thirdValue: workSpaceDetail.task?.updatedAt.toString().substring(0, 19) ?? '',
+              firstValue: workSpaceDetail.workspace?.createdAt
+                      .toString()
+                      .substring(0, 19) ??
+                  '',
+              secondValue: workSpaceDetail.workspace?.updatedAt
+                      .toString()
+                      .substring(0, 19) ??
+                  '',
+              thirdValue:
+                  workSpaceDetail.task?.updatedAt.toString().substring(0, 19) ??
+                      '',
             ),
             const CustomWoSummaryDivider(),
             const SizedBox(height: 10),
@@ -69,13 +86,17 @@ class CustomWorkSpaceDetailCard extends StatelessWidget {
             ),
             const CustomWoSummaryDivider(),
             const SizedBox(height: 10),
+
             // location
             _LocationInformation(
               workSpaceDetail,
               workOrderDetailProvider,
             ),
-            const SizedBox(height: 10),
             const CustomWoSummaryDivider(),
+
+            _TaskHistory(workSpaceDetail, workOrderDetailProvider),
+
+            const SizedBox(height: 10),
             const SizedBox(height: 10),
             _DoubleRowInformationComponent(
               firstLabel: LocaleKeys.Presence.tr(),
@@ -93,7 +114,8 @@ class CustomWorkSpaceDetailCard extends StatelessWidget {
 }
 
 class _LocationInformation extends StatelessWidget {
-  const _LocationInformation(this.workSpaceDetail, this.workOrderDetailProvider);
+  const _LocationInformation(
+      this.workSpaceDetail, this.workOrderDetailProvider);
 
   final WorkSpaceDetail workSpaceDetail;
   final WorkOrderDetailProvider workOrderDetailProvider;
@@ -103,7 +125,11 @@ class _LocationInformation extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(flex: 1, child: Text(LocaleKeys.Location.tr(), style: context.bodySmall.copyWith(color: APPColors.Main.black))),
+        Expanded(
+            flex: 1,
+            child: Text(LocaleKeys.Location.tr(),
+                style:
+                    context.bodySmall.copyWith(color: APPColors.Main.black))),
         Expanded(
           flex: 2,
           child: SingleChildScrollView(
@@ -115,7 +141,8 @@ class _LocationInformation extends StatelessWidget {
                     await ShowModalBottomSheet().show(
                       context,
                       ChangeLocationLeafModelBottomSheet(
-                        rootTitle: workSpaceDetail.task?.requestedSpaces?.name ?? '',
+                        rootTitle:
+                            workSpaceDetail.task?.requestedSpaces?.name ?? '',
                       ),
                     );
                   },
@@ -123,7 +150,55 @@ class _LocationInformation extends StatelessWidget {
                 ),
                 Text(
                   workSpaceDetail.task?.requestedSpaces?.name ?? '',
-                  style: context.labelMedium.copyWith(color: APPColors.Main.black),
+                  style:
+                      context.labelMedium.copyWith(color: APPColors.Main.black),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _TaskHistory extends StatelessWidget {
+  const _TaskHistory(this.workSpaceDetail, this.workOrderDetailProvider);
+
+  final WorkSpaceDetail workSpaceDetail;
+  final WorkOrderDetailProvider workOrderDetailProvider;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+            flex: 1,
+            child: Text('Tarihçe',
+                style:
+                    context.bodySmall.copyWith(color: APPColors.Main.black))),
+        Expanded(
+          flex: 2,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                CustomElevatedButtonWithIcon(
+                  width: context.width / 3,
+                  height: context.height * 0.03,
+                  bgColor: APPColors.Accent.black,
+                  onPressFunction: () async {
+                    await workOrderDetailProvider
+                        .getTaskHistory(workSpaceDetail.task?.id);
+
+                    GetTaskHistoryModalBottomSheet().showAlertDialog(context,
+                        workOrderDetailProvider, 'textData', 'Tarihçe');
+                  },
+                  textValue: 'İncele',
+                  textColor: APPColors.Main.white,
+                  iconColor: APPColors.Main.white,
+                  icon: Icons.qr_code,
                 ),
               ],
             ),
@@ -158,24 +233,33 @@ class _FourRowInformation extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(firstLabel, style: context.bodySmall.copyWith(color: APPColors.Main.black)),
-            Text(firstValue, style: context.labelMedium.copyWith(color: APPColors.Main.black)),
+            Text(firstLabel,
+                style: context.bodySmall.copyWith(color: APPColors.Main.black)),
+            Text(firstValue,
+                style:
+                    context.labelMedium.copyWith(color: APPColors.Main.black)),
           ],
         ),
         const SizedBox(height: 5),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(secondLabel, style: context.bodySmall.copyWith(color: APPColors.Main.black)),
-            Text(secondValue, style: context.labelMedium.copyWith(color: APPColors.Main.black)),
+            Text(secondLabel,
+                style: context.bodySmall.copyWith(color: APPColors.Main.black)),
+            Text(secondValue,
+                style:
+                    context.labelMedium.copyWith(color: APPColors.Main.black)),
           ],
         ),
         const SizedBox(height: 5),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(thirdLabel, style: context.bodySmall.copyWith(color: APPColors.Main.black)),
-            Text(thirdValue, style: context.labelMedium.copyWith(color: APPColors.Main.black)),
+            Text(thirdLabel,
+                style: context.bodySmall.copyWith(color: APPColors.Main.black)),
+            Text(thirdValue,
+                style:
+                    context.labelMedium.copyWith(color: APPColors.Main.black)),
           ],
         ),
       ],
@@ -184,7 +268,11 @@ class _FourRowInformation extends StatelessWidget {
 }
 
 class _DoubleRowInformation extends StatelessWidget {
-  const _DoubleRowInformation({required this.firstLabel, required this.secondLabel, required this.firstValue, required this.secondValue});
+  const _DoubleRowInformation(
+      {required this.firstLabel,
+      required this.secondLabel,
+      required this.firstValue,
+      required this.secondValue});
 
   final String firstLabel;
   final String secondLabel;
@@ -199,16 +287,22 @@ class _DoubleRowInformation extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(firstLabel, style: context.bodySmall.copyWith(color: APPColors.Main.black)),
-            Text(firstValue, style: context.labelMedium.copyWith(color: APPColors.Main.black)),
+            Text(firstLabel,
+                style: context.bodySmall.copyWith(color: APPColors.Main.black)),
+            Text(firstValue,
+                style:
+                    context.labelMedium.copyWith(color: APPColors.Main.black)),
           ],
         ),
         const SizedBox(height: 5),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(secondLabel, style: context.bodySmall.copyWith(color: APPColors.Main.black)),
-            Text(secondValue, style: context.labelMedium.copyWith(color: APPColors.Main.black)),
+            Text(secondLabel,
+                style: context.bodySmall.copyWith(color: APPColors.Main.black)),
+            Text(secondValue,
+                style:
+                    context.labelMedium.copyWith(color: APPColors.Main.black)),
           ],
         ),
       ],
@@ -239,7 +333,8 @@ class _DoubleRowInformationComponent extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(firstLabel, style: context.bodySmall.copyWith(color: APPColors.Main.black)),
+            Text(firstLabel,
+                style: context.bodySmall.copyWith(color: APPColors.Main.black)),
             Text(
               firstValue,
               style: context.labelMedium.copyWith(color: APPColors.Main.black),
@@ -254,7 +349,7 @@ class _DoubleRowInformationComponent extends StatelessWidget {
               CustomElevatedButtonWithIcon(
                 width: context.width / 3,
                 height: context.height * 0.05,
-                bgColor: APPColors.Main.blue,
+                bgColor: APPColors.Accent.black,
                 onPressFunction: workOrderDetailProvider.scanBarcodeAndQr,
                 textValue: LocaleKeys.Change.tr(),
                 textColor: APPColors.Main.white,
@@ -283,10 +378,16 @@ class _ResponseDates extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(LocaleKeys.ResponseDate.tr(), style: context.bodySmall.copyWith(color: APPColors.Main.black)),
+              Text(LocaleKeys.ResponseDate.tr(),
+                  style:
+                      context.bodySmall.copyWith(color: APPColors.Main.black)),
               Text(
-                workSpaceDetail.workspace?.updatedAt?.toString().substring(0, 19) ?? '',
-                style: context.labelMedium.copyWith(color: APPColors.Main.black),
+                workSpaceDetail.workspace?.updatedAt
+                        ?.toString()
+                        .substring(0, 19) ??
+                    '',
+                style:
+                    context.labelMedium.copyWith(color: APPColors.Main.black),
                 overflow: TextOverflow.ellipsis,
               ),
             ],
@@ -297,10 +398,14 @@ class _ResponseDates extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(LocaleKeys.UpdateDate.tr(), style: context.bodySmall.copyWith(color: APPColors.Main.black)),
+              Text(LocaleKeys.UpdateDate.tr(),
+                  style:
+                      context.bodySmall.copyWith(color: APPColors.Main.black)),
               Text(
-                workSpaceDetail.task?.updatedAt.toString().substring(0, 19) ?? '',
-                style: context.labelMedium.copyWith(color: APPColors.Main.black),
+                workSpaceDetail.task?.updatedAt.toString().substring(0, 19) ??
+                    '',
+                style:
+                    context.labelMedium.copyWith(color: APPColors.Main.black),
                 overflow: TextOverflow.ellipsis,
               ),
             ],

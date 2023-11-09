@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:vm_fm_4/feature/models/work_space/work_space_current_state.dart';
 import 'package:vm_fm_4/feature/models/work_space/child_location_structure.dart';
 import 'package:vm_fm_4/feature/models/work_space/main_location_structure.dart';
 import 'package:vm_fm_4/feature/models/work_space/work_space_note.dart';
@@ -68,7 +69,7 @@ abstract class WorkSpaceServiceRepository {
 
   Future<Either<bool, CustomServiceException>> takeItOnMe(String taskId, String currentStateId, String token);
 
-  Future<Either<TaskResponseEnums, CustomServiceException>> changeWorkSpaceState(String taskId, String nextStateId, String token);
+  Future<Either<TaskResponseEnums, CustomServiceException>> changeWorkSpaceState(String taskId, String nextStateId, String token, String? groupId);
 
   Future<Either<List<WorkSpaceRequirementMaterialsList>, CustomServiceException>> getWorkSpaceRequirementMaterialsList(String taskId, String token);
 
@@ -100,6 +101,8 @@ abstract class WorkSpaceServiceRepository {
   Future<bool> addNoteToWorkOrder(String userToken, String taskId, String value);
 
   Future<List<WorkSpaceNote>> getWorkSpaceNotes(String taskId, String userToken);
+
+  Future<Either<CurrentState, CustomServiceException>> getWorkSpaceStateGroups(String taskId,String workSpaceId,String token);
 
   Future<MainLocationStructure> getMainLocationStructure(String userToken);
 

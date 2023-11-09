@@ -24,9 +24,7 @@ Task _$TaskFromJson(Map<String, dynamic> json) => Task(
       isDeleted: json['isDeleted'] as bool?,
       name: json['name'] as String?,
       canDelete: json['canDelete'] as bool?,
-      appointmentDate: json['appointmentDate'] == null
-          ? null
-          : DateTime.parse(json['appointmentDate'] as String),
+      appointmentDate: json['appointmentDate'] as String?,
       key: json['key'] as String?,
       updatedAt: json['updatedAt'] == null
           ? null
@@ -54,7 +52,36 @@ Task _$TaskFromJson(Map<String, dynamic> json) => Task(
       priority: json['priority'] == null
           ? null
           : Priority.fromJson(json['priority'] as Map<String, dynamic>),
-      userFirstNameLastName: json['user_firstName_lastName'] as String?,
+      userFirstNameLastName: json['userFirstNameLastName'] as String?,
       user: json['user'] as String?,
       userId: json['userId'] as String?,
     );
+
+Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
+      'owner': instance.owner,
+      'canDisplay': instance.canDisplay,
+      'dueDate': instance.dueDate?.toIso8601String(),
+      'description': instance.description,
+      'isActive': instance.isActive,
+      'trId': instance.trId,
+      'createdAt': instance.createdAt?.toIso8601String(),
+      'isDeleted': instance.isDeleted,
+      'name': instance.name,
+      'canDelete': instance.canDelete,
+      'appointmentDate': instance.appointmentDate,
+      'key': instance.key,
+      'updatedAt': instance.updatedAt?.toIso8601String(),
+      'id': instance.id,
+      'labels': instance.labels,
+      'templatedBy': instance.templatedBy,
+      'requestedBy': instance.requestedBy,
+      'requestedSpaces': instance.requestedSpaces,
+      'requestedComponents': instance.requestedComponents,
+      'createdBy': instance.createdBy,
+      'woCategory': instance.woCategory,
+      'requestType': instance.requestType,
+      'priority': instance.priority,
+      'userFirstNameLastName': instance.userFirstNameLastName,
+      'user': instance.user,
+      'userId': instance.userId,
+    };

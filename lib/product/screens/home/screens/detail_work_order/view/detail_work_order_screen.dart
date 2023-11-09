@@ -32,7 +32,8 @@ import '../widgets/acordions/request_material_accordion.dart';
 class DetailWorkOrderScreen extends StatelessWidget {
   const DetailWorkOrderScreen({super.key, required this.workSpaceDetail});
 
-  static final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  static final GlobalKey<ScaffoldState> _scaffoldKey =
+      GlobalKey<ScaffoldState>();
 
   final WorkSpaceDetail workSpaceDetail;
 
@@ -40,8 +41,12 @@ class DetailWorkOrderScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => WorkOrderDetailServiceProvider(detail: workSpaceDetail)),
-        ChangeNotifierProvider(create: (context) => WorkOrderDetailProvider(detail: workSpaceDetail)),
+        ChangeNotifierProvider(
+            create: (context) =>
+                WorkOrderDetailServiceProvider(detail: workSpaceDetail)),
+        ChangeNotifierProvider(
+            create: (context) =>
+                WorkOrderDetailProvider(detail: workSpaceDetail)),
       ],
       child: Consumer<WorkOrderDetailProvider>(
         builder: (context, WorkOrderDetailProvider woDetailProvider, child) {
@@ -64,10 +69,12 @@ class DetailWorkOrderScreen extends StatelessWidget {
             }
 
             if (woDetailProvider.isTaskStateChange) {
-              snackBar(context, '${LocaleKeys.TaskStateChange.tr()} ${LocaleKeys.NewTask.tr()} ${woDetailProvider.selectedTaskState}', 'success');
+              snackBar(
+                  context,
+                  '${LocaleKeys.TaskStateChange.tr()} ${LocaleKeys.NewTask.tr()} ${woDetailProvider.selectedTaskState}',
+                  'success');
               context.router.pop<bool>(true);
             }
-
             if (woDetailProvider.takeItOnMeSuccess) {
               snackBar(context, LocaleKeys.TakeItOnMeSuccess.tr(), 'success');
             }
@@ -75,29 +82,41 @@ class DetailWorkOrderScreen extends StatelessWidget {
 
           return Scaffold(
             key: _scaffoldKey,
-            appBar: CustomMainAppbar(title: Text('WO - ${woDetailProvider.detail.task?.id.toString() ?? ''}'), returnBack: true, elevation: 4),
+            appBar: CustomMainAppbar(
+                title: Text(
+                    'WO - ${woDetailProvider.detail.task?.id.toString() ?? ''}'),
+                returnBack: true,
+                elevation: 4),
             body: context.read<WorkOrderDetailProvider>().isLoading
                 ? const CustomLoadingIndicator()
                 : RefreshIndicator(
                     onRefresh: () async {
-                      await Future.delayed(const Duration(seconds: 1), () => woDetailProvider.setStateToBeginning());
+                      await Future.delayed(const Duration(seconds: 1),
+                          () => woDetailProvider.setStateToBeginning());
                     },
                     child: SingleChildScrollView(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10.0, vertical: 10),
                         child: Column(
                           children: [
-                            CustomWorkSpaceDetailCard(workSpaceDetail: woDetailProvider.detail, workOrderDetailProvider: woDetailProvider),
+                            CustomWorkSpaceDetailCard(
+                                workSpaceDetail: woDetailProvider.detail,
+                                workOrderDetailProvider: woDetailProvider),
                             const SizedBox(height: 10),
                             //deneme için eklendi. Servis sorunundan sonra düzeltilecek context.read<GlobalProvider>().userId
                             //TODO
-                            (woDetailProvider.detail.task?.user ?? '') != 'user1'
+                            (woDetailProvider.detail.task?.user ?? '') !=
+                                    'user1'
                                 ? _TakeItOnMe(provider: woDetailProvider)
-                                : _StateChangeDropDownButton(provider: woDetailProvider),
+                                : _StateChangeDropDownButton(
+                                    provider: woDetailProvider),
                             const SizedBox(height: 20),
-                            (woDetailProvider.detail.task?.user ?? '') != 'user1'
+                            (woDetailProvider.detail.task?.user ?? '') !=
+                                    'user1'
                                 ? const SizedBox()
-                                : _customPageAccordionSection(context, woDetailProvider),
+                                : _customPageAccordionSection(
+                                    context, woDetailProvider),
                           ],
                         ),
                       ),
@@ -109,32 +128,53 @@ class DetailWorkOrderScreen extends StatelessWidget {
     );
   }
 
-  Padding _customPageAccordionSection(BuildContext context, WorkOrderDetailProvider woDetailProvider) {
+  Padding _customPageAccordionSection(
+      BuildContext context, WorkOrderDetailProvider woDetailProvider) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 22),
       child: CustomBaseAccordion(
         list: [
-          _accordionSection(context, LocaleKeys.Effort.tr(), AddEffortsAccordion(provider: woDetailProvider), AppIcons.insightsRounded),
-          _accordionSection(context, LocaleKeys.Material.tr(), AddMaterialAccordion(provider: woDetailProvider), AppIcons.warehouse),
-          _accordionSection(context, LocaleKeys.RequestMaterial.tr(), RequestMaterialAccordion(provider: woDetailProvider), AppIcons.tool),
-          _accordionSection(context, LocaleKeys.Document.tr(), AddDocumantAccordion(provider: woDetailProvider), AppIcons.photoAlbum),
-          _accordionSection(context, LocaleKeys.Notes.tr(), AddNotesAccordion(provider: woDetailProvider), AppIcons.note),
+          _accordionSection(
+              context,
+              LocaleKeys.Effort.tr(),
+              AddEffortsAccordion(provider: woDetailProvider),
+              AppIcons.insightsRounded),
+          _accordionSection(
+              context,
+              LocaleKeys.Material.tr(),
+              AddMaterialAccordion(provider: woDetailProvider),
+              AppIcons.warehouse),
+          _accordionSection(
+              context,
+              LocaleKeys.RequestMaterial.tr(),
+              RequestMaterialAccordion(provider: woDetailProvider),
+              AppIcons.tool),
+          _accordionSection(
+              context,
+              LocaleKeys.Document.tr(),
+              AddDocumantAccordion(provider: woDetailProvider),
+              AppIcons.photoAlbum),
+          _accordionSection(context, LocaleKeys.Notes.tr(),
+              AddNotesAccordion(provider: woDetailProvider), AppIcons.note),
         ],
       ),
     );
   }
 
-  AccordionSection _accordionSection(BuildContext context, String title, Widget content, IconData icon) {
+  AccordionSection _accordionSection(
+      BuildContext context, String title, Widget content, IconData icon) {
     return AccordionSection(
       headerPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
       isOpen: false,
       headerBackgroundColor: APPColors.Accent.black,
       headerBackgroundColorOpened: APPColors.Accent.black,
-      contentBackgroundColor: context.theme ? APPColors.Accent.black : APPColors.Accent.white,
+      contentBackgroundColor:
+          context.theme ? APPColors.Accent.black : APPColors.Accent.white,
       leftIcon: Icon(icon, color: APPColors.Main.white),
       contentBorderColor: APPColors.Accent.black,
       onOpenSection: () {},
-      header: Text(title, style: context.labelMedium.copyWith(color: APPColors.Main.white)),
+      header: Text(title,
+          style: context.labelMedium.copyWith(color: APPColors.Main.white)),
       content: content,
     );
   }
@@ -152,20 +192,41 @@ class _StateChangeDropDownButton extends StatelessWidget {
       child: DropDownInputFields(
         labelText: LocaleKeys.ProccessEntry,
         onChangedFunction: (val) async {
-          await WoWaitAcceptModalAlert()
-              .showAlertDialog(
-            context,
-            "${"${LocaleKeys.ProccessEntryFirstALertDialog.tr()}'" + val}'${LocaleKeys.ProccessEntrySecondALertDialog.tr()}",
-            LocaleKeys.ChangeState.tr(),
-          )
-              .then((value) {
-            // check response value
-            if (value == true) {
-              provider.changeState(val);
-            } else {
-              // fix this
-            }
-          });
+          provider.setGroupIdDefault();
+          provider.stateGroupExist(val);
+          provider.isGroupExist
+              ? await WoWaitAcceptModalAlert().showAlertDialogWithDropdown(
+                  context,
+                  "${"${LocaleKeys.ProccessEntryFirstALertDialog.tr()}'" + val}'${LocaleKeys.ProccessEntrySecondALertDialog.tr()}",
+                  LocaleKeys.ChangeState.tr(),
+                  LocaleKeys.SelectGroupForContinue.tr(),
+                  provider.stateGroupList, (String value) {
+                  provider.setGroupId(value);
+                }).then((value) {
+                  // check response value
+                  if (value == true) {
+                    provider.groupId != ''
+                        ? provider.changeState(val)
+                        : snackBar(context,
+                            LocaleKeys.ErrorChangeStateWithGroup.tr(), 'error');
+                  } else {
+                    // fix this
+                  }
+                })
+              : await WoWaitAcceptModalAlert()
+                  .showAlertDialog(
+                  context,
+                  "${"${LocaleKeys.ProccessEntryFirstALertDialog.tr()}'" + val}'${LocaleKeys.ProccessEntrySecondALertDialog.tr()}",
+                  LocaleKeys.ChangeState.tr(),
+                )
+                  .then((value) {
+                  // check response value
+                  if (value == true) {
+                    provider.changeState(val);
+                  } else {
+                    // fix this
+                  }
+                });
         },
         rightIcon: AppIcons.arrowDown,
         dropDownArray: provider.workSpaceUserTaskLabels,
@@ -184,10 +245,12 @@ class _TakeItOnMe extends StatelessWidget {
     return ElevatedButton(
       onPressed: () => provider.takeItOnMe(),
       style: ElevatedButton.styleFrom(
-        shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.mediumBorderRadius),
+        shape: RoundedRectangleBorder(
+            borderRadius: CustomBorderRadius.mediumBorderRadius),
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       ),
-      child: Text(LocaleKeys.TakeItOnMe.tr(), style: context.bodySmall.copyWith(color: APPColors.Main.white)),
+      child: Text(LocaleKeys.TakeItOnMe.tr(),
+          style: context.bodySmall.copyWith(color: APPColors.Main.white)),
     );
   }
 }
