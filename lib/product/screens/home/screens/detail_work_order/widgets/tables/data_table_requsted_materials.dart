@@ -18,7 +18,6 @@ class DataTableAccordionRequstedMaterials extends StatelessWidget {
     LocaleKeys.DataTableUnit.tr(),
     LocaleKeys.DataTableAmount.tr(),
     LocaleKeys.DataTableUser.tr(),
-    LocaleKeys.DataTableTotalAmount.tr(),
   ];
 
   final List<WorkSpaceRequirementMaterialsList> data;
@@ -42,14 +41,15 @@ class DataTableAccordionRequstedMaterials extends StatelessWidget {
         ],
         rows: [
           for (var i = 0; i < (data.length); i++) ...{
-            DataRow(cells: [
-              DataCell(Text(data[i].id.toString(), style: _cellTextStyle(context))),
-              DataCell(Text(data[i].name ?? "", style: _cellTextStyle(context))),
-              DataCell(Text(data[i].measurementUnit ?? "", style: _cellTextStyle(context))),
-              DataCell(Text(data[i].amount.toString(), style: _cellTextStyle(context))),
-              DataCell(Text(data[i].user.toString(), style: _cellTextStyle(context))),
-              DataCell(Text(data[i].totalAmount.toString(), style: _cellTextStyle(context))),
-            ]),
+            DataRow(
+              cells: [
+                DataCell(Text(data[i].id.toString(), style: _cellTextStyle(context))),
+                DataCell(Text(data[i].name ?? "", style: _cellTextStyle(context))),
+                DataCell(Text(data[i].measurementUnit ?? "", style: _cellTextStyle(context))),
+                DataCell(Text(data[i].amount.toString(), style: _cellTextStyle(context))),
+                DataCell(Text(data[i].user.toString(), style: _cellTextStyle(context))),
+              ],
+            ),
           },
         ],
       ),
