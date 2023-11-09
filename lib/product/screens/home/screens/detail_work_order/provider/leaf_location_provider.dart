@@ -268,7 +268,7 @@ class LeafLocationProvider extends ChangeNotifier {
       (l) => {
         _changeLocationSuccess = true,
         snackBar(context, LocaleKeys.LocationChangeSuccessfull.tr(), 'success'),
-        Navigator.of(context).pop<bool>(true),
+        Navigator.of(context).pop<String>(_selectedLocationName),
       },
       (r) => {
         snackBar(context, LocaleKeys.Active, 'success'),

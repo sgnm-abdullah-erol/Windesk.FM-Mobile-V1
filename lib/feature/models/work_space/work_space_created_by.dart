@@ -7,9 +7,9 @@ part 'generator/work_space_created_by.g.dart';
 class CreatedBy extends Equatable {
   final String? id;
   final List<String>? label;
-  final String? name;
+  String? name;
 
-  const CreatedBy({
+  CreatedBy({
     this.id,
     this.label,
     this.name,

@@ -128,8 +128,10 @@ class _LocationInformation extends StatelessWidget {
                         dependedOn: workSpaceDetail.task?.depended_on.toString() ?? '',
                       ),
                     );
-                    if (result == true) {
-                      context.router.popAndPush(DetailWorkOrderScreen(workSpaceDetail: workSpaceDetail));
+                    print('resultttt' + result.toString());
+                    if (result != '') {
+                      workSpaceDetail.task?.requestedSpaces?.name = result ?? '';
+                      //context.router.popAndPush(DetailWorkOrderScreen(workSpaceDetail: workSpaceDetail));
                     }
                   },
                   icon: const Icon(AppIcons.change),
