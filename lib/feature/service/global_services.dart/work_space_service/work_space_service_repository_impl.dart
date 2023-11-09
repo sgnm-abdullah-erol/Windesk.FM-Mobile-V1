@@ -32,6 +32,9 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
     String url =
         '${ServiceTools.url.workorder_url}/task/workSpace/task/state/List/for/assigned/user/pagination/swagger?page=$page&limit=10&orderBy=DESC&orderByColumn%5B0%5D=updatedAt';
+
+    print(url);
+
     final response = await super.dio.get(
           url,
           options: Options(
@@ -42,9 +45,10 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     if (response.statusCode == 200 || response.statusCode == 201) {
       final data = response.data;
       workSpaceDetailList = WorkSpaceDetail.fromJsonList(data);
-
+      super.logger.w(response);
       return Left(workSpaceDetailList);
     } else {
+      super.logger.wtf(response);
       return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
     }
   }
