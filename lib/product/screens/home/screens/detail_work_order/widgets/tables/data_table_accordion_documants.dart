@@ -1,6 +1,6 @@
-import 'dart:io';
-import 'dart:math';
+// ignore_for_file: avoid_print
 
+import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_file_dialog/flutter_file_dialog.dart';
@@ -67,12 +67,12 @@ class DataTableAccordionDocumants extends StatelessWidget {
                         ? const Center(child: CircularProgressIndicator())
                         : IconButton(
                             onPressed: () async {
-                              String type = data[i].name?.split('.').last ?? '';
+                              String type = data[i].url?.split('.').last ?? '';
                               if (type == 'jpg' || type == 'png' || type == 'jpeg') {
                                 _downloadImage(context, data[i].url ?? '', data[i].name ?? '', type);
                               } else if (type == 'pdf') {
-                                _downloadFile();
-                              }
+                                _downloadFile(context, data[i].url ?? '', data[i].name ?? '', type);
+                              } else {}
                             },
                             icon: Icon(AppIcons.download, color: APPColors.Login.green),
                           ),
@@ -99,7 +99,28 @@ class DataTableAccordionDocumants extends StatelessWidget {
     );
   }
 
-  void _downloadFile(BuildContext context, String url, String name, String type) {}
+  void _downloadFile(BuildContext context, String url, String name, String type) async {
+    final http.Response response = await http.get(
+      Uri.parse('https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'),
+    );
+
+    final dir = await getTemporaryDirectory();
+
+    // Create an image name
+    var filename = '${dir.path}/downloadPdf.pdf';
+
+    // Save to filesystem
+    final file = File(filename);
+    await file.writeAsBytes(response.bodyBytes, flush: true);
+
+    // Ask the user to save it
+    final params = SaveFileDialogParams(sourceFilePath: file.path);
+    final finalPath = await FlutterFileDialog.saveFile(params: params);
+
+    if (finalPath != null) {
+      print('pdf saved to $finalPath');
+    }
+  }
 
   void _downloadImage(BuildContext context, String url, String name, String type) async {
     final http.Response response = await http.get(
@@ -121,6 +142,8 @@ class DataTableAccordionDocumants extends StatelessWidget {
 
     if (finalPath != null) {
       print('image saved to $finalPath');
+    } else {
+      print('sssssssssssssssssss');
     }
   }
 
