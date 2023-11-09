@@ -1,15 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:vm_fm_4/core/constants/other/colors.dart';
 
 import '../../../generated/locale_keys.g.dart';
 import '../../../product/screens/home/screens/detail_work_order/provider/work_order_add_material_sheet_provider.dart';
 import '../../../product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
 import '../../extensions/context_extension.dart';
 import '../buttons/custom_half_buttons.dart';
-import '../input_fields/dropdown_input_fields.dart';
 import '../input_fields/text_fields_input_underline.dart';
 
 class AddMaterialModalBottomSheet extends StatelessWidget {
@@ -73,11 +74,33 @@ class _Inputs extends StatelessWidget {
       children: [
         Expanded(
           flex: 30,
-          child: DropDownInputFields(
-            labelText: LocaleKeys.MaterialList.tr(),
-            onChangedFunction: value.setHintTexts,
-            rightIcon: Icons.arrow_downward,
-            dropDownArray: wareHouseList.isEmpty ? [''] : wareHouseList,
+          child: DropdownSearch<String>(
+            popupProps: PopupProps.menu(
+              searchDelay: const Duration(milliseconds: 0),
+              showSearchBox: true,
+              showSelectedItems: true,
+              listViewProps: const ListViewProps(scrollDirection: Axis.vertical, shrinkWrap: true),
+              itemBuilder: (BuildContext context, String item, bool isSelected) {
+                return ListTile(
+                  title: Text(
+                    item,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: isSelected ? APPColors.Main.red : APPColors.Main.black),
+                  ),
+                );
+              },
+            ),
+            items: wareHouseList.isEmpty ? [''] : wareHouseList,
+            dropdownDecoratorProps: DropDownDecoratorProps(
+              baseStyle: Theme.of(context).textTheme.bodySmall,
+              textAlign: TextAlign.left,
+              dropdownSearchDecoration: InputDecoration(
+                labelStyle: Theme.of(context).textTheme.bodySmall,
+                labelText: LocaleKeys.MaterialList.tr(),
+              ),
+            ),
+            onChanged: (String? val) {
+              if (val != null) value.setHintTexts(val);
+            },
           ),
         ),
         Expanded(
