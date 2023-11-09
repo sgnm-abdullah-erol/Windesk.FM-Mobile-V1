@@ -127,7 +127,6 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     );
 
     _setUserTaskLabels();
-
     notifyListeners();
 
     Future.delayed(const Duration(seconds: 2), () {
@@ -180,6 +179,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
   void _setUserTaskLabels() async {
     _isLoading = true;
     notifyListeners();
+    _workSpaceUserTaskLabels.clear();
 
     String userToken = await SharedManager().getString(SharedEnum.userToken);
 
