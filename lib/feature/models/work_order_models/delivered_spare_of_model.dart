@@ -5,11 +5,11 @@ part 'delivered_spare_of_model.g.dart';
 
 @JsonSerializable()
 class DeliveredSpareOfModel extends Equatable {
-  final String? id;
+  final dynamic id;
   final List<String>? label;
   final String? name;
   final dynamic amount;
-  final String? measurementUnit;
+  final dynamic measurementUnit;
   final String? user;
   final dynamic totalAmount;
   final String? materialDeliveredDate;

@@ -607,27 +607,22 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     List<DeliveredSpareOfModel> workSpaceRequirementMaterialsList;
     String url = '${ServiceTools.url.workorder_url}/task/$taskId';
 
-    try {
-      final response = await super.dio.get(
-            url,
-            options: Options(
-              headers: {'authorization': 'Bearer $token'},
-            ),
-          );
+    final response = await super.dio.get(
+          url,
+          options: Options(
+            headers: {'authorization': 'Bearer $token'},
+          ),
+        );
 
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        final data = response.data;
-        workSpaceRequirementMaterialsList = DeliveredSpareOfModel.fromJsonList(data['deliveredSpareOf']);
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      final data = response.data;
+      workSpaceRequirementMaterialsList = DeliveredSpareOfModel.fromJsonList(data['deliveredSpareOf']);
 
-        super.logger.wtf(workSpaceRequirementMaterialsList);
+      super.logger.wtf(workSpaceRequirementMaterialsList);
 
-        return Left(workSpaceRequirementMaterialsList);
-      } else {
-        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
-      }
-    } catch (e) {
-      super.logger.i(e);
-      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+      return Left(workSpaceRequirementMaterialsList);
+    } else {
+      return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
     }
   }
 
