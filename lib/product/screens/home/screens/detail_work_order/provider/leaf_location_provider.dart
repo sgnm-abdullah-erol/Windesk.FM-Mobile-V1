@@ -257,7 +257,7 @@ class LeafLocationProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void changeLocation(String taskId, String templatedBy, String dependedOn,BuildContext context) async {
+  void changeLocation(String taskId, String templatedBy, String dependedOn, BuildContext context) async {
     _isLoading = true;
     final token = await SharedManager().getString(SharedEnum.userToken);
     final response = await _woCreateServiceRepository.updateTask(token, taskId, requestedId, requestedLabel, templatedBy, dependedOn);

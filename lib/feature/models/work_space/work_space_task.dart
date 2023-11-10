@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -37,35 +39,33 @@ class Task extends Equatable {
   final String? user;
   final String? userId;
 
-  const Task(
-    this.woCategory, {
-    this.owner,
-    this.canDisplay,
-    this.dueDate,
-    this.description,
-    this.isActive,
-    this.trId,
-    this.createdAt,
-    this.isDeleted,
-    this.name,
-    this.canDelete,
-    this.appointmentDate,
-    this.key,
-    this.updatedAt,
-    this.id,
-    this.labels,
-    this.templatedBy,
-    this.requestedBy,
-    this.requestedSpaces,
-    this.requestedComponents,
-    this.createdBy,
-    this.requestType,
-    this.priority,
-    this.userFirstNameLastName,
-    this.user,
-    this.userId,
-    this.depended_on
-  });
+  const Task(this.woCategory,
+      {this.owner,
+      this.canDisplay,
+      this.dueDate,
+      this.description,
+      this.isActive,
+      this.trId,
+      this.createdAt,
+      this.isDeleted,
+      this.name,
+      this.canDelete,
+      this.appointmentDate,
+      this.key,
+      this.updatedAt,
+      this.id,
+      this.labels,
+      this.templatedBy,
+      this.requestedBy,
+      this.requestedSpaces,
+      this.requestedComponents,
+      this.createdBy,
+      this.requestType,
+      this.priority,
+      this.userFirstNameLastName,
+      this.user,
+      this.userId,
+      this.depended_on});
 
   factory Task.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
 

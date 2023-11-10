@@ -18,7 +18,7 @@ class LocaleKeys {
   static const String spaceSearch = 'Mahal Arama';
 
   static const String spaceSearchSuccess = 'Mahal Arama Başarılı';
-  static const String spaceSearchError = 'Mahal Arama Başarısız';
+  static const String spaceSearchError = 'Uygun Düğüm Bulunamadı';
 
   // static const ----------App---------- = '----------App----------;
   static const String IfmName = 'IfmName';
