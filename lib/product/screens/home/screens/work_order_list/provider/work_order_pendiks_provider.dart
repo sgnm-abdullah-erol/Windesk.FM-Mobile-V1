@@ -44,8 +44,6 @@ class WorkOrderPendiksProvider extends ChangeNotifier {
 
     final response = await workSpaceService.getWorkSpaceStateGroups(taskId, workSpaceId, userToken);
 
-    print('dataaaa$response');
-
     response.fold(
       (l) => {_workSpaceStateGroups = l},
       (r) => {

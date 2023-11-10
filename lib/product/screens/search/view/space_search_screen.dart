@@ -76,7 +76,7 @@ class _SpaceSearchScreen extends State<SpaceSearchScreen> {
                                       child: SingleChildScrollView(
                                         scrollDirection: Axis.vertical,
                                         child: Padding(
-                                          padding: EdgeInsets.only(right: 15),
+                                          padding: const EdgeInsets.only(right: 15),
                                           child: TreeView(nodes: [
                                             for (var i = 0;
                                                 i <
@@ -88,7 +88,7 @@ class _SpaceSearchScreen extends State<SpaceSearchScreen> {
                                                   content: Text(
                                                     searchProvider.spaceData![
                                                         'children'][i]['name'],
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                         fontWeight:
                                                             FontWeight.bold),
                                                   ),
@@ -109,7 +109,7 @@ class _SpaceSearchScreen extends State<SpaceSearchScreen> {
                                                                     [
                                                                     i]["children"]
                                                                 [x]['name'],
-                                                            style: TextStyle(
+                                                            style: const TextStyle(
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .bold),
@@ -153,7 +153,7 @@ class _SpaceSearchScreen extends State<SpaceSearchScreen> {
                                           ]),
                                         ),
                                       )))
-                              : Text(
+                              : const Text(
                                   'Listelemek için lütfen arama yapınız.',
                                   style: TextStyle(fontSize: 13),
                                 )

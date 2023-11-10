@@ -183,12 +183,10 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     }
   }
 
-  @override
   Future<Either<Map, CustomServiceException>> getSpaceSearch(
       String spaceText, String token) async {
     String url =
         '${ServiceTools.url.facility_url}/structure/search?q=$spaceText';
-    print(url);
     try {
       final response = await super.dio.post(
             url,
@@ -197,8 +195,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
             ),
           );
       final data = response.data;
-      print(data);
-
       return Left(data);
     } catch (error) {
       super.logger.e(error.toString());

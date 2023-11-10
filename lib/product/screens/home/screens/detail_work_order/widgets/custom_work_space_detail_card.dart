@@ -5,7 +5,6 @@ import 'package:vm_fm_4/core/constants/other/app_icons.dart';
 import 'package:vm_fm_4/core/route/app_route.gr.dart';
 import 'package:vm_fm_4/feature/components/model_bottom_sheet/change_location_leaf_model_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/components/model_bottom_sheet/get_task_history_modal_bottom_sheet.dart';
-import 'package:vm_fm_4/feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 
 import '../../../../../../core/constants/other/colors.dart';
@@ -134,6 +133,7 @@ class _LocationInformation extends StatelessWidget {
               );
                     if (result != '') {
                       workSpaceDetail.task?.requestedSpaces?.name = result ?? '';
+                      // ignore: use_build_context_synchronously
                       context.router.popAndPush(DetailWorkOrderScreen(workSpaceDetail: workSpaceDetail));
                     }
                   },

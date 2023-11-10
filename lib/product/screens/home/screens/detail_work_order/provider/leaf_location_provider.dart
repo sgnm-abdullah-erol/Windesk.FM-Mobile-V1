@@ -47,9 +47,6 @@ class LeafLocationProvider extends ChangeNotifier {
   bool _floorLeaf = true;
   bool get floorLeaf => _floorLeaf;
 
-  String _category = '';
-  String get category => _category;
-
   String _location = '';
   String get location => _location;
 

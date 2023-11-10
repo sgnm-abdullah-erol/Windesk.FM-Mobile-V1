@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_simple_treeview/flutter_simple_treeview.dart';
-import 'package:vm_fm_4/feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
 
 import '../../../../../../feature/injection.dart';
@@ -26,8 +25,6 @@ class SearchMaterialProvider extends ChangeNotifier {
 
   bool _errorAccure = false;
   bool get errorAccure => _errorAccure;
-  bool _errorSpace = false;
-  bool get errorSpace => _errorSpace;
 
   bool _imageExist = false;
   bool get imageExist => _imageExist;
@@ -72,16 +69,16 @@ class SearchMaterialProvider extends ChangeNotifier {
   showWidget(data) {
     return SizedBox(
       child: TreeView(nodes: [
-        TreeNode(content: Text("root1")),
+        TreeNode(content: const Text("root1")),
         TreeNode(
-          content: Text("root2"),
+          content: const Text("root2"),
           children: [
-            TreeNode(content: Text("child21")),
-            TreeNode(content: Text("child22")),
+            TreeNode(content: const Text("child21")),
+            TreeNode(content: const Text("child22")),
             TreeNode(
-              content: Text("root23"),
+              content: const Text("root23"),
               children: [
-                TreeNode(content: Text("child231")),
+                TreeNode(content: const Text("child231")),
               ],
             ),
           ],
