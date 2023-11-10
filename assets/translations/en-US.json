@@ -114,6 +114,7 @@
 	"SelectGroupForContinue": "Select a group for continue",
 	"ErrorChangeStateWithGroup": "You have to select a group",
 	"LocationChangeSuccessfull": " Location Change Succesfull",
+	"SelectaLocation": "Alan seçiniz",
 
 	"----------------DATATABLE----------": "------------DATATABLE-------------",
 	"DataTableID": "ID",

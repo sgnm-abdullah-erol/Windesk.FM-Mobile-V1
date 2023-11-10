@@ -272,7 +272,6 @@ class LeafLocationProvider extends ChangeNotifier {
       },
       (r) => {
         snackBar(context, LocaleKeys.Active, 'success'),
-
       },
     );
     _isLoading = false;

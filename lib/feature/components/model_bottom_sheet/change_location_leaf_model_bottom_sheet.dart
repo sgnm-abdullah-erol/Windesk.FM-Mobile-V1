@@ -48,12 +48,13 @@ class ChangeLocationLeafModelBottomSheet extends StatelessWidget {
                     : SingleChildScrollView(
                         child: Column(
                           children: [
-                            Text('Select a location'),
+                            Text(LocaleKeys.SelectaLocation.tr()),
                             location(value, context),
+                            value.selectedLocationName != '' ?
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text('Seçili lokasyon ${value.selectedLocationName} olarak değiştirilecektir.'),
-                            ),
+                              child: Text('Seçili lokasyon ${value.selectedLocationName} olarak değiştirilecektir.',maxLines: 2),
+                            ) : Container(),
                             CustomHalfButtons(
                               leftTitle: Text(
                                 LocaleKeys.Cancel.tr(),

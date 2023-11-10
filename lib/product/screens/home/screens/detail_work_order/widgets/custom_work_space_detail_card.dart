@@ -119,19 +119,22 @@ class _LocationInformation extends StatelessWidget {
               children: [
                 IconButton(
                   onPressed: () async {
-                    final result = await ShowModalBottomSheet().show(
-                      context,
-                      ChangeLocationLeafModelBottomSheet(
-                        rootTitle: workSpaceDetail.task?.requestedSpaces?.name ?? '',
-                        taskId: workSpaceDetail.task?.id.toString() ?? '',
-                        templatedBy: workSpaceDetail.task?.templatedBy ?? '',
-                        dependedOn: workSpaceDetail.task?.depended_on.toString() ?? '',
-                      ),
-                    );
-                    print('resultttt' + result.toString());
+                  final result =   await showModalBottomSheet(
+                isScrollControlled: true,
+                context: context,
+                builder: (context) => SizedBox(
+                  height:500,
+                  child: ChangeLocationLeafModelBottomSheet(
+                      rootTitle: workSpaceDetail.task?.requestedSpaces?.name ?? '',
+                      taskId: workSpaceDetail.task?.id.toString() ?? '',
+                      templatedBy: workSpaceDetail.task?.templatedBy ?? '',
+                      dependedOn: workSpaceDetail.task?.depended_on.toString() ?? '',
+                    ),
+                ),
+              );
                     if (result != '') {
                       workSpaceDetail.task?.requestedSpaces?.name = result ?? '';
-                      //context.router.popAndPush(DetailWorkOrderScreen(workSpaceDetail: workSpaceDetail));
+                      context.router.popAndPush(DetailWorkOrderScreen(workSpaceDetail: workSpaceDetail));
                     }
                   },
                   icon: const Icon(AppIcons.change),
