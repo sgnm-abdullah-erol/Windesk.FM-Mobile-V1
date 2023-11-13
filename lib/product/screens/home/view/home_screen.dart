@@ -66,13 +66,11 @@ class _HomeScreenState extends State<HomeScreen> {
           });
           final WorkSpaceServiceRepositoryImpl workSpaceService = Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
           FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-            //TODO MESSAGE PARSE
-
+            // TODO MESSAGE PARSE
             NotificationAlertDialog.showNotification(context, searchWorkOrderProvider, message);
             //FlutterLocalNotificationsPlugin().show(message.notification.messageId, message.notification?.title, message.notification?.body,);
           });
-
-          // TODO DUMMY THEME, CHANGE LANGUAGE BUTTON
+          
           return Consumer<ThemeProvider>(
             builder: (context, ThemeProvider themeProvider, child) {
               return Scaffold(
