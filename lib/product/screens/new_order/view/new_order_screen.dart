@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vm_fm_4/product/screens/home/screens/search_work_order/provider/search_work_order_provider.dart';
 
 import '../../../../core/constants/functions/null_check_widget.dart';
 import '../../../../core/constants/other/colors.dart';
@@ -26,13 +27,49 @@ class NewOrderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => WoCreateProvider(),
-      child: Consumer<WoCreateProvider>(
-          builder: (context, WoCreateProvider woCreateProvider, child) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => WoCreateProvider()),
+        ChangeNotifierProvider(create: (context) => SearchWorkOrderProvider()),
+      ],
+      child: Consumer2<WoCreateProvider, SearchWorkOrderProvider>(builder:
+          (context, WoCreateProvider woCreateProvider,
+              SearchWorkOrderProvider searchWorkOrderProvider, child) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (woCreateProvider.isWorkOrderCreate) {
             snackBar(context, SnackbarStrings.woCreate, 'success');
+
+            showDialog(
+              context: context,
+              builder: (dialogContext) {
+                return AlertDialog(
+                  title: Text(
+                    "Yeni İş Emri Oluşturuldu.",
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  content: Text("İş Emri Adı : " +
+                      woCreateProvider.isWorkOrderCreatedTitle.toString()),
+                  actions: [
+                    TextButton(
+                      child: Text("Tamam"),
+                      onPressed: () {
+                        //Navigator.of(context).pop();
+
+                        Navigator.pop(dialogContext);
+                      },
+                    ),
+                    TextButton(
+                      child: Text("Detayı Gör"),
+                      onPressed: () {
+                        searchWorkOrderProvider
+                            .getWorkSpaceWithSearchFromGroupWorks(dialogContext,
+                                woCreateProvider.isWorkOrderCreatedId);
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
           }
           if (woCreateProvider.createTaskError) {
             snackBar(context, SnackbarStrings.woCreateError, 'error');
