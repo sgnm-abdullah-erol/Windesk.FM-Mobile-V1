@@ -108,16 +108,25 @@ class DetailWorkOrderScreen extends StatelessWidget {
   Padding _customPageAccordionSection(BuildContext context, WorkOrderDetailProvider woDetailProvider) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 22),
-      child: CustomBaseAccordion(
-        list: [
-          _accordionSection(context, LocaleKeys.Effort.tr(), AddEffortsAccordion(provider: woDetailProvider), AppIcons.insightsRounded),
-          _accordionSection(context, LocaleKeys.Material.tr(), AddMaterialAccordion(provider: woDetailProvider), AppIcons.warehouse),
-          _accordionSection(context, LocaleKeys.RequestMaterial.tr(), RequestMaterialAccordion(provider: woDetailProvider), AppIcons.tool),
-          _accordionSection(context, LocaleKeys.Document.tr(), AddDocumantAccordion(provider: woDetailProvider), AppIcons.photoAlbum),
-          _accordionSection(context, LocaleKeys.Notes.tr(), AddNotesAccordion(provider: woDetailProvider), AppIcons.note),
-        ],
-      ),
+      child: CustomBaseAccordion(list: _filterAcordionList(context, woDetailProvider)),
     );
+  }
+
+  List<AccordionSection> _filterAcordionList(BuildContext context, WorkOrderDetailProvider woDetailProvider) {
+    return woDetailProvider.detail.task?.labels?[1] == 'MaterialRequest'
+        ? [
+            _accordionSection(context, LocaleKeys.Effort.tr(), AddEffortsAccordion(provider: woDetailProvider), AppIcons.insightsRounded),
+            _accordionSection(context, LocaleKeys.RequestMaterial.tr(), RequestMaterialAccordion(provider: woDetailProvider), AppIcons.tool),
+            _accordionSection(context, LocaleKeys.Document.tr(), AddDocumantAccordion(provider: woDetailProvider), AppIcons.photoAlbum),
+            _accordionSection(context, LocaleKeys.Notes.tr(), AddNotesAccordion(provider: woDetailProvider), AppIcons.note),
+          ]
+        : [
+            _accordionSection(context, LocaleKeys.Effort.tr(), AddEffortsAccordion(provider: woDetailProvider), AppIcons.insightsRounded),
+            _accordionSection(context, LocaleKeys.Material.tr(), AddMaterialAccordion(provider: woDetailProvider), AppIcons.warehouse),
+            _accordionSection(context, LocaleKeys.RequestMaterial.tr(), RequestMaterialAccordion(provider: woDetailProvider), AppIcons.tool),
+            _accordionSection(context, LocaleKeys.Document.tr(), AddDocumantAccordion(provider: woDetailProvider), AppIcons.photoAlbum),
+            _accordionSection(context, LocaleKeys.Notes.tr(), AddNotesAccordion(provider: woDetailProvider), AppIcons.note),
+          ];
   }
 
   AccordionSection _accordionSection(BuildContext context, String title, Widget content, IconData icon) {
