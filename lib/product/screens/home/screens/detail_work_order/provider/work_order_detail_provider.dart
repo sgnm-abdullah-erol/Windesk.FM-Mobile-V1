@@ -286,6 +286,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
       },
       (r) => {
         _isTaskStateChange = false,
+        _selectedTaskState = LocaleKeys.StateError.tr(),
       },
     );
 

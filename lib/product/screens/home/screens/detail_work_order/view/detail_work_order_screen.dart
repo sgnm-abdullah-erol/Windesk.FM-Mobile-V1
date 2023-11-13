@@ -62,7 +62,6 @@ class DetailWorkOrderScreen extends StatelessWidget {
             if (woDetailProvider.isImageAdded) {
               snackBar(context, LocaleKeys.ImageAdded.tr(), 'success');
             }
-
             if (woDetailProvider.isTaskStateChange) {
               snackBar(context, '${LocaleKeys.TaskStateChange.tr()} ${LocaleKeys.NewTask.tr()} ${woDetailProvider.selectedTaskState}', 'success');
               context.router.pop<bool>(true);

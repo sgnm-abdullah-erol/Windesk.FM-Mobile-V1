@@ -41,7 +41,7 @@ class LocaleKeys {
   static const String EnterYourNotes = 'EnterYourNotes';
   static const String EditYourNotes = 'EditYourNotes';
   static const String NoteAdded = 'NoteAdded';
-  static const String StateGoToGroup = 'StateGoToFinished';
+  static const String StateGoToGroup = 'StateGoToGroup';
   static const String StateGoToMe = 'StateGoToMe';
   static const String StateGoToPending = 'StateGoToPending';
   static const String StateGoToOur = 'StateGoToOur';

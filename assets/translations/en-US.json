@@ -29,6 +29,7 @@
 	"StateGoToPending" : "sends to pending",
 	"StateGoToOur" : "sends to our",
 	"StateError": "State Error",
+	"StateFinished": "State Finished",
 	"DeleteNote": "Delete Note",
 	"Note": "Note",
 	"Location": "Location",
