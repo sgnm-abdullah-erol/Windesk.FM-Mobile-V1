@@ -177,8 +177,6 @@ class SearchMaterialProvider extends ChangeNotifier {
       final startIndexTag = barcodeScanRes.indexOf('Number":"');
       final endIndexTag = barcodeScanRes.indexOf('"}');
       final tagBarcode = barcodeScanRes.substring(startIndexTag + 9, endIndexTag);
-      print('fbarcode' + assetBarcode + 'tbarcode' + tagBarcode);
-
       setassetNumber = assetBarcode + '-' + tagBarcode;
     }
     notifyListeners();

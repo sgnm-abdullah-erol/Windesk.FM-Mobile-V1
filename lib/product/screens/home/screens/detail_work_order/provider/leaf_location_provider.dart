@@ -36,7 +36,7 @@ class LeafLocationProvider extends ChangeNotifier {
   bool get changeLocationSucces => _changeLocationSuccess;
 
   bool _lazyLoading = true;
-  bool get lazyLoading => locationLoading;
+  bool get lazyLoading => _lazyLoading;
 
   bool _locationLeaf = true;
   bool get locationLeaf => _locationLeaf;

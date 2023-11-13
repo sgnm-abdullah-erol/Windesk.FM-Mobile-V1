@@ -50,29 +50,34 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<SearchWorkOrderProvider>(create: (_) => SearchWorkOrderProvider()),
+        ChangeNotifierProvider<SearchWorkOrderProvider>(
+            create: (_) => SearchWorkOrderProvider()),
         ChangeNotifierProvider<HomeProvider>(create: (_) => HomeProvider()),
       ],
       child: Consumer2<HomeProvider, SearchWorkOrderProvider>(
-        builder: (context, HomeProvider homeProvider, SearchWorkOrderProvider searchWorkOrderProvider, child) {
+        builder: (context, HomeProvider homeProvider,
+            SearchWorkOrderProvider searchWorkOrderProvider, child) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             if (homeProvider.logoutError) {
               snackBar(context, LocaleKeys.LogoutError.tr(), 'error');
             }
             if (homeProvider.isUserLogout) {
               snackBar(context, LocaleKeys.LogoutSuccess.tr(), 'success');
-              context.router.pushAndPopUntil(LoginScreen(userName: homeProvider.userName), predicate: (_) => false);
+              context.router.pushAndPopUntil(
+                  LoginScreen(userName: homeProvider.userName),
+                  predicate: (_) => false);
             }
           });
-          final WorkSpaceServiceRepositoryImpl workSpaceService = Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
+          final WorkSpaceServiceRepositoryImpl workSpaceService =
+              Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
           FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
             //TODO MESSAGE PARSE
 
-            NotificationAlertDialog.showNotification(context, searchWorkOrderProvider, message);
+            NotificationAlertDialog.showNotification(
+                context, searchWorkOrderProvider, message);
             //FlutterLocalNotificationsPlugin().show(message.notification.messageId, message.notification?.title, message.notification?.body,);
           });
 
-          // TODO DUMMY THEME, CHANGE LANGUAGE BUTTON
           return Consumer<ThemeProvider>(
             builder: (context, ThemeProvider themeProvider, child) {
               return Scaffold(
@@ -81,7 +86,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 body: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[headerTextWidget(context, themeProvider), homePageIcons(context)],
+                    children: <Widget>[
+                      headerTextWidget(context, themeProvider),
+                      homePageIcons(context)
+                    ],
                   ),
                 ),
               );
@@ -158,12 +166,20 @@ class _HomeScreenState extends State<HomeScreen> {
     return Expanded(
       child: Column(
         children: [
-          Text(LocaleKeys.IfmName, style: context.titleSmall.copyWith(letterSpacing: 1.5)).tr(),
-          Text(LocaleKeys.AppTitle, style: context.titleMedium.copyWith(letterSpacing: 1.5)).tr(),
+          Text(LocaleKeys.IfmName,
+                  style: context.titleSmall.copyWith(letterSpacing: 1.5))
+              .tr(),
+          Text(LocaleKeys.AppTitle,
+                  style: context.titleMedium.copyWith(letterSpacing: 1.5))
+              .tr(),
           Row(
             children: [
               IconButton(
-                icon: Icon(Icons.settings, size: 35, color: context.theme ? APPColors.Main.white : APPColors.Main.black),
+                icon: Icon(Icons.settings,
+                    size: 35,
+                    color: context.theme
+                        ? APPColors.Main.white
+                        : APPColors.Main.black),
                 tooltip: LocaleKeys.HintLogout.tr(),
                 onPressed: () => ShowModalBottomSheet().show(
                     this.context,
@@ -182,7 +198,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Switch(
                                   value: themeProvider.isDark,
                                   onChanged: (value) {
-                                    themeProvider.setTheme(!themeProvider.isDark);
+                                    themeProvider
+                                        .setTheme(!themeProvider.isDark);
                                   },
                                 ),
                               ],
@@ -193,12 +210,16 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 const Icon(Icons.language),
                                 Switch(
-                                  value: context.locale == const Locale('en', 'US'),
+                                  value: context.locale ==
+                                      const Locale('en', 'US'),
                                   onChanged: (value) {
-                                    if (context.locale == const Locale('en', 'US')) {
-                                      context.setLocale(const Locale('tr', 'TR'));
+                                    if (context.locale ==
+                                        const Locale('en', 'US')) {
+                                      context
+                                          .setLocale(const Locale('tr', 'TR'));
                                     } else {
-                                      context.setLocale(const Locale('en', 'US'));
+                                      context
+                                          .setLocale(const Locale('en', 'US'));
                                     }
                                   },
                                 ),
@@ -242,10 +263,16 @@ class _HomeScreenState extends State<HomeScreen> {
   //             )
   AppBar appBarWidget(BuildContext context, HomeProvider provider) {
     return AppBar(
-      title: Image.asset(AssetPaths.windesk, width: context.width / 1.2, height: context.width / 1.2, fit: BoxFit.cover),
+      title: Image.asset(AssetPaths.windesk,
+          width: context.width / 1.2,
+          height: context.width / 1.2,
+          fit: BoxFit.cover),
       actions: <Widget>[
         IconButton(
-          icon: Icon(AppIcons.powerSettingsOff, size: 35, color: context.theme ? APPColors.Main.white : APPColors.Main.black),
+          icon: Icon(AppIcons.powerSettingsOff,
+              size: 35,
+              color:
+                  context.theme ? APPColors.Main.white : APPColors.Main.black),
           tooltip: LocaleKeys.HintLogout.tr(),
           onPressed: () => provider.logOut(context),
         ),
@@ -266,17 +293,24 @@ class _HomeScreenState extends State<HomeScreen> {
               position: badges.BadgePosition.topEnd(top: 10, end: 10),
               badgeContent: Text(
                 context.read<HomeProvider>().totalAnnoucementCount.toString(),
-                style: context.labelMedium.copyWith(color: APPColors.Main.white),
+                style:
+                    context.labelMedium.copyWith(color: APPColors.Main.white),
               ),
               onTap: () {},
               child: IconButton(
                 icon: Icon(
                   AppIcons.notifications,
                   size: 35,
-                  color: context.theme ? APPColors.Main.white : APPColors.Main.black,
+                  color: context.theme
+                      ? APPColors.Main.white
+                      : APPColors.Main.black,
                 ),
                 onPressed: () {
-                  context.read<HomeProvider>().totalAnnoucementCount.toString() != 0
+                  context
+                              .read<HomeProvider>()
+                              .totalAnnoucementCount
+                              .toString() !=
+                          0
                       ? showModalBottomSheet<void>(
                           isScrollControlled: true,
                           backgroundColor: Colors.transparent,

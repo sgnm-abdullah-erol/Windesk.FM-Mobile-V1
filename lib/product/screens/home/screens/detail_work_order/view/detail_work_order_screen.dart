@@ -88,8 +88,6 @@ class DetailWorkOrderScreen extends StatelessWidget {
                           children: [
                             CustomWorkSpaceDetailCard(workSpaceDetail: woDetailProvider.detail, workOrderDetailProvider: woDetailProvider),
                             const SizedBox(height: 10),
-                            //deneme için eklendi. Servis sorunundan sonra düzeltilecek context.read<GlobalProvider>().userId
-                            //TODO
                             (woDetailProvider.detail.task?.userId ?? '') != context.read<GlobalProvider>().userId
                                 ? _TakeItOnMe(provider: woDetailProvider)
                                 : _StateChangeDropDownButton(provider: woDetailProvider),
@@ -174,7 +172,8 @@ class _StateChangeDropDownButton extends StatelessWidget {
                   context,
                   "${"${LocaleKeys.ProccessEntryFirstALertDialog.tr()}'" + val}'${LocaleKeys.ProccessEntrySecondALertDialog.tr()}",
                   LocaleKeys.ChangeState.tr(),
-                ) .then((value) {
+                )
+                  .then((value) {
                   // check response value
                   if (value == true) {
                     provider.changeState(val);
