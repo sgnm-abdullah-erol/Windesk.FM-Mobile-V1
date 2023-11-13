@@ -14,8 +14,7 @@ import '../../../../feature/models/home_page_models/asset_image_model.dart';
 import '../../../../feature/models/home_page_models/asset_list_model.dart';
 
 class SearchMaterialProvider extends ChangeNotifier {
-  final WorkSpaceServiceRepositoryImpl workSpaceService =
-      Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
+  final WorkSpaceServiceRepositoryImpl workSpaceService = Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -31,6 +30,9 @@ class SearchMaterialProvider extends ChangeNotifier {
 
   bool _documentExist = false;
   bool get documentExist => _documentExist;
+
+  String _qrType = '';
+  String get qrType => _qrType;
 
   AssetListModel? _assetDetailList;
   AssetListModel? get assetDetailList => _assetDetailList;
@@ -66,6 +68,10 @@ class SearchMaterialProvider extends ChangeNotifier {
     _spaceText.text = spaceText;
   }
 
+  void setQrType(String qrType) {
+    _qrType = qrType;
+  }
+
   showWidget(data) {
     return SizedBox(
       child: TreeView(nodes: [
@@ -94,8 +100,7 @@ class SearchMaterialProvider extends ChangeNotifier {
 
     _isLoading = true;
     notifyListeners();
-    final result =
-        await workSpaceService.getSpaceSearch(spaceText.text, userToken);
+    final result = await workSpaceService.getSpaceSearch(spaceText.text, userToken);
 
     result.fold((l) => {_spaceData = l}, (r) {
       snackBar(context, LocaleKeys.spaceSearchError, 'error');
@@ -114,10 +119,15 @@ class SearchMaterialProvider extends ChangeNotifier {
       _documentExist = false;
       String userToken = await SharedManager().getString(SharedEnum.userToken);
 
+      final endIndexAsset = assetNumber.text.indexOf('-');
+      final String  identifierBarcode= assetNumber.text.substring(0, endIndexAsset);
+      final String  tagNumberBarcode= assetNumber.text.substring(endIndexAsset + 1);
+
       _isLoading = true;
       notifyListeners();
-      final result = await workSpaceService.getAssetWithSearch(
-          assetNumber.text, userToken);
+      final result = _qrType == '' || _qrType == 'Etiket Numarası'
+          ? await workSpaceService.getAssetWithSearchTagNumber(tagNumberBarcode, userToken)
+          : await workSpaceService.getAssetWithSearchIdentifier(identifierBarcode, userToken);
 
       result.fold(
           (l) => {
@@ -125,14 +135,12 @@ class SearchMaterialProvider extends ChangeNotifier {
                 _isSuccess = true,
                 if (l.images!.isNotEmpty)
                   {
-                    for (int i = 0; i < l.images!.length; i++)
-                      {_imageModel.add(l.images![i])},
+                    for (int i = 0; i < l.images!.length; i++) {_imageModel.add(l.images![i])},
                     _imageExist = true,
                   },
                 if (l.documents!.isNotEmpty)
                   {
-                    for (int i = 0; i < l.documents!.length; i++)
-                      {_documentModel.add(l.documents![i])},
+                    for (int i = 0; i < l.documents!.length; i++) {_documentModel.add(l.documents![i])},
                     _documentExist = true,
                   },
               }, (r) {
@@ -157,16 +165,21 @@ class SearchMaterialProvider extends ChangeNotifier {
     dynamic barcodeScanRes;
 
     try {
-      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-          '#ff6666', 'İptal', true, ScanMode.BARCODE);
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode('#ff6666', 'İptal', true, ScanMode.BARCODE);
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
     }
     if (barcodeScanRes != '-1') {
-      // final startIndex = barcodeScanRes.indexOf(':');
-      // final endIndex = barcodeScanRes.indexOf(',');
-      // final finalBarcode = barcodeScanRes.substring(startIndex + 1, endIndex);
-      setassetNumber = barcodeScanRes;
+      final startIndexAsset = barcodeScanRes.indexOf(':"');
+      final endIndexAsset = barcodeScanRes.indexOf('",');
+      final assetBarcode = barcodeScanRes.substring(startIndexAsset + 2, endIndexAsset);
+
+      final startIndexTag = barcodeScanRes.indexOf('Number":"');
+      final endIndexTag = barcodeScanRes.indexOf('"}');
+      final tagBarcode = barcodeScanRes.substring(startIndexTag + 9, endIndexTag);
+      print('fbarcode' + assetBarcode + 'tbarcode' + tagBarcode);
+
+      setassetNumber = assetBarcode + '-' + tagBarcode;
     }
     notifyListeners();
   }

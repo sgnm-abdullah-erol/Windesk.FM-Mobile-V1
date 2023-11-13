@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vm_fm_4/feature/components/input_fields/dropdown_input_fields.dart';
 import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
 
 import '../../../../../../../feature/components/appbar/custom_main_appbar.dart';
@@ -28,8 +29,7 @@ class _AssetSearchScreen extends State<AssetSearchScreen> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => SearchMaterialProvider(),
-      child: Consumer<SearchMaterialProvider>(
-          builder: (context, SearchMaterialProvider searchProvider, child) {
+      child: Consumer<SearchMaterialProvider>(builder: (context, SearchMaterialProvider searchProvider, child) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (searchProvider.isSuccess) {
             snackBar(context, LocaleKeys.assetSearchSuccess, 'success');
@@ -49,10 +49,7 @@ class _AssetSearchScreen extends State<AssetSearchScreen> {
         });
         return WillPopScope(
           child: Scaffold(
-            appBar: CustomMainAppbar(
-                returnBack: true,
-                title: const Text(LocaleKeys.MaterialSearch).tr(),
-                elevation: 3),
+            appBar: CustomMainAppbar(returnBack: true, title: const Text(LocaleKeys.MaterialSearch).tr(), elevation: 3),
             body: searchProvider.isLoading
                 ? const CustomLoadingIndicator()
                 : Center(
@@ -65,16 +62,19 @@ class _AssetSearchScreen extends State<AssetSearchScreen> {
                               textController: searchProvider.assetNumber,
                               labelText: LocaleKeys.MaterialSearch,
                               actionIcon: AppIcons.qr,
-                              actionFunction:
-                                  searchProvider.scanBarcodeAndQrForAsset),
+                              actionFunction: searchProvider.scanBarcodeAndQrForAsset),
+                          DropDownInputFields(
+                              labelText: 'Arama Türü',
+                              onChangedFunction: (String value) {
+                                searchProvider.setQrType(value);
+                              },
+                              rightIcon: AppIcons.arrowDown,
+                              dropDownArray: ['Etiket Numarası', 'Varlık Tanımlayıcı']),
                           CustomHalfButtons(
-                              leftTitle: Text(LocaleKeys.Clear.tr(),
-                                  style: context.bodyMedium),
-                              rightTitle: Text(LocaleKeys.Search.tr(),
-                                  style: context.bodyMedium),
+                              leftTitle: Text(LocaleKeys.Clear.tr(), style: context.bodyMedium),
+                              rightTitle: Text(LocaleKeys.Search.tr(), style: context.bodyMedium),
                               leftOnPressed: searchProvider.clearInput,
-                              rightOnPressed:
-                                  searchProvider.getAssetWithSearch),
+                              rightOnPressed: searchProvider.getAssetWithSearch),
                         ],
                       ),
                     ),

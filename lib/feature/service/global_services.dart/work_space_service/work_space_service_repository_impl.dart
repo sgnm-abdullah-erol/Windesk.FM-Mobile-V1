@@ -205,11 +205,36 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   }
 
   @override
-  Future<Either<AssetListModel, CustomServiceException>> getAssetWithSearch(
+  Future<Either<AssetListModel, CustomServiceException>> getAssetWithSearchTagNumber(
       String assetCode, String token) async {
     AssetListModel assetListModel;
     String url =
         '${ServiceTools.url.asset_url}/component/searchByColumn/?page=1&limit=10&orderBy=ASC&orderByColumn=&searchColumn=tagNumber&searchString=$assetCode&searchType=CONTAINS';
+    try {
+      final response = await super.dio.get(
+            url,
+            options: Options(
+              headers: {'authorization': 'Bearer $token'},
+            ),
+          );
+      final data = response.data['children'][0];
+      assetListModel = AssetListModel.fromJson(data);
+
+      return Left(assetListModel);
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.workOrderWorkloadError,
+          statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<AssetListModel, CustomServiceException>> getAssetWithSearchIdentifier(
+      String assetCode, String token) async {
+    AssetListModel assetListModel;
+    String url =
+        '${ServiceTools.url.asset_url}/component/searchByColumn/?page=1&limit=10&orderBy=ASC&orderByColumn=&searchColumn=assetIdentifier&searchString=$assetCode&searchType=CONTAINS';
     try {
       final response = await super.dio.get(
             url,
