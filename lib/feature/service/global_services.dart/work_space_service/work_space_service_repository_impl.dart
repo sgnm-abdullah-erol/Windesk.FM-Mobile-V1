@@ -177,7 +177,8 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   }
 
   @override
-  Future<Either<AssetListModel, CustomServiceException>> getAssetWithSearch(String assetCode, String token) async {
+  Future<Either<AssetListModel, CustomServiceException>> getAssetWithSearchTagNumber(
+      String assetCode, String token) async {
     AssetListModel assetListModel;
     String url =
         '${ServiceTools.url.asset_url}/component/searchByColumn/?page=1&limit=10&orderBy=ASC&orderByColumn=&searchColumn=tagNumber&searchString=$assetCode&searchType=CONTAINS';
@@ -199,7 +200,34 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   }
 
   @override
-  Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getWorkSpaceDetailsByRequestType(String requestId, int page, String token) async {
+  Future<Either<AssetListModel, CustomServiceException>> getAssetWithSearchIdentifier(
+      String assetCode, String token) async {
+    AssetListModel assetListModel;
+    String url =
+        '${ServiceTools.url.asset_url}/component/searchByColumn/?page=1&limit=10&orderBy=ASC&orderByColumn=&searchColumn=assetIdentifier&searchString=$assetCode&searchType=CONTAINS';
+    try {
+      final response = await super.dio.get(
+            url,
+            options: Options(
+              headers: {'authorization': 'Bearer $token'},
+            ),
+          );
+      final data = response.data['children'][0];
+      assetListModel = AssetListModel.fromJson(data);
+
+      return Left(assetListModel);
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.workOrderWorkloadError,
+          statusCode: '500'));
+    }
+  }
+
+  @override
+  Future<Either<List<WorkSpaceDetail>, CustomServiceException>>
+      getWorkSpaceDetailsByRequestType(
+          String requestId, int page, String token) async {
     List<WorkSpaceDetail> workSpaceDetailList = [];
     String url =
         '${ServiceTools.url.workorder_url}/task/mobile/getTasksByRequestType/swagger/$requestId?page=$page&limit=999&orderBy=DESC&orderByColumn=updateAt&withSpare=true';

@@ -13,7 +13,8 @@ import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_type_model.dart
 import 'package:vm_fm_4/product/screens/new_order/service/wo_create_service_repository_impl.dart';
 
 class WoCreateProvider extends ChangeNotifier {
-  final WoCreateServiceRepositoryImpl _woCreateServiceRepository = Injection.getIt.get<WoCreateServiceRepositoryImpl>();
+  final WoCreateServiceRepositoryImpl _woCreateServiceRepository =
+      Injection.getIt.get<WoCreateServiceRepositoryImpl>();
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -35,6 +36,12 @@ class WoCreateProvider extends ChangeNotifier {
 
   bool _isWorkOrderCreate = false;
   bool get isWorkOrderCreate => _isWorkOrderCreate;
+
+  String _isWorkOrderCreatedTitle = '';
+  String get isWorkOrderCreatedTitle => _isWorkOrderCreatedTitle;
+
+  String _isWorkOrderCreatedId = '';
+  String get isWorkOrderCreatedId => _isWorkOrderCreatedId;
 
   String _summary = '';
   String get summary => _summary;
@@ -188,7 +195,8 @@ class WoCreateProvider extends ChangeNotifier {
   List<String> get getComponentsChildren => _getComponentsChildren;
 
   final List<String> _getRequestedTypesChildrenTree1 = [];
-  List<String> get getRequestedTypesChildrenTree1 => _getRequestedTypesChildrenTree1;
+  List<String> get getRequestedTypesChildrenTree1 =>
+      _getRequestedTypesChildrenTree1;
 
   void setSummary(String newValue) {
     _summary = newValue;
@@ -290,7 +298,8 @@ class WoCreateProvider extends ChangeNotifier {
   void setSpace(String newValue) {
     _space = newValue;
     for (var i = 0; i < (_woSpaceList.children?.length ?? 0); i++) {
-      if ('${_woSpaceList.children?[i].code}-${_woSpaceList.children?[i].name}' == newValue) {
+      if ('${_woSpaceList.children?[i].code}-${_woSpaceList.children?[i].name}' ==
+          newValue) {
         //_spaceKey = _woSpaceList.children?[i].key ?? '';
         _lazyType = _woSpaceList.children?[i].labels?[0] ?? '';
         _requestedId = _woSpaceList.children?[i].id.toString() ?? '';
@@ -308,13 +317,15 @@ class WoCreateProvider extends ChangeNotifier {
     notifyListeners();
     for (var i = 0; i < (_getRequestedTypes.length); i++) {
       if (_getRequestedTypes[i].name == newValue) {
-        isChildrenExist = _getRequestedTypes[i].children!.isNotEmpty ? true : false;
+        isChildrenExist =
+            _getRequestedTypes[i].children!.isNotEmpty ? true : false;
         _requestTypeKey = _getRequestedTypes[i].code.toString();
         _requestedTypeTree1 = !isChildrenExist;
         notifyListeners();
         if (isChildrenExist) {
           for (var b = 0; b < (_getRequestedTypes[i].children!.length); b++) {
-            _getRequestedTypesChildrenTree1.add(_getRequestedTypes[i].children![b].name ?? '');
+            _getRequestedTypesChildrenTree1
+                .add(_getRequestedTypes[i].children![b].name ?? '');
           }
         }
       }
@@ -330,7 +341,8 @@ class WoCreateProvider extends ChangeNotifier {
       if (_getRequestedTypes[i].name == _requestType) {
         for (var b = 0; b < (_getRequestedTypes[i].children!.length); b++) {
           if (_getRequestedTypes[i].children![b].name == _requestType1) {
-            _requestTypeKey = _getRequestedTypes[i].children![b].code.toString();
+            _requestTypeKey =
+                _getRequestedTypes[i].children![b].code.toString();
             notifyListeners();
           }
           //_requestTypeKey.add(_getRequestedTypes[i].children![b].name ?? '');
@@ -353,7 +365,8 @@ class WoCreateProvider extends ChangeNotifier {
         _woLocationList = l,
         for (var i = 0; i < (_woLocationList.children?.length ?? 0); i++)
           {
-            _woLocationListChildren.add(_woLocationList.children?[i].name ?? ''),
+            _woLocationListChildren
+                .add(_woLocationList.children?[i].name ?? ''),
             notifyListeners(),
           }
       },
@@ -365,7 +378,8 @@ class WoCreateProvider extends ChangeNotifier {
 
   void lazyList(String key, String lazyType) async {
     final token = await SharedManager().getString(SharedEnum.userToken);
-    final response = await _woCreateServiceRepository.getLazyLoading(token, key);
+    final response =
+        await _woCreateServiceRepository.getLazyLoading(token, key);
     _lazyLoading = false;
     notifyListeners();
 
@@ -399,7 +413,8 @@ class WoCreateProvider extends ChangeNotifier {
           _woSpaceList = l,
           for (var i = 0; i < (_woSpaceList.children?.length ?? 0); i++)
             {
-              _woSpaceListChildren.add('${_woSpaceList.children?[i].code}-${_woSpaceList.children?[i].name}'),
+              _woSpaceListChildren.add(
+                  '${_woSpaceList.children?[i].code}-${_woSpaceList.children?[i].name}'),
             }
         },
         (r) => {},
@@ -524,16 +539,30 @@ class WoCreateProvider extends ChangeNotifier {
   void createTask() async {
     final token = await SharedManager().getString(SharedEnum.userToken);
     _isLoading = true;
+    _isWorkOrderCreatedId = '';
+    _isWorkOrderCreatedTitle = '';
     notifyListeners();
 
     final String appointmendData = '$_date $_hour:00';
 
     final response = await _woCreateServiceRepository.createTask(
-        token, summary, _requestTypeKey, requestedById, description, appointmendData, typesId, requestedId, requestedLabel, woCategory, componentKey);
+        token,
+        summary,
+        _requestTypeKey,
+        requestedById,
+        description,
+        appointmendData,
+        typesId,
+        requestedId,
+        requestedLabel,
+        woCategory,
+        componentKey);
 
     response.fold(
       (l) => {
         _isWorkOrderCreate = true,
+        _isWorkOrderCreatedTitle = l['properties']['name'].toString(),
+        _isWorkOrderCreatedId = l['properties']['id'].toString(),
         notifyListeners(),
       },
       (r) => {

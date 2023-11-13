@@ -93,7 +93,9 @@ abstract class WorkSpaceServiceRepository {
 
   Future<Either<List<WorkSpaceDocuments>, CustomServiceException>> getWorkSpaceDocuments(String token, String taskId);
 
-  Future<Either<AssetListModel, CustomServiceException>> getAssetWithSearch(String assetCode, String token);
+  Future<Either<AssetListModel, CustomServiceException>> getAssetWithSearchTagNumber(String assetCode, String token);
+
+  Future<Either<AssetListModel, CustomServiceException>> getAssetWithSearchIdentifier(String assetCode, String token);
 
   Future<bool> deleteNodeFromTask(String userToken, String taskId, String labelId, TaskNodeEnums labelType);
 

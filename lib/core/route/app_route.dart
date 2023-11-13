@@ -58,7 +58,22 @@ class AppRouter extends $AppRouter {
                     path: 'assetDetailScreen', page: AssetDetailScreen.page),
               ],
             ),
-            AutoRoute(path: 'newOrderScreen', page: NewOrderScreen.page),
+            AutoRoute(
+                path: 'emptyNewOrderScreen',
+                page: EmptyRouter3.page,
+                children: [
+                  RedirectRoute(path: '', redirectTo: 'newOrderScreen'),
+                  AutoRoute(
+                      path: 'newOrderScreen',
+                      page: NewOrderScreen.page,
+                      initial: true),
+                  AutoRoute(
+                      path: 'searchWorkOrderScreen',
+                      page: SearchWorkOrderScreen.page),
+                  AutoRoute(
+                      path: 'detailWorkOrderScreen',
+                      page: DetailWorkOrderScreen.page),
+                ]),
             AutoRoute(path: 'testScreen', page: TestScreen.page),
           ],
         ),
