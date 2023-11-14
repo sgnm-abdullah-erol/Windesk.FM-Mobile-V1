@@ -47,8 +47,8 @@ class NewOrderScreen extends StatelessWidget {
                     "Yeni İş Emri Oluşturuldu.",
                     style: TextStyle(fontSize: 14),
                   ),
-                  content: Text("İş Emri Adı : " +
-                      woCreateProvider.isWorkOrderCreatedTitle.toString()),
+                  content: Text("İş Emri NO : " +
+                      woCreateProvider.isWorkOrderCreatedId.toString()),
                   actions: [
                     TextButton(
                       child: Text("Tamam"),
