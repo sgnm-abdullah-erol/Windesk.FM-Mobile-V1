@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
+import 'package:vm_fm_4/feature/components/alert_dialog/work_order_reject_task_dialog.dart';
 
 import '../../../core/constants/other/colors.dart';
 import '../../../core/constants/style/border_radius.dart';
@@ -15,7 +16,6 @@ import '../../extensions/context_extension.dart';
 import '../../extensions/date_string_extension.dart';
 import '../../models/work_space/work_space_appendings.dart';
 import '../alert_dialog/wo_wait_accept_modal_alert.dart';
-import '../alert_dialog/wo_wait_reject_modal_alert.dart';
 import '../buttons/custom_half_buttons.dart';
 import '../snackBar/snackbar.dart';
 
@@ -24,6 +24,8 @@ class CustomPendingCardUndetail extends StatelessWidget {
 
   final WorkOrderListProvider provider;
   final WorkSpacePendiks pendiks;
+
+  // empty for now
   final Function onTap;
 
   final double _elevation = 4;
@@ -39,7 +41,6 @@ class CustomPendingCardUndetail extends StatelessWidget {
           child: Consumer<WorkOrderPendiksProvider>(
             builder: (context, value, child) {
               SchedulerBinding.instance.addPostFrameCallback(
-                
                 (timeStamp) {
                   if (value.isTaskStateChange) {
                     snackBar(context, '${LocaleKeys.TaskStateChange.tr()} ${LocaleKeys.NewTask.tr()} ${value.selectedTaskState}', 'success');
@@ -54,15 +55,17 @@ class CustomPendingCardUndetail extends StatelessWidget {
                   }
                 },
               );
-              return Card(
-                shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.mediumBorderRadius),
-                elevation: _elevation,
-                child: Container(
-                  width: context.width / 1.2,
-                  decoration: WoListCardDecoration(),
-                  child: _Content(pendiks, value),
-                ),
-              );
+              return value.isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : Card(
+                      shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.mediumBorderRadius),
+                      elevation: _elevation,
+                      child: Container(
+                        width: context.width / 1.2,
+                        decoration: WoListCardDecoration(),
+                        child: _Content(pendiks, value, provider),
+                      ),
+                    );
             },
           ),
         ),
@@ -72,14 +75,14 @@ class CustomPendingCardUndetail extends StatelessWidget {
 }
 
 class _Content extends StatelessWidget {
-  const _Content(this.pendiks, this.provider);
+  const _Content(this.pendiks, this.provider, this.mainProvider);
   final WorkSpacePendiks pendiks;
   final WorkOrderPendiksProvider provider;
+  final WorkOrderListProvider mainProvider;
 
   @override
   Widget build(BuildContext context) {
-    provider.isFetchGroupIds ?
-    provider.getStateUserGroups(pendiks.task?.id.toString() ?? '', pendiks.workspace?.id.toString() ?? '') : null;
+    provider.isFetchGroupIds ? provider.getStateUserGroups(pendiks.task?.id.toString() ?? '', pendiks.workspace?.id.toString() ?? '') : null;
 
     return Padding(
       padding: const EdgeInsets.only(top: 8, left: 12, right: 8, bottom: 8),
@@ -105,6 +108,7 @@ class _Content extends StatelessWidget {
             nextStatesLabel: LocaleKeys.HintNextStates,
             approveWorkOrder: LocaleKeys.ApproveWorkOrder,
             provider: provider,
+            mainProvider: mainProvider,
           )
         ],
       ),
@@ -177,12 +181,13 @@ class _ActionButtons extends StatelessWidget {
     required String nextStatesLabel,
     required String approveWorkOrder,
     required this.provider,
-  })  : _nextStatesLabel = nextStatesLabel,
-        _approveWorkOrder = approveWorkOrder;
+    required this.mainProvider,
+  }) : _approveWorkOrder = approveWorkOrder;
 
   final WorkSpacePendiks pendiks;
   final WorkOrderPendiksProvider provider;
-  final String _nextStatesLabel;
+  final WorkOrderListProvider mainProvider;
+  // final String _nextStatesLabel;
   final String _approveWorkOrder;
 
   @override
@@ -191,7 +196,13 @@ class _ActionButtons extends StatelessWidget {
       child: CustomHalfButtons(
         leftTitle: const Text(LocaleKeys.Cancel).tr(),
         rightTitle: const Text(LocaleKeys.Approve).tr(),
-        leftOnPressed: () => _rejectButton(context),
+        leftOnPressed: () async {
+          final response = await WorkOrderRejectTaskDialog.workOrderRejectStatus(
+              context, pendiks.workspace?.id.toString() ?? '', pendiks.task?.id.toString() ?? '');
+          if (response == true) {
+            mainProvider.getMyPendikWorkOrders();
+          }
+        },
         rightOnPressed: () => _approveButton(context),
       ),
     );
@@ -209,23 +220,23 @@ class _ActionButtons extends StatelessWidget {
     });
   }
 
-  void _rejectButton(BuildContext context) async {
-    List<String> pendikNextStateLabels = [];
-    for (var i = 0; i < (provider.workSpaceStateGroups?.rejectStates?.length ?? 0); i++) {
-      pendikNextStateLabels.add(provider.workSpaceStateGroups?.rejectStates?[i].name ?? '');
-    }
-    WoWaitRejectModalAlert()
-        .showAlertDialog(context, 'textData', _nextStatesLabel, pendikNextStateLabels, provider.onChangedSelectedTask)
-        .then((value) {
-      if (value != null) {
-        if (value == true) {
-          for (var i = 0; i < (provider.workSpaceStateGroups?.rejectStates?.length ?? 0); i++) {
-            if (provider.workSpaceStateGroups?.rejectStates?[i].name == provider.selectedTaskState) {
-              provider.changeState(pendiks.task?.id.toString() ?? '', provider.workSpaceStateGroups?.rejectStates?[i].id.toString() ?? '', true);
-            }
-          }
-        }
-      }
-    });
-  }
+  // void _rejectButton(BuildContext context) async {
+  //   List<String> pendikNextStateLabels = [];
+  //   for (var i = 0; i < (provider.workSpaceStateGroups?.rejectStates?.length ?? 0); i++) {
+  //     pendikNextStateLabels.add(provider.workSpaceStateGroups?.rejectStates?[i].name ?? '');
+  //   }
+  //   WoWaitRejectModalAlert().showAlertDialog(context, 'textData', _nextStatesLabel, pendikNextStateLabels, provider.onChangedSelectedTask).then(
+  //     (value) {
+  //       if (value != null) {
+  //         if (value == true) {
+  //           for (var i = 0; i < (provider.workSpaceStateGroups?.rejectStates?.length ?? 0); i++) {
+  //             if (provider.workSpaceStateGroups?.rejectStates?[i].name == provider.selectedTaskState) {
+  //               provider.changeState(pendiks.task?.id.toString() ?? '', provider.workSpaceStateGroups?.rejectStates?[i].id.toString() ?? '', true);
+  //             }
+  //           }
+  //         }
+  //       }
+  //     },
+  //   );
+  // }
 }

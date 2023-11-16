@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:auto_route/auto_route.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
@@ -32,9 +34,8 @@ class NewOrderScreen extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => WoCreateProvider()),
         ChangeNotifierProvider(create: (context) => SearchWorkOrderProvider()),
       ],
-      child: Consumer2<WoCreateProvider, SearchWorkOrderProvider>(builder:
-          (context, WoCreateProvider woCreateProvider,
-              SearchWorkOrderProvider searchWorkOrderProvider, child) {
+      child: Consumer2<WoCreateProvider, SearchWorkOrderProvider>(
+          builder: (context, WoCreateProvider woCreateProvider, SearchWorkOrderProvider searchWorkOrderProvider, child) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (woCreateProvider.isWorkOrderCreate) {
             snackBar(context, SnackbarStrings.woCreate, 'success');
@@ -43,15 +44,14 @@ class NewOrderScreen extends StatelessWidget {
               context: context,
               builder: (dialogContext) {
                 return AlertDialog(
-                  title: Text(
+                  title: const Text(
                     "Yeni İş Emri Oluşturuldu.",
                     style: TextStyle(fontSize: 14),
                   ),
-                  content: Text("İş Emri Adı : " +
-                      woCreateProvider.isWorkOrderCreatedTitle.toString()),
+                  content: Text("İş Emri Adı : ${woCreateProvider.isWorkOrderCreatedTitle}"),
                   actions: [
                     TextButton(
-                      child: Text("Tamam"),
+                      child: const Text("Tamam"),
                       onPressed: () {
                         //Navigator.of(context).pop();
 
@@ -59,11 +59,9 @@ class NewOrderScreen extends StatelessWidget {
                       },
                     ),
                     TextButton(
-                      child: Text("Detayı Gör"),
+                      child: const Text("Detayı Gör"),
                       onPressed: () {
-                        searchWorkOrderProvider
-                            .getWorkSpaceWithSearchFromGroupWorks(dialogContext,
-                                woCreateProvider.isWorkOrderCreatedId);
+                        searchWorkOrderProvider.getWorkSpaceWithSearchFromGroupWorks(dialogContext, woCreateProvider.isWorkOrderCreatedId);
                       },
                     ),
                   ],
@@ -77,28 +75,17 @@ class NewOrderScreen extends StatelessWidget {
         });
         //woCreateProvider.isWorkOrderCreate ? snackBar(context, SnackbarStrings.woCreate, 'success') : null;
         //woCreateProvider.createTaskError ? snackBar(context, SnackbarStrings.woCreateError, 'error') : null;
-        woCreateProvider.locationLoading
-            ? woCreateProvider.getLocation()
-            : null;
-        woCreateProvider.requestedLoading
-            ? woCreateProvider.getRequestedByPro()
-            : null;
+        woCreateProvider.locationLoading ? woCreateProvider.getLocation() : null;
+        woCreateProvider.requestedLoading ? woCreateProvider.getRequestedByPro() : null;
         woCreateProvider.typeLoading ? woCreateProvider.getType() : null;
-        woCreateProvider.requestedTypeLoading
-            ? woCreateProvider.getRequestedType()
-            : null;
-        woCreateProvider.categoryLoading
-            ? woCreateProvider.getCategory()
-            : null;
-        woCreateProvider.componentLoading
-            ? woCreateProvider.getComponent()
-            : null;
+        woCreateProvider.requestedTypeLoading ? woCreateProvider.getRequestedType() : null;
+        woCreateProvider.categoryLoading ? woCreateProvider.getCategory() : null;
+        woCreateProvider.componentLoading ? woCreateProvider.getComponent() : null;
         return woCreateProvider.isLoading
             ? const CustomLoadingIndicator()
             : WillPopScope(
                 child: Scaffold(
-                  appBar: const CustomMainAppbar(
-                      title: Text(LocaleKeys.newWorkOrder)),
+                  appBar: const CustomMainAppbar(title: Text(LocaleKeys.newWorkOrder)),
                   body: SingleChildScrollView(
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
@@ -119,8 +106,7 @@ class NewOrderScreen extends StatelessWidget {
                               widget3: DropdownSearch<String>(
                                 items: woCreateProvider.getComponentsChildren,
                                 onChanged: (value) {
-                                  woCreateProvider
-                                      .setComponent(value.toString());
+                                  woCreateProvider.setComponent(value.toString());
                                 },
                                 selectedItem: 'Bileşen',
                                 popupProps: const PopupProps.menu(
@@ -138,8 +124,7 @@ class NewOrderScreen extends StatelessWidget {
                                   woCreateProvider.setRequestedBy(newValue);
                                 },
                                 rightIcon: Icons.arrow_drop_down_rounded,
-                                dropDownArray:
-                                    woCreateProvider.getRequestedByChildren,
+                                dropDownArray: woCreateProvider.getRequestedByChildren,
                               ),
                               widget2: DropDownInputFields(
                                 labelText: 'Tip',
@@ -147,8 +132,7 @@ class NewOrderScreen extends StatelessWidget {
                                   woCreateProvider.setType(newValue);
                                 },
                                 rightIcon: Icons.arrow_drop_down_rounded,
-                                dropDownArray:
-                                    woCreateProvider.getTypesChildren,
+                                dropDownArray: woCreateProvider.getTypesChildren,
                               ),
                               widget3: DropDownInputFields(
                                 labelText: 'Kategori',
@@ -156,8 +140,7 @@ class NewOrderScreen extends StatelessWidget {
                                   woCreateProvider.setCategory(newValue);
                                 },
                                 rightIcon: Icons.arrow_drop_down_rounded,
-                                dropDownArray:
-                                    woCreateProvider.getCategoriesChildren,
+                                dropDownArray: woCreateProvider.getCategoriesChildren,
                               ),
                             ),
                             const SizedBox(height: 15),
@@ -174,6 +157,7 @@ class NewOrderScreen extends StatelessWidget {
                                   woCreateProvider.setidate = date;
                                 },
                                 initialDate: DateTime.now(),
+                                lastDate: DateTime.now().add(const Duration(days: 30)),
                               ),
                               widget2: TextFieldTimePicker(
                                 label: 'Randevu Saati',
@@ -209,8 +193,7 @@ class NewOrderScreen extends StatelessWidget {
     );
   }
 
-  Container requestType(
-      WoCreateProvider woCreateProvider, BuildContext context) {
+  Container requestType(WoCreateProvider woCreateProvider, BuildContext context) {
     return Container(
       width: context.width,
       padding: const EdgeInsets.all(10),
@@ -234,8 +217,7 @@ class NewOrderScreen extends StatelessWidget {
                     woCreateProvider.setRequestType1(newValue);
                   },
                   rightIcon: Icons.arrow_drop_down_rounded,
-                  dropDownArray:
-                      woCreateProvider.getRequestedTypesChildrenTree1,
+                  dropDownArray: woCreateProvider.getRequestedTypesChildrenTree1,
                   leftIconExist: true,
                   leftIcon: Icons.arrow_right_alt,
                 ),

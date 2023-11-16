@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:vm_fm_4/feature/models/reject_state_models/reject_state_model.dart';
 import 'package:vm_fm_4/feature/models/work_order_models/delivered_spare_of_model.dart';
 import 'package:vm_fm_4/feature/models/work_space/work_space_current_state.dart';
 import 'package:vm_fm_4/feature/models/work_space/child_location_structure.dart';
@@ -110,4 +111,6 @@ abstract class WorkSpaceServiceRepository {
   Future<MainLocationStructure> getMainLocationStructure(String userToken);
 
   Future<List<ChildLocationStructure>> getChildLocationStructure(String userToken, String key, String label);
+
+  Future<List<RejectStateModel>> getWorkSpaceRejectStateGroups(String taskId, String workSpaceId, String token);
 }

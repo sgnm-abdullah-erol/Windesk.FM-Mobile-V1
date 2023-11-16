@@ -45,7 +45,9 @@ class WorkOrderPendiksProvider extends ChangeNotifier {
     final response = await workSpaceService.getWorkSpaceStateGroups(taskId, workSpaceId, userToken);
 
     response.fold(
-      (l) => {_workSpaceStateGroups = l},
+      (l) => {
+        _workSpaceStateGroups = l,
+      },
       (r) => {
         errorWhileGetuserGroups = true,
       },
@@ -55,6 +57,7 @@ class WorkOrderPendiksProvider extends ChangeNotifier {
     _isLoading = false;
   }
 
+  // TODO
   void changeState(String taskId, String stateId, bool isReject) async {
     _isLoading = true;
     notifyListeners();

@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:vm_fm_4/feature/models/reject_state_models/reject_state_model.dart';
 import 'package:vm_fm_4/feature/models/work_order_models/delivered_spare_of_model.dart';
 import 'package:vm_fm_4/feature/models/work_space/work_space_current_state.dart';
 import 'package:vm_fm_4/feature/models/work_space/child_location_structure.dart';
@@ -177,8 +178,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   }
 
   @override
-  Future<Either<AssetListModel, CustomServiceException>> getAssetWithSearchTagNumber(
-      String assetCode, String token) async {
+  Future<Either<AssetListModel, CustomServiceException>> getAssetWithSearchTagNumber(String assetCode, String token) async {
     AssetListModel assetListModel;
     String url =
         '${ServiceTools.url.asset_url}/component/searchByColumn/?page=1&limit=10&orderBy=ASC&orderByColumn=&searchColumn=tagNumber&searchString=$assetCode&searchType=CONTAINS';
@@ -200,8 +200,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   }
 
   @override
-  Future<Either<AssetListModel, CustomServiceException>> getAssetWithSearchIdentifier(
-      String assetCode, String token) async {
+  Future<Either<AssetListModel, CustomServiceException>> getAssetWithSearchIdentifier(String assetCode, String token) async {
     AssetListModel assetListModel;
     String url =
         '${ServiceTools.url.asset_url}/component/searchByColumn/?page=1&limit=10&orderBy=ASC&orderByColumn=&searchColumn=assetIdentifier&searchString=$assetCode&searchType=CONTAINS';
@@ -218,16 +217,12 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       return Left(assetListModel);
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(
-          message: CustomServiceMessages.workOrderWorkloadError,
-          statusCode: '500'));
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
     }
   }
 
   @override
-  Future<Either<List<WorkSpaceDetail>, CustomServiceException>>
-      getWorkSpaceDetailsByRequestType(
-          String requestId, int page, String token) async {
+  Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getWorkSpaceDetailsByRequestType(String requestId, int page, String token) async {
     List<WorkSpaceDetail> workSpaceDetailList = [];
     String url =
         '${ServiceTools.url.workorder_url}/task/mobile/getTasksByRequestType/swagger/$requestId?page=$page&limit=999&orderBy=DESC&orderByColumn=updateAt&withSpare=true';
@@ -1075,6 +1070,35 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
         if (data != null) {
           final main = MainLocationStructure.fromJson(data);
           return main.children ?? [];
+        } else {
+          return [];
+        }
+      } else {
+        return [];
+      }
+    } catch (error) {
+      super.logger.e(error.toString());
+      return [];
+    }
+  }
+
+  @override
+  Future<List<RejectStateModel>> getWorkSpaceRejectStateGroups(String taskId, String workSpaceId, String token) async {
+    // task/task/current/state/412/1885
+    String url = '${ServiceTools.url.workorder_url}/task/task/current/state/$workSpaceId/$taskId';
+    try {
+      final response = await super.dio.get(
+            url,
+            options: Options(headers: {'authorization': 'Bearer $token'}),
+          );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = response.data;
+        super.logger.wtf(data);
+        if (data != null) {
+          final dataData = data['currentState'];
+          final main = RejectStateModel.fromJsonList(dataData['rejectStates']);
+          return main;
         } else {
           return [];
         }

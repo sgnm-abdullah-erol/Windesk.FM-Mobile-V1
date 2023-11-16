@@ -1,4 +1,4 @@
-// ignore_for_file: depend_on_referenced_packages, prefer_const_constructors, unused_local_variable
+// ignore_for_file: depend_on_referenced_packages, prefer_const_constructors, unused_local_variable, deprecated_member_use
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/link.dart';

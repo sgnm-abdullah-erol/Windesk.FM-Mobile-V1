@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -69,7 +71,7 @@ class _AssetSearchScreen extends State<AssetSearchScreen> {
                                 searchProvider.setQrType(value);
                               },
                               rightIcon: AppIcons.arrowDown,
-                              dropDownArray: ['Etiket Numarası', 'Varlık Tanımlayıcı']),
+                              dropDownArray: const ['Etiket Numarası', 'Varlık Tanımlayıcı']),
                           CustomHalfButtons(
                               leftTitle: Text(LocaleKeys.Clear.tr(), style: context.bodyMedium),
                               rightTitle: Text(LocaleKeys.Search.tr(), style: context.bodyMedium),

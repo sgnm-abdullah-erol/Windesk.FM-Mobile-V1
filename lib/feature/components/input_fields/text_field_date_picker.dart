@@ -4,11 +4,19 @@ import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 import '../../../core/constants/other/app_icons.dart';
 
 class TextFieldDatePicker extends StatefulWidget {
-  const TextFieldDatePicker({super.key, required this.label, required this.onTap, required this.initialDate, this.initialControllerFunction});
+  const TextFieldDatePicker({
+    super.key,
+    required this.label,
+    required this.onTap,
+    required this.initialDate,
+    this.initialControllerFunction,
+    this.lastDate,
+  });
 
   final String label;
   final Function onTap;
   final DateTime initialDate;
+  final DateTime? lastDate;
   final Function? initialControllerFunction;
 
   @override
@@ -32,7 +40,7 @@ class _TextFieldDatePickerState extends State<TextFieldDatePicker> {
       ),
       readOnly: true,
       onTap: () async {
-        final DateTime? date = await _datePicker(context, widget.initialDate);
+        final DateTime? date = await _datePicker(context, widget.initialDate, widget.lastDate ?? DateTime.now());
 
         if (date != null) {
           setState(() {
@@ -47,12 +55,12 @@ class _TextFieldDatePickerState extends State<TextFieldDatePicker> {
     );
   }
 
-  Future<DateTime?> _datePicker(BuildContext context, DateTime initialDate) {
+  Future<DateTime?> _datePicker(BuildContext context, DateTime initialDate, DateTime lastDate) {
     return showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: initialDate,
-      lastDate: DateTime.now(),
+      lastDate: lastDate,
     );
   }
 }
