@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:vm_fm_4/core/constants/other/app_icons.dart';
+import 'package:vm_fm_4/core/constants/style/box_decorations.dart';
 import 'package:vm_fm_4/core/route/app_route.gr.dart';
 import 'package:vm_fm_4/feature/components/model_bottom_sheet/change_location_leaf_model_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/components/model_bottom_sheet/get_task_history_modal_bottom_sheet.dart';
@@ -30,68 +31,71 @@ class CustomWorkSpaceDetailCard extends StatelessWidget {
       color: APPColors.Main.white,
       elevation: _elevation,
       shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.mediumBorderRadius),
-      child: Padding(
-        padding: _paddingCardInside,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _ResponseDates(workSpaceDetail: workSpaceDetail),
-            const CustomWoSummaryDivider(),
-            const SizedBox(height: 10),
-            Text('WO ${workSpaceDetail.task?.id}', style: context.bodySmall.copyWith(color: APPColors.Main.black)),
-            // Text('${workSpaceDetail.state?.name}', style: context.labelMedium.copyWith(color: APPColors.Main.black)),
-            const CustomWoSummaryDivider(),
-            const SizedBox(height: 10),
-            Text(workSpaceDetail.task?.description ?? '', style: context.labelMedium.copyWith(color: APPColors.Main.black)),
-            const CustomWoSummaryDivider(),
-            const SizedBox(height: 10),
-            _DoubleRowInformation(
-              firstLabel: LocaleKeys.Claiment.tr(),
-              secondLabel: LocaleKeys.Category.tr(),
-              firstValue: workSpaceDetail.workspace?.owner ?? '',
-              secondValue: workSpaceDetail.task?.requestType?.name ?? '',
-            ),
-            const CustomWoSummaryDivider(),
-            const SizedBox(height: 10),
-            _FourRowInformation(
-              firstLabel: LocaleKeys.OpenDate.tr(),
-              secondLabel: LocaleKeys.UpdateDate.tr(),
-              thirdLabel: LocaleKeys.LastUpdateDate.tr(),
-              firstValue: workSpaceDetail.workspace?.createdAt.toString().substring(0, 19) ?? '',
-              secondValue: workSpaceDetail.workspace?.updatedAt.toString().substring(0, 19) ?? '',
-              thirdValue: workSpaceDetail.task?.updatedAt.toString().substring(0, 19) ?? '',
-            ),
-            const CustomWoSummaryDivider(),
-            const SizedBox(height: 10),
-            _DoubleRowInformation(
-              firstLabel: LocaleKeys.AssignedGroup.tr(),
-              secondLabel: LocaleKeys.AssignedPerson.tr(),
-              firstValue: workSpaceDetail.task?.woCategory?.name ?? '',
-              secondValue: workSpaceDetail.task?.user ?? '',
-            ),
-            const CustomWoSummaryDivider(),
-            const SizedBox(height: 10),
+      child: Container(
+        decoration: WoListCardDecoration(),
+        child: Padding(
+          padding: _paddingCardInside,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _ResponseDates(workSpaceDetail: workSpaceDetail),
+              const CustomWoSummaryDivider(),
+              const SizedBox(height: 10),
+              Text('WO ${workSpaceDetail.task?.id}', style: context.bodySmall.copyWith(color: APPColors.Main.black)),
+              // Text('${workSpaceDetail.state?.name}', style: context.labelMedium.copyWith(color: APPColors.Main.black)),
+              const CustomWoSummaryDivider(),
+              const SizedBox(height: 10),
+              Text(workSpaceDetail.task?.description ?? '', style: context.labelMedium.copyWith(color: APPColors.Main.black)),
+              const CustomWoSummaryDivider(),
+              const SizedBox(height: 10),
+              _DoubleRowInformation(
+                firstLabel: LocaleKeys.Claiment.tr(),
+                secondLabel: LocaleKeys.Category.tr(),
+                firstValue: workSpaceDetail.workspace?.owner ?? '',
+                secondValue: workSpaceDetail.task?.requestType?.name ?? '',
+              ),
+              const CustomWoSummaryDivider(),
+              const SizedBox(height: 10),
+              _FourRowInformation(
+                firstLabel: LocaleKeys.OpenDate.tr(),
+                secondLabel: LocaleKeys.UpdateDate.tr(),
+                thirdLabel: LocaleKeys.LastUpdateDate.tr(),
+                firstValue: workSpaceDetail.workspace?.createdAt.toString().substring(0, 19) ?? '',
+                secondValue: workSpaceDetail.workspace?.updatedAt.toString().substring(0, 19) ?? '',
+                thirdValue: workSpaceDetail.task?.updatedAt.toString().substring(0, 19) ?? '',
+              ),
+              const CustomWoSummaryDivider(),
+              const SizedBox(height: 10),
+              _DoubleRowInformation(
+                firstLabel: LocaleKeys.AssignedGroup.tr(),
+                secondLabel: LocaleKeys.AssignedPerson.tr(),
+                firstValue: workSpaceDetail.task?.woCategory?.name ?? '',
+                secondValue: workSpaceDetail.task?.user ?? '',
+              ),
+              const CustomWoSummaryDivider(),
+              const SizedBox(height: 10),
 
-            // location
-            _LocationInformation(
-              workSpaceDetail,
-              workOrderDetailProvider,
-            ),
-            const CustomWoSummaryDivider(),
+              // location
+              _LocationInformation(
+                workSpaceDetail,
+                workOrderDetailProvider,
+              ),
+              const CustomWoSummaryDivider(),
 
-            _TaskHistory(workSpaceDetail, workOrderDetailProvider),
+              _TaskHistory(workSpaceDetail, workOrderDetailProvider),
 
-            const SizedBox(height: 10),
-            const SizedBox(height: 10),
-            _DoubleRowInformationComponent(
-              firstLabel: LocaleKeys.Presence.tr(),
-              secondLabel: LocaleKeys.AssignedPerson.tr(),
-              firstValue: workSpaceDetail.task?.requestedComponents?.name ?? '',
-              secondValue: workSpaceDetail.task?.user ?? '',
-              workOrderDetailProvider: workOrderDetailProvider,
-            ),
-            const CustomWoSummaryDivider(),
-          ],
+              const SizedBox(height: 10),
+              const SizedBox(height: 10),
+              _DoubleRowInformationComponent(
+                firstLabel: LocaleKeys.Presence.tr(),
+                secondLabel: LocaleKeys.AssignedPerson.tr(),
+                firstValue: workSpaceDetail.task?.requestedComponents?.name ?? '',
+                secondValue: workSpaceDetail.task?.user ?? '',
+                workOrderDetailProvider: workOrderDetailProvider,
+              ),
+              const CustomWoSummaryDivider(),
+            ],
+          ),
         ),
       ),
     );

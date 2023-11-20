@@ -41,12 +41,14 @@ class _MyWorkOrdersState extends State<MyWorkOrders> {
                   workSpaceDetail: widget.provider.myWorkSpaceDetails[index],
                   isButtonVisible: false,
                   onTap: () {
-                    context.router.push(DetailWorkOrderScreen(workSpaceDetail: widget.provider.myWorkSpaceDetails[index])).then((value) {
-                      if (value == true) {
-                        widget.provider.setIsMyWorkOrdersDataFetched(false);
-                        widget.provider.getMyWorkOrders();
-                      }
-                    });
+                    context.router.push(DetailWorkOrderScreen(workSpaceDetail: widget.provider.myWorkSpaceDetails[index])).then(
+                      (value) {
+                        if (value == true) {
+                          widget.provider.setIsMyWorkOrdersDataFetched(false);
+                          widget.provider.getMyWorkOrders();
+                        }
+                      },
+                    );
                   },
                 );
               },
