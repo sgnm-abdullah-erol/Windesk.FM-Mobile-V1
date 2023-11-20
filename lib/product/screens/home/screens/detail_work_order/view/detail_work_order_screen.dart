@@ -207,6 +207,7 @@ class _TakeItOnMe extends StatelessWidget {
     return ElevatedButton(
       onPressed: () => provider.takeItOnMe(),
       style: ElevatedButton.styleFrom(
+        backgroundColor: APPColors.Accent.black,
         shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.mediumBorderRadius),
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       ),

@@ -36,6 +36,7 @@
 	"WantedMaterialAmountBiggerThanHintAmount": "Wanted Material Amount Bigger Than Current Amount",
 	"EditNoteError" : "Error While Editing Note",
 	"EditNoteSuccess" : "Note Edited Successfully",
+	"Review" : "Review",
 	"----------------SNACKBAR----------": "-----------SNACKBAR--------------",
 	"NoInternetConnection": "No Internet Connection",
 	"LoginError": "Cant Login, Please Try Again",

@@ -14,7 +14,7 @@ class LocaleKeys {
   static const String assetSearchSuccess = 'Malzeme Arama Başarılı';
   static const String assetSearchError = 'Malzeme Arama Başarısız';
 
-//space search
+  //space search
   static const String spaceSearch = 'Mahal Arama';
 
   static const String spaceSearchSuccess = 'Mahal Arama Başarılı';
@@ -58,6 +58,8 @@ class LocaleKeys {
   static const String ChangeLocaleText = 'ChangeLocaleText';
   static const String NoMaterial = 'NoMaterial';
   static const String ErrorAccurWhileDownloadFile = 'ErrorAccurWhileDownloadFile';
+  static const String History = 'History';
+  static const String Review = 'Review';
 
   // static const ----------SNACKBAR---------- = '----------SNACKBAR----------;
   static const String NoInternetConnection = 'NoInternetConnection';
@@ -122,6 +124,7 @@ class LocaleKeys {
   static const String Search = 'Search';
   static const String Clear = 'Clear';
   static const String RejectTaskState = 'RejectTaskState';
+  
   // tabs
   static const String HomeTab = 'HomeTab';
   static const String NewOrderTab = 'NewOrderTab';
@@ -260,7 +263,6 @@ class LocaleKeys {
   static const String DecisionModelNotationsaskInformation = 'Decision Model Notationsask Information';
   static const String WorkOrderDecisionModelNotationsype = 'Work Order Decision Model Notationsype';
   static const String Detail = 'Detail';
-  static const String History = 'History';
   static const String Active = 'Active';
   static const String StartDate = 'Start Date';
   static const String EndDate = 'End Date';

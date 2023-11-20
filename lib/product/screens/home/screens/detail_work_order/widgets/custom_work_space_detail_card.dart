@@ -118,19 +118,19 @@ class _LocationInformation extends StatelessWidget {
               children: [
                 IconButton(
                   onPressed: () async {
-                  final result =   await showModalBottomSheet(
-                isScrollControlled: true,
-                context: context,
-                builder: (context) => SizedBox(
-                  height:500,
-                  child: ChangeLocationLeafModelBottomSheet(
-                      rootTitle: workSpaceDetail.task?.requestedSpaces?.name ?? '',
-                      taskId: workSpaceDetail.task?.id.toString() ?? '',
-                      templatedBy: workSpaceDetail.task?.templatedBy ?? '',
-                      dependedOn: workSpaceDetail.task?.depended_on.toString() ?? '',
-                    ),
-                ),
-              );
+                    final result = await showModalBottomSheet(
+                      isScrollControlled: true,
+                      context: context,
+                      builder: (context) => SizedBox(
+                        height: 500,
+                        child: ChangeLocationLeafModelBottomSheet(
+                          rootTitle: workSpaceDetail.task?.requestedSpaces?.name ?? '',
+                          taskId: workSpaceDetail.task?.id.toString() ?? '',
+                          templatedBy: workSpaceDetail.task?.templatedBy ?? '',
+                          dependedOn: workSpaceDetail.task?.depended_on.toString() ?? '',
+                        ),
+                      ),
+                    );
                     if (result != '') {
                       workSpaceDetail.task?.requestedSpaces?.name = result ?? '';
                       // ignore: use_build_context_synchronously
@@ -163,7 +163,7 @@ class _TaskHistory extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(flex: 1, child: Text('Tarihçe', style: context.bodySmall.copyWith(color: APPColors.Main.black))),
+        Expanded(flex: 1, child: Text(LocaleKeys.History.tr(), style: context.bodySmall.copyWith(color: APPColors.Main.black))),
         Expanded(
           flex: 2,
           child: SingleChildScrollView(
@@ -176,11 +176,10 @@ class _TaskHistory extends StatelessWidget {
                   bgColor: APPColors.Accent.black,
                   onPressFunction: () async {
                     await workOrderDetailProvider.getTaskHistory(workSpaceDetail.task?.id);
-
                     // ignore: use_build_context_synchronously
-                    GetTaskHistoryModalBottomSheet().showAlertDialog(context, workOrderDetailProvider, 'textData', 'Tarihçe');
+                    GetTaskHistoryModalBottomSheet().showAlertDialog(context, workOrderDetailProvider, 'textData', LocaleKeys.History.tr());
                   },
-                  textValue: 'İncele',
+                  textValue: LocaleKeys.Review.tr(),
                   textColor: APPColors.Main.white,
                   iconColor: APPColors.Main.white,
                   icon: Icons.qr_code,

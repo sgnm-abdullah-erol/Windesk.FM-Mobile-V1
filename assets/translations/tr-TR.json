@@ -40,6 +40,7 @@
 	"ChangeLocaleText" : "Konum değiştirmek istediğinizden emin misiniz?",
 	"NoMaterial": "Malzeme Bulunamadı",
 	"ErrorAccurWhileDownloadFile": "Dosya indirilirken hata oluştu",
+	"Review" : "İncele",
 	"----------------SNACKBAR----------": "-----------SNACKBAR--------------",
 	"NoInternetConnection": "İnternet bağlantısı yok",
 	"LoginError": "Giriş yapılamadı, lütfen tekrar deneyiniz",
