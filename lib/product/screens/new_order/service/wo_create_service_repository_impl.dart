@@ -138,7 +138,7 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
   Future<Either<List<WoCreateComponentModel>, CustomServiceException>> getComponents(token) async {
     List<WoCreateComponentModel> woCreatecomponentModel = [];
 
-    String url = '${ServiceTools.url.asset_url}/component/search/?page=1&limit=10&orderBy=DESC&orderByColumn=&searchString=';
+    String url = '${ServiceTools.url.asset_url}/component/search/?page=1&limit=100&orderBy=DESC&orderByColumn=&searchString=';
     final response = await super.dio.get(
           url,
           options: Options(
