@@ -36,7 +36,7 @@ class CustomMainAppbar extends StatelessWidget implements PreferredSizeWidget {
       actions: actions != null ? actions! : [],
       backgroundColor: context.theme ? APPColors.Modal.black : APPColors.Main.white,
       elevation: elevation ?? 0,
-      systemOverlayStyle: context.theme ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark,
+      systemOverlayStyle: SystemUiOverlayStyle.dark,
     );
   }
 

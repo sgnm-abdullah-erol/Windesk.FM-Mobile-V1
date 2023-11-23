@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import 'core/constants/other/app_strings.dart';
@@ -15,7 +14,6 @@ import 'feature/global_providers/global_provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Init.init();
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
   runApp(
     EasyLocalization(

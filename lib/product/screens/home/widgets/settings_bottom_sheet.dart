@@ -5,19 +5,14 @@ import 'package:vm_fm_4/core/constants/other/app_icons.dart';
 import 'package:vm_fm_4/core/l10n/x.dart';
 import 'package:vm_fm_4/core/themes/theme_provider.dart';
 
-class SettingsBottomSheet extends StatefulWidget {
+class SettingsBottomSheet extends StatelessWidget {
   const SettingsBottomSheet({super.key, required this.themeProvider});
 
   final ThemeProvider themeProvider;
 
   @override
-  State<SettingsBottomSheet> createState() => _SettingsBottomSheetState();
-}
-
-class _SettingsBottomSheetState extends State<SettingsBottomSheet> {
-  @override
   Widget build(BuildContext context) {
-    IconData _themeIcon = context.read<ThemeProvider>().isDark ? AppIcons.darkMode : AppIcons.lightMode;
+    IconData themeIcon = context.read<ThemeProvider>().isDark ? AppIcons.darkMode : AppIcons.lightMode;
 
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.2,
@@ -30,11 +25,11 @@ class _SettingsBottomSheetState extends State<SettingsBottomSheet> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Icon(_themeIcon),
+              Icon(themeIcon),
               Switch(
                 value: context.read<ThemeProvider>().isDark,
                 onChanged: (value) {
-                  widget.themeProvider.setTheme(widget.themeProvider.isDark ? false : true);
+                  themeProvider.setTheme(themeProvider.isDark ? false : true);
                 },
               ),
             ],
