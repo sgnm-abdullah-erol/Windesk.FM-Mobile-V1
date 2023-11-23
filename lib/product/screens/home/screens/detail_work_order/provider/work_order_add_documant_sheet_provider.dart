@@ -95,7 +95,7 @@ class WorkOrderAddDocumantSheetProvider extends ChangeNotifier {
   }
 
   void getImageFromCamera() async {
-    image = await picker.pickImage(source: ImageSource.camera);
+    image = await picker.pickImage(source: ImageSource.camera, preferredCameraDevice: CameraDevice.front);
     if (image != null) {
       imagePath = image!.path;
 
