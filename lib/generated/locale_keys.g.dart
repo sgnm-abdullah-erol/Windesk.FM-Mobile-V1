@@ -61,6 +61,7 @@ class LocaleKeys {
   static const String History = 'History';
   static const String Review = 'Review';
   static const String Owner = 'Owner';
+  static const String TaskName = 'TaskName';
 
   // static const ----------SNACKBAR---------- = '----------SNACKBAR----------;
   static const String NoInternetConnection = 'NoInternetConnection';

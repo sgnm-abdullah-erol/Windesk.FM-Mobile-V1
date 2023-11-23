@@ -38,7 +38,11 @@ class CustomWorkSpaceDetailCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _ResponseDates(workSpaceDetail: workSpaceDetail),
+              // _ResponseDates(workSpaceDetail: workSpaceDetail),
+              _TaskName(workSpaceDetail: workSpaceDetail),
+              const CustomWoSummaryDivider(),
+              const SizedBox(height: 10),
+              _TaskOwner(workSpaceDetail: workSpaceDetail),
               const CustomWoSummaryDivider(),
               const SizedBox(height: 10),
               Text('WO ${workSpaceDetail.task?.id}', style: context.bodySmall.copyWith(color: APPColors.Main.black)),
@@ -59,7 +63,7 @@ class CustomWorkSpaceDetailCard extends StatelessWidget {
               _FourRowInformation(
                 firstLabel: LocaleKeys.OpenDate.tr(),
                 secondLabel: LocaleKeys.UpdateDate.tr(),
-                thirdLabel: LocaleKeys.LastUpdateDate.tr(),
+                thirdLabel: LocaleKeys.EndDate.tr(),
                 firstValue: workOrderDetailProvider.dateModel.startDate ?? '',
                 secondValue: workOrderDetailProvider.dateModel.endDate ?? '',
                 thirdValue: workOrderDetailProvider.dateModel.updateDate ?? '',
@@ -98,6 +102,58 @@ class CustomWorkSpaceDetailCard extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _TaskOwner extends StatelessWidget {
+  const _TaskOwner({required this.workSpaceDetail});
+
+  final WorkSpaceDetail workSpaceDetail;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text(
+          LocaleKeys.Owner.tr(),
+          style: context.labelMedium.copyWith(color: APPColors.Main.black, fontWeight: FontWeight.bold),
+        ),
+        const Spacer(),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Text(
+            workSpaceDetail.task?.owner ?? '',
+            style: context.labelMedium.copyWith(color: APPColors.Main.black),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _TaskName extends StatelessWidget {
+  const _TaskName({required this.workSpaceDetail});
+
+  final WorkSpaceDetail workSpaceDetail;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text(
+          LocaleKeys.TaskName.tr(),
+          style: context.labelMedium.copyWith(color: APPColors.Main.black, fontWeight: FontWeight.bold),
+        ),
+        const Spacer(),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Text(
+            workSpaceDetail.task?.name ?? '',
+            style: context.labelMedium.copyWith(color: APPColors.Main.black),
+          ),
+        ),
+      ],
     );
   }
 }
