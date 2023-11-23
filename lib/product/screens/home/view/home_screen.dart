@@ -196,8 +196,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 const Icon(Icons.dark_mode),
                                 Switch(
-                                  value: themeProvider.isDark,
+                                  value: context.read<ThemeProvider>().isDark,
                                   onChanged: (value) {
+                                    context.router.pop();
                                     themeProvider
                                         .setTheme(!themeProvider.isDark);
                                   },
@@ -213,6 +214,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   value: context.locale ==
                                       const Locale('en', 'US'),
                                   onChanged: (value) {
+                                    context.router.pop();
+
                                     if (context.locale ==
                                         const Locale('en', 'US')) {
                                       context
