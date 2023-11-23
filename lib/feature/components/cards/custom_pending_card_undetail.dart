@@ -194,8 +194,8 @@ class _ActionButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: CustomHalfButtons(
-        leftTitle: const Text(LocaleKeys.Cancel).tr(),
-        rightTitle: const Text(LocaleKeys.Approve).tr(),
+        leftTitle: Text(LocaleKeys.Cancel, style: Theme.of(context).textTheme.bodyMedium).tr(),
+        rightTitle: Text(LocaleKeys.Approve, style: Theme.of(context).textTheme.bodyMedium).tr(),
         leftOnPressed: () async {
           final response = await WorkOrderRejectTaskDialog.workOrderRejectStatus(
               context, pendiks.workspace?.id.toString() ?? '', pendiks.task?.id.toString() ?? '');
