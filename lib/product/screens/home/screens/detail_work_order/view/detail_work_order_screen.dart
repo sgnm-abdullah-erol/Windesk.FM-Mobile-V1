@@ -47,6 +47,8 @@ class DetailWorkOrderScreen extends StatelessWidget {
       child: Consumer<WorkOrderDetailProvider>(
         builder: (context, WorkOrderDetailProvider woDetailProvider, child) {
           SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+            woDetailProvider.init(workSpaceDetail.task?.id.toString() ?? '');
+
             if (woDetailProvider.effortAdded) {
               snackBar(context, LocaleKeys.EffortAdded.tr(), 'success');
             }
@@ -71,35 +73,37 @@ class DetailWorkOrderScreen extends StatelessWidget {
             }
           });
 
-          return Scaffold(
-            key: _scaffoldKey,
-            appBar: CustomMainAppbar(title: Text('WO - ${woDetailProvider.detail.task?.id.toString() ?? ''}'), returnBack: true, elevation: 4),
-            body: context.read<WorkOrderDetailProvider>().isLoading
-                ? const CustomLoadingIndicator()
-                : RefreshIndicator(
-                    onRefresh: () async {
-                      await Future.delayed(const Duration(seconds: 1), () => woDetailProvider.setStateToBeginning());
-                    },
-                    child: SingleChildScrollView(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
-                        child: Column(
-                          children: [
-                            CustomWorkSpaceDetailCard(workSpaceDetail: woDetailProvider.detail, workOrderDetailProvider: woDetailProvider),
-                            const SizedBox(height: 10),
-                            (woDetailProvider.detail.task?.userId ?? '') != context.read<GlobalProvider>().userId
-                                ? _TakeItOnMe(provider: woDetailProvider)
-                                : _StateChangeDropDownButton(provider: woDetailProvider),
-                            const SizedBox(height: 20),
-                            (woDetailProvider.detail.task?.userId ?? '') != context.read<GlobalProvider>().userId
-                                ? const SizedBox()
-                                : _customPageAccordionSection(context, woDetailProvider),
-                          ],
+          return woDetailProvider.initLoading
+              ? const CustomLoadingIndicator()
+              : Scaffold(
+                  key: _scaffoldKey,
+                  appBar: CustomMainAppbar(title: Text('WO - ${woDetailProvider.detail.task?.id.toString() ?? ''}'), returnBack: true, elevation: 4),
+                  body: context.read<WorkOrderDetailProvider>().isLoading
+                      ? const CustomLoadingIndicator()
+                      : RefreshIndicator(
+                          onRefresh: () async {
+                            await Future.delayed(const Duration(seconds: 1), () => woDetailProvider.setStateToBeginning());
+                          },
+                          child: SingleChildScrollView(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
+                              child: Column(
+                                children: [
+                                  CustomWorkSpaceDetailCard(workSpaceDetail: woDetailProvider.detail, workOrderDetailProvider: woDetailProvider),
+                                  const SizedBox(height: 10),
+                                  (woDetailProvider.detail.task?.userId ?? '') != context.read<GlobalProvider>().userId
+                                      ? _TakeItOnMe(provider: woDetailProvider)
+                                      : _StateChangeDropDownButton(provider: woDetailProvider),
+                                  const SizedBox(height: 20),
+                                  (woDetailProvider.detail.task?.userId ?? '') != context.read<GlobalProvider>().userId
+                                      ? const SizedBox()
+                                      : _customPageAccordionSection(context, woDetailProvider),
+                                ],
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
-          );
+                );
         },
       ),
     );

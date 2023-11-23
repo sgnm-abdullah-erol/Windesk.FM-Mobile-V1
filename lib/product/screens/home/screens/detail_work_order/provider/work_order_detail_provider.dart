@@ -30,9 +30,17 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
   final WorkSpaceServiceRepositoryImpl workSpaceService = Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
 
+  DateModel dateModel = DateModel();
+
   // for page
   bool _isLoading = false;
   bool get isLoading => _isLoading;
+
+  bool _initLoading = false;
+  bool get initLoading => _initLoading;
+
+  bool _initState = true;
+  bool get initState => _initState;
 
   bool _isGroupExist = false;
   bool get isGroupExist => _isGroupExist;
@@ -104,6 +112,19 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
   CurrentState? _workSpaceStateGroups = const CurrentState();
   CurrentState? get workSpaceStateGroups => _workSpaceStateGroups;
+
+  Future<void> init(String taskId) async {
+    if (initState) {
+      _initState = false;
+      _initLoading = true;
+      notifyListeners();
+
+      await getTaskHistory(taskId);
+
+      _initLoading = false;
+      notifyListeners();
+    }
+  }
 
   void setDropdown() {
     _dropdownValue = _workSpaceUserTaskLabels[0];
@@ -455,7 +476,8 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future getTaskHistory(taskId) async {
+  // TODO model olarak yazilmasi lazim
+  Future<void> getTaskHistory(taskId) async {
     _isTaskHistoryLoading = false;
     final String token = await SharedManager().getString(SharedEnum.userToken);
     if (token.isNotEmpty) {
@@ -464,6 +486,13 @@ class WorkOrderDetailProvider extends ChangeNotifier {
       result.fold((l) {
         var dataList = [];
         for (var i = 0; i < l.length; i++) {
+          if (i == 0) {
+            dateModel = DateModel(
+              startDate: l[i]['state']['userStartDate'],
+              endDate: l[i]['task']['dueDate'],
+              updateDate: l[i]['task']['updatedAt'],
+            );
+          }
           dataList.add([l[i]['state']['name'], l[i]['state']['stateDate'], l[i]['state']['stateUser']]);
         }
         _isTaskHistoryLoading = true;
@@ -696,4 +725,16 @@ class WorkOrderDetailProvider extends ChangeNotifier {
       _isImageAdded = false;
     });
   }
+}
+
+class DateModel {
+  final String? startDate;
+  final String? endDate;
+  final String? updateDate;
+
+  DateModel({
+    this.startDate,
+    this.endDate,
+    this.updateDate,
+  });
 }
