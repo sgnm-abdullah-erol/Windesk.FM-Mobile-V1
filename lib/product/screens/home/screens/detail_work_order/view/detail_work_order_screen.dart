@@ -93,7 +93,7 @@ class DetailWorkOrderScreen extends StatelessWidget {
                                   const SizedBox(height: 10),
                                   (woDetailProvider.detail.task?.userId ?? '') != context.read<GlobalProvider>().userId
                                       ? _TakeItOnMe(provider: woDetailProvider)
-                                      : _StateChangeDropDownButton(provider: woDetailProvider),
+                                      : _StateChangeDropDownButton(provider: woDetailProvider, workSpaceDetail: workSpaceDetail),
                                   const SizedBox(height: 20),
                                   (woDetailProvider.detail.task?.userId ?? '') != context.read<GlobalProvider>().userId
                                       ? const SizedBox()
@@ -150,16 +150,17 @@ class DetailWorkOrderScreen extends StatelessWidget {
 }
 
 class _StateChangeDropDownButton extends StatelessWidget {
-  const _StateChangeDropDownButton({required this.provider});
+  const _StateChangeDropDownButton({required this.provider, required this.workSpaceDetail});
 
   final WorkOrderDetailProvider provider;
+  final WorkSpaceDetail workSpaceDetail;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0),
       child: DropDownInputFields(
-        labelText: LocaleKeys.ProccessEntry,
+        labelText: workSpaceDetail.state?.name ?? LocaleKeys.State.tr(),
         onChangedFunction: (val) async {
           provider.setGroupIdDefault();
           provider.stateGroupExist(val);
