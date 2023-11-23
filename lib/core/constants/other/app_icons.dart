@@ -8,8 +8,8 @@ class AppIcons {
   static const IconData home = Icons.home;
   static const IconData addBox = Icons.add_box;
   static const IconData search = Icons.search;
-    static const IconData assetSearch = Icons.manage_search;
-    static const IconData spaceSearch = Icons.location_searching;
+  static const IconData assetSearch = Icons.manage_search;
+  static const IconData spaceSearch = Icons.location_searching;
 
   static const IconData wifi = Icons.wifi;
   static const IconData note = Icons.note;
@@ -52,4 +52,9 @@ class AppIcons {
   static const IconData download = Icons.download;
   static const IconData change = Icons.change_circle;
   static const IconData edit = Icons.edit;
+
+  // settings
+  static const IconData language = Icons.language;
+  static const IconData darkMode = Icons.dark_mode;
+  static const IconData lightMode = Icons.light_mode;
 }
