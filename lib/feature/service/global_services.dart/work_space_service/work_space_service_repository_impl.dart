@@ -642,7 +642,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     String taskId,
     String token,
   ) async {
-    List<DeliveredSpareOfModel> workSpaceRequirementMaterialsList;
+    List<DeliveredSpareOfModel>? workSpaceRequirementMaterialsList = [];
     String url = '${ServiceTools.url.workorder_url}/task/$taskId';
 
     final response = await super.dio.get(
@@ -652,8 +652,14 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
           ),
         );
 
+    super.logger.wtf(response);
+
     if (response.statusCode == 200 || response.statusCode == 201) {
       final data = response.data;
+
+      if (data['deliveredSpareOf'] == null) {
+        return Left(workSpaceRequirementMaterialsList);
+      }
       workSpaceRequirementMaterialsList = DeliveredSpareOfModel.fromJsonList(data['deliveredSpareOf']);
 
       super.logger.wtf(workSpaceRequirementMaterialsList);
