@@ -39,7 +39,6 @@ class NewOrderScreen extends StatelessWidget {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (woCreateProvider.isWorkOrderCreate) {
             snackBar(context, SnackbarStrings.woCreate, 'success');
-
             showDialog(
               context: context,
               builder: (dialogContext) {
@@ -178,7 +177,9 @@ class NewOrderScreen extends StatelessWidget {
                               ),
                               leftOnPressed: () {},
                               rightOnPressed: () {
-                                woCreateProvider.createTask();
+                                woCreateProvider.selectedLeafIsTrue
+                                    ? woCreateProvider.createTask()
+                                    : snackBar(context, SnackbarStrings.woCreateErrorLocation, 'error');                                
                               },
                             )
                           ],

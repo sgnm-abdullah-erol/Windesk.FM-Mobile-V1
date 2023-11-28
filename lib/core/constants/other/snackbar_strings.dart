@@ -23,5 +23,7 @@ class SnackbarStrings {
 
   static const String woCreate = 'İş Emri Başarıyla Oluşturuldu.';
   static const String woCreateError = 'İş Emri Oluşturulurken Hata Oluştu.';
+  static const String woCreateErrorLocation = 'Lütfen lokasyon seçiminde en alt kırılıma kadar seçim yapınız.';
+
 
 }

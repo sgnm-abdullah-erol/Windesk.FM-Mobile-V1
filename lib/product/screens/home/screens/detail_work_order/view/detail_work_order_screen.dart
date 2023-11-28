@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 import 'package:vm_fm_4/feature/global_providers/global_provider.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
+import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/view/scope_main.dart';
 
 import '../../../../../../core/constants/other/app_icons.dart';
 import '../../../../../../core/constants/other/colors.dart';
@@ -95,6 +96,26 @@ class DetailWorkOrderScreen extends StatelessWidget {
                                       ? _TakeItOnMe(provider: woDetailProvider)
                                       : _StateChangeDropDownButton(provider: woDetailProvider, workSpaceDetail: workSpaceDetail),
                                   const SizedBox(height: 20),
+                                      (woDetailProvider.detail.task?.userId ?? '') != context.read<GlobalProvider>().userId
+                                      ? const SizedBox() : IconButton(
+                                      onPressed: () async {
+                                        final result = await showModalBottomSheet(
+                                          isScrollControlled: true,
+                                          context: context,
+                                          builder: (context) => const SizedBox(
+                                            height: 500,
+                                            child: ScopeModalBottomSheet(
+                                            ),
+                                          ),
+                                        );
+                                        if (result != '') {
+                                          workSpaceDetail.task?.requestedSpaces?.name = result ?? '';
+                                          // ignore: use_build_context_synchronously
+                                          //context.router.popAndPush(DetailWorkOrderScreen(workSpaceDetail: workSpaceDetail));
+                                        }
+                                      },
+                                    icon: const Icon(AppIcons.addBox),
+                                  ),
                                   (woDetailProvider.detail.task?.userId ?? '') != context.read<GlobalProvider>().userId
                                       ? const SizedBox()
                                       : _customPageAccordionSection(context, woDetailProvider),
