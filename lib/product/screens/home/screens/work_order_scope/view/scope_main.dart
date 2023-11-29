@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:vm_fm_4/feature/models/work_order_scope_models/maintanence_model.dart';
 import 'package:vm_fm_4/feature/service/graphql_manager.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/helpers.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/view/scope_bottom_sheet.dart';
@@ -18,9 +19,7 @@ class ScopeModalBottomSheet extends StatelessWidget {
               options: QueryOptions(
                 document: gql(queries.maintenancesTask),
                 variables: {
-                  "maintenanceTypeWhere2": {"language": "en"},
-                  "prioritiyWhere2": {"language": "en"},
-                  "where": {"id": 2940}
+                  "where": {"isDeleted": false, "id": 2939}
                 },
                 //pollInterval: 10,
               ),
@@ -31,7 +30,8 @@ class ScopeModalBottomSheet extends StatelessWidget {
                     'This should never be the case – please open an issue',
                   );
                 }
-                print('seeess1' + result.data.toString());
+                MaintanenceModel maintanenceModel;
+                maintanenceModel = MaintanenceModel.fromJson(result.data?['maintenances'][0]);
                 return ScopeBottomSheet();
               }),
             )
