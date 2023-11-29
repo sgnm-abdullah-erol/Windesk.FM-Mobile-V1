@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:vm_fm_4/feature/models/work_order_scope_models/maintanence_model.dart';
@@ -6,8 +7,9 @@ import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/helpers.da
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/view/scope_bottom_sheet.dart';
 import '../queries/scope/maintenances_task.dart' as queries;
 
-class ScopeModalBottomSheet extends StatelessWidget {
-  const ScopeModalBottomSheet({super.key});
+@RoutePage()
+class ScopeListScreen extends StatelessWidget {
+  const ScopeListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class ScopeModalBottomSheet extends StatelessWidget {
               options: QueryOptions(
                 document: gql(queries.maintenancesTask),
                 variables: {
-                  "where": {"isDeleted": false, "id": 2939}
+                  "where": {"isDeleted": false, "id": 2559}
                 },
                 //pollInterval: 10,
               ),
@@ -32,7 +34,7 @@ class ScopeModalBottomSheet extends StatelessWidget {
                 }
                 MaintanenceModel maintanenceModel;
                 maintanenceModel = MaintanenceModel.fromJson(result.data?['maintenances'][0]);
-                return ScopeBottomSheet();
+                return ScopeBottomSheet(maintanenceModel: maintanenceModel);
               }),
             )
           ],

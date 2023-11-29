@@ -298,6 +298,13 @@ class LocaleKeys {
   static const String DeleteMaterial = 'DeleteMaterial';
   static const String DeleteDocument = 'DeleteDocument';
   static const String MaterialError = 'MaterialError';
+
+  //work order scope
+  static const String name = 'Name';
+  static const String controlList = 'ControlList';
+  static const String startDate = 'Start Date';
+  static const String technician = 'Technician';
+
   // // static String const ----------MAİNTENANCE---------- = '----------MAİNTENANCE----------';
   // static const Manage Check List = 'Manage Check List';
   // static const Add Check List = 'Add Check List';

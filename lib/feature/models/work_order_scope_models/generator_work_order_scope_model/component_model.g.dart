@@ -8,8 +8,11 @@ part of '../component_model.dart';
 
 ComponentModel _$ComponentModelFromJson(Map<String, dynamic> json) =>
     ComponentModel(
-      willBeAppliedToComponents:
-          json['willBeAppliedToComponents'] as List<dynamic>?,
+      willBeAppliedToComponents: (json['willBeAppliedToComponents']
+              as List<dynamic>?)
+          ?.map((e) =>
+              WillBeAppliedToComponentModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$ComponentModelToJson(ComponentModel instance) =>
