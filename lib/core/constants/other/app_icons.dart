@@ -57,4 +57,9 @@ class AppIcons {
   static const IconData language = Icons.language;
   static const IconData darkMode = Icons.dark_mode;
   static const IconData lightMode = Icons.light_mode;
+
+  // Work Order Icons
+  static const IconData okay = Icons.done;
+  static const IconData clear = Icons.clear;
+  static const IconData send = Icons.send;
 }

@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:vm_fm_4/feature/models/work_order_scope_models/checklist_has_regulation_model.dart';
 import 'package:vm_fm_4/feature/models/work_order_scope_models/includesof_check_item_model.dart';
 
 part 'generator_work_order_scope_model/checklist_model.g.dart';
@@ -8,7 +9,7 @@ part 'generator_work_order_scope_model/checklist_model.g.dart';
 class CheckListModel extends Equatable {
     final String? name;
     final int? id;
-    final List<dynamic>? hasRegulations;
+    final List<CheckListHasRegulationModel>? hasRegulations;
     final List<IncludesOfCheckItemModel>? includesOfCheckItems;
 
 

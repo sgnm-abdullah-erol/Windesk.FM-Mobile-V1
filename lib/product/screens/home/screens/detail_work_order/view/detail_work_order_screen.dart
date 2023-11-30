@@ -6,10 +6,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
+import 'package:vm_fm_4/core/route/app_route.gr.dart' as Route;
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 import 'package:vm_fm_4/feature/global_providers/global_provider.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
-import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/view/scope_list_screen.dart';
+import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/view/scope_list.dart';
 
 import '../../../../../../core/constants/other/app_icons.dart';
 import '../../../../../../core/constants/other/colors.dart';
@@ -100,7 +101,7 @@ class DetailWorkOrderScreen extends StatelessWidget {
                                       ? const SizedBox()
                                       : IconButton(
                                           onPressed:() =>  
-                                            context.router.push(ScopeListScreen() as PageRouteInfo),
+                                            context.router.push(Route.ScopeList(taskId: woDetailProvider.detail.task?.id.toString() ?? '')),
                                           icon: const Icon(AppIcons.addBox),
                                         ),
                                   (woDetailProvider.detail.task?.userId ?? '') != context.read<GlobalProvider>().userId
@@ -115,9 +116,8 @@ class DetailWorkOrderScreen extends StatelessWidget {
         },
       ),
     );
-  }
-
-  Padding _customPageAccordionSection(BuildContext context, WorkOrderDetailProvider woDetailProvider) {
+ }
+ Padding _customPageAccordionSection(BuildContext context, WorkOrderDetailProvider woDetailProvider) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 22),
       child: CustomBaseAccordion(list: _filterAcordionList(context, woDetailProvider)),

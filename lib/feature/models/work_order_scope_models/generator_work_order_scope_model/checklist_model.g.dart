@@ -10,7 +10,10 @@ CheckListModel _$CheckListModelFromJson(Map<String, dynamic> json) =>
     CheckListModel(
       name: json['name'] as String?,
       id: json['id'] as int?,
-      hasRegulations: json['hasRegulations'] as List<dynamic>?,
+      hasRegulations: (json['hasRegulations'] as List<dynamic>?)
+          ?.map((e) =>
+              CheckListHasRegulationModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
       includesOfCheckItems: (json['includesOfCheckItems'] as List<dynamic>?)
           ?.map((e) =>
               IncludesOfCheckItemModel.fromJson(e as Map<String, dynamic>))

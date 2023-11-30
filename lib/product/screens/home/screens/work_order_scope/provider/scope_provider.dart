@@ -6,6 +6,15 @@ class ScopeProvider extends ChangeNotifier {
   bool _fetchQuery = true;
   bool get fetchQuery => _fetchQuery;
 
+  bool _selectedValue = false;
+  bool get selectedValue => _selectedValue;
+
+  void setSelectedValue() {
+    _selectedValue = !_selectedValue;
+    print(_selectedValue);
+    notifyListeners();
+  }
+
   void getQuery() async {
     _fetchQuery = false;
     notifyListeners();
@@ -19,10 +28,8 @@ class ScopeProvider extends ChangeNotifier {
           "where": {"id": 2940}
         },
         pollInterval: const Duration(seconds: 10),
-      ),      
+      ),
     );
-    print('seeess' + response.toString());
-
     notifyListeners();
   }
 }

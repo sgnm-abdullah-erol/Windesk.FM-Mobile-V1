@@ -80,7 +80,6 @@ class CustomWorkSpaceDetailCard extends StatelessWidget {
               ),
               const CustomWoSummaryDivider(),
               const SizedBox(height: 10),
-
               // location
               _LocationInformation(
                 workSpaceDetail,

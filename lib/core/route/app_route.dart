@@ -40,8 +40,11 @@ class AppRouter extends $AppRouter {
                     path: 'workOrderGroupDetailScreen',
                     page: WorkOrderGroupDetailScreen.page),
                 AutoRoute(
-                    path: 'scopeListScreen',
-                    page: ScopeListScreen.page),
+                    path: 'scopeList',
+                    page: ScopeList.page),
+                AutoRoute(
+                    path: 'scopeDetail',
+                    page: ScopeDetail.page),
               ],
             ),
             AutoRoute(
