@@ -257,7 +257,6 @@ class WoCreateProvider extends ChangeNotifier {
         _locationKey = _woLocationList.children?[i].key ?? '';
         _lazyType = _woLocationList.children?[i].labels?[0] ?? '';
         _locationLeaf = _woLocationList.children?[i].leaf ?? true;
-        print('ASDDASDSA' + _locationLeaf.toString());
         _selectedLeafIsTrue = _locationLeaf;
         _requestedId = _woLocationList.children![i].id.toString();
         _requestedLabel = _woLocationList.children![i].labels![0].toString();

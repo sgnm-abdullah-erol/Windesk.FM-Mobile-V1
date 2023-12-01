@@ -121,7 +121,7 @@ class CustomScopeListCard extends StatelessWidget {
               style: context.titleSmall.copyWith(color: APPColors.Main.black),
             ),
           ),
-          SizedBox(),
+          const SizedBox(),
           Expanded(
             flex: 4,
             child: Text(

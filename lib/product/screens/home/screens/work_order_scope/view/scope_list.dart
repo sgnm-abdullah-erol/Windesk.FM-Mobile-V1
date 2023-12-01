@@ -28,7 +28,7 @@ class ScopeList extends StatelessWidget {
                 options: QueryOptions(
                   document: gql(queries.maintenancesTask),
                   variables: {
-                    "where": {"isDeleted": false, "id": 2559}
+                    "where": {"isDeleted": false, "id": int.parse(taskId)}
                   },
                   //pollInterval: 10,
                 ),

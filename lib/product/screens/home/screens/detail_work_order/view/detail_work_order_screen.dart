@@ -10,7 +10,6 @@ import 'package:vm_fm_4/core/route/app_route.gr.dart' as Route;
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 import 'package:vm_fm_4/feature/global_providers/global_provider.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
-import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/view/scope_list.dart';
 
 import '../../../../../../core/constants/other/app_icons.dart';
 import '../../../../../../core/constants/other/colors.dart';

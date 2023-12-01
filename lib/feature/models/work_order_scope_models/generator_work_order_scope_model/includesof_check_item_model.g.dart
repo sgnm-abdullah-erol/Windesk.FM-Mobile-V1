@@ -17,6 +17,7 @@ IncludesOfCheckItemModel _$IncludesOfCheckItemModelFromJson(
       description: json['description'] as String?,
       isRequired: json['isRequired'] as bool?,
       documentRequired: json['documentRequired'] as bool?,
+      value: json['value'],
     );
 
 Map<String, dynamic> _$IncludesOfCheckItemModelToJson(
@@ -30,4 +31,5 @@ Map<String, dynamic> _$IncludesOfCheckItemModelToJson(
       'description': instance.description,
       'isRequired': instance.isRequired,
       'documentRequired': instance.documentRequired,
+      'value': instance.value,
     };
