@@ -54,3 +54,21 @@ mutation CreateCheckItemValue($createCheckItemValueInput: CreateCheckItemValueIn
   }
 }
 ''';
+
+
+const String startCheckListValueInput = r'''
+mutation StartCheckListValue($startCheckListValueInput: StartCheckListValueInput!) {
+  startCheckListValue(startCheckListValueInput: $startCheckListValueInput) {
+    id
+    labels
+  }
+}
+''';
+
+const String acceptRegulationMessage = r'''
+mutation AcceptRegulationMessage($acceptRegulationMessageInput: AcceptRegulationMessageInput!) {
+  acceptRegulationMessage(acceptRegulationMessageInput: $acceptRegulationMessageInput) {
+    id   
+  }
+}
+''';

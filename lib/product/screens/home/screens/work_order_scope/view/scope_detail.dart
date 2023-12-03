@@ -9,14 +9,15 @@ import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/provider/s
 
 @RoutePage()
 class ScopeDetail extends StatelessWidget {
-  const ScopeDetail({super.key, this.maintanenceList});
+  const ScopeDetail({super.key, this.maintanenceList, this.checkListValueId});
   final MaintanenceModel? maintanenceList;
+  final int? checkListValueId;
   @override
   Widget build(BuildContext context) {
+    print(checkListValueId);
     return ChangeNotifierProvider(
       create: (context) => ScopeProvider(),
       child: Scaffold(
-        
           appBar: CustomMainAppbar(
             title: Text('Check Items - ${maintanenceList?.id.toString()}'),
             returnBack: true,
@@ -29,6 +30,7 @@ class ScopeDetail extends StatelessWidget {
                     return CustomScopeCheckItemCard(
                       checkItem: maintanenceList?.scheduledBy?[0].parentSchedule?[0].checkList?[0].includesOfCheckItems?[index],
                       provider: provider,
+                      checkListValueId: checkListValueId,
                     );
                   }),
             );
