@@ -11,9 +11,7 @@ ComponentPropertiesModel _$ComponentPropertiesModelFromJson(
     ComponentPropertiesModel(
       canDisplay: json['canDisplay'] as bool?,
       warrantyDurationParts: json['warrantyDurationParts'] as int?,
-      installationDate: json['installationDate'] == null
-          ? null
-          : DateTime.parse(json['installationDate'] as String),
+      installationDate: json['installationDate'],
       description: json['description'] as String?,
       className: json['className'] as String?,
       assetIdentifier: json['assetIdentifier'] as String?,
@@ -28,9 +26,7 @@ ComponentPropertiesModel _$ComponentPropertiesModelFromJson(
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),
-      warrantyStartDate: json['warrantyStartDate'] == null
-          ? null
-          : DateTime.parse(json['warrantyStartDate'] as String),
+      warrantyStartDate: json['warrantyStartDate'],
       isDeleted: json['isDeleted'] as bool?,
       name: json['name'] as String?,
       warrantyDurationLabor: json['warrantyDurationLabor'] as int?,
@@ -58,7 +54,7 @@ Map<String, dynamic> _$ComponentPropertiesModelToJson(
     <String, dynamic>{
       'canDisplay': instance.canDisplay,
       'warrantyDurationParts': instance.warrantyDurationParts,
-      'installationDate': instance.installationDate?.toIso8601String(),
+      'installationDate': instance.installationDate,
       'description': instance.description,
       'className': instance.className,
       'assetIdentifier': instance.assetIdentifier,
@@ -71,7 +67,7 @@ Map<String, dynamic> _$ComponentPropertiesModelToJson(
       'trId': instance.trId,
       'tagNumber': instance.tagNumber,
       'createdAt': instance.createdAt?.toIso8601String(),
-      'warrantyStartDate': instance.warrantyStartDate?.toIso8601String(),
+      'warrantyStartDate': instance.warrantyStartDate,
       'isDeleted': instance.isDeleted,
       'name': instance.name,
       'warrantyDurationLabor': instance.warrantyDurationLabor,

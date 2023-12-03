@@ -16,7 +16,7 @@ class ServiceManager {
 
   Future<BaseResponseModel> queryGraphQL(String url, String token, String query, Function parserFunction) async {
     try {
-      final response = await dio.post(
+      final response = await dio.post(  
         url,
         options: Options(headers: {'authorization': 'Bearer $token'}, contentType: Headers.jsonContentType),
         data: {

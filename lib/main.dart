@@ -14,7 +14,7 @@ import 'feature/global_providers/global_provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Init.init();
-
+  
   runApp(
     EasyLocalization(
       supportedLocales: AppLocalization.supportedLocales,

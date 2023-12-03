@@ -39,6 +39,8 @@ class LoginProvider extends ChangeNotifier {
   bool get rememberMe => _rememberMe;
 
   String _userToken = '';
+  String get userToken => _userToken;
+
   String _userTokenName = '';
 
   String _userId = '';
@@ -68,15 +70,14 @@ class LoginProvider extends ChangeNotifier {
         _isLoginSuccess = true;
         _userId = login.id.toString();
         notifyListeners();
+        _userToken = login.accessToken ?? '';
 
         Future.delayed(const Duration(milliseconds: 2000), () async {
           loginModel = login;
-          _userToken = loginModel.accessToken ?? '';
-
           _userTokenName = userName;
 
           //  save the token to preferences
-          await _setTokenToPreferences(login.refreshToken ?? '', login.id.toString(), context);
+          await _setTokenToPreferences(login.refreshToken ?? '', login.id.toString(), context, login.accessToken ?? '');
 
           _setField();
         });
@@ -104,15 +105,14 @@ class LoginProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> _setTokenToPreferences(String refreshToken, String userId,context) async {
+  Future<void> _setTokenToPreferences(String refreshToken, String userId, context, String accessToken) async {
+    print('accesstoken' + accessToken);
     await SharedManager().setString(SharedEnum.userNameLogin, _userNameController.text);
     await SharedManager().setString(SharedEnum.userToken, _userToken);
     await SharedManager().setString(SharedEnum.userName, _userNameController.text);
     await SharedManager().setString(SharedEnum.refreshToken, refreshToken);
     await SharedManager().setString(SharedEnum.userId, userId);
     await SharedManager().setBool(SharedEnum.rememberMe, _rememberMe);
-    context.read<GlobalProvider>().setUserId(userId);
-
   }
 
   // void _setUserName(BuildContext context) async {

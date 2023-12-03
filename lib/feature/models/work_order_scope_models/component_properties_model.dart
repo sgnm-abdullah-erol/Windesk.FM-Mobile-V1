@@ -8,7 +8,7 @@ part 'generator_work_order_scope_model/component_properties_model.g.dart';
 class ComponentPropertiesModel extends Equatable {
     final bool? canDisplay;
     final int? warrantyDurationParts;
-    final DateTime? installationDate;
+    final dynamic installationDate;
     final String? description;
     final String? className;
     final String? assetIdentifier;
@@ -21,7 +21,7 @@ class ComponentPropertiesModel extends Equatable {
     final String? trId;
     final String? tagNumber;
     final DateTime? createdAt;
-    final DateTime? warrantyStartDate;
+    final dynamic warrantyStartDate;
     final bool? isDeleted;
     final String? name;
     final int? warrantyDurationLabor;

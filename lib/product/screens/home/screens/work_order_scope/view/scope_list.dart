@@ -21,7 +21,7 @@ class ScopeList extends StatelessWidget {
         returnBack: true,
       ),
       body: GraphQLProvider(
-          client: GraphQLManager.getClient(HttpLink('https://workorder-server.ifm.gov.tr/general-graphql')),
+          client: GraphQLManager.getClient(HttpLink('http://localhost:3015/general-graphql')),
           child: Column(
             children: [
               Query(

@@ -102,8 +102,12 @@ class SplashProvider extends ChangeNotifier {
         // set global properties
         String userName = await SharedManager().getString(SharedEnum.userName);
         String userId = await SharedManager().getString(SharedEnum.userId);
+        String userTokenn = await SharedManager().getString(SharedEnum.userToken);
+
         context.read<GlobalProvider>().setUserName(userName);
         context.read<GlobalProvider>().setUserId(userId);
+        context.read<GlobalProvider>().setGlobalUserToken(userTokenn);
+
       } else {
         _isUserAlreadyLoggedIn = false;
       }

@@ -73,6 +73,8 @@ class DetailWorkOrderScreen extends StatelessWidget {
               snackBar(context, LocaleKeys.TakeItOnMeSuccess.tr(), 'success');
             }
           });
+          print('taskkkk0');
+          print(woDetailProvider.detail.task!.userId.toString() + ' : '+context.read<GlobalProvider>().userId);
 
           return woDetailProvider.initLoading
               ? const CustomLoadingIndicator()
@@ -92,6 +94,7 @@ class DetailWorkOrderScreen extends StatelessWidget {
                                 children: [
                                   CustomWorkSpaceDetailCard(workSpaceDetail: woDetailProvider.detail, workOrderDetailProvider: woDetailProvider),
                                   const SizedBox(height: 10),
+                                  
                                   (woDetailProvider.detail.task?.userId ?? '') != context.read<GlobalProvider>().userId
                                       ? _TakeItOnMe(provider: woDetailProvider)
                                       : _StateChangeDropDownButton(provider: woDetailProvider, workSpaceDetail: workSpaceDetail),

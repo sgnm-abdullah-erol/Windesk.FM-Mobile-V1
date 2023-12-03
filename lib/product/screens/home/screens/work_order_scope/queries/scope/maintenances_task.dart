@@ -45,3 +45,12 @@ query MaintenancesTask($where: MaintenanceWhere)  {
     }
   }
   ''';
+
+const String createCheckItemValue = r'''
+mutation CreateCheckItemValue($createCheckItemValueInput: CreateCheckItemValueInput!) {
+  createCheckItemValue(createCheckItemValueInput: $createCheckItemValueInput) {
+    id
+    key
+  }
+}
+''';

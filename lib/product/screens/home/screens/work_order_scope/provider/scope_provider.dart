@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:vm_fm_4/core/database/shared_manager.dart';
+import 'package:vm_fm_4/core/enums/shared_enums.dart';
 import 'package:vm_fm_4/feature/models/work_order_scope_models/includesof_check_item_model.dart';
 
 class ScopeProvider extends ChangeNotifier {
@@ -8,14 +11,38 @@ class ScopeProvider extends ChangeNotifier {
   bool _selectedValue = false;
   bool get selectedValue => _selectedValue;
 
+  String _startDate = '';
+  String get startDate => _startDate;
+
+  String _userToken = '';
+  String get userToken => _userToken;
+
   IncludesOfCheckItemModel _checkItem = const IncludesOfCheckItemModel();
   IncludesOfCheckItemModel get checkItem => _checkItem;
+
+  bool fetchToken = true;
+
+  // void getToken() async {
+  //   fetchToken = false;
+  //   String _userToken = await SharedManager().getString(SharedEnum.userToken);
+  //   print('sdasddsads' + _userToken);
+  //   final AuthLink authLink = AuthLink(
+  //     getToken: () async => 'Bearer $_userToken',
+  //     // OR
+  //     // getToken: () => 'Bearer <YOUR_PERSONAL_ACCESS_TOKEN>',
+  //   );
+  // }
 
   void setSelectedValue(IncludesOfCheckItemModel? checkItems) {
     if (checkItems?.value) {
       //checkItems?.value = !checkItems.value;
     }
     _selectedValue = !_selectedValue;
+    notifyListeners();
+  }
+
+  void selectedDate(String value) {
+    _startDate = value;
     notifyListeners();
   }
 

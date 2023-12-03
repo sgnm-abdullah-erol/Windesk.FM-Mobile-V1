@@ -43,6 +43,8 @@ class LoginScreen extends StatelessWidget {
             if (loginProvider.isLoginSuccess) {
               snackBar(context, LocaleKeys.LoginSuccess.tr(), 'success');
               context.read<GlobalProvider>().setUserId(loginProvider.userId);
+              context.read<GlobalProvider>().setGlobalUserToken(loginProvider.userToken);
+
             }
           });
 

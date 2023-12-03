@@ -30,6 +30,7 @@ class GlobalProvider extends ChangeNotifier {
   }
 
   void setGlobalUserToken(String globalUserToken) {
+    print('accesstoken9019012 ' + globalUserToken);
     _globalUserToken = globalUserToken;
   }
 

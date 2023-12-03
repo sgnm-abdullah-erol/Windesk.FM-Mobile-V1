@@ -19,7 +19,7 @@ class ServiceTools {
   static const String graphQLUrl = "graphql";
   static const String generalGraphqlUrl = "general-graphql";
 
-  static const bool _isProduction = true;
+  static const bool _isProduction = false;
 
   static Url get url {
     if (_isProduction) {
@@ -32,11 +32,11 @@ class ServiceTools {
       );
     } else {
       return const Url(
-        facility_url: "http://10.0.2.2:3000",
-        location_url: "http://10.0.2.2:3010",
-        users_url: "http://10.0.2.2:3012",
-        asset_url: "http://10.0.2.2:3014",
-        workorder_url: "http://10.0.2.2:3015",
+        facility_url: "http://localhost:3010",
+        location_url: "http://localhost:3010",
+        users_url: "http://localhost:3012",
+        asset_url: "http://localhost:3014",
+        workorder_url: "http://localhost:3015",
       );
     }
   }
