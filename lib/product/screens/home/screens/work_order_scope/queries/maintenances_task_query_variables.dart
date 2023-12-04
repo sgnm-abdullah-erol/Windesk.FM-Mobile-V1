@@ -18,4 +18,13 @@ final class MaintenancesTaskVariableQueries {
       }
     };
   }
+
+  static Map<String, dynamic> acceptRegulationMessageInput(int checkListValueId, int regulationId) {
+    return {
+      "acceptRegulationMessageInput": {
+        "checkListValueId": checkListValueId,
+        "regulationId": regulationId,
+      }
+    };
+  }
 }

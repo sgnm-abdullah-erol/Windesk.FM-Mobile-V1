@@ -7,6 +7,7 @@ import 'package:vm_fm_4/core/route/app_route.gr.dart';
 import 'package:vm_fm_4/feature/models/work_order_scope_models/maintanence_model.dart';
 import 'package:vm_fm_4/feature/service/graphql_manager.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/queries/maintenances_task_queries.dart';
+import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/queries/maintenances_task_query_variables.dart';
 
 class AlertCheckListBottomSheet extends StatelessWidget {
   const AlertCheckListBottomSheet({super.key, required this.maintanenceModel, required this.checkListValueId});
@@ -33,7 +34,12 @@ class AlertCheckListBottomSheet extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(maintanenceModel.scheduledBy?.first.parentSchedule?.first.checkList?.first.hasRegulations?.first.name ?? ''),
-                Text(maintanenceModel.scheduledBy?.first.parentSchedule?.first.checkList?.first.hasRegulations?.first.description ?? ''),
+                Flexible(
+                  child: Text(
+                    maintanenceModel.scheduledBy?.first.parentSchedule?.first.checkList?.first.hasRegulations?.first.description ?? '',
+                    maxLines: 3,
+                  ),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -49,12 +55,12 @@ class AlertCheckListBottomSheet extends StatelessWidget {
                       height: 45,
                       child: ElevatedButton(
                         onPressed: () {
-                          runMutation({
-                            "acceptRegulationMessageInput": {
-                              "checkListValueId": checkListValueId,
-                              "regulationId": maintanenceModel.scheduledBy?.first.parentSchedule?.first.checkList?.first.hasRegulations?.first.id
-                            }
-                          });
+                          runMutation(
+                            MaintenancesTaskVariableQueries.acceptRegulationMessageInput(
+                              checkListValueId,
+                              maintanenceModel.scheduledBy?.first.parentSchedule?.first.checkList?.first.hasRegulations?.first.id ?? 0,
+                            ),
+                          );
                         },
                         style: ElevatedButton.styleFrom(backgroundColor: APPColors.Main.green),
                         child: Icon(AppIcons.okay, color: APPColors.Main.black),
