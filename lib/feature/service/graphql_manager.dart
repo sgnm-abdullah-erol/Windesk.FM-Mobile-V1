@@ -27,7 +27,6 @@ class GraphQLManager {
     final HttpLink httpLink = HttpLink('http://localhost:3015/graphql');
     final AuthLink authLink = AuthLink(getToken: () async => 'Bearer ${context.read<GlobalProvider>().globalUserToken}');
 
-
     final Link link = authLink.concat(httpLink);
     _client = ValueNotifier<GraphQLClient>(
       GraphQLClient(

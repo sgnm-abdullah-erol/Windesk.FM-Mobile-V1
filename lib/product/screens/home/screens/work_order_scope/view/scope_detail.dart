@@ -16,23 +16,27 @@ class ScopeDetail extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => ScopeProvider(),
       child: Scaffold(
-          appBar: CustomMainAppbar(
-            title: Text('Check Items - ${maintanenceList?.id.toString()}'),
-            returnBack: true,
-          ),
-          body: Consumer<ScopeProvider>(builder: (context, ScopeProvider provider, child) {
+        appBar: CustomMainAppbar(
+          title: Text('Check Items - ${maintanenceList?.id.toString()}'),
+          returnBack: true,
+        ),
+        body: Consumer<ScopeProvider>(
+          builder: (context, ScopeProvider provider, child) {
             return SizedBox(
               child: ListView.builder(
-                  itemCount: maintanenceList?.scheduledBy?[0].parentSchedule?[0].checkList?[0].includesOfCheckItems?.length,
-                  itemBuilder: (context, index) {
-                    return CustomScopeCheckItemCard(
-                      checkItem: maintanenceList?.scheduledBy?[0].parentSchedule?[0].checkList?[0].includesOfCheckItems?[index],
-                      provider: provider,
-                      checkListValueId: checkListValueId,
-                    );
-                  }),
+                itemCount: maintanenceList?.scheduledBy?[0].parentSchedule?[0].checkList?[0].includesOfCheckItems?.length,
+                itemBuilder: (context, index) {
+                  return CustomScopeCheckItemCard(
+                    checkItem: maintanenceList?.scheduledBy?[0].parentSchedule?[0].checkList?[0].includesOfCheckItems?[index],
+                    provider: provider,
+                    checkListValueId: checkListValueId,
+                  );
+                },
+              ),
             );
-          })),
+          },
+        ),
+      ),
     );
   }
 }

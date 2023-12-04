@@ -22,31 +22,32 @@ class ScopeList extends StatelessWidget {
         returnBack: true,
       ),
       body: GraphQLProvider(
-          client: GraphQLManager.getClient(HttpLink('http://localhost:3015/general-graphql')),
-          child: Column(
-            children: [
-              Query(
-                options: QueryOptions(
-                  document: gql(queries.maintenancesTask),
-                  variables: {
-                    "where": {"isDeleted": false, "id": int.parse(taskId)}
-                  },
-                  //pollInterval: 10,
-                ),
-                builder: withGenericHandling((QueryResult result, {refetch, fetchMore}) {
-                  if (result.data == null && !result.hasException) {
-                    return const Text(
-                      'Loading has completed, but both data and errors are null. '
-                      'This should never be the case – please open an issue',
-                    );
-                  }
-                  MaintanenceModel maintanenceModel;
-                  maintanenceModel = MaintanenceModel.fromJson(result.data?['maintenances'][0]);
-                  return ScopeBottomSheet(maintanenceModel: maintanenceModel, taskId: taskId);
-                }),
-              )
-            ],
-          )),
+        client: GraphQLManager.getClient(HttpLink('http://localhost:3015/general-graphql')),
+        child: Column(
+          children: [
+            Query(
+              options: QueryOptions(
+                document: gql(queries.maintenancesTask),
+                variables: {
+                  "where": {"isDeleted": false, "id": int.parse(taskId)}
+                },
+                //pollInterval: 10,
+              ),
+              builder: withGenericHandling((QueryResult result, {refetch, fetchMore}) {
+                if (result.data == null && !result.hasException) {
+                  return const Text(
+                    'Loading has completed, but both data and errors are null. '
+                    'This should never be the case – please open an issue',
+                  );
+                }
+                final MaintanenceModel maintanenceModel;
+                maintanenceModel = MaintanenceModel.fromJson(result.data?['maintenances'][0]);
+                return ScopeBottomSheet(maintanenceModel: maintanenceModel, taskId: taskId);
+              }),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

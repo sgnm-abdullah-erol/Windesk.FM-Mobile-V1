@@ -17,16 +17,17 @@ class ScopeBottomSheet extends StatelessWidget {
         height: context.height,
         width: context.width,
         child: ListView.builder(
-            itemCount: maintanenceModel.maintenancePlan?[0].components?[0].willBeAppliedToComponents?.length,
-            itemBuilder: (context, index) {
-              return CustomScopeListCard(
-                controlList:
-                    maintanenceModel.maintenancePlan?[0].components?[0].willBeAppliedToComponents?[index].componentOriginal?.properties?.className ??
-                        '',
-                name: maintanenceModel.maintenancePlan?[0].components?[0].willBeAppliedToComponents?[index].componentOriginal?.properties?.name ?? '',
-                maintanenceModel: maintanenceModel,
-              );
-            }),
+          itemCount: maintanenceModel.maintenancePlan?[0].components?[0].willBeAppliedToComponents?.length,
+          itemBuilder: (context, index) {
+            return CustomScopeListCard(
+              controlList:
+                  maintanenceModel.maintenancePlan?[0].components?[0].willBeAppliedToComponents?[index].componentOriginal?.properties?.className ??
+                      '',
+              name: maintanenceModel.maintenancePlan?[0].components?[0].willBeAppliedToComponents?[index].componentOriginal?.properties?.name ?? '',
+              maintanenceModel: maintanenceModel,
+            );
+          },
+        ),
       ),
     );
   }

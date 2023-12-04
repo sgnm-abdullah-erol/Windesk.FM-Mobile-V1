@@ -1,18 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:vm_fm_4/product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
 
-/// boilerplate `result.loading` and `result.hasException` handling
-///
-/// ```dart
-/// if (result.loading) {
-///   return const Center(
-///     child: CircularProgressIndicator(),
-///   );
-/// }
-/// if (result.hasException) {
-///   return Text(result.exception.toString());
-/// }
-/// ```
 QueryBuilder withGenericHandling(QueryBuilder builder) {
   return (result, {fetchMore, refetch}) {
     if (result.hasException) {
@@ -20,9 +9,7 @@ QueryBuilder withGenericHandling(QueryBuilder builder) {
     }
 
     if (result.isLoading) {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
+      return const CustomLoadingIndicator();
     }
 
     return builder(result, fetchMore: fetchMore, refetch: refetch);
