@@ -24,7 +24,7 @@ class GraphQLManager {
   }
 
   static ValueNotifier<GraphQLClient> getClientForMutation(BuildContext context) {
-    final HttpLink httpLink = HttpLink('http://localhost:3015/graphql',defaultHeaders: {
+    final HttpLink httpLink = HttpLink('http://10.0.2.2:3015/graphql',defaultHeaders: {
       'Authorization' : 'Bearer ${context.read<GlobalProvider>().globalUserToken}',
       'user' : '{"id":"${context.read<GlobalProvider>().userId}"}'
     });

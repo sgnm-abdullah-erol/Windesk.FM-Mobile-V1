@@ -41,8 +41,7 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> {
             document: gql(queries.createCheckItemValue), // this is the mutation string you just created
             // you can update the cache based on results
             // or do something with the result.data on completion
-            update: (GraphQLDataProxy cache, QueryResult? result) {
-            },
+            update: (GraphQLDataProxy cache, QueryResult? result) {},
             onCompleted: (dynamic resultData) {
               if (!isDocumentMutation) {
                 if (resultData['createCheckItemValue']['id'] != null) {
@@ -59,7 +58,7 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> {
                   AddImageModalBottomSheet(
                     taskId: resultData['createCheckItemValue']['id'].toString() ?? '',
                     taskKey: resultData['createCheckItemValue']['key'] ?? '',
-                    saveImage:()=> widget.provider.saveCheckItemDocument,
+                    saveImage: widget.provider.saveCheckItemDocument,
                   ),
                 );
               }
