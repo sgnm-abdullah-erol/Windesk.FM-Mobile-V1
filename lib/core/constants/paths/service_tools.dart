@@ -15,10 +15,6 @@ class ServiceTools {
   static const String attachPathLive = "http://10.32.12.42/windesktest/xreadattach.php?token=$tokenV1&id=";
   static const String facilityName = "İstanbul Finans Merkezi";
   static const bool isWorkOrderExist = true;
-  static const String graphHqlUrl = "https://facility-server.ifm.gov.tr/";
-  static const String graphQLUrl = "graphql";
-  static const String generalGraphqlUrl = "general-graphql";
-
   static const bool _isProduction = false;
 
   static Url get url {
@@ -29,6 +25,8 @@ class ServiceTools {
         users_url: "https://user-server.ifm.gov.tr",
         asset_url: "https://asset-server.ifm.gov.tr",
         workorder_url: "https://workorder-server.ifm.gov.tr",
+        generalGraphql_url: "https://workorder-server.ifm.gov.tr/general-graphql",
+        graphql_url: "https://workorder-server.ifm.gov.tr/graphql",
       );
     } else {
       return const Url(
@@ -37,6 +35,8 @@ class ServiceTools {
         users_url: "http://localhost:3012",
         asset_url: "http://localhost:3014",
         workorder_url: "http://localhost:3015",
+        generalGraphql_url: "http://localhost:3015/general-graphql",
+        graphql_url: "http://localhost:3015/graphql",
       );
     }
   }
@@ -48,8 +48,9 @@ class Url {
   final String users_url;
   final String asset_url;
   final String location_url;
-
   final String workorder_url;
+  final String generalGraphql_url;
+  final String graphql_url;
 
   const Url({
     required this.facility_url,
@@ -57,5 +58,7 @@ class Url {
     required this.location_url,
     required this.asset_url,
     required this.workorder_url,
+    required this.generalGraphql_url,
+    required this.graphql_url,
   });
 }
