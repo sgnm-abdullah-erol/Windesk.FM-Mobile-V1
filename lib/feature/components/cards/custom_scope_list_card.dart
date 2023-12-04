@@ -8,10 +8,10 @@ import 'package:vm_fm_4/feature/components/buttons/custom_elevated_button_with_i
 import 'package:vm_fm_4/feature/models/work_order_scope_models/maintanence_model.dart';
 import 'package:vm_fm_4/feature/service/graphql_manager.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
+import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/queries/maintenances_task_queries.dart';
 
 import '../../../core/constants/other/colors.dart';
 import '../../extensions/context_extension.dart';
-import '../../../product/screens/home/screens/work_order_scope/queries/scope/maintenances_task.dart' as queries;
 
 class CustomScopeListCard extends StatelessWidget {
   const CustomScopeListCard(
@@ -26,18 +26,11 @@ class CustomScopeListCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print({
-      "checkListId": maintanenceModel?.scheduledBy?[0].parentSchedule?[0].checkList?[0].id,
-      "scopeId": maintanenceModel?.maintenancePlan?[0].components?[0].willBeAppliedToComponents?[0].componentOriginal?.identity?.low,
-      "scopeLabel": maintanenceModel?.maintenancePlan?[0].components?[0].willBeAppliedToComponents?[0].componentOriginal?.labels?[0],
-      "taskId": maintanenceModel?.id
-    });
-    
     return GraphQLProvider(
       client: GraphQLManager.getClientForMutation(context),
       child: Mutation(
           options: MutationOptions(
-            document: gql(queries.startCheckListValueInput),
+            document: gql(MaintenancesTaskQuery.startCheckListValueInput),
             update: (GraphQLDataProxy cache, QueryResult? result) {},
             onCompleted: (dynamic resultData) async {
               // ignore: avoid_print
@@ -117,9 +110,7 @@ class CustomScopeListCard extends StatelessWidget {
         client: GraphQLManager.getClientForMutation(context),
         child: Mutation(
             options: MutationOptions(
-              document: gql(queries.acceptRegulationMessage), // this is the mutation string you just created
-              // you can update the cache based on results
-              // or do something with the result.data on completion
+              document: gql(MaintenancesTaskQuery.acceptRegulationMessage),
               update: (GraphQLDataProxy cache, QueryResult? result) {},
               onCompleted: (dynamic resultData) async {
                 debugPrint('asd$checkListValueId');

@@ -8,6 +8,12 @@ import 'package:flutter/material.dart';
 class LocaleKeys {
   const LocaleKeys._();
 
+  // maintenance
+  static const String ScopeList = 'ScopeList';
+  static const String CheckList = 'CheckList';
+  static const String Contuniue = 'Contuniue';
+  static const String FetchScopeListError = 'FetchScopeListError';
+
   // asset search
   static const String assetSearch = 'Malzeme Arama';
 
@@ -306,6 +312,11 @@ class LocaleKeys {
   static const String technician = 'Technician';
   static const String date = 'Tarih';
   static const String scope = 'scope';
+  
+  static const String Name = 'Name';
+  static const String ControlList = 'ControlList';
+  static const String Technician = 'Technician';
+  static const String Date = 'Date';
 
   // // static String const ----------MAİNTENANCE---------- = '----------MAİNTENANCE----------';
   // static const Manage Check List = 'Manage Check List';

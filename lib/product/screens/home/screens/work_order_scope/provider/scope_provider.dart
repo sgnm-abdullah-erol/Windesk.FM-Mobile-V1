@@ -1,12 +1,27 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:vm_fm_4/core/database/shared_manager.dart';
+import 'package:vm_fm_4/core/enums/shared_enums.dart';
+import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
+import 'package:vm_fm_4/feature/injection.dart';
 import 'package:vm_fm_4/feature/models/work_order_scope_models/includesof_check_item_model.dart';
+import 'package:vm_fm_4/feature/service/global_services.dart/work_space_service/work_space_service_repository_impl.dart';
+import 'package:vm_fm_4/generated/locale_keys.g.dart';
 
 class ScopeProvider extends ChangeNotifier {
+  final WorkSpaceServiceRepositoryImpl workSpaceService = Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
+
   bool _fetchQuery = true;
   bool get fetchQuery => _fetchQuery;
 
   bool _selectedValue = false;
   bool get selectedValue => _selectedValue;
+
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+
+  bool _isImageAdded = false;
+  bool get isImageAdded => _isImageAdded;
 
   String _startDate = '';
   String get startDate => _startDate;
@@ -60,7 +75,36 @@ class ScopeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void saveCheckItemDocument(BuildContext context, String imagePath, String desc, String taskId, String taskKey) {
-    print('imagePath : ' + imagePath + 'desc : ' + desc + 'taskId : ' + taskId + 'taskKey : ' + taskKey);
+  void saveImage(BuildContext context, String imagePath, String desc, String scopeId, String taskKey) async {
+    if (imagePath.isEmpty) {
+      snackBar(context, LocaleKeys.EmptyImagePath.tr(), 'error');
+      return;
+    }
+    _isLoading = true;
+    notifyListeners();
+
+    final String token = await SharedManager().getString(SharedEnum.userToken);
+
+    final response = await workSpaceService.saveDocumentForMaintenance(imagePath, '', desc, token, scopeId, taskKey, 'image');
+    response.fold(
+      (l) => {
+        l
+            ? {
+                _isImageAdded = true,
+              }
+            : {
+                _isImageAdded = false,
+              }
+      },
+      (r) => {},
+    );
+
+    _isLoading = false;
+    notifyListeners();
+
+    Future.delayed(const Duration(seconds: 2), () {
+      _isImageAdded = false;
+    });
   }
 }
+

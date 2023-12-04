@@ -1112,14 +1112,15 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     }
   }
 
-    @override
+  @override
   Future<Either<bool, CustomServiceException>> saveDocumentForMaintenance(
     String filePath,
     String fileName,
+    String desc,
     String token,
-    String label,
-    int id,
+    String id,
     String key,
+    String label,
   ) async {
     bool result = false;
 
@@ -1135,6 +1136,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     final bytes = File(filePath).readAsBytesSync();
     String extension = fileName.split(".").last;
 
+    print('filepath' + File(filePath).path);
     // var formData = FormData.fromMap({
     //   "document": MultipartFile.fromBytes(
     //     bytes,
@@ -1150,10 +1152,10 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
         File(filePath).path,
         filename: fileName,
       ),
-      "body":{
+      "body": {
         "id": id,
-        "labels":[label],
-        "key":key
+        "labels": ["CheckItemValue"],
+        "key": key
       }
     });
 

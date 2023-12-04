@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:vm_fm_4/core/constants/paths/service_tools.dart';
 import 'package:vm_fm_4/feature/global_providers/global_provider.dart';
 
 class GraphQLManager {
-  static final HttpLink _httpLink = HttpLink('http://localhost:3015/graphql');
+  static final HttpLink _httpLink = HttpLink(ServiceTools.url.graphql_url);
 
   static ValueNotifier<GraphQLClient> _client = ValueNotifier<GraphQLClient>(
     GraphQLClient(
@@ -24,9 +25,9 @@ class GraphQLManager {
   }
 
   static ValueNotifier<GraphQLClient> getClientForMutation(BuildContext context) {
-    final HttpLink httpLink = HttpLink('http://10.0.2.2:3015/graphql',defaultHeaders: {
-      'Authorization' : 'Bearer ${context.read<GlobalProvider>().globalUserToken}',
-      'user' : '{"id":"${context.read<GlobalProvider>().userId}"}'
+    final HttpLink httpLink = HttpLink(ServiceTools.url.graphql_url, defaultHeaders: {
+      'Authorization': 'Bearer ${context.read<GlobalProvider>().globalUserToken}',
+      'user': '{"id":"${context.read<GlobalProvider>().userId}"}'
     });
 
     _client = ValueNotifier<GraphQLClient>(

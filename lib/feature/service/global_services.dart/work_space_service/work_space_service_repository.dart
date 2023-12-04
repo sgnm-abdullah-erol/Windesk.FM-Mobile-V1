@@ -117,9 +117,10 @@ abstract class WorkSpaceServiceRepository {
   Future<Either<bool, CustomServiceException>> saveDocumentForMaintenance(
     String filePath,
     String fileName,
+    String desc,
     String token,
-    String label,
-    int id,
+    String id,
     String key,
+    String label,
   );
 }

@@ -8,7 +8,7 @@ import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
 import 'package:vm_fm_4/feature/models/work_order_scope_models/includesof_check_item_model.dart';
 import 'package:vm_fm_4/feature/service/graphql_manager.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/provider/scope_provider.dart';
-import '../../../product/screens/home/screens/work_order_scope/queries/scope/maintenances_task.dart' as queries;
+import '../../../product/screens/home/screens/work_order_scope/queries/maintenances_task_queries.dart';
 
 class CustomScopeCheckItemCard extends StatefulWidget {
   const CustomScopeCheckItemCard({super.key, this.checkItem, required this.provider, this.checkListValueId});
@@ -38,7 +38,7 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> {
       client: GraphQLManager.getClientForMutation(context),
       child: Mutation(
           options: MutationOptions(
-            document: gql(queries.createCheckItemValue), // this is the mutation string you just created
+            document: gql(MaintenancesTaskQuery.createCheckItemValue), // this is the mutation string you just created
             // you can update the cache based on results
             // or do something with the result.data on completion
             update: (GraphQLDataProxy cache, QueryResult? result) {},
@@ -56,9 +56,9 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> {
                 ShowModalBottomSheet().show(
                   context,
                   AddImageModalBottomSheet(
-                    taskId: resultData['createCheckItemValue']['id'].toString() ?? '',
+                    taskId: resultData['createCheckItemValue']['id'].toString(),
                     taskKey: resultData['createCheckItemValue']['key'] ?? '',
-                    saveImage: widget.provider.saveCheckItemDocument,
+                    saveImage: widget.provider.saveImage,
                   ),
                 );
               }
@@ -87,6 +87,7 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> {
                       Text(widget.checkItem?.description ?? ''),
                       Align(
                         alignment: Alignment.center,
+                        // TODO dynamic form
                         child: DynamicForm().formType(widget.checkItem?.inputType ?? '', selectedValue, () {
                           setState(() {
                             selectedValue = !selectedValue;
