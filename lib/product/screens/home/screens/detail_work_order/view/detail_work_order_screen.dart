@@ -6,7 +6,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
-import 'package:vm_fm_4/core/route/app_route.gr.dart' as Route;
+
+import 'package:vm_fm_4/core/route/app_route.gr.dart' as route;
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 import 'package:vm_fm_4/feature/global_providers/global_provider.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
@@ -27,8 +28,8 @@ import '../widgets/acordions/add_documant_accordion.dart';
 import '../widgets/acordions/add_efforts_accordion.dart';
 import '../widgets/acordions/add_material_accordion.dart';
 import '../widgets/acordions/add_notes_accordion.dart';
-import '../widgets/custom_work_space_detail_card.dart';
 import '../widgets/acordions/request_material_accordion.dart';
+import '../widgets/custom_work_space_detail_card.dart';
 
 @RoutePage()
 class DetailWorkOrderScreen extends StatelessWidget {
@@ -73,8 +74,6 @@ class DetailWorkOrderScreen extends StatelessWidget {
               snackBar(context, LocaleKeys.TakeItOnMeSuccess.tr(), 'success');
             }
           });
-          print('taskkkk0');
-          print(woDetailProvider.detail.task!.userId.toString() + ' : '+context.read<GlobalProvider>().userId);
 
           return woDetailProvider.initLoading
               ? const CustomLoadingIndicator()
@@ -94,7 +93,6 @@ class DetailWorkOrderScreen extends StatelessWidget {
                                 children: [
                                   CustomWorkSpaceDetailCard(workSpaceDetail: woDetailProvider.detail, workOrderDetailProvider: woDetailProvider),
                                   const SizedBox(height: 10),
-                                  
                                   (woDetailProvider.detail.task?.userId ?? '') != context.read<GlobalProvider>().userId
                                       ? _TakeItOnMe(provider: woDetailProvider)
                                       : _StateChangeDropDownButton(provider: woDetailProvider, workSpaceDetail: workSpaceDetail),
@@ -102,8 +100,8 @@ class DetailWorkOrderScreen extends StatelessWidget {
                                   (woDetailProvider.detail.task?.userId ?? '') != context.read<GlobalProvider>().userId
                                       ? const SizedBox()
                                       : IconButton(
-                                          onPressed:() =>  
-                                            context.router.push(Route.ScopeList(taskId: woDetailProvider.detail.task?.id.toString() ?? '')),
+                                          onPressed: () =>
+                                              context.router.push(route.ScopeList(taskId: woDetailProvider.detail.task?.id.toString() ?? '')),
                                           icon: const Icon(AppIcons.addBox),
                                         ),
                                   (woDetailProvider.detail.task?.userId ?? '') != context.read<GlobalProvider>().userId
@@ -118,8 +116,9 @@ class DetailWorkOrderScreen extends StatelessWidget {
         },
       ),
     );
- }
- Padding _customPageAccordionSection(BuildContext context, WorkOrderDetailProvider woDetailProvider) {
+  }
+
+  Padding _customPageAccordionSection(BuildContext context, WorkOrderDetailProvider woDetailProvider) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 22),
       child: CustomBaseAccordion(list: _filterAcordionList(context, woDetailProvider)),

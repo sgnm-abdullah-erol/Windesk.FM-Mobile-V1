@@ -6,7 +6,6 @@ import 'package:vm_fm_4/core/route/app_route.gr.dart';
 import 'package:vm_fm_4/feature/components/buttons/custom_circle_with_icon_button.dart';
 import 'package:vm_fm_4/feature/components/buttons/custom_elevated_button_with_icon.dart';
 import 'package:vm_fm_4/feature/models/work_order_scope_models/maintanence_model.dart';
-import 'package:vm_fm_4/feature/models/work_order_scope_models/start_check_list_value_model.dart';
 import 'package:vm_fm_4/feature/service/graphql_manager.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
 
@@ -34,11 +33,11 @@ class CustomScopeListCard extends StatelessWidget {
             document: gql(queries.startCheckListValueInput), // this is the mutation string you just created
             // you can update the cache based on results
             // or do something with the result.data on completion
-            update: (GraphQLDataProxy cache, QueryResult? result) {
-              return cache;
-            },
+            update: (GraphQLDataProxy cache, QueryResult? result) {},
             onCompleted: (dynamic resultData) async {
+              // ignore: avoid_print
               print(resultData['startCheckListValue']['id']);
+              // ignore: unused_local_variable
               final result = await _bottomSheet(context, resultData['startCheckListValue']['id']);
               //if (result != '') {
               // workSpaceDetail.task?.requestedSpaces?.name = result ?? '';
@@ -122,14 +121,12 @@ class CustomScopeListCard extends StatelessWidget {
               document: gql(queries.acceptRegulationMessage), // this is the mutation string you just created
               // you can update the cache based on results
               // or do something with the result.data on completion
-              update: (GraphQLDataProxy cache, QueryResult? result) {
-                return cache;
-              },
+              update: (GraphQLDataProxy cache, QueryResult? result) {},
               onCompleted: (dynamic resultData) async {
-                    print('asd'+checkListValueId.toString());
+                debugPrint('asd$checkListValueId');
 
                 context.router.push(ScopeDetail(maintanenceList: maintanenceModel, checkListValueId: checkListValueId));
-                print(resultData);
+                debugPrint(resultData);
               },
             ),
             builder: (

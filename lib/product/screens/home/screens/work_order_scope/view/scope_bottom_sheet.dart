@@ -4,10 +4,11 @@ import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 import 'package:vm_fm_4/feature/models/work_order_scope_models/maintanence_model.dart';
 
 class ScopeBottomSheet extends StatelessWidget {
-  ScopeBottomSheet({super.key, required this.maintanenceModel, required this.taskId});
+  const ScopeBottomSheet({super.key, required this.maintanenceModel, required this.taskId});
 
-  MaintanenceModel maintanenceModel;
-  String taskId;
+  final MaintanenceModel maintanenceModel;
+  final String taskId;
+
   @override
   Widget build(BuildContext context) {
     //List<WillBeAppliedToComponentModel> componentOriginals = WillBeAppliedToComponentModel.fromJsonList(maintanenceModel.maintenancePlan?[0].components?[0].willBeAppliedToComponents ?? ['']);
@@ -19,13 +20,12 @@ class ScopeBottomSheet extends StatelessWidget {
             itemCount: maintanenceModel.maintenancePlan?[0].components?[0].willBeAppliedToComponents?.length,
             itemBuilder: (context, index) {
               return CustomScopeListCard(
-                  controlList: maintanenceModel
-                          .maintenancePlan?[0].components?[0].willBeAppliedToComponents?[index].componentOriginal?.properties?.className ??
-                      '',
-                  name: maintanenceModel.maintenancePlan?[0].components?[0].willBeAppliedToComponents?[index].componentOriginal?.properties?.name ??
-                      '',
-                  maintanenceModel: maintanenceModel,
-                      );
+                controlList:
+                    maintanenceModel.maintenancePlan?[0].components?[0].willBeAppliedToComponents?[index].componentOriginal?.properties?.className ??
+                        '',
+                name: maintanenceModel.maintenancePlan?[0].components?[0].willBeAppliedToComponents?[index].componentOriginal?.properties?.name ?? '',
+                maintanenceModel: maintanenceModel,
+              );
             }),
       ),
     );

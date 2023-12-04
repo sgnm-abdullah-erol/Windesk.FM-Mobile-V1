@@ -10,14 +10,15 @@ import '../queries/scope/maintenances_task.dart' as queries;
 
 @RoutePage()
 class ScopeList extends StatelessWidget {
-  ScopeList({super.key, required this.taskId});
+  const ScopeList({super.key, required this.taskId});
 
-  String taskId;
+  final String taskId;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomMainAppbar(
-        title: Text('Scope List - ' + taskId),
+        title: Text('Scope List - $taskId'),
         returnBack: true,
       ),
       body: GraphQLProvider(

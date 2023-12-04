@@ -1,15 +1,10 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:provider/provider.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:vm_fm_4/core/constants/other/colors.dart';
 import 'package:vm_fm_4/feature/components/dynamic_form/dynamic_form.dart';
 import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
-import 'package:vm_fm_4/feature/global_providers/global_provider.dart';
 import 'package:vm_fm_4/feature/models/work_order_scope_models/includesof_check_item_model.dart';
 import 'package:vm_fm_4/feature/service/graphql_manager.dart';
-import 'package:vm_fm_4/generated/locale_keys.g.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/provider/scope_provider.dart';
 import '../../../product/screens/home/screens/work_order_scope/queries/scope/maintenances_task.dart' as queries;
 
@@ -43,16 +38,12 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> {
             document: gql(queries.createCheckItemValue), // this is the mutation string you just created
             // you can update the cache based on results
             // or do something with the result.data on completion
-            update: (GraphQLDataProxy cache, QueryResult? result) {
-              return cache;
-            },
+            update: (GraphQLDataProxy cache, QueryResult? result) {},
             onCompleted: (dynamic resultData) {
-              if(resultData['createCheckItemValue']['id'] != null)
-              {
-              snackBar(context, 'İşlem başarılı', 'success');
-              }
-              else{
-              snackBar(context, 'İşlem başarısız', 'error');
+              if (resultData['createCheckItemValue']['id'] != null) {
+                snackBar(context, 'İşlem başarılı', 'success');
+              } else {
+                snackBar(context, 'İşlem başarısız', 'error');
               }
               //print('resultdataaaaa' + resultData);
             },
@@ -100,7 +91,7 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> {
                                         : _initialController.text
                           }
                         }),
-                        child: Text('Kaydet'),
+                        child: const Text('Kaydet'),
                       )
                     ],
                   ),

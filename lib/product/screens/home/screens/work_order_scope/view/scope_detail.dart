@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vm_fm_4/feature/components/appbar/custom_main_appbar.dart';
 import 'package:vm_fm_4/feature/components/cards/custom_scope_check_item_card.dart';
-import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 import 'package:vm_fm_4/feature/models/work_order_scope_models/maintanence_model.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/provider/scope_provider.dart';
 
@@ -14,7 +13,6 @@ class ScopeDetail extends StatelessWidget {
   final int? checkListValueId;
   @override
   Widget build(BuildContext context) {
-    print(checkListValueId);
     return ChangeNotifierProvider(
       create: (context) => ScopeProvider(),
       child: Scaffold(

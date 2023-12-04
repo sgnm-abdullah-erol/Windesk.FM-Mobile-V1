@@ -23,8 +23,6 @@ class GraphQLManager {
     'http://localhost:3015/graphql',
   );
 
-
-
 _client = ValueNotifier<GraphQLClient>(
       GraphQLClient(
         link: link,

@@ -1,7 +1,6 @@
 // ignore_for_file: unused_field
 
 import 'package:flutter/material.dart';
-import 'package:vm_fm_4/feature/global_providers/global_provider.dart';
 
 import '../../../../core/database/shared_manager.dart';
 import '../../../../core/enums/shared_enums.dart';
@@ -63,6 +62,7 @@ class LoginProvider extends ChangeNotifier {
 
       final response = await _authService.login(userNameController.text, password);
 
+      // ignore: unused_local_variable
       LoginModel loginModel;
 
       response.fold((login) {
@@ -106,7 +106,6 @@ class LoginProvider extends ChangeNotifier {
   }
 
   Future<void> _setTokenToPreferences(String refreshToken, String userId, context, String accessToken) async {
-    print('accesstoken' + accessToken);
     await SharedManager().setString(SharedEnum.userNameLogin, _userNameController.text);
     await SharedManager().setString(SharedEnum.userToken, _userToken);
     await SharedManager().setString(SharedEnum.userName, _userNameController.text);
