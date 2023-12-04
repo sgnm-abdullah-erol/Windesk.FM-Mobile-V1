@@ -94,6 +94,8 @@ extension APPColorsExtension on APPColors {
         return const Color(0xffFFFDFD);
       case APPColors.Secondary:
         return const Color(0xffedede9);
+      case APPColors.Login:
+        return const Color(0xffffffff);
       default:
         return const Color(0xffFFFDFD);
     }

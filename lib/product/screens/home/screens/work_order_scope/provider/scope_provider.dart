@@ -61,6 +61,6 @@ class ScopeProvider extends ChangeNotifier {
   }
 
   void saveCheckItemDocument(BuildContext context, String imagePath, String desc, String taskId, String taskKey) {
-    print('imagePath : ' + imagePath + 'desc : ' + desc + 'taskId : ' + taskId + 'taskKey : ' + taskKey);
+    print('imagePath : ${imagePath}desc : ${desc}taskId : ${taskId}taskKey : $taskKey');
   }
 }
