@@ -111,8 +111,6 @@ class CustomScopeListCard extends StatelessWidget {
         child: Mutation(
             options: MutationOptions(
               document: gql(MaintenancesTaskQuery.acceptRegulationMessage),
-              // you can update the cache based on results
-              // or do something with the result.data on completion
               update: (GraphQLDataProxy cache, QueryResult? result) {},
               onCompleted: (dynamic resultData) async {
                 debugPrint('asd$checkListValueId');

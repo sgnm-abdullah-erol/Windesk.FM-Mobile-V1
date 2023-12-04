@@ -101,13 +101,13 @@ class CustomScopeListCard extends StatelessWidget {
   Column _columnChilds(BuildContext context) {
     return Column(
       children: [
-        _titleAndLabel(context, LocaleKeys.Name, name),
+        _titleAndLabel(context, LocaleKeys.Name.tr(), name),
         _emptyDivider(),
-        _titleAndLabel(context, LocaleKeys.ControlList, controlList),
+        _titleAndLabel(context, LocaleKeys.ControlList.tr(), controlList),
         _emptyDivider(),
         _titleAndLabel(
           context,
-          LocaleKeys.Date,
+          LocaleKeys.Date.tr(),
           maintanenceModel?.maintenancePlan?.first.components?.first.willBeAppliedToComponents?.first.componentOriginal?.properties?.createdAt
                   .toString() ??
               '',
@@ -115,7 +115,7 @@ class CustomScopeListCard extends StatelessWidget {
         _emptyDivider(),
         _titleAndLabel(
           context,
-          LocaleKeys.Technician,
+          LocaleKeys.Technician.tr(),
           maintanenceModel?.maintenancePlan?.first.components?.first.willBeAppliedToComponents?.first.componentOriginal?.properties?.name ?? '',
         ),
         _emptyDivider(),
