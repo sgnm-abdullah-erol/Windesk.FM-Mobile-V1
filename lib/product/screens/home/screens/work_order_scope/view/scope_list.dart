@@ -41,7 +41,7 @@ class ScopeList extends StatelessWidget {
                     return Text(LocaleKeys.FetchScopeListError.tr(), style: Theme.of(context).textTheme.bodyMedium);
                   }
                   final MaintanenceModel maintanenceModel = _checkNullablitiyOfMaintenanceModel(context, result.data ?? {});
-                  return ScopeBottomSheet(maintanenceModel: maintanenceModel, taskId: taskId);
+                  return ScopeCardListScreen(maintanenceModel: maintanenceModel, taskId: taskId);
                 },
               ),
             )
