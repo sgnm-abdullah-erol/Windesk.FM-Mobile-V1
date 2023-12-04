@@ -113,4 +113,13 @@ abstract class WorkSpaceServiceRepository {
   Future<List<ChildLocationStructure>> getChildLocationStructure(String userToken, String key, String label);
 
   Future<List<RejectStateModel>> getWorkSpaceRejectStateGroups(String taskId, String workSpaceId, String token);
+
+  Future<Either<bool, CustomServiceException>> saveDocumentForMaintenance(
+    String filePath,
+    String fileName,
+    String token,
+    String label,
+    int id,
+    String key,
+  );
 }

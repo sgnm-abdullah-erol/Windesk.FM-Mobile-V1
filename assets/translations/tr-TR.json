@@ -120,6 +120,7 @@
 	"ErrorChangeStateWithGroup" : "Lütfen grup seçimi yaparak devam ediniz",
 	"LocationChangeSuccessfull": " Lokasyon güncelleme başarılı",
 	"SelectaLocation": "Select a Location",
+	"scope": "Kapsam",
 
 
 	"----------------DATATABLE----------": "------------DATATABLE-------------",

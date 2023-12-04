@@ -62,4 +62,6 @@ class AppIcons {
   static const IconData okay = Icons.done;
   static const IconData clear = Icons.clear;
   static const IconData send = Icons.send;
+  static const IconData eventList = Icons.checklist_outlined;
+
 }

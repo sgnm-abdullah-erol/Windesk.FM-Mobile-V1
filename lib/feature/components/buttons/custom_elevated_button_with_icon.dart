@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../extensions/context_extension.dart';
@@ -28,7 +29,7 @@ class CustomElevatedButtonWithIcon extends StatelessWidget {
       style:  ButtonStyle(backgroundColor: MaterialStateProperty.all(bgColor),),
       onPressed: () => onPressFunction(),
       icon: Icon(icon, color: iconColor), //icon data for elevated button
-      label: Text(textValue,
+      label: Text(textValue.tr(),
           style: context.bodySmall.copyWith(color: textColor)), //label text
     );
   }

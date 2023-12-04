@@ -26,25 +26,24 @@ class CustomScopeListCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print({
+      "checkListId": maintanenceModel?.scheduledBy?[0].parentSchedule?[0].checkList?[0].id,
+      "scopeId": maintanenceModel?.maintenancePlan?[0].components?[0].willBeAppliedToComponents?[0].componentOriginal?.identity?.low,
+      "scopeLabel": maintanenceModel?.maintenancePlan?[0].components?[0].willBeAppliedToComponents?[0].componentOriginal?.labels?[0],
+      "taskId": maintanenceModel?.id
+    });
+    
     return GraphQLProvider(
       client: GraphQLManager.getClientForMutation(context),
       child: Mutation(
           options: MutationOptions(
-            document: gql(queries.startCheckListValueInput), // this is the mutation string you just created
-            // you can update the cache based on results
-            // or do something with the result.data on completion
+            document: gql(queries.startCheckListValueInput),
             update: (GraphQLDataProxy cache, QueryResult? result) {},
             onCompleted: (dynamic resultData) async {
               // ignore: avoid_print
               print(resultData['startCheckListValue']['id']);
               // ignore: unused_local_variable
               final result = await _bottomSheet(context, resultData['startCheckListValue']['id']);
-              //if (result != '') {
-              // workSpaceDetail.task?.requestedSpaces?.name = result ?? '';
-              // // ignore: use_build_context_synchronously
-              // context.router.popAndPush(DetailWorkOrderScreen(workSpaceDetail: workSpaceDetail));
-              //}
-              //print('resultdataaaaa' + resultData);
             },
           ),
           builder: (

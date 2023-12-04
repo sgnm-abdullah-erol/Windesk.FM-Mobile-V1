@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:vm_fm_4/core/constants/other/colors.dart';
 import 'package:vm_fm_4/feature/components/dynamic_form/dynamic_form.dart';
+import 'package:vm_fm_4/feature/components/model_bottom_sheet/add_image_modal_bottom_sheet.dart';
+import 'package:vm_fm_4/feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
 import 'package:vm_fm_4/feature/models/work_order_scope_models/includesof_check_item_model.dart';
 import 'package:vm_fm_4/feature/service/graphql_manager.dart';
@@ -24,6 +26,7 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> {
   final TextEditingController _textEditingController = TextEditingController();
   final TextEditingController _numberEditingController = TextEditingController();
   bool selectedValue = false;
+  bool isDocumentMutation = false;
   void setInitialController(String value) => setState(() {
         _initialController.text = value;
       });
@@ -38,12 +41,27 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> {
             document: gql(queries.createCheckItemValue), // this is the mutation string you just created
             // you can update the cache based on results
             // or do something with the result.data on completion
-            update: (GraphQLDataProxy cache, QueryResult? result) {},
+            update: (GraphQLDataProxy cache, QueryResult? result) {
+            },
             onCompleted: (dynamic resultData) {
-              if (resultData['createCheckItemValue']['id'] != null) {
-                snackBar(context, 'İşlem başarılı', 'success');
+              if (!isDocumentMutation) {
+                if (resultData['createCheckItemValue']['id'] != null) {
+                  snackBar(context, 'İşlem başarılı', 'success');
+                } else {
+                  snackBar(context, 'İşlem başarısız', 'error');
+                }
               } else {
-                snackBar(context, 'İşlem başarısız', 'error');
+                setState(() {
+                  isDocumentMutation = false;
+                });
+                ShowModalBottomSheet().show(
+                  context,
+                  AddImageModalBottomSheet(
+                    taskId: resultData['createCheckItemValue']['id'].toString() ?? '',
+                    taskKey: resultData['createCheckItemValue']['key'] ?? '',
+                    saveImage:()=> widget.provider.saveCheckItemDocument,
+                  ),
+                );
               }
               //print('resultdataaaaa' + resultData);
             },
@@ -92,6 +110,21 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> {
                           }
                         }),
                         child: const Text('Kaydet'),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            isDocumentMutation = true;
+                          });
+                          runMutation({
+                            "createCheckItemValueInput": {
+                              "checkItemId": widget.checkItem?.id,
+                              "checkListValueId": widget.checkListValueId,
+                              "inputValue": null
+                            }
+                          });
+                        },
+                        child: const Text('Döküman Ekle'),
                       )
                     ],
                   ),

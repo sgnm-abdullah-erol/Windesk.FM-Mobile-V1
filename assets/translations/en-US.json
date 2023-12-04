@@ -118,6 +118,8 @@
 	"ErrorChangeStateWithGroup": "You have to select a group",
 	"LocationChangeSuccessfull": " Location Change Succesfull",
 	"SelectaLocation": "Alan seçiniz",
+	"scope": "Scope",
+
 
 	"----------------DATATABLE----------": "------------DATATABLE-------------",
 	"DataTableID": "ID",

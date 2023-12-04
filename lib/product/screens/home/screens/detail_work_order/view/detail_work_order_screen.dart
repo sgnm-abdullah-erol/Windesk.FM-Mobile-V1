@@ -8,6 +8,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 import 'package:vm_fm_4/core/route/app_route.gr.dart' as route;
+import 'package:vm_fm_4/feature/components/buttons/custom_elevated_button_with_icon.dart';
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 import 'package:vm_fm_4/feature/global_providers/global_provider.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
@@ -99,11 +100,8 @@ class DetailWorkOrderScreen extends StatelessWidget {
                                   const SizedBox(height: 20),
                                   (woDetailProvider.detail.task?.userId ?? '') != context.read<GlobalProvider>().userId
                                       ? const SizedBox()
-                                      : IconButton(
-                                          onPressed: () =>
-                                              context.router.push(route.ScopeList(taskId: woDetailProvider.detail.task?.id.toString() ?? '')),
-                                          icon: const Icon(AppIcons.addBox),
-                                        ),
+                                      : CustomElevatedButtonWithIcon(onPressFunction: () =>
+                                              context.router.push(route.ScopeList(taskId: woDetailProvider.detail.task?.id.toString() ?? '')), bgColor: APPColors.Accent.black,icon: AppIcons.eventList, textValue: LocaleKeys.scope.tr(),textColor: APPColors.Main.white,iconColor: APPColors.Main.white,),
                                   (woDetailProvider.detail.task?.userId ?? '') != context.read<GlobalProvider>().userId
                                       ? const SizedBox()
                                       : _customPageAccordionSection(context, woDetailProvider),

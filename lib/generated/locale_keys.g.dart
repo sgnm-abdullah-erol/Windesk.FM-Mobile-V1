@@ -305,6 +305,7 @@ class LocaleKeys {
   static const String startDate = 'Start Date';
   static const String technician = 'Technician';
   static const String date = 'Tarih';
+  static const String scope = 'scope';
 
   // // static String const ----------MAİNTENANCE---------- = '----------MAİNTENANCE----------';
   // static const Manage Check List = 'Manage Check List';

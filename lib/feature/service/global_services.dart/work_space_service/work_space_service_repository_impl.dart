@@ -1111,4 +1111,78 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       return [];
     }
   }
+
+    @override
+  Future<Either<bool, CustomServiceException>> saveDocumentForMaintenance(
+    String filePath,
+    String fileName,
+    String token,
+    String label,
+    int id,
+    String key,
+  ) async {
+    bool result = false;
+
+    String url = '${ServiceTools.url.workorder_url}/maintenance/addFiles';
+    String app = '';
+
+    if (key == 'image') {
+      app = 'image';
+    } else if (key == 'pdf') {
+      app = 'application';
+    }
+
+    final bytes = File(filePath).readAsBytesSync();
+    String extension = fileName.split(".").last;
+
+    // var formData = FormData.fromMap({
+    //   "document": MultipartFile.fromBytes(
+    //     bytes,
+    //     filename: fileName,
+    //     contentType: MediaType(app, extension),
+    //   ),
+    // });
+    if (fileName == '') {
+      fileName = '${DateTime.now().toIso8601String()}.png';
+    }
+    FormData formData = FormData.fromMap({
+      "documents": await MultipartFile.fromFile(
+        File(filePath).path,
+        filename: fileName,
+      ),
+      "body":{
+        "id": id,
+        "labels":[label],
+        "key":key
+      }
+    });
+
+    try {
+      final response = await super.dio.post(
+            url,
+            data: formData,
+            options: Options(
+              headers: {'authorization': 'Bearer $token'},
+            ),
+          );
+
+      super.logger.i(response);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = response.data;
+        if (data['success'] == true) {
+          result = true;
+          return Left(result);
+        } else {
+          result = false;
+          return Left(result);
+        }
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+      }
+    } catch (e) {
+      super.logger.i(e.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
+    }
+  }
 }
