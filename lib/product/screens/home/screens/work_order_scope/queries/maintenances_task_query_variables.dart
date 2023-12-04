@@ -27,4 +27,14 @@ final class MaintenancesTaskVariableQueries {
       }
     };
   }
+
+  static Map<String, dynamic> createCheckItemValueInput(int checkItemId, int checkListValueId, String? inputValue) {
+    return {
+      "createCheckItemValueInput": {
+        "checkItemId": checkItemId,
+        "checkListValueId": checkListValueId,
+        "inputValue": inputValue,
+      }
+    };
+  }
 }

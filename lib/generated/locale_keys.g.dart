@@ -12,6 +12,11 @@ class LocaleKeys {
   static const String ScopeList = 'ScopeList';
   static const String CheckList = 'CheckList';
   static const String Contuniue = 'Contuniue';
+  static const String Yes = 'Yes';
+  static const String No = 'No';
+  static const String EnterNumber = 'EnterNumber';
+  static const String UnSuccessProcess = 'UnSuccessProcess';
+  static const String SuccessProcess = 'SuccessProcess';
   static const String FetchScopeListError = 'FetchScopeListError';
 
   // asset search
@@ -312,7 +317,7 @@ class LocaleKeys {
   static const String technician = 'Technician';
   static const String date = 'Tarih';
   static const String scope = 'scope';
-  
+
   static const String Name = 'Name';
   static const String ControlList = 'ControlList';
   static const String Technician = 'Technician';
