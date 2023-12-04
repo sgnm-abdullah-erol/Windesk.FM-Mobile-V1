@@ -8,6 +8,11 @@ import 'package:flutter/material.dart';
 class LocaleKeys {
   const LocaleKeys._();
 
+  // maintenance
+  static const String ScopeList = 'ScopeList';
+  static const String CheckList = 'CheckList';
+  static const String FetchScopeListError = 'FetchScopeListError';
+
   // asset search
   static const String assetSearch = 'Malzeme Arama';
 
