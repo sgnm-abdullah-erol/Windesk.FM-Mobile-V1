@@ -5,15 +5,8 @@ import 'package:vm_fm_4/generated/locale_keys.g.dart';
 
 @immutable
 class DynamicForm {
-  Widget formType(
-    String inputType,
-    bool selectedValue,
-    Function setSelectedValue,
-    Function selectDate,
-    Function setInitialController,
-    TextEditingController textEditingController,
-    TextEditingController numberEditingController
-  ) {
+  Widget formType(String inputType, bool selectedValue, Function setSelectedValue, Function selectDate, Function setInitialController,
+      TextEditingController textEditingController, TextEditingController numberEditingController) {
     switch (inputType) {
       case 'BOOLYES':
         return Column(
@@ -38,7 +31,7 @@ class DynamicForm {
         );
       case 'DATE':
         return TextFieldDatePicker(
-          label: LocaleKeys.date.tr(),
+          label: LocaleKeys.Date.tr(),
           onTap: (value) => selectDate(value),
           initialDate: DateTime(2015),
           initialControllerFunction: setInitialController,
@@ -48,10 +41,10 @@ class DynamicForm {
           padding: const EdgeInsets.all(8.0),
           child: TextFormField(
             controller: textEditingController,
-              decoration: const InputDecoration(
-                border: UnderlineInputBorder(),
-                labelText: 'Lütfen açıklama giriniz.',
-              ),
+            decoration: const InputDecoration(
+              border: UnderlineInputBorder(),
+              labelText: 'Lütfen açıklama giriniz.',
+            ),
           ),
         );
       case 'NUMBER':
@@ -60,10 +53,10 @@ class DynamicForm {
           child: TextFormField(
             keyboardType: TextInputType.number,
             controller: numberEditingController,
-              decoration: const InputDecoration(
-                border: UnderlineInputBorder(),
-                labelText: 'Lütfen sayı giriniz.',
-              ),
+            decoration: const InputDecoration(
+              border: UnderlineInputBorder(),
+              labelText: 'Lütfen sayı giriniz.',
+            ),
           ),
         );
       default:

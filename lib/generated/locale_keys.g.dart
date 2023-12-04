@@ -11,6 +11,7 @@ class LocaleKeys {
   // maintenance
   static const String ScopeList = 'ScopeList';
   static const String CheckList = 'CheckList';
+  static const String Contuniue = 'Contuniue';
   static const String FetchScopeListError = 'FetchScopeListError';
 
   // asset search
@@ -305,11 +306,10 @@ class LocaleKeys {
   static const String MaterialError = 'MaterialError';
 
   //work order scope
-  static const String name = 'Name';
-  static const String controlList = 'ControlList';
-  static const String startDate = 'Start Date';
-  static const String technician = 'Technician';
-  static const String date = 'Tarih';
+  static const String Name = 'Name';
+  static const String ControlList = 'ControlList';
+  static const String Technician = 'Technician';
+  static const String Date = 'Date';
 
   // // static String const ----------MAİNTENANCE---------- = '----------MAİNTENANCE----------';
   // static const Manage Check List = 'Manage Check List';

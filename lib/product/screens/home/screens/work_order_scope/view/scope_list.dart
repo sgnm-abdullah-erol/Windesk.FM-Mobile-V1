@@ -9,7 +9,7 @@ import 'package:vm_fm_4/feature/service/graphql_manager.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/graphql_result_handling.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/queries/maintenances_task_query_variables.dart';
-import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/view/scope_bottom_sheet.dart';
+import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/view/scope_card_list_screen.dart';
 import '../queries/maintenances_task_queries.dart';
 
 @RoutePage()

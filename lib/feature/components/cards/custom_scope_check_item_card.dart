@@ -70,6 +70,7 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> {
                       Text(widget.checkItem?.description ?? ''),
                       Align(
                         alignment: Alignment.center,
+                        // TODO dynamic form
                         child: DynamicForm().formType(widget.checkItem?.inputType ?? '', selectedValue, () {
                           setState(() {
                             selectedValue = !selectedValue;

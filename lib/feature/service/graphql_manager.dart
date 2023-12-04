@@ -25,13 +25,14 @@ class GraphQLManager {
   }
 
   static ValueNotifier<GraphQLClient> getClientForMutation(BuildContext context) {
-    final HttpLink httpLink = HttpLink(ServiceTools.url.graphql_url);
-    final AuthLink authLink = AuthLink(getToken: () async => 'Bearer ${context.read<GlobalProvider>().globalUserToken}');
+    final HttpLink httpLink = HttpLink(ServiceTools.url.graphql_url, defaultHeaders: {
+      'Authorization': 'Bearer ${context.read<GlobalProvider>().globalUserToken}',
+      'user': '{"id":"${context.read<GlobalProvider>().userId}"}'
+    });
 
-    final Link link = authLink.concat(httpLink);
     _client = ValueNotifier<GraphQLClient>(
       GraphQLClient(
-        link: link,
+        link: httpLink,
         cache: GraphQLCache(),
       ),
     );
