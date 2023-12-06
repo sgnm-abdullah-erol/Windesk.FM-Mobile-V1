@@ -40,6 +40,8 @@ import 'package:vm_fm_4/product/screens/home/screens/work_order_list/tabs/my_wor
     as _i10;
 import 'package:vm_fm_4/product/screens/home/screens/work_order_list/view/work_order_list_screen.dart'
     as _i21;
+import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/models/start_check_list_value_model.dart'
+    as _i31;
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/view/scope_detail.dart'
     as _i13;
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/view/scope_list.dart'
@@ -167,7 +169,7 @@ abstract class $AppRouter extends _i22.RootStackRouter {
         child: _i13.ScopeDetail(
           key: args.key,
           maintanenceList: args.maintanenceList,
-          checkListValueId: args.checkListValueId,
+          checkListValueModel: args.checkListValueModel,
         ),
       );
     },
@@ -547,14 +549,14 @@ class ScopeDetail extends _i22.PageRouteInfo<ScopeDetailArgs> {
   ScopeDetail({
     _i23.Key? key,
     _i30.MaintanenceModel? maintanenceList,
-    int? checkListValueId,
+    _i31.StartCheckListValueModel? checkListValueModel,
     List<_i22.PageRouteInfo>? children,
   }) : super(
           ScopeDetail.name,
           args: ScopeDetailArgs(
             key: key,
             maintanenceList: maintanenceList,
-            checkListValueId: checkListValueId,
+            checkListValueModel: checkListValueModel,
           ),
           initialChildren: children,
         );
@@ -569,18 +571,18 @@ class ScopeDetailArgs {
   const ScopeDetailArgs({
     this.key,
     this.maintanenceList,
-    this.checkListValueId,
+    this.checkListValueModel,
   });
 
   final _i23.Key? key;
 
   final _i30.MaintanenceModel? maintanenceList;
 
-  final int? checkListValueId;
+  final _i31.StartCheckListValueModel? checkListValueModel;
 
   @override
   String toString() {
-    return 'ScopeDetailArgs{key: $key, maintanenceList: $maintanenceList, checkListValueId: $checkListValueId}';
+    return 'ScopeDetailArgs{key: $key, maintanenceList: $maintanenceList, checkListValueModel: $checkListValueModel}';
   }
 }
 

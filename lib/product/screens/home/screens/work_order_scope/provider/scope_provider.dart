@@ -23,6 +23,9 @@ class ScopeProvider extends ChangeNotifier {
   bool _isImageAdded = false;
   bool get isImageAdded => _isImageAdded;
 
+  bool _userClickedDocumants = false;
+  bool get userClickedDocumants => _userClickedDocumants;
+
   String _startDate = '';
   String get startDate => _startDate;
 
@@ -33,6 +36,12 @@ class ScopeProvider extends ChangeNotifier {
   IncludesOfCheckItemModel get checkItem => _checkItem;
 
   bool fetchToken = true;
+
+  void setStateToBeginning() {
+    _userClickedDocumants = false;
+  }
+
+  void userClickedDocumantsFunction() => _userClickedDocumants = true;
 
   // void getToken() async {
   //   fetchToken = false;
@@ -76,6 +85,39 @@ class ScopeProvider extends ChangeNotifier {
   }
 
   void saveImage(BuildContext context, String imagePath, String desc, String scopeId, String taskKey) async {
+    if (imagePath.isEmpty) {
+      snackBar(context, LocaleKeys.EmptyImagePath.tr(), 'error');
+      return;
+    }
+    _isLoading = true;
+    notifyListeners();
+
+    final String token = await SharedManager().getString(SharedEnum.userToken);
+
+    final response = await workSpaceService.saveDocumentForMaintenance(imagePath, '', desc, token, scopeId, taskKey, 'image');
+    print('response' + response.toString());
+    response.fold(
+      (l) => {
+        l
+            ? {
+                _isImageAdded = true,
+              }
+            : {
+                _isImageAdded = false,
+              }
+      },
+      (r) => {},
+    );
+
+    _isLoading = false;
+    notifyListeners();
+
+    Future.delayed(const Duration(seconds: 2), () {
+      _isImageAdded = false;
+    });
+  }
+
+    void savePdf(BuildContext context, String imagePath, String desc, String scopeId, String taskKey) async {
     if (imagePath.isEmpty) {
       snackBar(context, LocaleKeys.EmptyImagePath.tr(), 'error');
       return;

@@ -6,6 +6,7 @@ import 'package:vm_fm_4/core/constants/other/app_icons.dart';
 import 'package:vm_fm_4/core/constants/other/colors.dart';
 import 'package:vm_fm_4/core/constants/paths/service_tools.dart';
 import 'package:vm_fm_4/core/constants/style/custom_paddings.dart';
+import 'package:vm_fm_4/core/route/app_route.gr.dart';
 import 'package:vm_fm_4/feature/components/buttons/custom_elevated_button_with_icon.dart';
 import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
@@ -53,7 +54,7 @@ class CustomScopeListCard extends StatelessWidget {
           onCompleted: (Map<String, dynamic>? resultData) async {
             StartCheckListValueModel? model = _setStartCheckListValue(resultData);
             if (model != null) {
-              await _bottomSheet(context, model.id ?? 0);
+              await _bottomSheet(context, model);
             } else {
               snackBar(context, LocaleKeys.FetchScopeListError, 'error');
             }
@@ -123,8 +124,7 @@ class CustomScopeListCard extends StatelessWidget {
             if (result.data == null && !result.hasException) {
               return Text(LocaleKeys.FetchScopeListError.tr(), style: Theme.of(context).textTheme.bodyMedium);
             }
-            //final StartCheckListValueModel? startCheckListValue = _setCheckListValue(result.data);
-            print('startchecklistvalue' + result.data.toString());
+            final StartCheckListValueModel? checkListValue = _setCheckListValue(result.data);
             return Align(
               alignment: Alignment.center,
               child: CustomElevatedButtonWithIcon(
@@ -132,7 +132,7 @@ class CustomScopeListCard extends StatelessWidget {
                 icon: AppIcons.send,
                 onPressFunction: () async {
                   //final component = maintanenceModel?.maintenancePlan?.first.components?.first.willBeAppliedToComponents?.first.componentOriginal;
-                  //context.router.push(ScopeDetail(maintanenceList: maintanenceModel, checkListValueId: checkListValueId));
+                  context.router.push(ScopeDetail(maintanenceList: maintanenceModel, checkListValueModel: checkListValue));
                 },
                 iconColor: APPColors.Main.white,
                 textValue: LocaleKeys.Contuniue.tr(),
@@ -182,13 +182,13 @@ class CustomScopeListCard extends StatelessWidget {
     );
   }
 
-  Future<dynamic> _bottomSheet(BuildContext context, int checkListValueId) {
+  Future<dynamic> _bottomSheet(BuildContext context, StartCheckListValueModel startCheckListValue) {
     return showModalBottomSheet(
       isScrollControlled: true,
       context: context,
       builder: (context) => AlertCheckListBottomSheet(
         maintanenceModel: maintanenceModel ?? const MaintanenceModel(),
-        checkListValueId: checkListValueId,
+        startCheckListValue: startCheckListValue,
       ),
     );
   }
@@ -215,7 +215,7 @@ class CustomScopeListCard extends StatelessWidget {
 
   StartCheckListValueModel? _setCheckListValue(Map<String, dynamic>? data) {
     if (data != null || data?['checkListValues'] != null) {
-      final checkListData = data?['checkListValues'];
+      final checkListData = data?['checkListValues'][0];
       StartCheckListValueModel model = StartCheckListValueModel.fromJson(checkListData);
       return model;
     }

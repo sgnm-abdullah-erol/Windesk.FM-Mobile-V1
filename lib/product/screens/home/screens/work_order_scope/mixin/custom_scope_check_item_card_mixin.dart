@@ -17,6 +17,8 @@ mixin CustomScopeCheckItemCardMixin on State<CustomScopeCheckItemCard> {
   // variables
   bool isDocumentMutation = false;
   String token = '';
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
 
   CreateCheckItemValue? _setCreateCheckItemModel(Map<String, dynamic>? data) {
     if (data != null || data?['createCheckItemValue'] != null) {
@@ -26,24 +28,14 @@ mixin CustomScopeCheckItemCardMixin on State<CustomScopeCheckItemCard> {
   }
 
   void completedMutationAction(BuildContext context, Map<String, dynamic>? data) {
-    if (!isDocumentMutation && data != null) {
+    if (data != null) {
       final model = _setCreateCheckItemModel(data);
       if (model != null && model.id != null) {
         snackBar(context, LocaleKeys.SuccessProcess.tr(), 'success');
+        _isLoading = true;
       } else {
         snackBar(context, LocaleKeys.UnSuccessProcess.tr(), 'error');
       }
-    } else {
-      setState(() => isDocumentMutation = false);
-      // fix this
-      ShowModalBottomSheet().show(
-        context,
-        AddImageModalBottomSheet(
-          taskId: data?['createCheckItemValue']['id'].toString() ?? '',
-          taskKey: data?['createCheckItemValue']['key'] ?? '',
-          saveImage: widget.provider.saveImage,
-        ),
-      );
     }
   }
 }

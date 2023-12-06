@@ -6,14 +6,15 @@ import 'package:vm_fm_4/core/constants/other/colors.dart';
 import 'package:vm_fm_4/core/route/app_route.gr.dart';
 import 'package:vm_fm_4/feature/models/work_order_scope_models/maintanence_model.dart';
 import 'package:vm_fm_4/feature/service/graphql_manager.dart';
+import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/models/start_check_list_value_model.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/queries/maintenances_task_queries.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/queries/maintenances_task_query_variables.dart';
 
 class AlertCheckListBottomSheet extends StatelessWidget {
-  const AlertCheckListBottomSheet({super.key, required this.maintanenceModel, required this.checkListValueId});
+  const AlertCheckListBottomSheet({super.key, required this.maintanenceModel, required this.startCheckListValue});
 
   final MaintanenceModel maintanenceModel;
-  final int checkListValueId;
+  final StartCheckListValueModel startCheckListValue;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class AlertCheckListBottomSheet extends StatelessWidget {
           document: gql(MaintenancesTaskQuery.acceptRegulationMessage),
           update: (GraphQLDataProxy cache, QueryResult? result) {},
           onCompleted: (dynamic resultData) async {
-            context.router.push(ScopeDetail(maintanenceList: maintanenceModel, checkListValueId: checkListValueId));
+            context.router.push(ScopeDetail(maintanenceList: maintanenceModel, checkListValueModel: startCheckListValue));
           },
         ),
         builder: (RunMutation runMutation, QueryResult? result) {
@@ -57,7 +58,7 @@ class AlertCheckListBottomSheet extends StatelessWidget {
                         onPressed: () {
                           runMutation(
                             MaintenancesTaskVariableQueries.acceptRegulationMessageInput(
-                              checkListValueId,
+                              startCheckListValue?.id ?? 0,
                               maintanenceModel.scheduledBy?.first.parentSchedule?.first.checkList?.first.hasRegulations?.first.id ?? 0,
                             ),
                           );

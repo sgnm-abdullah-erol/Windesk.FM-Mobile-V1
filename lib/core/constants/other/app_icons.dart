@@ -63,5 +63,5 @@ class AppIcons {
   static const IconData clear = Icons.clear;
   static const IconData send = Icons.send;
   static const IconData eventList = Icons.checklist_outlined;
-
+  static const IconData save = Icons.save;
 }

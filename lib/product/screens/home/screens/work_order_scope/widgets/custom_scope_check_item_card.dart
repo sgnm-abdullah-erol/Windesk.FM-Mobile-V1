@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:vm_fm_4/core/constants/other/app_icons.dart';
 import 'package:vm_fm_4/core/constants/other/colors.dart';
 import 'package:vm_fm_4/feature/components/dynamic_form/dynamic_form.dart';
 import 'package:vm_fm_4/feature/models/work_order_scope_models/includesof_check_item_model.dart';
@@ -54,12 +55,22 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
-              Text(widget.checkItem?.name ?? '', style: Theme.of(context).textTheme.bodyMedium),
-              const SizedBox(height: 10),
-              Text(widget.checkItem?.description ?? '', style: Theme.of(context).textTheme.bodySmall),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Text(widget.checkItem?.name ?? '', style: Theme.of(context).textTheme.bodyMedium),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      Text(widget.checkItem?.description ?? '', style: Theme.of(context).textTheme.bodySmall),
+                    ],
+                  ),
+                  _saveButton(runMutation),
+                ],
+              ),
               _dynamicForm(),
-              _saveButton(runMutation),
-              _addDocumentButton(runMutation, context)
             ],
           ),
         ),
@@ -67,33 +78,25 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
     );
   }
 
-  ElevatedButton _addDocumentButton(RunMutation<dynamic> runMutation, BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        setState(() => isDocumentMutation = true);
-        runMutation(MaintenancesTaskVariableQueries.createCheckItemValueInput(widget.checkItem?.id ?? 0, widget.checkListValueId ?? 0, null));
-      },
-      child: Text(
-        LocaleKeys.AddedDocumants.tr(),
-        style: Theme.of(context).textTheme.bodySmall?.copyWith(color: APPColors.Main.blue),
-      ),
-    );
-  }
-
-  ElevatedButton _saveButton(RunMutation<dynamic> runMutation) {
-    return ElevatedButton(
-      onPressed: () {
-        String? inputValue = widget.checkItem?.inputType == FormTypes.BOOLYES
-            ? selectedValue.toString()
-            : widget.checkItem?.inputType == FormTypes.TEXT
-                ? textEditingController.text
-                : widget.checkItem?.inputType == FormTypes.NUMBER
-                    ? numberEditingController.text
-                    : initialController.text;
-
-        MaintenancesTaskVariableQueries.createCheckItemValueInput(widget.checkItem?.id ?? 0, widget.checkListValueId ?? 0, inputValue);
-      },
-      child: Text(LocaleKeys.Save.tr(), style: TextStyle(color: APPColors.Main.blue)),
+  Row _saveButton(RunMutation<dynamic> runMutation) {
+    return Row(
+      children: [
+        IconButton(
+          onPressed: () {
+            String? inputValue = widget.checkItem?.inputType == FormTypes.BOOLYES
+                ? selectedValue.toString()
+                : widget.checkItem?.inputType == FormTypes.TEXT
+                    ? textEditingController.text
+                    : widget.checkItem?.inputType == FormTypes.NUMBER
+                        ? numberEditingController.text
+                        : initialController.text;
+            runMutation(MaintenancesTaskVariableQueries.createCheckItemValueInput(widget.checkItem?.id ?? 0, widget.checkListValueId ?? 0, inputValue));
+          },
+          icon: const Icon(AppIcons.save),
+          color: APPColors.Main.blue,
+        ),
+        isLoading ? Icon(Icons.check_circle, color: APPColors.Main.green) : Icon(Icons.check_circle_outline),
+      ],
     );
   }
 

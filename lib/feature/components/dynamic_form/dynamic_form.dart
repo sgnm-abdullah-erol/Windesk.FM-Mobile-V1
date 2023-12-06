@@ -44,16 +44,13 @@ class _NumberWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: TextFormField(
-        keyboardType: TextInputType.number,
-        controller: numberEditingController,
-        decoration: InputDecoration(
-          border: const UnderlineInputBorder(),
-          labelText: LocaleKeys.EnterNumber.tr(),
-          labelStyle: Theme.of(context).textTheme.bodyMedium,
-        ),
+    return TextFormField(
+      keyboardType: TextInputType.number,
+      controller: numberEditingController,
+      decoration: InputDecoration(
+        border: const UnderlineInputBorder(),
+        labelText: LocaleKeys.EnterNumber.tr(),
+        labelStyle: Theme.of(context).textTheme.bodyMedium,
       ),
     );
   }
@@ -66,15 +63,12 @@ class _TextWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: TextFormField(
-        controller: textEditingController,
-        decoration: InputDecoration(
-          border: const UnderlineInputBorder(),
-          labelText: LocaleKeys.EnterDescription.tr(),
-          labelStyle: Theme.of(context).textTheme.bodyMedium,
-        ),
+    return TextFormField(
+      controller: textEditingController,
+      decoration: InputDecoration(
+        border: const UnderlineInputBorder(),
+        labelText: LocaleKeys.EnterDescription.tr(),
+        labelStyle: Theme.of(context).textTheme.bodyMedium,
       ),
     );
   }
