@@ -58,16 +58,31 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      Text(widget.checkItem?.name ?? '', style: Theme.of(context).textTheme.bodyMedium),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Text(widget.checkItem?.description ?? '', style: Theme.of(context).textTheme.bodySmall),
-                    ],
+                  Expanded(
+                    flex: 3,
+                    child: Row(
+                      children: [
+                        Text(
+                          widget.checkItem?.name ?? '',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                              overflow: TextOverflow.ellipsis,
+
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Expanded(
+                          child: Text(
+                            widget.checkItem?.description ?? '',
+                            style: Theme.of(context).textTheme.bodySmall,
+                                overflow: TextOverflow.fade,
+                        
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  _saveButton(runMutation),
+                  Expanded(flex: 1, child: _saveButton(runMutation)),
                 ],
               ),
               _dynamicForm(),
@@ -90,7 +105,8 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
                     : widget.checkItem?.inputType == FormTypes.NUMBER
                         ? numberEditingController.text
                         : initialController.text;
-            runMutation(MaintenancesTaskVariableQueries.createCheckItemValueInput(widget.checkItem?.id ?? 0, widget.checkListValueId ?? 0, inputValue));
+            runMutation(
+                MaintenancesTaskVariableQueries.createCheckItemValueInput(widget.checkItem?.id ?? 0, widget.checkListValueId ?? 0, inputValue));
           },
           icon: const Icon(AppIcons.save),
           color: APPColors.Main.blue,
