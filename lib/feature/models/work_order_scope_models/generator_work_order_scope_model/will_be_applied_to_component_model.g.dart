@@ -13,10 +13,12 @@ WillBeAppliedToComponentModel _$WillBeAppliedToComponentModelFromJson(
           ? null
           : ComponentOriginalModel.fromJson(
               json['componentOriginal'] as Map<String, dynamic>),
+      id: json['id'] as int?,
     );
 
 Map<String, dynamic> _$WillBeAppliedToComponentModelToJson(
         WillBeAppliedToComponentModel instance) =>
     <String, dynamic>{
       'componentOriginal': instance.componentOriginal,
+      'id': instance.id,
     };

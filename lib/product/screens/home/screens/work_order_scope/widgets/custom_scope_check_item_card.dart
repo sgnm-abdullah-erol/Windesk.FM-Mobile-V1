@@ -24,6 +24,7 @@ class CustomScopeCheckItemCard extends StatefulWidget {
 
 class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> with CustomScopeCheckItemCardMixin {
   void _setInitialController(String value) => setState(() => initialController.text = value);
+  bool selectedValue = false;
 
   @override
   Widget build(BuildContext context) {

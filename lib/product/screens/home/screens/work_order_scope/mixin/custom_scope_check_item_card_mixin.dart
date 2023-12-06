@@ -15,7 +15,6 @@ mixin CustomScopeCheckItemCardMixin on State<CustomScopeCheckItemCard> {
   final TextEditingController numberEditingController = TextEditingController();
 
   // variables
-  bool selectedValue = false;
   bool isDocumentMutation = false;
   String token = '';
 

@@ -86,6 +86,7 @@ class ScopeProvider extends ChangeNotifier {
     final String token = await SharedManager().getString(SharedEnum.userToken);
 
     final response = await workSpaceService.saveDocumentForMaintenance(imagePath, '', desc, token, scopeId, taskKey, 'image');
+    print('response' + response.toString());
     response.fold(
       (l) => {
         l
@@ -107,4 +108,3 @@ class ScopeProvider extends ChangeNotifier {
     });
   }
 }
-

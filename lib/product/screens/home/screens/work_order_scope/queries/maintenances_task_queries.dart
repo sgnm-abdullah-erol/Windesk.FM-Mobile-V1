@@ -2,6 +2,43 @@ import 'package:flutter/material.dart';
 
 @immutable
 final class MaintenancesTaskQuery {
+  static const String checkListValue = r'''
+  query CheckListValue($where: MaintenanceWhere, $statusConnectionWhere2: CheckListValueStatusConnectionWhere) {
+    maintenances(where: $where) {
+      CheckListValue {
+        id
+    Component{
+      id
+    }
+    FacilityStructure{
+      id
+    }
+    System{
+      id
+    }
+        StatusConnection(where: $statusConnectionWhere2) {
+          edges {
+            node {
+              code
+            }
+          }
+        }
+  
+      }
+  
+    }
+  }
+  ''';
+
+  static const String checkListValue2 = r'''
+  query CheckListValues($where: CheckListValueWhere) {
+    checkListValues(where: $where) {
+      id
+      labels
+      key
+    }
+  }
+  ''';
   static const String maintenancesTask = r'''
     query MaintenancesTask($where: MaintenanceWhere)  {
         maintenances(where: $where) {
@@ -10,16 +47,19 @@ final class MaintenancesTaskQuery {
             Components {
               willBeAppliedToComponents {
                 componentOriginal
+                id
               }
             }
             FacilityStructures {
               willBeAppliedToFacilityStructures {
                 facilityStructureOriginal
+                id
               }
             }
             Systems {
               willBeAppliedToSystem {
                 SystemOriginal
+                id
               }
             }
           }

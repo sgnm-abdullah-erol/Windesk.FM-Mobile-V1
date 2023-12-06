@@ -1,37 +1,46 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:vm_fm_4/core/constants/other/app_icons.dart';
 import 'package:vm_fm_4/core/constants/other/colors.dart';
+import 'package:vm_fm_4/core/constants/paths/service_tools.dart';
 import 'package:vm_fm_4/core/constants/style/custom_paddings.dart';
 import 'package:vm_fm_4/feature/components/buttons/custom_elevated_button_with_icon.dart';
 import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
+import 'package:vm_fm_4/feature/models/work_order_scope_models/check_list_maintanence_model.dart';
 import 'package:vm_fm_4/feature/models/work_order_scope_models/maintanence_model.dart';
 import 'package:vm_fm_4/feature/service/graphql_manager.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
+import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/graphql_result_handling.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/models/start_check_list_value_model.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/queries/maintenances_task_queries.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/queries/maintenances_task_query_variables.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/widgets/alert_check_list_bottom_sheet.dart';
 
 class CustomScopeListCard extends StatelessWidget {
-  const CustomScopeListCard({
-    super.key,
-    required this.name,
-    required this.controlList,
-    this.startDate,
-    this.technician,
-    this.onTap,
-    this.maintanenceModel,
-  });
+  const CustomScopeListCard(
+      {super.key,
+      required this.name,
+      required this.controlList,
+      required this.scopeId,
+      this.startDate,
+      this.technician,
+      this.onTap,
+      this.maintanenceModel,
+      this.checkListmaintanenceModel,
+      this.checkListSituation});
 
   final String name;
   final String controlList;
+  final int scopeId;
   final String? startDate;
   final String? technician;
   final Function? onTap;
   final MaintanenceModel? maintanenceModel;
+  final CheckListMaintanenceModel? checkListmaintanenceModel;
+  final dynamic checkListSituation;
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +72,9 @@ class CustomScopeListCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _columnChilds(context),
-                    _contuinueButton(context, runMutation),
+                    checkListSituation == 'Started' || checkListSituation == 'Finished'
+                        ? _continueButton(context, runMutation)
+                        : _startButton(context, runMutation),
                   ],
                 ),
               ),
@@ -74,28 +85,66 @@ class CustomScopeListCard extends StatelessWidget {
     );
   }
 
-  Align _contuinueButton(BuildContext context, RunMutation<dynamic> runMutation) {
+  Align _startButton(BuildContext context, RunMutation<dynamic> runMutation) {
     return Align(
       alignment: Alignment.center,
       child: CustomElevatedButtonWithIcon(
         bgColor: APPColors.Accent.black,
         icon: AppIcons.send,
         onPressFunction: () async {
-          final component = maintanenceModel?.maintenancePlan?.first.components?.first.willBeAppliedToComponents?.first.componentOriginal;
+          final component = maintanenceModel?.maintenancePlan?.first.components?.first.willBeAppliedToComponents?.first;
           runMutation(
             MaintenancesTaskVariableQueries.checkListValueVariables(
               maintanenceModel?.scheduledBy?.first.parentSchedule?.first.checkList?.first.id ?? 0,
-              component?.identity?.low ?? 0,
-              component?.labels?.first ?? '',
+              scopeId,
+              component?.componentOriginal?.labels?[0] ?? '',
               maintanenceModel?.id ?? 0,
             ),
           );
         },
         iconColor: APPColors.Main.white,
-        textValue: LocaleKeys.Contuniue.tr(),
+        textValue: LocaleKeys.Start.tr(),
         textColor: APPColors.Main.white,
       ),
     );
+  }
+
+  GraphQLProvider _continueButton(BuildContext context, RunMutation<dynamic> runMutation) {
+    return GraphQLProvider(
+      client: GraphQLManager.getClient(HttpLink(ServiceTools.url.generalGraphql_url)),
+      child: Query(
+        options: QueryOptions(
+          document: gql(MaintenancesTaskQuery.checkListValue2),
+          variables: MaintenancesTaskVariableQueries.getCheckListValue2(maintanenceModel?.id ?? 0, scopeId ?? 0),
+        ),
+        builder: GraphqlResultHandling.withGenericHandling(
+          context,
+          (QueryResult result, {refetch, fetchMore}) {
+            if (result.data == null && !result.hasException) {
+              return Text(LocaleKeys.FetchScopeListError.tr(), style: Theme.of(context).textTheme.bodyMedium);
+            }
+            //final StartCheckListValueModel? startCheckListValue = _setCheckListValue(result.data);
+            print('startchecklistvalue' + result.data.toString());
+            return Align(
+              alignment: Alignment.center,
+              child: CustomElevatedButtonWithIcon(
+                bgColor: APPColors.Accent.black,
+                icon: AppIcons.send,
+                onPressFunction: () async {
+                  //final component = maintanenceModel?.maintenancePlan?.first.components?.first.willBeAppliedToComponents?.first.componentOriginal;
+                  //context.router.push(ScopeDetail(maintanenceList: maintanenceModel, checkListValueId: checkListValueId));
+                },
+                iconColor: APPColors.Main.white,
+                textValue: LocaleKeys.Contuniue.tr(),
+                textColor: APPColors.Main.white,
+              ),
+            );
+          },
+        ),
+      ),
+    );
+    //final component = maintanenceModel?.maintenancePlan?.first.components?.first.willBeAppliedToComponents?.first.componentOriginal;
+    //context.router.push(ScopeDetail(maintanenceList: maintanenceModel, checkListValueId: checkListValueId));
   }
 
   Column _columnChilds(BuildContext context) {
@@ -158,6 +207,15 @@ class CustomScopeListCard extends StatelessWidget {
   StartCheckListValueModel? _setStartCheckListValue(Map<String, dynamic>? data) {
     if (data != null || data?['startCheckListValue'] != null) {
       final checkListData = data?['startCheckListValue'];
+      StartCheckListValueModel model = StartCheckListValueModel.fromJson(checkListData);
+      return model;
+    }
+    return null;
+  }
+
+  StartCheckListValueModel? _setCheckListValue(Map<String, dynamic>? data) {
+    if (data != null || data?['checkListValues'] != null) {
+      final checkListData = data?['checkListValues'];
       StartCheckListValueModel model = StartCheckListValueModel.fromJson(checkListData);
       return model;
     }

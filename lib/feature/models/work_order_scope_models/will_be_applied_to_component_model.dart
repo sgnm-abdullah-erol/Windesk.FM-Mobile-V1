@@ -6,15 +6,15 @@ part 'generator_work_order_scope_model/will_be_applied_to_component_model.g.dart
 
 @JsonSerializable()
 class WillBeAppliedToComponentModel extends Equatable {
-    final ComponentOriginalModel? componentOriginal;
-
+  final ComponentOriginalModel? componentOriginal;
+  final int? id;
 
   const WillBeAppliedToComponentModel({
-        this.componentOriginal,
+    this.componentOriginal,
+    this.id,
   });
 
   factory WillBeAppliedToComponentModel.fromJson(Map<String, dynamic> json) => _$WillBeAppliedToComponentModelFromJson(json);
-
 
   static List<WillBeAppliedToComponentModel> fromJsonList(List<dynamic> json) {
     List<WillBeAppliedToComponentModel> willBeAppliedToComponentModel = [];
@@ -24,12 +24,13 @@ class WillBeAppliedToComponentModel extends Equatable {
     }
 
     return willBeAppliedToComponentModel;
-    }
+  }
 
   Map<String, dynamic> toJson() => _$WillBeAppliedToComponentModelToJson(this);
 
   @override
   List<Object?> get props => [
         componentOriginal,
+        id
       ];
 }

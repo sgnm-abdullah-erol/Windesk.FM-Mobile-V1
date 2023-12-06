@@ -1,9 +1,35 @@
+import 'dart:ffi';
+
 final class MaintenancesTaskVariableQueries {
   static Map<String, dynamic> getMaintenancesTaskVariables(String taskId) {
     return {
       "where": {
         "isDeleted": false,
         "id": int.parse(taskId),
+      }
+    };
+  }
+
+  static Map<String, dynamic> getCheckListValue(String taskId) {
+    return {
+      "where": {
+        "id": int.parse(taskId),
+      },
+      "statusConnectionWhere2": {
+        "edge": {"isDeleted": false}
+      },
+    };
+  }
+
+  static Map<String, dynamic> getCheckListValue2(int taskId, int scopeId) {
+    return {
+      "where": {
+        "AND": [
+          {
+            "MaintenanceTask_ALL": {"id": taskId},
+            "Component_ALL": {"id": scopeId},
+          }
+        ]
       }
     };
   }
