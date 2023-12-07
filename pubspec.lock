@@ -141,10 +141,10 @@ packages:
     dependency: "direct dev"
     description:
       name: build_runner
-      sha256: "10c6bcdbf9d049a0b666702cf1cee4ddfdc38f02a19d35ae392863b47519848b"
+      sha256: "67d591d602906ef9201caf93452495ad1812bea2074f04e25dbd7c133785821b"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.6"
+    version: "2.4.7"
   build_runner_core:
     dependency: transitive
     description:
@@ -197,10 +197,10 @@ packages:
     dependency: transitive
     description:
       name: code_builder
-      sha256: "315a598c7fbe77f22de1c9da7cfd6fd21816312f16ffa124453b4fc679e540f1"
+      sha256: b2151ce26a06171005b379ecff6e08d34c470180ffe16b8e14b6d52be292b55f
       url: "https://pub.dev"
     source: hosted
-    version: "4.6.0"
+    version: "4.8.0"
   collection:
     dependency: transitive
     description:
@@ -511,7 +511,7 @@ packages:
     source: hosted
     version: "9.1.0"
   flutter_hooks:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flutter_hooks
       sha256: "7c8db779c2d1010aa7f9ea3fbefe8f86524fcb87b69e8b0af31e1a4b55422dec"
@@ -645,6 +645,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.1-alpha+1700868214564"
+  gql_code_builder:
+    dependency: transitive
+    description:
+      name: gql_code_builder
+      sha256: b70e17fe62af58c3a9a3dfd619bf0b07ca15afe4d285001fbcd0852a40538401
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.9.1+1"
   gql_dedupe_link:
     dependency: transitive
     description:
@@ -693,14 +701,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
-  graphql:
+  gql_tristate_value:
     dependency: transitive
+    description:
+      name: gql_tristate_value
+      sha256: ae045e7e272fbfd030084315140c683c9b032a9861a37165f68c2ecd8a759664
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
+  graphql:
+    dependency: "direct main"
     description:
       name: graphql
       sha256: "4ac531068107dffef188c74e7ff662777b729e9d5e0686f71623d4af1e3751c8"
       url: "https://pub.dev"
     source: hosted
     version: "5.2.0-beta.6"
+  graphql_codegen:
+    dependency: "direct dev"
+    description:
+      name: graphql_codegen
+      sha256: "6702f85cfdf46cd416c3de3a4fcfecc482f15db23058178e4142fb24e604fb0c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.13.9"
   graphql_flutter:
     dependency: "direct main"
     description:
@@ -1085,6 +1109,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.3"
+  recase:
+    dependency: transitive
+    description:
+      name: recase
+      sha256: e4eb4ec2dcdee52dcf99cb4ceabaffc631d7424ee55e56f280bc039737f89213
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.1.0"
   rounded_loading_button:
     dependency: "direct main"
     description:

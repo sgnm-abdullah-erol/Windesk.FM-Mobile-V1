@@ -58,7 +58,7 @@ class AlertCheckListBottomSheet extends StatelessWidget {
                         onPressed: () {
                           runMutation(
                             MaintenancesTaskVariableQueries.acceptRegulationMessageInput(
-                              startCheckListValue?.id ?? 0,
+                              startCheckListValue.id ?? 0,
                               maintanenceModel.scheduledBy?.first.parentSchedule?.first.checkList?.first.hasRegulations?.first.id ?? 0,
                             ),
                           );

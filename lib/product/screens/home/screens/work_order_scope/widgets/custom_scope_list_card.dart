@@ -116,7 +116,7 @@ class CustomScopeListCard extends StatelessWidget {
       child: Query(
         options: QueryOptions(
           document: gql(MaintenancesTaskQuery.checkListValue2),
-          variables: MaintenancesTaskVariableQueries.getCheckListValue2(maintanenceModel?.id ?? 0, scopeId ?? 0),
+          variables: MaintenancesTaskVariableQueries.getCheckListValue2(maintanenceModel?.id ?? 0, scopeId),
         ),
         builder: GraphqlResultHandling.withGenericHandling(
           context,

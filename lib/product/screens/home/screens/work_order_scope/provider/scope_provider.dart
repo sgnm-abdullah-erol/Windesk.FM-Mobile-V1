@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:vm_fm_4/core/database/shared_manager.dart';
 import 'package:vm_fm_4/core/enums/shared_enums.dart';
 import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
@@ -73,7 +72,7 @@ class ScopeProvider extends ChangeNotifier {
   void setEndEffortDate(String value) => _endEffortDate = value;
 
   void addEffort(){
-      
+
   }
 
   // void getToken() async {
@@ -149,7 +148,7 @@ class ScopeProvider extends ChangeNotifier {
     });
   }
 
-    void savePdf(BuildContext context, String imagePath, String desc, String scopeId, String taskKey) async {
+  void savePdf(BuildContext context, String imagePath, String desc, String scopeId, String taskKey) async {
     if (imagePath.isEmpty) {
       snackBar(context, LocaleKeys.EmptyImagePath.tr(), 'error');
       return;
