@@ -20,7 +20,7 @@ class ScopeProvider extends ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
-  bool _dialVisible = false;
+  final bool _dialVisible = false;
   bool get dialVisible => _dialVisible;
 
   bool _isImageAdded = false;

@@ -11,6 +11,7 @@
 	"FetchScopeListError": "Yükleme tamamlandı, ancak hem veriler hem de hatalar boş.\nLütfen bizimle iletisim kurun.",
 	"AddPhoto": "Fotoğraf Ekle",
 	"EmptyComponentList": "Bileşen Listesi Boş",
+	"EffortAddedError":"Efor Ekleme Başarısız",
 	"----------------APP----------": "-----------APP--------------",
 	"IfmName": "İstanbul Finans Merkezi",
 	"AppTitle": "Yardım Masası Uygulaması",

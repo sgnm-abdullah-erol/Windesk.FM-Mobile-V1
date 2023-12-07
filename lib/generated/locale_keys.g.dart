@@ -85,6 +85,7 @@ class LocaleKeys {
   static const String LoginSuccess = 'LoginSuccess';
 
   static const String EffortAdded = 'EffortAdded';
+  static const String EffortAddedError = 'EffortAddedError';
   static const String MaterialAdded = 'MaterialAdded';
   static const String MaterialRequested = 'MaterialRequested';
   static const String TaskStateChange = 'TaskStateChange';
