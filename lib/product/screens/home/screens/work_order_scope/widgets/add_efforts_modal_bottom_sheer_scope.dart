@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
@@ -6,6 +7,7 @@ import 'package:vm_fm_4/feature/components/buttons/custom_half_buttons.dart';
 import 'package:vm_fm_4/feature/components/input_fields/dropdown_input_fields.dart';
 import 'package:vm_fm_4/feature/components/input_fields/text_field_date_picker.dart';
 import 'package:vm_fm_4/feature/components/input_fields/text_fields_input_underline.dart';
+import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 import 'package:vm_fm_4/feature/service/graphql_manager.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
@@ -36,7 +38,6 @@ class AddEffortsModalBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) => _bodyWidget(context);
 
   Widget _bodyWidget(BuildContext context) {
-    print('checklist' + checkListValueId.toString());
     return GraphQLProvider(
         client: GraphQLManager.getClientForMutation(context),
         child: Mutation(
@@ -44,8 +45,13 @@ class AddEffortsModalBottomSheet extends StatelessWidget {
               document: gql(MaintenancesTaskQuery.submitChecklistValueEffort),
               update: (GraphQLDataProxy cache, QueryResult? result) {},
               onCompleted: (dynamic resultData) async {
-                print('resultt');
-                print(resultData);
+                if (resultData != null) {
+                  snackBar(context, LocaleKeys.EffortAdded.tr(), 'success');
+                  context.router.pop();
+                }
+                else{
+                  snackBar(context, LocaleKeys.EffortAddedError.tr(), 'error');
+                }
                 //context.router.push(ScopeDetail(maintanenceList: maintanenceModel, checkListValueModel: startCheckListValue));
               },
             ),

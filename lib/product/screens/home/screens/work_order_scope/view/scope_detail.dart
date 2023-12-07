@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:vm_fm_4/core/constants/other/app_icons.dart';
 import 'package:vm_fm_4/core/constants/other/colors.dart';
 import 'package:vm_fm_4/feature/components/appbar/custom_main_appbar.dart';
+import 'package:vm_fm_4/feature/components/model_bottom_sheet/add_image_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/models/work_order_scope_models/maintanence_model.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
@@ -56,7 +57,27 @@ class ScopeDetail extends StatelessWidget {
                 overlayColor: Colors.black,
                 overlayOpacity: 0.5,
                 onOpen: () => print('OPENING DIAL'),
-                onClose: ()=>ShowModalBottomSheet().show(
+                onClose: () => {},
+                tooltip: 'Speed Dial',
+                heroTag: 'speed-dial-hero-tag',
+                backgroundColor: Colors.red,
+                foregroundColor: Colors.black,
+                elevation: 8.0,
+                shape: CircleBorder(),
+                children: [
+                  _speedDialChild(context, AppIcons.addPhoto, LocaleKeys.AddPhoto.tr(), APPColors.Main.grey, () {
+                    ShowModalBottomSheet().show(
+                      context,
+                      AddImageModalBottomSheet(
+                      taskId: checkListValueModel?.id.toString() ?? '',
+                      taskKey: checkListValueModel?.key ?? '',
+                      saveImage: provider.saveImage,
+                    ),
+                    );
+                  }),
+                  _speedDialChild(context, AppIcons.documantScanner, LocaleKeys.AddPdf.tr(), APPColors.Secondary.grey, () {}),
+                  _speedDialChild(context, AppIcons.workHistory, LocaleKeys.AddEfforts.tr(), APPColors.Main.blue, () {
+                    ShowModalBottomSheet().show(
                       context,
                       AddEffortsModalBottomSheet(
                         checkListValueId: checkListValueModel?.id ?? 0,
@@ -67,28 +88,22 @@ class ScopeDetail extends StatelessWidget {
                         selectedDescription: provider.setEffortDescription,
                         provider: provider,
                       ),
-                    ),
-                tooltip: 'Speed Dial',
-                heroTag: 'speed-dial-hero-tag',
-                backgroundColor: Colors.red,
-                foregroundColor: Colors.black,
-                elevation: 8.0,
-                shape: CircleBorder(),
-                children: [
-                  _speedDialChild(context, AppIcons.addPhoto, LocaleKeys.AddPhoto.tr(), APPColors.Main.grey, () {}),
-                  _speedDialChild(context, AppIcons.documantScanner, LocaleKeys.AddPdf.tr(), APPColors.Secondary.grey, () {}),
-                  _speedDialChild(context, AppIcons.workHistory, LocaleKeys.AddEfforts.tr(), APPColors.Main.blue, () =>
-                    {}
-                ),
+                    );
+                  }),
                   _speedDialChild(context, AppIcons.save, LocaleKeys.Save.tr(), APPColors.Main.green, () {}),
                 ],
               );
             })));
   }
 
-  SpeedDialChild _speedDialChild(
-      BuildContext context, IconData iconname, String label, Color color, Function onPressFunction) {
+  SpeedDialChild _speedDialChild(BuildContext context, IconData iconname, String label, Color color, Function onPressFunction) {
     return SpeedDialChild(
-        child: Icon(iconname), backgroundColor: color, label: label, labelStyle: Theme.of(context).textTheme.bodySmall, onTap: () =>onPressFunction);
+        child: Icon(iconname),
+        backgroundColor: color,
+        label: label,
+        labelStyle: Theme.of(context).textTheme.bodySmall,
+        onTap: () {
+          onPressFunction();
+        });
   }
 }
