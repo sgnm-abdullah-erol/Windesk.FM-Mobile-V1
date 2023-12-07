@@ -20,20 +20,19 @@ class ScopeCardListScreen extends StatelessWidget {
         itemCount: maintanenceModel.maintenancePlan?.first.components?.first.willBeAppliedToComponents?.length,
         itemBuilder: (context, index) {
           final item = maintanenceModel.maintenancePlan?.first.components?.first.willBeAppliedToComponents?[index];
-          var checkListSituation;
+          String? checkListSituation;
           for (var i = 0; i < checkListmaintanenceModel.checkListValue!.length; i++) {
             if (checkListmaintanenceModel.checkListValue?[i].component?[0]['id'] == item?.id) {
               checkListSituation = checkListmaintanenceModel.checkListValue?[i].statusConnection?.edges?[0].node?.code;
             }
           }
           return CustomScopeListCard(
-            controlList: item?.componentOriginal?.properties?.className ?? '',
-            name: item?.componentOriginal?.properties?.name ?? '',
-            scopeId: item?.id ?? 0,
-            maintanenceModel: maintanenceModel,
-            checkListmaintanenceModel: checkListmaintanenceModel,
-            checkListSituation: checkListSituation
-          );
+              controlList: item?.componentOriginal?.properties?.className ?? '',
+              name: item?.componentOriginal?.properties?.name ?? '',
+              scopeId: item?.id ?? 0,
+              maintanenceModel: maintanenceModel,
+              checkListmaintanenceModel: checkListmaintanenceModel,
+              checkListSituation: checkListSituation);
         },
       ),
     );

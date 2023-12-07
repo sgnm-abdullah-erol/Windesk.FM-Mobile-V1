@@ -1136,7 +1136,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     final bytes = File(filePath).readAsBytesSync();
     String extension = fileName.split(".").last;
 
-    print('filepath' + File(filePath).path);
     // var formData = FormData.fromMap({
     //   "document": MultipartFile.fromBytes(
     //     bytes,

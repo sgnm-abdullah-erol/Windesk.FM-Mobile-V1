@@ -12,7 +12,6 @@ import 'package:vm_fm_4/generated/locale_keys.g.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_list/widgets/custom_base_accordion.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/models/start_check_list_value_model.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/provider/scope_provider.dart';
-import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/widgets/add_check_item_accordion.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/widgets/add_documant_accordion.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/widgets/custom_scope_check_item_card.dart';
 
@@ -51,19 +50,30 @@ class ScopeDetail extends StatelessWidget {
   }
 }
 
-Padding _customPageAccordionSection(BuildContext context, ScopeProvider provider, StartCheckListValueModel? checkListValueModel,MaintanenceModel? maintanenceList) {
+// ignore: unused_element
+Padding _customPageAccordionSection(
+    BuildContext context, ScopeProvider provider, StartCheckListValueModel? checkListValueModel, MaintanenceModel? maintanenceList) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 22),
     child: CustomBaseAccordion(list: _filterAcordionList(context, provider, checkListValueModel!, maintanenceList)),
   );
 }
 
-List<AccordionSection> _filterAcordionList(BuildContext context, ScopeProvider provider, StartCheckListValueModel checkListValueModel,MaintanenceModel? maintanenceList) {
+List<AccordionSection> _filterAcordionList(
+    BuildContext context, ScopeProvider provider, StartCheckListValueModel checkListValueModel, MaintanenceModel? maintanenceList) {
   return [
     //_accordionSection(context, LocaleKeys.Effort.tr(), AddEffortsAccordion(provider: provider), AppIcons.insightsRounded),
     //_accordionSection(context, LocaleKeys.RequestMaterial.tr(), RequestMaterialAccordion(provider: provider), AppIcons.tool),
     //_accordionSection(context, LocaleKeys.Active.tr(), AddCheckItemAcordion(maintanenceList: maintanenceList ,checkListValueModel: checkListValueModel, provider: provider, taskId: checkListValueModel.id.toString(), taskKey: checkListValueModel.key.toString(),), AppIcons.photoAlbum),
-    _accordionSection(context, LocaleKeys.Document.tr(), AddDocumantAccordion(provider: provider, taskId: checkListValueModel.id.toString(), taskKey: checkListValueModel.key.toString(),), AppIcons.photoAlbum),
+    _accordionSection(
+        context,
+        LocaleKeys.Document.tr(),
+        AddDocumantAccordion(
+          provider: provider,
+          taskId: checkListValueModel.id.toString(),
+          taskKey: checkListValueModel.key.toString(),
+        ),
+        AppIcons.photoAlbum),
   ];
 }
 

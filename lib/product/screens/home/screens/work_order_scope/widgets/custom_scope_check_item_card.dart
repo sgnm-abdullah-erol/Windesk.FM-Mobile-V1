@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:vm_fm_4/core/constants/other/app_icons.dart';
@@ -6,7 +5,6 @@ import 'package:vm_fm_4/core/constants/other/colors.dart';
 import 'package:vm_fm_4/feature/components/dynamic_form/dynamic_form.dart';
 import 'package:vm_fm_4/feature/models/work_order_scope_models/includesof_check_item_model.dart';
 import 'package:vm_fm_4/feature/service/graphql_manager.dart';
-import 'package:vm_fm_4/generated/locale_keys.g.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/mixin/custom_scope_check_item_card_mixin.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/provider/scope_provider.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/queries/maintenances_task_queries.dart';
@@ -65,8 +63,7 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
                         Text(
                           widget.checkItem?.name ?? '',
                           style: Theme.of(context).textTheme.bodyMedium,
-                              overflow: TextOverflow.ellipsis,
-
+                          overflow: TextOverflow.ellipsis,
                         ),
                         const SizedBox(
                           width: 5,
@@ -75,8 +72,7 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
                           child: Text(
                             widget.checkItem?.description ?? '',
                             style: Theme.of(context).textTheme.bodySmall,
-                                overflow: TextOverflow.fade,
-                        
+                            overflow: TextOverflow.fade,
                           ),
                         ),
                       ],
@@ -111,7 +107,7 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
           icon: const Icon(AppIcons.save),
           color: APPColors.Main.blue,
         ),
-        isLoading ? Icon(Icons.check_circle, color: APPColors.Main.green) : Icon(Icons.check_circle_outline),
+        isLoading ? Icon(Icons.check_circle, color: APPColors.Main.green) : const Icon(Icons.check_circle_outline),
       ],
     );
   }
