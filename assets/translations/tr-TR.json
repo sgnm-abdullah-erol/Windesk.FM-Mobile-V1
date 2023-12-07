@@ -11,6 +11,8 @@
 	"FetchScopeListError": "Yükleme tamamlandı, ancak hem veriler hem de hatalar boş.\nLütfen bizimle iletisim kurun.",
 	"AddPhoto": "Fotoğraf Ekle",
 	"EffortAddedError":"Efor Ekleme Başarısız",
+	"AreYouSureSaveCheckList":"Kontrol listesini kaydetmek istediğinize emin misiniz?",
+
 	"----------------APP----------": "-----------APP--------------",
 	"IfmName": "İstanbul Finans Merkezi",
 	"AppTitle": "Yardım Masası Uygulaması",

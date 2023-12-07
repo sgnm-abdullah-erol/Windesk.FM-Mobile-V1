@@ -124,4 +124,27 @@ final class MaintenancesTaskQuery {
       }
     }
     ''';
+
+  static const String updateCheckListValueStatus = r'''
+    mutation UpdateCheckListValueStatus($updateCheckListValueStatusInput: UpdateCheckListValueStatusInput!) {
+      updateCheckListValueStatus(updateCheckListValueStatusInput: $updateCheckListValueStatusInput) {
+        id
+      }
+    }
+    ''';
+  static const String checkListValues = r'''
+  query CheckListValuesInputValues($where: CheckListValueWhere) {
+    checkListValues(where: $where) {
+      id
+      CheckItemValue {
+        id
+        name
+        inputValueParsed
+        CheckItem {
+          id
+        }
+      }
+    }
+  }
+    ''';
 }

@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:vm_fm_4/core/database/shared_manager.dart';
@@ -25,6 +26,9 @@ class ScopeProvider extends ChangeNotifier {
 
   bool _isImageAdded = false;
   bool get isImageAdded => _isImageAdded;
+
+  bool _isDocumentAdded = false;
+  bool get isDocumentAdded => _isDocumentAdded;
 
   bool _userClickedDocumants = false;
   bool get userClickedDocumants => _userClickedDocumants;
@@ -71,9 +75,7 @@ class ScopeProvider extends ChangeNotifier {
 
   void setEndEffortDate(String value) => _endEffortDate = value;
 
-  void addEffort(){
-
-  }
+  void addEffort() {}
 
   // void getToken() async {
   //   fetchToken = false;
@@ -116,7 +118,7 @@ class ScopeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void saveImage(BuildContext context, String imagePath, String desc, String scopeId, String taskKey) async {
+  void saveImage(BuildContext context, String imagePath, String desc, String scopeId, String taskKey, String labels) async {
     if (imagePath.isEmpty) {
       snackBar(context, LocaleKeys.EmptyImagePath.tr(), 'error');
       return;
@@ -126,18 +128,14 @@ class ScopeProvider extends ChangeNotifier {
 
     final String token = await SharedManager().getString(SharedEnum.userToken);
 
-    final response = await workSpaceService.saveDocumentForMaintenance(imagePath, '', desc, token, scopeId, taskKey, 'image');
+    final response = await workSpaceService.saveDocumentForMaintenance(imagePath, '', desc, token, scopeId, taskKey, 'image', labels);
     response.fold(
       (l) => {
-        l
-            ? {
-                _isImageAdded = true,
-              }
-            : {
-                _isImageAdded = false,
-              }
+        snackBar(context, LocaleKeys.AddPhoto.tr(), 'success'),
       },
-      (r) => {},
+      (r) => {
+        snackBar(context, LocaleKeys.AddPhoto.tr(), 'error'),
+      },
     );
 
     _isLoading = false;
@@ -148,9 +146,9 @@ class ScopeProvider extends ChangeNotifier {
     });
   }
 
-  void savePdf(BuildContext context, String imagePath, String desc, String scopeId, String taskKey) async {
-    if (imagePath.isEmpty) {
-      snackBar(context, LocaleKeys.EmptyImagePath.tr(), 'error');
+  void savePdf(BuildContext context, String pdfPath, String pdfName, String desc, String taskId, String taskKey, String labels) async {
+    if (pdfPath.isEmpty) {
+      snackBar(context, LocaleKeys.EmptyPdfPath.tr(), 'error');
       return;
     }
     _isLoading = true;
@@ -158,15 +156,18 @@ class ScopeProvider extends ChangeNotifier {
 
     final String token = await SharedManager().getString(SharedEnum.userToken);
 
-    final response = await workSpaceService.saveDocumentForMaintenance(imagePath, '', desc, token, scopeId, taskKey, 'image');
+    final response = await workSpaceService.saveDocumentForMaintenance(pdfPath, pdfName, desc, token, taskId, taskKey, 'pdf', labels);
+
     response.fold(
       (l) => {
         l
             ? {
-                _isImageAdded = true,
+                _isDocumentAdded = true,
+                snackBar(context, LocaleKeys.AddedDocumants.tr(), 'success'),
+
               }
             : {
-                _isImageAdded = false,
+                _isDocumentAdded = false,
               }
       },
       (r) => {},
@@ -176,7 +177,7 @@ class ScopeProvider extends ChangeNotifier {
     notifyListeners();
 
     Future.delayed(const Duration(seconds: 2), () {
-      _isImageAdded = false;
+      _isDocumentAdded = false;
     });
   }
 }

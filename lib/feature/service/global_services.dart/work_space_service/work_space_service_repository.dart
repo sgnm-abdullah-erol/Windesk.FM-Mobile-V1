@@ -121,6 +121,7 @@ abstract class WorkSpaceServiceRepository {
     String token,
     String id,
     String key,
-    String label,
+    String isImage,
+    String labels
   );
 }

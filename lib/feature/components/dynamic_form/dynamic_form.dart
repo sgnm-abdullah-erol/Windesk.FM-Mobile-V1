@@ -15,6 +15,7 @@ class FormTypes {
 class DynamicForm {
   Widget formType(
     String inputType,
+    dynamic inputValue,
     bool selectedValue,
     Function setSelectedValue,
     Function selectDate,
@@ -28,9 +29,9 @@ class DynamicForm {
       case FormTypes.DATE:
         return _DateWidget(setInitialController, selectDate);
       case FormTypes.TEXT:
-        return _TextWidget(textEditingController);
+        return _TextWidget(textEditingController, inputValue);
       case FormTypes.NUMBER:
-        return _NumberWidget(numberEditingController);
+        return _NumberWidget(numberEditingController, inputValue);
       default:
         return const Text('');
     }
@@ -38,12 +39,14 @@ class DynamicForm {
 }
 
 class _NumberWidget extends StatelessWidget {
-  const _NumberWidget(this.numberEditingController);
+  const _NumberWidget(this.numberEditingController, this.inputValue);
 
   final TextEditingController numberEditingController;
+  final dynamic inputValue;
 
   @override
   Widget build(BuildContext context) {
+    numberEditingController.text = inputValue.toString() ?? '';
     return TextFormField(
       keyboardType: TextInputType.number,
       controller: numberEditingController,
@@ -57,12 +60,15 @@ class _NumberWidget extends StatelessWidget {
 }
 
 class _TextWidget extends StatelessWidget {
-  const _TextWidget(this.textEditingController);
+  const _TextWidget(this.textEditingController, this.inputValue);
 
   final TextEditingController textEditingController;
+  final dynamic inputValue;
 
   @override
   Widget build(BuildContext context) {
+    print(inputValue);
+    textEditingController.text = inputValue.toString() ?? '';
     return TextFormField(
       controller: textEditingController,
       decoration: InputDecoration(
@@ -87,6 +93,7 @@ class _DateWidget extends StatelessWidget {
       onTap: (value) => selectDate(value),
       initialDate: DateTime(2015),
       initialControllerFunction: setInitialController,
+      
     );
   }
 }
@@ -94,7 +101,7 @@ class _DateWidget extends StatelessWidget {
 class _YesNoWidget extends StatelessWidget {
   const _YesNoWidget(this.selectedValue, this.setSelectedValue);
 
-  final bool selectedValue;
+  final bool selectedValue; 
   final Function setSelectedValue;
 
   @override

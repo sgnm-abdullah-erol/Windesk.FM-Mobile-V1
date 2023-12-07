@@ -11,22 +11,31 @@ import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/queries/ma
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/queries/maintenances_task_query_variables.dart';
 
 class CustomScopeCheckItemCard extends StatefulWidget {
-  const CustomScopeCheckItemCard({super.key, this.checkItem, required this.provider, this.checkListValueId});
+  const CustomScopeCheckItemCard({super.key, this.checkItem, required this.provider, this.checkListValueId, this.inputValuee});
 
   final IncludesOfCheckItemModel? checkItem;
   final ScopeProvider provider;
   final int? checkListValueId;
+  final dynamic inputValuee;
 
   @override
   State<CustomScopeCheckItemCard> createState() => _CustomScopeCheckItemCardState();
 }
 
 class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> with CustomScopeCheckItemCardMixin {
-  void _setInitialController(String value) => setState(() => initialController.text = value);
-  bool selectedValue = false;
+  void _setInitialController(String value) => setState(() => initialController.text = widget.inputValuee.toString());
+  late bool selectedValue;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedValue = widget.inputValuee.toString().toLowerCase() == 'true';
+  }
 
   @override
   Widget build(BuildContext context) {
+    print('---');
+    print(widget.inputValuee.toString());
     return GraphQLProvider(
       client: GraphQLManager.getClientForMutation(context),
       child: Mutation(
@@ -100,7 +109,7 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
                     ? textEditingController.text
                     : widget.checkItem?.inputType == FormTypes.NUMBER
                         ? numberEditingController.text
-                        : initialController.text;
+                        : widget.provider.startDate;
             runMutation(
                 MaintenancesTaskVariableQueries.createCheckItemValueInput(widget.checkItem?.id ?? 0, widget.checkListValueId ?? 0, inputValue));
           },
@@ -117,6 +126,7 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
       alignment: Alignment.center,
       child: DynamicForm().formType(
         widget.checkItem?.inputType ?? '',
+        widget.inputValuee ?? '',
         selectedValue,
         () => setState(() => selectedValue = !selectedValue),
         (String value) => widget.provider.selectedDate(value),

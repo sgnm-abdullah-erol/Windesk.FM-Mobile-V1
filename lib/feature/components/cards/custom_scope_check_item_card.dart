@@ -85,16 +85,16 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> {
                         widget.checkItem?.name ?? '',
                       ),
                       Text(widget.checkItem?.description ?? ''),
-                      Align(
-                        alignment: Alignment.center,
-                        // TODO dynamic form
-                        child: DynamicForm().formType(widget.checkItem?.inputType ?? '', selectedValue, () {
-                          setState(() {
-                            selectedValue = !selectedValue;
-                          });
-                        }, (String value) => widget.provider.selectedDate(value), (String value) => setInitialController(value),
-                            _textEditingController, _numberEditingController),
-                      ),
+                      // Align(
+                      //   alignment: Alignment.center,
+                      //   // TODO dynamic form
+                      //   child: DynamicForm().formType(widget.checkItem?.inputType ?? '', selectedValue, () {
+                      //     setState(() {
+                      //       selectedValue = !selectedValue;
+                      //     });
+                      //   }, (String value) => widget.provider.selectedDate(value), (String value) => setInitialController(value),
+                      //       _textEditingController, _numberEditingController),
+                      // ),
                       ElevatedButton(
                         onPressed: () => runMutation({
                           "createCheckItemValueInput": {

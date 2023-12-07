@@ -8,9 +8,9 @@ import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/widgets/cu
 
 mixin CustomScopeCheckItemCardMixin on State<CustomScopeCheckItemCard> {
   // controllers
-  final TextEditingController initialController = TextEditingController();
   final TextEditingController textEditingController = TextEditingController();
   final TextEditingController numberEditingController = TextEditingController();
+  final TextEditingController initialController = TextEditingController();
 
   // variables
   bool isDocumentMutation = false;
