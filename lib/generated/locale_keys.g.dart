@@ -18,6 +18,8 @@ class LocaleKeys {
   static const String UnSuccessProcess = 'UnSuccessProcess';
   static const String SuccessProcess = 'SuccessProcess';
   static const String FetchScopeListError = 'FetchScopeListError';
+  static const String AddPhoto = 'AddPhoto';
+
   // asset search
   static const String assetSearch = 'Malzeme Arama';
 

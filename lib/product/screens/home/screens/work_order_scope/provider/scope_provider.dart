@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:vm_fm_4/core/database/shared_manager.dart';
 import 'package:vm_fm_4/core/enums/shared_enums.dart';
 import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
@@ -19,6 +20,9 @@ class ScopeProvider extends ChangeNotifier {
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
+
+  bool _dialVisible = false;
+  bool get dialVisible => _dialVisible;
 
   bool _isImageAdded = false;
   bool get isImageAdded => _isImageAdded;
@@ -42,6 +46,35 @@ class ScopeProvider extends ChangeNotifier {
   }
 
   void userClickedDocumantsFunction() => _userClickedDocumants = true;
+
+  String _startEffortDate = '';
+  String get startEffortDate => _startEffortDate;
+
+  String _endEffortDate = '';
+  String get endEffortDate => _endEffortDate;
+
+  String _effortDuration = '';
+  String get effortDuration => _effortDuration;
+
+  String _effortType = '';
+  String get effortType => _effortType;
+
+  String _effortDescription = '';
+  String get effortDescription => _effortDescription;
+
+  void setEffortDescription(String value) => _effortDescription = value;
+  void setEffortType(String value) => _effortType = value;
+  void setEffortDuration(String value) => _effortDuration = value;
+
+  void setStartEffortDate(String value) {
+    _startEffortDate = value;
+  }
+
+  void setEndEffortDate(String value) => _endEffortDate = value;
+
+  void addEffort(){
+      
+  }
 
   // void getToken() async {
   //   fetchToken = false;
@@ -95,7 +128,6 @@ class ScopeProvider extends ChangeNotifier {
     final String token = await SharedManager().getString(SharedEnum.userToken);
 
     final response = await workSpaceService.saveDocumentForMaintenance(imagePath, '', desc, token, scopeId, taskKey, 'image');
-    print('response' + response.toString());
     response.fold(
       (l) => {
         l
@@ -128,7 +160,6 @@ class ScopeProvider extends ChangeNotifier {
     final String token = await SharedManager().getString(SharedEnum.userToken);
 
     final response = await workSpaceService.saveDocumentForMaintenance(imagePath, '', desc, token, scopeId, taskKey, 'image');
-    print('response' + response.toString());
     response.fold(
       (l) => {
         l

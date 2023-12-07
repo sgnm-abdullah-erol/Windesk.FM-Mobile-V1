@@ -115,4 +115,13 @@ final class MaintenancesTaskQuery {
       }
     }
     ''';
+
+  static const String submitChecklistValueEffort = r'''
+    mutation SubmitChecklistValueEffort($submitChecklistValueEffortInput: [SubmitChecklistValueEffortInput!]!) {
+      submitChecklistValueEffort(submitChecklistValueEffortInput: $submitChecklistValueEffortInput) {
+        id
+    
+      }
+    }
+    ''';
 }

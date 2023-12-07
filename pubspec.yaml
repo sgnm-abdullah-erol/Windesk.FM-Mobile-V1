@@ -103,6 +103,7 @@ dependencies:
   flutter_file_dialog: ^3.0.2
   flutter_simple_treeview: ^3.0.2
   graphql_flutter: ^5.2.0-beta.6
+  flutter_speed_dial: ^7.0.0
   # image_gallery_saver: ^2.0.3
   # open_file: ^3.3.2
 

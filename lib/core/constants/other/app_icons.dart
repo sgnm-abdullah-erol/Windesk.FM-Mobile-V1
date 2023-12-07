@@ -64,4 +64,7 @@ class AppIcons {
   static const IconData send = Icons.send;
   static const IconData eventList = Icons.checklist_outlined;
   static const IconData save = Icons.save;
+  static const IconData workHistory = Icons.work_history;
+
+
 }

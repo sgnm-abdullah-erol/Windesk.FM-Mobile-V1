@@ -63,4 +63,19 @@ final class MaintenancesTaskVariableQueries {
       }
     };
   }
+
+  static Map<String, dynamic> submitChecklistValueEffortInput(int checkListValueId, String startDate, String endDate, String effortDuration, String effortType, String? description) {
+    return {
+      "submitChecklistValueEffortInput": [
+        {
+          "checkListValueId": checkListValueId,
+          "startDate": startDate,
+          "endDate": endDate,
+          "effortDuration": effortDuration,
+          "effortType": effortType,
+          "description": description,
+        }
+      ]
+    };
+  }
 }

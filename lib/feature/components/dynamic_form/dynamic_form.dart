@@ -50,7 +50,7 @@ class _NumberWidget extends StatelessWidget {
       decoration: InputDecoration(
         border: const UnderlineInputBorder(),
         labelText: LocaleKeys.EnterNumber.tr(),
-        labelStyle: Theme.of(context).textTheme.bodyMedium,
+        labelStyle: Theme.of(context).textTheme.bodySmall,
       ),
     );
   }
@@ -68,7 +68,7 @@ class _TextWidget extends StatelessWidget {
       decoration: InputDecoration(
         border: const UnderlineInputBorder(),
         labelText: LocaleKeys.EnterDescription.tr(),
-        labelStyle: Theme.of(context).textTheme.bodyMedium,
+        labelStyle: Theme.of(context).textTheme.bodySmall,
       ),
     );
   }
