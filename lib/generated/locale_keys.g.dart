@@ -20,6 +20,7 @@ class LocaleKeys {
   static const String FetchScopeListError = 'FetchScopeListError';
   static const String AddPhoto = 'AddPhoto';
   static const String AreYouSureSaveCheckList = 'AreYouSureSaveCheckList';
+  static const String EmptyComponentList = 'EmptyComponentList';
 
   // asset search
   static const String assetSearch = 'Malzeme Arama';

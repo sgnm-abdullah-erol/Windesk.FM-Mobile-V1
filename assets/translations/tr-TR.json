@@ -10,6 +10,7 @@
 	"SuccessProcess": "İşlem Başarılı",
 	"FetchScopeListError": "Yükleme tamamlandı, ancak hem veriler hem de hatalar boş.\nLütfen bizimle iletisim kurun.",
 	"AddPhoto": "Fotoğraf Ekle",
+	"EmptyComponentList": "Bileşen Listesi Boş",
 	"EffortAddedError":"Efor Ekleme Başarısız",
 	"AreYouSureSaveCheckList":"Kontrol listesini kaydetmek istediğinize emin misiniz?",
 

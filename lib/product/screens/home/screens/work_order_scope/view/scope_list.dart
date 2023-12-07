@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:vm_fm_4/core/constants/paths/service_tools.dart';
 import 'package:vm_fm_4/feature/components/appbar/custom_main_appbar.dart';
+import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
 import 'package:vm_fm_4/feature/models/work_order_scope_models/check_list_maintanence_model.dart';
 import 'package:vm_fm_4/feature/models/work_order_scope_models/maintanence_model.dart';
 import 'package:vm_fm_4/feature/service/graphql_manager.dart';
@@ -42,6 +43,7 @@ class ScopeList extends StatelessWidget {
                     return Text(LocaleKeys.FetchScopeListError.tr(), style: Theme.of(context).textTheme.bodyMedium);
                   }
                   final MaintanenceModel maintanenceModel = _checkNullablitiyOfMaintenanceModel(context, result.data ?? {});
+
                   return Query(
                     options: QueryOptions(
                       document: gql(MaintenancesTaskQuery.checkListValue),
@@ -50,12 +52,33 @@ class ScopeList extends StatelessWidget {
                     builder: GraphqlResultHandling.withGenericHandling(
                       context,
                       (QueryResult result, {refetch, fetchMore}) {
+                        final CheckListMaintanenceModel checkListmaintanenceModel = _checkNullablitiyOfCheckListMaintenanceModel(
+                          context,
+                          result.data ?? {},
+                        );
                         if (result.data == null && !result.hasException) {
                           return Text(LocaleKeys.FetchScopeListError.tr(), style: Theme.of(context).textTheme.bodyMedium);
                         }
-                        final CheckListMaintanenceModel checkListmaintanenceModel =
-                            _checkNullablitiyOfCheckListMaintenanceModel(context, result.data ?? {});
-                        return ScopeCardListScreen(maintanenceModel: maintanenceModel, checkListmaintanenceModel: checkListmaintanenceModel, taskId: taskId);
+                        else{
+                          return ScopeCardListScreen(
+                            maintanenceModel: maintanenceModel,
+                            checkListmaintanenceModel: checkListmaintanenceModel,
+                            taskId: taskId,
+                          );
+                        }
+   
+
+                        // if (_checkShowComponents(context, checkListmaintanenceModel)) {
+                        //   snackBar(context, LocaleKeys.EmptyComponentList.tr(), 'error');
+                        //   context.router.pop();
+                        //   return Container();
+                        // } else {
+                        //   return ScopeCardListScreen(
+                        //     maintanenceModel: maintanenceModel,
+                        //     checkListmaintanenceModel: checkListmaintanenceModel,
+                        //     taskId: taskId,
+                        //   );
+                        // }
                       },
                     ),
                   );
@@ -66,6 +89,18 @@ class ScopeList extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  bool _checkShowComponents(BuildContext context, CheckListMaintanenceModel model) {
+    bool result = true;
+
+    if (model.checkListValue?.first.component == null || model.checkListValue?.first.component == []) {
+      result = false;
+    } else {
+      result = true;
+    }
+
+    return result;
   }
 
   MaintanenceModel _checkNullablitiyOfMaintenanceModel(BuildContext context, Map<String, dynamic> result) {
