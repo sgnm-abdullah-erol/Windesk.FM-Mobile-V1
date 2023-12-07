@@ -42,3 +42,7 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Graphql related
+/lib/feature/schemas/schema.graphql.dart
+/lib/feature/schemas/schema.graphql

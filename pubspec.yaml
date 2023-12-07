@@ -102,9 +102,11 @@ dependencies:
   # file downloader
   flutter_file_dialog: ^3.0.2
   flutter_simple_treeview: ^3.0.2
-  graphql_flutter: ^5.2.0-beta.6
-  # image_gallery_saver: ^2.0.3
-  # open_file: ^3.3.2
+
+  # graphql
+  graphql: ^5.2.0-beta.6
+  flutter_hooks: ^0.20.3
+  graphql_flutter: ^5.1.2
 
 dev_dependencies:
   flutter_test:
@@ -114,7 +116,10 @@ dev_dependencies:
   auto_route_generator: ^7.2.0
 
   # for auto router, code generation
-  build_runner: ^2.3.3
+  build_runner: ^2.4.7
+
+  # graphql codegen
+  graphql_codegen: ^0.13.9
 
   flutter_lints: ^2.0.0
 

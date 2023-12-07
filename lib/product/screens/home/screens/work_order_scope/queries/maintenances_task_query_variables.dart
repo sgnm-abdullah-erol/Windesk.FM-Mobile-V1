@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 final class MaintenancesTaskVariableQueries {
   static Map<String, dynamic> getMaintenancesTaskVariables(String taskId) {
