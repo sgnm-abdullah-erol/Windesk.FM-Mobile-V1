@@ -36,6 +36,7 @@ class AddEffortsModalBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) => _bodyWidget(context);
 
   Widget _bodyWidget(BuildContext context) {
+    print('checklist' + checkListValueId.toString());
     return GraphQLProvider(
         client: GraphQLManager.getClientForMutation(context),
         child: Mutation(
@@ -43,6 +44,8 @@ class AddEffortsModalBottomSheet extends StatelessWidget {
               document: gql(MaintenancesTaskQuery.submitChecklistValueEffort),
               update: (GraphQLDataProxy cache, QueryResult? result) {},
               onCompleted: (dynamic resultData) async {
+                print('resultt');
+                print(resultData);
                 //context.router.push(ScopeDetail(maintanenceList: maintanenceModel, checkListValueModel: startCheckListValue));
               },
             ),
@@ -69,7 +72,7 @@ class AddEffortsModalBottomSheet extends StatelessWidget {
                             flex: 20,
                             child: _InputButton(onPressed: () {
                               runMutation(
-                                MaintenancesTaskVariableQueries.submitChecklistValueEffortInput(checkListValueId, provider.startDate,
+                                MaintenancesTaskVariableQueries.submitChecklistValueEffortInput(checkListValueId, provider.startEffortDate,
                                     provider.endEffortDate, provider.effortDuration, provider.effortType, provider.effortDescription),
                               );
                             })),
