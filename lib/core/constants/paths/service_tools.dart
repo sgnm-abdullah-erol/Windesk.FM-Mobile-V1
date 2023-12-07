@@ -15,6 +15,7 @@ class ServiceTools {
   static const String attachPathLive = "http://10.32.12.42/windesktest/xreadattach.php?token=$tokenV1&id=";
   static const String facilityName = "İstanbul Finans Merkezi";
   static const bool isWorkOrderExist = true;
+
   static const bool _isProduction = false;
 
   static Url get url {
@@ -30,17 +31,18 @@ class ServiceTools {
       );
     } else {
       return const Url(
-        facility_url: "http://localhost:3010",
-        location_url: "http://localhost:3010",
-        users_url: "http://localhost:3012",
-        asset_url: "http://localhost:3014",
-        workorder_url: "http://localhost:3015",
-        generalGraphql_url: "http://localhost:3015/general-graphql",
-        graphql_url: "http://localhost:3015/graphql",
+        facility_url: "http://10.0.2.2:3010",
+        location_url: "http://10.0.2.2:3010",
+        users_url: "http://10.0.2.2:3012",
+        asset_url: "http://10.0.2.2:3014",
+        workorder_url: "http://10.0.2.2:3015",
+        generalGraphql_url: "http://10.0.2.2:3015/general-graphql",
+        graphql_url: "http://10.0.2.2:3015/graphql",
       );
     }
   }
 }
+
 // facility_url: "http://10.0.2.2:3010",
 // location_url: "http://10.0.2.2:3010",
 // users_url: "http://10.0.2.2:3012",
