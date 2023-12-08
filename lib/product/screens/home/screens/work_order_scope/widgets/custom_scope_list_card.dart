@@ -21,17 +21,19 @@ import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/queries/ma
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/widgets/alert_check_list_bottom_sheet.dart';
 
 class CustomScopeListCard extends StatelessWidget {
-  const CustomScopeListCard(
-      {super.key,
-      required this.name,
-      required this.controlList,
-      required this.scopeId,
-      this.startDate,
-      this.technician,
-      this.onTap,
-      this.maintanenceModel,
-      this.checkListmaintanenceModel,
-      this.checkListSituation});
+  const CustomScopeListCard({
+    super.key,
+    required this.name,
+    required this.controlList,
+    required this.scopeId,
+    this.startDate,
+    this.technician,
+    this.onTap,
+    this.maintanenceModel,
+    this.checkListmaintanenceModel,
+    this.checkListSituation,
+    this.refetch,
+  });
 
   final String name;
   final String controlList;
@@ -42,6 +44,7 @@ class CustomScopeListCard extends StatelessWidget {
   final MaintanenceModel? maintanenceModel;
   final CheckListMaintanenceModel? checkListmaintanenceModel;
   final dynamic checkListSituation;
+  final Function? refetch;
 
   @override
   Widget build(BuildContext context) {
@@ -131,16 +134,28 @@ class CustomScopeListCard extends StatelessWidget {
                 children: [
                   CustomElevatedButtonWithIcon(
                     bgColor: APPColors.Accent.black,
-                    icon: checkListSituation == 'Finished' ? AppIcons.eventList: AppIcons.send,
+                    icon: checkListSituation == 'Finished' ? AppIcons.eventList : AppIcons.send,
                     onPressFunction: () async {
-                      context.router.push(ScopeDetail(maintanenceList: maintanenceModel, checkListValueModel: checkListValue, checkListSituation:checkListSituation));
+                      final result = await context.router.push(
+                        ScopeDetail(
+                          maintanenceList: maintanenceModel,
+                          checkListValueModel: checkListValue,
+                          checkListSituation: checkListSituation,
+                        ),
+                      );
+
+                      //* if result is true, refetch the query
+                      if (result == true) {
+                        refetch!();
+                      }
                     },
                     iconColor: APPColors.Main.white,
-                    textValue: checkListSituation == 'Finished' ? LocaleKeys.Browse.tr(): LocaleKeys.Contuniue.tr(),
+                    textValue: checkListSituation == 'Finished' ? LocaleKeys.Browse.tr() : LocaleKeys.Contuniue.tr(),
                     textColor: APPColors.Main.white,
                   ),
-                  checkListSituation == 'Finished' ?
-                  Text(LocaleKeys.CompletedChecklist.tr(), style: TextStyle(color: APPColors.Main.red, fontSize: 10)):Container()
+                  checkListSituation == 'Finished'
+                      ? Text(LocaleKeys.CompletedChecklist.tr(), style: TextStyle(color: APPColors.Main.red, fontSize: 10))
+                      : Container()
                 ],
               ),
             );

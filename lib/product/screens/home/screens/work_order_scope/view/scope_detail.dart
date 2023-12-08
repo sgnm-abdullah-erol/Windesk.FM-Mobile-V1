@@ -46,13 +46,11 @@ class ScopeDetail extends StatelessWidget {
               return Text(LocaleKeys.FetchScopeListError.tr(), style: Theme.of(context).textTheme.bodyMedium);
             }
             final resultData = result.data?['checkListValues'].first['CheckItemValue'];
+
             return ChangeNotifierProvider(
               create: (context) => ScopeProvider(),
               child: Scaffold(
-                appBar: CustomMainAppbar(
-                  title: Text('${LocaleKeys.CheckList.tr()} - ${maintanenceList?.id.toString()}'),
-                  returnBack: true,
-                ),
+                appBar: _appbar(context),
                 body: Consumer<ScopeProvider>(
                   builder: (context, ScopeProvider provider, child) {
                     return SizedBox(
@@ -79,73 +77,73 @@ class ScopeDetail extends StatelessWidget {
                     );
                   },
                 ),
-                floatingActionButton: Consumer<ScopeProvider>(builder: (context, ScopeProvider provider, child) {
-                  return SpeedDial(
-                    animatedIcon: AnimatedIcons.menu_close,
-                    animatedIconTheme: const IconThemeData(size: 22.0),
-                    // this is ignored if animatedIcon is non null
-                    // child: Icon(Icons.add),
-                    visible: true,
-                    curve: Curves.bounceIn,
-                    overlayColor: Colors.black,
-                    overlayOpacity: 0.5,
-                    // ignore: avoid_print
-                    onOpen: () => print('OPENING DIAL'),
-                    onClose: () => {},
-                    tooltip: 'Speed Dial',
-                    heroTag: 'speed-dial-hero-tag',
-                    backgroundColor: Colors.red,
-                    foregroundColor: Colors.black,
-                    elevation: 8.0,
-                    shape: const CircleBorder(),
-                    children: [
-                      _speedDialChild(context, AppIcons.addPhoto, LocaleKeys.AddPhoto.tr(), APPColors.Main.grey, () {
-                        ShowModalBottomSheet().show(
-                          context,
-                          AddImageModalBottomSheet(
-                            taskId: checkListValueModel?.id.toString() ?? '',
-                            taskKey: checkListValueModel?.key ?? '',
-                            labels: checkListValueModel?.labels?.first,
-                            saveImage: provider.saveImage,
-                          ),
-                        );
-                      }),
-                      _speedDialChild(context, AppIcons.documantScanner, LocaleKeys.AddPdf.tr(), APPColors.NewNotifi.grey, () {
-                        ShowModalBottomSheet().show(
-                          context,
-                          AddDocumentsModalBottomSheet(
-                            taskId: checkListValueModel?.id.toString() ?? '',
-                            taskKey: checkListValueModel?.key ?? '',
-                            labels: checkListValueModel?.labels?.first,
-                            function: provider.savePdf,
-                          ),
-                        );
-                      }),
-                      _speedDialChild(context, AppIcons.workHistory, LocaleKeys.AddEfforts.tr(), APPColors.Secondary.blue, () {
-                        ShowModalBottomSheet().show(
-                          context,
-                          AddEffortsModalBottomSheet(
-                            checkListValueId: checkListValueModel?.id ?? 0,
-                            selectedStartDate: provider.setStartEffortDate,
-                            selectedEndtDate: provider.setEndEffortDate,
-                            selectedEffortDuration: provider.setEffortDuration,
-                            selectedEffortType: provider.setEffortType,
-                            selectedDescription: provider.setEffortDescription,
-                            provider: provider,
-                          ),
-                        );
-                      }),
-                      _speedDialChild(context, AppIcons.save, LocaleKeys.Save.tr(), APPColors.Main.green, () {
-                        ShowModalBottomSheet().show(
-                          context,
-                          SaveCheckListBottomSheet(
-                            checkListValueId: checkListValueModel?.id ?? 0,
-                          ),
-                        );
-                      }),
-                    ],
-                  );
-                }),
+                floatingActionButton: Consumer<ScopeProvider>(
+                  builder: (context, ScopeProvider provider, child) {
+                    return SpeedDial(
+                      animatedIcon: AnimatedIcons.menu_close,
+                      animatedIconTheme: const IconThemeData(size: 22.0),
+                      // this is ignored if animatedIcon is non null
+                      // child: Icon(Icons.add),
+                      visible: true,
+                      curve: Curves.bounceIn,
+                      overlayColor: Colors.black,
+                      overlayOpacity: 0.5,
+                      // ignore: avoid_print
+                      onOpen: () => print('OPENING DIAL'),
+                      onClose: () => {},
+                      tooltip: 'Speed Dial',
+                      heroTag: 'speed-dial-hero-tag',
+                      backgroundColor: Colors.red,
+                      foregroundColor: Colors.black,
+                      elevation: 8.0,
+                      shape: const CircleBorder(),
+                      children: [
+                        _speedDialChild(context, AppIcons.addPhoto, LocaleKeys.AddPhoto.tr(), APPColors.Main.grey, () {
+                          ShowModalBottomSheet().show(
+                            context,
+                            AddImageModalBottomSheet(
+                              taskId: checkListValueModel?.id.toString() ?? '',
+                              taskKey: checkListValueModel?.key ?? '',
+                              labels: checkListValueModel?.labels?.first,
+                              saveImage: provider.saveImage,
+                            ),
+                          );
+                        }),
+                        _speedDialChild(context, AppIcons.documantScanner, LocaleKeys.AddPdf.tr(), APPColors.NewNotifi.grey, () {
+                          ShowModalBottomSheet().show(
+                            context,
+                            AddDocumentsModalBottomSheet(
+                              taskId: checkListValueModel?.id.toString() ?? '',
+                              taskKey: checkListValueModel?.key ?? '',
+                              labels: checkListValueModel?.labels?.first,
+                              function: provider.savePdf,
+                            ),
+                          );
+                        }),
+                        _speedDialChild(context, AppIcons.workHistory, LocaleKeys.AddEfforts.tr(), APPColors.Secondary.blue, () {
+                          ShowModalBottomSheet().show(
+                            context,
+                            AddEffortsModalBottomSheet(
+                              checkListValueId: checkListValueModel?.id ?? 0,
+                              selectedStartDate: provider.setStartEffortDate,
+                              selectedEndtDate: provider.setEndEffortDate,
+                              selectedEffortDuration: provider.setEffortDuration,
+                              selectedEffortType: provider.setEffortType,
+                              selectedDescription: provider.setEffortDescription,
+                              provider: provider,
+                            ),
+                          );
+                        }),
+                        _speedDialChild(context, AppIcons.save, LocaleKeys.Save.tr(), APPColors.Main.green, () {
+                          ShowModalBottomSheet().show(
+                            context,
+                            SaveCheckListBottomSheet(checkListValueId: checkListValueModel?.id ?? 0),
+                          );
+                        }),
+                      ],
+                    );
+                  },
+                ),
               ),
             );
           },
@@ -154,14 +152,24 @@ class ScopeDetail extends StatelessWidget {
     );
   }
 
+  CustomMainAppbar _appbar(BuildContext context) {
+    return CustomMainAppbar(
+      title: Text('${LocaleKeys.CheckList.tr()} - ${maintanenceList?.id.toString()}'),
+      returnBack: false,
+      leading: IconButton(
+        icon: const Icon(AppIcons.goBackArrow),
+        onPressed: () => context.router.pop<bool>(true),
+      ),
+    );
+  }
+
   SpeedDialChild _speedDialChild(BuildContext context, IconData iconname, String label, Color color, Function onPressFunction) {
     return SpeedDialChild(
-        child: Icon(iconname),
-        backgroundColor: color,
-        label: label,
-        labelStyle: Theme.of(context).textTheme.bodySmall,
-        onTap: () {
-          onPressFunction();
-        });
+      child: Icon(iconname),
+      backgroundColor: color,
+      label: label,
+      labelStyle: Theme.of(context).textTheme.bodySmall,
+      onTap: () => onPressFunction(),
+    );
   }
 }

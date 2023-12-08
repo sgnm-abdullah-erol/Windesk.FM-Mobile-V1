@@ -66,6 +66,7 @@ class ScopeList extends StatelessWidget {
                             maintanenceModel: maintanenceModel,
                             checkListmaintanenceModel: checkListmaintanenceModel,
                             taskId: taskId,
+                            refetchFunction: refetch,
                           );
                         }
                       },
