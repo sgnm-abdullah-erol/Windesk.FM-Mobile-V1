@@ -30,7 +30,6 @@ class SaveCheckListBottomSheet extends StatelessWidget {
         builder: GraphqlResultHandling.withGenericHandling(
           context,
           (QueryResult result, {refetch, fetchMore}) {
-            print(result);
             if (result.data == null && !result.hasException) {
               return Text(LocaleKeys.FetchScopeListError.tr(), style: Theme.of(context).textTheme.bodyMedium);
             }
@@ -43,10 +42,8 @@ class SaveCheckListBottomSheet extends StatelessWidget {
                   update: (GraphQLDataProxy cache, QueryResult? result) {},
                   onCompleted: (dynamic resultData) async {
                     //koşul eklenmeli
-                    print('resultData');
-                    print(resultData);
                     snackBar(context, 'Scope Listesi Başarıyla Eklendi', 'success');
-                    context.router.pop();
+                    Navigator.of(context).pop<bool>(true);
                   },
                 ),
                 builder: (RunMutation runMutation, QueryResult? result) {
@@ -66,7 +63,7 @@ class SaveCheckListBottomSheet extends StatelessWidget {
                             SizedBox(
                               height: 45,
                               child: ElevatedButton(
-                                onPressed: () => Navigator.of(context).pop(),
+                                onPressed: () => Navigator.of(context).pop<bool>(false),
                                 style: ElevatedButton.styleFrom(backgroundColor: APPColors.Main.grey),
                                 child: Icon(AppIcons.clear, color: APPColors.Main.white),
                               ),
@@ -83,8 +80,7 @@ class SaveCheckListBottomSheet extends StatelessWidget {
                                         if (resultDataQuery[b]['CheckItem'].first['id'] == data[i].id) {
                                           allCheckListsTrue = true;
                                           break;
-                                        }
-                                        else{
+                                        } else {
                                           allCheckListsTrue = false;
                                         }
                                       }
@@ -96,9 +92,7 @@ class SaveCheckListBottomSheet extends StatelessWidget {
                                             checkListValueId,
                                           ),
                                         )
-                                      : {
-                                        snackBar(context, 'Scope Listesi Eklenemedi. Zorunlu alanları giriniz.', 'error'),
-                                        context.router.pop()};
+                                      : {snackBar(context, 'Scope Listesi Eklenemedi. Zorunlu alanları giriniz.', 'error'), context.router.pop()};
                                 },
                                 style: ElevatedButton.styleFrom(backgroundColor: APPColors.Main.green),
                                 child: Icon(AppIcons.okay, color: APPColors.Main.black),

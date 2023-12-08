@@ -87,6 +87,7 @@ class ScopeDetail extends StatelessWidget {
                     curve: Curves.bounceIn,
                     overlayColor: Colors.black,
                     overlayOpacity: 0.5,
+                    // ignore: avoid_print
                     onOpen: () => print('OPENING DIAL'),
                     onClose: () => {},
                     tooltip: 'Speed Dial',
@@ -94,7 +95,7 @@ class ScopeDetail extends StatelessWidget {
                     backgroundColor: Colors.red,
                     foregroundColor: Colors.black,
                     elevation: 8.0,
-                    shape: CircleBorder(),
+                    shape: const CircleBorder(),
                     children: [
                       _speedDialChild(context, AppIcons.addPhoto, LocaleKeys.AddPhoto.tr(), APPColors.Main.grey, () {
                         ShowModalBottomSheet().show(
@@ -132,14 +133,23 @@ class ScopeDetail extends StatelessWidget {
                           ),
                         );
                       }),
-                      _speedDialChild(context, AppIcons.save, LocaleKeys.Save.tr(), APPColors.Main.green, () {
-                        ShowModalBottomSheet().show(
-                          context,
-                          SaveCheckListBottomSheet(
-                            checkListValueId: checkListValueModel?.id ?? 0,
-                            maintanenceList: maintanenceList,
-                          ),
+                      _speedDialChild(context, AppIcons.save, LocaleKeys.Save.tr(), APPColors.Main.green, () async {
+                        final screenContext = context;
+                        final response = await showModalBottomSheet<bool>(
+                          context: context,
+                          builder: (context) {
+                            return SaveCheckListBottomSheet(
+                              checkListValueId: checkListValueModel?.id ?? 0,
+                              maintanenceList: maintanenceList,
+                            );
+                          },
                         );
+
+                        if (response == true) {
+                          // ignore: use_build_context_synchronously
+                          Navigator.of(screenContext).pop<bool>(true);
+                          refetch!();
+                        }
                       }),
                     ],
                   );
@@ -150,6 +160,10 @@ class ScopeDetail extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> goBack(BuildContext context) async {
+    context.router.pop<bool>(true);
   }
 
   CustomMainAppbar _appbar(BuildContext context) {

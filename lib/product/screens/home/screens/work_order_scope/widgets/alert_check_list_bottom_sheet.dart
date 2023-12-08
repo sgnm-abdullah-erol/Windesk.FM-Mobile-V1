@@ -35,10 +35,13 @@ class AlertCheckListBottomSheet extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(maintanenceModel.scheduledBy?.first.parentSchedule?.first.checkList?.first.hasRegulations?.first.name ?? ''),
-                Flexible(
-                  child: Text(
-                    maintanenceModel.scheduledBy?.first.parentSchedule?.first.checkList?.first.hasRegulations?.first.description ?? '',
-                    maxLines: 3,
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                  child: Flexible(
+                    child: Text(
+                      maintanenceModel.scheduledBy?.first.parentSchedule?.first.checkList?.first.hasRegulations?.first.description ?? '',
+                      maxLines: 3,
+                    ),
                   ),
                 ),
                 Row(
@@ -47,7 +50,7 @@ class AlertCheckListBottomSheet extends StatelessWidget {
                     SizedBox(
                       height: 45,
                       child: ElevatedButton(
-                        onPressed: () => Navigator.of(context).pop(),
+                        onPressed: () => Navigator.of(context).pop<bool>(false),
                         style: ElevatedButton.styleFrom(backgroundColor: APPColors.Main.grey),
                         child: Icon(AppIcons.clear, color: APPColors.Main.white),
                       ),

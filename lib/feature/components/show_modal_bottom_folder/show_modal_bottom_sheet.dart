@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ShowModalBottomSheet {
-  show(context, Widget showWidget) {
+  Future<dynamic> show(context, Widget showWidget) async {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,

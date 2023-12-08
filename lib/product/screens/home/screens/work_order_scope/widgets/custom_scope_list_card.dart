@@ -57,7 +57,8 @@ class CustomScopeListCard extends StatelessWidget {
           onCompleted: (Map<String, dynamic>? resultData) async {
             StartCheckListValueModel? model = _setStartCheckListValue(resultData);
             if (model != null) {
-              await _bottomSheet(context, model);
+              final response = await _bottomSheet(context, model);
+              response ? refetch!() : null;
             } else {
               snackBar(context, LocaleKeys.FetchScopeListError, 'error');
             }
