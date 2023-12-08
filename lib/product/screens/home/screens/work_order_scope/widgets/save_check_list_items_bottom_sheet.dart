@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:vm_fm_4/core/constants/other/app_icons.dart';
 import 'package:vm_fm_4/core/constants/other/colors.dart';
+import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
 import 'package:vm_fm_4/feature/service/graphql_manager.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/queries/maintenances_task_queries.dart';
@@ -24,6 +25,9 @@ class SaveCheckListBottomSheet extends StatelessWidget {
           update: (GraphQLDataProxy cache, QueryResult? result) {},
           onCompleted: (dynamic resultData) async {
             //koşul eklenmeli
+            print('resultData');
+            print(resultData);
+            snackBar(context, 'Scope Listesi Başarıyla Eklendi', 'success');
             context.router.pop();
           },
         ),

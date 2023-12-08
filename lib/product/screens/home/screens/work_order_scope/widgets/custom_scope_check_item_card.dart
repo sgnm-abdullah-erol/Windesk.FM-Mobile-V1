@@ -11,11 +11,13 @@ import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/queries/ma
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/queries/maintenances_task_query_variables.dart';
 
 class CustomScopeCheckItemCard extends StatefulWidget {
-  const CustomScopeCheckItemCard({super.key, this.checkItem, required this.provider, this.checkListValueId, this.inputValuee});
+  const CustomScopeCheckItemCard(
+      {super.key, this.checkItem, required this.provider, this.checkListValueId, this.inputValuee, this.checkListSituation});
 
   final IncludesOfCheckItemModel? checkItem;
   final ScopeProvider provider;
   final int? checkListValueId;
+  final String? checkListSituation;
   final dynamic inputValuee;
 
   @override
@@ -35,7 +37,6 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
 
   @override
   Widget build(BuildContext context) {
-
     return GraphQLProvider(
       client: GraphQLManager.getClientForMutation(context),
       child: Mutation(
@@ -62,7 +63,10 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
-              Align(alignment: Alignment.centerLeft, child: Text(widget.checkItem?.isRequired == true ? '*Zorunlu Alan' : '', style: TextStyle(color: APPColors.Main.red, fontSize: 10))),
+              Align(
+                  alignment: Alignment.centerLeft,
+                  child:
+                      Text(widget.checkItem?.isRequired == true ? '*Zorunlu Alan' : '', style: TextStyle(color: APPColors.Main.red, fontSize: 10))),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -111,6 +115,7 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
                     : widget.checkItem?.inputType == FormTypes.NUMBER
                         ? numberEditingController.text
                         : widget.provider.startDate;
+            widget.checkListSituation == 'Finished' ? null :
             runMutation(
                 MaintenancesTaskVariableQueries.createCheckItemValueInput(widget.checkItem?.id ?? 0, widget.checkListValueId ?? 0, inputValue));
           },
@@ -126,6 +131,7 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
     return Align(
       alignment: Alignment.center,
       child: DynamicForm().formType(
+        widget.checkListSituation ?? '',
         widget.checkItem?.inputType ?? '',
         widget.inputValuee ?? '',
         selectedValue,

@@ -11,6 +11,7 @@ class TextFieldDatePicker extends StatefulWidget {
     required this.initialDate,
     this.initialControllerFunction,
     this.lastDate,
+    this.readOnly,
   });
 
   final String label;
@@ -18,6 +19,7 @@ class TextFieldDatePicker extends StatefulWidget {
   final DateTime initialDate;
   final DateTime? lastDate;
   final Function? initialControllerFunction;
+  final bool? readOnly;
 
   @override
   State<TextFieldDatePicker> createState() => _TextFieldDatePickerState();
@@ -40,8 +42,11 @@ class _TextFieldDatePickerState extends State<TextFieldDatePicker> {
       ),
       readOnly: true,
       onTap: () async {
-        final DateTime? date = await _datePicker(context, widget.initialDate, widget.lastDate ?? DateTime.now());
+        if(widget.readOnly ?? false){
 
+        }
+        else{
+        final DateTime? date = await _datePicker(context, widget.initialDate, widget.lastDate ?? DateTime.now());
         if (date != null) {
           setState(() {
             if (widget.initialControllerFunction != null) {
@@ -51,6 +56,7 @@ class _TextFieldDatePickerState extends State<TextFieldDatePicker> {
           });
         }
         widget.onTap(_controller.text);
+        }
       },
     );
   }

@@ -170,6 +170,7 @@ abstract class $AppRouter extends _i22.RootStackRouter {
           key: args.key,
           maintanenceList: args.maintanenceList,
           checkListValueModel: args.checkListValueModel,
+          checkListSituation: args.checkListSituation,
         ),
       );
     },
@@ -550,6 +551,7 @@ class ScopeDetail extends _i22.PageRouteInfo<ScopeDetailArgs> {
     _i23.Key? key,
     _i30.MaintanenceModel? maintanenceList,
     _i31.StartCheckListValueModel? checkListValueModel,
+    String? checkListSituation,
     List<_i22.PageRouteInfo>? children,
   }) : super(
           ScopeDetail.name,
@@ -557,6 +559,7 @@ class ScopeDetail extends _i22.PageRouteInfo<ScopeDetailArgs> {
             key: key,
             maintanenceList: maintanenceList,
             checkListValueModel: checkListValueModel,
+            checkListSituation: checkListSituation,
           ),
           initialChildren: children,
         );
@@ -572,6 +575,7 @@ class ScopeDetailArgs {
     this.key,
     this.maintanenceList,
     this.checkListValueModel,
+    this.checkListSituation,
   });
 
   final _i23.Key? key;
@@ -580,9 +584,11 @@ class ScopeDetailArgs {
 
   final _i31.StartCheckListValueModel? checkListValueModel;
 
+  final String? checkListSituation;
+
   @override
   String toString() {
-    return 'ScopeDetailArgs{key: $key, maintanenceList: $maintanenceList, checkListValueModel: $checkListValueModel}';
+    return 'ScopeDetailArgs{key: $key, maintanenceList: $maintanenceList, checkListValueModel: $checkListValueModel, checkListSituation: $checkListSituation}';
   }
 }
 

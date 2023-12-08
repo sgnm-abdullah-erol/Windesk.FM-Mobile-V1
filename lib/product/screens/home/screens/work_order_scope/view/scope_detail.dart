@@ -25,13 +25,15 @@ import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/widgets/sa
 
 @RoutePage()
 class ScopeDetail extends StatelessWidget {
-  const ScopeDetail({super.key, this.maintanenceList, this.checkListValueModel});
+  const ScopeDetail({super.key, this.maintanenceList, this.checkListValueModel, this.checkListSituation});
   final MaintanenceModel? maintanenceList;
   final StartCheckListValueModel? checkListValueModel;
+  final String? checkListSituation;
 
   @override
   Widget build(BuildContext context) {
-    print(checkListValueModel?.id.toString());
+    print('check');
+    print(checkListSituation);
     return GraphQLProvider(
       client: GraphQLManager.getClient(HttpLink(ServiceTools.url.generalGraphql_url)),
       child: Query(
@@ -46,8 +48,6 @@ class ScopeDetail extends StatelessWidget {
               return Text(LocaleKeys.FetchScopeListError.tr(), style: Theme.of(context).textTheme.bodyMedium);
             }
             final resultData = result.data?['checkListValues'].first['CheckItemValue'];
-            print('resultdataa');
-            print(resultData);
             return ChangeNotifierProvider(
               create: (context) => ScopeProvider(),
               child: Scaffold(
@@ -73,6 +73,7 @@ class ScopeDetail extends StatelessWidget {
                             provider: provider,
                             checkListValueId: checkListValueModel?.id,
                             inputValuee: inputVal ?? '',
+                            checkListSituation: checkListSituation,
                           );
                         },
                       ),
@@ -110,7 +111,7 @@ class ScopeDetail extends StatelessWidget {
                         );
                       }),
                       _speedDialChild(context, AppIcons.documantScanner, LocaleKeys.AddPdf.tr(), APPColors.NewNotifi.grey, () {
-                      ShowModalBottomSheet().show(
+                        ShowModalBottomSheet().show(
                           context,
                           AddDocumentsModalBottomSheet(
                             taskId: checkListValueModel?.id.toString() ?? '',
