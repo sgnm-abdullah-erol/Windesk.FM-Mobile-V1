@@ -28,7 +28,7 @@ class DynamicForm {
       case FormTypes.BOOLYES:
         return _YesNoWidget(selectedValue, setSelectedValue, checkListSituation);
       case FormTypes.DATE:
-        return _DateWidget(setInitialController, selectDate, checkListSituation);
+        return _DateWidget(setInitialController, selectDate, checkListSituation, inputValue);
       case FormTypes.TEXT:
         return _TextWidget(textEditingController, inputValue, checkListSituation);
       case FormTypes.NUMBER:
@@ -86,17 +86,18 @@ class _TextWidget extends StatelessWidget {
 }
 
 class _DateWidget extends StatelessWidget {
-  const _DateWidget(this.setInitialController, this.selectDate, this.checkListSituation);
+  const _DateWidget(this.setInitialController, this.selectDate, this.checkListSituation, this.inputValue);
 
   final Function setInitialController;
   final Function selectDate;
   final String checkListSituation;
+  final dynamic inputValue;
 
   @override
   Widget build(BuildContext context) {
     return TextFieldDatePicker(
       readOnly: checkListSituation == 'Finished',
-      label: LocaleKeys.Date.tr(),
+      label: inputValue ?? LocaleKeys.Date.tr(),
       onTap: (value) => selectDate(value),
       initialDate: DateTime(2015),
       initialControllerFunction: setInitialController,
@@ -119,12 +120,11 @@ class _YesNoWidget extends StatelessWidget {
           enabled: checkListSituation == 'Finished',
           title: Text(LocaleKeys.Yes.tr(), style: const TextStyle(color: Colors.black)),
           leading: Radio<bool>(
-            value: true,
-            groupValue: selectedValue,
-            onChanged: (bool? value) =>{if(checkListSituation != 'Finished'){
-              setSelectedValue()
-              },}
-          ),
+              value: true,
+              groupValue: selectedValue,
+              onChanged: (bool? value) => {
+                    if (checkListSituation != 'Finished') {setSelectedValue()},
+                  }),
         ),
         ListTile(
           enabled: checkListSituation == 'Finished',
@@ -133,11 +133,10 @@ class _YesNoWidget extends StatelessWidget {
             value: false,
             groupValue: selectedValue,
             onChanged: (bool? value) {
-              if(checkListSituation != 'Finished'){
-
-              setSelectedValue();
+              if (checkListSituation != 'Finished') {
+                setSelectedValue();
               }
-             },
+            },
           ),
         ),
       ],

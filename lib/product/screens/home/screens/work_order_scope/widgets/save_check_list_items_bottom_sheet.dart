@@ -37,7 +37,10 @@ class SaveCheckListBottomSheet extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text(LocaleKeys.AreYouSureSaveCheckList.tr()),
+                Flexible(child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(LocaleKeys.AreYouSureSaveCheckList.tr(), overflow: TextOverflow.fade),
+                )),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
