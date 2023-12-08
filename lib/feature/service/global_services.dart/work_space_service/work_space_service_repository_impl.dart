@@ -1120,11 +1120,12 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     String token,
     String id,
     String key,
-    String label,
+    String isImage,
+    String labels
   ) async {
     bool result = false;
 
-    String url = '${ServiceTools.url.workorder_url}/maintenance/addFiles';
+    String url = '${ServiceTools.url.workorder_url}/maintenance/addFilesMobile';
     String app = '';
 
     if (key == 'image') {
@@ -1153,7 +1154,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       ),
       "body": {
         "id": id,
-        "labels": ["CheckItemValue"],
+        "labels": [labels],
         "key": key
       }
     });
@@ -1171,7 +1172,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
-        if (data['success'] == true) {
+        if (data['success'] == true || data['code'] == 200) {
           result = true;
           return Left(result);
         } else {

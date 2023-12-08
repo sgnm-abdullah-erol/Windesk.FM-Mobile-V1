@@ -8,15 +8,19 @@ import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/widgets/cu
 
 mixin CustomScopeCheckItemCardMixin on State<CustomScopeCheckItemCard> {
   // controllers
-  final TextEditingController initialController = TextEditingController();
   final TextEditingController textEditingController = TextEditingController();
   final TextEditingController numberEditingController = TextEditingController();
+  final TextEditingController initialController = TextEditingController();
 
   // variables
   bool isDocumentMutation = false;
   String token = '';
   bool _isLoading = false;
   bool get isLoading => _isLoading;
+
+  void setIsLoading(bool value) {
+    _isLoading = value;
+  }
 
   CreateCheckItemValue? _setCreateCheckItemModel(Map<String, dynamic>? data) {
     if (data != null || data?['createCheckItemValue'] != null) {

@@ -1,4 +1,3 @@
-
 final class MaintenancesTaskVariableQueries {
   static Map<String, dynamic> getMaintenancesTaskVariables(String taskId) {
     return {
@@ -58,12 +57,13 @@ final class MaintenancesTaskVariableQueries {
       "createCheckItemValueInput": {
         "checkItemId": checkItemId,
         "checkListValueId": checkListValueId,
-        "inputValue": inputValue,
+        "inputValue": {"value" : inputValue},
       }
     };
   }
 
-  static Map<String, dynamic> submitChecklistValueEffortInput(int checkListValueId, String startDate, String endDate, String effortDuration, String effortType, String? description) {
+  static Map<String, dynamic> submitChecklistValueEffortInput(
+      int checkListValueId, String startDate, String endDate, String effortDuration, String effortType, String? description) {
     return {
       "submitChecklistValueEffortInput": [
         {
@@ -76,5 +76,19 @@ final class MaintenancesTaskVariableQueries {
         }
       ]
     };
+  }
+
+  static Map<String, dynamic> updateCheckListValueStatusInput(int checkListValueId) {
+    return {
+      "updateCheckListValueStatusInput": {"checkListValueId": checkListValueId, "status": "Finished"}
+    };
+  }
+
+  static Map<String, dynamic> checkListValues(int checkListValueId) {
+    return {
+    "where": {
+    "id": checkListValueId
+  }
+};
   }
 }

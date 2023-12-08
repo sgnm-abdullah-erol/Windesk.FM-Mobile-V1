@@ -11,10 +11,11 @@ import '../buttons/custom_half_buttons.dart';
 import '../input_fields/text_fields_input.dart';
 
 class AddImageModalBottomSheet extends StatelessWidget {
-  const AddImageModalBottomSheet({super.key, required this.taskId, required this.taskKey, required this.saveImage});
+  const AddImageModalBottomSheet({super.key, required this.taskId, required this.taskKey, required this.saveImage, this.labels});
 
   final String taskId;
   final String taskKey;
+  final String? labels;
   final Function saveImage;
 
   @override
@@ -36,7 +37,7 @@ class AddImageModalBottomSheet extends StatelessWidget {
                         const SizedBox(height: 10),
                         Expanded(flex: 20, child: _Description(value)),
                         const SizedBox(height: 10),
-                        Expanded(flex: 20, child: _ApproveButton(value, taskId, taskKey, saveImage)),
+                        Expanded(flex: 20, child: _ApproveButton(value, taskId, taskKey, saveImage, labels)),
                       ],
                     );
             },
@@ -48,12 +49,13 @@ class AddImageModalBottomSheet extends StatelessWidget {
 }
 
 class _ApproveButton extends StatelessWidget {
-  const _ApproveButton(this.provider, this.taskId, this.taskKey, this.saveImage);
+  const _ApproveButton(this.provider, this.taskId, this.taskKey, this.saveImage, this.labels);
 
   final WorkOrderAddDocumantSheetProvider provider;
   final Function saveImage;
   final String taskId;
   final String taskKey;
+  final String? labels;
 
   @override
   Widget build(BuildContext context) {
@@ -62,8 +64,7 @@ class _ApproveButton extends StatelessWidget {
       rightTitle: const Text(LocaleKeys.Approve).tr(),
       leftOnPressed: () => Navigator.pop(context),
       rightOnPressed: () async {
-        Navigator.of(context).pop();
-        saveImage(context, provider.imagePath, provider.desc, taskId, taskKey);
+        saveImage(context, provider.imagePath, provider.desc, taskId, taskKey, labels);
       },
     );
   }

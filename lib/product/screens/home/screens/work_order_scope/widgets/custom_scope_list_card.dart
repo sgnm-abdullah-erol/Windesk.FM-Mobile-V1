@@ -74,7 +74,7 @@ class CustomScopeListCard extends StatelessWidget {
                   children: [
                     _columnChilds(context),
                     checkListSituation == 'Started' || checkListSituation == 'Finished'
-                        ? _continueButton(context, runMutation)
+                        ? _continueButton(context, runMutation, checkListSituation)
                         : _startButton(context, runMutation),
                   ],
                 ),
@@ -110,7 +110,7 @@ class CustomScopeListCard extends StatelessWidget {
     );
   }
 
-  GraphQLProvider _continueButton(BuildContext context, RunMutation<dynamic> runMutation) {
+  GraphQLProvider _continueButton(BuildContext context, RunMutation<dynamic> runMutation, String checkListSituation) {
     return GraphQLProvider(
       client: GraphQLManager.getClient(HttpLink(ServiceTools.url.generalGraphql_url)),
       child: Query(
@@ -127,16 +127,21 @@ class CustomScopeListCard extends StatelessWidget {
             final StartCheckListValueModel? checkListValue = _setCheckListValue(result.data);
             return Align(
               alignment: Alignment.center,
-              child: CustomElevatedButtonWithIcon(
-                bgColor: APPColors.Accent.black,
-                icon: AppIcons.send,
-                onPressFunction: () async {
-                  //final component = maintanenceModel?.maintenancePlan?.first.components?.first.willBeAppliedToComponents?.first.componentOriginal;
-                  context.router.push(ScopeDetail(maintanenceList: maintanenceModel, checkListValueModel: checkListValue));
-                },
-                iconColor: APPColors.Main.white,
-                textValue: LocaleKeys.Contuniue.tr(),
-                textColor: APPColors.Main.white,
+              child: Column(
+                children: [
+                  CustomElevatedButtonWithIcon(
+                    bgColor: APPColors.Accent.black,
+                    icon: checkListSituation == 'Finished' ? AppIcons.eventList: AppIcons.send,
+                    onPressFunction: () async {
+                      context.router.push(ScopeDetail(maintanenceList: maintanenceModel, checkListValueModel: checkListValue, checkListSituation:checkListSituation));
+                    },
+                    iconColor: APPColors.Main.white,
+                    textValue: checkListSituation == 'Finished' ? LocaleKeys.Browse.tr(): LocaleKeys.Contuniue.tr(),
+                    textColor: APPColors.Main.white,
+                  ),
+                  checkListSituation == 'Finished' ?
+                  Text(LocaleKeys.CompletedChecklist.tr(), style: TextStyle(color: APPColors.Main.red, fontSize: 10)):Container()
+                ],
               ),
             );
           },

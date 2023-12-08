@@ -52,9 +52,6 @@ class ScopeList extends StatelessWidget {
                     builder: GraphqlResultHandling.withGenericHandling(
                       context,
                       (QueryResult result, {refetch, fetchMore}) {
-                        if (result.data == null && !result.hasException) {
-                          return Text(LocaleKeys.FetchScopeListError.tr(), style: Theme.of(context).textTheme.bodyMedium);
-                        }
                         final CheckListMaintanenceModel checkListmaintanenceModel = _checkNullablitiyOfCheckListMaintenanceModel(
                           context,
                           result.data ?? {},

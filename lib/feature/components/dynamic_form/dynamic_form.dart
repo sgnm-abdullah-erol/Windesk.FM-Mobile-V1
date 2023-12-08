@@ -14,7 +14,9 @@ class FormTypes {
 
 class DynamicForm {
   Widget formType(
+    String checkListSituation,
     String inputType,
+    dynamic inputValue,
     bool selectedValue,
     Function setSelectedValue,
     Function selectDate,
@@ -24,13 +26,13 @@ class DynamicForm {
   ) {
     switch (inputType) {
       case FormTypes.BOOLYES:
-        return _YesNoWidget(selectedValue, setSelectedValue);
+        return _YesNoWidget(selectedValue, setSelectedValue, checkListSituation);
       case FormTypes.DATE:
-        return _DateWidget(setInitialController, selectDate);
+        return _DateWidget(setInitialController, selectDate, checkListSituation, inputValue);
       case FormTypes.TEXT:
-        return _TextWidget(textEditingController);
+        return _TextWidget(textEditingController, inputValue, checkListSituation);
       case FormTypes.NUMBER:
-        return _NumberWidget(numberEditingController);
+        return _NumberWidget(numberEditingController, inputValue, checkListSituation);
       default:
         return const Text('');
     }
@@ -38,13 +40,17 @@ class DynamicForm {
 }
 
 class _NumberWidget extends StatelessWidget {
-  const _NumberWidget(this.numberEditingController);
+  const _NumberWidget(this.numberEditingController, this.inputValue, this.checkListSituation);
 
   final TextEditingController numberEditingController;
+  final dynamic inputValue;
+  final String checkListSituation;
 
   @override
   Widget build(BuildContext context) {
+    numberEditingController.text = inputValue.toString();
     return TextFormField(
+      readOnly: checkListSituation == 'Finished',
       keyboardType: TextInputType.number,
       controller: numberEditingController,
       decoration: InputDecoration(
@@ -57,13 +63,17 @@ class _NumberWidget extends StatelessWidget {
 }
 
 class _TextWidget extends StatelessWidget {
-  const _TextWidget(this.textEditingController);
+  const _TextWidget(this.textEditingController, this.inputValue, this.checkListSituation);
 
   final TextEditingController textEditingController;
+  final dynamic inputValue;
+  final String checkListSituation;
 
   @override
   Widget build(BuildContext context) {
+    textEditingController.text = inputValue.toString();
     return TextFormField(
+      readOnly: checkListSituation == 'Finished',
       controller: textEditingController,
       decoration: InputDecoration(
         border: const UnderlineInputBorder(),
@@ -75,15 +85,18 @@ class _TextWidget extends StatelessWidget {
 }
 
 class _DateWidget extends StatelessWidget {
-  const _DateWidget(this.setInitialController, this.selectDate);
+  const _DateWidget(this.setInitialController, this.selectDate, this.checkListSituation, this.inputValue);
 
   final Function setInitialController;
   final Function selectDate;
+  final String checkListSituation;
+  final dynamic inputValue;
 
   @override
   Widget build(BuildContext context) {
     return TextFieldDatePicker(
-      label: LocaleKeys.Date.tr(),
+      readOnly: checkListSituation == 'Finished',
+      label: inputValue ?? LocaleKeys.Date.tr(),
       onTap: (value) => selectDate(value),
       initialDate: DateTime(2015),
       initialControllerFunction: setInitialController,
@@ -92,29 +105,37 @@ class _DateWidget extends StatelessWidget {
 }
 
 class _YesNoWidget extends StatelessWidget {
-  const _YesNoWidget(this.selectedValue, this.setSelectedValue);
+  const _YesNoWidget(this.selectedValue, this.setSelectedValue, this.checkListSituation);
 
   final bool selectedValue;
   final Function setSelectedValue;
+  final String checkListSituation;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         ListTile(
+          enabled: checkListSituation == 'Finished',
           title: Text(LocaleKeys.Yes.tr(), style: const TextStyle(color: Colors.black)),
           leading: Radio<bool>(
-            value: true,
-            groupValue: selectedValue,
-            onChanged: (bool? value) => setSelectedValue(),
-          ),
+              value: true,
+              groupValue: selectedValue,
+              onChanged: (bool? value) => {
+                    if (checkListSituation != 'Finished') {setSelectedValue()},
+                  }),
         ),
         ListTile(
+          enabled: checkListSituation == 'Finished',
           title: Text(LocaleKeys.No.tr(), style: const TextStyle(color: Colors.black)),
           leading: Radio<bool>(
             value: false,
             groupValue: selectedValue,
-            onChanged: (bool? value) => setSelectedValue(),
+            onChanged: (bool? value) {
+              if (checkListSituation != 'Finished') {
+                setSelectedValue();
+              }
+            },
           ),
         ),
       ],

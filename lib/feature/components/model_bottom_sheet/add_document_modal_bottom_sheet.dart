@@ -12,10 +12,11 @@ import '../buttons/custom_half_buttons.dart';
 import '../input_fields/text_fields_input.dart';
 
 class AddDocumentsModalBottomSheet extends StatelessWidget {
-  const AddDocumentsModalBottomSheet({super.key, required this.taskId, required this.taskKey, required this.function});
+  const AddDocumentsModalBottomSheet({super.key, required this.taskId, required this.taskKey, required this.function, this.labels});
 
   final String taskId;
   final String taskKey;
+  final String? labels;
   final Function function;
 
   @override
@@ -36,7 +37,7 @@ class AddDocumentsModalBottomSheet extends StatelessWidget {
                         Expanded(flex: 20, child: _PickPdf(provider: value)),
                         value.isPdfPicked ? Expanded(flex: 20, child: Text(value.pdfPath.split('/').last)) : const SizedBox(),
                         Expanded(flex: 20, child: _DescField(value)),
-                        Expanded(flex: 40, child: _ActionButtons(value, taskId, taskKey, function)),
+                        Expanded(flex: 40, child: _ActionButtons(value, taskId, taskKey, function,labels)),
                       ],
                     );
             },
@@ -62,11 +63,12 @@ class _DescField extends StatelessWidget {
 }
 
 class _ActionButtons extends StatelessWidget {
-  const _ActionButtons(this.provider, this.taskId, this.taskKey, this.function);
+  const _ActionButtons(this.provider, this.taskId, this.taskKey, this.function, this.labels);
 
   final Function function;
   final String taskId;
   final String taskKey;
+  final String? labels;
   final WorkOrderAddDocumantSheetProvider provider;
 
   @override
@@ -76,8 +78,7 @@ class _ActionButtons extends StatelessWidget {
       rightTitle: const Text(LocaleKeys.Approve).tr(),
       leftOnPressed: () => Navigator.of(context).pop(),
       rightOnPressed: () {
-        Navigator.of(context).pop();
-        function(context, provider.pdfPath, provider.pdfName, provider.desc, taskId, taskKey);
+        function(context, provider.pdfPath, provider.pdfName, provider.desc, taskId, taskKey, labels);
       },
     );
   }

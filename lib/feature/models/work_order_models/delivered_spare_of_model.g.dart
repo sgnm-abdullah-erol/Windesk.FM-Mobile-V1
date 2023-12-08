@@ -6,9 +6,12 @@ part of 'delivered_spare_of_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-DeliveredSpareOfModel _$DeliveredSpareOfModelFromJson(Map<String, dynamic> json) => DeliveredSpareOfModel(
+DeliveredSpareOfModel _$DeliveredSpareOfModelFromJson(
+        Map<String, dynamic> json) =>
+    DeliveredSpareOfModel(
       id: json['id'],
-      label: (json['label'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      label:
+          (json['label'] as List<dynamic>?)?.map((e) => e as String).toList(),
       name: json['name'] as String?,
       amount: json['amount'],
       measurementUnit: json['measurementUnit'],

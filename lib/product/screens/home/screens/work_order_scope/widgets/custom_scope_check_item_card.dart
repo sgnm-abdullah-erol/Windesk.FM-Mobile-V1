@@ -11,19 +11,29 @@ import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/queries/ma
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/queries/maintenances_task_query_variables.dart';
 
 class CustomScopeCheckItemCard extends StatefulWidget {
-  const CustomScopeCheckItemCard({super.key, this.checkItem, required this.provider, this.checkListValueId});
+  const CustomScopeCheckItemCard(
+      {super.key, this.checkItem, required this.provider, this.checkListValueId, this.inputValuee, this.checkListSituation});
 
   final IncludesOfCheckItemModel? checkItem;
   final ScopeProvider provider;
   final int? checkListValueId;
+  final String? checkListSituation;
+  final dynamic inputValuee;
 
   @override
   State<CustomScopeCheckItemCard> createState() => _CustomScopeCheckItemCardState();
 }
 
 class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> with CustomScopeCheckItemCardMixin {
-  void _setInitialController(String value) => setState(() => initialController.text = value);
-  bool selectedValue = false;
+  void _setInitialController(String value) => setState(() => initialController.text = widget.inputValuee.toString());
+  late bool selectedValue;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedValue = widget.inputValuee.toString().toLowerCase() == 'true';
+    setIsLoading(widget.inputValuee.toString() != 'null' && widget.inputValuee.toString() != '' ? true : false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +63,10 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
+              Align(
+                  alignment: Alignment.centerLeft,
+                  child:
+                      Text(widget.checkItem?.isRequired == true ? '*Zorunlu Alan' : '', style: TextStyle(color: APPColors.Main.red, fontSize: 10))),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -100,7 +114,8 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
                     ? textEditingController.text
                     : widget.checkItem?.inputType == FormTypes.NUMBER
                         ? numberEditingController.text
-                        : initialController.text;
+                        : widget.provider.startDate;
+            widget.checkListSituation == 'Finished' ? null :
             runMutation(
                 MaintenancesTaskVariableQueries.createCheckItemValueInput(widget.checkItem?.id ?? 0, widget.checkListValueId ?? 0, inputValue));
           },
@@ -116,7 +131,9 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
     return Align(
       alignment: Alignment.center,
       child: DynamicForm().formType(
+        widget.checkListSituation ?? '',
         widget.checkItem?.inputType ?? '',
+        widget.inputValuee ?? '',
         selectedValue,
         () => setState(() => selectedValue = !selectedValue),
         (String value) => widget.provider.selectedDate(value),
