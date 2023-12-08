@@ -6,7 +6,6 @@ import 'package:vm_fm_4/core/constants/other/app_icons.dart';
 import 'package:vm_fm_4/core/constants/other/colors.dart';
 import 'package:vm_fm_4/feature/service/graphql_manager.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
-import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/models/start_check_list_value_model.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/queries/maintenances_task_queries.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/queries/maintenances_task_query_variables.dart';
 
@@ -26,7 +25,6 @@ class SaveCheckListBottomSheet extends StatelessWidget {
           onCompleted: (dynamic resultData) async {
             //koşul eklenmeli
             context.router.pop();
-
           },
         ),
         builder: (RunMutation runMutation, QueryResult? result) {

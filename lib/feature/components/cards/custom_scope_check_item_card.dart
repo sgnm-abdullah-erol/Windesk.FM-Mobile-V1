@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:vm_fm_4/core/constants/other/colors.dart';
-import 'package:vm_fm_4/feature/components/dynamic_form/dynamic_form.dart';
 import 'package:vm_fm_4/feature/components/model_bottom_sheet/add_image_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
@@ -85,16 +84,6 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> {
                         widget.checkItem?.name ?? '',
                       ),
                       Text(widget.checkItem?.description ?? ''),
-                      // Align(
-                      //   alignment: Alignment.center,
-                      //   // TODO dynamic form
-                      //   child: DynamicForm().formType(widget.checkItem?.inputType ?? '', selectedValue, () {
-                      //     setState(() {
-                      //       selectedValue = !selectedValue;
-                      //     });
-                      //   }, (String value) => widget.provider.selectedDate(value), (String value) => setInitialController(value),
-                      //       _textEditingController, _numberEditingController),
-                      // ),
                       ElevatedButton(
                         onPressed: () => runMutation({
                           "createCheckItemValueInput": {

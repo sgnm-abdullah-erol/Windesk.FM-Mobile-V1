@@ -46,7 +46,7 @@ class _NumberWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    numberEditingController.text = inputValue.toString() ?? '';
+    numberEditingController.text = inputValue.toString();
     return TextFormField(
       keyboardType: TextInputType.number,
       controller: numberEditingController,
@@ -67,7 +67,7 @@ class _TextWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    textEditingController.text = inputValue.toString() ?? '';
+    textEditingController.text = inputValue.toString();
     return TextFormField(
       controller: textEditingController,
       decoration: InputDecoration(

@@ -30,7 +30,7 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
   void initState() {
     super.initState();
     selectedValue = widget.inputValuee.toString().toLowerCase() == 'true';
-    setIsLoading(widget.inputValuee.toString() != null && widget.inputValuee.toString() != '' ? true : false);
+    setIsLoading(widget.inputValuee.toString() != 'null' && widget.inputValuee.toString() != '' ? true : false);
   }
 
   @override
@@ -62,6 +62,7 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
+              Align(alignment: Alignment.centerLeft, child: Text(widget.checkItem?.isRequired == true ? '*Zorunlu Alan' : '', style: TextStyle(color: APPColors.Main.red, fontSize: 10))),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

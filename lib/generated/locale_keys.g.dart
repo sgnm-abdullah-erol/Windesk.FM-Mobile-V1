@@ -23,6 +23,7 @@ class LocaleKeys {
   static const String DocumentAdded = 'DocumentAdded';
   static const String AreYouSureSaveCheckList = 'AreYouSureSaveCheckList';
   static const String EmptyComponentList = 'EmptyComponentList';
+  static const String RequiredField = 'RequiredField';
 
   // asset search
   static const String assetSearch = 'Malzeme Arama';
