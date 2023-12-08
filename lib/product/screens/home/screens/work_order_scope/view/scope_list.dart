@@ -60,7 +60,7 @@ class ScopeList extends StatelessWidget {
                           result.data ?? {},
                         );
 
-                        if (_checkShowComponents(context, checkListmaintanenceModel)) {
+                        if (!_checkMaintenancePlan(context, maintanenceModel)) {
                           snackBar(context, LocaleKeys.EmptyComponentList.tr(), 'error');
                           context.router.pop();
                           return Container();
@@ -83,16 +83,18 @@ class ScopeList extends StatelessWidget {
     );
   }
 
-  bool _checkShowComponents(BuildContext context, CheckListMaintanenceModel model) {
-    bool result = true;
+  bool _checkMaintenancePlan(BuildContext context, MaintanenceModel model) {
+    bool goScopeList = true;
 
-    if (model.checkListValue?.first.component == null || model.checkListValue?.first.component == []) {
-      result = false;
+    if (model.maintenancePlan?.isEmpty ?? false) {
+      // cannot go to scope list
+      goScopeList = false;
     } else {
-      result = true;
+      // can go to scope list
+      goScopeList = true;
     }
 
-    return result;
+    return goScopeList;
   }
 
   MaintanenceModel _checkNullablitiyOfMaintenanceModel(BuildContext context, Map<String, dynamic> result) {
