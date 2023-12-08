@@ -138,6 +138,7 @@ class ScopeDetail extends StatelessWidget {
                           context,
                           SaveCheckListBottomSheet(
                             checkListValueId: checkListValueModel?.id ?? 0,
+                            maintanenceList: maintanenceList,
                           ),
                         );
                       }),
