@@ -100,16 +100,18 @@ class DetailWorkOrderScreen extends StatelessWidget {
                                   const SizedBox(height: 20),
                                   (woDetailProvider.detail.task?.userId ?? '') != context.read<GlobalProvider>().userId
                                       ? const SizedBox()
-                                      : CustomElevatedButtonWithIcon(
-                                          onPressFunction: () => context.router.push(
-                                            route.ScopeList(taskId: woDetailProvider.detail.task?.id.toString() ?? ''),
-                                          ),
-                                          bgColor: APPColors.Accent.black,
-                                          icon: AppIcons.eventList,
-                                          textValue: LocaleKeys.scope.tr(),
-                                          textColor: APPColors.Main.white,
-                                          iconColor: APPColors.Main.white,
-                                        ),
+                                      : woDetailProvider.detail.task?.labels?[1] == 'Maintenance'
+                                          ? CustomElevatedButtonWithIcon(
+                                              onPressFunction: () => context.router.push(
+                                                route.ScopeList(taskId: woDetailProvider.detail.task?.id.toString() ?? ''),
+                                              ),
+                                              bgColor: APPColors.Accent.black,
+                                              icon: AppIcons.eventList,
+                                              textValue: LocaleKeys.scope.tr(),
+                                              textColor: APPColors.Main.white,
+                                              iconColor: APPColors.Main.white,
+                                            )
+                                          : const SizedBox(),
                                   const SizedBox(height: 20),
                                   (woDetailProvider.detail.task?.userId ?? '') != context.read<GlobalProvider>().userId
                                       ? const SizedBox()
