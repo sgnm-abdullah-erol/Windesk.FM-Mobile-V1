@@ -37,6 +37,7 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
 
   @override
   Widget build(BuildContext context) {
+    print('check' + widget.checkListValueId.toString());
     return GraphQLProvider(
       client: GraphQLManager.getClientForMutation(context),
       child: Mutation(
@@ -74,13 +75,12 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
                     flex: 3,
                     child: Row(
                       children: [
-                        Text(
-                          widget.checkItem?.name ?? '',
-                          style: Theme.of(context).textTheme.bodyMedium,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        const SizedBox(
-                          width: 5,
+                        Expanded(
+                          child: Text(
+                            widget.checkItem?.name ?? '',
+                            style: Theme.of(context).textTheme.bodyMedium,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                         Expanded(
                           child: Text(
@@ -115,9 +115,10 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
                     : widget.checkItem?.inputType == FormTypes.NUMBER
                         ? numberEditingController.text
                         : widget.provider.startDate;
-            widget.checkListSituation == 'Finished' ? null :
-            runMutation(
-                MaintenancesTaskVariableQueries.createCheckItemValueInput(widget.checkItem?.id ?? 0, widget.checkListValueId ?? 0, inputValue));
+            widget.checkListSituation == 'Finished'
+                ? null
+                : runMutation(
+                    MaintenancesTaskVariableQueries.createCheckItemValueInput(widget.checkItem?.id ?? 0, widget.checkListValueId ?? 0, inputValue));
           },
           icon: const Icon(AppIcons.save),
           color: APPColors.Main.blue,
