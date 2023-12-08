@@ -64,7 +64,6 @@ class _ApproveButton extends StatelessWidget {
       rightTitle: const Text(LocaleKeys.Approve).tr(),
       leftOnPressed: () => Navigator.pop(context),
       rightOnPressed: () async {
-        Navigator.of(context).pop();
         saveImage(context, provider.imagePath, provider.desc, taskId, taskKey, labels);
       },
     );

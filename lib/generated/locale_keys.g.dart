@@ -19,6 +19,8 @@ class LocaleKeys {
   static const String SuccessProcess = 'SuccessProcess';
   static const String FetchScopeListError = 'FetchScopeListError';
   static const String AddPhoto = 'AddPhoto';
+  static const String PhotoAdded = 'PhotoAdded';
+  static const String DocumentAdded = 'DocumentAdded';
   static const String AreYouSureSaveCheckList = 'AreYouSureSaveCheckList';
   static const String EmptyComponentList = 'EmptyComponentList';
 

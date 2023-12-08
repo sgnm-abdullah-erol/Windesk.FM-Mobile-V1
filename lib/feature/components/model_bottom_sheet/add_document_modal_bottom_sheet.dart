@@ -78,7 +78,6 @@ class _ActionButtons extends StatelessWidget {
       rightTitle: const Text(LocaleKeys.Approve).tr(),
       leftOnPressed: () => Navigator.of(context).pop(),
       rightOnPressed: () {
-        Navigator.of(context).pop();
         function(context, provider.pdfPath, provider.pdfName, provider.desc, taskId, taskKey, labels);
       },
     );

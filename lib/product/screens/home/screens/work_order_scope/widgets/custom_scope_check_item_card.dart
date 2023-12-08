@@ -30,12 +30,12 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
   void initState() {
     super.initState();
     selectedValue = widget.inputValuee.toString().toLowerCase() == 'true';
+    setIsLoading(widget.inputValuee.toString() != null && widget.inputValuee.toString() != '' ? true : false);
   }
 
   @override
   Widget build(BuildContext context) {
-    print('---');
-    print(widget.inputValuee.toString());
+
     return GraphQLProvider(
       client: GraphQLManager.getClientForMutation(context),
       child: Mutation(

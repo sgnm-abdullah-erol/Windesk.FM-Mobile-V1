@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:vm_fm_4/core/database/shared_manager.dart';
@@ -64,6 +63,14 @@ class ScopeProvider extends ChangeNotifier {
 
   String _effortDescription = '';
   String get effortDescription => _effortDescription;
+
+  bool _isExist = false;
+  bool get isExist => _isExist;
+  void setIsExist(bool val) {
+    _isExist = val;
+    notifyListeners();
+  }
+
 
   void setEffortDescription(String value) => _effortDescription = value;
   void setEffortType(String value) => _effortType = value;
@@ -131,7 +138,8 @@ class ScopeProvider extends ChangeNotifier {
     final response = await workSpaceService.saveDocumentForMaintenance(imagePath, '', desc, token, scopeId, taskKey, 'image', labels);
     response.fold(
       (l) => {
-        snackBar(context, LocaleKeys.AddPhoto.tr(), 'success'),
+        Navigator.of(context).pop<bool>(true),
+        snackBar(context, LocaleKeys.PhotoAdded.tr(), 'success'),
       },
       (r) => {
         snackBar(context, LocaleKeys.AddPhoto.tr(), 'error'),
@@ -163,8 +171,8 @@ class ScopeProvider extends ChangeNotifier {
         l
             ? {
                 _isDocumentAdded = true,
+                Navigator.of(context).pop<bool>(true),
                 snackBar(context, LocaleKeys.AddedDocumants.tr(), 'success'),
-
               }
             : {
                 _isDocumentAdded = false,

@@ -10,9 +10,11 @@
 	"SuccessProcess": "İşlem Başarılı",
 	"FetchScopeListError": "Yükleme tamamlandı, ancak hem veriler hem de hatalar boş.\nLütfen bizimle iletisim kurun.",
 	"AddPhoto": "Fotoğraf Ekle",
+	"PhotoAdded": "Fotoğraf Ekleme Başarılı",
 	"EmptyComponentList": "Bileşen Listesi Boş",
 	"EffortAddedError":"Efor Ekleme Başarısız",
 	"AreYouSureSaveCheckList":"Kontrol listesini kaydetmek istediğinize emin misiniz?",
+	"DocumentAdded": "Döküman Ekleme İşlemi Başarılı",
 
 	"----------------APP----------": "-----------APP--------------",
 	"IfmName": "İstanbul Finans Merkezi",

@@ -66,8 +66,6 @@ class ScopeList extends StatelessWidget {
                             taskId: taskId,
                           );
                         }
-   
-
                         // if (_checkShowComponents(context, checkListmaintanenceModel)) {
                         //   snackBar(context, LocaleKeys.EmptyComponentList.tr(), 'error');
                         //   context.router.pop();

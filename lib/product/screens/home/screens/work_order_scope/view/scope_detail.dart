@@ -109,7 +109,7 @@ class ScopeDetail extends StatelessWidget {
                           ),
                         );
                       }),
-                      _speedDialChild(context, AppIcons.documantScanner, LocaleKeys.AddPdf.tr(), APPColors.Secondary.grey, () {
+                      _speedDialChild(context, AppIcons.documantScanner, LocaleKeys.AddPdf.tr(), APPColors.NewNotifi.grey, () {
                       ShowModalBottomSheet().show(
                           context,
                           AddDocumentsModalBottomSheet(
@@ -120,7 +120,7 @@ class ScopeDetail extends StatelessWidget {
                           ),
                         );
                       }),
-                      _speedDialChild(context, AppIcons.workHistory, LocaleKeys.AddEfforts.tr(), APPColors.Main.blue, () {
+                      _speedDialChild(context, AppIcons.workHistory, LocaleKeys.AddEfforts.tr(), APPColors.Secondary.blue, () {
                         ShowModalBottomSheet().show(
                           context,
                           AddEffortsModalBottomSheet(

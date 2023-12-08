@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/models/create_check_item_value_model.dart';
+import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/provider/scope_provider.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/widgets/custom_scope_check_item_card.dart';
 
 mixin CustomScopeCheckItemCardMixin on State<CustomScopeCheckItemCard> {
@@ -17,6 +18,10 @@ mixin CustomScopeCheckItemCardMixin on State<CustomScopeCheckItemCard> {
   String token = '';
   bool _isLoading = false;
   bool get isLoading => _isLoading;
+
+  void setIsLoading(bool value) {
+    _isLoading = value;
+  }
 
   CreateCheckItemValue? _setCreateCheckItemModel(Map<String, dynamic>? data) {
     if (data != null || data?['createCheckItemValue'] != null) {
