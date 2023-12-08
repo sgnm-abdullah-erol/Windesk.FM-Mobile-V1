@@ -66,5 +66,6 @@ class AppIcons {
   static const IconData save = Icons.save;
   static const IconData workHistory = Icons.work_history;
 
-
+  // arrows
+  static const IconData goBackArrow = Icons.arrow_back;
 }

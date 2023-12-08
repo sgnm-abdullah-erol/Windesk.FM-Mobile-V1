@@ -13,9 +13,3 @@ CreateCheckItemValue _$CreateCheckItemValueFromJson(
       json['key'] as String?,
     );
 
-Map<String, dynamic> _$CreateCheckItemValueToJson(
-        CreateCheckItemValue instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'key': instance.key,
-    };

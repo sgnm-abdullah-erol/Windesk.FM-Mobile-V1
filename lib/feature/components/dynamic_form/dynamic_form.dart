@@ -71,7 +71,6 @@ class _TextWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(checkListSituation.toString());
     textEditingController.text = inputValue.toString();
     return TextFormField(
       readOnly: checkListSituation == 'Finished',

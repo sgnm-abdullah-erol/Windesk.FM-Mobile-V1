@@ -46,19 +46,18 @@ class ScopeDetail extends StatelessWidget {
               return Text(LocaleKeys.FetchScopeListError.tr(), style: Theme.of(context).textTheme.bodyMedium);
             }
             final resultData = result.data?['checkListValues'].first['CheckItemValue'];
+
             return ChangeNotifierProvider(
               create: (context) => ScopeProvider(),
               child: Scaffold(
-                appBar: CustomMainAppbar(
-                  title: Text('${LocaleKeys.CheckList.tr()} - ${maintanenceList?.id.toString()}'),
-                  returnBack: true,
-                ),
+                appBar: _appbar(context),
                 body: Consumer<ScopeProvider>(
                   builder: (context, ScopeProvider provider, child) {
                     return SizedBox(
                       child: ListView.builder(
                         itemCount: maintanenceList?.scheduledBy?.first.parentSchedule?.first.checkList?.first.includesOfCheckItems?.length,
                         itemBuilder: (context, index) {
+                          // ignore: prefer_typing_uninitialized_variables
                           var inputVal;
                           for (var i = 0; i < resultData.length; i++) {
                             if (resultData[i]["CheckItem"].first['id'] ==
@@ -153,14 +152,24 @@ class ScopeDetail extends StatelessWidget {
     );
   }
 
+  CustomMainAppbar _appbar(BuildContext context) {
+    return CustomMainAppbar(
+      title: Text('${LocaleKeys.CheckList.tr()} - ${maintanenceList?.id.toString()}'),
+      returnBack: false,
+      leading: IconButton(
+        icon: const Icon(AppIcons.goBackArrow),
+        onPressed: () => context.router.pop<bool>(true),
+      ),
+    );
+  }
+
   SpeedDialChild _speedDialChild(BuildContext context, IconData iconname, String label, Color color, Function onPressFunction) {
     return SpeedDialChild(
-        child: Icon(iconname),
-        backgroundColor: color,
-        label: label,
-        labelStyle: Theme.of(context).textTheme.bodySmall,
-        onTap: () {
-          onPressFunction();
-        });
+      child: Icon(iconname),
+      backgroundColor: color,
+      label: label,
+      labelStyle: Theme.of(context).textTheme.bodySmall,
+      onTap: () => onPressFunction(),
+    );
   }
 }
