@@ -192,11 +192,13 @@ class CustomWorkOrderListCard extends StatelessWidget {
           children: [
             Expanded(
               flex: 2,
-              child: Text(header.tr(),
-                  style: context.labelMedium.copyWith(
-                    color: APPColors.Secondary.black,
-                    fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
-                  )),
+              child: Text(
+                header.tr(),
+                style: context.labelMedium.copyWith(
+                  color: APPColors.Secondary.black,
+                  fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
+                ),
+              ),
             ),
           ],
         ),
