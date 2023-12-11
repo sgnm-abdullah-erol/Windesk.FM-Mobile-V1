@@ -129,6 +129,7 @@ class CustomScopeListCard extends StatelessWidget {
               return Text(LocaleKeys.FetchScopeListError.tr(), style: Theme.of(context).textTheme.bodyMedium);
             }
             final StartCheckListValueModel? checkListValue = _setCheckListValue(result.data);
+
             return Align(
               alignment: Alignment.center,
               child: Column(
@@ -137,6 +138,10 @@ class CustomScopeListCard extends StatelessWidget {
                     bgColor: APPColors.Accent.black,
                     icon: checkListSituation == 'Finished' ? AppIcons.eventList : AppIcons.send,
                     onPressFunction: () async {
+                      print(maintanenceModel);
+                      print(checkListValue);
+                      print(checkListSituation);
+
                       final result = await context.router.push(
                         ScopeDetail(
                           maintanenceList: maintanenceModel,
