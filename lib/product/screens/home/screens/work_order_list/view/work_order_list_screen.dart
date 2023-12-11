@@ -3,7 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vm_fm_4/core/constants/other/app_icons.dart';
-import 'package:vm_fm_4/product/screens/home/screens/work_order_list/widgets/filter/filter_dialog.dart';
+import 'package:vm_fm_4/product/screens/sla/widgets/custom_sla_timeline_dialog.dart';
 
 import '../../../../../../feature/components/appbar/custom_main_appbar.dart';
 import '../../../../../../generated/locale_keys.g.dart';
@@ -72,7 +72,7 @@ class _BuildScaffold extends StatelessWidget {
               onPressed: () async {
                 final response = await showDialog(
                   context: context,
-                  builder: (context) => const CustomFilterDialog(),
+                  builder: (context) => const CustomSlaTimeLineDialog(),
                 );
 
                 debugPrint(response);
