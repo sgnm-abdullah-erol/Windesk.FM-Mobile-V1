@@ -138,10 +138,6 @@ class CustomScopeListCard extends StatelessWidget {
                     bgColor: APPColors.Accent.black,
                     icon: checkListSituation == 'Finished' ? AppIcons.eventList : AppIcons.send,
                     onPressFunction: () async {
-                      print(maintanenceModel);
-                      print(checkListValue);
-                      print(checkListSituation);
-
                       final result = await context.router.push(
                         ScopeDetail(
                           maintanenceList: maintanenceModel,

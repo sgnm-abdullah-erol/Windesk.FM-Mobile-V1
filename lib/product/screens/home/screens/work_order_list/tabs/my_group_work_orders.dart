@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:vm_fm_4/core/route/app_route.gr.dart';
@@ -23,7 +24,7 @@ class _MyGroupWorkOrdersState extends State<MyGroupWorkOrders> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      widget.provider.getMyGroupWorkOrdersSecond();
+      widget.provider.getMyGroupWorkOrdersSecond(context.locale.languageCode);
     });
     super.initState();
   }
@@ -45,7 +46,7 @@ class _MyGroupWorkOrdersState extends State<MyGroupWorkOrders> {
                     onTap: () {
                       context.router.push(DetailWorkOrderScreen(workSpaceDetail: widget.provider.myGroupWorkSpaceDetails[index])).then((value) {
                         if (value == true) {
-                          widget.provider.getMyGroupWorkOrdersSecond();
+                          widget.provider.getMyGroupWorkOrdersSecond(context.locale.languageCode);
                         }
                       });
                     },

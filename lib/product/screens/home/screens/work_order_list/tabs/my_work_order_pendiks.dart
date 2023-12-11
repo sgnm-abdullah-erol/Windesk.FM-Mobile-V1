@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -19,7 +20,7 @@ class _MyWorkOrderPendiksState extends State<MyWorkOrderPendiks> {
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      widget.provider.getMyPendikWorkOrders();
+      widget.provider.getMyPendikWorkOrders(context.locale.languageCode);
     });
     super.initState();
   }

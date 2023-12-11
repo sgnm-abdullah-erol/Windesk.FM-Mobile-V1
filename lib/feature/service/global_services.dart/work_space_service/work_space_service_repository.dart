@@ -28,13 +28,14 @@ abstract class WorkSpaceServiceRepository {
   final Dio dio = Injection.getIt.get<ServiceManager>().dio;
   final logger = Injection.getIt.get<LogManager>().logger;
 
-  Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getMyWorkSpaces(String id, String token, int page);
+  Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getMyWorkSpaces(String id, String token, int page, String language);
 
-  Future<Either<WorkSpaceMyGroupDemandList, CustomServiceException>> getMyGroupDemandList(String token);
+  Future<Either<WorkSpaceMyGroupDemandList, CustomServiceException>> getMyGroupDemandList(String token, String language);
 
-  Future<Either<List<WorkSpacePendiks>, CustomServiceException>> getWorkSpacePendiks(String id, String token, int page);
+  Future<Either<List<WorkSpacePendiks>, CustomServiceException>> getWorkSpacePendiks(String id, String token, int page, String language);
 
   Future<Either<WorkSpaceDetail, CustomServiceException>> getWorkSpaceWithSearch(String workOrderCode, String token);
+
   Future<Either<WorkSpaceDetail, CustomServiceException>> getWorkSpaceWithSearchFromGroupWorks(String workOrderCode, String token);
 
   Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getWorkSpaceDetailsByRequestType(String requestId, int page, String token);
@@ -100,7 +101,7 @@ abstract class WorkSpaceServiceRepository {
 
   Future<bool> deleteNodeFromTask(String userToken, String taskId, String labelId, TaskNodeEnums labelType);
 
-  Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getGroupWorkOrders(String userToken);
+  Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getGroupWorkOrders(String userToken, String language);
 
   Future<bool> addNoteToWorkOrder(String userToken, String taskId, String value);
 
@@ -115,13 +116,5 @@ abstract class WorkSpaceServiceRepository {
   Future<List<RejectStateModel>> getWorkSpaceRejectStateGroups(String taskId, String workSpaceId, String token);
 
   Future<Either<bool, CustomServiceException>> saveDocumentForMaintenance(
-    String filePath,
-    String fileName,
-    String desc,
-    String token,
-    String id,
-    String key,
-    String isImage,
-    String labels
-  );
+      String filePath, String fileName, String desc, String token, String id, String key, String isImage, String labels);
 }

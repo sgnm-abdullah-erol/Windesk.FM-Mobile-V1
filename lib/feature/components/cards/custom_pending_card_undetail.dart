@@ -47,11 +47,11 @@ class CustomPendingCardUndetail extends StatelessWidget {
                   }
                   if (value.isApproved) {
                     snackBar(context, LocaleKeys.TaskStateApproved.tr(), 'success');
-                    provider.getMyPendikWorkOrders();
+                    provider.getMyPendikWorkOrders(context.locale.languageCode);
                   }
                   if (value.isRejected) {
                     snackBar(context, LocaleKeys.TaskStateRejected.tr(), 'success');
-                    provider.getMyPendikWorkOrders();
+                    provider.getMyPendikWorkOrders(context.locale.languageCode);
                   }
                 },
               );
@@ -200,7 +200,8 @@ class _ActionButtons extends StatelessWidget {
           final response = await WorkOrderRejectTaskDialog.workOrderRejectStatus(
               context, pendiks.workspace?.id.toString() ?? '', pendiks.task?.id.toString() ?? '');
           if (response == true) {
-            mainProvider.getMyPendikWorkOrders();
+            // ignore: use_build_context_synchronously
+            mainProvider.getMyPendikWorkOrders(context.locale.languageCode);
           }
         },
         rightOnPressed: () => _approveButton(context),

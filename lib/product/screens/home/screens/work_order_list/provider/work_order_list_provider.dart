@@ -42,13 +42,13 @@ class WorkOrderListProvider extends ChangeNotifier {
   final List<String> _pendinkNextStates = [];
   List<String> get pendinkNextStates => _pendinkNextStates;
 
-  void getMyWorkOrders() async {
+  void getMyWorkOrders(String localization) async {
     if (_isMyWorkOrdersDataFetched) return;
     String userToken = await SharedManager().getString(SharedEnum.userToken);
-      
+
     _isLoading = true;
     notifyListeners();
-    final result = await workSpaceService.getMyWorkSpaces('swagger', userToken, 1);
+    final result = await workSpaceService.getMyWorkSpaces('swagger', userToken, 1, localization);
 
     result.fold((l) {
       _myWorkSpaceDetails = l;
@@ -59,13 +59,13 @@ class WorkOrderListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void getMyGroupWorkOrdersSecond() async {
+  void getMyGroupWorkOrdersSecond(String language) async {
     if (_isMyGroupWorkOrdersDataFetched) return;
     _isLoading = true;
     notifyListeners();
     final String token = await SharedManager().getString(SharedEnum.userToken);
     if (token.isNotEmpty) {
-      final result = await workSpaceService.getGroupWorkOrders(token);
+      final result = await workSpaceService.getGroupWorkOrders(token, language);
 
       result.fold((l) {
         _myGroupWorkSpaceDetails = l;
@@ -78,13 +78,13 @@ class WorkOrderListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void getMyGroupWorkOrders() async {
+  void getMyGroupWorkOrders(String language) async {
     if (_isMyGroupWorkOrdersDataFetched) return;
     _isLoading = true;
     notifyListeners();
     final String token = await SharedManager().getString(SharedEnum.userToken);
     if (token.isNotEmpty) {
-      final result = await workSpaceService.getMyGroupDemandList(token);
+      final result = await workSpaceService.getMyGroupDemandList(token, language);
 
       result.fold((l) {
         _workSpaceMyGroupDemandList = l;
@@ -97,13 +97,13 @@ class WorkOrderListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void getMyPendikWorkOrders() async {
+  void getMyPendikWorkOrders(String language) async {
     _isLoading = true;
     notifyListeners();
 
     final String token = await SharedManager().getString(SharedEnum.userToken);
     if (token.isNotEmpty) {
-      final result = await workSpaceService.getWorkSpacePendiks('swagger', token, 1);
+      final result = await workSpaceService.getWorkSpacePendiks('swagger', token, 1, language);
 
       result.fold((l) {
         _myPendikWorkSpaceDetails = l;

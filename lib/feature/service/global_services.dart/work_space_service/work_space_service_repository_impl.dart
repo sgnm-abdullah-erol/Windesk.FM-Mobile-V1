@@ -29,7 +29,7 @@ import 'work_space_service_repository.dart';
 
 class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   @override
-  Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getMyWorkSpaces(String id, String token, int page) async {
+  Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getMyWorkSpaces(String id, String token, int page, String language) async {
     List<WorkSpaceDetail> workSpaceDetailList = [];
 
     String url =
@@ -38,7 +38,10 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     final response = await super.dio.get(
           url,
           options: Options(
-            headers: {'authorization': 'Bearer $token'},
+            headers: {
+              'authorization': 'Bearer $token',
+              'language': language,
+            },
           ),
         );
 
@@ -72,7 +75,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   }
 
   @override
-  Future<Either<WorkSpaceMyGroupDemandList, CustomServiceException>> getMyGroupDemandList(String token) async {
+  Future<Either<WorkSpaceMyGroupDemandList, CustomServiceException>> getMyGroupDemandList(String token, String language) async {
     WorkSpaceMyGroupDemandList workSpaceMyGroupDemandList;
 
     String url = '${ServiceTools.url.workorder_url}/classification/getRequestTypeWithTaskCount';
@@ -81,7 +84,10 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       final response = await super.dio.post(
             url,
             options: Options(
-              headers: {'authorization': 'Bearer $token'},
+              headers: {
+                'authorization': 'Bearer $token',
+                'language': language,
+              },
               responseType: ResponseType.json,
             ),
           );
@@ -103,7 +109,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   }
 
   @override
-  Future<Either<List<WorkSpacePendiks>, CustomServiceException>> getWorkSpacePendiks(String id, String token, int page) async {
+  Future<Either<List<WorkSpacePendiks>, CustomServiceException>> getWorkSpacePendiks(String id, String token, int page, String language) async {
     List<WorkSpacePendiks> workSpaceAppendings = [];
     String url = '${ServiceTools.url.workorder_url}/task/workSpace/task/state/List/can/be/approve/current/user/pagination/$id';
 
@@ -115,7 +121,10 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
               "limit": 10,
             },
             options: Options(
-              headers: {'authorization': 'Bearer $token'},
+              headers: {
+                'authorization': 'Bearer $token',
+                'language': language,
+              },
             ),
           );
 
@@ -896,7 +905,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   }
 
   @override
-  Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getGroupWorkOrders(String userToken) async {
+  Future<Either<List<WorkSpaceDetail>, CustomServiceException>> getGroupWorkOrders(String userToken, String language) async {
     String url =
         '${ServiceTools.url.workorder_url}/task/workSpace/task/state/List/can/be/assigned/user/pagination/swagger?page=1&limit=8&orderBy=DESC&orderByColumn%5B0%5D=updatedAt';
     List<WorkSpaceDetail> workSpaceDetailList = [];
@@ -904,7 +913,10 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       final response = await super.dio.get(
             url,
             options: Options(
-              headers: {'authorization': 'Bearer $userToken'},
+              headers: {
+                'authorization': 'Bearer $userToken',
+                'language': language,
+              },
             ),
           );
 
@@ -1114,15 +1126,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
   @override
   Future<Either<bool, CustomServiceException>> saveDocumentForMaintenance(
-    String filePath,
-    String fileName,
-    String desc,
-    String token,
-    String id,
-    String key,
-    String isImage,
-    String labels
-  ) async {
+      String filePath, String fileName, String desc, String token, String id, String key, String isImage, String labels) async {
     bool result = false;
 
     String url = '${ServiceTools.url.workorder_url}/maintenance/addFilesMobile';
