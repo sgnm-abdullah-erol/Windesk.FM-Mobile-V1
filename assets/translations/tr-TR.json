@@ -1,4 +1,5 @@
 {
+	"Filter": "Filtrele",
 	"----------------Maintenance----------": "-----------Maintenance--------------",
 	"ScopeList": "Kapsam Listesi",
 	"CheckList": "Kontrol Listesi",
@@ -12,13 +13,12 @@
 	"AddPhoto": "Fotoğraf Ekle",
 	"PhotoAdded": "Fotoğraf Ekleme Başarılı",
 	"EmptyComponentList": "Bileşen Listesi Boş",
-	"EffortAddedError":"Efor Ekleme Başarısız",
-	"AreYouSureSaveCheckList":"Kontrol listesini kaydetmek istediğinize emin misiniz?",
+	"EffortAddedError": "Efor Ekleme Başarısız",
+	"AreYouSureSaveCheckList": "Kontrol listesini kaydetmek istediğinize emin misiniz?",
 	"DocumentAdded": "Döküman Ekleme İşlemi Başarılı",
 	"RequiredField": "Zorunlu ALan",
-	"Browse":"Browse",
+	"Browse": "Browse",
 	"CompletedChecklist": "Tamamlanmış Checklist",
-
 	"----------------APP----------": "-----------APP--------------",
 	"IfmName": "İstanbul Finans Merkezi",
 	"AppTitle": "Yardım Masası Uygulaması",

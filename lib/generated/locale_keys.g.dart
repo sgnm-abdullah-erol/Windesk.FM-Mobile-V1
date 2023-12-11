@@ -8,6 +8,9 @@ import 'package:flutter/material.dart';
 class LocaleKeys {
   const LocaleKeys._();
 
+  static const String Filter = 'Filter';
+  static const String Apply = 'Apply';
+
   // maintenance
   static const String ScopeList = 'ScopeList';
   static const String CheckList = 'CheckList';

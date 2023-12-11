@@ -13,6 +13,7 @@ class AppIcons {
 
   static const IconData wifi = Icons.wifi;
   static const IconData note = Icons.note;
+  static const IconData filter = Icons.filter_alt_outlined;
 
   // HOME CIRCULAR BUTTON ICONS
   static const IconData calendarMonth = Icons.calendar_month;
