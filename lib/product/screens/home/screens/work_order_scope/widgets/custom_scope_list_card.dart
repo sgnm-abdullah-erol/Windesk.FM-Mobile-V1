@@ -129,6 +129,7 @@ class CustomScopeListCard extends StatelessWidget {
               return Text(LocaleKeys.FetchScopeListError.tr(), style: Theme.of(context).textTheme.bodyMedium);
             }
             final StartCheckListValueModel? checkListValue = _setCheckListValue(result.data);
+
             return Align(
               alignment: Alignment.center,
               child: Column(

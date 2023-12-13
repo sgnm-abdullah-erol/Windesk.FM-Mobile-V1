@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vm_fm_4/core/constants/other/app_icons.dart';
+import 'package:vm_fm_4/product/screens/home/screens/work_order_list/widgets/filter/filter_dialog.dart';
 
 import '../../../../../../feature/components/appbar/custom_main_appbar.dart';
 import '../../../../../../generated/locale_keys.g.dart';
@@ -40,7 +42,12 @@ class _BuildScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomMainAppbar(title: Text(LocaleKeys.WorkOrderList.tr()), returnBack: true, elevation: 3),
+      appBar: CustomMainAppbar(
+        title: Text(LocaleKeys.WorkOrderList.tr()),
+        returnBack: true,
+        elevation: 3,
+        actions: _appBarActions(context, provider),
+      ),
       body: Column(
         children: [
           const SizedBox(height: 10),
@@ -56,5 +63,23 @@ class _BuildScaffold extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  List<Widget> _appBarActions(BuildContext context, WorkOrderListProvider provider) {
+    return provider.tabIndex == 0
+        ? [
+            IconButton(
+              onPressed: () async {
+                final response = await showDialog(
+                  context: context,
+                  builder: (context) => const CustomFilterDialog(),
+                );
+
+                debugPrint(response);
+              },
+              icon: const Icon(AppIcons.filter),
+            ),
+          ]
+        : [];
   }
 }

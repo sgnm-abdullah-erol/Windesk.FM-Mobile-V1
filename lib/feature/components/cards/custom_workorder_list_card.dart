@@ -98,9 +98,15 @@ class CustomWorkOrderListCard extends StatelessWidget {
           style: context.bodySmall.copyWith(fontWeight: FontWeight.bold, color: APPColors.Secondary.black),
         ),
         Spacer(),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Text(workSpaceDetail.task?.requestedSpaces?.name ?? '', style: context.labelMedium.copyWith(color: APPColors.Main.black)),
+        SizedBox(
+          width: context.width / 2,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Text(
+              workSpaceDetail.task?.requestedSpaces?.name ?? '',
+              style: context.labelMedium.copyWith(color: APPColors.Main.black),
+            ),
+          ),
         ),
       ],
     );
@@ -186,11 +192,13 @@ class CustomWorkOrderListCard extends StatelessWidget {
           children: [
             Expanded(
               flex: 2,
-              child: Text(header.tr(),
-                  style: context.labelMedium.copyWith(
-                    color: APPColors.Secondary.black,
-                    fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
-                  )),
+              child: Text(
+                header.tr(),
+                style: context.labelMedium.copyWith(
+                  color: APPColors.Secondary.black,
+                  fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
+                ),
+              ),
             ),
           ],
         ),

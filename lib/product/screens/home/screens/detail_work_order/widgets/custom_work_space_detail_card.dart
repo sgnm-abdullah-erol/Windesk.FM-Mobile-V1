@@ -86,9 +86,7 @@ class CustomWorkSpaceDetailCard extends StatelessWidget {
                 workOrderDetailProvider,
               ),
               const CustomWoSummaryDivider(),
-
               _TaskHistory(workSpaceDetail, workOrderDetailProvider),
-
               const SizedBox(height: 10),
               const SizedBox(height: 10),
               _DoubleRowInformationComponent(

@@ -1,4 +1,6 @@
 {
+	"Filter": "Filter",
+	"SLAStates": "SLA States",
 	"----------------Maintenance----------": "-----------Maintenance--------------",
 	"ScopeList": "Scope List",
 	"CheckList": "Check List",
@@ -13,14 +15,12 @@
 	"AddPhoto": "Add Photo",
 	"PhotoAdded": "Add Photo Process Success",
 	"EmptyComponentList": "Empty Component List",
-	"EffortAddedError":"Having error while added effort",
-	"AreYouSureSaveCheckList":"Are you sure to save the checklist?",
+	"EffortAddedError": "Having error while added effort",
+	"AreYouSureSaveCheckList": "Are you sure to save the checklist?",
 	"DocumentAdded": "Add Photo Process Success",
 	"RequiredField": "Required Field",
 	"Browse": "Browse",
 	"CompletedChecklist": "Completed Checklist",
-
-
 	"----------------APP----------": "-----------APP--------------",
 	"IfmName": "İstanbul Finance Center",
 	"AppTitle": "Help Desk App",
