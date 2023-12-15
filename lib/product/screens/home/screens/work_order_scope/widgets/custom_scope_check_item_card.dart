@@ -24,7 +24,7 @@ class CustomScopeCheckItemCard extends StatefulWidget {
   State<CustomScopeCheckItemCard> createState() => _CustomScopeCheckItemCardState();
 }
 
-class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> with CustomScopeCheckItemCardMixin {
+class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> with CustomScopeCheckItemCardMixin, AutomaticKeepAliveClientMixin {
   void _setInitialController(String value) => setState(() => initialController.text = widget.inputValuee.toString());
   late bool selectedValue;
 
@@ -37,7 +37,7 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
 
   @override
   Widget build(BuildContext context) {
-    print('check' + widget.checkListValueId.toString());
+    super.build(context);
     return GraphQLProvider(
       client: GraphQLManager.getClientForMutation(context),
       child: Mutation(
@@ -144,4 +144,8 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
       ),
     );
   }
+  
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

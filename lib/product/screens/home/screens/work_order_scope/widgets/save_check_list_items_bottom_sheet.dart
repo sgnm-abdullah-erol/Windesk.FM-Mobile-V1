@@ -73,7 +73,7 @@ class SaveCheckListBottomSheet extends StatelessWidget {
                               child: ElevatedButton(
                                 onPressed: () {
                                   final data = maintanenceList?.scheduledBy?.first.parentSchedule?.first.checkList?.first.includesOfCheckItems;
-                                  bool allCheckListsTrue = false;
+                                  bool allCheckListsTrue = true;
                                   for (var i = 0; i < data!.length; i++) {
                                     if (data[i].isRequired == true) {
                                       for (var b = 0; b < resultDataQuery!.length; b++) {

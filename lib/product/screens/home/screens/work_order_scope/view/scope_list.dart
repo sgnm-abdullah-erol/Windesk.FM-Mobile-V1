@@ -57,11 +57,11 @@ class ScopeList extends StatelessWidget {
                           result.data ?? {},
                         );
 
-                        if (!_checkMaintenancePlan(context, maintanenceModel, checkListmaintanenceModel)) {
-                          snackBar(context, LocaleKeys.EmptyComponentList.tr(), 'error');
-                          context.router.pop();
-                          return Container();
-                        } else {
+                        // if (!_checkMaintenancePlan(context, maintanenceModel, checkListmaintanenceModel)) {
+                        //   snackBar(context, LocaleKeys.EmptyComponentList.tr(), 'error');
+                        //   //context.router.pop();
+                        //   return Container();
+                        // } else {
                           return ScopeCardListScreen(
                             maintanenceModel: maintanenceModel,
                             checkListmaintanenceModel: checkListmaintanenceModel,
@@ -69,7 +69,7 @@ class ScopeList extends StatelessWidget {
                             refetchFunction: refetch,
                           );
                         }
-                      },
+                      //},
                     ),
                   );
                 },
@@ -98,32 +98,35 @@ class ScopeList extends StatelessWidget {
   }
 
   MaintanenceModel _checkNullablitiyOfMaintenanceModel(BuildContext context, Map<String, dynamic> result) {
+    print('Result'+result.toString());
     if (result['maintenances'] == null) {
-      _showSnackbar();
-      context.router.pop();
+      //_showSnackbar();
+      //context.router.pop();
       return const MaintanenceModel();
     } else {
       if (result['maintenances'].first != null) {
         return MaintanenceModel.fromJson(result['maintenances'][0]);
       } else {
-        _showSnackbar();
-        context.router.pop();
+        //_showSnackbar();
+        //context.router.pop();
         return const MaintanenceModel();
       }
     }
   }
 
   CheckListMaintanenceModel _checkNullablitiyOfCheckListMaintenanceModel(BuildContext context, Map<String, dynamic> result) {
+        print('Result2'+result.toString());
+
     if (result['maintenances'] == null) {
-      _showSnackbar();
-      context.router.pop();
+      // _showSnackbar();
+      // context.router.pop();
       return const CheckListMaintanenceModel();
     } else {
       if (result['maintenances'].first != null) {
         return CheckListMaintanenceModel.fromJson(result['maintenances'][0]);
       } else {
-        _showSnackbar();
-        context.router.pop();
+        // _showSnackbar();
+        // context.router.pop();
         return const CheckListMaintanenceModel();
       }
     }

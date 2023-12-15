@@ -32,6 +32,9 @@ class ScopeDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('checklistvalue');
+        print(checkListValueModel?.id);
+
     return GraphQLProvider(
       client: GraphQLManager.getClient(HttpLink(ServiceTools.url.generalGraphql_url)),
       child: Query(
@@ -46,14 +49,16 @@ class ScopeDetail extends StatelessWidget {
               return Text(LocaleKeys.FetchScopeListError.tr(), style: Theme.of(context).textTheme.bodyMedium);
             }
             final resultData = result.data?['checkListValues'].first['CheckItemValue'];
-
             return ChangeNotifierProvider(
               create: (context) => ScopeProvider(),
               child: Scaffold(
                 appBar: _appbar(context),
                 body: Consumer<ScopeProvider>(
+                  
                   builder: (context, ScopeProvider provider, child) {
+                    
                     return SizedBox(
+
                       child: ListView.builder(
                         itemCount: maintanenceList?.scheduledBy?.first.parentSchedule?.first.checkList?.first.includesOfCheckItems?.length,
                         itemBuilder: (context, index) {
@@ -144,7 +149,7 @@ class ScopeDetail extends StatelessWidget {
                             );
                           },
                         );
-
+            
                         if (response == true) {
                           // ignore: use_build_context_synchronously
                           Navigator.of(screenContext).pop<bool>(true);
