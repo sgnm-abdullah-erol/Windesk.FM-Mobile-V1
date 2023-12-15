@@ -3,6 +3,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:vm_fm_4/feature/components/input_fields/text_field_date_picker.dart';
+import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
 
 class FormTypes {
@@ -113,29 +114,35 @@ class _YesNoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
       children: [
-        ListTile(
-          enabled: checkListSituation == 'Finished',
-          title: Text(LocaleKeys.Yes.tr(), style: const TextStyle(color: Colors.black)),
-          leading: Radio<bool>(
-              value: true,
-              groupValue: selectedValue,
-              onChanged: (bool? value) => {
-                    if (checkListSituation != 'Finished') {setSelectedValue()},
-                  }),
+        SizedBox(
+          width: context.width/3,
+          child: ListTile(
+            enabled: checkListSituation == 'Finished',
+            title: Text(LocaleKeys.Yes.tr(), style: const TextStyle(color: Colors.black)),
+            leading: Radio<bool>(
+                value: true,
+                groupValue: selectedValue,
+                onChanged: (bool? value) => {
+                      if (checkListSituation != 'Finished') {setSelectedValue()},
+                    }),
+          ),
         ),
-        ListTile(
-          enabled: checkListSituation == 'Finished',
-          title: Text(LocaleKeys.No.tr(), style: const TextStyle(color: Colors.black)),
-          leading: Radio<bool>(
-            value: false,
-            groupValue: selectedValue,
-            onChanged: (bool? value) {
-              if (checkListSituation != 'Finished') {
-                setSelectedValue();
-              }
-            },
+        SizedBox(
+          width: context.width/3,
+          child: ListTile(
+            enabled: checkListSituation == 'Finished',
+            title: Text(LocaleKeys.No.tr(), style: const TextStyle(color: Colors.black)),
+            leading: Radio<bool>(
+              value: false,
+              groupValue: selectedValue,
+              onChanged: (bool? value) {
+                if (checkListSituation != 'Finished') {
+                  setSelectedValue();
+                }
+              },
+            ),
           ),
         ),
       ],

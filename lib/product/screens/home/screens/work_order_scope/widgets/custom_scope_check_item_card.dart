@@ -3,6 +3,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:vm_fm_4/core/constants/other/app_icons.dart';
 import 'package:vm_fm_4/core/constants/other/colors.dart';
 import 'package:vm_fm_4/feature/components/dynamic_form/dynamic_form.dart';
+import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 import 'package:vm_fm_4/feature/models/work_order_scope_models/includesof_check_item_model.dart';
 import 'package:vm_fm_4/feature/service/graphql_manager.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/mixin/custom_scope_check_item_card_mixin.dart';
@@ -68,32 +69,38 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
                   alignment: Alignment.centerLeft,
                   child:
                       Text(widget.checkItem?.isRequired == true ? '*Zorunlu Alan' : '', style: TextStyle(color: APPColors.Main.red, fontSize: 10))),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    flex: 3,
-                    child: Row(
+              SizedBox(
+                width: context.width,
+                height: context.height/8,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
+                          flex:3,
                           child: Text(
                             widget.checkItem?.name ?? '',
                             style: Theme.of(context).textTheme.bodyMedium,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        Expanded(
-                          child: Text(
-                            widget.checkItem?.description ?? '',
-                            style: Theme.of(context).textTheme.bodySmall,
-                            overflow: TextOverflow.fade,
-                          ),
-                        ),
+                        _saveButton(runMutation),
                       ],
                     ),
-                  ),
-                  Expanded(flex: 1, child: _saveButton(runMutation)),
-                ],
+                    Flexible(
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          widget.checkItem?.description ?? '',
+                          style: Theme.of(context).textTheme.bodySmall,
+                          overflow: TextOverflow.fade,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               _dynamicForm(),
             ],
