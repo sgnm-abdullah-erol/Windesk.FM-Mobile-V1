@@ -33,7 +33,7 @@ class ScopeDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print('checklistvalue');
-        print(checkListValueModel?.id);
+    print(checkListValueModel);
 
     return GraphQLProvider(
       client: GraphQLManager.getClient(HttpLink(ServiceTools.url.generalGraphql_url)),
@@ -54,11 +54,8 @@ class ScopeDetail extends StatelessWidget {
               child: Scaffold(
                 appBar: _appbar(context),
                 body: Consumer<ScopeProvider>(
-                  
-                  builder: (context, ScopeProvider provider, child) {
-                    
+                  builder: (context, ScopeProvider provider, child) {              
                     return SizedBox(
-
                       child: ListView.builder(
                         itemCount: maintanenceList?.scheduledBy?.first.parentSchedule?.first.checkList?.first.includesOfCheckItems?.length,
                         itemBuilder: (context, index) {

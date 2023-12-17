@@ -98,12 +98,6 @@ class CustomScopeListCard extends StatelessWidget {
         icon: AppIcons.send,
         onPressFunction: () async {
           final component = maintanenceModel?.maintenancePlan?.first.components?.first.willBeAppliedToComponents?.first;
-          print('ttttt');
-          print(maintanenceModel?.scheduledBy?.first.parentSchedule?.first.checkList);
-          print(scopeId);
-          print(component?.componentOriginal?.labels?[0]);
-          print(maintanenceModel?.id.toString());
-
           runMutation(
             MaintenancesTaskVariableQueries.checkListValueVariables(
               maintanenceModel?.scheduledBy?.first.parentSchedule?.first.checkList?.first.id ?? 0,

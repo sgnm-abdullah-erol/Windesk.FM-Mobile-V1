@@ -117,10 +117,10 @@ class _YesNoWidget extends StatelessWidget {
     return Row(
       children: [
         SizedBox(
-          width: context.width/3,
+          width: context.width/2.6,
           child: ListTile(
             enabled: checkListSituation == 'Finished',
-            title: Text(LocaleKeys.Yes.tr(), style: const TextStyle(color: Colors.black)),
+            title: Text(LocaleKeys.Yes.tr(), style: const TextStyle(color: Colors.black,fontSize:14)),
             leading: Radio<bool>(
                 value: true,
                 groupValue: selectedValue,
@@ -130,10 +130,10 @@ class _YesNoWidget extends StatelessWidget {
           ),
         ),
         SizedBox(
-          width: context.width/3,
+          width: context.width/2.6,
           child: ListTile(
             enabled: checkListSituation == 'Finished',
-            title: Text(LocaleKeys.No.tr(), style: const TextStyle(color: Colors.black)),
+            title: Text(LocaleKeys.No.tr(), style: const TextStyle(color: Colors.black,fontSize: 14)),
             leading: Radio<bool>(
               value: false,
               groupValue: selectedValue,
