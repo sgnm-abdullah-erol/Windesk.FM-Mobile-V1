@@ -269,13 +269,15 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
             url,
             data: {},
             options: Options(
-              headers: {'authorization': 'Bearer $token'},
+              headers: {'authorization': 'Bearer $token', 'language': 'tr'},
             ),
           );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
+        super.logger.wtf(data);
         workSpaceEfforts = WorkSpaceEfforts.fromJsonList(data);
+        super.logger.wtf(workSpaceEfforts);
 
         return Left(workSpaceEfforts);
       } else {
@@ -299,12 +301,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   ) async {
     bool result;
     String url = '${ServiceTools.url.workorder_url}/task/add/node/to/task';
-
-    if (effortType == 'Working') {
-      effortType = 'EffortType2';
-    } else if (effortType == 'Way') {
-      effortType = 'EffortType1';
-    }
 
     try {
       final response = await super.dio.post(
@@ -1162,11 +1158,11 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
         "key": key
       }
     });
-      print({
-        "id": id,
-        "labels": [labels],
-        "key": key,
-      });
+    print({
+      "id": id,
+      "labels": [labels],
+      "key": key,
+    });
 
     try {
       final response = await super.dio.post(
