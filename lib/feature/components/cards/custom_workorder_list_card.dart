@@ -156,6 +156,7 @@ class CustomWorkOrderListCard extends StatelessWidget {
   }
 
   Flexible _codeAndStatusWidget(BuildContext context) {
+    print(workSpaceDetail.state?.name.toString().length);
     return Flexible(
       child: SizedBox(
         width: context.width,
@@ -171,11 +172,21 @@ class CustomWorkOrderListCard extends StatelessWidget {
                 style: context.bodyMedium.copyWith(fontWeight: FontWeight.bold, fontFamily: "Poppins", color: APPColors.Main.black),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(2.0),
-              child: Text(
-                workSpaceDetail.state?.name.toString() ?? LocaleKeys.NoState.tr(),
-                style: context.labelMedium.copyWith(color: APPColors.Secondary.black),
+            SizedBox(
+              width: (workSpaceDetail.state?.name ?? '').toString().length > 20 ? context.width / 2 : null,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: Text(
+                      workSpaceDetail.state?.name.toString() ?? LocaleKeys.NoState.tr(),
+                      style: context.labelMedium.copyWith(color: APPColors.Secondary.black),
+                      textAlign: TextAlign.right,
+                    ),
+                  ),
+                ),
               ),
             ),
           ],
