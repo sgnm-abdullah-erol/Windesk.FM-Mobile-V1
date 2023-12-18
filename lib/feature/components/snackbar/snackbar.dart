@@ -25,7 +25,7 @@ void snackBar(BuildContext context, String message, String type) async {
       ),
       displayDuration: const Duration(seconds: 2),
     );
-  }else if (type == 'true') {
+  } else if (type == 'true') {
     showTopSnackBar(
         Overlay.of(context),
         CustomSnackBar.success(
