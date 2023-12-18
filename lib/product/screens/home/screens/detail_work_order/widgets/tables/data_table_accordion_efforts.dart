@@ -26,6 +26,9 @@ class DataTableAccordionEfforts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    for (var i = 0; i < data.length; i++) {
+      print(data[i].effortType);
+    }
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: DataTable(
@@ -45,7 +48,7 @@ class DataTableAccordionEfforts extends StatelessWidget {
           for (var i = 0; i < (data.length); i++) ...{
             DataRow(cells: [
               DataCell(Text(data[i].id.toString(), style: _cellTextStyle(context))),
-              DataCell(Text(data[i].effortType ?? "", style: _cellTextStyle(context))),
+              DataCell(Text(data[i].effortType ?? '', style: _cellTextStyle(context)).tr()),
               DataCell(Text(data[i].user ?? "", style: _cellTextStyle(context))),
               DataCell(Text(data[i].effortDuration.toString(), style: _cellTextStyle(context))),
               DataCell(

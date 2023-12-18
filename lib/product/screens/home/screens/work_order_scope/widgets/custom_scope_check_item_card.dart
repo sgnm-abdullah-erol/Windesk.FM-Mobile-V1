@@ -71,7 +71,7 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
                       Text(widget.checkItem?.isRequired == true ? '*Zorunlu Alan' : '', style: TextStyle(color: APPColors.Main.red, fontSize: 10))),
               SizedBox(
                 width: context.width,
-                height: context.height/7,
+                height: context.height / 7,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -155,7 +155,7 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
       ),
     );
   }
-  
+
   @override
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
