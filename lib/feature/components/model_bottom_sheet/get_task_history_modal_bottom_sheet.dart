@@ -26,21 +26,21 @@ class GetTaskHistoryModalBottomSheet {
                   height: MediaQuery.of(context).size.height * 0.3,
                   child: ListView(
                     children: [
-                      for (var i = 0; i < (workOrderDetailProvider.taskHistoryData!.length); i++) ...{
+                      for (var i = 0; i < (workOrderDetailProvider.taskHistoryData?.length ?? 0); i++) ...{
                         ListTile(
                             title: Text(
-                              workOrderDetailProvider.taskHistoryData![i][1],
+                              workOrderDetailProvider.taskHistoryData?[i][1],
                               style: const TextStyle(fontSize: 15),
                             ),
                             subtitle: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  workOrderDetailProvider.taskHistoryData![i][0],
+                                  workOrderDetailProvider.taskHistoryData?[i][0],
                                   style: const TextStyle(fontSize: 13),
                                 ),
                                 Text(
-                                  workOrderDetailProvider.taskHistoryData![i][2][0],
+                                  workOrderDetailProvider.taskHistoryData?[i][2][0],
                                   style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                                 ),
                                 const Divider(),

@@ -135,7 +135,6 @@ class DetailWorkOrderScreen extends StatelessWidget {
   }
 
   List<AccordionSection> _filterAcordionList(BuildContext context, WorkOrderDetailProvider woDetailProvider) {
-    print(woDetailProvider.detail.task?.labels?[1]);
     return woDetailProvider.detail.task?.labels?[1] == 'MaterialRequest'
         ? [
             _accordionSection(context, LocaleKeys.Effort.tr(), AddEffortsAccordion(provider: woDetailProvider), AppIcons.insightsRounded),
