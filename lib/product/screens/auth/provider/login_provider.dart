@@ -66,7 +66,6 @@ class LoginProvider extends ChangeNotifier {
       LoginModel loginModel;
 
       response.fold((login) {
-        // _setUserName(context);
         _isLoginSuccess = true;
         _userId = login.id.toString();
         notifyListeners();
@@ -76,10 +75,10 @@ class LoginProvider extends ChangeNotifier {
           loginModel = login;
           _userTokenName = userName;
 
+          // set userName
+          setUserName(_userName);
           //  save the token to preferences
           await _setTokenToPreferences(login.refreshToken ?? '', login.id.toString(), context, login.accessToken ?? '');
-
-          _setField();
         });
 
         Future.delayed(const Duration(milliseconds: 1000), () {
@@ -91,6 +90,7 @@ class LoginProvider extends ChangeNotifier {
         _isLoginSuccess = false;
         _isErrorActive = true;
         _loading = false;
+        setUserName(_userName);
         notifyListeners();
         Future.delayed(const Duration(milliseconds: 1000), () {
           _isErrorActive = false;
@@ -98,6 +98,8 @@ class LoginProvider extends ChangeNotifier {
       });
     } else {
       _textFieldEmptyError = true;
+      setUserName(_userName);
+
       notifyListeners();
       Future.delayed(const Duration(milliseconds: 1000), () {
         _textFieldEmptyError = false;
@@ -112,14 +114,6 @@ class LoginProvider extends ChangeNotifier {
     await SharedManager().setString(SharedEnum.refreshToken, refreshToken);
     await SharedManager().setString(SharedEnum.userId, userId);
     await SharedManager().setBool(SharedEnum.rememberMe, _rememberMe);
-  }
-
-  // void _setUserName(BuildContext context) async {
-  //   Provider.of<GlobalProvider>(context, listen: false).setUserName(_userTokenName);
-  // }
-
-  void _setField() {
-    _password = "";
   }
 
   // set functions

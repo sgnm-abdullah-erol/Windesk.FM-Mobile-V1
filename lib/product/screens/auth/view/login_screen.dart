@@ -33,7 +33,6 @@ class LoginScreen extends StatelessWidget {
       child: Consumer<LoginProvider>(
         builder: (context, LoginProvider loginProvider, child) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
-            loginProvider.setUserName(userName);
             if (loginProvider.isErrorActive) {
               snackBar(context, LocaleKeys.LoginError.tr(), 'error');
             }
@@ -44,10 +43,8 @@ class LoginScreen extends StatelessWidget {
               snackBar(context, LocaleKeys.LoginSuccess.tr(), 'success');
               context.read<GlobalProvider>().setUserId(loginProvider.userId);
               context.read<GlobalProvider>().setGlobalUserToken(loginProvider.userToken);
-
             }
           });
-
           return _LoginScreenBody(provider: loginProvider, userName: userName);
         },
       ),

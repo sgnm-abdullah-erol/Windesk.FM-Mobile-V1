@@ -549,6 +549,8 @@ class WoCreateProvider extends ChangeNotifier {
 
     response.fold(
       (l) => {
+        print('---------------------'),
+        print(l),
         _isWorkOrderCreate = true,
         _isWorkOrderCreatedTitle = l['properties']['name'].toString(),
         _isWorkOrderCreatedId = l['properties']['id'].toString(),

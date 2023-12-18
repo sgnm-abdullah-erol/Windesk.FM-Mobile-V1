@@ -1129,7 +1129,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       String filePath, String fileName, String desc, String token, String id, String key, String isImage, String labels) async {
     bool result = false;
 
-    String url = '${ServiceTools.url.workorder_url}/maintenance/addFilesMobile';
+    String url = '${ServiceTools.url.workorder_url}/maintenance/addFilesV2Mobile';
     String app = '';
 
     if (key == 'image') {
@@ -1162,6 +1162,11 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
         "key": key
       }
     });
+      print({
+        "id": id,
+        "labels": [labels],
+        "key": key,
+      });
 
     try {
       final response = await super.dio.post(
@@ -1173,6 +1178,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
           );
 
       super.logger.i(response);
+      print(response.toString());
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;

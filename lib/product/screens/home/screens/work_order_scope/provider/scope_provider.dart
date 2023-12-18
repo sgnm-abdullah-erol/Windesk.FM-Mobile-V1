@@ -71,7 +71,6 @@ class ScopeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
   void setEffortDescription(String value) => _effortDescription = value;
   void setEffortType(String value) => _effortType = value;
   void setEffortDuration(String value) => _effortDuration = value;
@@ -136,13 +135,14 @@ class ScopeProvider extends ChangeNotifier {
     final String token = await SharedManager().getString(SharedEnum.userToken);
 
     final response = await workSpaceService.saveDocumentForMaintenance(imagePath, '', desc, token, scopeId, taskKey, 'image', labels);
+
     response.fold(
       (l) => {
         Navigator.of(context).pop<bool>(true),
         snackBar(context, LocaleKeys.PhotoAdded.tr(), 'success'),
       },
       (r) => {
-        snackBar(context, LocaleKeys.AddPhoto.tr(), 'error'),
+        snackBar(context, LocaleKeys.ImageAddedError.tr(), 'error'),
       },
     );
 
@@ -172,7 +172,7 @@ class ScopeProvider extends ChangeNotifier {
             ? {
                 _isDocumentAdded = true,
                 Navigator.of(context).pop<bool>(true),
-                snackBar(context, LocaleKeys.AddedDocumants.tr(), 'success'),
+                snackBar(context, LocaleKeys.DocumentAdded.tr(), 'success'),
               }
             : {
                 _isDocumentAdded = false,

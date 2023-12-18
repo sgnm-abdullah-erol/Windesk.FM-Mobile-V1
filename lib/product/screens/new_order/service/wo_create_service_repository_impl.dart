@@ -175,7 +175,7 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
               ],
               "woCategory": woCategory,
               "isMobile": true,
-              "depended_on": ["416"]
+              "depended_on": ["718"]
             },
             options: Options(
               headers: {'authorization': 'Bearer $token'},

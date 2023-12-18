@@ -17,10 +17,12 @@
 	"EmptyComponentList": "Empty Component List",
 	"EffortAddedError": "Having error while added effort",
 	"AreYouSureSaveCheckList": "Are you sure to save the checklist?",
-	"DocumentAdded": "Add Photo Process Success",
+	"DocumentAdded": "Add Document Process Success",
 	"RequiredField": "Required Field",
 	"Browse": "Browse",
 	"CompletedChecklist": "Completed Checklist",
+	"ImageAddedError": "Getting Error While Added Photo",
+
 	"----------------APP----------": "-----------APP--------------",
 	"IfmName": "İstanbul Finance Center",
 	"AppTitle": "Help Desk App",

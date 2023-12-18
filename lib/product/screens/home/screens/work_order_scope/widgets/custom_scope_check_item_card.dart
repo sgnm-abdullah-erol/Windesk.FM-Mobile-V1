@@ -25,7 +25,7 @@ class CustomScopeCheckItemCard extends StatefulWidget {
   State<CustomScopeCheckItemCard> createState() => _CustomScopeCheckItemCardState();
 }
 
-class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> with CustomScopeCheckItemCardMixin {
+class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> with CustomScopeCheckItemCardMixin, AutomaticKeepAliveClientMixin {
   void _setInitialController(String value) => setState(() => initialController.text = widget.inputValuee.toString());
   late bool selectedValue;
 
@@ -38,6 +38,7 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return GraphQLProvider(
       client: GraphQLManager.getClientForMutation(context),
       child: Mutation(
@@ -70,7 +71,7 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
                       Text(widget.checkItem?.isRequired == true ? '*Zorunlu Alan' : '', style: TextStyle(color: APPColors.Main.red, fontSize: 10))),
               SizedBox(
                 width: context.width,
-                height: context.height/8,
+                height: context.height/7,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -78,23 +79,25 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
-                          flex:3,
+                          flex:5,
                           child: Text(
                             widget.checkItem?.name ?? '',
                             style: Theme.of(context).textTheme.bodyMedium,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
+                            //overflow: TextOverflow.ellipsis,
                           ),
                         ),
                         _saveButton(runMutation),
                       ],
                     ),
                     Flexible(
-                      child: Text(
-                        widget.checkItem?.description ?? '',
-                        style: Theme.of(context).textTheme.bodySmall,
-                        overflow: TextOverflow.fade,
-                        maxLines: 4,
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          widget.checkItem?.description ?? '',
+                          style: Theme.of(context).textTheme.bodySmall,
+                          overflow: TextOverflow.fade,
+                          maxLines: 4,
+                        ),
                       ),
                     ),
                   ],
@@ -110,7 +113,7 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
 
   Expanded _saveButton(RunMutation<dynamic> runMutation) {
     return Expanded(
-      flex:1,
+      flex:2,
       child: Row(
         children: [
           IconButton(
@@ -152,4 +155,8 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
       ),
     );
   }
+  
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

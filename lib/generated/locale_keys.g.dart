@@ -104,6 +104,7 @@ class LocaleKeys {
   static const String TakeItOnMeSuccess = 'TakeItOnMeSuccess';
   static const String PdfAdded = 'PdfAdded';
   static const String ImageAdded = 'ImageAdded';
+  static const String ImageAddedError = 'ImageAddedError';
   static const String FileDownloaded = 'FileDownloaded';
   static const String FileNotDownloaded = 'FileNotDownloaded';
   static const String NewTask = 'NewTask';
