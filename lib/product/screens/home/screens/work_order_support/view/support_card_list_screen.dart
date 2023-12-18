@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 import 'package:vm_fm_4/feature/models/work_order_scope_models/check_list_maintanence_model.dart';
 import 'package:vm_fm_4/feature/models/work_order_scope_models/maintanence_model.dart';
-import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/widgets/custom_scope_list_card.dart';
+import 'package:vm_fm_4/product/screens/home/screens/work_order_support/widgets/custom_support_list_card.dart';
 
-class ScopeCardListScreen extends StatelessWidget {
-  const ScopeCardListScreen({
+class SupportCardListScreen extends StatelessWidget {
+  const SupportCardListScreen({
     super.key,
     required this.checkListmaintanenceModel,
     required this.maintanenceModel,
@@ -21,7 +21,7 @@ class ScopeCardListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: context.height - 200,      
+      height: context.height - 170,
       width: context.width,
       child: ListView.builder(
         itemCount: maintanenceModel.maintenancePlan?.first.components?.first.willBeAppliedToComponents?.length,
@@ -33,7 +33,7 @@ class ScopeCardListScreen extends StatelessWidget {
               checkListSituation = checkListmaintanenceModel.checkListValue?[i].statusConnection?.edges?[0].node?.code;
             }
           }
-          return CustomScopeListCard(
+          return CustomSupportListCard(
             controlList: item?.componentOriginal?.properties?.className ?? '',
             name: item?.componentOriginal?.properties?.name ?? '',
             scopeId: item?.id ?? 0,

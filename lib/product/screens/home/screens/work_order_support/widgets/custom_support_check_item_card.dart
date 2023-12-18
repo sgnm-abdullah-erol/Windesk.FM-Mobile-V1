@@ -6,26 +6,26 @@ import 'package:vm_fm_4/feature/components/dynamic_form/dynamic_form.dart';
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 import 'package:vm_fm_4/feature/models/work_order_scope_models/includesof_check_item_model.dart';
 import 'package:vm_fm_4/feature/service/graphql_manager.dart';
-import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/mixin/custom_scope_check_item_card_mixin.dart';
-import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/provider/scope_provider.dart';
-import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/queries/maintenances_task_queries.dart';
-import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/queries/maintenances_task_query_variables.dart';
+import 'package:vm_fm_4/product/screens/home/screens/work_order_support/provider/support_provider.dart';
+import 'package:vm_fm_4/product/screens/home/screens/work_order_support/queries/maintenances_task_queries.dart';
+import 'package:vm_fm_4/product/screens/home/screens/work_order_support/queries/maintenances_task_query_variables.dart';
+import 'package:vm_fm_4/product/screens/home/screens/work_order_support/mixin/custom_support_check_item_card_mixin.dart';
 
-class CustomScopeCheckItemCard extends StatefulWidget {
-  const CustomScopeCheckItemCard(
+class CustomSupportCheckItemCard extends StatefulWidget {
+  const CustomSupportCheckItemCard(
       {super.key, this.checkItem, required this.provider, this.checkListValueId, this.inputValuee, this.checkListSituation});
 
   final IncludesOfCheckItemModel? checkItem;
-  final ScopeProvider provider;
+  final SupportProvider provider;
   final int? checkListValueId;
   final String? checkListSituation;
   final dynamic inputValuee;
 
   @override
-  State<CustomScopeCheckItemCard> createState() => _CustomScopeCheckItemCardState();
+  State<CustomSupportCheckItemCard> createState() => _CustomSupportCheckItemCardState();
 }
 
-class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> with CustomScopeCheckItemCardMixin, AutomaticKeepAliveClientMixin {
+class _CustomSupportCheckItemCardState extends State<CustomSupportCheckItemCard> with CustomSupportCheckItemCardMixin, AutomaticKeepAliveClientMixin {
   void _setInitialController(String value) => setState(() => initialController.text = widget.inputValuee.toString());
   late bool selectedValue;
 
@@ -71,7 +71,7 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
                       Text(widget.checkItem?.isRequired == true ? '*Zorunlu Alan' : '', style: TextStyle(color: APPColors.Main.red, fontSize: 10))),
               SizedBox(
                 width: context.width,
-                height: context.height / 7,
+                height: context.height/7,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -79,7 +79,7 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
-                          flex:5,
+                          flex:3,
                           child: Text(
                             widget.checkItem?.name ?? '',
                             style: Theme.of(context).textTheme.bodyMedium,
@@ -111,31 +111,28 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
     );
   }
 
-  Expanded _saveButton(RunMutation<dynamic> runMutation) {
-    return Expanded(
-      flex:2,
-      child: Row(
-        children: [
-          IconButton(
-            onPressed: () {
-              String? inputValue = widget.checkItem?.inputType == FormTypes.BOOLYES
-                  ? selectedValue.toString()
-                  : widget.checkItem?.inputType == FormTypes.TEXT
-                      ? textEditingController.text
-                      : widget.checkItem?.inputType == FormTypes.NUMBER
-                          ? numberEditingController.text
-                          : widget.provider.startDate;
-              widget.checkListSituation == 'Finished'
-                  ? null
-                  : runMutation(
-                      MaintenancesTaskVariableQueries.createCheckItemValueInput(widget.checkItem?.id ?? 0, widget.checkListValueId ?? 0, inputValue));
-            },
-            icon: const Icon(AppIcons.save),
-            color: APPColors.Main.blue,
-          ),
-          isLoading ? Icon(Icons.check_circle, color: APPColors.Main.green) : const Icon(Icons.check_circle_outline),
-        ],
-      ),
+  Row _saveButton(RunMutation<dynamic> runMutation) {
+    return Row(
+      children: [
+        IconButton(
+          onPressed: () {
+            String? inputValue = widget.checkItem?.inputType == FormTypes.BOOLYES
+                ? selectedValue.toString()
+                : widget.checkItem?.inputType == FormTypes.TEXT
+                    ? textEditingController.text
+                    : widget.checkItem?.inputType == FormTypes.NUMBER
+                        ? numberEditingController.text
+                        : widget.provider.startDate;
+            widget.checkListSituation == 'Finished'
+                ? null
+                : runMutation(
+                    MaintenancesTaskVariableQueries.createCheckItemValueInput(widget.checkItem?.id ?? 0, widget.checkListValueId ?? 0, inputValue));
+          },
+          icon: const Icon(AppIcons.save),
+          color: APPColors.Main.blue,
+        ),
+        isLoading ? Icon(Icons.check_circle, color: APPColors.Main.green) : const Icon(Icons.check_circle_outline),
+      ],
     );
   }
 
@@ -155,7 +152,7 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
       ),
     );
   }
-
+  
   @override
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;

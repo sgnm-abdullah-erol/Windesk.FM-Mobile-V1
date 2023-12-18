@@ -36,7 +36,8 @@ import '../widgets/custom_work_space_detail_card.dart';
 class DetailWorkOrderScreen extends StatelessWidget {
   const DetailWorkOrderScreen({super.key, required this.workSpaceDetail});
 
-  static final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  static final GlobalKey<ScaffoldState> _scaffoldKey =
+      GlobalKey<ScaffoldState>();
 
   final WorkSpaceDetail workSpaceDetail;
 
@@ -44,8 +45,12 @@ class DetailWorkOrderScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => WorkOrderDetailServiceProvider(detail: workSpaceDetail)),
-        ChangeNotifierProvider(create: (context) => WorkOrderDetailProvider(detail: workSpaceDetail)),
+        ChangeNotifierProvider(
+            create: (context) =>
+                WorkOrderDetailServiceProvider(detail: workSpaceDetail)),
+        ChangeNotifierProvider(
+            create: (context) =>
+                WorkOrderDetailProvider(detail: workSpaceDetail)),
       ],
       child: Consumer<WorkOrderDetailProvider>(
         builder: (context, WorkOrderDetailProvider woDetailProvider, child) {
@@ -68,7 +73,10 @@ class DetailWorkOrderScreen extends StatelessWidget {
               snackBar(context, LocaleKeys.ImageAdded.tr(), 'success');
             }
             if (woDetailProvider.isTaskStateChange) {
-              snackBar(context, '${LocaleKeys.TaskStateChange.tr()} ${LocaleKeys.NewTask.tr()} ${woDetailProvider.selectedTaskState}', 'success');
+              snackBar(
+                  context,
+                  '${LocaleKeys.TaskStateChange.tr()} ${LocaleKeys.NewTask.tr()} ${woDetailProvider.selectedTaskState}',
+                  'success');
               context.router.pop<bool>(true);
             }
             if (woDetailProvider.takeItOnMeSuccess) {
@@ -80,30 +88,52 @@ class DetailWorkOrderScreen extends StatelessWidget {
               ? const CustomLoadingIndicator()
               : Scaffold(
                   key: _scaffoldKey,
-                  appBar: CustomMainAppbar(title: Text('WO - ${woDetailProvider.detail.task?.id.toString() ?? ''}'), returnBack: true, elevation: 4),
+                  appBar: CustomMainAppbar(
+                      title: Text(
+                          'WO - ${woDetailProvider.detail.task?.id.toString() ?? ''}'),
+                      returnBack: true,
+                      elevation: 4),
                   body: context.read<WorkOrderDetailProvider>().isLoading
                       ? const CustomLoadingIndicator()
                       : RefreshIndicator(
                           onRefresh: () async {
-                            await Future.delayed(const Duration(seconds: 1), () => woDetailProvider.setStateToBeginning());
+                            await Future.delayed(const Duration(seconds: 1),
+                                () => woDetailProvider.setStateToBeginning());
                           },
                           child: SingleChildScrollView(
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10.0, vertical: 10),
                               child: Column(
                                 children: [
-                                  CustomWorkSpaceDetailCard(workSpaceDetail: woDetailProvider.detail, workOrderDetailProvider: woDetailProvider),
+                                  CustomWorkSpaceDetailCard(
+                                      workSpaceDetail: woDetailProvider.detail,
+                                      workOrderDetailProvider:
+                                          woDetailProvider),
                                   const SizedBox(height: 10),
-                                  (woDetailProvider.detail.task?.userId ?? '') != context.read<GlobalProvider>().userId
+                                  (woDetailProvider.detail.task?.userId ??
+                                              '') !=
+                                          context.read<GlobalProvider>().userId
                                       ? _TakeItOnMe(provider: woDetailProvider)
-                                      : _StateChangeDropDownButton(provider: woDetailProvider, workSpaceDetail: workSpaceDetail),
+                                      : _StateChangeDropDownButton(
+                                          provider: woDetailProvider,
+                                          workSpaceDetail: workSpaceDetail),
                                   const SizedBox(height: 20),
-                                  (woDetailProvider.detail.task?.userId ?? '') != context.read<GlobalProvider>().userId
+                                  (woDetailProvider.detail.task?.userId ??
+                                              '') !=
+                                          context.read<GlobalProvider>().userId
                                       ? const SizedBox()
-                                      : woDetailProvider.detail.task?.labels?[1] == 'Maintenance'
+                                      : woDetailProvider
+                                                  .detail.task?.labels?[1] ==
+                                              'Maintenance'
                                           ? CustomElevatedButtonWithIcon(
-                                              onPressFunction: () => context.router.push(
-                                                route.ScopeList(taskId: woDetailProvider.detail.task?.id.toString() ?? ''),
+                                              onPressFunction: () =>
+                                                  context.router.push(
+                                                route.ScopeList(
+                                                    taskId: woDetailProvider
+                                                            .detail.task?.id
+                                                            .toString() ??
+                                                        ''),
                                               ),
                                               bgColor: APPColors.Accent.black,
                                               icon: AppIcons.eventList,
@@ -112,10 +142,31 @@ class DetailWorkOrderScreen extends StatelessWidget {
                                               iconColor: APPColors.Main.white,
                                             )
                                           : const SizedBox(),
+                                  woDetailProvider.detail.task?.labels?[1] ==
+                                          'Support'
+                                      ? CustomElevatedButtonWithIcon(
+                                          onPressFunction: () =>
+                                              context.router.push(
+                                            route.SupportList(
+                                                taskId: woDetailProvider
+                                                        .detail.task?.id
+                                                        .toString() ??
+                                                    ''),
+                                          ),
+                                          bgColor: APPColors.Accent.black,
+                                          icon: AppIcons.eventList,
+                                          textValue: LocaleKeys.support.tr(),
+                                          textColor: APPColors.Main.white,
+                                          iconColor: APPColors.Main.white,
+                                        )
+                                      : const SizedBox(),
                                   const SizedBox(height: 20),
-                                  (woDetailProvider.detail.task?.userId ?? '') != context.read<GlobalProvider>().userId
+                                  (woDetailProvider.detail.task?.userId ??
+                                              '') !=
+                                          context.read<GlobalProvider>().userId
                                       ? const SizedBox()
-                                      : _customPageAccordionSection(context, woDetailProvider),
+                                      : _customPageAccordionSection(
+                                          context, woDetailProvider),
                                 ],
                               ),
                             ),
@@ -127,20 +178,35 @@ class DetailWorkOrderScreen extends StatelessWidget {
     );
   }
 
-  Padding _customPageAccordionSection(BuildContext context, WorkOrderDetailProvider woDetailProvider) {
+  Padding _customPageAccordionSection(
+      BuildContext context, WorkOrderDetailProvider woDetailProvider) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 22),
-      child: CustomBaseAccordion(list: _filterAcordionList(context, woDetailProvider)),
+      child: CustomBaseAccordion(
+          list: _filterAcordionList(context, woDetailProvider)),
     );
   }
 
   List<AccordionSection> _filterAcordionList(BuildContext context, WorkOrderDetailProvider woDetailProvider) {
     return woDetailProvider.detail.task?.labels?[1] == 'MaterialRequest'
         ? [
-            _accordionSection(context, LocaleKeys.Effort.tr(), AddEffortsAccordion(provider: woDetailProvider), AppIcons.insightsRounded),
-            _accordionSection(context, LocaleKeys.RequestMaterial.tr(), RequestMaterialAccordion(provider: woDetailProvider), AppIcons.tool),
-            _accordionSection(context, LocaleKeys.Document.tr(), AddDocumantAccordion(provider: woDetailProvider), AppIcons.photoAlbum),
-            _accordionSection(context, LocaleKeys.Notes.tr(), AddNotesAccordion(provider: woDetailProvider), AppIcons.note),
+            _accordionSection(
+                context,
+                LocaleKeys.Effort.tr(),
+                AddEffortsAccordion(provider: woDetailProvider),
+                AppIcons.insightsRounded),
+            _accordionSection(
+                context,
+                LocaleKeys.RequestMaterial.tr(),
+                RequestMaterialAccordion(provider: woDetailProvider),
+                AppIcons.tool),
+            _accordionSection(
+                context,
+                LocaleKeys.Document.tr(),
+                AddDocumantAccordion(provider: woDetailProvider),
+                AppIcons.photoAlbum),
+            _accordionSection(context, LocaleKeys.Notes.tr(),
+                AddNotesAccordion(provider: woDetailProvider), AppIcons.note),
           ]
         : woDetailProvider.detail.task?.labels?[1] == 'Maintenance'
             ? [
@@ -156,24 +222,28 @@ class DetailWorkOrderScreen extends StatelessWidget {
               ];
   }
 
-  AccordionSection _accordionSection(BuildContext context, String title, Widget content, IconData icon) {
+  AccordionSection _accordionSection(
+      BuildContext context, String title, Widget content, IconData icon) {
     return AccordionSection(
       headerPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
       isOpen: false,
       headerBackgroundColor: APPColors.Accent.black,
       headerBackgroundColorOpened: APPColors.Accent.black,
-      contentBackgroundColor: context.theme ? APPColors.Accent.black : APPColors.Accent.white,
+      contentBackgroundColor:
+          context.theme ? APPColors.Accent.black : APPColors.Accent.white,
       leftIcon: Icon(icon, color: APPColors.Main.white),
       contentBorderColor: APPColors.Accent.black,
       onOpenSection: () {},
-      header: Text(title, style: context.labelMedium.copyWith(color: APPColors.Main.white)),
+      header: Text(title,
+          style: context.labelMedium.copyWith(color: APPColors.Main.white)),
       content: content,
     );
   }
 }
 
 class _StateChangeDropDownButton extends StatelessWidget {
-  const _StateChangeDropDownButton({required this.provider, required this.workSpaceDetail});
+  const _StateChangeDropDownButton(
+      {required this.provider, required this.workSpaceDetail});
 
   final WorkOrderDetailProvider provider;
   final WorkSpaceDetail workSpaceDetail;
@@ -198,7 +268,10 @@ class _StateChangeDropDownButton extends StatelessWidget {
                 }).then((value) {
                   // check response value
                   if (value == true) {
-                    provider.groupId != '' ? provider.changeState(val) : snackBar(context, LocaleKeys.ErrorChangeStateWithGroup.tr(), 'error');
+                    provider.groupId != ''
+                        ? provider.changeState(val)
+                        : snackBar(context,
+                            LocaleKeys.ErrorChangeStateWithGroup.tr(), 'error');
                   } else {
                     // fix this
                   }
@@ -236,10 +309,12 @@ class _TakeItOnMe extends StatelessWidget {
       onPressed: () => provider.takeItOnMe(),
       style: ElevatedButton.styleFrom(
         backgroundColor: APPColors.Accent.black,
-        shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.mediumBorderRadius),
+        shape: RoundedRectangleBorder(
+            borderRadius: CustomBorderRadius.mediumBorderRadius),
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       ),
-      child: Text(LocaleKeys.TakeItOnMe.tr(), style: context.bodySmall.copyWith(color: APPColors.Main.white)),
+      child: Text(LocaleKeys.TakeItOnMe.tr(),
+          style: context.bodySmall.copyWith(color: APPColors.Main.white)),
     );
   }
 }

@@ -1130,7 +1130,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       String filePath, String fileName, String desc, String token, String id, String key, String isImage, String labels) async {
     bool result = false;
 
-    String url = '${ServiceTools.url.workorder_url}/maintenance/addFilesMobile';
+    String url = '${ServiceTools.url.workorder_url}/maintenance/addFilesV2Mobile';
     String app = '';
 
     if (key == 'image') {

@@ -8,8 +8,9 @@ import 'package:vm_fm_4/feature/models/work_order_scope_models/includesof_check_
 import 'package:vm_fm_4/feature/service/global_services.dart/work_space_service/work_space_service_repository_impl.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
 
-class ScopeProvider extends ChangeNotifier {
-  final WorkSpaceServiceRepositoryImpl workSpaceService = Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
+class SupportProvider extends ChangeNotifier {
+  final WorkSpaceServiceRepositoryImpl workSpaceService =
+      Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
 
   bool _fetchQuery = true;
   bool get fetchQuery => _fetchQuery;
@@ -124,7 +125,8 @@ class ScopeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void saveImage(BuildContext context, String imagePath, String desc, String scopeId, String taskKey, String labels) async {
+  void saveImage(BuildContext context, String imagePath, String desc,
+      String scopeId, String taskKey, String labels) async {
     if (imagePath.isEmpty) {
       snackBar(context, LocaleKeys.EmptyImagePath.tr(), 'error');
       return;
@@ -134,15 +136,15 @@ class ScopeProvider extends ChangeNotifier {
 
     final String token = await SharedManager().getString(SharedEnum.userToken);
 
-    final response = await workSpaceService.saveDocumentForMaintenance(imagePath, '', desc, token, scopeId, taskKey, 'image', labels);
-
+    final response = await workSpaceService.saveDocumentForMaintenance(
+        imagePath, '', desc, token, scopeId, taskKey, 'image', labels);
     response.fold(
       (l) => {
         Navigator.of(context).pop<bool>(true),
         snackBar(context, LocaleKeys.PhotoAdded.tr(), 'success'),
       },
       (r) => {
-        snackBar(context, LocaleKeys.ImageAddedError.tr(), 'error'),
+        snackBar(context, LocaleKeys.AddPhoto.tr(), 'error'),
       },
     );
 
@@ -154,7 +156,8 @@ class ScopeProvider extends ChangeNotifier {
     });
   }
 
-  void savePdf(BuildContext context, String pdfPath, String pdfName, String desc, String taskId, String taskKey, String labels) async {
+  void savePdf(BuildContext context, String pdfPath, String pdfName,
+      String desc, String taskId, String taskKey, String labels) async {
     if (pdfPath.isEmpty) {
       snackBar(context, LocaleKeys.EmptyPdfPath.tr(), 'error');
       return;
@@ -164,7 +167,8 @@ class ScopeProvider extends ChangeNotifier {
 
     final String token = await SharedManager().getString(SharedEnum.userToken);
 
-    final response = await workSpaceService.saveDocumentForMaintenance(pdfPath, pdfName, desc, token, taskId, taskKey, 'pdf', labels);
+    final response = await workSpaceService.saveDocumentForMaintenance(
+        pdfPath, pdfName, desc, token, taskId, taskKey, 'pdf', labels);
 
     response.fold(
       (l) => {
@@ -172,7 +176,7 @@ class ScopeProvider extends ChangeNotifier {
             ? {
                 _isDocumentAdded = true,
                 Navigator.of(context).pop<bool>(true),
-                snackBar(context, LocaleKeys.DocumentAdded.tr(), 'success'),
+                snackBar(context, LocaleKeys.AddedDocumants.tr(), 'success'),
               }
             : {
                 _isDocumentAdded = false,

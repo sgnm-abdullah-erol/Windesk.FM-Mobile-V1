@@ -2,6 +2,7 @@
 
 import 'package:auto_route/auto_route.dart';
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vm_fm_4/product/screens/home/screens/search_work_order/provider/search_work_order_provider.dart';
@@ -10,7 +11,7 @@ import '../../../../core/constants/functions/null_check_widget.dart';
 import '../../../../core/constants/other/colors.dart';
 import '../../../../core/constants/other/snackbar_strings.dart';
 import '../../../../core/constants/style/custom_paddings.dart';
-import '../../../../core/l10n/locale_keys.g.dart';
+import '../../../../generated/locale_keys.g.dart';
 import '../../../../feature/components/appbar/custom_main_appbar.dart';
 import '../../../../feature/components/buttons/custom_half_buttons.dart';
 import '../../../../feature/components/cards/custom_wo_create_card.dart';
@@ -43,22 +44,20 @@ class NewOrderScreen extends StatelessWidget {
               context: context,
               builder: (dialogContext) {
                 return AlertDialog(
-                  title: const Text(
-                    "Yeni İş Emri Oluşturuldu.",
-                    style: TextStyle(fontSize: 14),
+                  title: Text(
+                    LocaleKeys.NewWorkOrderCreated.tr(),
+                    style: const TextStyle(fontSize: 14),
                   ),
-                  content: Text("İş Emri NO : ${woCreateProvider.isWorkOrderCreatedId}"),
+                  content: Text("${LocaleKeys.WorkOrderNumber.tr()} ${woCreateProvider.isWorkOrderCreatedId}"),
                   actions: [
                     TextButton(
-                      child: const Text("Tamam"),
+                      child: Text(LocaleKeys.Okey.tr()),
                       onPressed: () {
-                        //Navigator.of(context).pop();
-
                         Navigator.pop(dialogContext);
                       },
                     ),
                     TextButton(
-                      child: const Text("Detayı Gör"),
+                      child: Text(LocaleKeys.SeeDetail.tr()),
                       onPressed: () {
                         searchWorkOrderProvider.getWorkSpaceWithSearchFromGroupWorks(dialogContext, woCreateProvider.isWorkOrderCreatedId);
                       },
@@ -84,7 +83,7 @@ class NewOrderScreen extends StatelessWidget {
             ? const CustomLoadingIndicator()
             : WillPopScope(
                 child: Scaffold(
-                  appBar: const CustomMainAppbar(title: Text(LocaleKeys.newWorkOrder)),
+                  appBar: CustomMainAppbar(title: Text(LocaleKeys.NewWorkOrder.tr())),
                   body: SingleChildScrollView(
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
@@ -93,12 +92,12 @@ class NewOrderScreen extends StatelessWidget {
                           children: [
                             WoCreateCard(
                               widget1: TextFieldsInputUnderline(
-                                  hintText: 'Tanım',
+                                  hintText: LocaleKeys.defination.tr(),
                                   onChanged: (String newValue) {
                                     woCreateProvider.setSummary(newValue);
                                   }),
                               widget2: TextFieldsInputUnderline(
-                                  hintText: 'Açıklama',
+                                  hintText: LocaleKeys.Explanation.tr(),
                                   onChanged: (String newValue) {
                                     woCreateProvider.setDescription(newValue);
                                   }),
@@ -107,7 +106,7 @@ class NewOrderScreen extends StatelessWidget {
                                 onChanged: (value) {
                                   woCreateProvider.setComponent(value.toString());
                                 },
-                                selectedItem: 'Bileşen',
+                                selectedItem: LocaleKeys.Component.tr(),
                                 popupProps: const PopupProps.menu(
                                   showSearchBox: true,
                                   fit: FlexFit.loose,
@@ -118,7 +117,7 @@ class NewOrderScreen extends StatelessWidget {
                             const SizedBox(height: 15),
                             WoCreateCard(
                               widget1: DropDownInputFields(
-                                labelText: 'Talep Sahibi',
+                                labelText: LocaleKeys.OrderOwner.tr(),
                                 onChangedFunction: (String newValue) {
                                   woCreateProvider.setRequestedBy(newValue);
                                 },
@@ -126,7 +125,7 @@ class NewOrderScreen extends StatelessWidget {
                                 dropDownArray: woCreateProvider.getRequestedByChildren,
                               ),
                               widget2: DropDownInputFields(
-                                labelText: 'Tip',
+                                labelText: LocaleKeys.Type.tr(),
                                 onChangedFunction: (String newValue) {
                                   woCreateProvider.setType(newValue);
                                 },
@@ -134,7 +133,7 @@ class NewOrderScreen extends StatelessWidget {
                                 dropDownArray: woCreateProvider.getTypesChildren,
                               ),
                               widget3: DropDownInputFields(
-                                labelText: 'Kategori',
+                                labelText: LocaleKeys.Category.tr(),
                                 onChangedFunction: (String newValue) {
                                   woCreateProvider.setCategory(newValue);
                                 },
@@ -151,7 +150,7 @@ class NewOrderScreen extends StatelessWidget {
                             const SizedBox(height: 15),
                             WoCreateCard(
                               widget1: TextFieldDatePicker(
-                                label: 'Randevu Tarihi',
+                                label: LocaleKeys.AppointmentDate.tr(),
                                 onTap: (String date) {
                                   woCreateProvider.setidate = date;
                                 },
@@ -159,7 +158,7 @@ class NewOrderScreen extends StatelessWidget {
                                 lastDate: DateTime.now().add(const Duration(days: 30)),
                               ),
                               widget2: TextFieldTimePicker(
-                                label: 'Randevu Saati',
+                                label: LocaleKeys.AppointmentHour.tr(),
                                 onTap: (String hour) {
                                   woCreateProvider.setihour = hour;
                                 },
@@ -168,11 +167,11 @@ class NewOrderScreen extends StatelessWidget {
                             ),
                             CustomHalfButtons(
                               leftTitle: Text(
-                                'Vazgeç',
+                                LocaleKeys.Cancel.tr(),
                                 style: TextStyle(color: APPColors.Main.white),
                               ),
                               rightTitle: Text(
-                                'Kaydet',
+                                LocaleKeys.Save.tr(),
                                 style: TextStyle(color: APPColors.Main.white),
                               ),
                               leftOnPressed: () {},
@@ -201,7 +200,7 @@ class NewOrderScreen extends StatelessWidget {
       child: Column(
         children: [
           DropDownInputFields(
-            labelText: 'Request Type',
+            labelText: LocaleKeys.RequestType.tr(),
             onChangedFunction: (String newValue) {
               woCreateProvider.setRequestType(newValue);
             },
@@ -213,7 +212,7 @@ class NewOrderScreen extends StatelessWidget {
               child: NullCheckWidget().isLeafFalse(
                 woCreateProvider.requestedTypeTree1,
                 DropDownInputFields(
-                  labelText: 'Tree1',
+                  labelText: LocaleKeys.Choose.tr(),
                   onChangedFunction: (String newValue) {
                     woCreateProvider.setRequestType1(newValue);
                   },
@@ -235,7 +234,7 @@ class NewOrderScreen extends StatelessWidget {
       child: Column(
         children: [
           DropDownInputFields(
-            labelText: 'Lokasyon',
+            labelText: LocaleKeys.Location.tr(),
             onChangedFunction: (String newValue) {
               woCreateProvider.setLocation(newValue);
             },
@@ -247,7 +246,7 @@ class NewOrderScreen extends StatelessWidget {
               child: NullCheckWidget().isLeafFalse(
                 woCreateProvider.locationLeaf,
                 DropDownInputFields(
-                  labelText: 'Blok',
+                  labelText: LocaleKeys.Block.tr(),
                   onChangedFunction: (String newValue) {
                     woCreateProvider.setBlock(newValue);
                   },
@@ -262,7 +261,7 @@ class NewOrderScreen extends StatelessWidget {
               child: NullCheckWidget().isLeafFalse(
                 woCreateProvider.buildingLeaf,
                 DropDownInputFields(
-                  labelText: 'Kat',
+                  labelText: LocaleKeys.Floor.tr(),
                   onChangedFunction: (String newValue) {
                     woCreateProvider.setFloor(newValue);
                   },
@@ -277,7 +276,7 @@ class NewOrderScreen extends StatelessWidget {
               child: NullCheckWidget().isLeafFalse(
                 woCreateProvider.floorLeaf,
                 DropDownInputFields(
-                  labelText: 'Alan',
+                  labelText: LocaleKeys.Space.tr(),
                   onChangedFunction: (String newValue) {
                     woCreateProvider.setSpace(newValue);
                   },

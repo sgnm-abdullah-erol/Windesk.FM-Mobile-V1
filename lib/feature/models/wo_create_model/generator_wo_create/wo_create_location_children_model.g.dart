@@ -6,21 +6,24 @@ part of '../wo_create_location_children_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-WoCreateLocationChildrenModel _$WoCreateLocationChildrenModelFromJson(Map<String, dynamic> json) => WoCreateLocationChildrenModel(
-      labels: (json['labels'] as List<dynamic>?)?.map((e) => e as String).toList(),
+WoCreateLocationChildrenModel _$WoCreateLocationChildrenModelFromJson(
+        Map<String, dynamic> json) =>
+    WoCreateLocationChildrenModel(
+      labels:
+          (json['labels'] as List<dynamic>?)?.map((e) => e as String).toList(),
       contractor: json['contractor'] as String?,
       code: json['code'] as String?,
       externalSiteObject: json['externalSiteObject'] as String?,
-      warrantyExpireDate: json['warrantyExpireDate'] as String?,
+      warrantyExpireDate: json['warrantyExpireDate'],
       externalFacilityObject: json['externalFacilityObject'] as String?,
       description: json['description'] as String?,
       siteName: json['siteName'] as String?,
       isActive: json['isActive'] as bool?,
       operator: json['operator'] as String?,
-      handoverDate: json['handoverDate'] as String?,
+      handoverDate: json['handoverDate'],
       createdAt: json['createdAt'] as String?,
       isDeleted: json['isDeleted'] as bool?,
-      operationStartDate: json['operationStartDate'] as String?,
+      operationStartDate: json['operationStartDate'],
       externalIdentifier: json['externalIdentifier'] as String?,
       canDelete: json['canDelete'] as bool?,
       tag: (json['tag'] as List<dynamic>?)?.map((e) => e as String).toList(),
@@ -31,11 +34,11 @@ WoCreateLocationChildrenModel _$WoCreateLocationChildrenModelFromJson(Map<String
       canDisplay: json['canDisplay'] as bool?,
       address: json['address'] as String?,
       siteDescription: json['siteDescription'] as String?,
-      areaMeasurement: json['areaMeasurement'] as dynamic,
+      areaMeasurement: json['areaMeasurement'],
       nodeType: json['nodeType'] as String?,
       externalSystem: json['externalSystem'] as String?,
       externalObject: json['externalObject'] as String?,
-      updatedOn: json['updatedOn'] as dynamic,
+      updatedOn: json['updatedOn'],
       name: json['name'] as String?,
       projectDescription: json['projectDescription'] as String?,
       projectName: json['projectName'] as String?,
@@ -45,7 +48,9 @@ WoCreateLocationChildrenModel _$WoCreateLocationChildrenModelFromJson(Map<String
       leaf: json['leaf'] as bool?,
     );
 
-Map<String, dynamic> _$WoCreateLocationChildrenModelToJson(WoCreateLocationChildrenModel instance) => <String, dynamic>{
+Map<String, dynamic> _$WoCreateLocationChildrenModelToJson(
+        WoCreateLocationChildrenModel instance) =>
+    <String, dynamic>{
       'labels': instance.labels,
       'contractor': instance.contractor,
       'code': instance.code,
