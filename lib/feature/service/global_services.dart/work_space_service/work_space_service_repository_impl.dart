@@ -269,7 +269,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
             url,
             data: {},
             options: Options(
-              headers: {'authorization': 'Bearer $token', 'language': 'tr'},
+              headers: {'authorization': 'Bearer $token', 'language': 'en'},
             ),
           );
 
