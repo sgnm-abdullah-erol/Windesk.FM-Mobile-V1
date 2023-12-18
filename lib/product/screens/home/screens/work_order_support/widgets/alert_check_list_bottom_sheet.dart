@@ -6,9 +6,9 @@ import 'package:vm_fm_4/core/constants/other/colors.dart';
 import 'package:vm_fm_4/core/route/app_route.gr.dart';
 import 'package:vm_fm_4/feature/models/work_order_scope_models/maintanence_model.dart';
 import 'package:vm_fm_4/feature/service/graphql_manager.dart';
-import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/models/start_check_list_value_model.dart';
-import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/queries/maintenances_task_queries.dart';
-import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/queries/maintenances_task_query_variables.dart';
+import 'package:vm_fm_4/product/screens/home/screens/work_order_support/models/start_check_list_value_model.dart';
+import 'package:vm_fm_4/product/screens/home/screens/work_order_support/queries/maintenances_task_queries.dart';
+import 'package:vm_fm_4/product/screens/home/screens/work_order_support/queries/maintenances_task_query_variables.dart';
 
 class AlertCheckListBottomSheet extends StatelessWidget {
   const AlertCheckListBottomSheet(
