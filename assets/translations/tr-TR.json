@@ -145,6 +145,8 @@
 	"LocationChangeSuccessfull": " Lokasyon güncelleme başarılı",
 	"SelectaLocation": "Select a Location",
 	"scope": "Kapsam",
+	"PleaseGiveAllRequiredInputs":"Lütfen zorunlu alanların tümünü doldurunuz.",
+
 	"----------------DATATABLE----------": "------------DATATABLE-------------",
 	"DataTableID": "ID",
 	"DataTableName": "İsim",

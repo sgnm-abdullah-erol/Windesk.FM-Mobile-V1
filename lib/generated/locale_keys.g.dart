@@ -183,6 +183,7 @@ class LocaleKeys {
   static const String ErrorChangeStateWithGroup = 'ErrorChangeStateWithGroup';
   static const String LocationChangeSuccessfull = 'LocationChangeSuccessfull';
   static const String SelectaLocation = 'SelectaLocation';
+  static const String PleaseGiveAllRequiredInputs = 'PleaseGiveAllRequiredInputs';
 
   // Data Table Strings
   static const String DataTableID = "DataTableID";
@@ -337,6 +338,7 @@ class LocaleKeys {
   static const String Type = 'Type';
   static const String RequestType = 'RequestType';
   static const String Block = 'Block';
+
 
   //work order scope
   static const String name = 'Name';

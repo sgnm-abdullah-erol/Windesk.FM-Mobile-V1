@@ -1,8 +1,11 @@
 // ignore_for_file: unused_element, unused_field, unused_local_variable
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:vm_fm_4/core/constants/other/snackbar_strings.dart';
 import 'package:vm_fm_4/core/database/shared_manager.dart';
 import 'package:vm_fm_4/core/enums/shared_enums.dart';
+import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
 import 'package:vm_fm_4/feature/injection.dart';
 import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_component_model.dart';
 import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_leaf_model.dart';
@@ -10,6 +13,7 @@ import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_location_model.
 import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_requestedby_model.dart';
 import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_requestedtype_model.dart';
 import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_type_model.dart';
+import 'package:vm_fm_4/generated/locale_keys.g.dart';
 import 'package:vm_fm_4/product/screens/new_order/service/wo_create_service_repository_impl.dart';
 
 class WoCreateProvider extends ChangeNotifier {
@@ -535,7 +539,8 @@ class WoCreateProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void createTask() async {
+  void createTask(BuildContext context) async {
+    if (summary != '' && requestedById != '' && description != '' && requestedId != '') {
     final token = await SharedManager().getString(SharedEnum.userToken);
     _isLoading = true;
     _isWorkOrderCreatedId = '';
@@ -544,29 +549,30 @@ class WoCreateProvider extends ChangeNotifier {
 
     final String appointmendData = '$_date $_hour:00';
 
-    final response = await _woCreateServiceRepository.createTask(
-        token, summary, _requestTypeKey, requestedById, description, appointmendData, typesId, requestedId, requestedLabel, woCategory, componentKey);
+      final response = await _woCreateServiceRepository.createTask(token, summary, _requestTypeKey, requestedById, description, appointmendData,
+          typesId, requestedId, requestedLabel, woCategory, componentKey);
 
-    response.fold(
-      (l) => {
-        print('---------------------'),
-        print(l),
-        _isWorkOrderCreate = true,
-        _isWorkOrderCreatedTitle = l['properties']['name'].toString(),
-        _isWorkOrderCreatedId = l['properties']['id'].toString(),
-        notifyListeners(),
-      },
-      (r) => {
-        _createTaskError = true,
-        _isWorkOrderCreate = false,
-      },
-    );
-    _isLoading = false;
-    notifyListeners();
-    Future.delayed(const Duration(seconds: 2), () {
-      _createTaskError = false;
-      _isWorkOrderCreate = false;
+      response.fold(
+        (l) => {
+          _isWorkOrderCreate = true,
+          _isWorkOrderCreatedTitle = l['properties']['name'].toString(),
+          _isWorkOrderCreatedId = l['properties']['id'].toString(),
+          notifyListeners(),
+        },
+        (r) => {
+          _createTaskError = true,
+          _isWorkOrderCreate = false,
+        },
+      );
+      _isLoading = false;
       notifyListeners();
-    });
+      Future.delayed(const Duration(seconds: 2), () {
+        _createTaskError = false;
+        _isWorkOrderCreate = false;
+        notifyListeners();
+      });
+    } else {
+      snackBar(context, LocaleKeys.PleaseGiveAllRequiredInputs.tr(), 'error');
+    }
   }
 }

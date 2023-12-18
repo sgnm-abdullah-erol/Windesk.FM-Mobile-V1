@@ -146,6 +146,7 @@
 	"SelectaLocation": "Alan seçiniz",
 	"scope": "Scope",
 	"Explanation": "Explanation",
+	"PleaseGiveAllRequiredInputs":"Please Give All Required Inputs",
 	"----------------DATATABLE----------": "------------DATATABLE-------------",
 	"DataTableID": "ID",
 	"DataTableName": "Name",

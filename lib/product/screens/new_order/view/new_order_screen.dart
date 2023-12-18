@@ -113,6 +113,9 @@ class NewOrderScreen extends StatelessWidget {
                                   constraints: BoxConstraints.tightFor(),
                                 ),
                               ),
+                              widget1Required: true,
+                              widget2Required: true,
+                              widget3Required: false,
                             ),
                             const SizedBox(height: 15),
                             WoCreateCard(
@@ -140,12 +143,18 @@ class NewOrderScreen extends StatelessWidget {
                                 rightIcon: Icons.arrow_drop_down_rounded,
                                 dropDownArray: woCreateProvider.getCategoriesChildren,
                               ),
+                              widget1Required: true,
+                              widget2Required: true,
+                              widget3Required: false,
                             ),
                             const SizedBox(height: 15),
                             WoCreateCard(
                               widget1: location(woCreateProvider, context),
                               widget2: requestType(woCreateProvider, context),
                               widget3: Container(),
+                              widget1Required: true,
+                              widget2Required: false,
+                              widget3Required: false,
                             ),
                             const SizedBox(height: 15),
                             WoCreateCard(
@@ -164,6 +173,9 @@ class NewOrderScreen extends StatelessWidget {
                                 },
                               ),
                               widget3: Container(),
+                              widget1Required: false,
+                              widget2Required: false,
+                              widget3Required: false,
                             ),
                             CustomHalfButtons(
                               leftTitle: Text(
@@ -177,7 +189,7 @@ class NewOrderScreen extends StatelessWidget {
                               leftOnPressed: () {},
                               rightOnPressed: () {
                                 woCreateProvider.selectedLeafIsTrue
-                                    ? woCreateProvider.createTask()
+                                    ? woCreateProvider.createTask(context)
                                     : snackBar(context, SnackbarStrings.woCreateErrorLocation, 'error');                                
                               },
                             )
