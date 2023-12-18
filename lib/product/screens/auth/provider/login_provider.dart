@@ -12,6 +12,8 @@ import '../../../../feature/service/global_services.dart/auth_service/auth_servi
 class LoginProvider extends ChangeNotifier {
   final AuthServiceRepositoryImpl _authService = Injection.getIt.get<AuthServiceRepositoryImpl>();
 
+  bool _initState = true;
+
   bool _loading = false;
 
   bool get loading => _loading;
@@ -45,6 +47,15 @@ class LoginProvider extends ChangeNotifier {
   String _userId = '';
   String get userId => _userId;
 
+  void init(String userName) {
+    if (_initState) {
+      setUserName(userName);
+      _userNameController.text = userName;
+      _initState = false;
+      notifyListeners();
+    }
+  }
+
   void setRememberMe(bool value) {
     _rememberMe = value;
   }
@@ -77,12 +88,12 @@ class LoginProvider extends ChangeNotifier {
 
           // set userName
           setUserName(_userName);
+
           //  save the token to preferences
           await _setTokenToPreferences(login.refreshToken ?? '', login.id.toString(), context, login.accessToken ?? '');
         });
 
         Future.delayed(const Duration(milliseconds: 1000), () {
-          notifyListeners();
           _loading = false;
           _isLoginSuccess = false;
         });

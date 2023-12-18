@@ -33,6 +33,8 @@ class LoginScreen extends StatelessWidget {
       child: Consumer<LoginProvider>(
         builder: (context, LoginProvider loginProvider, child) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
+            loginProvider.init(userName);
+
             if (loginProvider.isErrorActive) {
               snackBar(context, LocaleKeys.LoginError.tr(), 'error');
             }
@@ -66,7 +68,12 @@ class _LoginScreenBodyState extends State<_LoginScreenBody> {
 
   @override
   Widget build(BuildContext context) {
-    widget.provider.isLoginSuccess ? context.router.push(const HomeScreen()) : null;
+    widget.provider.isLoginSuccess
+        ? {
+            context.read<GlobalProvider>().setUserName(widget.userName),
+            context.router.replace(const HomeScreen()),
+          }
+        : null;
     return Scaffold(
       key: _globalKey,
       appBar: CustomMainAppbar(title: _loginAppbarTitle(context), returnBack: false),

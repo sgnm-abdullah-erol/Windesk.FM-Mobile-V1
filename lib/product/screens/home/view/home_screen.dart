@@ -11,6 +11,7 @@ import 'package:vm_fm_4/core/themes/theme_provider.dart';
 import 'package:vm_fm_4/feature/components/alert_dialog/notification_alert_dialog.dart';
 import 'package:vm_fm_4/feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
+import 'package:vm_fm_4/feature/global_providers/global_provider.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
 import 'package:vm_fm_4/product/screens/home/service/home_service_repo_impl.dart';
 import 'package:vm_fm_4/product/screens/home/widgets/settings_bottom_sheet.dart';
@@ -62,7 +63,8 @@ class _HomeScreenState extends State<HomeScreen> {
             }
             if (homeProvider.isUserLogout) {
               snackBar(context, LocaleKeys.LogoutSuccess.tr(), 'success');
-              context.router.pop();
+              print(context.read<GlobalProvider>().userName);
+              context.router.popAndPush(LoginScreen(userName: context.read<GlobalProvider>().userName));
             }
           });
           final WorkSpaceServiceRepositoryImpl workSpaceService = Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
