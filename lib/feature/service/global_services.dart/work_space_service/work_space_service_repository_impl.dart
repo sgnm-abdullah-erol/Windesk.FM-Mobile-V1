@@ -58,12 +58,17 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
   Future<Either<List, CustomServiceException>> getTaskHistoryApi(String id, String token) async {
     String url = '${ServiceTools.url.workorder_url}/task/one/task/state/List/with/user/approver/date/hour/second/status/$id';
+    super.logger.wtf(url);
+    print(id);
+    print(token);
     final response = await super.dio.get(
           url,
           options: Options(
             headers: {'authorization': 'Bearer $token'},
           ),
         );
+
+    super.logger.wtf(response);
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       final data = response.data;

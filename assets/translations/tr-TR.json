@@ -146,6 +146,7 @@
 	"SelectaLocation": "Select a Location",
 	"scope": "Kapsam",
 	"PleaseGiveAllRequiredInputs":"Lütfen zorunlu alanların tümünü doldurunuz.",
+	"support": "Destek",
 
 	"----------------DATATABLE----------": "------------DATATABLE-------------",
 	"DataTableID": "ID",
