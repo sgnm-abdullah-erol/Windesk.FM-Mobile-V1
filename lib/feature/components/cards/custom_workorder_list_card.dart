@@ -99,12 +99,15 @@ class CustomWorkOrderListCard extends StatelessWidget {
         ),
         Spacer(),
         SizedBox(
-          width: context.width / 2,
+          width: (workSpaceDetail.task?.requestedSpaces?.name ?? '').toString().length > 20 ? context.width / 2 : null,
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            child: Text(
-              workSpaceDetail.task?.requestedSpaces?.name ?? '',
-              style: context.labelMedium.copyWith(color: APPColors.Main.black),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 4.0),
+              child: Text(
+                workSpaceDetail.task?.requestedSpaces?.name ?? '',
+                style: context.labelMedium.copyWith(color: APPColors.Main.black),
+              ),
             ),
           ),
         ),
