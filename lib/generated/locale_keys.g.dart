@@ -37,6 +37,7 @@ class LocaleKeys {
 
   static const String assetSearchSuccess = 'Malzeme Arama Başarılı';
   static const String assetSearchError = 'Malzeme Arama Başarısız';
+  static const String SearchType = "SearchType";
 
   //space search
   static const String spaceSearch = 'Mahal Arama';
@@ -214,6 +215,8 @@ class LocaleKeys {
   static const String ApprovedRequestMaterials = 'ApprovedRequestMaterials';
   static const String RequestedMaterials = 'RequestedMaterials';
   static const String MaterialSearch = 'MaterialSearch';
+  static const String LabelNumber = 'LabelNumber';
+  static const String IdentifierNumber = 'IdentifierNumber';
 
   // issue
   static const String State = 'State';
@@ -277,6 +280,7 @@ class LocaleKeys {
   static const String SelectDecisionModelNotationsype = 'Select Decision Model Notationsype';
   static const String Building = 'Building';
   static const String AppointmentDate = 'Appointment Date';
+  static const String AppointmentHour = 'Appointment Hour';
   static const String Choose = 'Choose';
   static const String AssignedWorkOrders = 'Assigned Work Orders';
   static const String OpenWorkOrders = 'Open Work Orders';
@@ -323,6 +327,15 @@ class LocaleKeys {
   static const String DeleteMaterial = 'DeleteMaterial';
   static const String DeleteDocument = 'DeleteDocument';
   static const String MaterialError = 'MaterialError';
+  static const String NewWorkOrderCreated = 'NewWorkOrderCreated';
+  static const String WorkOrderNumber = 'WorkOrderNumber';
+  static const String defination = 'defination';
+  static const String Explanation = 'Explanation';
+  static const String Component = 'Component';
+  static const String OrderOwner = 'OrderOwner';
+  static const String Type = 'Type';
+  static const String RequestType = 'RequestType';
+  static const String Block = 'Block';
 
   //work order scope
   static const String name = 'Name';
@@ -681,7 +694,6 @@ class LocaleKeys {
   // static const Blocks = 'Blocks';
   // static const Floors = 'Floors';
   // static const Spaces = 'Spaces';
-  // static const Block = 'Block';
   // static const Floor = 'Floor';
   // static const Send for Approval = 'Send for Approval';
   // static const Code = 'Code';

@@ -19,3 +19,16 @@ DeliveredSpareOfModel _$DeliveredSpareOfModelFromJson(
       totalAmount: json['totalAmount'],
       materialDeliveredDate: json['materialDeliveredDate'] as String?,
     );
+
+Map<String, dynamic> _$DeliveredSpareOfModelToJson(
+        DeliveredSpareOfModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'label': instance.label,
+      'name': instance.name,
+      'amount': instance.amount,
+      'measurementUnit': instance.measurementUnit,
+      'user': instance.user,
+      'totalAmount': instance.totalAmount,
+      'materialDeliveredDate': instance.materialDeliveredDate,
+    };

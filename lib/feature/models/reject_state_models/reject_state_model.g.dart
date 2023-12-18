@@ -21,3 +21,16 @@ RejectStateModel _$RejectStateModelFromJson(Map<String, dynamic> json) =>
           ?.map((e) => UserGroupModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
+
+Map<String, dynamic> _$RejectStateModelToJson(RejectStateModel instance) =>
+    <String, dynamic>{
+      'isDefault': instance.isDefault,
+      'isDeleted': instance.isDeleted,
+      'name': instance.name,
+      'canDelete': instance.canDelete,
+      'isActive': instance.isActive,
+      'key': instance.key,
+      'id': instance.id,
+      'label': instance.label,
+      'userGroups': instance.userGroups,
+    };

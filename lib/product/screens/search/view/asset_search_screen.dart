@@ -62,16 +62,16 @@ class _AssetSearchScreen extends State<AssetSearchScreen> {
                         children: [
                           TextFieldsInputWithActionAndController(
                               textController: searchProvider.assetNumber,
-                              labelText: LocaleKeys.MaterialSearch,
+                              labelText: LocaleKeys.MaterialSearch.tr(),
                               actionIcon: AppIcons.qr,
                               actionFunction: searchProvider.scanBarcodeAndQrForAsset),
                           DropDownInputFields(
-                              labelText: 'Arama Türü',
+                              labelText: LocaleKeys.SearchType.tr(),
                               onChangedFunction: (String value) {
                                 searchProvider.setQrType(value);
                               },
                               rightIcon: AppIcons.arrowDown,
-                              dropDownArray: const ['Etiket Numarası', 'Varlık Tanımlayıcı']),
+                              dropDownArray:  [LocaleKeys.LabelNumber.tr(), LocaleKeys.IdentifierNumber.tr()]),
                           CustomHalfButtons(
                               leftTitle: Text(LocaleKeys.Clear.tr(), style: context.bodyMedium),
                               rightTitle: Text(LocaleKeys.Search.tr(), style: context.bodyMedium),

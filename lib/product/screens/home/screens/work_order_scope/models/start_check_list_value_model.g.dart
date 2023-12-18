@@ -14,3 +14,10 @@ StartCheckListValueModel _$StartCheckListValueModelFromJson(
       json['key'] as String?,
     );
 
+Map<String, dynamic> _$StartCheckListValueModelToJson(
+        StartCheckListValueModel instance) =>
+    <String, dynamic>{
+      'labels': instance.labels,
+      'id': instance.id,
+      'key': instance.key,
+    };

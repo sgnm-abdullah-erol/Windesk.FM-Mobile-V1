@@ -21,7 +21,7 @@ class ScopeCardListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: context.height - 170,
+      height: context.height - 200,      
       width: context.width,
       child: ListView.builder(
         itemCount: maintanenceModel.maintenancePlan?.first.components?.first.willBeAppliedToComponents?.length,

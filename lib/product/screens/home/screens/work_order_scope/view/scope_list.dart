@@ -43,7 +43,6 @@ class ScopeList extends StatelessWidget {
                     return Text(LocaleKeys.FetchScopeListError.tr(), style: Theme.of(context).textTheme.bodyMedium);
                   }
                   final MaintanenceModel maintanenceModel = _checkNullablitiyOfMaintenanceModel(context, result.data ?? {});
-
                   return Query(
                     options: QueryOptions(
                       document: gql(MaintenancesTaskQuery.checkListValue),
@@ -56,7 +55,6 @@ class ScopeList extends StatelessWidget {
                           context,
                           result.data ?? {},
                         );
-
                         if (!_checkMaintenancePlan(context, maintanenceModel, checkListmaintanenceModel)) {
                           snackBar(context, LocaleKeys.EmptyComponentList.tr(), 'error');
                           context.router.pop();
@@ -98,6 +96,7 @@ class ScopeList extends StatelessWidget {
   }
 
   MaintanenceModel _checkNullablitiyOfMaintenanceModel(BuildContext context, Map<String, dynamic> result) {
+    print('object1' + result.toString());
     if (result['maintenances'] == null) {
       _showSnackbar();
       context.router.pop();
@@ -114,19 +113,19 @@ class ScopeList extends StatelessWidget {
   }
 
   CheckListMaintanenceModel _checkNullablitiyOfCheckListMaintenanceModel(BuildContext context, Map<String, dynamic> result) {
-    if (result['maintenances'] == null) {
-      _showSnackbar();
-      context.router.pop();
-      return const CheckListMaintanenceModel();
-    } else {
-      if (result['maintenances'].first != null) {
-        return CheckListMaintanenceModel.fromJson(result['maintenances'][0]);
-      } else {
-        _showSnackbar();
-        context.router.pop();
-        return const CheckListMaintanenceModel();
-      }
-    }
+    return CheckListMaintanenceModel.fromJson(result['maintenances'][0]);
+    // if (result['maintenances'] == null) {
+    //   //_showSnackbar();
+    //   //context.router.pop();
+    //   return const CheckListMaintanenceModel();
+    // } else {
+    //   if (result['maintenances'].first != null) {
+    //   } else {
+    //     //_showSnackbar();
+    //     //context.router.pop();
+    //     return const CheckListMaintanenceModel();
+    //   }
+    // }
   }
 
   ScaffoldFeatureController _showSnackbar() {
