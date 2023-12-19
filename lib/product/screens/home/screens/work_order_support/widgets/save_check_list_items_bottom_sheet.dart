@@ -7,6 +7,7 @@ import 'package:vm_fm_4/core/constants/other/colors.dart';
 import 'package:vm_fm_4/core/constants/paths/service_tools.dart';
 import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
 import 'package:vm_fm_4/feature/models/work_order_scope_models/maintanence_model.dart';
+import 'package:vm_fm_4/feature/models/work_order_support_models/support_model.dart';
 import 'package:vm_fm_4/feature/service/graphql_manager.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_support/graphql_result_handling.dart';
@@ -15,8 +16,8 @@ import 'package:vm_fm_4/product/screens/home/screens/work_order_support/queries/
 
 class SaveCheckListBottomSheet extends StatelessWidget {
   const SaveCheckListBottomSheet(
-      {super.key, required this.checkListValueId, this.maintanenceList});
-  final MaintanenceModel? maintanenceList;
+      {super.key, required this.checkListValueId, this.supportList});
+  final SupportModel? supportList;
   final int checkListValueId;
 
   @override
@@ -83,7 +84,7 @@ class SaveCheckListBottomSheet extends StatelessWidget {
                               height: 45,
                               child: ElevatedButton(
                                 onPressed: () {
-                                  final data = maintanenceList
+                                  final data = supportList
                                       ?.scheduledBy
                                       ?.first
                                       .parentSchedule

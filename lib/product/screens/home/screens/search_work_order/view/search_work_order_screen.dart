@@ -26,16 +26,21 @@ class _SearchWorkOrderScreenState extends State<SearchWorkOrderScreen> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => SearchWorkOrderProvider(),
-      child: Consumer<SearchWorkOrderProvider>(builder: (context, SearchWorkOrderProvider searchProvider, child) {
+      child: Consumer<SearchWorkOrderProvider>(
+          builder: (context, SearchWorkOrderProvider searchProvider, child) {
         if (searchProvider.isSuccess) {
           if (searchProvider.woDetailList != null) {
-            context.router.push(DetailWorkOrderScreen(workSpaceDetail: searchProvider.woDetailList!));
+            context.router.push(DetailWorkOrderScreen(
+                workSpaceDetail: searchProvider.woDetailList!));
             searchProvider.clearInput();
           }
         }
 
         return Scaffold(
-          appBar: CustomMainAppbar(title: const Text(LocaleKeys.WorkOrderSearch).tr(), returnBack: true, elevation: 3),
+          appBar: CustomMainAppbar(
+              title: const Text(LocaleKeys.WorkOrderSearch).tr(),
+              returnBack: true,
+              elevation: 3),
           body: searchProvider.isLoading
               ? const CustomLoadingIndicator()
               : Center(
@@ -46,7 +51,8 @@ class _SearchWorkOrderScreenState extends State<SearchWorkOrderScreen> {
                       children: [
                         TextFieldsInputWithActionAndController(
                             textController: searchProvider.woNumber,
-                            labelText: 'İş Emri Arama',
+                            labelText:
+                                'İş Emri Arama (İş Emri Numarası Giriniz. Örn. 3235)',
                             actionIcon: AppIcons.qr,
                             actionFunction: searchProvider.scanBarcodeAndQr),
                         CustomHalfButtons(
@@ -59,7 +65,8 @@ class _SearchWorkOrderScreenState extends State<SearchWorkOrderScreen> {
                               style: TextStyle(color: Colors.white),
                             ),
                             leftOnPressed: searchProvider.clearInput,
-                            rightOnPressed: searchProvider.getWorkOrderWithSearch),
+                            rightOnPressed:
+                                searchProvider.getWorkOrderWithSearch),
                       ],
                     ),
                   ),

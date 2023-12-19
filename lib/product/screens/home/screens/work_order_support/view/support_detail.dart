@@ -12,6 +12,7 @@ import 'package:vm_fm_4/feature/components/model_bottom_sheet/add_document_modal
 import 'package:vm_fm_4/feature/components/model_bottom_sheet/add_image_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/models/work_order_scope_models/maintanence_model.dart';
+import 'package:vm_fm_4/feature/models/work_order_support_models/support_model.dart';
 import 'package:vm_fm_4/feature/service/graphql_manager.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_support/graphql_result_handling.dart';
@@ -25,8 +26,8 @@ import 'package:vm_fm_4/product/screens/home/screens/work_order_support/widgets/
 
 @RoutePage()
 class SupportDetail extends StatelessWidget {
-  const SupportDetail({super.key, this.maintanenceList, this.checkListValueModel, this.checkListSituation});
-  final MaintanenceModel? maintanenceList;
+  const SupportDetail({super.key, this.supportList, this.checkListValueModel, this.checkListSituation});
+  final SupportModel? supportList;
   final StartCheckListValueModel? checkListValueModel;
   final String? checkListSituation;
 
@@ -57,18 +58,18 @@ class SupportDetail extends StatelessWidget {
                   builder: (context, SupportProvider provider, child) {              
                     return SizedBox(
                       child: ListView.builder(
-                        itemCount: maintanenceList?.scheduledBy?.first.parentSchedule?.first.checkList?.first.includesOfCheckItems?.length,
+                        itemCount: supportList?.scheduledBy?.first.parentSchedule?.first.checkList?.first.includesOfCheckItems?.length,
                         itemBuilder: (context, index) {
                           // ignore: prefer_typing_uninitialized_variables
                           var inputVal;
                           for (var i = 0; i < resultData.length; i++) {
                             if (resultData[i]["CheckItem"].first['id'] ==
-                                maintanenceList?.scheduledBy?.first.parentSchedule?.first.checkList?.first.includesOfCheckItems?[index].id) {
+                                supportList?.scheduledBy?.first.parentSchedule?.first.checkList?.first.includesOfCheckItems?[index].id) {
                               inputVal = resultData[i]["inputValueParsed"]["value"] ?? '';
                             }
                           }
                           return CustomSupportCheckItemCard(
-                            checkItem: maintanenceList?.scheduledBy?.first.parentSchedule?.first.checkList?.first.includesOfCheckItems?[index],
+                            checkItem: supportList?.scheduledBy?.first.parentSchedule?.first.checkList?.first.includesOfCheckItems?[index],
                             provider: provider,
                             checkListValueId: checkListValueModel?.id,
                             inputValuee: inputVal ?? '',
@@ -142,7 +143,7 @@ class SupportDetail extends StatelessWidget {
                           builder: (context) {
                             return SaveCheckListBottomSheet(
                               checkListValueId: checkListValueModel?.id ?? 0,
-                              maintanenceList: maintanenceList,
+                              supportList: supportList,
                             );
                           },
                         );
@@ -170,7 +171,7 @@ class SupportDetail extends StatelessWidget {
 
   CustomMainAppbar _appbar(BuildContext context) {
     return CustomMainAppbar(
-      title: Text('${LocaleKeys.CheckList.tr()} - ${maintanenceList?.id.toString()}'),
+      title: Text('${LocaleKeys.CheckList.tr()} - ${supportList?.id.toString()}'),
       returnBack: false,
       leading: IconButton(
         icon: const Icon(AppIcons.goBackArrow),
