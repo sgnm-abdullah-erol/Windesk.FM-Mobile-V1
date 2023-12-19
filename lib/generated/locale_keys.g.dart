@@ -15,6 +15,7 @@ class LocaleKeys {
 
   // maintenance
   static const String ScopeList = 'ScopeList';
+  
   static const String CheckList = 'CheckList';
   static const String Contuniue = 'Contuniue';
   static const String Yes = 'Yes';

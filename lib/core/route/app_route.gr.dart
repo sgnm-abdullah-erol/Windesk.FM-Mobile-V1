@@ -21,6 +21,8 @@ import 'package:vm_fm_4/feature/models/home_page_models/asset_list_model.dart'
     as _i26;
 import 'package:vm_fm_4/feature/models/work_order_scope_models/maintanence_model.dart'
     as _i32;
+import 'package:vm_fm_4/feature/models/work_order_support_models/support_model.dart'
+    as _i34;
 import 'package:vm_fm_4/feature/models/work_space/work_space_appendings.dart'
     as _i31;
 import 'package:vm_fm_4/feature/models/work_space/work_space_detail.dart'
@@ -47,7 +49,7 @@ import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/view/scope
 import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/view/scope_list.dart'
     as _i14;
 import 'package:vm_fm_4/product/screens/home/screens/work_order_support/models/start_check_list_value_model.dart'
-    as _i34;
+    as _i35;
 import 'package:vm_fm_4/product/screens/home/screens/work_order_support/view/support_detail.dart'
     as _i19;
 import 'package:vm_fm_4/product/screens/home/screens/work_order_support/view/support_list.dart'
@@ -221,7 +223,7 @@ abstract class $AppRouter extends _i24.RootStackRouter {
         routeData: routeData,
         child: _i19.SupportDetail(
           key: args.key,
-          maintanenceList: args.maintanenceList,
+          supportList: args.supportList,
           checkListValueModel: args.checkListValueModel,
           checkListSituation: args.checkListSituation,
         ),
@@ -720,15 +722,15 @@ class SplashScreen extends _i24.PageRouteInfo<void> {
 class SupportDetail extends _i24.PageRouteInfo<SupportDetailArgs> {
   SupportDetail({
     _i25.Key? key,
-    _i32.MaintanenceModel? maintanenceList,
-    _i34.StartCheckListValueModel? checkListValueModel,
+    _i34.SupportModel? supportList,
+    _i35.StartCheckListValueModel? checkListValueModel,
     String? checkListSituation,
     List<_i24.PageRouteInfo>? children,
   }) : super(
           SupportDetail.name,
           args: SupportDetailArgs(
             key: key,
-            maintanenceList: maintanenceList,
+            supportList: supportList,
             checkListValueModel: checkListValueModel,
             checkListSituation: checkListSituation,
           ),
@@ -744,22 +746,22 @@ class SupportDetail extends _i24.PageRouteInfo<SupportDetailArgs> {
 class SupportDetailArgs {
   const SupportDetailArgs({
     this.key,
-    this.maintanenceList,
+    this.supportList,
     this.checkListValueModel,
     this.checkListSituation,
   });
 
   final _i25.Key? key;
 
-  final _i32.MaintanenceModel? maintanenceList;
+  final _i34.SupportModel? supportList;
 
-  final _i34.StartCheckListValueModel? checkListValueModel;
+  final _i35.StartCheckListValueModel? checkListValueModel;
 
   final String? checkListSituation;
 
   @override
   String toString() {
-    return 'SupportDetailArgs{key: $key, maintanenceList: $maintanenceList, checkListValueModel: $checkListValueModel, checkListSituation: $checkListSituation}';
+    return 'SupportDetailArgs{key: $key, supportList: $supportList, checkListValueModel: $checkListValueModel, checkListSituation: $checkListSituation}';
   }
 }
 

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 @immutable
 final class MaintenancesTaskQuery {
   static const String checkListValue = r'''
-  query CheckListValue($where: MaintenanceWhere, $statusConnectionWhere2: CheckListValueStatusConnectionWhere) {
-    maintenances(where: $where) {
+  query CheckListValue($where: SupportWhere, $statusConnectionWhere2: CheckListValueStatusConnectionWhere) {
+    supports(where: $where) {
       CheckListValue {
         id
     Component{
@@ -40,10 +40,10 @@ final class MaintenancesTaskQuery {
   }
   ''';
   static const String maintenancesTask = r'''
-    query MaintenancesTask($where: MaintenanceWhere)  {
-        maintenances(where: $where) {
+    query Support($where: SupportWhere)  {
+        supports(where: $where) {
           id
-          MaintenancePlan {
+          SupportPlan {
             Components {
               willBeAppliedToComponents {
                 componentOriginal

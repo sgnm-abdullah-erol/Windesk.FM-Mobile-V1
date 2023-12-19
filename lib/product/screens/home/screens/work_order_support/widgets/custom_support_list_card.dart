@@ -12,6 +12,7 @@ import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 import 'package:vm_fm_4/feature/models/work_order_scope_models/check_list_maintanence_model.dart';
 import 'package:vm_fm_4/feature/models/work_order_scope_models/maintanence_model.dart';
+import 'package:vm_fm_4/feature/models/work_order_support_models/support_model.dart';
 import 'package:vm_fm_4/feature/service/graphql_manager.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_support/graphql_result_handling.dart';
@@ -29,7 +30,7 @@ class CustomSupportListCard extends StatelessWidget {
     this.startDate,
     this.technician,
     this.onTap,
-    this.maintanenceModel,
+    this.supportModel,
     this.checkListmaintanenceModel,
     this.checkListSituation,
     this.refetch,
@@ -41,7 +42,7 @@ class CustomSupportListCard extends StatelessWidget {
   final String? startDate;
   final String? technician;
   final Function? onTap;
-  final MaintanenceModel? maintanenceModel;
+  final SupportModel? supportModel;
   final CheckListMaintanenceModel? checkListmaintanenceModel;
   final dynamic checkListSituation;
   final Function? refetch;
@@ -100,16 +101,16 @@ class CustomSupportListCard extends StatelessWidget {
         bgColor: APPColors.Accent.black,
         icon: AppIcons.send,
         onPressFunction: () async {
-          final component = maintanenceModel?.maintenancePlan?.first.components
+          final component = supportModel?.supportPlan?.first.components
               ?.first.willBeAppliedToComponents?.first;
           runMutation(
             MaintenancesTaskVariableQueries.checkListValueVariables(
-              maintanenceModel?.scheduledBy?.first.parentSchedule?.first
+              supportModel?.scheduledBy?.first.parentSchedule?.first
                       .checkList?.first.id ??
                   0,
               scopeId,
               component?.componentOriginal?.labels?[0] ?? '',
-              maintanenceModel?.id ?? 0,
+              supportModel?.id ?? 0,
             ),
           );
         },
@@ -129,7 +130,7 @@ class CustomSupportListCard extends StatelessWidget {
         options: QueryOptions(
           document: gql(MaintenancesTaskQuery.checkListValue2),
           variables: MaintenancesTaskVariableQueries.getCheckListValue2(
-              maintanenceModel?.id ?? 0, scopeId),
+              supportModel?.id ?? 0, scopeId),
         ),
         builder: GraphqlResultHandling.withGenericHandling(
           context,
@@ -153,7 +154,7 @@ class CustomSupportListCard extends StatelessWidget {
                     onPressFunction: () async {
                       final result = await context.router.push(
                         SupportDetail(
-                          maintanenceList: maintanenceModel,
+                          supportList: supportModel,
                           checkListValueModel: checkListValue,
                           checkListSituation: checkListSituation,
                         ),
@@ -196,8 +197,8 @@ class CustomSupportListCard extends StatelessWidget {
         _titleAndLabel(
           context,
           LocaleKeys.Date.tr(),
-          maintanenceModel
-                  ?.maintenancePlan
+          supportModel
+                  ?.supportPlan
                   ?.first
                   .components
                   ?.first
@@ -213,8 +214,8 @@ class CustomSupportListCard extends StatelessWidget {
         _titleAndLabel(
           context,
           LocaleKeys.Technician.tr(),
-          maintanenceModel
-                  ?.maintenancePlan
+          supportModel
+                  ?.supportPlan
                   ?.first
                   .components
                   ?.first
@@ -246,7 +247,7 @@ class CustomSupportListCard extends StatelessWidget {
       isScrollControlled: true,
       context: context,
       builder: (context) => AlertCheckListBottomSheet(
-        maintanenceModel: maintanenceModel ?? const MaintanenceModel(),
+        supportModel: supportModel ?? const SupportModel(),
         startCheckListValue: startCheckListValue,
       ),
     );

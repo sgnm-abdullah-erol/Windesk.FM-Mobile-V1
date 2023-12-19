@@ -5,6 +5,7 @@ import 'package:vm_fm_4/core/constants/other/app_icons.dart';
 import 'package:vm_fm_4/core/constants/other/colors.dart';
 import 'package:vm_fm_4/core/route/app_route.gr.dart';
 import 'package:vm_fm_4/feature/models/work_order_scope_models/maintanence_model.dart';
+import 'package:vm_fm_4/feature/models/work_order_support_models/support_model.dart';
 import 'package:vm_fm_4/feature/service/graphql_manager.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_support/models/start_check_list_value_model.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_support/queries/maintenances_task_queries.dart';
@@ -13,10 +14,10 @@ import 'package:vm_fm_4/product/screens/home/screens/work_order_support/queries/
 class AlertCheckListBottomSheet extends StatelessWidget {
   const AlertCheckListBottomSheet(
       {super.key,
-      required this.maintanenceModel,
+      required this.supportModel,
       required this.startCheckListValue});
 
-  final MaintanenceModel maintanenceModel;
+  final SupportModel supportModel;
   final StartCheckListValueModel startCheckListValue;
 
   @override
@@ -29,7 +30,7 @@ class AlertCheckListBottomSheet extends StatelessWidget {
           update: (GraphQLDataProxy cache, QueryResult? result) {},
           onCompleted: (dynamic resultData) async {
             context.router.push(SupportDetail(
-                maintanenceList: maintanenceModel,
+                supportList: supportModel,
                 checkListValueModel: startCheckListValue));
           },
         ),
@@ -39,14 +40,14 @@ class AlertCheckListBottomSheet extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text(maintanenceModel.scheduledBy?.first.parentSchedule?.first
+                Text(supportModel.scheduledBy?.first.parentSchedule?.first
                         .checkList?.first.hasRegulations?.first.name ??
                     ''),
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                   child: Flexible(
                     child: Text(
-                      maintanenceModel
+                      supportModel
                               .scheduledBy
                               ?.first
                               .parentSchedule
@@ -82,7 +83,7 @@ class AlertCheckListBottomSheet extends StatelessWidget {
                             MaintenancesTaskVariableQueries
                                 .acceptRegulationMessageInput(
                               startCheckListValue.id ?? 0,
-                              maintanenceModel
+                              supportModel
                                       .scheduledBy
                                       ?.first
                                       .parentSchedule
