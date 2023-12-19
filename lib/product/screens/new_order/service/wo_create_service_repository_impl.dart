@@ -81,7 +81,7 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
   Future<Either<List<WoCreateTypeModel>, CustomServiceException>> getType(token) async {
     List<WoCreateTypeModel> woCreateTypeModel = [];
 
-    String url = '${ServiceTools.url.workorder_url}/task/task/find/task/types/related/with/workspace/535?page=1&limit=100';
+    String url = '${ServiceTools.url.workorder_url}/task/task/find/task/types/related/with/workspace/707?page=1&limit=100&orderBy=undefined';
     final response = await super.dio.get(
           url,
           options: Options(

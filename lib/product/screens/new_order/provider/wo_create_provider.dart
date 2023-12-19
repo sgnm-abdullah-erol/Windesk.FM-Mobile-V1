@@ -326,7 +326,7 @@ class WoCreateProvider extends ChangeNotifier {
     notifyListeners();
     for (var i = 0; i < (_getRequestedTypes.length); i++) {
       if (_getRequestedTypes[i].name == newValue) {
-        isChildrenExist = _getRequestedTypes[i].children!.isNotEmpty ? true : false;
+        isChildrenExist = _getRequestedTypes[i].children?.isNotEmpty ?? true;
         _requestTypeKey = _getRequestedTypes[i].code.toString();
         _requestedTypeTree1 = !isChildrenExist;
         notifyListeners();

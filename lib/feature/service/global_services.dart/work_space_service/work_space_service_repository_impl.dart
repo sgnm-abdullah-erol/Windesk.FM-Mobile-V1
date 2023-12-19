@@ -1163,11 +1163,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
         "key": key
       }
     });
-    print({
-      "id": id,
-      "labels": [labels],
-      "key": key,
-    });
 
     try {
       final response = await super.dio.post(
@@ -1177,10 +1172,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
               headers: {'authorization': 'Bearer $token'},
             ),
           );
-
       super.logger.i(response);
-      print(response.toString());
-
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
         if (data['success'] == true || data['code'] == 200) {

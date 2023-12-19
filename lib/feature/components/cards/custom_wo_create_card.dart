@@ -39,13 +39,13 @@ class WoCreateCard extends StatelessWidget {
         ? Row(
             children: [
               Expanded(flex: 15, child: widget),
-              Expanded(flex: 1, child: Text('*', style: TextStyle(color: APPColors.Main.red, fontSize: 10)))
+              Expanded(flex: 1, child: Text('*', style: TextStyle(color: APPColors.Main.red, fontSize: 13)))
             ],
           )
         : Row(
             children: [
               Expanded(flex: 15, child: widget),
-              Expanded(flex: 1, child: Text('', style: TextStyle(color: APPColors.Main.red, fontSize: 10)))
+              Expanded(flex: 1, child: Text('', style: TextStyle(color: APPColors.Main.red, fontSize: 13)))
             ],
           );
   }
