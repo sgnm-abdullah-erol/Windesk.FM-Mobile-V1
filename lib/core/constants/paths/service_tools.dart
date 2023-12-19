@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:vm_fm_4/core/enums/task_response_enums.dart';
 
 @immutable
 class ServiceTools {
@@ -12,8 +13,7 @@ class ServiceTools {
   static const String tokenV1 = 'wddemo!_';
   static const String tokenV2 = 'demo!';
   static const String attachPath = "http://10.126.12.21/esh/";
-  static const String attachPathLive =
-      "http://10.32.12.42/windesktest/xreadattach.php?token=$tokenV1&id=";
+  static const String attachPathLive = "http://10.32.12.42/windesktest/xreadattach.php?token=$tokenV1&id=";
   static const String facilityName = "İstanbul Finans Merkezi";
   static const bool isWorkOrderExist = true;
 
@@ -27,8 +27,7 @@ class ServiceTools {
         users_url: "https://user-server.ifm.gov.tr",
         asset_url: "https://asset-server.ifm.gov.tr",
         workorder_url: "https://workorder-server.ifm.gov.tr",
-        generalGraphql_url:
-            "https://workorder-server.ifm.gov.tr/general-graphql",
+        generalGraphql_url: "https://workorder-server.ifm.gov.tr/general-graphql",
         graphql_url: "https://workorder-server.ifm.gov.tr/graphql",
       );
     } else {

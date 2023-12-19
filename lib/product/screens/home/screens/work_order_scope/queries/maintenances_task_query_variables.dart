@@ -57,7 +57,7 @@ final class MaintenancesTaskVariableQueries {
       "createCheckItemValueInput": {
         "checkItemId": checkItemId,
         "checkListValueId": checkListValueId,
-        "inputValue": {"value" : inputValue},
+        "inputValue": {"value": inputValue},
       }
     };
   }
@@ -86,9 +86,19 @@ final class MaintenancesTaskVariableQueries {
 
   static Map<String, dynamic> checkListValues(int checkListValueId) {
     return {
-    "where": {
-    "id": checkListValueId
+      "where": {"id": checkListValueId}
+    };
   }
-};
+
+  static Map<String, dynamic> getDocumentValues(int taskId, int checkListValueId) {
+    return {
+      "where": {
+        "id": taskId,
+      },
+      "statusConnectionWhere2": {
+        "edge": {"isDeleted": false}
+      },
+      "checkListValueWhere2": {"id": checkListValueId},
+    };
   }
 }

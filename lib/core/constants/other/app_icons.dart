@@ -30,7 +30,6 @@ class AppIcons {
 
   // DROPDOWN INPUT ICON
   static const IconData arrowDown = Icons.keyboard_arrow_down;
-
   static const IconData addPhoto = Icons.add_a_photo;
 
   // PASSWORD INPUT ICON
@@ -59,14 +58,16 @@ class AppIcons {
   static const IconData darkMode = Icons.dark_mode;
   static const IconData lightMode = Icons.light_mode;
 
-  // Work Order Icons
+  // Scope Icons
   static const IconData okay = Icons.done;
   static const IconData clear = Icons.clear;
   static const IconData send = Icons.send;
   static const IconData eventList = Icons.checklist_outlined;
   static const IconData save = Icons.save;
   static const IconData workHistory = Icons.work_history;
+  static const IconData history = Icons.history;
 
   // arrows
   static const IconData goBackArrow = Icons.arrow_back;
+
 }
