@@ -32,6 +32,7 @@ class LocaleKeys {
   static const String RequiredField = 'RequiredField';
   static const String Browse = 'Browse';
   static const String CompletedChecklist = 'CompletedChecklist';
+
 // support
   static const String SupportList = 'SupportList';
 

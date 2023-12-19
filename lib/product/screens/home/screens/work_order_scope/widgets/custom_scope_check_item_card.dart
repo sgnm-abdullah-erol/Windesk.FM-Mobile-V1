@@ -71,7 +71,7 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
                       Text(widget.checkItem?.isRequired == true ? '*Zorunlu Alan' : '', style: TextStyle(color: APPColors.Main.red, fontSize: 10))),
               SizedBox(
                 width: context.width,
-                height: context.height / 7,
+                height: context.height / 5,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -79,7 +79,7 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
-                          flex:5,
+                          flex: 5,
                           child: Text(
                             widget.checkItem?.name ?? '',
                             style: Theme.of(context).textTheme.bodyMedium,
@@ -113,7 +113,7 @@ class _CustomScopeCheckItemCardState extends State<CustomScopeCheckItemCard> wit
 
   Expanded _saveButton(RunMutation<dynamic> runMutation) {
     return Expanded(
-      flex:2,
+      flex: 2,
       child: Row(
         children: [
           IconButton(

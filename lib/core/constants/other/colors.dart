@@ -48,7 +48,7 @@ extension APPColorsExtension on APPColors {
       case APPColors.TracingNumber:
         return const Color(0xff44B6C8);
       case APPColors.Clear:
-        return const Color(0xff21ADE4);
+        return Color.fromARGB(255, 13, 19, 22);
       case APPColors.Filter:
         return const Color(0xff98D6EE);
       default:
