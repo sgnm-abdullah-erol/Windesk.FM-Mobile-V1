@@ -142,24 +142,30 @@ class DetailWorkOrderScreen extends StatelessWidget {
                                               iconColor: APPColors.Main.white,
                                             )
                                           : const SizedBox(),
-                                  woDetailProvider.detail.task?.labels?[1] ==
-                                          'Support'
-                                      ? CustomElevatedButtonWithIcon(
-                                          onPressFunction: () =>
-                                              context.router.push(
-                                            route.SupportList(
-                                                taskId: woDetailProvider
-                                                        .detail.task?.id
-                                                        .toString() ??
-                                                    ''),
-                                          ),
-                                          bgColor: APPColors.Accent.black,
-                                          icon: AppIcons.eventList,
-                                          textValue: LocaleKeys.support.tr(),
-                                          textColor: APPColors.Main.white,
-                                          iconColor: APPColors.Main.white,
-                                        )
-                                      : const SizedBox(),
+                                  (woDetailProvider.detail.task?.userId ??
+                                              '') !=
+                                          context.read<GlobalProvider>().userId
+                                      ? const SizedBox()
+                                      : woDetailProvider
+                                                  .detail.task?.labels?[1] ==
+                                              'Support'
+                                          ? CustomElevatedButtonWithIcon(
+                                              onPressFunction: () =>
+                                                  context.router.push(
+                                                route.SupportList(
+                                                    taskId: woDetailProvider
+                                                            .detail.task?.id
+                                                            .toString() ??
+                                                        ''),
+                                              ),
+                                              bgColor: APPColors.Accent.black,
+                                              icon: AppIcons.eventList,
+                                              textValue:
+                                                  LocaleKeys.support.tr(),
+                                              textColor: APPColors.Main.white,
+                                              iconColor: APPColors.Main.white,
+                                            )
+                                          : const SizedBox(),
                                   const SizedBox(height: 20),
                                   (woDetailProvider.detail.task?.userId ??
                                               '') !=
@@ -187,7 +193,8 @@ class DetailWorkOrderScreen extends StatelessWidget {
     );
   }
 
-  List<AccordionSection> _filterAcordionList(BuildContext context, WorkOrderDetailProvider woDetailProvider) {
+  List<AccordionSection> _filterAcordionList(
+      BuildContext context, WorkOrderDetailProvider woDetailProvider) {
     return woDetailProvider.detail.task?.labels?[1] == 'MaterialRequest'
         ? [
             _accordionSection(
@@ -210,15 +217,43 @@ class DetailWorkOrderScreen extends StatelessWidget {
           ]
         : woDetailProvider.detail.task?.labels?[1] == 'Maintenance'
             ? [
-                _accordionSection(context, LocaleKeys.Document.tr(), AddDocumantAccordion(provider: woDetailProvider), AppIcons.photoAlbum),
-                _accordionSection(context, LocaleKeys.Notes.tr(), AddNotesAccordion(provider: woDetailProvider), AppIcons.note),
+                _accordionSection(
+                    context,
+                    LocaleKeys.Document.tr(),
+                    AddDocumantAccordion(provider: woDetailProvider),
+                    AppIcons.photoAlbum),
+                _accordionSection(
+                    context,
+                    LocaleKeys.Notes.tr(),
+                    AddNotesAccordion(provider: woDetailProvider),
+                    AppIcons.note),
               ]
             : [
-                _accordionSection(context, LocaleKeys.Effort.tr(), AddEffortsAccordion(provider: woDetailProvider), AppIcons.insightsRounded),
-                _accordionSection(context, LocaleKeys.Material.tr(), AddMaterialAccordion(provider: woDetailProvider), AppIcons.warehouse),
-                _accordionSection(context, LocaleKeys.RequestMaterial.tr(), RequestMaterialAccordion(provider: woDetailProvider), AppIcons.tool),
-                _accordionSection(context, LocaleKeys.Document.tr(), AddDocumantAccordion(provider: woDetailProvider), AppIcons.photoAlbum),
-                _accordionSection(context, LocaleKeys.Notes.tr(), AddNotesAccordion(provider: woDetailProvider), AppIcons.note),
+                _accordionSection(
+                    context,
+                    LocaleKeys.Effort.tr(),
+                    AddEffortsAccordion(provider: woDetailProvider),
+                    AppIcons.insightsRounded),
+                _accordionSection(
+                    context,
+                    LocaleKeys.Material.tr(),
+                    AddMaterialAccordion(provider: woDetailProvider),
+                    AppIcons.warehouse),
+                _accordionSection(
+                    context,
+                    LocaleKeys.RequestMaterial.tr(),
+                    RequestMaterialAccordion(provider: woDetailProvider),
+                    AppIcons.tool),
+                _accordionSection(
+                    context,
+                    LocaleKeys.Document.tr(),
+                    AddDocumantAccordion(provider: woDetailProvider),
+                    AppIcons.photoAlbum),
+                _accordionSection(
+                    context,
+                    LocaleKeys.Notes.tr(),
+                    AddNotesAccordion(provider: woDetailProvider),
+                    AppIcons.note),
               ];
   }
 

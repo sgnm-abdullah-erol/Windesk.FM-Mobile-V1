@@ -434,6 +434,7 @@ class WoCreateProvider extends ChangeNotifier {
             {
               _woSpaceListChildren.add(
                   '${_woSpaceList.children?[i].architecturalCode}-${_woSpaceList.children?[i].name}'),
+              //                  '${_woSpaceList.children?[i].code}-${_woSpaceList.children?[i].name}'),
             }
         },
         (r) => {},

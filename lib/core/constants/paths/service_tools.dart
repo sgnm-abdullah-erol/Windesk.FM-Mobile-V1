@@ -13,7 +13,8 @@ class ServiceTools {
   static const String tokenV1 = 'wddemo!_';
   static const String tokenV2 = 'demo!';
   static const String attachPath = "http://10.126.12.21/esh/";
-  static const String attachPathLive = "http://10.32.12.42/windesktest/xreadattach.php?token=$tokenV1&id=";
+  static const String attachPathLive =
+      "http://10.32.12.42/windesktest/xreadattach.php?token=$tokenV1&id=";
   static const String facilityName = "İstanbul Finans Merkezi";
   static const bool isWorkOrderExist = true;
 

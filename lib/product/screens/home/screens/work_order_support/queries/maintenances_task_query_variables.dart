@@ -24,7 +24,7 @@ final class MaintenancesTaskVariableQueries {
       "where": {
         "AND": [
           {
-            "MaintenanceTask_ALL": {"id": taskId},
+            "SupportTask_ALL": {"id": taskId},
             "Component_ALL": {"id": scopeId},
           }
         ]
@@ -32,7 +32,8 @@ final class MaintenancesTaskVariableQueries {
     };
   }
 
-  static Map<String, dynamic> checkListValueVariables(int checkListValueId, int scopeId, String scopeLabel, int taskId) {
+  static Map<String, dynamic> checkListValueVariables(
+      int checkListValueId, int scopeId, String scopeLabel, int taskId) {
     return {
       "startCheckListValueInput": {
         "checkListId": checkListValueId,
@@ -43,7 +44,8 @@ final class MaintenancesTaskVariableQueries {
     };
   }
 
-  static Map<String, dynamic> acceptRegulationMessageInput(int checkListValueId, int regulationId) {
+  static Map<String, dynamic> acceptRegulationMessageInput(
+      int checkListValueId, int regulationId) {
     return {
       "acceptRegulationMessageInput": {
         "checkListValueId": checkListValueId,
@@ -52,18 +54,24 @@ final class MaintenancesTaskVariableQueries {
     };
   }
 
-  static Map<String, dynamic> createCheckItemValueInput(int checkItemId, int checkListValueId, String? inputValue) {
+  static Map<String, dynamic> createCheckItemValueInput(
+      int checkItemId, int checkListValueId, String? inputValue) {
     return {
       "createCheckItemValueInput": {
         "checkItemId": checkItemId,
         "checkListValueId": checkListValueId,
-        "inputValue": {"value" : inputValue},
+        "inputValue": {"value": inputValue},
       }
     };
   }
 
   static Map<String, dynamic> submitChecklistValueEffortInput(
-      int checkListValueId, String startDate, String endDate, String effortDuration, String effortType, String? description) {
+      int checkListValueId,
+      String startDate,
+      String endDate,
+      String effortDuration,
+      String effortType,
+      String? description) {
     return {
       "submitChecklistValueEffortInput": [
         {
@@ -78,17 +86,19 @@ final class MaintenancesTaskVariableQueries {
     };
   }
 
-  static Map<String, dynamic> updateCheckListValueStatusInput(int checkListValueId) {
+  static Map<String, dynamic> updateCheckListValueStatusInput(
+      int checkListValueId) {
     return {
-      "updateCheckListValueStatusInput": {"checkListValueId": checkListValueId, "status": "Finished"}
+      "updateCheckListValueStatusInput": {
+        "checkListValueId": checkListValueId,
+        "status": "Finished"
+      }
     };
   }
 
   static Map<String, dynamic> checkListValues(int checkListValueId) {
     return {
-    "where": {
-    "id": checkListValueId
-  }
-};
+      "where": {"id": checkListValueId}
+    };
   }
 }

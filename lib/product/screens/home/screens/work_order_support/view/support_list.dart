@@ -50,7 +50,8 @@ class SupportList extends StatelessWidget {
                   final SupportModel supportModel =
                       _checkNullablitiyOfMaintenanceModel(
                           context, result.data ?? {});
-
+                  print('İÇeri');
+                  print(supportModel);
                   return Query(
                     options: QueryOptions(
                       document: gql(MaintenancesTaskQuery.checkListValue),
@@ -60,7 +61,9 @@ class SupportList extends StatelessWidget {
                     ),
                     builder: GraphqlResultHandling.withGenericHandling(context,
                         (QueryResult result, {refetch, fetchMore}) {
-                      final CheckListMaintanenceModel
+                      print('BURDA : ');
+                      print(result);
+                      final CheckListMaintanenceModel?
                           checkListmaintanenceModel =
                           _checkNullablitiyOfCheckListMaintenanceModel(
                         context,
@@ -110,38 +113,30 @@ class SupportList extends StatelessWidget {
 
   SupportModel _checkNullablitiyOfMaintenanceModel(
       BuildContext context, Map<String, dynamic> result) {
-    print('Result' + result.toString());
-    if (result['supports'] == null) {
-      //_showSnackbar();
-      //context.router.pop();
-      return const SupportModel();
+    final model = SupportModel.fromJson(result['supports'][0]);
+    print('İÇ İÇ ');
+    print(model);
+    if (model.supportPlan == null ||
+        model.supportPlan!.isEmpty ||
+        model.supportPlan!.first.components == null ||
+        model.supportPlan!.first.components!.isEmpty) {
+      return SupportModel();
     } else {
-      if (result['supports'].first != null) {
-        return SupportModel.fromJson(result['supports'][0]);
-      } else {
-        //_showSnackbar();
-        //context.router.pop();
-        return const SupportModel();
-      }
+      return SupportModel.fromJson(result['supports'][0]);
     }
   }
 
-  CheckListMaintanenceModel _checkNullablitiyOfCheckListMaintenanceModel(
+  CheckListMaintanenceModel? _checkNullablitiyOfCheckListMaintenanceModel(
       BuildContext context, Map<String, dynamic> result) {
-    print('Result2' + result.toString());
-
-    if (result['supports'] == null) {
-      // _showSnackbar();
-      // context.router.pop();
-      return const CheckListMaintanenceModel();
+    print('KONTROL MATİK2 : ');
+    print(result);
+    final model = CheckListMaintanenceModel.fromJson(result['supports'][0]);
+    print('KONTROL MATİK : ');
+    print(model);
+    if (model.checkListValue == null || model.checkListValue!.isEmpty) {
+      return null;
     } else {
-      if (result['supports'].first != null) {
-        return CheckListMaintanenceModel.fromJson(result['supports'][0]);
-      } else {
-        // _showSnackbar();
-        // context.router.pop();
-        return const CheckListMaintanenceModel();
-      }
+      return CheckListMaintanenceModel.fromJson(result['supports'][0]);
     }
   }
 

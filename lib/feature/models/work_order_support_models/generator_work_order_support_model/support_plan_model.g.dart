@@ -8,16 +8,16 @@ part of '../support_plan_model.dart';
 
 SupportPlanModel _$SupportPlanModelFromJson(Map<String, dynamic> json) =>
     SupportPlanModel(
-      components: (json['components'] as List<dynamic>?)
+      components: (json['Components'] as List<dynamic>?)
           ?.map((e) => ComponentModel.fromJson(e as Map<String, dynamic>))
           .toList(),
-      facilityStructures: json['facilityStructures'] as List<dynamic>?,
-      systems: json['systems'] as List<dynamic>?,
+      facilityStructures: json['FacilityStructures'] as List<dynamic>?,
+      systems: json['Systems'] as List<dynamic>?,
     );
 
 Map<String, dynamic> _$SupportPlanModelToJson(SupportPlanModel instance) =>
     <String, dynamic>{
-      'components': instance.components,
-      'facilityStructures': instance.facilityStructures,
-      'systems': instance.systems,
+      'Components': instance.components,
+      'FacilityStructures': instance.facilityStructures,
+      'Systems': instance.systems,
     };

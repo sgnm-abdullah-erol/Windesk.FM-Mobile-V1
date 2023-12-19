@@ -29,6 +29,8 @@ class AlertCheckListBottomSheet extends StatelessWidget {
           document: gql(MaintenancesTaskQuery.acceptRegulationMessage),
           update: (GraphQLDataProxy cache, QueryResult? result) {},
           onCompleted: (dynamic resultData) async {
+            print('RSULT DATA : ');
+            print(resultData);
             context.router.push(SupportDetail(
                 supportList: supportModel,
                 checkListValueModel: startCheckListValue));
@@ -79,6 +81,19 @@ class AlertCheckListBottomSheet extends StatelessWidget {
                       height: 45,
                       child: ElevatedButton(
                         onPressed: () {
+                          print('GELENLER 1 : ');
+                          print(startCheckListValue.id);
+                          print('GELENLER : ');
+                          print(supportModel
+                              .scheduledBy
+                              ?.first
+                              .parentSchedule
+                              ?.first
+                              .checkList
+                              ?.first
+                              .hasRegulations
+                              ?.first
+                              .id);
                           runMutation(
                             MaintenancesTaskVariableQueries
                                 .acceptRegulationMessageInput(

@@ -8,19 +8,21 @@ import 'package:vm_fm_4/product/screens/home/screens/work_order_support/widgets/
 class SupportCardListScreen extends StatelessWidget {
   const SupportCardListScreen({
     super.key,
-    required this.checkListmaintanenceModel,
+    this.checkListmaintanenceModel,
     required this.supportModel,
     required this.taskId,
     this.refetchFunction,
   });
 
   final SupportModel supportModel;
-  final CheckListMaintanenceModel checkListmaintanenceModel;
+  final CheckListMaintanenceModel? checkListmaintanenceModel;
   final String taskId;
   final Function? refetchFunction;
 
   @override
   Widget build(BuildContext context) {
+    print('SAY : ');
+    print(supportModel.supportPlan);
     return SizedBox(
       height: context.height - 170,
       width: context.width,
@@ -30,17 +32,25 @@ class SupportCardListScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           final item = supportModel.supportPlan?.first.components?.first
               .willBeAppliedToComponents?[index];
-          String? checkListSituation;
-          for (var i = 0;
-              i < checkListmaintanenceModel.checkListValue!.length;
-              i++) {
-            if (checkListmaintanenceModel.checkListValue?[i].component?[0]
-                    ['id'] ==
-                item?.id) {
-              checkListSituation = checkListmaintanenceModel
-                  .checkListValue?[i].statusConnection?.edges?[0].node?.code;
+          String? checkListSituation = '';
+          var total = checkListmaintanenceModel?.checkListValue!.length ?? 0;
+          if (checkListmaintanenceModel != null) {
+            print('CHECK LİST MAN MODEL : ');
+            print(checkListmaintanenceModel);
+            for (var i = 0; i < total; i++) {
+              if (checkListmaintanenceModel?.checkListValue?[i].component?[0]
+                      ['id'] ==
+                  item?.id) {
+                print('GİRD KONTRO');
+                checkListSituation = checkListmaintanenceModel
+                    ?.checkListValue?[i].statusConnection?.edges?[0].node?.code;
+              }
             }
           }
+
+          print('SİTATİON : ');
+          print(checkListSituation);
+          
           return CustomSupportListCard(
             controlList: item?.componentOriginal?.properties?.className ?? '',
             name: item?.componentOriginal?.properties?.name ?? '',

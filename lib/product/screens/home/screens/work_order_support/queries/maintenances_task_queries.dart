@@ -100,12 +100,12 @@ final class MaintenancesTaskQuery {
     ''';
 
   static const String startCheckListValueInput = r'''
-    mutation StartCheckListValue($startCheckListValueInput: StartCheckListValueInput!) {
-      startCheckListValue(startCheckListValueInput: $startCheckListValueInput) {
-        id
-        labels
-      }
-    }
+    mutation StartCheckListValueForSupport($startCheckListValueInput: StartCheckListValueInput!) {
+  startCheckListValueForSupport(startCheckListValueInput: $startCheckListValueInput) {
+       id
+      labels
+  }
+}
     ''';
 
   static const String acceptRegulationMessage = r'''

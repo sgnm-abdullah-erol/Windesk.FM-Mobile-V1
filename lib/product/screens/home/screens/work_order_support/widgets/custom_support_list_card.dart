@@ -56,6 +56,8 @@ class CustomSupportListCard extends StatelessWidget {
           document: gql(MaintenancesTaskQuery.startCheckListValueInput),
           update: (GraphQLDataProxy cache, QueryResult? result) {},
           onCompleted: (Map<String, dynamic>? resultData) async {
+            print('result');
+            print(resultData);
             StartCheckListValueModel? model =
                 _setStartCheckListValue(resultData);
             if (model != null) {
@@ -101,12 +103,12 @@ class CustomSupportListCard extends StatelessWidget {
         bgColor: APPColors.Accent.black,
         icon: AppIcons.send,
         onPressFunction: () async {
-          final component = supportModel?.supportPlan?.first.components
-              ?.first.willBeAppliedToComponents?.first;
+          final component = supportModel?.supportPlan?.first.components?.first
+              .willBeAppliedToComponents?.first;
           runMutation(
             MaintenancesTaskVariableQueries.checkListValueVariables(
-              supportModel?.scheduledBy?.first.parentSchedule?.first
-                      .checkList?.first.id ??
+              supportModel?.scheduledBy?.first.parentSchedule?.first.checkList
+                      ?.first.id ??
                   0,
               scopeId,
               component?.componentOriginal?.labels?[0] ?? '',
@@ -123,6 +125,8 @@ class CustomSupportListCard extends StatelessWidget {
 
   GraphQLProvider _continueButton(BuildContext context,
       RunMutation<dynamic> runMutation, String checkListSituation) {
+    print('Contin gridi');
+    print(scopeId);
     return GraphQLProvider(
       client: GraphQLManager.getClient(
           HttpLink(ServiceTools.url.generalGraphql_url)),
@@ -135,6 +139,8 @@ class CustomSupportListCard extends StatelessWidget {
         builder: GraphqlResultHandling.withGenericHandling(
           context,
           (QueryResult result, {refetch, fetchMore}) {
+            print('RESULTTT : ');
+            print(result);
             if (result.data == null && !result.hasException) {
               return Text(LocaleKeys.FetchScopeListError.tr(),
                   style: Theme.of(context).textTheme.bodyMedium);
