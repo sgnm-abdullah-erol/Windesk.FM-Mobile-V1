@@ -156,7 +156,6 @@ class ScopeDetail extends StatelessWidget {
                             );
                           },
                         );
-
                         if (response == true) {
                           // ignore: use_build_context_synchronously
                           Navigator.of(screenContext).pop<bool>(true);
