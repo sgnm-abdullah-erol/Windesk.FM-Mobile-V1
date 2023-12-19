@@ -35,8 +35,9 @@ class NewOrderScreen extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => WoCreateProvider()),
         ChangeNotifierProvider(create: (context) => SearchWorkOrderProvider()),
       ],
-      child: Consumer2<WoCreateProvider, SearchWorkOrderProvider>(
-          builder: (context, WoCreateProvider woCreateProvider, SearchWorkOrderProvider searchWorkOrderProvider, child) {
+      child: Consumer2<WoCreateProvider, SearchWorkOrderProvider>(builder:
+          (context, WoCreateProvider woCreateProvider,
+              SearchWorkOrderProvider searchWorkOrderProvider, child) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (woCreateProvider.isWorkOrderCreate) {
             snackBar(context, SnackbarStrings.woCreate, 'success');
@@ -48,7 +49,8 @@ class NewOrderScreen extends StatelessWidget {
                     LocaleKeys.NewWorkOrderCreated.tr(),
                     style: const TextStyle(fontSize: 14),
                   ),
-                  content: Text("${LocaleKeys.WorkOrderNumber.tr()} ${woCreateProvider.isWorkOrderCreatedId}"),
+                  content: Text(
+                      "${LocaleKeys.WorkOrderNumber.tr()} ${woCreateProvider.isWorkOrderCreatedId}"),
                   actions: [
                     TextButton(
                       child: Text(LocaleKeys.Okey.tr()),
@@ -59,7 +61,9 @@ class NewOrderScreen extends StatelessWidget {
                     TextButton(
                       child: Text(LocaleKeys.SeeDetail.tr()),
                       onPressed: () {
-                        searchWorkOrderProvider.getWorkSpaceWithSearchFromGroupWorks(dialogContext, woCreateProvider.isWorkOrderCreatedId);
+                        searchWorkOrderProvider
+                            .getWorkSpaceWithSearchFromGroupWorks(dialogContext,
+                                woCreateProvider.isWorkOrderCreatedId);
                       },
                     ),
                   ],
@@ -73,17 +77,28 @@ class NewOrderScreen extends StatelessWidget {
         });
         //woCreateProvider.isWorkOrderCreate ? snackBar(context, SnackbarStrings.woCreate, 'success') : null;
         //woCreateProvider.createTaskError ? snackBar(context, SnackbarStrings.woCreateError, 'error') : null;
-        woCreateProvider.locationLoading ? woCreateProvider.getLocation() : null;
-        woCreateProvider.requestedLoading ? woCreateProvider.getRequestedByPro() : null;
+        woCreateProvider.locationLoading
+            ? woCreateProvider.getLocation()
+            : null;
+        woCreateProvider.requestedLoading
+            ? woCreateProvider.getRequestedByPro()
+            : null;
         woCreateProvider.typeLoading ? woCreateProvider.getType() : null;
-        woCreateProvider.requestedTypeLoading ? woCreateProvider.getRequestedType() : null;
-        woCreateProvider.categoryLoading ? woCreateProvider.getCategory() : null;
-        woCreateProvider.componentLoading ? woCreateProvider.getComponent() : null;
+        woCreateProvider.requestedTypeLoading
+            ? woCreateProvider.getRequestedType()
+            : null;
+        woCreateProvider.categoryLoading
+            ? woCreateProvider.getCategory()
+            : null;
+        woCreateProvider.componentLoading
+            ? woCreateProvider.getComponent()
+            : null;
         return woCreateProvider.isLoading
             ? const CustomLoadingIndicator()
             : WillPopScope(
                 child: Scaffold(
-                  appBar: CustomMainAppbar(title: Text(LocaleKeys.NewWorkOrder.tr())),
+                  appBar: CustomMainAppbar(
+                      title: Text(LocaleKeys.NewWorkOrder.tr())),
                   body: SingleChildScrollView(
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
@@ -104,7 +119,8 @@ class NewOrderScreen extends StatelessWidget {
                               widget3: DropdownSearch<String>(
                                 items: woCreateProvider.getComponentsChildren,
                                 onChanged: (value) {
-                                  woCreateProvider.setComponent(value.toString());
+                                  woCreateProvider
+                                      .setComponent(value.toString());
                                 },
                                 selectedItem: LocaleKeys.Component.tr(),
                                 popupProps: const PopupProps.menu(
@@ -125,7 +141,8 @@ class NewOrderScreen extends StatelessWidget {
                                   woCreateProvider.setRequestedBy(newValue);
                                 },
                                 rightIcon: Icons.arrow_drop_down_rounded,
-                                dropDownArray: woCreateProvider.getRequestedByChildren,
+                                dropDownArray:
+                                    woCreateProvider.getRequestedByChildren,
                               ),
                               widget2: DropDownInputFields(
                                 labelText: LocaleKeys.Type.tr(),
@@ -133,7 +150,8 @@ class NewOrderScreen extends StatelessWidget {
                                   woCreateProvider.setType(newValue);
                                 },
                                 rightIcon: Icons.arrow_drop_down_rounded,
-                                dropDownArray: woCreateProvider.getTypesChildren,
+                                dropDownArray:
+                                    woCreateProvider.getTypesChildren,
                               ),
                               widget3: DropDownInputFields(
                                 labelText: LocaleKeys.Category.tr(),
@@ -141,7 +159,8 @@ class NewOrderScreen extends StatelessWidget {
                                   woCreateProvider.setCategory(newValue);
                                 },
                                 rightIcon: Icons.arrow_drop_down_rounded,
-                                dropDownArray: woCreateProvider.getCategoriesChildren,
+                                dropDownArray:
+                                    woCreateProvider.getCategoriesChildren,
                               ),
                               widget1Required: true,
                               widget2Required: true,
@@ -164,7 +183,8 @@ class NewOrderScreen extends StatelessWidget {
                                   woCreateProvider.setidate = date;
                                 },
                                 initialDate: DateTime.now(),
-                                lastDate: DateTime.now().add(const Duration(days: 30)),
+                                lastDate: DateTime.now()
+                                    .add(const Duration(days: 30)),
                               ),
                               widget2: TextFieldTimePicker(
                                 label: LocaleKeys.AppointmentHour.tr(),
@@ -186,11 +206,16 @@ class NewOrderScreen extends StatelessWidget {
                                 LocaleKeys.Save.tr(),
                                 style: TextStyle(color: APPColors.Main.white),
                               ),
-                              leftOnPressed: () {},
+                              leftOnPressed: () {
+                                woCreateProvider.setAllClear();
+                              },
                               rightOnPressed: () {
                                 woCreateProvider.selectedLeafIsTrue
                                     ? woCreateProvider.createTask(context)
-                                    : snackBar(context, SnackbarStrings.woCreateErrorLocation, 'error');                                
+                                    : snackBar(
+                                        context,
+                                        SnackbarStrings.woCreateErrorLocation,
+                                        'error');
                               },
                             )
                           ],
@@ -205,7 +230,8 @@ class NewOrderScreen extends StatelessWidget {
     );
   }
 
-  Container requestType(WoCreateProvider woCreateProvider, BuildContext context) {
+  Container requestType(
+      WoCreateProvider woCreateProvider, BuildContext context) {
     return Container(
       width: context.width,
       padding: const EdgeInsets.all(10),
@@ -229,7 +255,8 @@ class NewOrderScreen extends StatelessWidget {
                     woCreateProvider.setRequestType1(newValue);
                   },
                   rightIcon: Icons.arrow_drop_down_rounded,
-                  dropDownArray: woCreateProvider.getRequestedTypesChildrenTree1,
+                  dropDownArray:
+                      woCreateProvider.getRequestedTypesChildrenTree1,
                   leftIconExist: true,
                   leftIcon: Icons.arrow_right_alt,
                 ),

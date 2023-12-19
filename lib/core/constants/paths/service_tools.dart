@@ -29,6 +29,14 @@ class ServiceTools {
         workorder_url: "https://workorder-server.ifm.gov.tr",
         generalGraphql_url: "https://workorder-server.ifm.gov.tr/general-graphql",
         graphql_url: "https://workorder-server.ifm.gov.tr/graphql",
+
+        // facility_url: "http://138.201.186.190:30052",
+        // location_url: "http://138.201.186.190:30052",
+        // users_url: "http://138.201.186.190:30054",
+        // asset_url: "http://138.201.186.190:30051",
+        // workorder_url: "http://138.201.186.190:30056",
+        // generalGraphql_url: "http://138.201.186.190:30056/general-graphql",
+        // graphql_url: "http://138.201.186.190:30056/graphql",
       );
     } else {
       return const Url(
