@@ -368,6 +368,9 @@ class LocaleKeys {
   static const String ControlList = 'ControlList';
   static const String Technician = 'Technician';
   static const String Date = 'Date';
+  static const String Description = 'Description';
+  static const String TotalTime = 'Total Time';
+
 
   // // static String const ----------MAİNTENANCE---------- = '----------MAİNTENANCE----------';
   // static const Manage Check List = 'Manage Check List';
@@ -1129,7 +1132,6 @@ class LocaleKeys {
   // static const Virtual Warehouse = 'Virtual Warehouse';
   // static const Vehicle Warehouse = 'Vehicle Warehouse';
   // static const Created Date = 'Created Date';
-  // static const Total Time = 'Total Time';
   // static const No Check Items = 'No Check Items';
   // static const Deleting All Notifications... = 'Deleting All Notifications...';
   // static const Please Wait = 'Please Wait';
@@ -1165,7 +1167,6 @@ class LocaleKeys {
   // static const Spare Parts = 'Spare Parts';
   // static const Unit = 'Unit';
   // static const Error = 'Error';
-  // static const Description = 'Description';
   // static const Other = 'Other';
   // static const Email = 'Email';
   // static const Company = 'Company';
