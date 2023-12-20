@@ -12,6 +12,7 @@ import 'package:vm_fm_4/feature/components/model_bottom_sheet/add_document_modal
 import 'package:vm_fm_4/feature/components/model_bottom_sheet/add_image_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/components/model_bottom_sheet/added_documents_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/components/model_bottom_sheet/added_documents_modal_bottom_sheet_support.dart';
+import 'package:vm_fm_4/feature/components/model_bottom_sheet/added_effots_modal_bottom_sheet_support.dart';
 import 'package:vm_fm_4/feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/models/work_order_scope_models/maintanence_model.dart';
 import 'package:vm_fm_4/feature/models/work_order_support_models/support_model.dart';
@@ -133,6 +134,19 @@ class SupportDetail extends StatelessWidget {
                     elevation: 8.0,
                     shape: const CircleBorder(),
                     children: [
+                      _speedDialChild(
+                          context,
+                          AppIcons.workHistory,
+                          LocaleKeys.AddedEfforts.tr(),
+                          APPColors.Secondary.blue, () {
+                        ShowModalBottomSheet().show(
+                          context,
+                          AddedEffortsModalBottomSheetSupport(
+                            taskId: supportList?.id ?? 0,
+                            checkListValueId: checkListValueModel?.id ?? 0,
+                          ),
+                        );
+                      }),
                       _speedDialChild(
                           context,
                           AppIcons.history,

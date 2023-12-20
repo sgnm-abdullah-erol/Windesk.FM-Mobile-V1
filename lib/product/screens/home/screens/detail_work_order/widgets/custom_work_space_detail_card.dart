@@ -153,7 +153,7 @@ class _TaskName extends StatelessWidget {
   final WorkSpaceDetail workSpaceDetail;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {  
     return Text(
       workSpaceDetail.task?.name ?? '',
       style: context.labelMedium.copyWith(color: APPColors.Main.black),

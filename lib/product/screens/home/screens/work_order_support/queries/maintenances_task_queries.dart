@@ -173,4 +173,28 @@ final class MaintenancesTaskQuery {
     }
   }
     ''';
+
+  static const String getEffortsQuery = r'''
+  query CheckListValue($where: SupportWhere, $statusConnectionWhere2: CheckListValueStatusConnectionWhere, $checkListValueWhere2: CheckListValueWhere) {
+    supports(where: $where) {
+      CheckListValue(where: $checkListValueWhere2) {
+        id
+        StatusConnection(where: $statusConnectionWhere2) {
+          edges {
+            node {
+              code
+            }
+          }
+        }
+      Effort {
+        description
+        effortDuration
+        startDate
+        endDate
+        effortType
+      }
+      }
+    }
+  }
+    ''';
 }
