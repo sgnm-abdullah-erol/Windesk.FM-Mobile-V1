@@ -64,8 +64,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
     String url =
         '${ServiceTools.url.workorder_url}/task/one/task/state/List/with/user/approver/date/hour/second/status/$id';
     super.logger.wtf(url);
-    print(id);
-    print(token);
     final response = await super.dio.get(
           url,
           options: Options(
@@ -1034,7 +1032,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       getGroupWorkOrders(String userToken, String language) async {
     String url =
         '${ServiceTools.url.workorder_url}/task/workSpace/task/state/List/can/be/assigned/user/pagination/swagger?page=1&limit=8&orderBy=DESC&orderByColumn%5B0%5D=updatedAt';
-    print(url);
     List<WorkSpaceDetail> workSpaceDetailList = [];
     try {
       final response = await super.dio.get(

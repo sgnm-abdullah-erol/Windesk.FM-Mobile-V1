@@ -52,7 +52,6 @@ class AddEffortsModalBottomSheet extends StatelessWidget {
                 else{
                   snackBar(context, LocaleKeys.EffortAddedError.tr(), 'error');
                 }
-                //context.router.push(ScopeDetail(maintanenceList: maintanenceModel, checkListValueModel: startCheckListValue));
               },
             ),
             builder: (RunMutation runMutation, QueryResult? result) {

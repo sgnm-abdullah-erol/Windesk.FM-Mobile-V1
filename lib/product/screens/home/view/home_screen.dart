@@ -63,7 +63,6 @@ class _HomeScreenState extends State<HomeScreen> {
             }
             if (homeProvider.isUserLogout) {
               snackBar(context, LocaleKeys.LogoutSuccess.tr(), 'success');
-              print(context.read<GlobalProvider>().userName);
               context.router.popAndPush(LoginScreen(userName: context.read<GlobalProvider>().userName));
             }
           });

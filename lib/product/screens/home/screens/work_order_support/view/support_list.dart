@@ -5,7 +5,6 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:vm_fm_4/core/constants/paths/service_tools.dart';
 import 'package:vm_fm_4/feature/components/appbar/custom_main_appbar.dart';
 import 'package:vm_fm_4/feature/models/work_order_scope_models/check_list_maintanence_model.dart';
-import 'package:vm_fm_4/feature/models/work_order_scope_models/maintanence_model.dart';
 import 'package:vm_fm_4/feature/models/work_order_support_models/support_model.dart';
 import 'package:vm_fm_4/feature/service/graphql_manager.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
@@ -50,8 +49,6 @@ class SupportList extends StatelessWidget {
                   final SupportModel supportModel =
                       _checkNullablitiyOfMaintenanceModel(
                           context, result.data ?? {});
-                  print('İÇeri');
-                  print(supportModel);
                   return Query(
                     options: QueryOptions(
                       document: gql(MaintenancesTaskQuery.checkListValue),
@@ -61,20 +58,13 @@ class SupportList extends StatelessWidget {
                     ),
                     builder: GraphqlResultHandling.withGenericHandling(context,
                         (QueryResult result, {refetch, fetchMore}) {
-                      print('BURDA : ');
-                      print(result);
+
                       final CheckListMaintanenceModel?
                           checkListmaintanenceModel =
                           _checkNullablitiyOfCheckListMaintenanceModel(
                         context,
                         result.data ?? {},
                       );
-
-                      // if (!_checkMaintenancePlan(context, maintanenceModel, checkListmaintanenceModel)) {
-                      //   snackBar(context, LocaleKeys.EmptyComponentList.tr(), 'error');
-                      //   //context.router.pop();
-                      //   return Container();
-                      // } else {
                       return SupportCardListScreen(
                         supportModel: supportModel,
                         checkListmaintanenceModel: checkListmaintanenceModel,
@@ -82,7 +72,6 @@ class SupportList extends StatelessWidget {
                         refetchFunction: refetch,
                       );
                     }
-                        //},
                         ),
                   );
                 },
@@ -94,33 +83,14 @@ class SupportList extends StatelessWidget {
     );
   }
 
-  bool _checkMaintenancePlan(BuildContext context, MaintanenceModel model,
-      CheckListMaintanenceModel checkListmaintanenceModel) {
-    bool goScopeList = true;
-
-    if ((checkListmaintanenceModel.checkListValue?.isEmpty ?? false) ||
-        (model.maintenancePlan?.isEmpty ?? false) ||
-        (model.maintenancePlan?.first.components?.isEmpty ?? false)) {
-      // cannot go to scope list
-      goScopeList = false;
-    } else {
-      // can go to scope list
-      goScopeList = true;
-    }
-
-    return goScopeList;
-  }
-
   SupportModel _checkNullablitiyOfMaintenanceModel(
       BuildContext context, Map<String, dynamic> result) {
     final model = SupportModel.fromJson(result['supports'][0]);
-    print('İÇ İÇ ');
-    print(model);
     if (model.supportPlan == null ||
         model.supportPlan!.isEmpty ||
         model.supportPlan!.first.components == null ||
         model.supportPlan!.first.components!.isEmpty) {
-      return SupportModel();
+      return const SupportModel();
     } else {
       return SupportModel.fromJson(result['supports'][0]);
     }
@@ -128,24 +98,11 @@ class SupportList extends StatelessWidget {
 
   CheckListMaintanenceModel? _checkNullablitiyOfCheckListMaintenanceModel(
       BuildContext context, Map<String, dynamic> result) {
-    print('KONTROL MATİK2 : ');
-    print(result);
     final model = CheckListMaintanenceModel.fromJson(result['supports'][0]);
-    print('KONTROL MATİK : ');
-    print(model);
     if (model.checkListValue == null || model.checkListValue!.isEmpty) {
       return null;
     } else {
       return CheckListMaintanenceModel.fromJson(result['supports'][0]);
     }
-  }
-
-  ScaffoldFeatureController _showSnackbar() {
-    return ScaffoldMessenger.of(_scaffoldKey.currentContext!).showSnackBar(
-      SnackBar(
-        content: Text(LocaleKeys.FetchScopeListError.tr()),
-        duration: const Duration(seconds: 2),
-      ),
-    );
   }
 }

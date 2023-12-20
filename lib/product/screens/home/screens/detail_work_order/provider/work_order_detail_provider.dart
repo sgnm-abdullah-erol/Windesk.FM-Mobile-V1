@@ -478,7 +478,6 @@ class WorkOrderDetailProvider extends ChangeNotifier {
 
   // TODO model olarak yazilmasi lazim
   Future<void> getTaskHistory(taskId) async {
-    print('helloooo');
     _isTaskHistoryLoading = false;
     final String token = await SharedManager().getString(SharedEnum.userToken);
     if (token.isNotEmpty) {
@@ -499,7 +498,6 @@ class WorkOrderDetailProvider extends ChangeNotifier {
         _taskHistoryData = dataList;
         notifyListeners();
       }, (r) {
-        print('asdasdasd$r');
       });
     }
     _isLoading = false;

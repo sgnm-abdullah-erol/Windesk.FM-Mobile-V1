@@ -182,8 +182,6 @@ class CustomScopeListCard extends StatelessWidget {
         ),
       ),
     );
-    //final component = maintanenceModel?.maintenancePlan?.first.components?.first.willBeAppliedToComponents?.first.componentOriginal;
-    //context.router.push(ScopeDetail(maintanenceList: maintanenceModel, checkListValueId: checkListValueId));
   }
 
   Column _columnChilds(BuildContext context) {

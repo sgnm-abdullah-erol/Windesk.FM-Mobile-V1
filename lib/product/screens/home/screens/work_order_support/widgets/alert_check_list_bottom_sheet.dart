@@ -4,7 +4,6 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:vm_fm_4/core/constants/other/app_icons.dart';
 import 'package:vm_fm_4/core/constants/other/colors.dart';
 import 'package:vm_fm_4/core/route/app_route.gr.dart';
-import 'package:vm_fm_4/feature/models/work_order_scope_models/maintanence_model.dart';
 import 'package:vm_fm_4/feature/models/work_order_support_models/support_model.dart';
 import 'package:vm_fm_4/feature/service/graphql_manager.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_support/models/start_check_list_value_model.dart';
@@ -79,19 +78,6 @@ class AlertCheckListBottomSheet extends StatelessWidget {
                       height: 45,
                       child: ElevatedButton(
                         onPressed: () {
-                          print('GELENLER 1 : ');
-                          print(startCheckListValue.id);
-                          print('GELENLER : ');
-                          print(supportModel
-                              .scheduledBy
-                              ?.first
-                              .parentSchedule
-                              ?.first
-                              .checkList
-                              ?.first
-                              .hasRegulations
-                              ?.first
-                              .id);
                           runMutation(
                             MaintenancesTaskVariableQueries
                                 .acceptRegulationMessageInput(

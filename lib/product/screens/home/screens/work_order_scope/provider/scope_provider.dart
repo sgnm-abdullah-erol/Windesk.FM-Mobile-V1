@@ -138,7 +138,6 @@ class ScopeProvider extends ChangeNotifier {
 
     response.fold(
       (l) => {
-        print('asdsadasdads'),
         Navigator.of(context).pop<bool>(true),
         snackBar(context, LocaleKeys.PhotoAdded.tr(), 'success'),
       },

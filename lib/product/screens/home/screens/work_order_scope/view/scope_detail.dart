@@ -34,9 +34,6 @@ class ScopeDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('checklistvalue');
-    print(checkListValueModel);
-
     return GraphQLProvider(
       client: GraphQLManager.getClient(HttpLink(ServiceTools.url.generalGraphql_url)),
       child: Query(

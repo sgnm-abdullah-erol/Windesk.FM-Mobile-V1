@@ -128,7 +128,7 @@ class _TestScreenState extends State<TestScreen> {
           Expanded(
             flex: 4,
             child: Padding(
-              padding: EdgeInsets.only(top: 25),
+              padding: const EdgeInsets.only(top: 25),
               child: Column(
                 children: [
                   const Text(

@@ -191,7 +191,6 @@ class CustomWorkOrderListCard extends StatelessWidget {
   }
 
   Flexible _codeAndStatusWidget(BuildContext context) {
-    print(workSpaceDetail.state?.name.toString().length);
     return Flexible(
       child: SizedBox(
         width: context.width,

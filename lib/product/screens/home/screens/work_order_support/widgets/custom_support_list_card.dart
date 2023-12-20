@@ -11,7 +11,6 @@ import 'package:vm_fm_4/feature/components/buttons/custom_elevated_button_with_i
 import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 import 'package:vm_fm_4/feature/models/work_order_scope_models/check_list_maintanence_model.dart';
-import 'package:vm_fm_4/feature/models/work_order_scope_models/maintanence_model.dart';
 import 'package:vm_fm_4/feature/models/work_order_support_models/support_model.dart';
 import 'package:vm_fm_4/feature/service/graphql_manager.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
@@ -56,8 +55,6 @@ class CustomSupportListCard extends StatelessWidget {
           document: gql(MaintenancesTaskQuery.startCheckListValueInput),
           update: (GraphQLDataProxy cache, QueryResult? result) {},
           onCompleted: (Map<String, dynamic>? resultData) async {
-            print('result');
-            print(resultData);
             StartCheckListValueModel? model =
                 _setStartCheckListValue(resultData);
             if (model != null) {
@@ -105,11 +102,6 @@ class CustomSupportListCard extends StatelessWidget {
         onPressFunction: () async {
           final component = supportModel?.supportPlan?.first.components?.first
               .willBeAppliedToComponents?.first;
-          print(supportModel
-              ?.scheduledBy?.first.parentSchedule?.first.checkList?.first.id);
-          print(scopeId);
-          print(component?.componentOriginal?.labels?[0]);
-          print(supportModel?.id);
           runMutation(
             MaintenancesTaskVariableQueries.checkListValueVariables(
               supportModel?.scheduledBy?.first.parentSchedule?.first.checkList
@@ -130,8 +122,6 @@ class CustomSupportListCard extends StatelessWidget {
 
   GraphQLProvider _continueButton(BuildContext context,
       RunMutation<dynamic> runMutation, String checkListSituation) {
-    print('Contin gridi');
-    print(scopeId);
     return GraphQLProvider(
       client: GraphQLManager.getClient(
           HttpLink(ServiceTools.url.generalGraphql_url)),
@@ -144,8 +134,6 @@ class CustomSupportListCard extends StatelessWidget {
         builder: GraphqlResultHandling.withGenericHandling(
           context,
           (QueryResult result, {refetch, fetchMore}) {
-            print('RESULTTT : ');
-            print(result);
             if (result.data == null && !result.hasException) {
               return Text(LocaleKeys.FetchScopeListError.tr(),
                   style: Theme.of(context).textTheme.bodyMedium);
@@ -194,8 +182,6 @@ class CustomSupportListCard extends StatelessWidget {
         ),
       ),
     );
-    //final component = maintanenceModel?.maintenancePlan?.first.components?.first.willBeAppliedToComponents?.first.componentOriginal;
-    //context.router.push(ScopeDetail(maintanenceList: maintanenceModel, checkListValueId: checkListValueId));
   }
 
   Column _columnChilds(BuildContext context) {
@@ -283,8 +269,6 @@ class CustomSupportListCard extends StatelessWidget {
       Map<String, dynamic>? data) {
     if (data != null || data?['startCheckListValueForSupport'] != null) {
       final checkListData = data?['startCheckListValueForSupport'];
-      print('checkListData');
-      print(data);
       StartCheckListValueModel model =
           StartCheckListValueModel.fromJson(checkListData);
       return model;

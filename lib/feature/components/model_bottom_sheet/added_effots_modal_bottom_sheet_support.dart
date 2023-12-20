@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:url_launcher/link.dart';
 import 'package:vm_fm_4/core/constants/other/colors.dart';
 import 'package:vm_fm_4/core/constants/paths/service_tools.dart';
 import 'package:vm_fm_4/core/constants/style/custom_paddings.dart';
@@ -11,7 +10,6 @@ import 'package:vm_fm_4/generated/locale_keys.g.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_support/queries/maintenances_task_queries.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_support/queries/maintenances_task_query_variables.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_support/graphql_result_handling.dart';
-import 'package:url_launcher/link.dart' as link;
 
 class AddedEffortsModalBottomSheetSupport extends StatelessWidget {
   const AddedEffortsModalBottomSheetSupport(
