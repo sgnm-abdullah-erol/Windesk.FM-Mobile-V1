@@ -86,4 +86,16 @@ class TimeClass {
 
     return hDisplay + mDisplay + sDisplay;
   }
+
+  String convertDateToLocal(String dateee) {
+    if (dateee != '') {
+      final String dateString = dateee;
+      DateTime utcDateTime = DateTime.parse(dateString);
+      DateTime localDateTime = utcDateTime.toLocal();
+      String formattedDate = DateFormat.yMd().add_Hms().format(localDateTime);
+      return formattedDate;
+    } else {
+      return '';
+    }
+  }
 }

@@ -4,6 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:vm_fm_4/core/constants/other/app_icons.dart';
+import 'package:vm_fm_4/core/constants/other/time_functions.dart';
 import 'package:vm_fm_4/core/constants/style/box_decorations.dart';
 import 'package:vm_fm_4/core/route/app_route.gr.dart';
 import 'package:vm_fm_4/feature/components/model_bottom_sheet/change_location_leaf_model_bottom_sheet.dart';
@@ -66,9 +67,9 @@ class CustomWorkSpaceDetailCard extends StatelessWidget {
                 firstLabel: LocaleKeys.OpenDate.tr(),
                 secondLabel: LocaleKeys.UpdateDate.tr(),
                 thirdLabel: LocaleKeys.EndDate.tr(),
-                firstValue: workOrderDetailProvider.dateModel.startDate ?? '',
-                secondValue: workOrderDetailProvider.dateModel.endDate ?? '',
-                thirdValue: workOrderDetailProvider.dateModel.updateDate ?? '',
+                firstValue: TimeClass().convertDateToLocal(workOrderDetailProvider.dateModel.startDate ?? ''),
+                secondValue: TimeClass().convertDateToLocal(workOrderDetailProvider.dateModel.endDate ?? ''),
+                thirdValue: TimeClass().convertDateToLocal(workOrderDetailProvider.dateModel.updateDate ?? ''),
               ),
               const CustomWoSummaryDivider(),
               const SizedBox(height: 10),
