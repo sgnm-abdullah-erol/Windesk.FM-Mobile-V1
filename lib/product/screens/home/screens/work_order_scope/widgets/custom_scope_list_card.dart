@@ -257,12 +257,16 @@ class CustomScopeListCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(title,
-            maxLines: 1,
-            style: context.bodyMedium.copyWith(color: APPColors.Main.black)),
-        Text(label,
-            maxLines: 1,
-            style: context.bodySmall.copyWith(color: APPColors.Main.black)),
+        Expanded(
+          flex:1,
+          child: Text(title,
+              style: context.bodyMedium.copyWith(color: APPColors.Main.black, overflow: TextOverflow.fade)),
+        ),
+        Expanded(
+          flex:2,
+          child: Text(label,
+              style: context.bodySmall.copyWith(color: APPColors.Main.black,overflow: TextOverflow.fade)),
+        ),
       ],
     );
   }

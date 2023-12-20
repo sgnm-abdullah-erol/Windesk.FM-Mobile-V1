@@ -11,6 +11,7 @@ import 'package:vm_fm_4/feature/components/appbar/custom_main_appbar.dart';
 import 'package:vm_fm_4/feature/components/model_bottom_sheet/add_document_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/components/model_bottom_sheet/add_image_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/components/model_bottom_sheet/added_documents_modal_bottom_sheet.dart';
+import 'package:vm_fm_4/feature/components/model_bottom_sheet/added_efforts_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/components/show_modal_bottom_folder/show_modal_bottom_sheet.dart';
 import 'package:vm_fm_4/feature/models/work_order_scope_models/maintanence_model.dart';
 import 'package:vm_fm_4/feature/service/graphql_manager.dart';
@@ -100,6 +101,15 @@ class ScopeDetail extends StatelessWidget {
                     elevation: 8.0,
                     shape: const CircleBorder(),
                     children: [
+                    _speedDialChild(context, AppIcons.workHistory, LocaleKeys.AddedEfforts.tr(), APPColors.Secondary.blue, () {
+                        ShowModalBottomSheet().show(
+                          context,
+                          AddedEffortsModalBottomSheet(
+                            taskId: maintanenceList?.id ?? 0,
+                            checkListValueId: checkListValueModel?.id ?? 0,
+                          ),
+                        );
+                      }),
                       _speedDialChild(context, AppIcons.history, LocaleKeys.AddedDocumants.tr(), APPColors.TracingNumber.blue, () {
                         ShowModalBottomSheet().show(
                           context,
