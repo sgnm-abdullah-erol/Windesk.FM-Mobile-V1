@@ -105,6 +105,11 @@ class CustomSupportListCard extends StatelessWidget {
         onPressFunction: () async {
           final component = supportModel?.supportPlan?.first.components?.first
               .willBeAppliedToComponents?.first;
+          print(supportModel
+              ?.scheduledBy?.first.parentSchedule?.first.checkList?.first.id);
+          print(scopeId);
+          print(component?.componentOriginal?.labels?[0]);
+          print(supportModel?.id);
           runMutation(
             MaintenancesTaskVariableQueries.checkListValueVariables(
               supportModel?.scheduledBy?.first.parentSchedule?.first.checkList
@@ -276,8 +281,10 @@ class CustomSupportListCard extends StatelessWidget {
 
   StartCheckListValueModel? _setStartCheckListValue(
       Map<String, dynamic>? data) {
-    if (data != null || data?['startCheckListValue'] != null) {
-      final checkListData = data?['startCheckListValue'];
+    if (data != null || data?['startCheckListValueForSupport'] != null) {
+      final checkListData = data?['startCheckListValueForSupport'];
+      print('checkListData');
+      print(data);
       StartCheckListValueModel model =
           StartCheckListValueModel.fromJson(checkListData);
       return model;
