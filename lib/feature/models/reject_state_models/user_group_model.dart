@@ -17,6 +17,9 @@ class UserGroupModel extends Equatable {
 
   factory UserGroupModel.fromJson(Map<String, dynamic> json) => _$UserGroupModelFromJson(json);
 
+  // to json map
+  Map<String, dynamic> toJson() => _$UserGroupModelToJson(this);
+
   @override
   List<Object?> get props => [
         id,

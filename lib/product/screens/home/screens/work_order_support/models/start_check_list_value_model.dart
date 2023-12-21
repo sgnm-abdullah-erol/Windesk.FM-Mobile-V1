@@ -13,6 +13,9 @@ class StartCheckListValueModel extends Equatable {
 
   factory StartCheckListValueModel.fromJson(Map<String, dynamic> json) => _$StartCheckListValueModelFromJson(json);
 
+  // to json
+  Map<String, dynamic> toJson() => _$StartCheckListValueModelToJson(this);
+
   @override
   List<Object?> get props => [labels, id, key];
 }

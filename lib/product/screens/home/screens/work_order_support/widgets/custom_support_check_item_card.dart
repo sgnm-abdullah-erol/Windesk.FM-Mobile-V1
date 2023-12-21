@@ -154,6 +154,5 @@ class _CustomSupportCheckItemCardState extends State<CustomSupportCheckItemCard>
   }
   
   @override
-  // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 }

@@ -26,7 +26,7 @@ class SplashProvider extends ChangeNotifier {
   bool _isUserAlreadyLoggedIn = false;
   bool get isUserAlreadyLoggedIn => _isUserAlreadyLoggedIn;
 
-  void _getDeviceInformation() async {
+  Future<void> _getDeviceInformation() async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
 
     String? deviceId;
@@ -54,7 +54,7 @@ class SplashProvider extends ChangeNotifier {
     }
   }
 
-  void _getFirebaseInformation() async {
+  Future<void> _getFirebaseInformation() async {
     FirebaseMessaging messaging = FirebaseMessaging.instance;
     String? firebaseToken = await messaging.getToken();
     if (firebaseToken == null) return;
@@ -77,47 +77,43 @@ class SplashProvider extends ChangeNotifier {
 
   void checkUserAlreadyLoggedIn(BuildContext context) async {
     await SharedManager().initInstances();
-    _getDeviceInformation();
-    // _getFirebaseInformation();
+    await _getDeviceInformation();
+    await _getFirebaseInformation();
 
-    final bool rememberMe = await SharedManager().getBool(SharedEnum.rememberMe);
+    final String userName = await SharedManager().getString(SharedEnum.userName);
 
-    if (rememberMe) {
-      final String userName = await SharedManager().getString(SharedEnum.userName);
-
-      if (userName.isNotEmpty) {
-        final String userToken = await SharedManager().getString(SharedEnum.userToken);
-        await _authService.checkAccessToken(userToken).then((value) {
-          value.fold((l) {
-            if (l.isTokenValid == true) {
-              _isUserAlreadyLoggedIn = true;
-            } else {
-              _isUserAlreadyLoggedIn = false;
-            }
-          }, (r) {
+    if (userName.isNotEmpty) {
+      final String userToken = await SharedManager().getString(SharedEnum.userToken);
+      await _authService.checkAccessToken(userToken).then((value) {
+        value.fold((l) {
+          if (l.isTokenValid == true) {
+            _isUserAlreadyLoggedIn = true;
+          } else {
             _isUserAlreadyLoggedIn = false;
-          });
+          }
+        }, (r) {
+          _isUserAlreadyLoggedIn = false;
         });
+      });
 
-        // set global properties
-        String userName = await SharedManager().getString(SharedEnum.userName);
-        String userId = await SharedManager().getString(SharedEnum.userId);
-        String userTokenn = await SharedManager().getString(SharedEnum.userToken);
+      // set global properties
+      String userName = await SharedManager().getString(SharedEnum.userName);
+      String userId = await SharedManager().getString(SharedEnum.userId);
+      String userTokenn = await SharedManager().getString(SharedEnum.userToken);
 
-        context.read<GlobalProvider>().setUserName(userName);
-        context.read<GlobalProvider>().setUserId(userId);
-        context.read<GlobalProvider>().setGlobalUserToken(userTokenn);
-
-      } else {
-        _isUserAlreadyLoggedIn = false;
-      }
+      context.read<GlobalProvider>().setUserName(userName);
+      context.read<GlobalProvider>().setUserId(userId);
+      context.read<GlobalProvider>().setGlobalUserToken(userTokenn);
     } else {
       _isUserAlreadyLoggedIn = false;
     }
   }
 
-  void setSplashFinished(BuildContext context) {
+  void setSplashFinished(BuildContext context) async {
+    if (_isSplashFinished == true) {}
+
     if (_isSplashFinished == true) return;
+
     checkUserAlreadyLoggedIn(context);
 
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -126,6 +122,10 @@ class SplashProvider extends ChangeNotifier {
         _isSplashFinished = true;
         notifyListeners();
       }
+    });
+
+    Future.delayed(const Duration(seconds: 1), () {
+      _isSplashFinished = false;
     });
   }
 }

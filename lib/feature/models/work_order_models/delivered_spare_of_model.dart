@@ -31,6 +31,8 @@ class DeliveredSpareOfModel extends Equatable {
   // list json
   static List<DeliveredSpareOfModel> fromJsonList(List<dynamic> jsonList) => jsonList.map((e) => DeliveredSpareOfModel.fromJson(e)).toList();
 
+  // to json
+  Map<String, dynamic> toJson() => _$DeliveredSpareOfModelToJson(this);
   @override
   List<Object?> get props => [
         id,

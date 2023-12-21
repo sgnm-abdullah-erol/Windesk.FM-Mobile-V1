@@ -35,6 +35,8 @@ class RejectStateModel extends Equatable {
     return json.map((e) => RejectStateModel.fromJson(e)).toList();
   }
 
+  Map<String, dynamic> toJson() => _$RejectStateModelToJson(this);
+
   @override
   List<Object?> get props => [
         isDefault,

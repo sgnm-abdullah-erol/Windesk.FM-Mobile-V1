@@ -50,9 +50,13 @@ class WorkOrderListProvider extends ChangeNotifier {
     notifyListeners();
     final result = await workSpaceService.getMyWorkSpaces('swagger', userToken, 1, localization);
 
-    result.fold((l) {
-      _myWorkSpaceDetails = l;
-    }, (r) {});
+    result.fold(
+      (l) {
+        _myWorkSpaceDetails = l;
+        debugPrint('My Work Orders: ${l.first}');
+      },
+      (r) {},
+    );
 
     _isMyWorkOrdersDataFetched = true;
     _isLoading = false;
