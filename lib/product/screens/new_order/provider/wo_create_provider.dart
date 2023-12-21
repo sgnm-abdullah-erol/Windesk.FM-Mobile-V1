@@ -259,9 +259,14 @@ class WoCreateProvider extends ChangeNotifier {
   }
 
   void setAllClear() {
-    // setSummary('');
-    // setDescription('');
+    setSummary('');
+    setDescription('');
+    woBlockListChildren.clear();
+    woFloorListChildren.clear();
+    woSpaceListChildren.clear();
+    getRequestedTypesChildrenTree1.clear();
 
+    getLocation();
     notifyListeners();
   }
 

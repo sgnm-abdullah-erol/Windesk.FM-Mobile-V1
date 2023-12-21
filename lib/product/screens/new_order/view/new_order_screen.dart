@@ -319,7 +319,7 @@ class NewOrderScreen extends StatelessWidget {
                         leftIconExist: true,
                         leftIcon: Icons.arrow_right_alt,
                       )
-                    : const CustomLoadingIndicator2(),
+                    : Container(),
               )),
           Padding(
               padding: CustomPaddings.onlyLeft * 3,
@@ -338,7 +338,7 @@ class NewOrderScreen extends StatelessWidget {
                         leftIconExist: true,
                         leftIcon: Icons.arrow_right_alt,
                       )
-                    : const CustomLoadingIndicator2(),
+                    : Container(),
               )),
           Padding(
               padding: CustomPaddings.onlyLeft * 4.5,
@@ -355,7 +355,7 @@ class NewOrderScreen extends StatelessWidget {
                         leftIconExist: true,
                         leftIcon: Icons.arrow_right_alt,
                       )
-                    : const CustomLoadingIndicator2(),
+                    : Container(),
               )),
         ],
       ),

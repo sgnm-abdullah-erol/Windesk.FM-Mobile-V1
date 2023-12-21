@@ -22,21 +22,22 @@ class ServiceTools {
   static Url get url {
     if (_isProduction) {
       return const Url(
-        // facility_url: "https://facility-server.ifm.gov.tr",
-        // location_url: "https://facility-server.ifm.gov.tr",
-        // users_url: "https://user-server.ifm.gov.tr",
-        // asset_url: "https://asset-server.ifm.gov.tr",
-        // workorder_url: "https://workorder-server.ifm.gov.tr",
-        // generalGraphql_url: "https://workorder-server.ifm.gov.tr/general-graphql",
-        // graphql_url: "https://workorder-server.ifm.gov.tr/graphql",
+        facility_url: "https://facility-server.ifm.gov.tr",
+        location_url: "https://facility-server.ifm.gov.tr",
+        users_url: "https://user-server.ifm.gov.tr",
+        asset_url: "https://asset-server.ifm.gov.tr",
+        workorder_url: "https://workorder-server.ifm.gov.tr",
+        generalGraphql_url:
+            "https://workorder-server.ifm.gov.tr/general-graphql",
+        graphql_url: "https://workorder-server.ifm.gov.tr/graphql",
 
-        facility_url: "http://138.201.186.190:30052",
-        location_url: "http://138.201.186.190:30052",
-        users_url: "http://138.201.186.190:30054",
-        asset_url: "http://138.201.186.190:30051",
-        workorder_url: "http://138.201.186.190:30056",
-        generalGraphql_url: "http://138.201.186.190:30056/general-graphql",
-        graphql_url: "http://138.201.186.190:30056/graphql",
+        // facility_url: "http://138.201.186.190:30052",
+        // location_url: "http://138.201.186.190:30052",
+        // users_url: "http://138.201.186.190:30054",
+        // asset_url: "http://138.201.186.190:30051",
+        // workorder_url: "http://138.201.186.190:30056",
+        // generalGraphql_url: "http://138.201.186.190:30056/general-graphql",
+        // graphql_url: "http://138.201.186.190:30056/graphql",
       );
     } else {
       return const Url(
