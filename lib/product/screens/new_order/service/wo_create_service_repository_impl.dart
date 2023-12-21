@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_default_ws_user.dart';
+import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_work_space_model.dart';
 
 import '../../../../core/constants/paths/service_tools.dart';
 import '../../../../feature/exceptions/custom_service_exceptions.dart';
@@ -244,7 +245,6 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
     String url = '${ServiceTools.url.workorder_url}/workspace/getDefaultWorkSpaceOfUser/$userKey';
 
     try {
-    
     final response = await super.dio.get(
           url,
           options: Options(
@@ -261,4 +261,29 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
       return Right(CustomServiceException(message: CustomServiceMessages.tokenChangeError, statusCode: '400'));
     }
   }
+
+  @override
+  Future<Either<WoCreateWorkSpaceModel, CustomServiceException>> getWorkFlows(token, workSpaceId) async {
+    WoCreateWorkSpaceModel woCreateWorkFlowModel;
+    String url = '${ServiceTools.url.workorder_url}/workflows/workspace/$workSpaceId?page=1&limit=1000&orderBy=ASC';
+
+    try {
+    final response = await super.dio.get(
+          url,
+          options: Options(
+            headers: {'authorization': 'Bearer $token'},
+          ),
+        );
+    final data = response.data;
+    woCreateWorkFlowModel = WoCreateWorkSpaceModel.fromJson(data);
+    super.logger.e(woCreateWorkFlowModel);
+    return Left(woCreateWorkFlowModel);
+  
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.tokenChangeError, statusCode: '400'));
+    }
+  }
+
+  
 }

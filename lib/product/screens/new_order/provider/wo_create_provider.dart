@@ -555,15 +555,11 @@ class WoCreateProvider extends ChangeNotifier {
     WoCreateDefaultWsUser woCreateDefaultWsUser;
     final userKey = context.read<GlobalProvider>().userId;
     final token = await SharedManager().getString(SharedEnum.userToken);
-
     final response = await _woCreateServiceRepository.getDefaultWorkSpaceOfUser(token, userKey);
-
-
+    
     response.fold(
       (l) => {
         woCreateDefaultWsUser = l,
-        print('getDefaultWorkSpaceOfUser'),
-        print(woCreateDefaultWsUser.id),
       },
       (r) => {},
     );

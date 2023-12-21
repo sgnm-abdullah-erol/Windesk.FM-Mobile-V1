@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_default_ws_user.dart';
+import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_work_space_model.dart';
 
 import '../../../../core/log/log_manager.dart';
 import '../../../../feature/exceptions/custom_service_exceptions.dart';
@@ -28,5 +29,6 @@ abstract class WoCreateServiceRepository {
       String appointmendData, String templatedBy, String requestSpaceId, String requestSpaceLabels, String woCategory, String woComponent);
   Future<Either<dynamic, CustomServiceException>> updateTask(String token,String taskId,String requestedId,String requestedLabel, String templatedBy, String depended);
   Future<Either<WoCreateDefaultWsUser, CustomServiceException>> getDefaultWorkSpaceOfUser(String token, String userKey);
+  Future<Either<WoCreateWorkSpaceModel, CustomServiceException>> getWorkFlows(String token, String workSpaceId);
 
 }
