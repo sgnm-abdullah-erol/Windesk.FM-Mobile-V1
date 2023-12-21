@@ -14,6 +14,7 @@ import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_location_model.
 import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_requestedby_model.dart';
 import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_requestedtype_model.dart';
 import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_type_model.dart';
+import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_work_space_model.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
 import 'package:vm_fm_4/product/screens/new_order/service/wo_create_service_repository_impl.dart';
 
@@ -553,18 +554,34 @@ class WoCreateProvider extends ChangeNotifier {
 
   void getDefaultWorkSpaceOfUser(BuildContext context) async {
     WoCreateDefaultWsUser woCreateDefaultWsUser;
+
     final userKey = context.read<GlobalProvider>().userId;
     final token = await SharedManager().getString(SharedEnum.userToken);
     final response = await _woCreateServiceRepository.getDefaultWorkSpaceOfUser(token, userKey);
-    
+
     response.fold(
       (l) => {
         woCreateDefaultWsUser = l,
+        getWorkFlows(woCreateDefaultWsUser.id),
       },
       (r) => {},
     );
 
     _workSpaceLoading = false;
+    notifyListeners();
+  }
+
+  void getWorkFlows(workSpaceId) async {
+    print('dasdsaasdasdsad');
+    WoCreateWorkSpaceModel woCreateWorkSpaceModel;
+
+    final token = await SharedManager().getString(SharedEnum.userToken);
+    final response = await _woCreateServiceRepository.getWorkFlows(token, workSpaceId);
+
+    response.fold(
+      (l) => {woCreateWorkSpaceModel = l, print('wocreateworkspaceModel'), print(l)},
+      (r) => {},
+    );
     notifyListeners();
   }
 
