@@ -12,6 +12,9 @@ class CreateCheckItemValue extends Equatable {
 
   factory CreateCheckItemValue.fromJson(Map<String, dynamic> json) => _$CreateCheckItemValueFromJson(json);
 
+  // to json
+  Map<String, dynamic> toJson() => _$CreateCheckItemValueToJson(this);
+
   @override
   List<Object?> get props => [id, key];
 }
