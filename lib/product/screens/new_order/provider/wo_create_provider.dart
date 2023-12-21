@@ -146,6 +146,9 @@ class WoCreateProvider extends ChangeNotifier {
   bool _lazyLoading = true;
   bool get lazyLoading => _locationLoading;
 
+  bool _workSpaceLoading = true;
+  bool get workSpaceLoading =>  _workSpaceLoading;
+
   WoCreateLocationModel _woLocationList = const WoCreateLocationModel();
   WoCreateLocationModel get woLocationList => _woLocationList;
 
@@ -553,6 +556,10 @@ class WoCreateProvider extends ChangeNotifier {
       (r) => {},
     );
     notifyListeners();
+  }
+
+  void getDefaultWorkSpaceOfUser(){
+    
   }
 
   void createTask(BuildContext context) async {

@@ -20,32 +20,34 @@ class ScopeCardListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: context.height - 200,
-      width: context.width,
-      child: ListView.builder(
-        itemCount: maintanenceModel.maintenancePlan?.first.components?.first.willBeAppliedToComponents?.length,
-        itemBuilder: (context, index) {
-          final item = maintanenceModel.maintenancePlan?.first.components?.first.willBeAppliedToComponents?[index];
-          String? checkListSituation = '';
-          var total = checkListmaintanenceModel?.checkListValue!.length ?? 0;
-          if (checkListmaintanenceModel != null) {
-            for (var i = 0; i < total; i++) {
-              if (checkListmaintanenceModel?.checkListValue?[i].component?[0]['id'] == item?.id) {
-                checkListSituation = checkListmaintanenceModel?.checkListValue?[i].statusConnection?.edges?[0].node?.code;
+    return SingleChildScrollView(
+      child: SizedBox(
+        width: context.width,
+        height: context.height-200,
+        child: ListView.builder(
+          itemCount: maintanenceModel.maintenancePlan?.first.components?.first.willBeAppliedToComponents?.length,
+          itemBuilder: (context, index) {
+            final item = maintanenceModel.maintenancePlan?.first.components?.first.willBeAppliedToComponents?[index];
+            String? checkListSituation = '';
+            var total = checkListmaintanenceModel?.checkListValue!.length ?? 0;
+            if (checkListmaintanenceModel != null) {
+              for (var i = 0; i < total; i++) {
+                if (checkListmaintanenceModel?.checkListValue?[i].component?[0]['id'] == item?.id) {
+                  checkListSituation = checkListmaintanenceModel?.checkListValue?[i].statusConnection?.edges?[0].node?.code;
+                }
               }
             }
-          }
-          return CustomScopeListCard(
-            controlList: item?.componentOriginal?.properties?.className ?? '',
-            name: item?.componentOriginal?.properties?.name ?? '',
-            scopeId: item?.id ?? 0,
-            maintanenceModel: maintanenceModel,
-            checkListmaintanenceModel: checkListmaintanenceModel,
-            checkListSituation: checkListSituation,
-            refetchFunction: refetchFunction,
-          );
-        },
+            return CustomScopeListCard(
+              controlList: item?.componentOriginal?.properties?.className ?? '',
+              name: item?.componentOriginal?.properties?.name ?? '',
+              scopeId: item?.id ?? 0,
+              maintanenceModel: maintanenceModel,
+              checkListmaintanenceModel: checkListmaintanenceModel,
+              checkListSituation: checkListSituation,
+              refetchFunction: refetchFunction,
+            );
+          },
+        ),
       ),
     );
   }

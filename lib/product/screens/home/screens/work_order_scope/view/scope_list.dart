@@ -82,9 +82,6 @@ class ScopeList extends StatelessWidget {
 
   MaintanenceModel? _checkNullablitiyOfMaintenanceModel(BuildContext context, Map<String, dynamic> result) {
     final model = MaintanenceModel.fromJson(result['maintenances'][0]);
-    print('resultmaintenance');
-    print(result);
-
     if (model.maintenancePlan == null ||
         model.maintenancePlan!.isEmpty ||
         model.maintenancePlan!.first.components == null ||

@@ -148,7 +148,6 @@ class CustomScopeListCard extends StatelessWidget {
                       );
                       //* if result is true, refetch the query
                       if (result == true) {
-                        print('query load');
                         refetchFunction!();
                       }
                     },
@@ -232,8 +231,6 @@ class CustomScopeListCard extends StatelessWidget {
   }
 
   StartCheckListValueModel? _setStartCheckListValue(Map<String, dynamic>? data) {
-    print('-------');
-    print(data);
     if (data != null || data?['startCheckListValue'] != null) {
       final checkListData = data?['startCheckListValue'];
       StartCheckListValueModel model = StartCheckListValueModel.fromJson(checkListData);

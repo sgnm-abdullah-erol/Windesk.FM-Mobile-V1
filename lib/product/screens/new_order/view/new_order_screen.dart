@@ -79,6 +79,8 @@ class NewOrderScreen extends StatelessWidget {
         woCreateProvider.requestedTypeLoading ? woCreateProvider.getRequestedType() : null;
         woCreateProvider.categoryLoading ? woCreateProvider.getCategory() : null;
         woCreateProvider.componentLoading ? woCreateProvider.getComponent() : null;
+        woCreateProvider.workSpaceLoading ? woCreateProvider.getDefaultWorkSpaceOfUser() : null;
+
         return woCreateProvider.isLoading
             ? const CustomLoadingIndicator()
             : WillPopScope(
