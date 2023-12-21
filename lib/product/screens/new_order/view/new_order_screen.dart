@@ -250,9 +250,6 @@ class NewOrderScreen extends StatelessWidget {
               woCreateProvider.setRequestType(newValue);
               woCreateProvider.setRequestType1(
                   woCreateProvider.getRequestedTypesChildrenTree1[0]);
-
-              print('girmeli');
-              print(woCreateProvider.requestType1);
             },
             rightIcon: Icons.arrow_drop_down_rounded,
             dropDownArray: woCreateProvider.getRequestedTypesChildren,
@@ -264,8 +261,6 @@ class NewOrderScreen extends StatelessWidget {
                 DropDownInputFields2(
                   labelText: LocaleKeys.Choose.tr(),
                   onChangedFunction: (String newValue) {
-                    print('İÇ NEW VALUE : ');
-                    print(newValue);
                     woCreateProvider.setRequestType1(newValue);
                   },
                   rightIcon: Icons.arrow_drop_down_rounded,

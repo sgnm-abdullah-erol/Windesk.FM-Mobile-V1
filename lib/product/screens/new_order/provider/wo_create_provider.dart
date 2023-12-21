@@ -471,7 +471,7 @@ class WoCreateProvider extends ChangeNotifier {
     response.fold(
       (l) => {
         _getRequestedBy = l,
-        _getRequestedByChildren.add('Seçim yapınız'),
+        _getRequestedByChildren.add(''),
         for (var i = 0; i < (_getRequestedBy.length); i++)
           {
             _getRequestedByChildren.add(_getRequestedBy[i].username ?? ''),
@@ -495,7 +495,7 @@ class WoCreateProvider extends ChangeNotifier {
     response.fold(
       (l) => {
         _getTypes = l,
-        _getTypesChildren.add('Seçim yapınız'),
+        _getTypesChildren.add(''),
         for (var i = 0; i < (_getTypes.length); i++)
           {
             _getTypesChildren.add(_getTypes[i].name ?? ''),
@@ -518,7 +518,7 @@ class WoCreateProvider extends ChangeNotifier {
     response.fold(
       (l) => {
         _getRequestedTypes = l,
-        _getRequestedTypesChildren.add('Seçim yapınız'),
+        _getRequestedTypesChildren.add(''),
         for (var i = 0; i < (_getRequestedTypes.length); i++)
           {
             _getRequestedTypesChildren.add(_getRequestedTypes[i].name ?? ''),
@@ -541,7 +541,7 @@ class WoCreateProvider extends ChangeNotifier {
     response.fold(
       (l) => {
         _getCategories = l,
-        _getCategoriesChildren.add('Seçim yapınız'),
+        _getCategoriesChildren.add(''),
         for (var i = 0; i < (_getCategories.length); i++)
           {
             _getCategoriesChildren.add(_getCategories[i].name ?? ''),

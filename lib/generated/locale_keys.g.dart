@@ -15,7 +15,7 @@ class LocaleKeys {
 
   // maintenance
   static const String ScopeList = 'ScopeList';
-  
+
   static const String CheckList = 'CheckList';
   static const String Contuniue = 'Contuniue';
   static const String Yes = 'Yes';
@@ -180,6 +180,7 @@ class LocaleKeys {
   static const String LastUpdateDate = "LastUpdateDate";
   static const String AssignedGroup = "AssignedGroup";
   static const String AssignedPerson = "AssignedPerson";
+  static const String MakeYourChoice = "MakeYourChoice";
   static const String Presence = "Presence";
   static const String Change = "Change";
   static const String ProccessEntry = "ProccessEntry";
@@ -192,7 +193,8 @@ class LocaleKeys {
   static const String ErrorChangeStateWithGroup = 'ErrorChangeStateWithGroup';
   static const String LocationChangeSuccessfull = 'LocationChangeSuccessfull';
   static const String SelectaLocation = 'SelectaLocation';
-  static const String PleaseGiveAllRequiredInputs = 'PleaseGiveAllRequiredInputs';
+  static const String PleaseGiveAllRequiredInputs =
+      'PleaseGiveAllRequiredInputs';
 
   // Data Table Strings
   static const String DataTableID = "DataTableID";
@@ -354,7 +356,6 @@ class LocaleKeys {
   static const String RequestType = 'RequestType';
   static const String Block = 'Block';
 
-
   //work order scope
   static const String name = 'Name';
   static const String controlList = 'ControlList';
@@ -370,7 +371,6 @@ class LocaleKeys {
   static const String Date = 'Date';
   static const String Description = 'Description';
   static const String TotalTime = 'Total Time';
-
 
   // // static String const ----------MAİNTENANCE---------- = '----------MAİNTENANCE----------';
   // static const Manage Check List = 'Manage Check List';
