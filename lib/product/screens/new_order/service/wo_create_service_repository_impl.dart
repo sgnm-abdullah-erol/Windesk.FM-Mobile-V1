@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_default_ws_user.dart';
 
 import '../../../../core/constants/paths/service_tools.dart';
 import '../../../../feature/exceptions/custom_service_exceptions.dart';
@@ -234,6 +235,30 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
     } catch (error) {
       super.logger.e(error.toString());
       return Right(CustomServiceException(message: CustomServiceMessages.loginError, statusCode: '400'));
+    }
+  }
+
+  @override
+  Future<Either<WoCreateDefaultWsUser, CustomServiceException>> getDefaultWorkSpaceOfUser(token, userKey) async {
+    WoCreateDefaultWsUser woCreateDefaultWsUser;
+    String url = '${ServiceTools.url.workorder_url}/workspace/getDefaultWorkSpaceOfUser/$userKey';
+
+    try {
+    
+    final response = await super.dio.get(
+          url,
+          options: Options(
+            headers: {'authorization': 'Bearer $token'},
+          ),
+        );
+    final data = response.data;
+    woCreateDefaultWsUser = WoCreateDefaultWsUser.fromJson(data);
+    super.logger.e(woCreateDefaultWsUser);
+    return Left(woCreateDefaultWsUser);
+  
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(message: CustomServiceMessages.tokenChangeError, statusCode: '400'));
     }
   }
 }

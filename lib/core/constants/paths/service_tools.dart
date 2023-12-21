@@ -27,7 +27,8 @@ class ServiceTools {
         // users_url: "https://user-server.ifm.gov.tr",
         // asset_url: "https://asset-server.ifm.gov.tr",
         // workorder_url: "https://workorder-server.ifm.gov.tr",
-        // generalGraphql_url: "https://workorder-server.ifm.gov.tr/general-graphql",
+        // generalGraphql_url:
+        //     "https://workorder-server.ifm.gov.tr/general-graphql",
         // graphql_url: "https://workorder-server.ifm.gov.tr/graphql",
 
         facility_url: "http://138.201.186.190:30052",

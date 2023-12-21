@@ -23,7 +23,6 @@
 	"Browse": "Browse",
 	"CompletedChecklist": "Tamamlanmış Checklist",
 	"ImageAddedError": "Fotoğraf ekleme işlemi sırasında hata oluştu.",
-
 	"----------------Support----------": "-----------Support--------------",
 	"SupportList": "Destek Listesi",
 
@@ -62,6 +61,7 @@
 	"DeleteNote": "Not Silindi",
 	"Note": "Not",
 	"Location": "Lokasyon",
+	
 	"WantedMaterialAmountBiggerThanHintAmount": "İstenen malzeme miktarı, mevcut malzeme miktarından büyük olamaz.",
 	"EditNoteError": "Not Düzenlenemedi",
 	"EditNoteSuccess": "Not Düzenlendi",
@@ -192,7 +192,7 @@
 	"----------------ISSUE----------": "-----------ISSUE--------------",
 	"State": "Durum",
 	"Build": "Bina",
-	"Floor": "Kay",
+	"Floor": "Kat",
 	"Wing": "Kanat",
 	"TaskForMe": "Üzerime Atanan Vakalar",
 	"----------------HOME----------": "-----------HOME--------------",
@@ -1180,6 +1180,7 @@
 	"More Columns": "Daha Fazla Sütun",
 	"Select Column": "Sütun Seç",
 	"Category": "Kategori",
+	"MakeYourChoice":"Seçim yapınız",
 	"Contains": "İçeren",
 	"Apply": "Uygula",
 	"Add Item": "Öğe Ekle",
