@@ -80,6 +80,8 @@ class AuthServiceRepositoryImpl extends AuthServiceRepository {
             receiveTimeout: const Duration(seconds: 4),
             responseType: ResponseType.json,
           ));
+
+      super.logger.wtf(response);
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
 

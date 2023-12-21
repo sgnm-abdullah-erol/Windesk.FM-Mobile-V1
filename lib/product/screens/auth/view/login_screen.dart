@@ -2,10 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vm_fm_4/core/route/app_route.gr.dart';
 
 import '../../../../core/constants/paths/asset_paths.dart';
 import '../../../../core/constants/style/custom_paddings.dart';
-import '../../../../core/route/app_route.gr.dart';
 import '../../../../feature/components/appbar/custom_main_appbar.dart';
 import '../../../../feature/components/buttons/custom_login_button.dart';
 import '../../../../feature/components/input_fields/text_fields_input_underline.dart';
@@ -63,8 +63,15 @@ class _LoginScreenBody extends StatefulWidget {
   State<_LoginScreenBody> createState() => _LoginScreenBodyState();
 }
 
-class _LoginScreenBodyState extends State<_LoginScreenBody> {
+class _LoginScreenBodyState extends State<_LoginScreenBody> with WidgetsBindingObserver {
   final GlobalKey<ScaffoldMessengerState> _globalKey = GlobalKey<ScaffoldMessengerState>();
+
+  // state takibi için
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,22 +98,6 @@ class _LoginScreenBodyState extends State<_LoginScreenBody> {
             ),
     );
   }
-
-  // Padding _rememberMeButton(BuildContext context) {
-  //   return Padding(
-  //     padding: CustomPaddings.onlyHorizontalHigh,
-  //     child: Row(
-  //       children: [
-  //         Text(LocaleKeys.HintRememberMe, style: context.bodyMedium).tr(),
-  //         Checkbox(
-  //           checkColor: Colors.white,
-  //           value: widget.provider.rememberMe,
-  //           onChanged: (bool? value) => (value != null) ? setState(() => widget.provider.setRememberMe(value)) : null,
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
 
   Expanded _loginButton() {
     return Expanded(
