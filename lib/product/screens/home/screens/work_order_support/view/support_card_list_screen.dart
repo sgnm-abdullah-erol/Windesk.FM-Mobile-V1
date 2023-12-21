@@ -40,7 +40,7 @@ class SupportCardListScreen extends StatelessWidget {
                     ?.checkListValue?[i].statusConnection?.edges?[0].node?.code;
               }
             }
-          } 
+          }
           return CustomSupportListCard(
             controlList: item?.componentOriginal?.properties?.className ?? '',
             name: item?.componentOriginal?.properties?.name ?? '',

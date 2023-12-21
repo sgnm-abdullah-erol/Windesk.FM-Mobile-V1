@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import '../../../../../../core/constants/other/colors.dart';
 import '../../../../../../feature/extensions/context_extension.dart';
 
-class CustomLoadingIndicator extends StatelessWidget {
-  const CustomLoadingIndicator({super.key});
+class CustomLoadingIndicator2 extends StatelessWidget {
+  const CustomLoadingIndicator2({super.key});
 
   final String _windesk = 'Windesk';
   final String _fm = 'FM';
@@ -21,24 +21,6 @@ class CustomLoadingIndicator extends StatelessWidget {
           Align(
               alignment: Alignment.center,
               child: CircularProgressIndicator(color: APPColors.Main.blue)),
-          const SizedBox(height: 10),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(_windesk,
-                  style:
-                      context.titleMedium.copyWith(color: APPColors.Main.blue)),
-              const SizedBox(width: 10),
-              AnimatedTextKit(
-                animatedTexts: [
-                  RotateAnimatedText(_fm,
-                      textStyle: context.titleMedium
-                          .copyWith(color: APPColors.Login.blue)),
-                ],
-              ),
-            ],
-          ),
         ],
       ),
     );

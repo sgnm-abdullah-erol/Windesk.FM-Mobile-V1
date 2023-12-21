@@ -200,9 +200,14 @@ class WoCreateProvider extends ChangeNotifier {
   final List<String> _getComponentsChildren = [];
   List<String> get getComponentsChildren => _getComponentsChildren;
 
-  final List<String> _getRequestedTypesChildrenTree1 = [];
+  List<String> _getRequestedTypesChildrenTree1 = [];
   List<String> get getRequestedTypesChildrenTree1 =>
       _getRequestedTypesChildrenTree1;
+  void setRequestedTypesChildrenTree1(
+      List<String> getRequestedTypesChildrenTree1) {
+    _getRequestedTypesChildrenTree1 = getRequestedTypesChildrenTree1;
+    notifyListeners();
+  }
 
   void setSummary(String newValue) {
     _summary = newValue;
@@ -296,6 +301,7 @@ class WoCreateProvider extends ChangeNotifier {
   }
 
   void setFloor(String newValue) {
+    _woSpaceListChildren.clear();
     _floor = newValue;
     for (var i = 0; i < (_woFloorList.children?.length ?? 0); i++) {
       if (_woFloorList.children?[i].name == newValue) {
@@ -335,13 +341,19 @@ class WoCreateProvider extends ChangeNotifier {
     notifyListeners();
     for (var i = 0; i < (_getRequestedTypes.length); i++) {
       if (_getRequestedTypes[i].name == newValue) {
+        print('girdiiç');
+
         isChildrenExist =
             _getRequestedTypes[i].children!.isNotEmpty ? true : false;
         _requestTypeKey = _getRequestedTypes[i].code.toString();
         _requestedTypeTree1 = !isChildrenExist;
         notifyListeners();
         if (isChildrenExist) {
+          print('girdiiç1');
+
           for (var b = 0; b < (_getRequestedTypes[i].children!.length); b++) {
+            print('girdiiç2');
+
             _getRequestedTypesChildrenTree1
                 .add(_getRequestedTypes[i].children![b].name ?? '');
           }
@@ -355,6 +367,7 @@ class WoCreateProvider extends ChangeNotifier {
     bool isChildrenExist;
     _requestType1 = newValue;
     notifyListeners();
+
     for (var i = 0; i < (_getRequestedTypes.length); i++) {
       if (_getRequestedTypes[i].name == _requestType) {
         for (var b = 0; b < (_getRequestedTypes[i].children!.length); b++) {
@@ -400,7 +413,6 @@ class WoCreateProvider extends ChangeNotifier {
         await _woCreateServiceRepository.getLazyLoading(token, key);
     _lazyLoading = false;
     notifyListeners();
-
     if (lazyType == 'Building') {
       _woLocationListChildren.clear();
       response.fold(
@@ -454,6 +466,7 @@ class WoCreateProvider extends ChangeNotifier {
     response.fold(
       (l) => {
         _getRequestedBy = l,
+        _getRequestedByChildren.add('Seçim yapınız'),
         for (var i = 0; i < (_getRequestedBy.length); i++)
           {
             _getRequestedByChildren.add(_getRequestedBy[i].username ?? ''),
@@ -477,6 +490,7 @@ class WoCreateProvider extends ChangeNotifier {
     response.fold(
       (l) => {
         _getTypes = l,
+        _getTypesChildren.add('Seçim yapınız'),
         for (var i = 0; i < (_getTypes.length); i++)
           {
             _getTypesChildren.add(_getTypes[i].name ?? ''),
@@ -499,6 +513,7 @@ class WoCreateProvider extends ChangeNotifier {
     response.fold(
       (l) => {
         _getRequestedTypes = l,
+        _getRequestedTypesChildren.add('Seçim yapınız'),
         for (var i = 0; i < (_getRequestedTypes.length); i++)
           {
             _getRequestedTypesChildren.add(_getRequestedTypes[i].name ?? ''),
@@ -521,6 +536,7 @@ class WoCreateProvider extends ChangeNotifier {
     response.fold(
       (l) => {
         _getCategories = l,
+        _getCategoriesChildren.add('Seçim yapınız'),
         for (var i = 0; i < (_getCategories.length); i++)
           {
             _getCategoriesChildren.add(_getCategories[i].name ?? ''),
@@ -556,6 +572,10 @@ class WoCreateProvider extends ChangeNotifier {
   }
 
   void createTask(BuildContext context) async {
+    print(summary);
+    print(requestedById);
+    print(description);
+    print(requestedId);
     if (summary != '' &&
         requestedById != '' &&
         description != '' &&
