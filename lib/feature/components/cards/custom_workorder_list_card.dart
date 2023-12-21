@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:vm_fm_4/core/constants/style/border_radius.dart';
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
+import 'package:vm_fm_4/feature/extensions/date_string_extension.dart';
 import 'package:vm_fm_4/feature/models/work_space/work_space_detail.dart';
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
 
@@ -93,8 +94,7 @@ class CustomWorkOrderListCard extends StatelessWidget {
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Text(
-              'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-              // giveFormat ? date.splitString(date) : date,
+              giveFormat ? date.splitString(date) : date,
               style: context.labelMedium.copyWith(color: APPColors.Main.black),
               maxLines: 2,
             ),
