@@ -42,7 +42,8 @@ class SaveCheckListBottomSheet extends StatelessWidget {
                   update: (GraphQLDataProxy cache, QueryResult? result) {},
                   onCompleted: (dynamic resultData) async {
                     //koşul eklenmeli
-                    snackBar(context, 'Scope Listesi Başarıyla Eklendi', 'success');
+                    
+                    snackBar(context, 'Scope Listesi Başarıyla Kaydedildi', 'success');
                     Navigator.of(context).pop<bool>(true);
                   },
                 ),

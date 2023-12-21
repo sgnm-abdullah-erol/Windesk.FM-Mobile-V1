@@ -25,7 +25,7 @@ class AlertCheckListBottomSheet extends StatelessWidget {
           document: gql(MaintenancesTaskQuery.acceptRegulationMessage),
           update: (GraphQLDataProxy cache, QueryResult? result) {},
           onCompleted: (dynamic resultData) async {
-            Navigator.of(context).pop();
+            Navigator.of(context).pop<bool>(true);
             context.router.push(ScopeDetail(maintanenceList: maintanenceModel, checkListValueModel: startCheckListValue));
           },
         ),

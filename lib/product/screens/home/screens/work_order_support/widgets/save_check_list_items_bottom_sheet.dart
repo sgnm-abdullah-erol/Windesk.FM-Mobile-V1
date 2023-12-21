@@ -14,43 +14,36 @@ import 'package:vm_fm_4/product/screens/home/screens/work_order_support/queries/
 import 'package:vm_fm_4/product/screens/home/screens/work_order_support/queries/maintenances_task_query_variables.dart';
 
 class SaveCheckListBottomSheet extends StatelessWidget {
-  const SaveCheckListBottomSheet(
-      {super.key, required this.checkListValueId, this.supportList});
+  const SaveCheckListBottomSheet({super.key, required this.checkListValueId, this.supportList});
   final SupportModel? supportList;
   final int checkListValueId;
 
   @override
   Widget build(BuildContext context) {
     return GraphQLProvider(
-      client: GraphQLManager.getClient(
-          HttpLink(ServiceTools.url.generalGraphql_url)),
+      client: GraphQLManager.getClient(HttpLink(ServiceTools.url.generalGraphql_url)),
       child: Query(
         options: QueryOptions(
           document: gql(MaintenancesTaskQuery.checkListValues),
-          variables:
-              MaintenancesTaskVariableQueries.checkListValues(checkListValueId),
+          variables: MaintenancesTaskVariableQueries.checkListValues(checkListValueId),
         ),
         builder: GraphqlResultHandling.withGenericHandling(
           context,
           (QueryResult result, {refetch, fetchMore}) {
             if (result.data == null && !result.hasException) {
-              return Text(LocaleKeys.FetchScopeListError.tr(),
-                  style: Theme.of(context).textTheme.bodyMedium);
+              return Text(LocaleKeys.FetchScopeListError.tr(), style: Theme.of(context).textTheme.bodyMedium);
             }
-            final resultDataQuery =
-                result.data?['checkListValues'].first['CheckItemValue'];
+            final resultDataQuery = result.data?['checkListValues'].first['CheckItemValue'];
             return GraphQLProvider(
               client: GraphQLManager.getClientForMutation(context),
               child: Mutation(
                 options: MutationOptions(
-                  document:
-                      gql(MaintenancesTaskQuery.updateCheckListValueStatus),
+                  document: gql(MaintenancesTaskQuery.updateCheckListValueStatus),
                   update: (GraphQLDataProxy cache, QueryResult? result) {},
                   onCompleted: (dynamic resultData) async {
                     //koşul eklenmeli
-                    snackBar(
-                        context, 'Scope Listesi Başarıyla Eklendi', 'success');
                     Navigator.of(context).pop<bool>(true);
+                    snackBar(context, 'Scope Listesi Başarıyla Kaydedildi', 'success');
                   },
                 ),
                 builder: (RunMutation runMutation, QueryResult? result) {
@@ -62,8 +55,7 @@ class SaveCheckListBottomSheet extends StatelessWidget {
                         Flexible(
                             child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(LocaleKeys.AreYouSureSaveCheckList.tr(),
-                              overflow: TextOverflow.fade),
+                          child: Text(LocaleKeys.AreYouSureSaveCheckList.tr(), overflow: TextOverflow.fade),
                         )),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -71,35 +63,21 @@ class SaveCheckListBottomSheet extends StatelessWidget {
                             SizedBox(
                               height: 45,
                               child: ElevatedButton(
-                                onPressed: () =>
-                                    Navigator.of(context).pop<bool>(false),
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: APPColors.Main.grey),
-                                child: Icon(AppIcons.clear,
-                                    color: APPColors.Main.white),
+                                onPressed: () => Navigator.of(context).pop<bool>(false),
+                                style: ElevatedButton.styleFrom(backgroundColor: APPColors.Main.grey),
+                                child: Icon(AppIcons.clear, color: APPColors.Main.white),
                               ),
                             ),
                             SizedBox(
                               height: 45,
                               child: ElevatedButton(
                                 onPressed: () {
-                                  final data = supportList
-                                      ?.scheduledBy
-                                      ?.first
-                                      .parentSchedule
-                                      ?.first
-                                      .checkList
-                                      ?.first
-                                      .includesOfCheckItems;
+                                  final data = supportList?.scheduledBy?.first.parentSchedule?.first.checkList?.first.includesOfCheckItems;
                                   bool allCheckListsTrue = true;
                                   for (var i = 0; i < data!.length; i++) {
                                     if (data[i].isRequired == true) {
-                                      for (var b = 0;
-                                          b < resultDataQuery!.length;
-                                          b++) {
-                                        if (resultDataQuery[b]['CheckItem']
-                                                .first['id'] ==
-                                            data[i].id) {
+                                      for (var b = 0; b < resultDataQuery!.length; b++) {
+                                        if (resultDataQuery[b]['CheckItem'].first['id'] == data[i].id) {
                                           allCheckListsTrue = true;
                                           break;
                                         } else {
@@ -110,23 +88,14 @@ class SaveCheckListBottomSheet extends StatelessWidget {
                                   }
                                   allCheckListsTrue
                                       ? runMutation(
-                                          MaintenancesTaskVariableQueries
-                                              .updateCheckListValueStatusInput(
+                                          MaintenancesTaskVariableQueries.updateCheckListValueStatusInput(
                                             checkListValueId,
                                           ),
                                         )
-                                      : {
-                                          snackBar(
-                                              context,
-                                              'Scope Listesi Eklenemedi. Zorunlu alanları giriniz.',
-                                              'error'),
-                                          context.router.pop()
-                                        };
+                                      : {snackBar(context, 'Scope Listesi Eklenemedi. Zorunlu alanları giriniz.', 'error'), context.router.pop()};
                                 },
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: APPColors.Main.green),
-                                child: Icon(AppIcons.okay,
-                                    color: APPColors.Main.black),
+                                style: ElevatedButton.styleFrom(backgroundColor: APPColors.Main.green),
+                                child: Icon(AppIcons.okay, color: APPColors.Main.black),
                               ),
                             ),
                           ],

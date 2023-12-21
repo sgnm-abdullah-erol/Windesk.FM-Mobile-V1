@@ -32,7 +32,7 @@ class CustomScopeListCard extends StatelessWidget {
     this.maintanenceModel,
     this.checkListmaintanenceModel,
     this.checkListSituation,
-    this.refetch,
+    this.refetchFunction,
   });
 
   final String name;
@@ -44,7 +44,7 @@ class CustomScopeListCard extends StatelessWidget {
   final MaintanenceModel? maintanenceModel;
   final CheckListMaintanenceModel? checkListmaintanenceModel;
   final dynamic checkListSituation;
-  final Function? refetch;
+  final Function? refetchFunction;
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +55,10 @@ class CustomScopeListCard extends StatelessWidget {
           document: gql(MaintenancesTaskQuery.startCheckListValueInput),
           update: (GraphQLDataProxy cache, QueryResult? result) {},
           onCompleted: (Map<String, dynamic>? resultData) async {
-            StartCheckListValueModel? model =
-                _setStartCheckListValue(resultData);
+            StartCheckListValueModel? model = _setStartCheckListValue(resultData);
             if (model != null) {
               final response = await _bottomSheet(context, model);
-              response ? refetch!() : null;
+              response ? refetchFunction!() : null;
             } else {
               snackBar(context, LocaleKeys.FetchScopeListError, 'error');
             }
@@ -78,10 +77,8 @@ class CustomScopeListCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _columnChilds(context),
-                    checkListSituation == 'Started' ||
-                            checkListSituation == 'Finished'
-                        ? _continueButton(
-                            context, runMutation, checkListSituation)
+                    checkListSituation == 'Started' || checkListSituation == 'Finished'
+                        ? _continueButton(context, runMutation, checkListSituation)
                         : _startButton(context, runMutation),
                   ],
                 ),
@@ -100,13 +97,16 @@ class CustomScopeListCard extends StatelessWidget {
         bgColor: APPColors.Accent.black,
         icon: AppIcons.send,
         onPressFunction: () async {
-          final component = maintanenceModel?.maintenancePlan?.first.components
-              ?.first.willBeAppliedToComponents?.first;
+          final component = maintanenceModel?.maintenancePlan?.first.components?.first.willBeAppliedToComponents?.first;
+          print('----');
+          print(maintanenceModel?.scheduledBy?.first.parentSchedule?.first.checkList?.first.id);
+          print(scopeId);
+          print(component?.componentOriginal?.labels?[0]);
+          print(maintanenceModel?.id);
+
           runMutation(
             MaintenancesTaskVariableQueries.checkListValueVariables(
-              maintanenceModel?.scheduledBy?.first.parentSchedule?.first
-                      .checkList?.first.id ??
-                  0,
+              maintanenceModel?.scheduledBy?.first.parentSchedule?.first.checkList?.first.id ?? 0,
               scopeId,
               component?.componentOriginal?.labels?[0] ?? '',
               maintanenceModel?.id ?? 0,
@@ -120,26 +120,21 @@ class CustomScopeListCard extends StatelessWidget {
     );
   }
 
-  GraphQLProvider _continueButton(BuildContext context,
-      RunMutation<dynamic> runMutation, String checkListSituation) {
+  GraphQLProvider _continueButton(BuildContext context, RunMutation<dynamic> runMutation, String checkListSituation) {
     return GraphQLProvider(
-      client: GraphQLManager.getClient(
-          HttpLink(ServiceTools.url.generalGraphql_url)),
+      client: GraphQLManager.getClient(HttpLink(ServiceTools.url.generalGraphql_url)),
       child: Query(
         options: QueryOptions(
           document: gql(MaintenancesTaskQuery.checkListValue2),
-          variables: MaintenancesTaskVariableQueries.getCheckListValue2(
-              maintanenceModel?.id ?? 0, scopeId),
+          variables: MaintenancesTaskVariableQueries.getCheckListValue2(maintanenceModel?.id ?? 0, scopeId),
         ),
         builder: GraphqlResultHandling.withGenericHandling(
           context,
           (QueryResult result, {refetch, fetchMore}) {
             if (result.data == null && !result.hasException) {
-              return Text(LocaleKeys.FetchScopeListError.tr(),
-                  style: Theme.of(context).textTheme.bodyMedium);
+              return Text(LocaleKeys.FetchScopeListError.tr(), style: Theme.of(context).textTheme.bodyMedium);
             }
-            final StartCheckListValueModel? checkListValue =
-                _setCheckListValue(result.data);
+            final StartCheckListValueModel? checkListValue = _setCheckListValue(result.data);
 
             return Align(
               alignment: Alignment.center,
@@ -147,9 +142,7 @@ class CustomScopeListCard extends StatelessWidget {
                 children: [
                   CustomElevatedButtonWithIcon(
                     bgColor: APPColors.Accent.black,
-                    icon: checkListSituation == 'Finished'
-                        ? AppIcons.eventList
-                        : AppIcons.send,
+                    icon: checkListSituation == 'Finished' ? AppIcons.eventList : AppIcons.send,
                     onPressFunction: () async {
                       final result = await context.router.push(
                         ScopeDetail(
@@ -158,22 +151,18 @@ class CustomScopeListCard extends StatelessWidget {
                           checkListSituation: checkListSituation,
                         ),
                       );
-
                       //* if result is true, refetch the query
                       if (result == true) {
-                        refetch!();
+                        print('query load');
+                        refetchFunction!();
                       }
                     },
                     iconColor: APPColors.Main.white,
-                    textValue: checkListSituation == 'Finished'
-                        ? LocaleKeys.Browse.tr()
-                        : LocaleKeys.Contuniue.tr(),
+                    textValue: checkListSituation == 'Finished' ? LocaleKeys.Browse.tr() : LocaleKeys.Contuniue.tr(),
                     textColor: APPColors.Main.white,
                   ),
                   checkListSituation == 'Finished'
-                      ? Text(LocaleKeys.CompletedChecklist.tr(),
-                          style: TextStyle(
-                              color: APPColors.Main.red, fontSize: 10))
+                      ? Text(LocaleKeys.CompletedChecklist.tr(), style: TextStyle(color: APPColors.Main.red, fontSize: 10))
                       : Container()
                 ],
               ),
@@ -194,16 +183,7 @@ class CustomScopeListCard extends StatelessWidget {
         _titleAndLabel(
           context,
           LocaleKeys.Date.tr(),
-          maintanenceModel
-                  ?.maintenancePlan
-                  ?.first
-                  .components
-                  ?.first
-                  .willBeAppliedToComponents
-                  ?.first
-                  .componentOriginal
-                  ?.properties
-                  ?.createdAt
+          maintanenceModel?.maintenancePlan?.first.components?.first.willBeAppliedToComponents?.first.componentOriginal?.properties?.createdAt
                   .toString() ??
               '',
         ),
@@ -211,17 +191,7 @@ class CustomScopeListCard extends StatelessWidget {
         _titleAndLabel(
           context,
           LocaleKeys.Technician.tr(),
-          maintanenceModel
-                  ?.maintenancePlan
-                  ?.first
-                  .components
-                  ?.first
-                  .willBeAppliedToComponents
-                  ?.first
-                  .componentOriginal
-                  ?.properties
-                  ?.name ??
-              '',
+          maintanenceModel?.maintenancePlan?.first.components?.first.willBeAppliedToComponents?.first.componentOriginal?.properties?.name ?? '',
         ),
         _emptyDivider(),
       ],
@@ -238,8 +208,7 @@ class CustomScopeListCard extends StatelessWidget {
     );
   }
 
-  Future<dynamic> _bottomSheet(
-      BuildContext context, StartCheckListValueModel startCheckListValue) {
+  Future<dynamic> _bottomSheet(BuildContext context, StartCheckListValueModel startCheckListValue) {
     return showModalBottomSheet(
       isScrollControlled: true,
       context: context,
@@ -256,25 +225,23 @@ class CustomScopeListCard extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
-          flex:1,
-          child: Text(title,
-              style: context.bodyMedium.copyWith(color: APPColors.Main.black, overflow: TextOverflow.fade)),
+          flex: 1,
+          child: Text(title, style: context.bodyMedium.copyWith(color: APPColors.Main.black, overflow: TextOverflow.fade)),
         ),
         Expanded(
-          flex:2,
-          child: Text(label,
-              style: context.bodySmall.copyWith(color: APPColors.Main.black,overflow: TextOverflow.fade)),
+          flex: 2,
+          child: Text(label, style: context.bodySmall.copyWith(color: APPColors.Main.black, overflow: TextOverflow.fade)),
         ),
       ],
     );
   }
 
-  StartCheckListValueModel? _setStartCheckListValue(
-      Map<String, dynamic>? data) {
+  StartCheckListValueModel? _setStartCheckListValue(Map<String, dynamic>? data) {
+    print('-------');
+    print(data);
     if (data != null || data?['startCheckListValue'] != null) {
       final checkListData = data?['startCheckListValue'];
-      StartCheckListValueModel model =
-          StartCheckListValueModel.fromJson(checkListData);
+      StartCheckListValueModel model = StartCheckListValueModel.fromJson(checkListData);
       return model;
     }
     return null;
@@ -283,8 +250,7 @@ class CustomScopeListCard extends StatelessWidget {
   StartCheckListValueModel? _setCheckListValue(Map<String, dynamic>? data) {
     if (data != null || data?['checkListValues'] != null) {
       final checkListData = data?['checkListValues'][0];
-      StartCheckListValueModel model =
-          StartCheckListValueModel.fromJson(checkListData);
+      StartCheckListValueModel model = StartCheckListValueModel.fromJson(checkListData);
       return model;
     }
     return null;

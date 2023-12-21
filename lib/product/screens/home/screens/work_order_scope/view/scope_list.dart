@@ -64,7 +64,9 @@ class ScopeList extends StatelessWidget {
                           maintanenceModel: maintanenceModel,
                           checkListmaintanenceModel: checkListmaintanenceModel,
                           taskId: taskId,
-                          refetchFunction: refetch,
+                          refetchFunction: () {
+                            refetch!();
+                          },
                         );
                       },
                     ),
@@ -80,6 +82,8 @@ class ScopeList extends StatelessWidget {
 
   MaintanenceModel? _checkNullablitiyOfMaintenanceModel(BuildContext context, Map<String, dynamic> result) {
     final model = MaintanenceModel.fromJson(result['maintenances'][0]);
+    print('resultmaintenance');
+    print(result);
 
     if (model.maintenancePlan == null ||
         model.maintenancePlan!.isEmpty ||

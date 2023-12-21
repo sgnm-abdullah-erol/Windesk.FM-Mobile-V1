@@ -43,7 +43,7 @@ class ScopeCardListScreen extends StatelessWidget {
             maintanenceModel: maintanenceModel,
             checkListmaintanenceModel: checkListmaintanenceModel,
             checkListSituation: checkListSituation,
-            refetch: refetchFunction,
+            refetchFunction: refetchFunction,
           );
         },
       ),

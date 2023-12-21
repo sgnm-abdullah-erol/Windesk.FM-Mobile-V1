@@ -27,11 +27,7 @@ import 'package:vm_fm_4/product/screens/home/screens/work_order_support/widgets/
 
 @RoutePage()
 class SupportDetail extends StatelessWidget {
-  const SupportDetail(
-      {super.key,
-      this.supportList,
-      this.checkListValueModel,
-      this.checkListSituation});
+  const SupportDetail({super.key, this.supportList, this.checkListValueModel, this.checkListSituation});
   final SupportModel? supportList;
   final StartCheckListValueModel? checkListValueModel;
   final String? checkListSituation;
@@ -39,23 +35,19 @@ class SupportDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GraphQLProvider(
-      client: GraphQLManager.getClient(
-          HttpLink(ServiceTools.url.generalGraphql_url)),
+      client: GraphQLManager.getClient(HttpLink(ServiceTools.url.generalGraphql_url)),
       child: Query(
         options: QueryOptions(
           document: gql(MaintenancesTaskQuery.checkListValues),
-          variables: MaintenancesTaskVariableQueries.checkListValues(
-              checkListValueModel?.id ?? 0),
+          variables: MaintenancesTaskVariableQueries.checkListValues(checkListValueModel?.id ?? 0),
         ),
         builder: GraphqlResultHandling.withGenericHandling(
           context,
           (QueryResult result, {refetch, fetchMore}) {
             if (result.data == null && !result.hasException) {
-              return Text(LocaleKeys.FetchScopeListError.tr(),
-                  style: Theme.of(context).textTheme.bodyMedium);
+              return Text(LocaleKeys.FetchScopeListError.tr(), style: Theme.of(context).textTheme.bodyMedium);
             }
-            final resultData =
-                result.data?['checkListValues'].first['CheckItemValue'];
+            final resultData = result.data?['checkListValues'].first['CheckItemValue'];
             return ChangeNotifierProvider(
               create: (context) => SupportProvider(),
               child: Scaffold(
@@ -64,43 +56,18 @@ class SupportDetail extends StatelessWidget {
                   builder: (context, SupportProvider provider, child) {
                     return SizedBox(
                       child: ListView.builder(
-                        itemCount: supportList
-                            ?.scheduledBy
-                            ?.first
-                            .parentSchedule
-                            ?.first
-                            .checkList
-                            ?.first
-                            .includesOfCheckItems
-                            ?.length,
+                        itemCount: supportList?.scheduledBy?.first.parentSchedule?.first.checkList?.first.includesOfCheckItems?.length,
                         itemBuilder: (context, index) {
                           // ignore: prefer_typing_uninitialized_variables
                           var inputVal;
                           for (var i = 0; i < resultData.length; i++) {
                             if (resultData[i]["CheckItem"].first['id'] ==
-                                supportList
-                                    ?.scheduledBy
-                                    ?.first
-                                    .parentSchedule
-                                    ?.first
-                                    .checkList
-                                    ?.first
-                                    .includesOfCheckItems?[index]
-                                    .id) {
-                              inputVal = resultData[i]["inputValueParsed"]
-                                      ["value"] ??
-                                  '';
+                                supportList?.scheduledBy?.first.parentSchedule?.first.checkList?.first.includesOfCheckItems?[index].id) {
+                              inputVal = resultData[i]["inputValueParsed"]["value"] ?? '';
                             }
                           }
                           return CustomSupportCheckItemCard(
-                            checkItem: supportList
-                                ?.scheduledBy
-                                ?.first
-                                .parentSchedule
-                                ?.first
-                                .checkList
-                                ?.first
-                                .includesOfCheckItems?[index],
+                            checkItem: supportList?.scheduledBy?.first.parentSchedule?.first.checkList?.first.includesOfCheckItems?[index],
                             provider: provider,
                             checkListValueId: checkListValueModel?.id,
                             inputValuee: inputVal ?? '',
@@ -111,8 +78,7 @@ class SupportDetail extends StatelessWidget {
                     );
                   },
                 ),
-                floatingActionButton: Consumer<SupportProvider>(
-                    builder: (context, SupportProvider provider, child) {
+                floatingActionButton: Consumer<SupportProvider>(builder: (context, SupportProvider provider, child) {
                   return SpeedDial(
                     animatedIcon: AnimatedIcons.menu_close,
                     animatedIconTheme: const IconThemeData(size: 22.0),
@@ -132,11 +98,7 @@ class SupportDetail extends StatelessWidget {
                     elevation: 8.0,
                     shape: const CircleBorder(),
                     children: [
-                      _speedDialChild(
-                          context,
-                          AppIcons.workHistory,
-                          LocaleKeys.AddedEfforts.tr(),
-                          APPColors.Secondary.blue, () {
+                      _speedDialChild(context, AppIcons.workHistory, LocaleKeys.AddedEfforts.tr(), APPColors.Secondary.blue, () {
                         ShowModalBottomSheet().show(
                           context,
                           AddedEffortsModalBottomSheetSupport(
@@ -145,11 +107,7 @@ class SupportDetail extends StatelessWidget {
                           ),
                         );
                       }),
-                      _speedDialChild(
-                          context,
-                          AppIcons.history,
-                          LocaleKeys.AddedDocumants.tr(),
-                          APPColors.TracingNumber.blue, () {
+                      _speedDialChild(context, AppIcons.history, LocaleKeys.AddedDocumants.tr(), APPColors.TracingNumber.blue, () {
                         ShowModalBottomSheet().show(
                           context,
                           AddedDocumentsModalBottomSheetSupport(
@@ -158,8 +116,7 @@ class SupportDetail extends StatelessWidget {
                           ),
                         );
                       }),
-                      _speedDialChild(context, AppIcons.addPhoto,
-                          LocaleKeys.AddPhoto.tr(), APPColors.Main.grey, () {
+                      _speedDialChild(context, AppIcons.addPhoto, LocaleKeys.AddPhoto.tr(), APPColors.Main.grey, () {
                         ShowModalBottomSheet().show(
                           context,
                           AddImageModalBottomSheet(
@@ -170,8 +127,7 @@ class SupportDetail extends StatelessWidget {
                           ),
                         );
                       }),
-                      _speedDialChild(context, AppIcons.documantScanner,
-                          LocaleKeys.AddPdf.tr(), APPColors.NewNotifi.grey, () {
+                      _speedDialChild(context, AppIcons.documantScanner, LocaleKeys.AddPdf.tr(), APPColors.NewNotifi.grey, () {
                         ShowModalBottomSheet().show(
                           context,
                           AddDocumentsModalBottomSheet(
@@ -182,11 +138,7 @@ class SupportDetail extends StatelessWidget {
                           ),
                         );
                       }),
-                      _speedDialChild(
-                          context,
-                          AppIcons.workHistory,
-                          LocaleKeys.AddEfforts.tr(),
-                          APPColors.Secondary.blue, () {
+                      _speedDialChild(context, AppIcons.workHistory, LocaleKeys.AddEfforts.tr(), APPColors.Secondary.blue, () {
                         ShowModalBottomSheet().show(
                           context,
                           AddEffortsModalBottomSheet(
@@ -200,8 +152,7 @@ class SupportDetail extends StatelessWidget {
                           ),
                         );
                       }),
-                      _speedDialChild(context, AppIcons.save,
-                          LocaleKeys.Save.tr(), APPColors.Main.green, () async {
+                      _speedDialChild(context, AppIcons.save, LocaleKeys.Save.tr(), APPColors.Main.green, () async {
                         final screenContext = context;
                         final response = await showModalBottomSheet<bool>(
                           context: context,
@@ -236,8 +187,7 @@ class SupportDetail extends StatelessWidget {
 
   CustomMainAppbar _appbar(BuildContext context) {
     return CustomMainAppbar(
-      title:
-          Text('${LocaleKeys.CheckList.tr()} - ${supportList?.id.toString()}'),
+      title: Text('${LocaleKeys.CheckList.tr()} - ${supportList?.id.toString()}'),
       returnBack: false,
       leading: IconButton(
         icon: const Icon(AppIcons.goBackArrow),
@@ -246,8 +196,7 @@ class SupportDetail extends StatelessWidget {
     );
   }
 
-  SpeedDialChild _speedDialChild(BuildContext context, IconData iconname,
-      String label, Color color, Function onPressFunction) {
+  SpeedDialChild _speedDialChild(BuildContext context, IconData iconname, String label, Color color, Function onPressFunction) {
     return SpeedDialChild(
       child: Icon(iconname),
       backgroundColor: color,
