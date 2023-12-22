@@ -108,6 +108,9 @@ class WoCreateProvider extends ChangeNotifier {
   String _requestedLabel = '';
   String get requestedLabel => _requestedLabel;
 
+  String _workFlowId = '';
+  String get workFlowId => _workFlowId;
+
   String _date = '';
   String get date => _date;
   set setidate(String date1) {
@@ -169,6 +172,9 @@ class WoCreateProvider extends ChangeNotifier {
   List<WoCreateComponentModel> _getComponents = [];
   List<WoCreateComponentModel> get getComponents => _getComponents;
 
+  WoCreateWorkSpaceModel _woCreateWorkSpaceModel = const WoCreateWorkSpaceModel();
+  WoCreateWorkSpaceModel get woCreateWorkSpaceModel => _woCreateWorkSpaceModel;
+
   WoCreateLeafModel _woBlockList = const WoCreateLeafModel();
   WoCreateLeafModel get woBlockList => _woBlockList;
 
@@ -177,6 +183,11 @@ class WoCreateProvider extends ChangeNotifier {
 
   WoCreateLeafModel _woSpaceList = const WoCreateLeafModel();
   WoCreateLeafModel get woSpaceList => _woSpaceList;
+
+  WoCreateDefaultWsUser _woCreateDefaultWsUser = const WoCreateDefaultWsUser();
+  WoCreateDefaultWsUser get woCreateDefaultWsUser => _woCreateDefaultWsUser;
+
+
 
   final List<String> _woLocationListChildren = [];
   List<String> get woLocationListChildren => _woLocationListChildren;
@@ -207,6 +218,9 @@ class WoCreateProvider extends ChangeNotifier {
 
   final List<String> _getRequestedTypesChildrenTree1 = [];
   List<String> get getRequestedTypesChildrenTree1 => _getRequestedTypesChildrenTree1;
+
+  final List<String> _workFlowNames = [];
+  List<String> get workFlowNames => _workFlowNames;
 
   void setSummary(String newValue) {
     _summary = newValue;
@@ -247,11 +261,21 @@ class WoCreateProvider extends ChangeNotifier {
     }
   }
 
+
   void setComponent(String newValue) {
     _component = newValue;
     for (var i = 0; i < (_getComponents.length); i++) {
       if (_getCategories[i].name == _component) {
         _componentKey = _getCategories[i].id.toString();
+      }
+      notifyListeners();
+    }
+  }
+
+  void setWorkFlow(String newValue) {
+    for (var i = 0; i < (_woCreateWorkSpaceModel.children?.length ?? 0); i++) {
+      if (_woCreateWorkSpaceModel.children?[i].name == newValue) {
+        _workFlowId = _woCreateWorkSpaceModel.children?[i].id.toString() ?? '';
       }
       notifyListeners();
     }
@@ -552,8 +576,7 @@ class WoCreateProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void getDefaultWorkSpaceOfUser(BuildContext context) async {
-    WoCreateDefaultWsUser woCreateDefaultWsUser;
+  Future<int?> getDefaultWorkSpaceOfUser(BuildContext context) async {
 
     final userKey = context.read<GlobalProvider>().userId;
     final token = await SharedManager().getString(SharedEnum.userToken);
@@ -561,32 +584,38 @@ class WoCreateProvider extends ChangeNotifier {
 
     response.fold(
       (l) => {
-        woCreateDefaultWsUser = l,
-        getWorkFlows(woCreateDefaultWsUser.id),
+        _woCreateDefaultWsUser = l,
       },
-      (r) => {},
+      (r) => {
+      },
     );
-
-    _workSpaceLoading = false;
     notifyListeners();
+    
+    return _woCreateDefaultWsUser.id;
+
   }
 
-  void getWorkFlows(workSpaceId) async {
-    print('dasdsaasdasdsad');
-    WoCreateWorkSpaceModel woCreateWorkSpaceModel;
-
+  void getWorkFlows(BuildContext context) async {
+    _workSpaceLoading = false;
+    
+    final int? result = await getDefaultWorkSpaceOfUser(context);
     final token = await SharedManager().getString(SharedEnum.userToken);
-    final response = await _woCreateServiceRepository.getWorkFlows(token, workSpaceId);
-
+    final response = await _woCreateServiceRepository.getWorkFlows(token, result.toString());
     response.fold(
-      (l) => {woCreateWorkSpaceModel = l, print('wocreateworkspaceModel'), print(l)},
+      (l) => {
+      _woCreateWorkSpaceModel = l, 
+      for (var i = 0; i < (_woCreateWorkSpaceModel.children?.length ?? 0); i++)
+      {
+        _workFlowNames.add(_woCreateWorkSpaceModel.children?[i].name ?? ''),
+      }
+      },
       (r) => {},
     );
     notifyListeners();
   }
 
   void createTask(BuildContext context) async {
-    if (summary != '' && requestedById != '' && description != '' && requestedId != '') {
+    if (summary != '' && requestedById != '' && description != '' && requestedId != '' && workFlowId != '') {
       final token = await SharedManager().getString(SharedEnum.userToken);
       _isLoading = true;
       _isWorkOrderCreatedId = '';
@@ -596,7 +625,7 @@ class WoCreateProvider extends ChangeNotifier {
       final String appointmendData = '$_date $_hour:00';
 
       final response = await _woCreateServiceRepository.createTask(token, summary, _requestTypeKey, requestedById, description, appointmendData,
-          typesId, requestedId, requestedLabel, woCategory, componentKey);
+          typesId, requestedId, requestedLabel, woCategory, componentKey,workFlowId);
 
       response.fold(
         (l) => {

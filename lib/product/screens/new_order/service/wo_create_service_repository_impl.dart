@@ -124,7 +124,7 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
     final response = await super.dio.post(
           url,
           data: {
-            "label": ["WoCategory"],
+            "label": ["WoCategory"],  
           },
           options: Options(
             headers: {'authorization': 'Bearer $token'},
@@ -155,8 +155,9 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
 
   @override
   Future<Either<dynamic, CustomServiceException>> createTask(token, summary, requestType, requestedBy, description, appointmendData, templatedBy,
-      requestSpaceId, requestSpaceLabels, woCategory, woComponent) async {
+      requestSpaceId, requestSpaceLabels, woCategory, woComponent, workFlowId) async {
     String url = '${ServiceTools.url.workorder_url}/task';
+
 
     try {
       final response = await super.dio.post(
@@ -177,7 +178,7 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
               ],
               "woCategory": woCategory,
               "isMobile": true,
-              "depended_on": ["718"]
+              "depended_on": [workFlowId]
             },
             options: Options(
               headers: {'authorization': 'Bearer $token'},
@@ -239,7 +240,7 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
     }
   }
 
-  @override
+    @override
   Future<Either<WoCreateDefaultWsUser, CustomServiceException>> getDefaultWorkSpaceOfUser(token, userKey) async {
     WoCreateDefaultWsUser woCreateDefaultWsUser;
     String url = '${ServiceTools.url.workorder_url}/workspace/getDefaultWorkSpaceOfUser/$userKey';
@@ -266,7 +267,6 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
   Future<Either<WoCreateWorkSpaceModel, CustomServiceException>> getWorkFlows(token, workSpaceId) async {
     WoCreateWorkSpaceModel woCreateWorkFlowModel;
     String url = '${ServiceTools.url.workorder_url}/workflows/workspace/$workSpaceId?page=1&limit=1000&orderBy=ASC';
-
     try {
     final response = await super.dio.get(
           url,
@@ -275,14 +275,13 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
           ),
         );
     final data = response.data;
+
     woCreateWorkFlowModel = WoCreateWorkSpaceModel.fromJson(data);
     super.logger.e(woCreateWorkFlowModel);
     return Left(woCreateWorkFlowModel);
-  
     } catch (error) {
       super.logger.e(error.toString());
       return Right(CustomServiceException(message: CustomServiceMessages.tokenChangeError, statusCode: '400'));
     }
   }
-  
 }

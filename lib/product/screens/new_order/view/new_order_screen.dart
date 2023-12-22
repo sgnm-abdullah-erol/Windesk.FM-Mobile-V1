@@ -93,7 +93,7 @@ class NewOrderScreen extends StatelessWidget {
             ? woCreateProvider.getComponent()
             : null;
         woCreateProvider.workSpaceLoading
-            ? woCreateProvider.getDefaultWorkSpaceOfUser(context)
+            ? woCreateProvider.getWorkFlows(context)
             : null;
         return woCreateProvider.isLoading
             ? const CustomLoadingIndicator()
@@ -145,8 +145,6 @@ class NewOrderScreen extends StatelessWidget {
                                 labelText: LocaleKeys.OrderOwner.tr(),
                                 onChangedFunction: (String newValue) {
                                   woCreateProvider.setRequestedBy(newValue);
-                                  print('ggg');
-                                  print(newValue);
                                 },
                                 rightIcon: Icons.arrow_drop_down_rounded,
                                 dropDownArray:
@@ -178,10 +176,21 @@ class NewOrderScreen extends StatelessWidget {
                             WoCreateCard(
                               widget1: location(woCreateProvider, context),
                               widget2: requestType(woCreateProvider, context),
-                              widget3: Container(),
+                              widget3: Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: DropDownInputFields2(
+                                  labelText: LocaleKeys.Workflows.tr(),
+                                  onChangedFunction: (String newValue) {
+                                    woCreateProvider.setWorkFlow(newValue);
+                                  },
+                                  rightIcon: Icons.arrow_drop_down_rounded,
+                                  dropDownArray:
+                                      woCreateProvider.workFlowNames,
+                                ),
+                              ),
                               widget1Required: true,
                               widget2Required: false,
-                              widget3Required: false,
+                              widget3Required: true,
                             ),
                             const SizedBox(height: 15),
                             WoCreateCard(

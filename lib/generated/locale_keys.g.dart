@@ -371,6 +371,8 @@ class LocaleKeys {
   static const String Date = 'Date';
   static const String Description = 'Description';
   static const String TotalTime = 'Total Time';
+  static const String Workflows = "Workflows";
+
 
   // // static String const ----------MAİNTENANCE---------- = '----------MAİNTENANCE----------';
   // static const Manage Check List = 'Manage Check List';
