@@ -374,6 +374,9 @@ class LocaleKeys {
   static const String Workflows = "Workflows";
 
 
+  //test screen
+  static const String AccessTest = 'AccessTest';
+
   // // static String const ----------MAİNTENANCE---------- = '----------MAİNTENANCE----------';
   // static const Manage Check List = 'Manage Check List';
   // static const Add Check List = 'Add Check List';

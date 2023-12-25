@@ -81,7 +81,9 @@ class NewOrderScreen extends StatelessWidget {
         woCreateProvider.locationLoading
             ? woCreateProvider.getLocation()
             : null;
-        woCreateProvider.requestedLoading ? woCreateProvider.getRequestedByPro() : null;
+        woCreateProvider.requestedLoading
+            ? woCreateProvider.getRequestedByPro()
+            : null;
         woCreateProvider.typeLoading ? woCreateProvider.getType() : null;
         woCreateProvider.requestedTypeLoading
             ? woCreateProvider.getRequestedType()
@@ -145,6 +147,8 @@ class NewOrderScreen extends StatelessWidget {
                                 labelText: LocaleKeys.OrderOwner.tr(),
                                 onChangedFunction: (String newValue) {
                                   woCreateProvider.setRequestedBy(newValue);
+                                  print('ggg');
+                                  print(newValue);
                                 },
                                 rightIcon: Icons.arrow_drop_down_rounded,
                                 dropDownArray:
@@ -184,8 +188,7 @@ class NewOrderScreen extends StatelessWidget {
                                     woCreateProvider.setWorkFlow(newValue);
                                   },
                                   rightIcon: Icons.arrow_drop_down_rounded,
-                                  dropDownArray:
-                                      woCreateProvider.workFlowNames,
+                                  dropDownArray: woCreateProvider.workFlowNames,
                                 ),
                               ),
                               widget1Required: true,

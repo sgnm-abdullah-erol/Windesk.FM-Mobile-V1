@@ -15,7 +15,8 @@ import 'wo_create_service_repository.dart';
 
 class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
   @override
-  Future<Either<WoCreateLocationModel, CustomServiceException>> getLocation(token) async {
+  Future<Either<WoCreateLocationModel, CustomServiceException>> getLocation(
+      token) async {
     WoCreateLocationModel woCreateLocationModel;
     String url = '${ServiceTools.url.facility_url}/structures';
 
@@ -33,17 +34,25 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
       return Left(woCreateLocationModel);
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.loginError, statusCode: '400'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.loginError, statusCode: '400'));
     }
   }
 
   @override
-  Future<Either<WoCreateLeafModel, CustomServiceException>> getLazyLoading(token, key) async {
+  Future<Either<WoCreateLeafModel, CustomServiceException>> getLazyLoading(
+      token, key) async {
     WoCreateLeafModel woCreateLeafModel;
-    String url = '${ServiceTools.url.facility_url}/jointspaces/lazyLoadingByKey';
+    String url =
+        '${ServiceTools.url.facility_url}/jointspaces/lazyLoadingByKey';
     final response = await super.dio.post(
           url,
-          data: {"key": key, "leafType": "", "rootLabels": [], "childrenLabels": []},
+          data: {
+            "key": key,
+            "leafType": "",
+            "rootLabels": [],
+            "childrenLabels": []
+          },
           options: Options(
             headers: {'authorization': 'Bearer $token'},
           ),
@@ -55,7 +64,8 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
   }
 
   @override
-  Future<Either<List<WoCreateRequestedByModel>, CustomServiceException>> getRequestedBy(token) async {
+  Future<Either<List<WoCreateRequestedByModel>, CustomServiceException>>
+      getRequestedBy(token) async {
     List<WoCreateRequestedByModel> woCreateRequestedByModel = [];
 
     String url = '${ServiceTools.url.users_url}/user?page=1&limit=100';
@@ -70,37 +80,43 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
             ),
           );
 
-      woCreateRequestedByModel = WoCreateRequestedByModel.fromJsonList(response.data['users']);
+      woCreateRequestedByModel =
+          WoCreateRequestedByModel.fromJsonList(response.data['users']);
       super.logger.e(woCreateRequestedByModel);
       return Left(woCreateRequestedByModel);
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.loginError, statusCode: '400'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.loginError, statusCode: '400'));
     }
   }
 
   @override
-  Future<Either<List<WoCreateTypeModel>, CustomServiceException>> getType(token) async {
+  Future<Either<List<WoCreateTypeModel>, CustomServiceException>> getType(
+      token) async {
     List<WoCreateTypeModel> woCreateTypeModel = [];
 
-    String url = '${ServiceTools.url.workorder_url}/task/task/find/task/types/related/with/workspace/707?page=1&limit=100&orderBy=undefined';
+    String url =
+        '${ServiceTools.url.workorder_url}/task/task/find/task/types/related/with/workspace/707?page=1&limit=100&orderBy=undefined';
     final response = await super.dio.get(
           url,
           options: Options(
             headers: {'authorization': 'Bearer $token'},
           ),
         );
-
+    print(response.data);
     woCreateTypeModel = WoCreateTypeModel.fromJsonList(response.data);
     super.logger.e(woCreateTypeModel);
     return Left(woCreateTypeModel);
   }
 
   @override
-  Future<Either<List<WoCreateRequestedTypeModel>, CustomServiceException>> getRequestedType(token) async {
+  Future<Either<List<WoCreateRequestedTypeModel>, CustomServiceException>>
+      getRequestedType(token) async {
     List<WoCreateRequestedTypeModel> woCreateRequestedTypeModel = [];
 
-    String url = '${ServiceTools.url.workorder_url}/classification/getAClassificationByRealmAndLabelNameAndLanguage/info';
+    String url =
+        '${ServiceTools.url.workorder_url}/classification/getAClassificationByRealmAndLabelNameAndLanguage/info';
     final response = await super.dio.post(
           url,
           data: {
@@ -111,36 +127,42 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
           ),
         );
 
-    woCreateRequestedTypeModel = WoCreateRequestedTypeModel.fromJsonList(response.data['root']['children'][0]['children']);
+    woCreateRequestedTypeModel = WoCreateRequestedTypeModel.fromJsonList(
+        response.data['root']['children'][0]['children']);
     super.logger.e(woCreateRequestedTypeModel);
     return Left(woCreateRequestedTypeModel);
   }
 
   @override
-  Future<Either<List<WoCreateRequestedTypeModel>, CustomServiceException>> getCategory(token) async {
+  Future<Either<List<WoCreateRequestedTypeModel>, CustomServiceException>>
+      getCategory(token) async {
     List<WoCreateRequestedTypeModel> woCreateLocationModel = [];
 
-    String url = '${ServiceTools.url.workorder_url}/classification/getAClassificationByRealmAndLabelNameAndLanguage/info';
+    String url =
+        '${ServiceTools.url.workorder_url}/classification/getAClassificationByRealmAndLabelNameAndLanguage/info';
     final response = await super.dio.post(
           url,
           data: {
-            "label": ["WoCategory"],  
+            "label": ["WoCategory"],
           },
           options: Options(
             headers: {'authorization': 'Bearer $token'},
           ),
         );
 
-    woCreateLocationModel = WoCreateRequestedTypeModel.fromJsonList(response.data['root']['children'][0]['children']);
+    woCreateLocationModel = WoCreateRequestedTypeModel.fromJsonList(
+        response.data['root']['children'][0]['children']);
     super.logger.e(woCreateLocationModel);
     return Left(woCreateLocationModel);
   }
 
   @override
-  Future<Either<List<WoCreateComponentModel>, CustomServiceException>> getComponents(token) async {
+  Future<Either<List<WoCreateComponentModel>, CustomServiceException>>
+      getComponents(token) async {
     List<WoCreateComponentModel> woCreatecomponentModel = [];
 
-    String url = '${ServiceTools.url.asset_url}/component/search/?page=1&limit=100&orderBy=DESC&orderByColumn=&searchString=';
+    String url =
+        '${ServiceTools.url.asset_url}/component/search/?page=1&limit=100&orderBy=DESC&orderByColumn=&searchString=';
     final response = await super.dio.get(
           url,
           options: Options(
@@ -148,16 +170,27 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
           ),
         );
 
-    woCreatecomponentModel = WoCreateComponentModel.fromJsonList(response.data['children']);
+    woCreatecomponentModel =
+        WoCreateComponentModel.fromJsonList(response.data['children']);
     super.logger.e(woCreatecomponentModel);
     return Left(woCreatecomponentModel);
   }
 
   @override
-  Future<Either<dynamic, CustomServiceException>> createTask(token, summary, requestType, requestedBy, description, appointmendData, templatedBy,
-      requestSpaceId, requestSpaceLabels, woCategory, woComponent, workFlowId) async {
+  Future<Either<dynamic, CustomServiceException>> createTask(
+      token,
+      summary,
+      requestType,
+      requestedBy,
+      description,
+      appointmendData,
+      templatedBy,
+      requestSpaceId,
+      requestSpaceLabels,
+      woCategory,
+      woComponent,
+      workFlowId) async {
     String url = '${ServiceTools.url.workorder_url}/task';
-
 
     try {
       final response = await super.dio.post(
@@ -189,13 +222,19 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
       return Left(data);
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.loginError, statusCode: '400'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.loginError, statusCode: '400'));
     }
   }
 
   @override
   Future<Either<dynamic, CustomServiceException>> updateTask(
-      String token, String taskId, String requestedId, String requestedLabel, String templatedBy, String depended) async {
+      String token,
+      String taskId,
+      String requestedId,
+      String requestedLabel,
+      String templatedBy,
+      String depended) async {
     String url = '${ServiceTools.url.workorder_url}/task';
 
     try {
@@ -236,52 +275,58 @@ class WoCreateServiceRepositoryImpl extends WoCreateServiceRepository {
       return Left(data);
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.loginError, statusCode: '400'));
-    }
-  }
-
-    @override
-  Future<Either<WoCreateDefaultWsUser, CustomServiceException>> getDefaultWorkSpaceOfUser(token, userKey) async {
-    WoCreateDefaultWsUser woCreateDefaultWsUser;
-    String url = '${ServiceTools.url.workorder_url}/workspace/getDefaultWorkSpaceOfUser/$userKey';
-
-    try {
-    final response = await super.dio.get(
-          url,
-          options: Options(
-            headers: {'authorization': 'Bearer $token'},
-          ),
-        );
-    final data = response.data;
-    woCreateDefaultWsUser = WoCreateDefaultWsUser.fromJson(data);
-    super.logger.e(woCreateDefaultWsUser);
-    return Left(woCreateDefaultWsUser);
-  
-    } catch (error) {
-      super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.tokenChangeError, statusCode: '400'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.loginError, statusCode: '400'));
     }
   }
 
   @override
-  Future<Either<WoCreateWorkSpaceModel, CustomServiceException>> getWorkFlows(token, workSpaceId) async {
-    WoCreateWorkSpaceModel woCreateWorkFlowModel;
-    String url = '${ServiceTools.url.workorder_url}/workflows/workspace/$workSpaceId?page=1&limit=1000&orderBy=ASC';
-    try {
-    final response = await super.dio.get(
-          url,
-          options: Options(
-            headers: {'authorization': 'Bearer $token'},
-          ),
-        );
-    final data = response.data;
+  Future<Either<WoCreateDefaultWsUser, CustomServiceException>>
+      getDefaultWorkSpaceOfUser(token, userKey) async {
+    WoCreateDefaultWsUser woCreateDefaultWsUser;
+    String url =
+        '${ServiceTools.url.workorder_url}/workspace/getDefaultWorkSpaceOfUser/$userKey';
 
-    woCreateWorkFlowModel = WoCreateWorkSpaceModel.fromJson(data);
-    super.logger.e(woCreateWorkFlowModel);
-    return Left(woCreateWorkFlowModel);
+    try {
+      final response = await super.dio.get(
+            url,
+            options: Options(
+              headers: {'authorization': 'Bearer $token'},
+            ),
+          );
+      final data = response.data;
+      woCreateDefaultWsUser = WoCreateDefaultWsUser.fromJson(data);
+      super.logger.e(woCreateDefaultWsUser);
+      return Left(woCreateDefaultWsUser);
     } catch (error) {
       super.logger.e(error.toString());
-      return Right(CustomServiceException(message: CustomServiceMessages.tokenChangeError, statusCode: '400'));
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.tokenChangeError, statusCode: '400'));
+    }
+  }
+
+  @override
+  Future<Either<WoCreateWorkSpaceModel, CustomServiceException>> getWorkFlows(
+      token, workSpaceId) async {
+    WoCreateWorkSpaceModel woCreateWorkFlowModel;
+    String url =
+        '${ServiceTools.url.workorder_url}/workflows/workspace/$workSpaceId?page=1&limit=1000&orderBy=ASC';
+    try {
+      final response = await super.dio.get(
+            url,
+            options: Options(
+              headers: {'authorization': 'Bearer $token'},
+            ),
+          );
+      final data = response.data;
+
+      woCreateWorkFlowModel = WoCreateWorkSpaceModel.fromJson(data);
+      super.logger.e(woCreateWorkFlowModel);
+      return Left(woCreateWorkFlowModel);
+    } catch (error) {
+      super.logger.e(error.toString());
+      return Right(CustomServiceException(
+          message: CustomServiceMessages.tokenChangeError, statusCode: '400'));
     }
   }
 }

@@ -1209,5 +1209,7 @@
 	"Group": "Grup",
 	"Task Assignee": "Görev Atanan",
 	"Rejected User / Description:": "Reddeden Kullanıcı / Açıklama:",
-	"Approved User:": "Onaylayan Kullanıcı:"
+	"Approved User:": "Onaylayan Kullanıcı:",
+	"<---------- TEST ---------->": "<--- TEST --->",
+	"AccessTest":"Bağlantı Zamanı"
 }

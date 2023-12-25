@@ -1121,5 +1121,11 @@
 	"Group": "Group",
 	"Task Assignee": "Task Assignee",
 	"Rejected User / Description:": "Rejected User / Description:",
-	"Approved User:": "Approved User:"
+	"Approved User:": "Approved User:",
+
+	"<---------- TEST ---------->": "<--- TEST --->",
+	"AccessTest":"Connection Test"
+
+
+
 }

@@ -9,6 +9,7 @@ import 'package:vm_fm_4/core/constants/other/colors.dart';
 import 'package:vm_fm_4/core/constants/paths/service_tools.dart';
 import 'package:vm_fm_4/core/themes/theme_provider.dart';
 import 'package:vm_fm_4/feature/components/appbar/custom_main_appbar.dart';
+import 'package:vm_fm_4/generated/locale_keys.g.dart';
 
 import '../../../../feature/extensions/context_extension.dart';
 import '../../../../feature/global_providers/global_provider.dart';
@@ -41,6 +42,7 @@ class _TestScreenState extends State<TestScreen> {
       ],
       child: Consumer2<TestProvider, ThemeProvider>(builder: (context,
           TestProvider testProvider, ThemeProvider themeProvider, child) {
+        themeProvider.getPreferences();
         testProvider.getInfoLoad == false
             ? testProvider.getTestScreenInfo()
             : null;
@@ -148,95 +150,102 @@ class _TestScreenState extends State<TestScreen> {
 
   Widget _buttonsAndTestResultWidget(BuildContext context,
       TestProvider testProvider, ThemeProvider themeProvider) {
-    return Expanded(
-      child: Column(
-        children: [
-          // buttonNotify(context, AppStrings.issueNotify, onPressFunction,
-          //     _controllerButton),
-          // CustomElevatedButtonWithIcon(
-          //     bgColor: Colors.greenAccent,
-          //     onPressFunction: () {
-          //       themeProvider.setTheme(!themeProvider.isDark);
-          //     },
-          //     textValue: 'Dark theme',
-          //     textColor: Colors.red,
-          //     iconColor: Colors.black,
-          //     icon: Icons.abc),
-          buttonTest(context, AppStrings.accessTest.tr(), testProvider,
-              _controllerButton),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Container(
-                  child: testProvider.accessTestV1 == 'true'
-                      ? const Text(
-                          AppStrings.ifmSuccess,
-                          style: TextStyle(color: Colors.green),
-                        )
-                      : testProvider.accessTestV1 == 'false'
-                          ? const Text(
-                              AppStrings.ifmConnFail,
-                              style: TextStyle(color: Colors.red),
-                            )
-                          : const Text(
-                              AppStrings.ifmConnWait,
-                              style: TextStyle(color: Colors.orange),
-                            ),
-                ),
-                // Container(
-                //   child: testProvider.accessTestV2 == 'true'
-                //       ? const Text(
-                //           AppStrings.mobilServerSuccess,
-                //           style: TextStyle(color: Colors.green),
-                //         )
-                //       : testProvider.accessTestV2 == 'false'
-                //           ? const Text(
-                //               AppStrings.mobilServerConnFail,
-                //               style: TextStyle(color: Colors.red),
-                //             )
-                //           : const Text(
-                //               AppStrings.mobilServerConnWait,
-                //               style: TextStyle(color: Colors.orange),
-                //             ),
-                // ),
-              ],
+    return Consumer<ThemeProvider>(
+        builder: (context, ThemeProvider themeProvider, child) {
+      return Expanded(
+        child: Column(
+          children: [
+            // buttonNotify(context, AppStrings.issueNotify, onPressFunction,
+            //     _controllerButton),
+            // CustomElevatedButtonWithIcon(
+            //     bgColor: Colors.greenAccent,
+            //     onPressFunction: () {
+            //       themeProvider.setTheme(!themeProvider.isDark);
+            //     },
+            //     textValue: 'Dark theme',
+            //     textColor: Colors.red,
+            //     iconColor: Colors.black,
+            //     icon: Icons.abc),
+            buttonTest(context, LocaleKeys.AccessTest.tr(), testProvider,
+                _controllerButton),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Container(
+                    child: testProvider.accessTestV1 == 'true'
+                        ? const Text(
+                            AppStrings.ifmSuccess,
+                            style: TextStyle(color: Colors.green),
+                          )
+                        : testProvider.accessTestV1 == 'false'
+                            ? const Text(
+                                AppStrings.ifmConnFail,
+                                style: TextStyle(color: Colors.red),
+                              )
+                            : const Text(
+                                AppStrings.ifmConnWait,
+                                style: TextStyle(color: Colors.orange),
+                              ),
+                  ),
+                  // Container(
+                  //   child: testProvider.accessTestV2 == 'true'
+                  //       ? const Text(
+                  //           AppStrings.mobilServerSuccess,
+                  //           style: TextStyle(color: Colors.green),
+                  //         )
+                  //       : testProvider.accessTestV2 == 'false'
+                  //           ? const Text(
+                  //               AppStrings.mobilServerConnFail,
+                  //               style: TextStyle(color: Colors.red),
+                  //             )
+                  //           : const Text(
+                  //               AppStrings.mobilServerConnWait,
+                  //               style: TextStyle(color: Colors.orange),
+                  //             ),
+                  // ),
+                ],
+              ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
+    });
   }
 }
 
-SizedBox buttonTest(BuildContext context, String buttonText,
+Widget buttonTest(BuildContext context, String buttonText,
     TestProvider testProvider, controllerButton) {
-  return SizedBox(
-    width: context.width * 0.7,
-    child: Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: RoundedLoadingButton(
-        color: APPColors.Main.red,
-        successColor: Colors.amber,
-        controller: controllerButton,
-        onPressed: () {
-          controllerButton.success();
-          testProvider.accessTestV1Function();
-          //testProvider.accessTestV2Function();
+  return Consumer<ThemeProvider>(
+    builder: (context, ThemeProvider themeProvider, child) {
+      return SizedBox(
+        width: context.width * 0.7,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: RoundedLoadingButton(
+            color: APPColors.Main.red,
+            successColor: Colors.amber,
+            controller: controllerButton,
+            onPressed: () {
+              controllerButton.success();
+              testProvider.accessTestV1Function();
+              //testProvider.accessTestV2Function();
 
-          controllerButton.reset();
-        },
-        valueColor: Colors.white,
-        borderRadius: 12,
-        child: Center(
-          child: Text(
-              buttonText == AppStrings.accessTest
-                  ? AppStrings.accessTest
-                  : AppStrings.accessTest,
-              style: const TextStyle(color: Colors.white)),
+              controllerButton.reset();
+            },
+            valueColor: Colors.white,
+            borderRadius: 12,
+            child: Center(
+              child: Text(
+                  buttonText == LocaleKeys.AccessTest.tr()
+                      ? LocaleKeys.AccessTest.tr()
+                      : LocaleKeys.AccessTest.tr(),
+                  style: const TextStyle(color: Colors.white)),
+            ),
+          ),
         ),
-      ),
-    ),
+      );
+    },
   );
 }
 
@@ -255,9 +264,9 @@ SizedBox buttonNotify(BuildContext context, String buttonText, onPressFunction,
         borderRadius: 12,
         child: Center(
           child: Text(
-              buttonText == AppStrings.accessTest
-                  ? AppStrings.accessTest
-                  : AppStrings.accessTest,
+              buttonText == LocaleKeys.AccessTest.tr()
+                  ? LocaleKeys.AccessTest.tr()
+                  : LocaleKeys.AccessTest.tr(),
               style: const TextStyle(color: Colors.white)),
         ),
       ),
