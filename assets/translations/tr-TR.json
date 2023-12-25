@@ -1211,5 +1211,14 @@
 	"Rejected User / Description:": "Reddeden Kullanıcı / Açıklama:",
 	"Approved User:": "Onaylayan Kullanıcı:",
 	"<---------- TEST ---------->": "<--- TEST --->",
-	"AccessTest":"Bağlantı Zamanı"
+	"AccessTest":"Bağlantı Zamanı",
+	"PhoneTime":"Telefon Saati",
+	"ConnectionTime":"Bağlantı Zamanı",
+	"AppVersion":"Uygulama Versiyonu",
+	"OS":"OS",
+	"Device":"Cihaz",
+	"FacilityName":"İstanbul Finans Merkezi",
+	"ConnectionSuccess" : "IFM : Erişim Başarılı",
+	"ConnectionUnSuccess" : "IFM : Erişim Başarısız",
+	"ConnectionWait":"IFM : Erişim Bekleniyor"
 }

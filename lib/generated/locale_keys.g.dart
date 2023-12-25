@@ -373,9 +373,17 @@ class LocaleKeys {
   static const String TotalTime = 'Total Time';
   static const String Workflows = "Workflows";
 
-
   //test screen
   static const String AccessTest = 'AccessTest';
+  static const String PhoneTime = 'PhoneTime';
+  static const String ConnectionTime = 'ConnectionTime';
+  static const String AppVersion = 'AppVersion';
+  static const String OS = 'OS';
+  static const String Device = 'Device';
+  static const String FacilityName = 'FacilityName';
+  static const String ConnectionSuccess = 'ConnectionSuccess';
+  static const String ConnectionUnSuccess = 'ConnectionUnSuccess';
+  static const String ConnectionWait = 'ConnectionWait';
 
   // // static String const ----------MAİNTENANCE---------- = '----------MAİNTENANCE----------';
   // static const Manage Check List = 'Manage Check List';

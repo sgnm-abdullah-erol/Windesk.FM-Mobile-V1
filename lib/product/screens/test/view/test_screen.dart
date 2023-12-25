@@ -114,17 +114,18 @@ class _TestScreenState extends State<TestScreen> {
           ),
           Padding(
             padding: const EdgeInsets.all(5.0),
-            child: Text(AppStrings.device +
+            child: Text(LocaleKeys.Device.tr() +
                 context.read<TestProvider>().deviceModel.toString()),
           ),
           Padding(
             padding: const EdgeInsets.all(5.0),
-            child: Text(AppStrings.os +
+            child: Text(LocaleKeys.OS.tr() +
+                ' : ' +
                 context.read<TestProvider>().deviceOS.toString()),
           ),
           Padding(
             padding: const EdgeInsets.all(5.0),
-            child: Text(AppStrings.appVersion +
+            child: Text(LocaleKeys.AppVersion.tr() +
                 context.read<TestProvider>().appVersion.toString()),
           ),
           Expanded(
@@ -133,12 +134,14 @@ class _TestScreenState extends State<TestScreen> {
               padding: const EdgeInsets.only(top: 25),
               child: Column(
                 children: [
-                  const Text(
-                    AppStrings.connectionTime,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                  Text(
+                    LocaleKeys.ConnectionTime.tr(),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   //Text(AppStrings.serverTime + testProvider.serverTime),
-                  Text(AppStrings.phoneTime + testProvider.phoneTime),
+                  Text(LocaleKeys.PhoneTime.tr() +
+                      ' : ' +
+                      testProvider.phoneTime),
                 ],
               ),
             ),
@@ -174,13 +177,13 @@ class _TestScreenState extends State<TestScreen> {
                 children: [
                   Container(
                     child: testProvider.accessTestV1 == 'true'
-                        ? const Text(
-                            AppStrings.ifmSuccess,
+                        ?  Text(
+                            LocaleKeys.ConnectionSuccess.tr(),
                             style: TextStyle(color: Colors.green),
                           )
                         : testProvider.accessTestV1 == 'false'
-                            ? const Text(
-                                AppStrings.ifmConnFail,
+                            ?  Text(
+                                LocaleKeys.ConnectionUnSuccess.tr(),
                                 style: TextStyle(color: Colors.red),
                               )
                             : const Text(

@@ -1124,7 +1124,16 @@
 	"Approved User:": "Approved User:",
 
 	"<---------- TEST ---------->": "<--- TEST --->",
-	"AccessTest":"Connection Test"
+	"AccessTest":"Connection Test",
+	"PhoneTime":"Phone Time",
+	"ConnectionTime":"Connection Time",
+	"AppVersion":"App Version",
+	"OS":"OS",
+	"Device":"Device",
+	"FacilityName":"İstanbul Finans Merkezi",
+	"ConnectionSuccess" : "IFM : Connection Success",
+	"ConnectionUnSuccess" : "IFM : Connection Fail",
+	"ConnectionWait":"IFM : Connection Waiting"
 
 
 
