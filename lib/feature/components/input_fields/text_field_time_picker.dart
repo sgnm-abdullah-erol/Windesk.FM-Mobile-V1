@@ -1,9 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/other/app_icons.dart';
 
 class TextFieldTimePicker extends StatefulWidget {
-  const TextFieldTimePicker({super.key, required this.label, required this.onTap, this.disable});
+  const TextFieldTimePicker(
+      {super.key, required this.label, required this.onTap, this.disable});
 
   final bool? disable;
   final String label;
@@ -24,8 +26,8 @@ class _TextFieldTimePickerState extends State<TextFieldTimePicker> {
       enabled: widget.disable ?? true,
       decoration: InputDecoration(
         icon: const Icon(AppIcons.time),
-        labelText: widget.label,
-        hintText: widget.label,
+        labelText: widget.label.tr(),
+        hintText: widget.label.tr(),
         hintStyle: Theme.of(context).textTheme.bodyMedium,
         labelStyle: Theme.of(context).textTheme.bodyMedium,
       ),

@@ -177,12 +177,12 @@ class _TestScreenState extends State<TestScreen> {
                 children: [
                   Container(
                     child: testProvider.accessTestV1 == 'true'
-                        ?  Text(
+                        ? Text(
                             LocaleKeys.ConnectionSuccess.tr(),
                             style: TextStyle(color: Colors.green),
                           )
                         : testProvider.accessTestV1 == 'false'
-                            ?  Text(
+                            ? Text(
                                 LocaleKeys.ConnectionUnSuccess.tr(),
                                 style: TextStyle(color: Colors.red),
                               )

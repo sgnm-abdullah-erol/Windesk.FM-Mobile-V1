@@ -35,7 +35,9 @@ class LocaleKeys {
 
 // support
   static const String SupportList = 'SupportList';
-
+  //search page
+  static const String AssetSearch = 'AssetSearch';
+  static const String SpaceSearch = 'SpaceSearch';
   // asset search
   static const String assetSearch = 'Malzeme Arama';
 
@@ -48,6 +50,7 @@ class LocaleKeys {
 
   static const String spaceSearchSuccess = 'Mahal Arama Başarılı';
   static const String spaceSearchError = 'Uygun Düğüm Bulunamadı';
+  static const String SpaceSearchListItem = 'SpaceSearchListItem';
 
   // static const ----------App---------- = '----------App----------;
   static const String IfmName = 'IfmName';
@@ -296,8 +299,8 @@ class LocaleKeys {
   static const String SelectDecisionModelNotationsype =
       'Select Decision Model Notationsype';
   static const String Building = 'Building';
-  static const String AppointmentDate = 'Appointment Date';
-  static const String AppointmentHour = 'Appointment Hour';
+  static const String AppointmentDatee = 'AppointmentDatee';
+  static const String AppointmentHour = 'AppointmentHour';
   static const String Choose = 'Choose';
   static const String AssignedWorkOrders = 'Assigned Work Orders';
   static const String OpenWorkOrders = 'Open Work Orders';
@@ -348,7 +351,7 @@ class LocaleKeys {
   static const String MaterialError = 'MaterialError';
   static const String NewWorkOrderCreated = 'NewWorkOrderCreated';
   static const String WorkOrderNumber = 'WorkOrderNumber';
-  static const String defination = 'defination';
+  static const String Defination = 'Defination';
   static const String Explanation = 'Explanation';
   static const String Component = 'Component';
   static const String OrderOwner = 'OrderOwner';

@@ -5,6 +5,7 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vm_fm_4/core/themes/theme_provider.dart';
 import 'package:vm_fm_4/feature/components/input_fields/dropdown_input_fields2.dart';
 import 'package:vm_fm_4/product/screens/home/screens/search_work_order/provider/search_work_order_provider.dart';
 import 'package:vm_fm_4/product/screens/home/screens/work_order_list/widgets/custom_loading_indicator2.dart';
@@ -35,11 +36,17 @@ class NewOrderScreen extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => WoCreateProvider()),
         ChangeNotifierProvider(create: (context) => SearchWorkOrderProvider()),
+        ChangeNotifierProvider(create: (context) => ThemeProvider()),
       ],
-      child: Consumer2<WoCreateProvider, SearchWorkOrderProvider>(builder:
-          (context, WoCreateProvider woCreateProvider,
-              SearchWorkOrderProvider searchWorkOrderProvider, child) {
+      child:
+          Consumer3<WoCreateProvider, SearchWorkOrderProvider, ThemeProvider>(
+              builder: (context,
+                  WoCreateProvider woCreateProvider,
+                  SearchWorkOrderProvider searchWorkOrderProvider,
+                  ThemeProvider themeProvider,
+                  child) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
+          //themeProvider.getPreferences();
           if (woCreateProvider.isWorkOrderCreate) {
             snackBar(context, SnackbarStrings.woCreate, 'success');
             showDialog(
@@ -47,20 +54,20 @@ class NewOrderScreen extends StatelessWidget {
               builder: (dialogContext) {
                 return AlertDialog(
                   title: Text(
-                    LocaleKeys.NewWorkOrderCreated.tr(),
+                    LocaleKeys.NewWorkOrderCreated,
                     style: const TextStyle(fontSize: 14),
                   ),
                   content: Text(
-                      "${LocaleKeys.WorkOrderNumber.tr()} ${woCreateProvider.isWorkOrderCreatedId}"),
+                      "${LocaleKeys.WorkOrderNumber} ${woCreateProvider.isWorkOrderCreatedId}"),
                   actions: [
                     TextButton(
-                      child: Text(LocaleKeys.Okey.tr()),
+                      child: Text(LocaleKeys.Okey),
                       onPressed: () {
                         Navigator.pop(dialogContext);
                       },
                     ),
                     TextButton(
-                      child: Text(LocaleKeys.SeeDetail.tr()),
+                      child: Text(LocaleKeys.SeeDetail),
                       onPressed: () {
                         searchWorkOrderProvider
                             .getWorkSpaceWithSearchFromGroupWorks(dialogContext,
@@ -111,12 +118,12 @@ class NewOrderScreen extends StatelessWidget {
                           children: [
                             WoCreateCard(
                               widget1: TextFieldsInputUnderline(
-                                  hintText: LocaleKeys.defination.tr(),
+                                  hintText: LocaleKeys.Defination,
                                   onChanged: (String newValue) {
                                     woCreateProvider.setSummary(newValue);
                                   }),
                               widget2: TextFieldsInputUnderline(
-                                  hintText: LocaleKeys.Explanation.tr(),
+                                  hintText: LocaleKeys.Explanation,
                                   onChanged: (String newValue) {
                                     woCreateProvider.setDescription(newValue);
                                   }),
@@ -144,7 +151,7 @@ class NewOrderScreen extends StatelessWidget {
                             const SizedBox(height: 15),
                             WoCreateCard(
                               widget1: DropDownInputFields2(
-                                labelText: LocaleKeys.OrderOwner.tr(),
+                                labelText: LocaleKeys.OrderOwner,
                                 onChangedFunction: (String newValue) {
                                   woCreateProvider.setRequestedBy(newValue);
                                   print('ggg');
@@ -155,7 +162,7 @@ class NewOrderScreen extends StatelessWidget {
                                     woCreateProvider.getRequestedByChildren,
                               ),
                               widget2: DropDownInputFields2(
-                                labelText: LocaleKeys.Type.tr(),
+                                labelText: LocaleKeys.Type,
                                 onChangedFunction: (String newValue) {
                                   woCreateProvider.setType(newValue);
                                 },
@@ -164,7 +171,7 @@ class NewOrderScreen extends StatelessWidget {
                                     woCreateProvider.getTypesChildren,
                               ),
                               widget3: DropDownInputFields2(
-                                labelText: LocaleKeys.Category.tr(),
+                                labelText: LocaleKeys.Category,
                                 onChangedFunction: (String newValue) {
                                   woCreateProvider.setCategory(newValue);
                                 },
@@ -183,7 +190,7 @@ class NewOrderScreen extends StatelessWidget {
                               widget3: Padding(
                                 padding: const EdgeInsets.all(10),
                                 child: DropDownInputFields2(
-                                  labelText: LocaleKeys.Workflows.tr(),
+                                  labelText: LocaleKeys.Workflows,
                                   onChangedFunction: (String newValue) {
                                     woCreateProvider.setWorkFlow(newValue);
                                   },
@@ -198,7 +205,7 @@ class NewOrderScreen extends StatelessWidget {
                             const SizedBox(height: 15),
                             WoCreateCard(
                               widget1: TextFieldDatePicker(
-                                label: LocaleKeys.AppointmentDate.tr(),
+                                label: LocaleKeys.AppointmentDatee,
                                 onTap: (String date) {
                                   woCreateProvider.setidate = date;
                                 },
@@ -207,7 +214,7 @@ class NewOrderScreen extends StatelessWidget {
                                     .add(const Duration(days: 30)),
                               ),
                               widget2: TextFieldTimePicker(
-                                label: LocaleKeys.AppointmentHour.tr(),
+                                label: LocaleKeys.AppointmentHour,
                                 onTap: (String hour) {
                                   woCreateProvider.setihour = hour;
                                 },
@@ -219,11 +226,11 @@ class NewOrderScreen extends StatelessWidget {
                             ),
                             CustomHalfButtons(
                               leftTitle: Text(
-                                LocaleKeys.Cancel.tr(),
+                                LocaleKeys.Cancel,
                                 style: TextStyle(color: APPColors.Main.white),
                               ),
                               rightTitle: Text(
-                                LocaleKeys.Save.tr(),
+                                LocaleKeys.Save,
                                 style: TextStyle(color: APPColors.Main.white),
                               ),
                               leftOnPressed: () {
@@ -258,7 +265,7 @@ class NewOrderScreen extends StatelessWidget {
       child: Column(
         children: [
           DropDownInputFields2(
-            labelText: LocaleKeys.RequestType.tr(),
+            labelText: LocaleKeys.RequestType,
             onChangedFunction: (String newValue) {
               woCreateProvider.setRequestType(newValue);
               woCreateProvider.setRequestType1(
@@ -272,7 +279,7 @@ class NewOrderScreen extends StatelessWidget {
               child: NullCheckWidget().isLeafFalse(
                 woCreateProvider.requestedTypeTree1,
                 DropDownInputFields2(
-                  labelText: LocaleKeys.Choose.tr(),
+                  labelText: LocaleKeys.Choose,
                   onChangedFunction: (String newValue) {
                     woCreateProvider.setRequestType1(newValue);
                   },
@@ -295,7 +302,7 @@ class NewOrderScreen extends StatelessWidget {
       child: Column(
         children: [
           DropDownInputFields2(
-            labelText: LocaleKeys.Location.tr(),
+            labelText: LocaleKeys.Location,
             onChangedFunction: (String newValue) {
               woCreateProvider.setLocation(newValue);
               woCreateProvider
@@ -314,7 +321,7 @@ class NewOrderScreen extends StatelessWidget {
                 woCreateProvider.locationLeaf,
                 woCreateProvider.woBlockListChildren.isNotEmpty
                     ? DropDownInputFields2(
-                        labelText: LocaleKeys.Block.tr(),
+                        labelText: LocaleKeys.Block,
                         onChangedFunction: (String newValue) {
                           woCreateProvider.setBlock(newValue);
                           woCreateProvider.setFloor(
@@ -335,7 +342,7 @@ class NewOrderScreen extends StatelessWidget {
                 woCreateProvider.buildingLeaf,
                 woCreateProvider.woFloorListChildren.isNotEmpty
                     ? DropDownInputFields2(
-                        labelText: LocaleKeys.Floor.tr(),
+                        labelText: LocaleKeys.Floor,
                         onChangedFunction: (String newValue) {
                           woCreateProvider.setFloor(newValue);
                           woCreateProvider.setSpace(
@@ -354,7 +361,7 @@ class NewOrderScreen extends StatelessWidget {
                 woCreateProvider.floorLeaf,
                 woCreateProvider.woSpaceListChildren.isNotEmpty
                     ? DropDownInputFields2(
-                        labelText: LocaleKeys.Space.tr(),
+                        labelText: LocaleKeys.Space,
                         onChangedFunction: (String newValue) {
                           woCreateProvider.setSpace(newValue);
                         },
