@@ -48,13 +48,12 @@ class _SpaceSearchScreen extends State<SpaceSearchScreen> {
           if (searchProvider.errorAccure) {
             snackBar(context, LocaleKeys.assetSearchError, 'error');
           }
-          
         });
         return WillPopScope(
           child: Scaffold(
             appBar: CustomMainAppbar(
                 returnBack: true,
-                title: const Text(LocaleKeys.spaceSearch).tr(),
+                title: Text(LocaleKeys.SpaceSearch.tr()),
                 elevation: 3),
             body: searchProvider.isLoading
                 ? const CustomLoadingIndicator()
@@ -66,7 +65,7 @@ class _SpaceSearchScreen extends State<SpaceSearchScreen> {
                         children: [
                           TextFieldsInputWithActionAndController(
                               textController: searchProvider.spaceText,
-                              labelText: LocaleKeys.spaceSearch,
+                              labelText: LocaleKeys.SpaceSearch.tr(),
                               actionIcon: AppIcons.search,
                               actionFunction: () {
                                 searchProvider.spaceSearch(context);
@@ -78,7 +77,8 @@ class _SpaceSearchScreen extends State<SpaceSearchScreen> {
                                       child: SingleChildScrollView(
                                         scrollDirection: Axis.vertical,
                                         child: Padding(
-                                          padding: const EdgeInsets.only(right: 15),
+                                          padding:
+                                              const EdgeInsets.only(right: 15),
                                           child: TreeView(nodes: [
                                             for (var i = 0;
                                                 i <
@@ -155,8 +155,8 @@ class _SpaceSearchScreen extends State<SpaceSearchScreen> {
                                           ]),
                                         ),
                                       )))
-                              : const Text(
-                                  'Listelemek için lütfen arama yapınız.',
+                              : Text(
+                                  LocaleKeys.SpaceSearchListItem.tr(),
                                   style: TextStyle(fontSize: 13),
                                 )
                           // CustomHalfButtons(

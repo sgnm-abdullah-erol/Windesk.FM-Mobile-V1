@@ -254,7 +254,7 @@
 	"Select Requested By": "Talep Sahibini Seçin",
 	"Select Type": "Tür Seçiniz",
 	"Building": "Bina",
-	"Appointment Date": "Randevu Tarihi",
+	"AppointmentDatee": "Randevu Tarihi",
 	"AppointmentHour": "Randevu Saati",
 	"Choose": "Seçiniz",
 	"Drag and drop files to here to upload": "Yüklemek için dosyaları buraya sürükleyip bırakın",
@@ -301,7 +301,7 @@
 	"DeleteDocument": "Döküman Silme İşlemi Başarıyla Gerçekleşti",
 	"NewWorkOrderCreated": "New Work Order Created",
 	"WorkOrderNumber": "İş Emri Numarası",
-	"defination": "Tanım",
+	"Defination": "Tanım",
 	"Explanation": "Açıklama",
 	"RequestType": "İstek Türü",
 
@@ -1212,5 +1212,21 @@
 	"Group": "Grup",
 	"Task Assignee": "Görev Atanan",
 	"Rejected User / Description:": "Reddeden Kullanıcı / Açıklama:",
-	"Approved User:": "Onaylayan Kullanıcı:"
+	"Approved User:": "Onaylayan Kullanıcı:",
+	"<---------- Search ---------->": "<--- Search --->",
+	"AssetSearch":"Malzeme Arama",
+	"SpaceSearch":"Mahal Arama",
+	"SpaceSearchListItem":"Listelemek için lütfen arama yapınız.",
+
+	"<---------- TEST ---------->": "<--- TEST --->",
+	"AccessTest":"Bağlantı Zamanı",
+	"PhoneTime":"Telefon Saati",
+	"ConnectionTime":"Bağlantı Zamanı",
+	"AppVersion":"Uygulama Versiyonu",
+	"OS":"OS",
+	"Device":"Cihaz",
+	"FacilityName":"İstanbul Finans Merkezi",
+	"ConnectionSuccess" : "IFM : Erişim Başarılı",
+	"ConnectionUnSuccess" : "IFM : Erişim Başarısız",
+	"ConnectionWait":"IFM : Erişim Bekleniyor"
 }

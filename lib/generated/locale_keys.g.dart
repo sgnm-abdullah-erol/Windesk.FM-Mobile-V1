@@ -35,7 +35,9 @@ class LocaleKeys {
 
 // support
   static const String SupportList = 'SupportList';
-
+  //search page
+  static const String AssetSearch = 'AssetSearch';
+  static const String SpaceSearch = 'SpaceSearch';
   // asset search
   static const String assetSearch = 'Malzeme Arama';
 
@@ -48,6 +50,7 @@ class LocaleKeys {
 
   static const String spaceSearchSuccess = 'Mahal Arama Başarılı';
   static const String spaceSearchError = 'Uygun Düğüm Bulunamadı';
+  static const String SpaceSearchListItem = 'SpaceSearchListItem';
 
   // static const ----------App---------- = '----------App----------;
   static const String IfmName = 'IfmName';
@@ -298,8 +301,8 @@ class LocaleKeys {
   static const String SelectDecisionModelNotationsype =
       'Select Decision Model Notationsype';
   static const String Building = 'Building';
-  static const String AppointmentDate = 'Appointment Date';
-  static const String AppointmentHour = 'Appointment Hour';
+  static const String AppointmentDatee = 'AppointmentDatee';
+  static const String AppointmentHour = 'AppointmentHour';
   static const String Choose = 'Choose';
   static const String AssignedWorkOrders = 'Assigned Work Orders';
   static const String OpenWorkOrders = 'Open Work Orders';
@@ -350,7 +353,7 @@ class LocaleKeys {
   static const String MaterialError = 'MaterialError';
   static const String NewWorkOrderCreated = 'NewWorkOrderCreated';
   static const String WorkOrderNumber = 'WorkOrderNumber';
-  static const String defination = 'defination';
+  static const String Defination = 'Defination';
   static const String Explanation = 'Explanation';
   static const String Component = 'Component';
   static const String OrderOwner = 'OrderOwner';
@@ -379,6 +382,17 @@ class LocaleKeys {
   static const String selectedLocation = 'selectedLocation';
   static const String willBeChanged = 'willBeChanged';
 
+  //test screen
+  static const String AccessTest = 'AccessTest';
+  static const String PhoneTime = 'PhoneTime';
+  static const String ConnectionTime = 'ConnectionTime';
+  static const String AppVersion = 'AppVersion';
+  static const String OS = 'OS';
+  static const String Device = 'Device';
+  static const String FacilityName = 'FacilityName';
+  static const String ConnectionSuccess = 'ConnectionSuccess';
+  static const String ConnectionUnSuccess = 'ConnectionUnSuccess';
+  static const String ConnectionWait = 'ConnectionWait';
 
   // // static String const ----------MAİNTENANCE---------- = '----------MAİNTENANCE----------';
   // static const Manage Check List = 'Manage Check List';

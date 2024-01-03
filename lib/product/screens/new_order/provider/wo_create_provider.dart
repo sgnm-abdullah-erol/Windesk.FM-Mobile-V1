@@ -1,11 +1,11 @@
 // ignore_for_file: unused_element, unused_field, unused_local_variable
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vm_fm_4/core/database/shared_manager.dart';
 import 'package:vm_fm_4/core/enums/shared_enums.dart';
 import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
-import 'package:vm_fm_4/feature/global_providers/global_provider.dart';
 import 'package:vm_fm_4/feature/injection.dart';
 import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_component_model.dart';
 import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_default_ws_user.dart';
@@ -18,8 +18,11 @@ import 'package:vm_fm_4/feature/models/wo_create_model/wo_create_work_space_mode
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
 import 'package:vm_fm_4/product/screens/new_order/service/wo_create_service_repository_impl.dart';
 
+import '../../../../feature/global_providers/global_provider.dart';
+
 class WoCreateProvider extends ChangeNotifier {
-  final WoCreateServiceRepositoryImpl _woCreateServiceRepository = Injection.getIt.get<WoCreateServiceRepositoryImpl>();
+  final WoCreateServiceRepositoryImpl _woCreateServiceRepository =
+      Injection.getIt.get<WoCreateServiceRepositoryImpl>();
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -108,15 +111,15 @@ class WoCreateProvider extends ChangeNotifier {
   String _requestedLabel = '';
   String get requestedLabel => _requestedLabel;
 
-  String _workFlowId = '';
-  String get workFlowId => _workFlowId;
-
   String _date = '';
   String get date => _date;
   set setidate(String date1) {
     _date = date1;
     notifyListeners();
   }
+
+  String _workFlowId = '';
+  String get workFlowId => _workFlowId;
 
   String _hour = '';
   String get hour => _hour;
@@ -150,7 +153,6 @@ class WoCreateProvider extends ChangeNotifier {
 
   bool _lazyLoading = true;
   bool get lazyLoading => _locationLoading;
-
   bool _workSpaceLoading = true;
   bool get workSpaceLoading => _workSpaceLoading;
 
@@ -172,9 +174,6 @@ class WoCreateProvider extends ChangeNotifier {
   List<WoCreateComponentModel> _getComponents = [];
   List<WoCreateComponentModel> get getComponents => _getComponents;
 
-  WoCreateWorkSpaceModel _woCreateWorkSpaceModel = const WoCreateWorkSpaceModel();
-  WoCreateWorkSpaceModel get woCreateWorkSpaceModel => _woCreateWorkSpaceModel;
-
   WoCreateLeafModel _woBlockList = const WoCreateLeafModel();
   WoCreateLeafModel get woBlockList => _woBlockList;
 
@@ -187,7 +186,9 @@ class WoCreateProvider extends ChangeNotifier {
   WoCreateDefaultWsUser _woCreateDefaultWsUser = const WoCreateDefaultWsUser();
   WoCreateDefaultWsUser get woCreateDefaultWsUser => _woCreateDefaultWsUser;
 
-
+  WoCreateWorkSpaceModel _woCreateWorkSpaceModel =
+      const WoCreateWorkSpaceModel();
+  WoCreateWorkSpaceModel get woCreateWorkSpaceModel => _woCreateWorkSpaceModel;
 
   final List<String> _woLocationListChildren = [];
   List<String> get woLocationListChildren => _woLocationListChildren;
@@ -216,8 +217,14 @@ class WoCreateProvider extends ChangeNotifier {
   final List<String> _getComponentsChildren = [];
   List<String> get getComponentsChildren => _getComponentsChildren;
 
-  final List<String> _getRequestedTypesChildrenTree1 = [];
-  List<String> get getRequestedTypesChildrenTree1 => _getRequestedTypesChildrenTree1;
+  List<String> _getRequestedTypesChildrenTree1 = [];
+  List<String> get getRequestedTypesChildrenTree1 =>
+      _getRequestedTypesChildrenTree1;
+  void setRequestedTypesChildrenTree1(
+      List<String> getRequestedTypesChildrenTree1) {
+    _getRequestedTypesChildrenTree1 = getRequestedTypesChildrenTree1;
+    notifyListeners();
+  }
 
   final List<String> _workFlowNames = [];
   List<String> get workFlowNames => _workFlowNames;
@@ -261,7 +268,6 @@ class WoCreateProvider extends ChangeNotifier {
     }
   }
 
-
   void setComponent(String newValue) {
     _component = newValue;
     for (var i = 0; i < (_getComponents.length); i++) {
@@ -282,9 +288,14 @@ class WoCreateProvider extends ChangeNotifier {
   }
 
   void setAllClear() {
-    // setSummary('');
-    // setDescription('');
+    setSummary('');
+    setDescription('');
+    woBlockListChildren.clear();
+    woFloorListChildren.clear();
+    woSpaceListChildren.clear();
+    getRequestedTypesChildrenTree1.clear();
 
+    getLocation();
     notifyListeners();
   }
 
@@ -324,6 +335,7 @@ class WoCreateProvider extends ChangeNotifier {
   }
 
   void setFloor(String newValue) {
+    _woSpaceListChildren.clear();
     _floor = newValue;
     for (var i = 0; i < (_woFloorList.children?.length ?? 0); i++) {
       if (_woFloorList.children?[i].name == newValue) {
@@ -343,7 +355,8 @@ class WoCreateProvider extends ChangeNotifier {
     _space = newValue;
     _selectedLeafIsTrue = true;
     for (var i = 0; i < (_woSpaceList.children?.length ?? 0); i++) {
-      if ('${_woSpaceList.children?[i].code}-${_woSpaceList.children?[i].name}' == newValue) {
+      if ('${_woSpaceList.children?[i].code}-${_woSpaceList.children?[i].name}' ==
+          newValue) {
         //_spaceKey = _woSpaceList.children?[i].key ?? '';
         _selectedLeafIsTrue = true;
         _lazyType = _woSpaceList.children?[i].labels?[0] ?? '';
@@ -362,13 +375,21 @@ class WoCreateProvider extends ChangeNotifier {
     notifyListeners();
     for (var i = 0; i < (_getRequestedTypes.length); i++) {
       if (_getRequestedTypes[i].name == newValue) {
-        isChildrenExist = _getRequestedTypes[i].children!.isNotEmpty ? true : false;
+        print('girdiiç');
+
+        isChildrenExist =
+            _getRequestedTypes[i].children!.isNotEmpty ? true : false;
         _requestTypeKey = _getRequestedTypes[i].code.toString();
         _requestedTypeTree1 = !isChildrenExist;
         notifyListeners();
         if (isChildrenExist) {
+          print('girdiiç1');
+
           for (var b = 0; b < (_getRequestedTypes[i].children!.length); b++) {
-            _getRequestedTypesChildrenTree1.add(_getRequestedTypes[i].children![b].name ?? '');
+            print('girdiiç2');
+
+            _getRequestedTypesChildrenTree1
+                .add(_getRequestedTypes[i].children![b].name ?? '');
           }
         }
       }
@@ -380,11 +401,13 @@ class WoCreateProvider extends ChangeNotifier {
     bool isChildrenExist;
     _requestType1 = newValue;
     notifyListeners();
+
     for (var i = 0; i < (_getRequestedTypes.length); i++) {
       if (_getRequestedTypes[i].name == _requestType) {
         for (var b = 0; b < (_getRequestedTypes[i].children!.length); b++) {
           if (_getRequestedTypes[i].children![b].name == _requestType1) {
-            _requestTypeKey = _getRequestedTypes[i].children![b].code.toString();
+            _requestTypeKey =
+                _getRequestedTypes[i].children![b].code.toString();
             notifyListeners();
           }
           //_requestTypeKey.add(_getRequestedTypes[i].children![b].name ?? '');
@@ -407,7 +430,8 @@ class WoCreateProvider extends ChangeNotifier {
         _woLocationList = l,
         for (var i = 0; i < (_woLocationList.children?.length ?? 0); i++)
           {
-            _woLocationListChildren.add(_woLocationList.children?[i].name ?? ''),
+            _woLocationListChildren
+                .add(_woLocationList.children?[i].name ?? ''),
             notifyListeners(),
           }
       },
@@ -419,10 +443,10 @@ class WoCreateProvider extends ChangeNotifier {
 
   void lazyList(String key, String lazyType) async {
     final token = await SharedManager().getString(SharedEnum.userToken);
-    final response = await _woCreateServiceRepository.getLazyLoading(token, key);
+    final response =
+        await _woCreateServiceRepository.getLazyLoading(token, key);
     _lazyLoading = false;
     notifyListeners();
-
     if (lazyType == 'Building') {
       _woLocationListChildren.clear();
       response.fold(
@@ -453,7 +477,8 @@ class WoCreateProvider extends ChangeNotifier {
           _woSpaceList = l,
           for (var i = 0; i < (_woSpaceList.children?.length ?? 0); i++)
             {
-              _woSpaceListChildren.add('${_woSpaceList.children?[i].architecturalCode}-${_woSpaceList.children?[i].name}'),
+              _woSpaceListChildren.add(
+                  '${_woSpaceList.children?[i].architecturalCode}-${_woSpaceList.children?[i].name}'),
               //                  '${_woSpaceList.children?[i].code}-${_woSpaceList.children?[i].name}'),
             }
         },
@@ -475,6 +500,7 @@ class WoCreateProvider extends ChangeNotifier {
     response.fold(
       (l) => {
         _getRequestedBy = l,
+        _getRequestedByChildren.add(''),
         for (var i = 0; i < (_getRequestedBy.length); i++)
           {
             _getRequestedByChildren.add(_getRequestedBy[i].username ?? ''),
@@ -498,6 +524,7 @@ class WoCreateProvider extends ChangeNotifier {
     response.fold(
       (l) => {
         _getTypes = l,
+        _getTypesChildren.add(''),
         for (var i = 0; i < (_getTypes.length); i++)
           {
             _getTypesChildren.add(_getTypes[i].name ?? ''),
@@ -520,6 +547,7 @@ class WoCreateProvider extends ChangeNotifier {
     response.fold(
       (l) => {
         _getRequestedTypes = l,
+        _getRequestedTypesChildren.add(''),
         for (var i = 0; i < (_getRequestedTypes.length); i++)
           {
             _getRequestedTypesChildren.add(_getRequestedTypes[i].name ?? ''),
@@ -542,6 +570,7 @@ class WoCreateProvider extends ChangeNotifier {
     response.fold(
       (l) => {
         _getCategories = l,
+        _getCategoriesChildren.add(''),
         for (var i = 0; i < (_getCategories.length); i++)
           {
             _getCategoriesChildren.add(_getCategories[i].name ?? ''),
@@ -577,37 +606,38 @@ class WoCreateProvider extends ChangeNotifier {
   }
 
   Future<int?> getDefaultWorkSpaceOfUser(BuildContext context) async {
-
     final userKey = context.read<GlobalProvider>().userId;
     final token = await SharedManager().getString(SharedEnum.userToken);
-    final response = await _woCreateServiceRepository.getDefaultWorkSpaceOfUser(token, userKey);
+    final response = await _woCreateServiceRepository.getDefaultWorkSpaceOfUser(
+        token, userKey);
 
     response.fold(
       (l) => {
         _woCreateDefaultWsUser = l,
       },
-      (r) => {
-      },
+      (r) => {},
     );
     notifyListeners();
-    
-    return _woCreateDefaultWsUser.id;
 
+    return _woCreateDefaultWsUser.id;
   }
 
   void getWorkFlows(BuildContext context) async {
     _workSpaceLoading = false;
-    
+
     final int? result = await getDefaultWorkSpaceOfUser(context);
     final token = await SharedManager().getString(SharedEnum.userToken);
-    final response = await _woCreateServiceRepository.getWorkFlows(token, result.toString());
+    final response =
+        await _woCreateServiceRepository.getWorkFlows(token, result.toString());
     response.fold(
       (l) => {
-      _woCreateWorkSpaceModel = l, 
-      for (var i = 0; i < (_woCreateWorkSpaceModel.children?.length ?? 0); i++)
-      {
-        _workFlowNames.add(_woCreateWorkSpaceModel.children?[i].name ?? ''),
-      }
+        _woCreateWorkSpaceModel = l,
+        for (var i = 0;
+            i < (_woCreateWorkSpaceModel.children?.length ?? 0);
+            i++)
+          {
+            _workFlowNames.add(_woCreateWorkSpaceModel.children?[i].name ?? ''),
+          }
       },
       (r) => {},
     );
@@ -615,7 +645,14 @@ class WoCreateProvider extends ChangeNotifier {
   }
 
   void createTask(BuildContext context) async {
-    if (summary != '' && requestedById != '' && description != '' && requestedId != '' && workFlowId != '') {
+    print(summary);
+    print(requestedById);
+    print(description);
+    print(requestedId);
+    if (summary != '' &&
+        requestedById != '' &&
+        description != '' &&
+        requestedId != '') {
       final token = await SharedManager().getString(SharedEnum.userToken);
       _isLoading = true;
       _isWorkOrderCreatedId = '';
@@ -624,8 +661,19 @@ class WoCreateProvider extends ChangeNotifier {
 
       final String appointmendData = '$_date $_hour:00';
 
-      final response = await _woCreateServiceRepository.createTask(token, summary, _requestTypeKey, requestedById, description, appointmendData,
-          typesId, requestedId, requestedLabel, woCategory, componentKey,workFlowId);
+      final response = await _woCreateServiceRepository.createTask(
+          token,
+          summary,
+          _requestTypeKey,
+          requestedById,
+          description,
+          appointmendData,
+          typesId,
+          requestedId,
+          requestedLabel,
+          woCategory,
+          componentKey,
+          workFlowId);
 
       response.fold(
         (l) => {

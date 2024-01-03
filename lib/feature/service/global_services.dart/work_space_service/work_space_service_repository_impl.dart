@@ -596,7 +596,6 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
               "description": description,
               "originiatedBy": taskId, // task id
               "templatedBy": ["MaterialRequest001"],
-              //"depended_on": ["1159"],
               "mob": true, //TODO değişecek. Backend kaynaklı eklenmiştir.
               "requestedSpareOf": [
                 {

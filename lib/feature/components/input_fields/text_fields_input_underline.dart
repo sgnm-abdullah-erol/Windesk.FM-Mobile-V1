@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -42,7 +43,7 @@ class TextFieldsInputUnderline extends StatelessWidget {
           borderSide: BorderSide(color: APPColors.Main.grey),
         ),
         border: const UnderlineInputBorder(),
-        hintText: hintText,
+        hintText: hintText.tr(),
       ),
       inputFormatters: inputFormatters,
       maxLines: maxLines ?? 1,

@@ -248,7 +248,7 @@
 	"Select Requested By": "Select Requested By",
 	"Select Decision Model Notationsype": "Select Decision Model Notationsype",
 	"Building": "Building",
-	"Appointment Date": "Appointment Date",
+	"AppointmentDatee": "Appointment Date",
 	"AppointmentHour": "Appointment Hour",
 	"Choose": "Choose",
 	"Assigned Work Orders": "Assigned Work Orders",
@@ -297,7 +297,7 @@
 	"ErrorAccurWhileDownloadFile": "Error Accured While Downloading File",
 	"NewWorkOrderCreated": "New Work Order Created",
 	"WorkOrderNumber": "Work Order Number",
-	"defination": "Defination",
+	"Defination": "Defination",
 	"RequestType": "Request Type",
 
 	"----------MAİNTENANCE----------": "------------MAİNTENANCE------------",
@@ -1125,5 +1125,26 @@
 	"Group": "Group",
 	"Task Assignee": "Task Assignee",
 	"Rejected User / Description:": "Rejected User / Description:",
-	"Approved User:": "Approved User:"
+	"Approved User:": "Approved User:",
+
+	"<---------- Search ---------->": "<--- Search --->",
+	"AssetSearch":"Asset Search",
+	"SpaceSearch":"Space Search",
+	"SpaceSearchListItem":"Please search to list.",
+
+
+	"<---------- TEST ---------->": "<--- TEST --->",
+	"AccessTest":"Connection Test",
+	"PhoneTime":"Phone Time",
+	"ConnectionTime":"Connection Time",
+	"AppVersion":"App Version",
+	"OS":"OS",
+	"Device":"Device",
+	"FacilityName":"İstanbul Finans Merkezi",
+	"ConnectionSuccess" : "IFM : Connection Success",
+	"ConnectionUnSuccess" : "IFM : Connection Fail",
+	"ConnectionWait":"IFM : Connection Waiting"
+
+
+
 }

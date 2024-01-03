@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
 
@@ -34,34 +35,34 @@ class _TextFieldDatePickerState extends State<TextFieldDatePicker> {
       controller: _controller,
       style: context.bodyMedium,
       decoration: InputDecoration(
-        labelText: widget.label,
+        labelText: widget.label.tr(),
         icon: const Icon(AppIcons.calendarToday),
-        hintText: widget.label,
+        hintText: widget.label.tr(),
         hintStyle: context.bodyMedium,
         labelStyle: context.bodyMedium,
       ),
       readOnly: true,
       onTap: () async {
-        if(widget.readOnly ?? false){
-
-        }
-        else{
-        final DateTime? date = await _datePicker(context, widget.initialDate, widget.lastDate ?? DateTime.now());
-        if (date != null) {
-          setState(() {
-            if (widget.initialControllerFunction != null) {
-              widget.initialControllerFunction!(date.toLocal().toString());
-            }
-            _controller.text = date.toString().split(' ')[0];
-          });
-        }
-        widget.onTap(_controller.text);
+        if (widget.readOnly ?? false) {
+        } else {
+          final DateTime? date = await _datePicker(
+              context, widget.initialDate, widget.lastDate ?? DateTime.now());
+          if (date != null) {
+            setState(() {
+              if (widget.initialControllerFunction != null) {
+                widget.initialControllerFunction!(date.toLocal().toString());
+              }
+              _controller.text = date.toString().split(' ')[0];
+            });
+          }
+          widget.onTap(_controller.text);
         }
       },
     );
   }
 
-  Future<DateTime?> _datePicker(BuildContext context, DateTime initialDate, DateTime lastDate) {
+  Future<DateTime?> _datePicker(
+      BuildContext context, DateTime initialDate, DateTime lastDate) {
     return showDatePicker(
       context: context,
       initialDate: DateTime.now(),
