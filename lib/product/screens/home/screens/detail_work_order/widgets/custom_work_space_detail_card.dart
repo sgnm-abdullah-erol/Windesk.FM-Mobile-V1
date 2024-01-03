@@ -187,6 +187,9 @@ class _LocationInformation extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
+              workSpaceDetail.task?.labels != null &&
+              workSpaceDetail.task?.labels?.contains('Maintenance') == false &&
+              workSpaceDetail.task?.labels?.contains('Support') == false  ?
                 IconButton(
                   onPressed: () async {
                     final result = await showModalBottomSheet(
@@ -214,7 +217,7 @@ class _LocationInformation extends StatelessWidget {
                     }
                   },
                   icon: const Icon(AppIcons.change),
-                ),
+                ) : Container(),
                 Text(
                   workSpaceDetail.task?.requestedSpaces?.name ?? '',
                   style:

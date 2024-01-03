@@ -226,11 +226,11 @@ class NewOrderScreen extends StatelessWidget {
                             ),
                             CustomHalfButtons(
                               leftTitle: Text(
-                                LocaleKeys.Cancel,
+                                LocaleKeys.Cancel.tr(),
                                 style: TextStyle(color: APPColors.Main.white),
                               ),
                               rightTitle: Text(
-                                LocaleKeys.Save,
+                                LocaleKeys.Save.tr(),
                                 style: TextStyle(color: APPColors.Main.white),
                               ),
                               leftOnPressed: () {
