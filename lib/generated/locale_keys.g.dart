@@ -192,6 +192,8 @@ class LocaleKeys {
   static const String SelectGroupForContinue = "SelectGroupForContinue";
   static const String ErrorChangeStateWithGroup = 'ErrorChangeStateWithGroup';
   static const String LocationChangeSuccessfull = 'LocationChangeSuccessfull';
+  static const String LocationChangeUnSuccessfull = 'LocationChangeUnSuccessfull';
+
   static const String SelectaLocation = 'SelectaLocation';
   static const String PleaseGiveAllRequiredInputs =
       'PleaseGiveAllRequiredInputs';
@@ -372,6 +374,10 @@ class LocaleKeys {
   static const String Description = 'Description';
   static const String TotalTime = 'Total Time';
   static const String Workflows = "Workflows";
+
+  //work order location
+  static const String selectedLocation = 'selectedLocation';
+  static const String willBeChanged = 'willBeChanged';
 
 
   // // static String const ----------MAİNTENANCE---------- = '----------MAİNTENANCE----------';

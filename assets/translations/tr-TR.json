@@ -149,10 +149,13 @@
 	"SelectGroupForContinue": "Devam etmek için grup seçiniz",
 	"ErrorChangeStateWithGroup": "Lütfen grup seçimi yaparak devam ediniz",
 	"LocationChangeSuccessfull": " Lokasyon güncelleme başarılı",
+	"LocationChangeUnSuccessfull": " Lokasyon güncelleme başarısız",
 	"SelectaLocation": "Select a Location",
 	"scope": "Kapsam",
 	"PleaseGiveAllRequiredInputs":"Lütfen zorunlu alanların tümünü doldurunuz.",
 	"support": "Destek",
+	"selectedLocation":"Seçtiğiniz lokasyon",
+	"willBeChanged":"olarak değiştirilecektir",
 
 	"----------------DATATABLE----------": "------------DATATABLE-------------",
 	"DataTableID": "ID",

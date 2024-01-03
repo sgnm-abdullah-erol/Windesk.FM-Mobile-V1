@@ -581,7 +581,8 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
   ) async {
     bool result;
     String url = '${ServiceTools.url.workorder_url}/task';
-
+    
+    //mob propertisi geçici olarak eklenmiştirrr.!!!!!!!!!!
     try {
       final response = await super.dio.post(
             url,
@@ -595,6 +596,8 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
               "description": description,
               "originiatedBy": taskId, // task id
               "templatedBy": ["MaterialRequest001"],
+              //"depended_on": ["1159"],
+              "mob": true, //TODO değişecek. Backend kaynaklı eklenmiştir.
               "requestedSpareOf": [
                 {
                   "id": materialId, // malzeme id
@@ -608,7 +611,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
               contentType: Headers.jsonContentType,
             ),
           );
-
+      
       if (response.statusCode == 200 || response.statusCode == 201) {
         result = true;
 

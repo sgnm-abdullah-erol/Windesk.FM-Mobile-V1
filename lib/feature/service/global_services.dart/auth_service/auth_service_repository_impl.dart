@@ -27,7 +27,6 @@ class AuthServiceRepositoryImpl extends AuthServiceRepository {
             },
             options: Options(),
           );
-
       final data = response.data;
       LoginModel loginModel = LoginModel.fromJson(data);
       return Left(loginModel);

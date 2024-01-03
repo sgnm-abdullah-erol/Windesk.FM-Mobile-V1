@@ -50,7 +50,7 @@ class ChangeLocationLeafModelBottomSheet extends StatelessWidget {
                             value.selectedLocationName != '' ?
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text('Seçili lokasyon ${value.selectedLocationName} olarak değiştirilecektir.',maxLines: 2),
+                              child: Text('${LocaleKeys.selectedLocation.tr()} ${value.selectedLocationName} ${LocaleKeys.willBeChanged.tr()}',maxLines: 2),
                             ) : Container(),
                             CustomHalfButtons(
                               leftTitle: Text(
