@@ -144,7 +144,7 @@
 	"ErrorChangeStateWithGroup": "You have to select a group",
 	"LocationChangeSuccessfull": " Location Change Succesfull",
 	"LocationChangeUnSuccessfull": " Location Change Unsuccesfull",
-	"SelectaLocation": "Alan seçiniz",
+	"SelectaLocation": "Please Select a Location",
 	"scope": "Scope",
 	"Explanation": "Explanation",
 	"PleaseGiveAllRequiredInputs":"Please Give All Required Inputs",

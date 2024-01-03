@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import 'core/constants/other/app_strings.dart';
@@ -31,6 +32,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+  SystemChrome.setPreferredOrientations([
+     DeviceOrientation.portraitDown,
+     DeviceOrientation.portraitUp,
+  ]);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<GlobalProvider>(create: (_) => GlobalProvider()),
