@@ -188,8 +188,7 @@ class _LocationInformation extends StatelessWidget {
             child: Row(
               children: [
               workSpaceDetail.task?.labels != null &&
-              workSpaceDetail.task?.labels?.contains('Maintenance') == false &&
-              workSpaceDetail.task?.labels?.contains('Support') == false  ?
+              workSpaceDetail.task?.labels?.contains('Fault') == true ?
                 IconButton(
                   onPressed: () async {
                     final result = await showModalBottomSheet(
