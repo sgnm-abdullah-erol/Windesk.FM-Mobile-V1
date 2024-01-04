@@ -50,7 +50,10 @@ class _SpaceSearchScreen extends State<SpaceSearchScreen> {
         });
         return WillPopScope(
           child: Scaffold(
-            appBar: CustomMainAppbar(returnBack: true, title: Text(LocaleKeys.SpaceSearch.tr()), elevation: 3),
+            appBar: CustomMainAppbar(
+                returnBack: true,
+                title: (LocaleKeys.SpaceSearch.tr()),
+                elevation: 3),
             body: searchProvider.isLoading
                 ? const CustomLoadingIndicator()
                 : Center(

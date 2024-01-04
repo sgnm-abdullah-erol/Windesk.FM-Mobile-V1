@@ -64,8 +64,8 @@ class _BodyWidget extends StatelessWidget {
         Expanded(
           flex: 20,
           child: CustomHalfButtons(
-            leftTitle: const Text(LocaleKeys.Cancel).tr(),
-            rightTitle: const Text(LocaleKeys.Approve).tr(),
+            leftTitle: (LocaleKeys.Cancel),
+            rightTitle: (LocaleKeys.Approve),
             leftOnPressed: () => Navigator.of(context).pop(),
             rightOnPressed: () {
               Navigator.pop(context);

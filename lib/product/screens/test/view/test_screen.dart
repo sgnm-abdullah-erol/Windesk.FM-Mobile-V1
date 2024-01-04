@@ -26,7 +26,8 @@ class TestScreen extends StatefulWidget {
 }
 
 class _TestScreenState extends State<TestScreen> {
-  final RoundedLoadingButtonController _controllerButton = RoundedLoadingButtonController();
+  final RoundedLoadingButtonController _controllerButton =
+      RoundedLoadingButtonController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,13 +40,17 @@ class _TestScreenState extends State<TestScreen> {
           create: (context) => ThemeProvider(),
         )
       ],
-      child: Consumer2<TestProvider, ThemeProvider>(builder: (context, TestProvider testProvider, ThemeProvider themeProvider, child) {
+      child: Consumer2<TestProvider, ThemeProvider>(builder: (context,
+          TestProvider testProvider, ThemeProvider themeProvider, child) {
         themeProvider.getPreferences();
-        testProvider.getInfoLoad == false ? testProvider.getTestScreenInfo() : null;
+        testProvider.getInfoLoad == false
+            ? testProvider.getTestScreenInfo()
+            : null;
         return WillPopScope(
           child: Scaffold(
-            appBar: const CustomMainAppbar(title: Text('Test')),
-            body: Center(child: _bodyWidget(context, testProvider, themeProvider)),
+            appBar: const CustomMainAppbar(title: LocaleKeys.TestTab),
+            body: Center(
+                child: _bodyWidget(context, testProvider, themeProvider)),
           ),
           onWillPop: () async => false,
         );
@@ -53,7 +58,8 @@ class _TestScreenState extends State<TestScreen> {
     );
   }
 
-  _bodyWidget(BuildContext context, TestProvider testProvider, ThemeProvider themeProvider) {
+  _bodyWidget(BuildContext context, TestProvider testProvider,
+      ThemeProvider themeProvider) {
     return Column(
       children: [
         _headerWidget(context),
@@ -108,15 +114,18 @@ class _TestScreenState extends State<TestScreen> {
           ),
           Padding(
             padding: const EdgeInsets.all(5.0),
-            child: Text(LocaleKeys.Device.tr() + context.read<TestProvider>().deviceModel.toString()),
+            child: Text(
+                '${LocaleKeys.Device.tr()} : ${context.read<TestProvider>().deviceModel}'),
           ),
           Padding(
             padding: const EdgeInsets.all(5.0),
-            child: Text('${LocaleKeys.OS.tr()} : ${context.read<TestProvider>().deviceOS}'),
+            child: Text(
+                '${LocaleKeys.OS.tr()} : ${context.read<TestProvider>().deviceOS}'),
           ),
           Padding(
             padding: const EdgeInsets.all(5.0),
-            child: Text(LocaleKeys.AppVersion.tr() + context.read<TestProvider>().appVersion.toString()),
+            child: Text(
+                '${LocaleKeys.AppVersion.tr()} : ${context.read<TestProvider>().appVersion}'),
           ),
           Expanded(
             flex: 4,
@@ -129,7 +138,8 @@ class _TestScreenState extends State<TestScreen> {
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   //Text(AppStrings.serverTime + testProvider.serverTime),
-                  Text('${LocaleKeys.PhoneTime.tr()} : ${testProvider.phoneTime}'),
+                  Text('${LocaleKeys.PhoneTime.tr()} : ' +
+                      testProvider.phoneTime),
                 ],
               ),
             ),
@@ -139,8 +149,10 @@ class _TestScreenState extends State<TestScreen> {
     );
   }
 
-  Widget _buttonsAndTestResultWidget(BuildContext context, TestProvider testProvider, ThemeProvider themeProvider) {
-    return Consumer<ThemeProvider>(builder: (context, ThemeProvider themeProvider, child) {
+  Widget _buttonsAndTestResultWidget(BuildContext context,
+      TestProvider testProvider, ThemeProvider themeProvider) {
+    return Consumer<ThemeProvider>(
+        builder: (context, ThemeProvider themeProvider, child) {
       return Expanded(
         child: Column(
           children: [
@@ -155,7 +167,8 @@ class _TestScreenState extends State<TestScreen> {
             //     textColor: Colors.red,
             //     iconColor: Colors.black,
             //     icon: Icons.abc),
-            buttonTest(context, LocaleKeys.AccessTest.tr(), testProvider, _controllerButton),
+            buttonTest(context, LocaleKeys.AccessTest.tr(), testProvider,
+                _controllerButton),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -171,9 +184,9 @@ class _TestScreenState extends State<TestScreen> {
                                 LocaleKeys.ConnectionUnSuccess.tr(),
                                 style: const TextStyle(color: Colors.red),
                               )
-                            : const Text(
-                                AppStrings.ifmConnWait,
-                                style: TextStyle(color: Colors.orange),
+                            : Text(
+                                LocaleKeys.ConnectionWait.tr(),
+                                style: const TextStyle(color: Colors.orange),
                               ),
                   ),
                   // Container(
@@ -202,7 +215,8 @@ class _TestScreenState extends State<TestScreen> {
   }
 }
 
-Widget buttonTest(BuildContext context, String buttonText, TestProvider testProvider, controllerButton) {
+Widget buttonTest(BuildContext context, String buttonText,
+    TestProvider testProvider, controllerButton) {
   return Consumer<ThemeProvider>(
     builder: (context, ThemeProvider themeProvider, child) {
       return SizedBox(
@@ -223,7 +237,10 @@ Widget buttonTest(BuildContext context, String buttonText, TestProvider testProv
             valueColor: Colors.white,
             borderRadius: 12,
             child: Center(
-              child: Text(buttonText == LocaleKeys.AccessTest.tr() ? LocaleKeys.AccessTest.tr() : LocaleKeys.AccessTest.tr(),
+              child: Text(
+                  buttonText == LocaleKeys.AccessTest.tr()
+                      ? LocaleKeys.AccessTest.tr()
+                      : LocaleKeys.AccessTest.tr(),
                   style: const TextStyle(color: Colors.white)),
             ),
           ),
@@ -233,7 +250,8 @@ Widget buttonTest(BuildContext context, String buttonText, TestProvider testProv
   );
 }
 
-SizedBox buttonNotify(BuildContext context, String buttonText, onPressFunction, controllerButton) {
+SizedBox buttonNotify(BuildContext context, String buttonText, onPressFunction,
+    controllerButton) {
   return SizedBox(
     width: context.width * 0.7,
     child: Padding(
@@ -246,7 +264,10 @@ SizedBox buttonNotify(BuildContext context, String buttonText, onPressFunction, 
         valueColor: Colors.white,
         borderRadius: 12,
         child: Center(
-          child: Text(buttonText == LocaleKeys.AccessTest.tr() ? LocaleKeys.AccessTest.tr() : LocaleKeys.AccessTest.tr(),
+          child: Text(
+              buttonText == LocaleKeys.AccessTest.tr()
+                  ? LocaleKeys.AccessTest.tr()
+                  : LocaleKeys.AccessTest.tr(),
               style: const TextStyle(color: Colors.white)),
         ),
       ),

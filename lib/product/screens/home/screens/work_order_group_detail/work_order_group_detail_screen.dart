@@ -11,7 +11,8 @@ import 'work_order_group_detail_provider.dart';
 
 @RoutePage()
 class WorkOrderGroupDetailScreen extends StatelessWidget {
-  const WorkOrderGroupDetailScreen({super.key, required this.requestCode, required this.appTitle});
+  const WorkOrderGroupDetailScreen(
+      {super.key, required this.requestCode, required this.appTitle});
 
   final String requestCode;
   final String appTitle;
@@ -21,13 +22,18 @@ class WorkOrderGroupDetailScreen extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => WorkOrderGroupDetailProvider(),
       child: Scaffold(
-        appBar: CustomMainAppbar(title: Text(appTitle), elevation: 4, returnBack: true),
+        appBar:
+            CustomMainAppbar(title: (appTitle), elevation: 4, returnBack: true),
         body: Consumer<WorkOrderGroupDetailProvider>(
           builder: (context, WorkOrderGroupDetailProvider provider, child) {
             SchedulerBinding.instance.addPostFrameCallback((_) {
-              provider.isGroupWorkOrdersDataFetched ? null : provider.getGroupSpaceOrders(requestCode);
+              provider.isGroupWorkOrdersDataFetched
+                  ? null
+                  : provider.getGroupSpaceOrders(requestCode);
             });
-            return provider.isLoading ? const CustomLoadingIndicator() : _BuildScaffold(provider, requestCode);
+            return provider.isLoading
+                ? const CustomLoadingIndicator()
+                : _BuildScaffold(provider, requestCode);
           },
         ),
       ),
@@ -50,7 +56,11 @@ class _BuildScaffold extends StatelessWidget {
             workSpaceDetail: provider.workSpaceGroupWorkOrdersList[index],
             isButtonVisible: false,
             onTap: () {
-              context.router.push(DetailWorkOrderScreen(workSpaceDetail: provider.workSpaceGroupWorkOrdersList[index])).then((value) {
+              context.router
+                  .push(DetailWorkOrderScreen(
+                      workSpaceDetail:
+                          provider.workSpaceGroupWorkOrdersList[index]))
+                  .then((value) {
                 if (value == true) {
                   provider.getGroupSpaceOrders(requestCode);
                 }

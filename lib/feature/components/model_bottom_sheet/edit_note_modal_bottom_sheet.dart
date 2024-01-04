@@ -94,8 +94,8 @@ class _BodyWidget extends StatelessWidget {
         const Expanded(child: SizedBox()),
         Expanded(
           child: CustomHalfButtons(
-            leftTitle: Text(LocaleKeys.Cancel.tr()),
-            rightTitle: Text(LocaleKeys.Approve.tr()),
+            leftTitle: (LocaleKeys.Cancel),
+            rightTitle: (LocaleKeys.Approve),
             leftOnPressed: () => Navigator.of(context).pop(),
             rightOnPressed: () async {
               value.editNote(context, taskId, textEditingController.text, labelId);

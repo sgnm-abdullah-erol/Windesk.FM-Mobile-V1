@@ -29,7 +29,8 @@ class AssetDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomMainAppbar(title: Text(LocaleKeys.assetDetail), returnBack: true),
+      appBar: const CustomMainAppbar(
+          title: (LocaleKeys.assetDetail), returnBack: true),
       body: Column(
         children: [
           Expanded(
@@ -118,7 +119,11 @@ class AssetDetailScreen extends StatelessWidget {
 }
 
 class _DoubleRowInformation extends StatelessWidget {
-  const _DoubleRowInformation({required this.firstLabel, required this.secondLabel, required this.firstValue, required this.secondValue});
+  const _DoubleRowInformation(
+      {required this.firstLabel,
+      required this.secondLabel,
+      required this.firstValue,
+      required this.secondValue});
 
   final String firstLabel;
   final String secondLabel;
@@ -146,7 +151,10 @@ class _DoubleRowInformation extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyMedium,
               overflow: TextOverflow.ellipsis,
             ),
-            Flexible(child: Text(secondValue, style: Theme.of(context).textTheme.bodyMedium, overflow: TextOverflow.ellipsis)),
+            Flexible(
+                child: Text(secondValue,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                    overflow: TextOverflow.ellipsis)),
           ],
         ),
       ],

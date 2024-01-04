@@ -26,7 +26,7 @@ class SupportList extends StatelessWidget {
     return Scaffold(
       key: _scaffoldKey,
       appBar: CustomMainAppbar(
-          title: Text('${LocaleKeys.SupportList.tr()} - $taskId'),
+          title: ('${LocaleKeys.SupportList.tr()} - $taskId'),
           returnBack: true),
       body: GraphQLProvider(
         client: GraphQLManager.getClient(
@@ -58,7 +58,6 @@ class SupportList extends StatelessWidget {
                     ),
                     builder: GraphqlResultHandling.withGenericHandling(context,
                         (QueryResult result, {refetch, fetchMore}) {
-
                       final CheckListMaintanenceModel?
                           checkListmaintanenceModel =
                           _checkNullablitiyOfCheckListMaintenanceModel(
@@ -71,8 +70,7 @@ class SupportList extends StatelessWidget {
                         taskId: taskId,
                         refetchFunction: refetch,
                       );
-                    }
-                        ),
+                    }),
                   );
                 },
               ),

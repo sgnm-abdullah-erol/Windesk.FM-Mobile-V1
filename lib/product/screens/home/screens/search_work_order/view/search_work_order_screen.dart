@@ -38,7 +38,7 @@ class _SearchWorkOrderScreenState extends State<SearchWorkOrderScreen> {
 
         return Scaffold(
           appBar: CustomMainAppbar(
-              title: const Text(LocaleKeys.WorkOrderSearch).tr(),
+              title: (LocaleKeys.WorkOrderSearch),
               returnBack: true,
               elevation: 3),
           body: searchProvider.isLoading
@@ -56,14 +56,8 @@ class _SearchWorkOrderScreenState extends State<SearchWorkOrderScreen> {
                             actionIcon: AppIcons.qr,
                             actionFunction: searchProvider.scanBarcodeAndQr),
                         CustomHalfButtons(
-                            leftTitle: const Text(
-                              'Temizle',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            rightTitle: const Text(
-                              'Ara',
-                              style: TextStyle(color: Colors.white),
-                            ),
+                            leftTitle: LocaleKeys.Cancel,
+                            rightTitle: LocaleKeys.Save,
                             leftOnPressed: searchProvider.clearInput,
                             rightOnPressed:
                                 searchProvider.getWorkOrderWithSearch),

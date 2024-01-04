@@ -74,8 +74,8 @@ class _ActionButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomHalfButtons(
-      leftTitle: const Text(LocaleKeys.Cancel).tr(),
-      rightTitle: const Text(LocaleKeys.Approve).tr(),
+      leftTitle:  (LocaleKeys.Cancel),
+      rightTitle:  (LocaleKeys.Approve),
       leftOnPressed: () => Navigator.of(context).pop(),
       rightOnPressed: () {
         function(context, provider.pdfPath, provider.pdfName, provider.desc, taskId, taskKey, labels);

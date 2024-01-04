@@ -80,7 +80,11 @@ class DetailWorkOrderScreen extends StatelessWidget {
               ? const CustomLoadingIndicator()
               : Scaffold(
                   key: _scaffoldKey,
-                  appBar: CustomMainAppbar(title: Text('WO - ${woDetailProvider.detail.task?.id.toString() ?? ''}'), returnBack: true, elevation: 4),
+                  appBar: CustomMainAppbar(
+                      title: (
+                          'WO - ${woDetailProvider.detail.task?.id.toString() ?? ''}'),
+                      returnBack: true,
+                      elevation: 4),
                   body: context.read<WorkOrderDetailProvider>().isLoading
                       ? const CustomLoadingIndicator()
                       : RefreshIndicator(

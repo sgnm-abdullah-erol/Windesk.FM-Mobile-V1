@@ -23,10 +23,10 @@ class SearchScreen extends StatelessWidget {
       ],
       child: Consumer<ThemeProvider>(
           builder: (context, ThemeProvider themeProvider, child) {
-        //themeProvider.getPreferences();
+        themeProvider.getPreferences();
 
         return Scaffold(
-            appBar: CustomMainAppbar(title: Text(LocaleKeys.Search.tr())),
+            appBar: const CustomMainAppbar(title: LocaleKeys.Search),
             body: Center(child: _bodyWidget(context)));
       }),
     );
@@ -42,10 +42,10 @@ class SearchScreen extends StatelessWidget {
         ),
         rowIconButtonSection(
             context,
-            LocaleKeys.AssetSearch.tr(),
+            LocaleKeys.AssetSearch,
             AppIcons.assetSearch,
             const AssetSearchScreen(),
-            LocaleKeys.SpaceSearch.tr(),
+            LocaleKeys.SpaceSearch,
             AppIcons.spaceSearch,
             const SpaceSearchScreen(),
             ServiceTools.isWorkOrderExist),
