@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -37,7 +38,7 @@ class AddDocumentsModalBottomSheet extends StatelessWidget {
                         Expanded(flex: 20, child: _PickPdf(provider: value)),
                         value.isPdfPicked ? Expanded(flex: 20, child: Text(value.pdfPath.split('/').last)) : const SizedBox(),
                         Expanded(flex: 20, child: _DescField(value)),
-                        Expanded(flex: 40, child: _ActionButtons(value, taskId, taskKey, function,labels)),
+                        Expanded(flex: 40, child: _ActionButtons(value, taskId, taskKey, function, labels)),
                       ],
                     );
             },
@@ -78,7 +79,8 @@ class _ActionButtons extends StatelessWidget {
       rightTitle: const Text(LocaleKeys.Approve).tr(),
       leftOnPressed: () => Navigator.of(context).pop(),
       rightOnPressed: () {
-        function(context, provider.pdfPath, provider.pdfName, provider.desc, taskId, taskKey, labels);
+        function(context, provider.pdfPath, provider.pdfName, provider.desc, taskId, taskKey);
+        context.router.pop();
       },
     );
   }
