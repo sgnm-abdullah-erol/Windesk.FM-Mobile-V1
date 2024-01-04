@@ -53,7 +53,6 @@ class WorkOrderListProvider extends ChangeNotifier {
     result.fold(
       (l) {
         _myWorkSpaceDetails = l;
-        debugPrint('My Work Orders: ${l.first}');
       },
       (r) {},
     );

@@ -9,8 +9,7 @@ import 'package:vm_fm_4/feature/service/global_services.dart/work_space_service/
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
 
 class SupportProvider extends ChangeNotifier {
-  final WorkSpaceServiceRepositoryImpl workSpaceService =
-      Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
+  final WorkSpaceServiceRepositoryImpl workSpaceService = Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
 
   bool _fetchQuery = true;
   bool get fetchQuery => _fetchQuery;
@@ -125,8 +124,7 @@ class SupportProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void saveImage(BuildContext context, String imagePath, String desc,
-      String scopeId, String taskKey, String labels) async {
+  void saveImage(BuildContext context, String imagePath, String desc, String scopeId, String taskKey, String labels) async {
     if (imagePath.isEmpty) {
       snackBar(context, LocaleKeys.EmptyImagePath.tr(), 'error');
       return;
@@ -136,8 +134,7 @@ class SupportProvider extends ChangeNotifier {
 
     final String token = await SharedManager().getString(SharedEnum.userToken);
 
-    final response = await workSpaceService.saveDocumentForMaintenance(
-        imagePath, '', desc, token, scopeId, taskKey, 'image', labels);
+    final response = await workSpaceService.saveDocumentForMaintenance(imagePath, '', desc, token, scopeId, taskKey, 'image', labels);
     response.fold(
       (l) => {
         Navigator.of(context).pop<bool>(true),
@@ -156,8 +153,7 @@ class SupportProvider extends ChangeNotifier {
     });
   }
 
-  void savePdf(BuildContext context, String pdfPath, String pdfName,
-      String desc, String taskId, String taskKey, String labels) async {
+  void savePdf(BuildContext context, String pdfPath, String pdfName, String desc, String taskId, String taskKey, String labels) async {
     if (pdfPath.isEmpty) {
       snackBar(context, LocaleKeys.EmptyPdfPath.tr(), 'error');
       return;
@@ -167,8 +163,7 @@ class SupportProvider extends ChangeNotifier {
 
     final String token = await SharedManager().getString(SharedEnum.userToken);
 
-    final response = await workSpaceService.saveDocumentForMaintenance(
-        pdfPath, pdfName, desc, token, taskId, taskKey, 'pdf', labels);
+    final response = await workSpaceService.saveDocumentForMaintenance(pdfPath, pdfName, desc, token, taskId, taskKey, 'pdf', labels);
 
     response.fold(
       (l) => {

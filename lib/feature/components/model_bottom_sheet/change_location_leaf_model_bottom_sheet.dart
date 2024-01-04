@@ -53,13 +53,13 @@ class ChangeLocationLeafModelBottomSheet extends StatelessWidget {
                               child: Text('${LocaleKeys.selectedLocation.tr()} ${value.selectedLocationName} ${LocaleKeys.willBeChanged.tr()}',maxLines: 2),
                             ) : Container(),
                             CustomHalfButtons(
-                              leftTitle: Text(
-                                LocaleKeys.Cancel.tr(),
-                                style: TextStyle(color: APPColors.Main.white),
+                              leftTitle: (
+                                LocaleKeys.Cancel
+                                
                               ),
-                              rightTitle: Text(
-                                LocaleKeys.Approve.tr(),
-                                style: TextStyle(color: APPColors.Main.white),
+                              rightTitle: (
+                                LocaleKeys.Approve
+                                
                               ),
                               leftOnPressed: () {
                                 context.router.pop();

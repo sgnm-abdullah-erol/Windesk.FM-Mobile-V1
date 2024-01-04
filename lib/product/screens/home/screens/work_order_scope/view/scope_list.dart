@@ -26,32 +26,42 @@ class ScopeList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      appBar: CustomMainAppbar(title: Text('${LocaleKeys.ScopeList.tr()} - $taskId'), returnBack: true),
+      appBar: CustomMainAppbar(
+          title: ('${LocaleKeys.ScopeList.tr()} - $taskId'), returnBack: true),
       body: GraphQLProvider(
-        client: GraphQLManager.getClient(HttpLink(ServiceTools.url.generalGraphql_url)),
+        client: GraphQLManager.getClient(
+            HttpLink(ServiceTools.url.generalGraphql_url)),
         child: Column(
           children: [
             Query(
               options: QueryOptions(
                 document: gql(MaintenancesTaskQuery.maintenancesTask),
-                variables: MaintenancesTaskVariableQueries.getMaintenancesTaskVariables(taskId.toString()),
+                variables: MaintenancesTaskVariableQueries
+                    .getMaintenancesTaskVariables(taskId.toString()),
               ),
               builder: GraphqlResultHandling.withGenericHandling(
                 context,
                 (QueryResult result, {refetch, fetchMore}) {
                   if (result.data == null && !result.hasException) {
-                    return Text(LocaleKeys.FetchScopeListError.tr(), style: Theme.of(context).textTheme.bodyMedium);
+                    return Text(LocaleKeys.FetchScopeListError.tr(),
+                        style: Theme.of(context).textTheme.bodyMedium);
                   }
-                  final MaintanenceModel? maintanenceModel = _checkNullablitiyOfMaintenanceModel(context, result.data ?? {});
+                  final MaintanenceModel? maintanenceModel =
+                      _checkNullablitiyOfMaintenanceModel(
+                          context, result.data ?? {});
                   return Query(
                     options: QueryOptions(
                       document: gql(MaintenancesTaskQuery.checkListValue),
-                      variables: MaintenancesTaskVariableQueries.getCheckListValue(taskId.toString()),
+                      variables:
+                          MaintenancesTaskVariableQueries.getCheckListValue(
+                              taskId.toString()),
                     ),
                     builder: GraphqlResultHandling.withGenericHandling(
                       context,
                       (QueryResult result, {refetch, fetchMore}) {
-                        final CheckListMaintanenceModel? checkListmaintanenceModel = _checkNullablitiyOfCheckListMaintenanceModel(
+                        final CheckListMaintanenceModel?
+                            checkListmaintanenceModel =
+                            _checkNullablitiyOfCheckListMaintenanceModel(
                           context,
                           result.data ?? {},
                         );
@@ -80,7 +90,8 @@ class ScopeList extends StatelessWidget {
     );
   }
 
-  MaintanenceModel? _checkNullablitiyOfMaintenanceModel(BuildContext context, Map<String, dynamic> result) {
+  MaintanenceModel? _checkNullablitiyOfMaintenanceModel(
+      BuildContext context, Map<String, dynamic> result) {
     final model = MaintanenceModel.fromJson(result['maintenances'][0]);
     if (model.maintenancePlan == null ||
         model.maintenancePlan!.isEmpty ||
@@ -92,7 +103,8 @@ class ScopeList extends StatelessWidget {
     }
   }
 
-  CheckListMaintanenceModel? _checkNullablitiyOfCheckListMaintenanceModel(BuildContext context, Map<String, dynamic> result) {
+  CheckListMaintanenceModel? _checkNullablitiyOfCheckListMaintenanceModel(
+      BuildContext context, Map<String, dynamic> result) {
     final model = CheckListMaintanenceModel.fromJson(result['maintenances'][0]);
 
     if (model.checkListValue == null || model.checkListValue!.isEmpty) {

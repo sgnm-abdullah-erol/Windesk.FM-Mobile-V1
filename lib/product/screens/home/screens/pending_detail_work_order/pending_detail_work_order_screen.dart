@@ -43,7 +43,7 @@ class _BuildScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomMainAppbar(title: Text(workSpacePendiks.task?.name ?? ''), elevation: 4, returnBack: true),
+      appBar: CustomMainAppbar(title: (workSpacePendiks.task?.name ?? ''), elevation: 4, returnBack: true),
       body: Padding(
         padding: CustomPaddings.pageNormal,
         child: Column(
@@ -51,8 +51,8 @@ class _BuildScaffold extends StatelessWidget {
             CustomUndetailPendingCard(workSpacePendiks: workSpacePendiks),
             const SizedBox(height: 20),
             CustomHalfButtons(
-              leftTitle: const Text(LocaleKeys.Reject).tr(),
-              rightTitle: const Text(LocaleKeys.Approve).tr(),
+              leftTitle: (LocaleKeys.Reject),
+              rightTitle:  (LocaleKeys.Approve),
               leftOnPressed: () {
                 WoWaitRejectModalAlert().showAlertDialog(context, 'textData', 'inputArrayLabelText', ['as', 'asd', 'sad'], () {}).then((value) {
                   if (value != null) {

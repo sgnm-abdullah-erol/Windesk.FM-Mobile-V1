@@ -99,8 +99,8 @@ class _InputButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomHalfButtons(
-      leftTitle: const Text(LocaleKeys.Cancel).tr(),
-      rightTitle: const Text(LocaleKeys.Approve).tr(),
+      leftTitle: (LocaleKeys.Cancel),
+      rightTitle: (LocaleKeys.Approve),
       leftOnPressed: () => Navigator.pop(context),
       rightOnPressed: () => {
         onPressed(),

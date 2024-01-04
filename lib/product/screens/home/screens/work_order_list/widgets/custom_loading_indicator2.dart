@@ -13,9 +13,7 @@ class CustomLoadingIndicator2 extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Align(
-              alignment: Alignment.center,
-              child: CircularProgressIndicator(color: APPColors.Main.blue)),
+          Align(alignment: Alignment.center, child: CircularProgressIndicator(color: APPColors.Main.blue)),
         ],
       ),
     );

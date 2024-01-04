@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -60,12 +61,12 @@ class _ApproveButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomHalfButtons(
-      leftTitle: const Text(LocaleKeys.Cancel).tr(),
-      rightTitle: const Text(LocaleKeys.Approve).tr(),
+      leftTitle:  (LocaleKeys.Cancel),
+      rightTitle:  (LocaleKeys.Approve),
       leftOnPressed: () => Navigator.pop(context),
       rightOnPressed: () async {
-        saveImage(context, provider.imagePath, provider.desc, taskId, taskKey, labels ?? '');
-        //context.router.pop();
+        saveImage(context, provider.imagePath, provider.desc, taskId, taskKey);
+        context.router.pop();
       },
     );
   }

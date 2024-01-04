@@ -66,7 +66,7 @@ class _TestScreenState extends State<TestScreen> {
             : null;
         return WillPopScope(
           child: Scaffold(
-            appBar: const CustomMainAppbar(title: Text('Test')),
+            appBar: const CustomMainAppbar(title: LocaleKeys.TestTab),
             body: Center(
                 child: _bodyWidget(context, testProvider, themeProvider)),
           ),
@@ -186,16 +186,16 @@ class _TestScreenState extends State<TestScreen> {
                     child: testProvider.accessTestV1 == 'true'
                         ? Text(
                             LocaleKeys.ConnectionSuccess.tr(),
-                            style: TextStyle(color: Colors.green),
+                            style: const TextStyle(color: Colors.green),
                           )
                         : testProvider.accessTestV1 == 'false'
                             ? Text(
                                 LocaleKeys.ConnectionUnSuccess.tr(),
-                                style: TextStyle(color: Colors.red),
+                                style: const TextStyle(color: Colors.red),
                               )
-                            : const Text(
-                                AppStrings.ifmConnWait,
-                                style: TextStyle(color: Colors.orange),
+                            : Text(
+                                LocaleKeys.ConnectionWait.tr(),
+                                style: const TextStyle(color: Colors.orange),
                               ),
                   ),
                   // Container(

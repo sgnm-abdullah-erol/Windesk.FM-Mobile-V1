@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/other/colors.dart';
@@ -16,8 +17,8 @@ class CustomHalfButtons extends StatelessWidget {
     this.buttonsWidth,
   });
 
-  final Widget leftTitle;
-  final Widget rightTitle;
+  final String leftTitle;
+  final String rightTitle;
   final Function leftOnPressed;
   final Function rightOnPressed;
   final Color? leftColor;
@@ -47,7 +48,11 @@ class CustomHalfButtons extends StatelessWidget {
             ),
           ),
         ),
-        child: leftTitle,
+        child: Text(
+          leftTitle,
+          style: TextStyle(color: APPColors.Main.white),
+          textAlign: TextAlign.center,
+        ).tr(),
       ),
     );
   }
@@ -65,7 +70,11 @@ class CustomHalfButtons extends StatelessWidget {
             ),
           ),
         ),
-        child: rightTitle,
+        child: Text(
+          rightTitle,
+          style: TextStyle(color: APPColors.Main.white),
+          textAlign: TextAlign.center,
+        ).tr(),
       ),
     );
   }

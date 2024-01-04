@@ -33,9 +33,13 @@ class CustomWorkOrderListCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Card(
-          shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.mediumBorderRadius),
+          shape: RoundedRectangleBorder(
+              borderRadius: CustomBorderRadius.mediumBorderRadius),
           elevation: _elevation,
-          child: Container(width: context.width / 1.2, decoration: WoListCardDecoration(), child: _content(context)),
+          child: Container(
+              width: context.width / 1.2,
+              decoration: WoListCardDecoration(),
+              child: _content(context)),
         ),
       ),
     );
@@ -50,7 +54,8 @@ class CustomWorkOrderListCard extends StatelessWidget {
         children: [
           _codeAndStatusWidget(context),
           SizedBox(height: 5),
-          _woListText(context, workSpaceDetail.task?.name ?? LocaleKeys.NoName, false),
+          _woListText(
+              context, workSpaceDetail.task?.name ?? LocaleKeys.NoName, false),
           _divider(),
           SizedBox(height: 5),
           _woCategoryText(context),
@@ -62,7 +67,10 @@ class CustomWorkOrderListCard extends StatelessWidget {
           _woOwnerText(context),
           _divider(),
           SizedBox(height: 5),
-          _woListText(context, workSpaceDetail.task?.description ?? LocaleKeys.NoDescription, true),
+          _woListText(
+              context,
+              workSpaceDetail.task?.description ?? LocaleKeys.NoDescription,
+              true),
           _divider(),
           SizedBox(height: 5),
           _dateText(
@@ -74,7 +82,11 @@ class CustomWorkOrderListCard extends StatelessWidget {
           // SizedBox(height: 5),
           // _dateText(context, LocaleKeys.HintUpdateDate, workSpaceDetail.task?.updatedAt.toString() ?? '', true),
           SizedBox(height: 5),
-          _dateText(context, LocaleKeys.HintEndDate, workSpaceDetail.task?.dueDate.toString() == 'null' ? '' : '', false),
+          _dateText(
+              context,
+              LocaleKeys.HintEndDate,
+              workSpaceDetail.task?.dueDate.toString() == 'null' ? '' : '',
+              false),
           SizedBox(height: 5),
           _checkButtonVisibility(context)
         ],
@@ -82,15 +94,20 @@ class CustomWorkOrderListCard extends StatelessWidget {
     );
   }
 
-  Divider _divider() => Divider(height: 10, thickness: 0.5, color: APPColors.Secondary.black);
+  Divider _divider() =>
+      Divider(height: 10, thickness: 0.5, color: APPColors.Secondary.black);
 
-  Widget _dateText(BuildContext context, String label, String date, bool giveFormat) {
+  Widget _dateText(
+      BuildContext context, String label, String date, bool giveFormat) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label, style: context.bodySmall.copyWith(fontWeight: FontWeight.bold, color: APPColors.Main.black)).tr(),
+        Text(label,
+                style: context.bodySmall.copyWith(
+                    fontWeight: FontWeight.bold, color: APPColors.Main.black))
+            .tr(),
         SizedBox(
-          width: context.width / 3,
+          width: context.width / 2.75,
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Text(
@@ -110,18 +127,25 @@ class CustomWorkOrderListCard extends StatelessWidget {
       children: [
         Text(
           LocaleKeys.Location.tr(),
-          style: context.bodySmall.copyWith(fontWeight: FontWeight.bold, color: APPColors.Secondary.black),
+          style: context.bodySmall.copyWith(
+              fontWeight: FontWeight.bold, color: APPColors.Secondary.black),
         ),
         Spacer(),
         SizedBox(
-          width: (workSpaceDetail.task?.requestedSpaces?.name ?? '').toString().length > 20 ? context.width / 2 : null,
+          width: (workSpaceDetail.task?.requestedSpaces?.name ?? '')
+                      .toString()
+                      .length >
+                  20
+              ? context.width / 2
+              : null,
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Padding(
               padding: const EdgeInsets.only(right: 4.0),
               child: Text(
                 workSpaceDetail.task?.requestedSpaces?.name ?? '',
-                style: context.labelMedium.copyWith(color: APPColors.Main.black),
+                style:
+                    context.labelMedium.copyWith(color: APPColors.Main.black),
               ),
             ),
           ),
@@ -136,7 +160,8 @@ class CustomWorkOrderListCard extends StatelessWidget {
       children: [
         Text(
           workSpaceDetail.task?.woCategory?.name ?? '',
-          style: context.bodySmall.copyWith(fontWeight: FontWeight.bold, color: APPColors.Secondary.black),
+          style: context.bodySmall.copyWith(
+              fontWeight: FontWeight.bold, color: APPColors.Secondary.black),
         ),
         // SizedBox(height: 5),
         // Text(workSpaceDetail.task?.requestType?.name ?? '', style: context.labelMedium.copyWith(color: APPColors.Main.black)),
@@ -149,12 +174,14 @@ class CustomWorkOrderListCard extends StatelessWidget {
       children: [
         Text(
           LocaleKeys.Owner.tr(),
-          style: context.bodySmall.copyWith(fontWeight: FontWeight.bold, color: APPColors.Secondary.black),
+          style: context.bodySmall.copyWith(
+              fontWeight: FontWeight.bold, color: APPColors.Secondary.black),
         ),
         Spacer(),
         Text(
           workSpaceDetail.task?.owner ?? '',
-          style: context.bodySmall.copyWith(fontWeight: FontWeight.bold, color: APPColors.Secondary.black),
+          style: context.bodySmall.copyWith(
+              fontWeight: FontWeight.bold, color: APPColors.Secondary.black),
         ),
       ],
     );
@@ -164,9 +191,9 @@ class CustomWorkOrderListCard extends StatelessWidget {
     return isButtonVisible
         ? Center(
             child: CustomHalfButtons(
-              leftTitle: Text(LocaleKeys.Cancel, style: context.bodySmall.copyWith(color: APPColors.Main.white)).tr(),
+              leftTitle: (LocaleKeys.Cancel),
               leftOnPressed: () {},
-              rightTitle: Text(LocaleKeys.Approve, style: context.bodySmall.copyWith(color: APPColors.Main.white)).tr(),
+              rightTitle: (LocaleKeys.Approve),
               rightOnPressed: () {},
             ),
           )
@@ -186,11 +213,16 @@ class CustomWorkOrderListCard extends StatelessWidget {
                 'WO ${workSpaceDetail.task?.id.toString() ?? LocaleKeys.NoCode.tr()}',
                 softWrap: true,
                 overflow: TextOverflow.ellipsis,
-                style: context.bodyMedium.copyWith(fontWeight: FontWeight.bold, fontFamily: "Poppins", color: APPColors.Main.black),
+                style: context.bodyMedium.copyWith(
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "Poppins",
+                    color: APPColors.Main.black),
               ),
             ),
             SizedBox(
-              width: (workSpaceDetail.state?.name ?? '').toString().length > 20 ? context.width / 2 : null,
+              width: (workSpaceDetail.state?.name ?? '').toString().length > 20
+                  ? context.width / 2
+                  : null,
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Align(
@@ -198,8 +230,10 @@ class CustomWorkOrderListCard extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(2.0),
                     child: Text(
-                      workSpaceDetail.state?.name.toString() ?? LocaleKeys.NoState.tr(),
-                      style: context.labelMedium.copyWith(color: APPColors.Secondary.black),
+                      workSpaceDetail.state?.name.toString() ??
+                          LocaleKeys.NoState.tr(),
+                      style: context.labelMedium
+                          .copyWith(color: APPColors.Secondary.black),
                       textAlign: TextAlign.right,
                     ),
                   ),
@@ -226,6 +260,7 @@ class CustomWorkOrderListCard extends StatelessWidget {
                   color: APPColors.Secondary.black,
                   fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
                 ),
+                maxLines: 2,
               ),
             ),
           ],

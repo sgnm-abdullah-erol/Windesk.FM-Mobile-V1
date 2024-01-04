@@ -28,7 +28,8 @@ class LoginScreen extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => LoginPassword()),
-        ChangeNotifierProvider(create: (context) => LoginProvider(), lazy: false),
+        ChangeNotifierProvider(
+            create: (context) => LoginProvider(), lazy: false),
       ],
       child: Consumer<LoginProvider>(
         builder: (context, LoginProvider loginProvider, child) {
@@ -44,7 +45,9 @@ class LoginScreen extends StatelessWidget {
             if (loginProvider.isLoginSuccess) {
               snackBar(context, LocaleKeys.LoginSuccess.tr(), 'success');
               context.read<GlobalProvider>().setUserId(loginProvider.userId);
-              context.read<GlobalProvider>().setGlobalUserToken(loginProvider.userToken);
+              context
+                  .read<GlobalProvider>()
+                  .setGlobalUserToken(loginProvider.userToken);
             }
           });
           return _LoginScreenBody(provider: loginProvider, userName: userName);
@@ -63,8 +66,10 @@ class _LoginScreenBody extends StatefulWidget {
   State<_LoginScreenBody> createState() => _LoginScreenBodyState();
 }
 
-class _LoginScreenBodyState extends State<_LoginScreenBody> with WidgetsBindingObserver {
-  final GlobalKey<ScaffoldMessengerState> _globalKey = GlobalKey<ScaffoldMessengerState>();
+class _LoginScreenBodyState extends State<_LoginScreenBody>
+    with WidgetsBindingObserver {
+  final GlobalKey<ScaffoldMessengerState> _globalKey =
+      GlobalKey<ScaffoldMessengerState>();
 
   // state takibi için
   @override
@@ -83,7 +88,7 @@ class _LoginScreenBodyState extends State<_LoginScreenBody> with WidgetsBindingO
         : null;
     return Scaffold(
       key: _globalKey,
-      appBar: CustomMainAppbar(title: _loginAppbarTitle(context), returnBack: false),
+      appBar: CustomMainAppbar(title: 'windesk', returnBack: false),
       body: widget.provider.loading
           ? const CustomMainLoading()
           : Column(
@@ -102,7 +107,8 @@ class _LoginScreenBodyState extends State<_LoginScreenBody> with WidgetsBindingO
   Expanded _loginButton() {
     return Expanded(
       flex: 2,
-      child: CustomLoginButton(title: LocaleKeys.HintLogin, onPressed: widget.provider.logIn),
+      child: CustomLoginButton(
+          title: LocaleKeys.HintLogin, onPressed: widget.provider.logIn),
     );
   }
 
@@ -135,13 +141,19 @@ class _LoginScreenBodyState extends State<_LoginScreenBody> with WidgetsBindingO
     );
   }
 
-  Expanded _loginTitleWidget(BuildContext context) => Expanded(flex: 1, child: Text(LocaleKeys.HintLogin.tr(), style: context.titleLarge));
+  Expanded _loginTitleWidget(BuildContext context) => Expanded(
+      flex: 1,
+      child: Text(LocaleKeys.HintLogin.tr(), style: context.titleLarge));
 
   Expanded _loginImage(BuildContext context) => Expanded(
         flex: 4,
-        child: Image.asset(AssetPaths.loginPic, height: context.width, width: context.width / 1, fit: BoxFit.cover),
+        child: Image.asset(AssetPaths.loginPic,
+            height: context.width, width: context.width / 1, fit: BoxFit.cover),
       );
 
   Image _loginAppbarTitle(BuildContext context) =>
-      Image.asset(AssetPaths.windesk, width: context.width / 1.5, height: context.width / 1.5, fit: BoxFit.cover);
+      Image.asset(AssetPaths.windesk,
+          width: context.width / 1.5,
+          height: context.width / 1.5,
+          fit: BoxFit.cover);
 }

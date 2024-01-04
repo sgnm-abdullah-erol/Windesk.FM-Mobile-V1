@@ -46,8 +46,8 @@ class AddMaterialModalBottomSheet extends StatelessWidget {
         Expanded(
           flex: 70,
           child: CustomHalfButtons(
-            leftTitle: Text(LocaleKeys.Cancel.tr()),
-            rightTitle: Text(LocaleKeys.Approve.tr()),
+            leftTitle: (LocaleKeys.Cancel),
+            rightTitle: (LocaleKeys.Approve),
             leftOnPressed: () => Navigator.of(context).pop(),
             rightOnPressed: () async {
               // Navigator.of(context).pop();

@@ -30,8 +30,7 @@ class _SpaceSearchScreen extends State<SpaceSearchScreen> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => SearchMaterialProvider(),
-      child: Consumer<SearchMaterialProvider>(
-          builder: (context, SearchMaterialProvider searchProvider, child) {
+      child: Consumer<SearchMaterialProvider>(builder: (context, SearchMaterialProvider searchProvider, child) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (searchProvider.isSuccess) {
             snackBar(context, LocaleKeys.assetSearchSuccess, 'success');
@@ -53,7 +52,7 @@ class _SpaceSearchScreen extends State<SpaceSearchScreen> {
           child: Scaffold(
             appBar: CustomMainAppbar(
                 returnBack: true,
-                title: Text(LocaleKeys.SpaceSearch.tr()),
+                title: (LocaleKeys.SpaceSearch.tr()),
                 elevation: 3),
             body: searchProvider.isLoading
                 ? const CustomLoadingIndicator()
@@ -77,74 +76,41 @@ class _SpaceSearchScreen extends State<SpaceSearchScreen> {
                                       child: SingleChildScrollView(
                                         scrollDirection: Axis.vertical,
                                         child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 15),
+                                          padding: const EdgeInsets.only(right: 15),
                                           child: TreeView(nodes: [
-                                            for (var i = 0;
-                                                i <
-                                                    searchProvider
-                                                        .spaceData!['children']
-                                                        .length;
-                                                i++) ...{
+                                            for (var i = 0; i < searchProvider.spaceData!['children'].length; i++) ...{
                                               TreeNode(
                                                   content: Text(
-                                                    searchProvider.spaceData![
-                                                        'children'][i]['name'],
-                                                    style: const TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold),
+                                                    searchProvider.spaceData!['children'][i]['name'],
+                                                    style: const TextStyle(fontWeight: FontWeight.bold),
                                                   ),
                                                   children: [
-                                                    for (var x = 0;
-                                                        x <
-                                                            searchProvider
-                                                                .spaceData![
-                                                                    'children']
-                                                                    [i]
-                                                                    ["children"]
-                                                                .length;
-                                                        x++) ...{
+                                                    for (var x = 0; x < searchProvider.spaceData!['children'][i]["children"].length; x++) ...{
                                                       TreeNode(
                                                           content: Text(
-                                                            searchProvider.spaceData![
-                                                                        'children']
-                                                                    [
-                                                                    i]["children"]
-                                                                [x]['name'],
-                                                            style: const TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
+                                                            searchProvider.spaceData!['children'][i]["children"][x]['name'],
+                                                            style: const TextStyle(fontWeight: FontWeight.bold),
                                                           ),
                                                           children: [
                                                             for (var y = 0;
-                                                                y <
-                                                                    searchProvider
-                                                                        .spaceData![
-                                                                            'children']
-                                                                            [i][
-                                                                            "children"]
-                                                                            [x][
-                                                                            'children']
-                                                                        .length;
+                                                                y < searchProvider.spaceData!['children'][i]["children"][x]['children'].length;
                                                                 y++) ...{
                                                               TreeNode(
-                                                                  content: Text(searchProvider.spaceData!['children'][i]["children"]
-                                                                              [
-                                                                              x]
-                                                                          [
-                                                                          'children']
-                                                                      [
-                                                                      y]['name']),
+                                                                  content: Text(
+                                                                      searchProvider.spaceData!['children'][i]["children"][x]['children'][y]['name']),
                                                                   children: [
-                                                                    for (var z =
-                                                                            0;
-                                                                        z < searchProvider.spaceData!['children'][i]["children"][x]['children'][y]['children'].length;
+                                                                    for (var z = 0;
+                                                                        z <
+                                                                            searchProvider
+                                                                                .spaceData!['children'][i]["children"][x]['children'][y]['children']
+                                                                                .length;
                                                                         z++) ...{
                                                                       TreeNode(
-                                                                          content: Text(searchProvider.spaceData!['children'][i]["children"][x]['children'][y]['children'][z]['architecturalCode'] +
+                                                                          content: Text(searchProvider.spaceData!['children'][i]["children"][x]
+                                                                                  ['children'][y]['children'][z]['architecturalCode'] +
                                                                               '/' +
-                                                                              searchProvider.spaceData!['children'][i]["children"][x]['children'][y]['children'][z]['name'])),
+                                                                              searchProvider.spaceData!['children'][i]["children"][x]['children'][y]
+                                                                                  ['children'][z]['name'])),
                                                                     }
                                                                   ]),
                                                             }
@@ -157,7 +123,7 @@ class _SpaceSearchScreen extends State<SpaceSearchScreen> {
                                       )))
                               : Text(
                                   LocaleKeys.SpaceSearchListItem.tr(),
-                                  style: TextStyle(fontSize: 13),
+                                  style: const TextStyle(fontSize: 13),
                                 )
                           // CustomHalfButtons(
                           //     leftTitle: Text(LocaleKeys.Clear.tr(),

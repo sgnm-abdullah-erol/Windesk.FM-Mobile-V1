@@ -22,7 +22,8 @@ class WorkOrderListScreen extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => WorkOrderListProvider(),
       child: Consumer(
-        builder: (context, WorkOrderListProvider provider, _) => _BuildScaffold(provider: provider),
+        builder: (context, WorkOrderListProvider provider, _) =>
+            _BuildScaffold(provider: provider),
       ),
     );
   }
@@ -34,16 +35,22 @@ class _BuildScaffold extends StatelessWidget {
   final WorkOrderListProvider provider;
 
   final List<Widget> tabs = [
-    const Text(LocaleKeys.MyOrders, maxLines: 1, overflow: TextOverflow.ellipsis).tr(),
-    const Text(LocaleKeys.MyGroups, maxLines: 1, overflow: TextOverflow.ellipsis).tr(),
-    const Text(LocaleKeys.MyPendings, maxLines: 1, overflow: TextOverflow.ellipsis).tr(),
+    const Text(LocaleKeys.MyOrders,
+            maxLines: 1, overflow: TextOverflow.ellipsis)
+        .tr(),
+    const Text(LocaleKeys.MyGroups,
+            maxLines: 1, overflow: TextOverflow.ellipsis)
+        .tr(),
+    const Text(LocaleKeys.MyPendings,
+            maxLines: 1, overflow: TextOverflow.ellipsis)
+        .tr(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomMainAppbar(
-        title: Text(LocaleKeys.WorkOrderList.tr()),
+        title: (LocaleKeys.WorkOrderList.tr()),
         returnBack: true,
         elevation: 3,
         actions: _appBarActions(context, provider),
@@ -51,7 +58,10 @@ class _BuildScaffold extends StatelessWidget {
       body: Column(
         children: [
           const SizedBox(height: 10),
-          Expanded(flex: 10, child: CustomDefaultTabController(provider: provider, tabs: tabs)),
+          Expanded(
+              flex: 10,
+              child:
+                  CustomDefaultTabController(provider: provider, tabs: tabs)),
           Expanded(
             flex: 90,
             child: provider.tabIndex == 0
@@ -65,7 +75,8 @@ class _BuildScaffold extends StatelessWidget {
     );
   }
 
-  List<Widget> _appBarActions(BuildContext context, WorkOrderListProvider provider) {
+  List<Widget> _appBarActions(
+      BuildContext context, WorkOrderListProvider provider) {
     return provider.tabIndex == 0
         ? [
             IconButton(

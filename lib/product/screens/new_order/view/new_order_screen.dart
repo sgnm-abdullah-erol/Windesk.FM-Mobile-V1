@@ -46,28 +46,28 @@ class NewOrderScreen extends StatelessWidget {
                   ThemeProvider themeProvider,
                   child) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          //themeProvider.getPreferences();
+          themeProvider.getPreferences();
           if (woCreateProvider.isWorkOrderCreate) {
             snackBar(context, SnackbarStrings.woCreate, 'success');
             showDialog(
               context: context,
               builder: (dialogContext) {
                 return AlertDialog(
-                  title: Text(
+                  title: const Text(
                     LocaleKeys.NewWorkOrderCreated,
-                    style: const TextStyle(fontSize: 14),
+                    style: TextStyle(fontSize: 14, color: Colors.black),
                   ),
                   content: Text(
                       "${LocaleKeys.WorkOrderNumber} ${woCreateProvider.isWorkOrderCreatedId}"),
                   actions: [
                     TextButton(
-                      child: Text(LocaleKeys.Okey),
+                      child: const Text(LocaleKeys.Okey),
                       onPressed: () {
                         Navigator.pop(dialogContext);
                       },
                     ),
                     TextButton(
-                      child: Text(LocaleKeys.SeeDetail),
+                      child: const Text(LocaleKeys.SeeDetail),
                       onPressed: () {
                         searchWorkOrderProvider
                             .getWorkSpaceWithSearchFromGroupWorks(dialogContext,
@@ -108,8 +108,8 @@ class NewOrderScreen extends StatelessWidget {
             ? const CustomLoadingIndicator()
             : WillPopScope(
                 child: Scaffold(
-                  appBar: CustomMainAppbar(
-                      title: Text(LocaleKeys.NewWorkOrder.tr())),
+                  appBar:
+                      const CustomMainAppbar(title: LocaleKeys.NewWorkOrder),
                   body: SingleChildScrollView(
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
@@ -143,7 +143,7 @@ class NewOrderScreen extends StatelessWidget {
                                         constraints: BoxConstraints.tightFor(),
                                       ),
                                     )
-                                  : CustomLoadingIndicator2(),
+                                  : const CustomLoadingIndicator2(),
                               widget1Required: true,
                               widget2Required: true,
                               widget3Required: false,
@@ -225,14 +225,8 @@ class NewOrderScreen extends StatelessWidget {
                               widget3Required: false,
                             ),
                             CustomHalfButtons(
-                              leftTitle: Text(
-                                LocaleKeys.Cancel.tr(),
-                                style: TextStyle(color: APPColors.Main.white),
-                              ),
-                              rightTitle: Text(
-                                LocaleKeys.Save.tr(),
-                                style: TextStyle(color: APPColors.Main.white),
-                              ),
+                              leftTitle: LocaleKeys.Cancel,
+                              rightTitle: LocaleKeys.Save,
                               leftOnPressed: () {
                                 woCreateProvider.setAllClear();
                               },
