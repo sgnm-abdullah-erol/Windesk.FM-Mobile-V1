@@ -24,7 +24,7 @@
 	"Browse": "Browse",
 	"CompletedChecklist": "Completed Checklist",
 	"ImageAddedError": "Getting Error While Added Photo",
-	"MakeYourChoice":"Make your choice",
+	"MakeYourChoice": "Make your choice",
 	"----------------APP----------": "-----------APP--------------",
 	"IfmName": "İstanbul Finance Center",
 	"AppTitle": "Help Desk App",
@@ -123,6 +123,7 @@
 	"SearchTab": "Search",
 	"TestTab": "Test",
 	"----------------WORKORDER----------": "------------WORKORDER-------------",
+	"NoWorkOrder": "No Work Order",
 	"CreatedNewWorkOrder": "Created New Work Order",
 	"GoingToNewWorkOrderDetailPage": "Going To New Work Order Detail Page...",
 	"ChangeState": "Change State",
@@ -147,10 +148,9 @@
 	"SelectaLocation": "Please Select a Location",
 	"scope": "Scope",
 	"Explanation": "Explanation",
-	"PleaseGiveAllRequiredInputs":"Please Give All Required Inputs",
-	"selectedLocation":"Selected Location",
-	"willBeChanged":"will be changed.",
-
+	"PleaseGiveAllRequiredInputs": "Please Give All Required Inputs",
+	"selectedLocation": "Selected Location",
+	"willBeChanged": "will be changed.",
 	"----------------DATATABLE----------": "------------DATATABLE-------------",
 	"DataTableID": "ID",
 	"DataTableName": "Name",
@@ -184,8 +184,6 @@
 	"MaterialSearch": "Material Search",
 	"LabelNumber": "Label Number",
 	"IdentifierNumber": "Identifier Number",
-
-
 	"----------------ISSUE----------": "-----------ISSUE--------------",
 	"State": "State",
 	"Build": "Build",
@@ -299,7 +297,6 @@
 	"WorkOrderNumber": "Work Order Number",
 	"Defination": "Defination",
 	"RequestType": "Request Type",
-
 	"----------MAİNTENANCE----------": "------------MAİNTENANCE------------",
 	"Manage Check List": "Manage Check List",
 	"Add Check List": "Add Check List",
@@ -630,7 +627,7 @@
 	"Form": "Form",
 	"Assigned Roles": "Assigned Roles",
 	"Assigned Users": "Assigned Users",
-	"SearchType" :"Search Type",
+	"SearchType": "Search Type",
 	"-------------------------------------": "---------------------------------------------",
 	"Organization/Realm": "Organization/Realm",
 	"Classifications": "Classifications",
@@ -1126,25 +1123,19 @@
 	"Task Assignee": "Task Assignee",
 	"Rejected User / Description:": "Rejected User / Description:",
 	"Approved User:": "Approved User:",
-
 	"<---------- Search ---------->": "<--- Search --->",
-	"AssetSearch":"Asset Search",
-	"SpaceSearch":"Space Search",
-	"SpaceSearchListItem":"Please search to list.",
-
-
+	"AssetSearch": "Asset Search",
+	"SpaceSearch": "Space Search",
+	"SpaceSearchListItem": "Please search to list.",
 	"<---------- TEST ---------->": "<--- TEST --->",
-	"AccessTest":"Connection Test",
-	"PhoneTime":"Phone Time",
-	"ConnectionTime":"Connection Time",
-	"AppVersion":"App Version",
-	"OS":"OS",
-	"Device":"Device",
-	"FacilityName":"İstanbul Finans Merkezi",
-	"ConnectionSuccess" : "IFM : Connection Success",
-	"ConnectionUnSuccess" : "IFM : Connection Fail",
-	"ConnectionWait":"IFM : Connection Waiting"
-
-
-
+	"AccessTest": "Connection Test",
+	"PhoneTime": "Phone Time",
+	"ConnectionTime": "Connection Time",
+	"AppVersion": "App Version",
+	"OS": "OS",
+	"Device": "Device",
+	"FacilityName": "İstanbul Finans Merkezi",
+	"ConnectionSuccess": "IFM : Connection Success",
+	"ConnectionUnSuccess": "IFM : Connection Fail",
+	"ConnectionWait": "IFM : Connection Waiting"
 }
