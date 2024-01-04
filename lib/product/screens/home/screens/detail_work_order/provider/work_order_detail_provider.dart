@@ -497,8 +497,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
         _isTaskHistoryLoading = true;
         _taskHistoryData = dataList;
         notifyListeners();
-      }, (r) {
-      });
+      }, (r) {});
     }
     _isLoading = false;
 
@@ -661,7 +660,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     });
   }
 
-  void savePdf(BuildContext context, String pdfPath, String pdfName, String desc, String taskId, String taskKey) async {
+  void savePdf(BuildContext context, String pdfPath, String pdfName, String desc, String taskId, String taskKey, String label) async {
     if (pdfPath.isEmpty) {
       snackBar(context, LocaleKeys.EmptyPdfPath.tr(), 'error');
       return;
@@ -694,7 +693,7 @@ class WorkOrderDetailProvider extends ChangeNotifier {
     });
   }
 
-  void saveImage(BuildContext context, String imagePath, String desc, String taskId, String taskKey) async {
+  void saveImage(BuildContext context, String imagePath, String desc, String taskId, String taskKey, String label) async {
     if (imagePath.isEmpty) {
       snackBar(context, LocaleKeys.EmptyImagePath.tr(), 'error');
       return;

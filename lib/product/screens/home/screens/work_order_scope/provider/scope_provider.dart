@@ -9,9 +9,14 @@ import 'package:vm_fm_4/feature/service/global_services.dart/work_space_service/
 import 'package:vm_fm_4/generated/locale_keys.g.dart';
 
 class ScopeProvider extends ChangeNotifier {
+  ScopeProvider({required this.pageContext});
+
   final WorkSpaceServiceRepositoryImpl workSpaceService = Injection.getIt.get<WorkSpaceServiceRepositoryImpl>();
 
+  final BuildContext pageContext;
+
   bool _fetchQuery = true;
+
   bool get fetchQuery => _fetchQuery;
 
   bool _selectedValue = false;
@@ -138,11 +143,11 @@ class ScopeProvider extends ChangeNotifier {
 
     response.fold(
       (l) => {
-        Navigator.of(context).pop<bool>(true),
-        snackBar(context, LocaleKeys.PhotoAdded.tr(), 'success'),
+        // Navigator.of(context).pop<bool>(true),
+        snackBar(pageContext, LocaleKeys.PhotoAdded.tr(), 'success'),
       },
       (r) => {
-        snackBar(context, LocaleKeys.ImageAddedError.tr(), 'error'),
+        snackBar(pageContext, LocaleKeys.ImageAddedError.tr(), 'error'),
       },
     );
 
@@ -156,7 +161,7 @@ class ScopeProvider extends ChangeNotifier {
 
   void savePdf(BuildContext context, String pdfPath, String pdfName, String desc, String taskId, String taskKey, String labels) async {
     if (pdfPath.isEmpty) {
-      snackBar(context, LocaleKeys.EmptyPdfPath.tr(), 'error');
+      snackBar(pageContext, LocaleKeys.EmptyPdfPath.tr(), 'error');
       return;
     }
     _isLoading = true;
@@ -171,8 +176,8 @@ class ScopeProvider extends ChangeNotifier {
         l
             ? {
                 _isDocumentAdded = true,
-                Navigator.of(context).pop<bool>(true),
-                snackBar(context, LocaleKeys.DocumentAdded.tr(), 'success'),
+                // Navigator.of(context).pop<bool>(true),
+                snackBar(pageContext, LocaleKeys.DocumentAdded.tr(), 'success'),
               }
             : {
                 _isDocumentAdded = false,

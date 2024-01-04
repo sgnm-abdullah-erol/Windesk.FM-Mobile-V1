@@ -32,10 +32,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  SystemChrome.setPreferredOrientations([
-     DeviceOrientation.portraitDown,
-     DeviceOrientation.portraitUp,
-  ]);
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.portraitUp,
+    ]);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<GlobalProvider>(create: (_) => GlobalProvider()),

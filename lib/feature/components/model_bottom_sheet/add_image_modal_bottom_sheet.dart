@@ -61,11 +61,11 @@ class _ApproveButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomHalfButtons(
-      leftTitle:  (LocaleKeys.Cancel),
-      rightTitle:  (LocaleKeys.Approve),
+      leftTitle: (LocaleKeys.Cancel),
+      rightTitle: (LocaleKeys.Approve),
       leftOnPressed: () => Navigator.pop(context),
       rightOnPressed: () async {
-        saveImage(context, provider.imagePath, provider.desc, taskId, taskKey);
+        saveImage(context, provider.imagePath, provider.desc, taskId, taskKey, '');
         context.router.pop();
       },
     );
