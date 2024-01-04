@@ -1,8 +1,8 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
+// ignore_for_file: unused_field
+
 import 'package:flutter/material.dart';
 
 import '../../../../../../core/constants/other/colors.dart';
-import '../../../../../../feature/extensions/context_extension.dart';
 
 class CustomLoadingIndicator2 extends StatelessWidget {
   const CustomLoadingIndicator2({super.key});
@@ -18,9 +18,7 @@ class CustomLoadingIndicator2 extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Align(
-              alignment: Alignment.center,
-              child: CircularProgressIndicator(color: APPColors.Main.blue)),
+          Align(alignment: Alignment.center, child: CircularProgressIndicator(color: APPColors.Main.blue)),
         ],
       ),
     );
