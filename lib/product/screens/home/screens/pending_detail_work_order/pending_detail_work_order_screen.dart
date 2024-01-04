@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_print
 
 import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vm_fm_4/core/constants/style/custom_paddings.dart';
@@ -52,7 +51,7 @@ class _BuildScaffold extends StatelessWidget {
             const SizedBox(height: 20),
             CustomHalfButtons(
               leftTitle: (LocaleKeys.Reject),
-              rightTitle:  (LocaleKeys.Approve),
+              rightTitle: (LocaleKeys.Approve),
               leftOnPressed: () {
                 WoWaitRejectModalAlert().showAlertDialog(context, 'textData', 'inputArrayLabelText', ['as', 'asd', 'sad'], () {}).then((value) {
                   if (value != null) {

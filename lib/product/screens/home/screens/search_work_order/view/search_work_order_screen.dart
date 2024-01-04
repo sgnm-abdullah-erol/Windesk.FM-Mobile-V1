@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,21 +25,16 @@ class _SearchWorkOrderScreenState extends State<SearchWorkOrderScreen> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => SearchWorkOrderProvider(),
-      child: Consumer<SearchWorkOrderProvider>(
-          builder: (context, SearchWorkOrderProvider searchProvider, child) {
+      child: Consumer<SearchWorkOrderProvider>(builder: (context, SearchWorkOrderProvider searchProvider, child) {
         if (searchProvider.isSuccess) {
           if (searchProvider.woDetailList != null) {
-            context.router.push(DetailWorkOrderScreen(
-                workSpaceDetail: searchProvider.woDetailList!));
+            context.router.push(DetailWorkOrderScreen(workSpaceDetail: searchProvider.woDetailList!));
             searchProvider.clearInput();
           }
         }
 
         return Scaffold(
-          appBar: CustomMainAppbar(
-              title: (LocaleKeys.WorkOrderSearch),
-              returnBack: true,
-              elevation: 3),
+          appBar: const CustomMainAppbar(title: (LocaleKeys.WorkOrderSearch), returnBack: true, elevation: 3),
           body: searchProvider.isLoading
               ? const CustomLoadingIndicator()
               : Center(
@@ -51,16 +45,14 @@ class _SearchWorkOrderScreenState extends State<SearchWorkOrderScreen> {
                       children: [
                         TextFieldsInputWithActionAndController(
                             textController: searchProvider.woNumber,
-                            labelText:
-                                'İş Emri Arama (İş Emri Numarası Giriniz. Örn. 3235)',
+                            labelText: 'İş Emri Arama (İş Emri Numarası Giriniz. Örn. 3235)',
                             actionIcon: AppIcons.qr,
                             actionFunction: searchProvider.scanBarcodeAndQr),
                         CustomHalfButtons(
                             leftTitle: LocaleKeys.Cancel,
                             rightTitle: LocaleKeys.Save,
                             leftOnPressed: searchProvider.clearInput,
-                            rightOnPressed:
-                                searchProvider.getWorkOrderWithSearch),
+                            rightOnPressed: searchProvider.getWorkOrderWithSearch),
                       ],
                     ),
                   ),

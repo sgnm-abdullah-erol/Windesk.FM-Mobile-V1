@@ -13,7 +13,6 @@ import '../../../../../../../feature/components/input_fields/text_fields_input_w
 import '../../../../core/constants/other/app_icons.dart';
 import '../../../../core/constants/style/custom_paddings.dart';
 import '../../../../core/route/app_route.gr.dart';
-import '../../../../feature/extensions/context_extension.dart';
 import '../../../../generated/locale_keys.g.dart';
 import '../../home/screens/work_order_list/widgets/custom_loading_indicator.dart';
 import '../provider/search_provider.dart';
@@ -31,8 +30,7 @@ class _AssetSearchScreen extends State<AssetSearchScreen> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => SearchMaterialProvider(),
-      child: Consumer<SearchMaterialProvider>(
-          builder: (context, SearchMaterialProvider searchProvider, child) {
+      child: Consumer<SearchMaterialProvider>(builder: (context, SearchMaterialProvider searchProvider, child) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (searchProvider.isSuccess) {
             snackBar(context, LocaleKeys.assetSearchSuccess, 'success');
@@ -52,10 +50,7 @@ class _AssetSearchScreen extends State<AssetSearchScreen> {
         });
         return WillPopScope(
           child: Scaffold(
-            appBar: CustomMainAppbar(
-                returnBack: true,
-                title: LocaleKeys.MaterialSearch,
-                elevation: 3),
+            appBar: const CustomMainAppbar(returnBack: true, title: LocaleKeys.MaterialSearch, elevation: 3),
             body: searchProvider.isLoading
                 ? const CustomLoadingIndicator()
                 : Center(
@@ -68,24 +63,19 @@ class _AssetSearchScreen extends State<AssetSearchScreen> {
                               textController: searchProvider.assetNumber,
                               labelText: LocaleKeys.MaterialSearch.tr(),
                               actionIcon: AppIcons.qr,
-                              actionFunction:
-                                  searchProvider.scanBarcodeAndQrForAsset),
+                              actionFunction: searchProvider.scanBarcodeAndQrForAsset),
                           DropDownInputFields(
                               labelText: LocaleKeys.SearchType.tr(),
                               onChangedFunction: (String value) {
                                 searchProvider.setQrType(value);
                               },
                               rightIcon: AppIcons.arrowDown,
-                              dropDownArray: [
-                                LocaleKeys.LabelNumber.tr(),
-                                LocaleKeys.IdentifierNumber.tr()
-                              ]),
+                              dropDownArray: [LocaleKeys.LabelNumber.tr(), LocaleKeys.IdentifierNumber.tr()]),
                           CustomHalfButtons(
                               leftTitle: LocaleKeys.Clear.tr(),
                               rightTitle: LocaleKeys.Search.tr(),
                               leftOnPressed: searchProvider.clearInput,
-                              rightOnPressed:
-                                  searchProvider.getAssetWithSearch),
+                              rightOnPressed: searchProvider.getAssetWithSearch),
                         ],
                       ),
                     ),

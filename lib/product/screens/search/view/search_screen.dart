@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vm_fm_4/core/constants/other/app_icons.dart';
@@ -21,13 +20,10 @@ class SearchScreen extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
       ],
-      child: Consumer<ThemeProvider>(
-          builder: (context, ThemeProvider themeProvider, child) {
+      child: Consumer<ThemeProvider>(builder: (context, ThemeProvider themeProvider, child) {
         themeProvider.getPreferences();
 
-        return Scaffold(
-            appBar: const CustomMainAppbar(title: LocaleKeys.Search),
-            body: Center(child: _bodyWidget(context)));
+        return Scaffold(appBar: const CustomMainAppbar(title: LocaleKeys.Search), body: Center(child: _bodyWidget(context)));
       }),
     );
   }
@@ -40,28 +36,14 @@ class SearchScreen extends StatelessWidget {
         SizedBox(
           height: MediaQuery.of(context).size.height / 8,
         ),
-        rowIconButtonSection(
-            context,
-            LocaleKeys.AssetSearch,
-            AppIcons.assetSearch,
-            const AssetSearchScreen(),
-            LocaleKeys.SpaceSearch,
-            AppIcons.spaceSearch,
-            const SpaceSearchScreen(),
-            ServiceTools.isWorkOrderExist),
+        rowIconButtonSection(context, LocaleKeys.AssetSearch, AppIcons.assetSearch, const AssetSearchScreen(), LocaleKeys.SpaceSearch,
+            AppIcons.spaceSearch, const SpaceSearchScreen(), ServiceTools.isWorkOrderExist),
       ],
     );
   }
 
-  Widget rowIconButtonSection(
-      BuildContext context,
-      String buttonTitle1,
-      IconData buttonIcon1,
-      PageRouteInfo<dynamic> navigateRouteName1,
-      String buttonTitle2,
-      IconData buttonIcon2,
-      PageRouteInfo<dynamic> navigateRouteName2,
-      bool secondButtonExist) {
+  Widget rowIconButtonSection(BuildContext context, String buttonTitle1, IconData buttonIcon1, PageRouteInfo<dynamic> navigateRouteName1,
+      String buttonTitle2, IconData buttonIcon2, PageRouteInfo<dynamic> navigateRouteName2, bool secondButtonExist) {
     return Expanded(
       child: Center(
         child: Row(
