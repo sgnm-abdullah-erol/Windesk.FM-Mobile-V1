@@ -90,7 +90,7 @@ class CustomWorkOrderListCard extends StatelessWidget {
       children: [
         Text(label, style: context.bodySmall.copyWith(fontWeight: FontWeight.bold, color: APPColors.Main.black)).tr(),
         SizedBox(
-          width: context.width / 3,
+          width: context.width / 2.75,
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Text(
@@ -226,6 +226,7 @@ class CustomWorkOrderListCard extends StatelessWidget {
                   color: APPColors.Secondary.black,
                   fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
                 ),
+                maxLines: 2,
               ),
             ),
           ],
