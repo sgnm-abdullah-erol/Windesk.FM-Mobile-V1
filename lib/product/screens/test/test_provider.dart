@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:vm_fm_4/core/database/shared_manager.dart';
 import 'package:vm_fm_4/core/enums/shared_enums.dart';
 import 'service/test_service_repo_impl.dart';
@@ -36,8 +40,20 @@ class TestProvider extends ChangeNotifier {
     _deviceModel = deviceModel;
   }
 
+  String _deviceId = '';
+  get deviceId => _deviceId;
+  set setDeviceId(String deviceId) {
+    _deviceId = deviceId;
+  }
+
+  String _deviceVersion = '';
+  get deviceVersion => _deviceVersion;
+  set setDeviceVersion(String deviceVersion) {
+    _deviceVersion = deviceVersion;
+  }
+
   String _deviceOS = '';
-  get deviceOS => _deviceOS;
+  String get deviceOS => _deviceOS;
   set setDeviceOS(String deviceOS) {
     _deviceOS = deviceOS;
   }
@@ -66,13 +82,41 @@ class TestProvider extends ChangeNotifier {
     _phoneTime = phoneTime;
   }
 
-  void getTestScreenInfo() async {
+  Future<void> getTestScreenInfo() async {
     setGetInfoLoad = true;
-    setDeviceModel = await SharedManager().getString(SharedEnum.deviceModel);
-    setDeviceOS = await SharedManager().getString(SharedEnum.deviceType);
-    setAppVersion = await SharedManager().getString(SharedEnum.appVersion);
-    notifyListeners();
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    
+
+    setAppVersion = '1.0.0';
+    // Gets device information from Android and iOS devices sparingly.
+    if (Platform.isAndroid) {
+      AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+      _deviceModel = androidInfo.model;
+      _deviceVersion = androidInfo.version.release;
+      _deviceId = androidInfo.id;
+      _deviceOS = 'Android';
+    } else if (Platform.isIOS) {
+      IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+     // _appVersion = packageInfo.version;
+      _deviceModel = iosInfo.model;
+      _deviceVersion = iosInfo.systemVersion;
+      _deviceId = iosInfo.identifierForVendor ?? 'unknown ID';
+      _deviceOS = 'IOS';
+    }
+    // sets device information to shared preferences.
+    if (deviceId != null && deviceOS != null) {
+      await SharedManager().setString(SharedEnum.deviceId, deviceId);
+      await SharedManager().setString(SharedEnum.deviceType, deviceOS);
+    }
   }
+
+  // void getTestScreenInfo() async {
+  //   setGetInfoLoad = true;
+  //   setDeviceModel = await SharedManager().getString(SharedEnum.deviceModel);
+  //   setDeviceOS = await SharedManager().getString(SharedEnum.deviceType);
+  //   setAppVersion = await SharedManager().getString(SharedEnum.appVersion);
+  //   notifyListeners();
+  // }
 
   void getServerTime() async {
     String token = await SharedManager().getString(SharedEnum.deviceId);

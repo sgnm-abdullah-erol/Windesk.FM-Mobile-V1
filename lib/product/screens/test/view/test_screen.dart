@@ -1,5 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,6 +30,22 @@ class TestScreen extends StatefulWidget {
 class _TestScreenState extends State<TestScreen> {
   final RoundedLoadingButtonController _controllerButton =
       RoundedLoadingButtonController();
+
+  DateTime _currentDateTime = DateTime.now();
+
+  @override
+  void initState() {
+    super.initState();
+    _updateDateTime();
+  }
+  void _updateDateTime() {
+    // Update the current date and time every second
+    Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        _currentDateTime = DateTime.now();
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,6 +103,7 @@ class _TestScreenState extends State<TestScreen> {
 
   Widget _headerWidget(BuildContext context) {
     return Expanded(
+            flex: 1,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
@@ -100,9 +119,9 @@ class _TestScreenState extends State<TestScreen> {
       ),
     );
   }
-
   Widget _infoWidget(BuildContext context, TestProvider testProvider) {
     return Expanded(
+      flex: 2,
       child: Column(
         children: [
           const Padding(
@@ -112,38 +131,20 @@ class _TestScreenState extends State<TestScreen> {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
+          _infoText(context,LocaleKeys.Device.tr(),context.read<TestProvider>().deviceModel.toString()),
+          _infoText(context,LocaleKeys.OS.tr(),context.read<TestProvider>().deviceOS.toString()),
+          _infoText(context,LocaleKeys.AppVersion.tr(),context.read<TestProvider>().appVersion.toString()),
           Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Text(LocaleKeys.Device.tr() +
-                context.read<TestProvider>().deviceModel.toString()),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Text(LocaleKeys.OS.tr() +
-                ' : ' +
-                context.read<TestProvider>().deviceOS.toString()),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Text(LocaleKeys.AppVersion.tr() +
-                context.read<TestProvider>().appVersion.toString()),
-          ),
-          Expanded(
-            flex: 4,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 25),
-              child: Column(
-                children: [
-                  Text(
-                    LocaleKeys.ConnectionTime.tr(),
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  //Text(AppStrings.serverTime + testProvider.serverTime),
-                  Text(LocaleKeys.PhoneTime.tr() +
-                      ' : ' +
-                      testProvider.phoneTime),
-                ],
-              ),
+            padding: const EdgeInsets.only(top: 10.0),
+            child: Column(
+              children: [
+                Text(
+                  LocaleKeys.ConnectionTime.tr(),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                //Text(AppStrings.serverTime + testProvider.serverTime),
+                Text('${LocaleKeys.PhoneTime.tr()} : $_currentDateTime', overflow: TextOverflow.ellipsis,),
+              ],
             ),
           ),
         ],
@@ -151,6 +152,12 @@ class _TestScreenState extends State<TestScreen> {
     );
   }
 
+  Padding _infoText(BuildContext context, String title, String subTitle) {
+    return Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: Text('$title : $subTitle'),
+        );
+  }
   Widget _buttonsAndTestResultWidget(BuildContext context,
       TestProvider testProvider, ThemeProvider themeProvider) {
     return Consumer<ThemeProvider>(

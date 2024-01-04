@@ -1,14 +1,9 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../core/constants/other/colors.dart';
-import '../../../../../../feature/extensions/context_extension.dart';
 
 class CustomLoadingIndicator2 extends StatelessWidget {
   const CustomLoadingIndicator2({super.key});
-
-  final String _windesk = 'Windesk';
-  final String _fm = 'FM';
 
   @override
   Widget build(BuildContext context) {
