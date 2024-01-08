@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:vm_fm_4/feature/service/log/log_service.dart';
 
 import '../core/log/log_manager.dart';
 import '../product/screens/new_order/service/wo_create_service_repository_impl.dart';
@@ -13,6 +14,7 @@ class Injection {
 
   Future<void> initInstances() async {
     getIt
+      ..registerLazySingleton<LogService>(() => LogService())
       ..registerLazySingleton<ServiceManager>(() => ServiceManager())
       ..registerLazySingleton<LogManager>(() => LogManager())
       ..registerLazySingleton<GlobalProvider>(() => GlobalProvider())

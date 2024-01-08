@@ -15,7 +15,7 @@ class ServiceTools {
   static const String attachPathLive = "http://10.32.12.42/windesktest/xreadattach.php?token=$tokenV1&id=";
   static const String facilityName = "İstanbul Finans Merkezi";
   static const bool isWorkOrderExist = true;
-  static const bool _isProduction = true;
+  static const bool _isProduction = false;
 
   static Url get url {
     if (_isProduction) {
@@ -27,6 +27,7 @@ class ServiceTools {
         workorder_url: "https://workorder-server.ifm.gov.tr",
         generalGraphql_url: "https://workorder-server.ifm.gov.tr/general-graphql",
         graphql_url: "https://workorder-server.ifm.gov.tr/graphql",
+        log_url: "http://10.0.2.2:3020",
       );
     } else {
       return const Url(
@@ -37,6 +38,7 @@ class ServiceTools {
         workorder_url: "http://10.0.2.2:3015",
         generalGraphql_url: "http://10.0.2.2:3015/general-graphql",
         graphql_url: "http://10.0.2.2:3015/graphql",
+        log_url: "http://10.0.2.2:3020",
       );
     }
   }
@@ -82,6 +84,7 @@ class Url {
   final String workorder_url;
   final String generalGraphql_url;
   final String graphql_url;
+  final String log_url;
 
   const Url({
     required this.facility_url,
@@ -91,5 +94,6 @@ class Url {
     required this.workorder_url,
     required this.generalGraphql_url,
     required this.graphql_url,
+    required this.log_url,
   });
 }
