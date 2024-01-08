@@ -8,12 +8,10 @@ import 'package:provider/provider.dart';
 import 'package:vm_fm_4/core/themes/theme_provider.dart';
 import 'package:vm_fm_4/feature/components/input_fields/dropdown_input_fields2.dart';
 import 'package:vm_fm_4/product/screens/home/screens/search_work_order/provider/search_work_order_provider.dart';
-import 'package:vm_fm_4/product/screens/home/screens/work_order_list/widgets/custom_loading_indicator2.dart';
 
 import '../../../../core/constants/functions/null_check_widget.dart';
 import '../../../../core/constants/other/snackbar_strings.dart';
 import '../../../../core/constants/style/custom_paddings.dart';
-import '../../../../generated/locale_keys.g.dart';
 import '../../../../feature/components/appbar/custom_main_appbar.dart';
 import '../../../../feature/components/buttons/custom_half_buttons.dart';
 import '../../../../feature/components/cards/custom_wo_create_card.dart';
@@ -22,6 +20,7 @@ import '../../../../feature/components/input_fields/text_field_time_picker.dart'
 import '../../../../feature/components/input_fields/text_fields_input_underline.dart';
 import '../../../../feature/components/snackBar/snackbar.dart';
 import '../../../../feature/extensions/context_extension.dart';
+import '../../../../generated/locale_keys.g.dart';
 import '../../home/screens/work_order_list/widgets/custom_loading_indicator.dart';
 import '../provider/wo_create_provider.dart';
 
@@ -105,20 +104,18 @@ class NewOrderScreen extends StatelessWidget {
                                   onChanged: (String newValue) {
                                     woCreateProvider.setDescription(newValue);
                                   }),
-                              widget3: woCreateProvider.getComponentsChildren.isNotEmpty
-                                  ? DropdownSearch<String>(
-                                      items: woCreateProvider.getComponentsChildren,
-                                      onChanged: (value) {
-                                        woCreateProvider.setComponent(value.toString());
-                                      },
-                                      selectedItem: LocaleKeys.Component.tr(),
-                                      popupProps: const PopupProps.menu(
-                                        showSearchBox: true,
-                                        fit: FlexFit.loose,
-                                        constraints: BoxConstraints.tightFor(),
-                                      ),
-                                    )
-                                  : const CustomLoadingIndicator2(),
+                              widget3: DropdownSearch<String>(
+                                items: woCreateProvider.getComponentsChildren,
+                                onChanged: (value) {
+                                  woCreateProvider.setComponent(value.toString());
+                                },
+                                selectedItem: LocaleKeys.Component.tr(),
+                                popupProps: const PopupProps.menu(
+                                  showSearchBox: true,
+                                  fit: FlexFit.loose,
+                                  constraints: BoxConstraints.tightFor(),
+                                ),
+                              ),
                               widget1Required: true,
                               widget2Required: true,
                               widget3Required: false,

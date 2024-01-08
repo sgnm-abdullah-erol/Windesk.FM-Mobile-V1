@@ -375,6 +375,8 @@ class WoCreateProvider extends ChangeNotifier {
         _requestedTypeTree1 = !isChildrenExist;
         notifyListeners();
         if (isChildrenExist) {
+          // _getRequestedTypesChildrenTree1.add('Seçiniz');
+
           for (var b = 0; b < (_getRequestedTypes[i].children!.length); b++) {
             _getRequestedTypesChildrenTree1.add(_getRequestedTypes[i].children![b].name ?? '');
           }
@@ -610,6 +612,7 @@ class WoCreateProvider extends ChangeNotifier {
     final int? result = await getDefaultWorkSpaceOfUser(context);
     final token = await SharedManager().getString(SharedEnum.userToken);
     final response = await _woCreateServiceRepository.getWorkFlows(token, result.toString());
+    _workFlowNames.add('');
     response.fold(
       (l) => {
         _woCreateWorkSpaceModel = l,
