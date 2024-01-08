@@ -38,10 +38,7 @@ class DropDownInputFields2 extends StatelessWidget {
                 borderSide: BorderSide(color: APPColors.Main.grey, width: 4),
               ),
               labelText: labelText.tr(),
-              labelStyle: context.bodySmall.copyWith(
-                  color: context.theme
-                      ? APPColors.Main.white
-                      : APPColors.Main.black),
+              labelStyle: context.bodySmall.copyWith(color: context.theme ? APPColors.Main.white : APPColors.Main.black),
             ),
             items: dropDownArray.map(
               (String items) {
@@ -53,10 +50,7 @@ class DropDownInputFields2 extends StatelessWidget {
                       Flexible(
                         child: Text(
                           items,
-                          style: context.labelMedium.copyWith(
-                              color: context.theme
-                                  ? APPColors.Main.white
-                                  : APPColors.Main.black),
+                          style: context.labelMedium.copyWith(color: context.theme ? APPColors.Main.white : APPColors.Main.black),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
@@ -75,10 +69,7 @@ class DropDownInputFields2 extends StatelessWidget {
                 borderSide: BorderSide(color: APPColors.Main.grey, width: 4),
               ),
               labelText: labelText.tr(),
-              labelStyle: context.bodySmall.copyWith(
-                  color: context.theme
-                      ? APPColors.Main.white
-                      : APPColors.Main.black),
+              labelStyle: context.bodySmall.copyWith(color: context.theme ? APPColors.Main.white : APPColors.Main.black),
             ),
             items: dropDownArray.map(
               (String items) {
@@ -90,10 +81,7 @@ class DropDownInputFields2 extends StatelessWidget {
                       Flexible(
                         child: Text(
                           items,
-                          style: context.labelMedium.copyWith(
-                              color: context.theme
-                                  ? APPColors.Main.white
-                                  : APPColors.Main.black),
+                          style: context.labelMedium.copyWith(color: context.theme ? APPColors.Main.white : APPColors.Main.black),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),

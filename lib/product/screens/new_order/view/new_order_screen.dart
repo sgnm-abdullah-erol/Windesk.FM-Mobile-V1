@@ -38,8 +38,9 @@ class NewOrderScreen extends StatelessWidget {
       ],
       child: Consumer3<WoCreateProvider, SearchWorkOrderProvider, ThemeProvider>(
           builder: (context, WoCreateProvider woCreateProvider, SearchWorkOrderProvider searchWorkOrderProvider, ThemeProvider themeProvider, child) {
+        // themeProvider.getPreferences();
+        print(context.locale);
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          themeProvider.getPreferences();
           if (woCreateProvider.isWorkOrderCreate) {
             snackBar(context, SnackbarStrings.woCreate, 'success');
             showDialog(
@@ -223,27 +224,45 @@ class NewOrderScreen extends StatelessWidget {
           DropDownInputFields2(
             labelText: LocaleKeys.RequestType,
             onChangedFunction: (String newValue) {
+              woCreateProvider.setRequestType1('');
+
               woCreateProvider.setRequestType(newValue);
-              woCreateProvider.setRequestType1(woCreateProvider.getRequestedTypesChildrenTree1[0]);
+              //woCreateProvider.setRequestType1(woCreateProvider.getRequestedTypesChildrenTree1[0]);
             },
             rightIcon: Icons.arrow_drop_down_rounded,
             dropDownArray: woCreateProvider.getRequestedTypesChildren,
           ),
-          Padding(
-              padding: CustomPaddings.onlyLeft * 1.5,
-              child: NullCheckWidget().isLeafFalse(
-                woCreateProvider.requestedTypeTree1,
-                DropDownInputFields2(
-                  labelText: LocaleKeys.Choose,
-                  onChangedFunction: (String newValue) {
-                    woCreateProvider.setRequestType1(newValue);
-                  },
-                  rightIcon: Icons.arrow_drop_down_rounded,
-                  dropDownArray: woCreateProvider.getRequestedTypesChildrenTree1,
-                  leftIconExist: true,
-                  leftIcon: Icons.arrow_right_alt,
-                ),
-              )),
+          woCreateProvider.requestType1 != ''
+              ? Padding(
+                  padding: CustomPaddings.onlyLeft * 1.5,
+                  child: NullCheckWidget().isLeafFalse(
+                    woCreateProvider.requestedTypeTree1,
+                    DropDownInputFields2(
+                      labelText: LocaleKeys.Choose,
+                      onChangedFunction: (String newValue) {
+                        woCreateProvider.setRequestType1(newValue);
+                      },
+                      rightIcon: Icons.arrow_drop_down_rounded,
+                      dropDownArray: woCreateProvider.getRequestedTypesChildrenTree1,
+                      leftIconExist: true,
+                      leftIcon: Icons.arrow_right_alt,
+                    ),
+                  ))
+              : Padding(
+                  padding: CustomPaddings.onlyLeft * 1.5,
+                  child: NullCheckWidget().isLeafFalse(
+                    woCreateProvider.requestedTypeTree1,
+                    DropDownInputFields2(
+                      labelText: LocaleKeys.Choose,
+                      onChangedFunction: (String newValue) {
+                        woCreateProvider.setRequestType1(newValue);
+                      },
+                      rightIcon: Icons.arrow_drop_down_rounded,
+                      dropDownArray: [LocaleKeys.View.tr()],
+                      leftIconExist: true,
+                      leftIcon: Icons.arrow_right_alt,
+                    ),
+                  )),
         ],
       ),
     );

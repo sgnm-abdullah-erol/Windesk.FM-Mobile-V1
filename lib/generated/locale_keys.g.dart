@@ -12,7 +12,7 @@ class LocaleKeys {
   static const String Apply = 'Apply';
   static const String SLAStates = 'SLAStates';
   static const String Close = 'Close';
-
+  static const String View = 'View';
   // maintenance
   static const String ScopeList = 'ScopeList';
 
