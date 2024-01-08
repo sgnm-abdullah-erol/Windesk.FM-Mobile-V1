@@ -374,7 +374,6 @@ class WoCreateProvider extends ChangeNotifier {
     // if (_requestType1 == '') {
     //   _getRequestedTypesChildrenTree1.add('');
     // }
-    print('GİRDİ');
     notifyListeners();
     for (var i = 0; i < (_getRequestedTypes.length); i++) {
       if (_getRequestedTypes[i].name == newValue) {

@@ -142,6 +142,4 @@ class _LoginScreenBodyState extends State<_LoginScreenBody> with WidgetsBindingO
         child: Image.asset(AssetPaths.loginPic, height: context.width, width: context.width / 1, fit: BoxFit.cover),
       );
 
-  Image _loginAppbarTitle(BuildContext context) =>
-      Image.asset(AssetPaths.windesk, width: context.width / 1.5, height: context.width / 1.5, fit: BoxFit.cover);
 }
