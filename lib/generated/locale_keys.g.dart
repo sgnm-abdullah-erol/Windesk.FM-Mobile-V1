@@ -244,6 +244,7 @@ class LocaleKeys {
   static const String WorkOrdersInMyGroup = 'Work Orders in My Group';
   static const String AwaitingApprova = 'Awaiting Approva';
   static const String WorkOrders = 'Work Orders';
+  static const String WorkOrderSample = 'WorkOrderSample';
   static const String Intheprocess = 'In the process';
   static const String January = 'January';
   static const String February = 'February';

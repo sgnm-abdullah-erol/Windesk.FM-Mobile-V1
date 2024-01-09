@@ -43,6 +43,7 @@
 	"WorkOrderList": "İş Emri Listesi",
 	"WorkOrderSearch": "İş Emri Arama",
 	"NewWorkOrder": "Yeni İş Emri",
+	"WorkOrderSample":"(İş Emri Numarası Giriniz Örn.3235)",
 	"Delete": "Sil",
 	"MaterialError": "Malzeme bulunamadı",
 	"Notes": "Notlar",

@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -43,14 +44,27 @@ class _SearchWorkOrderScreenState extends State<SearchWorkOrderScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        TextFieldsInputWithActionAndController(
-                            textController: searchProvider.woNumber,
-                            labelText: 'İş Emri Arama (İş Emri Numarası Giriniz. Örn. 3235)',
-                            actionIcon: AppIcons.qr,
-                            actionFunction: searchProvider.scanBarcodeAndQr),
+                        Column(
+                          children: [
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                LocaleKeys.WorkOrderSample.tr(),
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                            TextFieldsInputWithActionAndController(
+                                textController: searchProvider.woNumber,
+                                labelText: LocaleKeys.WorkOrderNumber,
+                                actionIcon: AppIcons.qr,
+                                actionFunction: searchProvider.scanBarcodeAndQr),
+                          ],
+                        ),
                         CustomHalfButtons(
-                            leftTitle: LocaleKeys.Cancel,
-                            rightTitle: LocaleKeys.Save,
+                            leftTitle: LocaleKeys.Clear,
+                            rightTitle: LocaleKeys.Search,
                             leftOnPressed: searchProvider.clearInput,
                             rightOnPressed: searchProvider.getWorkOrderWithSearch),
                       ],

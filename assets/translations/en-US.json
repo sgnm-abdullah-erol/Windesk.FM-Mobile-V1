@@ -297,6 +297,7 @@
 	"ErrorAccurWhileDownloadFile": "Error Accured While Downloading File",
 	"NewWorkOrderCreated": "New Work Order Created",
 	"WorkOrderNumber": "Work Order Number",
+	"WorkOrderSample":"(Enter Work Order Number Ex.3235)",
 	"Defination": "Defination",
 	"RequestType": "Request Type",
 	"----------MAİNTENANCE----------": "------------MAİNTENANCE------------",
