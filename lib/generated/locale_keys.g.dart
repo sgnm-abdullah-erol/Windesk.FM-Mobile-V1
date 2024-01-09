@@ -103,7 +103,7 @@ class LocaleKeys {
   static const String LogoutError = 'LogoutError';
   static const String LoginEmptyError = 'LoginEmptyError';
   static const String LoginSuccess = 'LoginSuccess';
-
+  static const String WoCreateError = "WoCreateError";
   static const String EffortAdded = 'EffortAdded';
   static const String EffortAddedError = 'EffortAddedError';
   static const String MaterialAdded = 'MaterialAdded';

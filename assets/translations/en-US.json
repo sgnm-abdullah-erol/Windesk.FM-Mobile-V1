@@ -83,6 +83,7 @@
 	"FileDownloaded": "File Downloaded",
 	"FileNotDownloaded": "File Not Downloaded",
 	"WoCreate": "Work Order Created",
+	"WoCreateError":"An Error Occurred While Creating a Work Order",
 	"NewTask": "New Task",
 	"EmptyEffortFields": "Please Fill All Effort Fields",
 	"EmptyMaterialWantedAmount": "Please Enter Wanted Amount",

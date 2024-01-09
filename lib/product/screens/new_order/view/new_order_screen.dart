@@ -39,6 +39,7 @@ class NewOrderScreen extends StatelessWidget {
       child: Consumer3<WoCreateProvider, SearchWorkOrderProvider, ThemeProvider>(
           builder: (context, WoCreateProvider woCreateProvider, SearchWorkOrderProvider searchWorkOrderProvider, ThemeProvider themeProvider, child) {
         // themeProvider.getPreferences();
+        print(context.locale);
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (woCreateProvider.isWorkOrderCreate) {
             snackBar(context, SnackbarStrings.woCreate, 'success');
@@ -49,17 +50,17 @@ class NewOrderScreen extends StatelessWidget {
                   title: const Text(
                     LocaleKeys.NewWorkOrderCreated,
                     style: TextStyle(fontSize: 14, color: Colors.black),
-                  ),
-                  content: Text("${LocaleKeys.WorkOrderNumber} ${woCreateProvider.isWorkOrderCreatedId}"),
+                  ).tr(),
+                  content: Text("${LocaleKeys.WorkOrderNumber.tr()} ${woCreateProvider.isWorkOrderCreatedId}").tr(),
                   actions: [
                     TextButton(
-                      child: const Text(LocaleKeys.Okey),
+                      child: const Text(LocaleKeys.Okey).tr(),
                       onPressed: () {
                         Navigator.pop(dialogContext);
                       },
                     ),
                     TextButton(
-                      child: const Text(LocaleKeys.SeeDetail),
+                      child: const Text(LocaleKeys.SeeDetail).tr(),
                       onPressed: () {
                         searchWorkOrderProvider.getWorkSpaceWithSearchFromGroupWorks(dialogContext, woCreateProvider.isWorkOrderCreatedId);
                       },
@@ -70,7 +71,7 @@ class NewOrderScreen extends StatelessWidget {
             );
           }
           if (woCreateProvider.createTaskError) {
-            snackBar(context, SnackbarStrings.woCreateError, 'error');
+            snackBar(context, LocaleKeys.WoCreateError.tr(), 'error');
           }
         });
         //woCreateProvider.isWorkOrderCreate ? snackBar(context, SnackbarStrings.woCreate, 'success') : null;

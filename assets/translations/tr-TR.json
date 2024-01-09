@@ -296,6 +296,7 @@
 	"DeleteMaterial": "Malzeme Silme İşlemi Başarıyla Gerçekleşti",
 	"DeleteDocument": "Döküman Silme İşlemi Başarıyla Gerçekleşti",
 	"NewWorkOrderCreated": "Yeni İş Emri Oluşturuldu.",
+	"WoCreateError":"İş Emri Oluşturulurken Hata Oluştu.",
 	"WorkOrderNumber": "İş Emri Numarası",
 	"Defination": "Tanım",
 	"Explanation": "Açıklama",
