@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:vm_fm_4/core/database/shared_manager.dart';
 import 'package:vm_fm_4/core/enums/shared_enums.dart';
 import 'service/test_service_repo_impl.dart';
@@ -85,7 +84,6 @@ class TestProvider extends ChangeNotifier {
   Future<void> getTestScreenInfo() async {
     setGetInfoLoad = true;
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    
 
     setAppVersion = '1.0.0';
     // Gets device information from Android and iOS devices sparingly.
@@ -97,13 +95,14 @@ class TestProvider extends ChangeNotifier {
       _deviceOS = 'Android';
     } else if (Platform.isIOS) {
       IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
-     // _appVersion = packageInfo.version;
+      // _appVersion = packageInfo.version;
       _deviceModel = iosInfo.model;
       _deviceVersion = iosInfo.systemVersion;
       _deviceId = iosInfo.identifierForVendor ?? 'unknown ID';
       _deviceOS = 'IOS';
     }
     // sets device information to shared preferences.
+    // ignore: unnecessary_null_comparison
     if (deviceId != null && deviceOS != null) {
       await SharedManager().setString(SharedEnum.deviceId, deviceId);
       await SharedManager().setString(SharedEnum.deviceType, deviceOS);
@@ -146,8 +145,7 @@ class TestProvider extends ChangeNotifier {
     setAccessTestV1 = 'loading';
     notifyListeners();
     var accesTestResult = await testServices.accessTestWindesk();
-    accesTestResult.fold(
-        (l) => {setAccessTestV1 = 'true'}, (r) => setAccessTestV1 = 'false');
+    accesTestResult.fold((l) => {setAccessTestV1 = 'true'}, (r) => setAccessTestV1 = 'false');
     notifyListeners();
   }
 
@@ -156,8 +154,7 @@ class TestProvider extends ChangeNotifier {
     notifyListeners();
 
     var accesTestResult = await testServices.accessTestMobileService();
-    accesTestResult.fold(
-        (l) => {setAccessTestV2 = 'true'}, (r) => setAccessTestV2 = 'false');
+    accesTestResult.fold((l) => {setAccessTestV2 = 'true'}, (r) => setAccessTestV2 = 'false');
 
     notifyListeners();
   }

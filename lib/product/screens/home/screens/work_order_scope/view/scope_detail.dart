@@ -27,11 +27,7 @@ import 'package:vm_fm_4/product/screens/home/screens/work_order_scope/widgets/sa
 
 @RoutePage()
 class ScopeDetail extends StatelessWidget {
-  const ScopeDetail(
-      {super.key,
-      this.maintanenceList,
-      this.checkListValueModel,
-      this.checkListSituation});
+  const ScopeDetail({super.key, this.maintanenceList, this.checkListValueModel, this.checkListSituation});
   final MaintanenceModel? maintanenceList;
   final StartCheckListValueModel? checkListValueModel;
   final String? checkListSituation;
@@ -39,68 +35,39 @@ class ScopeDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GraphQLProvider(
-      client: GraphQLManager.getClient(
-          HttpLink(ServiceTools.url.generalGraphql_url)),
+      client: GraphQLManager.getClient(HttpLink(ServiceTools.url.generalGraphql_url)),
       child: Query(
         options: QueryOptions(
           document: gql(MaintenancesTaskQuery.checkListValues),
-          variables: MaintenancesTaskVariableQueries.checkListValues(
-              checkListValueModel?.id ?? 0),
+          variables: MaintenancesTaskVariableQueries.checkListValues(checkListValueModel?.id ?? 0),
         ),
         builder: GraphqlResultHandling.withGenericHandling(
           context,
           (QueryResult result, {refetch, fetchMore}) {
             if (result.data == null && !result.hasException) {
-              return Text(LocaleKeys.FetchScopeListError.tr(),
-                  style: Theme.of(context).textTheme.bodyMedium);
+              return Text(LocaleKeys.FetchScopeListError.tr(), style: Theme.of(context).textTheme.bodyMedium);
             }
-            final resultData =
-                result.data?['checkListValues'].first['CheckItemValue'];
+            final resultData = result.data?['checkListValues'].first['CheckItemValue'];
             return ChangeNotifierProvider(
-              create: (context) => ScopeProvider(),
+              create: (context) => ScopeProvider(pageContext: context),
               child: Scaffold(
                 appBar: _appbar(context),
                 body: Consumer<ScopeProvider>(
                   builder: (context, ScopeProvider provider, child) {
                     return SizedBox(
                       child: ListView.builder(
-                        itemCount: maintanenceList
-                            ?.scheduledBy
-                            ?.first
-                            .parentSchedule
-                            ?.first
-                            .checkList
-                            ?.first
-                            .includesOfCheckItems
-                            ?.length,
+                        itemCount: maintanenceList?.scheduledBy?.first.parentSchedule?.first.checkList?.first.includesOfCheckItems?.length,
                         itemBuilder: (context, index) {
                           // ignore: prefer_typing_uninitialized_variables
                           var inputVal;
                           for (var i = 0; i < resultData.length; i++) {
                             if (resultData[i]["CheckItem"].first['id'] ==
-                                maintanenceList
-                                    ?.scheduledBy
-                                    ?.first
-                                    .parentSchedule
-                                    ?.first
-                                    .checkList
-                                    ?.first
-                                    .includesOfCheckItems?[index]
-                                    .id) {
-                              inputVal = resultData[i]["inputValueParsed"]
-                                      ["value"] ??
-                                  '';
+                                maintanenceList?.scheduledBy?.first.parentSchedule?.first.checkList?.first.includesOfCheckItems?[index].id) {
+                              inputVal = resultData[i]["inputValueParsed"]["value"] ?? '';
                             }
                           }
                           return CustomScopeCheckItemCard(
-                            checkItem: maintanenceList
-                                ?.scheduledBy
-                                ?.first
-                                .parentSchedule
-                                ?.first
-                                .checkList
-                                ?.first
-                                .includesOfCheckItems?[index],
+                            checkItem: maintanenceList?.scheduledBy?.first.parentSchedule?.first.checkList?.first.includesOfCheckItems?[index],
                             provider: provider,
                             checkListValueId: checkListValueModel?.id,
                             inputValuee: inputVal ?? '',
@@ -111,8 +78,7 @@ class ScopeDetail extends StatelessWidget {
                     );
                   },
                 ),
-                floatingActionButton: Consumer<ScopeProvider>(
-                    builder: (context, ScopeProvider provider, child) {
+                floatingActionButton: Consumer<ScopeProvider>(builder: (context, ScopeProvider provider, child) {
                   return SpeedDial(
                     animatedIcon: AnimatedIcons.menu_close,
                     animatedIconTheme: const IconThemeData(size: 22.0),
@@ -132,11 +98,7 @@ class ScopeDetail extends StatelessWidget {
                     elevation: 8.0,
                     shape: const CircleBorder(),
                     children: [
-                      _speedDialChild(
-                          context,
-                          AppIcons.workHistory,
-                          LocaleKeys.AddedEfforts.tr(),
-                          APPColors.Secondary.blue, () {
+                      _speedDialChild(context, AppIcons.workHistory, LocaleKeys.AddedEfforts.tr(), APPColors.Secondary.blue, () {
                         ShowModalBottomSheet().show(
                           context,
                           AddedEffortsModalBottomSheet(
@@ -145,11 +107,7 @@ class ScopeDetail extends StatelessWidget {
                           ),
                         );
                       }),
-                      _speedDialChild(
-                          context,
-                          AppIcons.history,
-                          LocaleKeys.AddedDocumants.tr(),
-                          APPColors.TracingNumber.blue, () {
+                      _speedDialChild(context, AppIcons.history, LocaleKeys.AddedDocumants.tr(), APPColors.TracingNumber.blue, () {
                         ShowModalBottomSheet().show(
                           context,
                           AddedDocumentsModalBottomSheet(
@@ -158,8 +116,7 @@ class ScopeDetail extends StatelessWidget {
                           ),
                         );
                       }),
-                      _speedDialChild(context, AppIcons.addPhoto,
-                          LocaleKeys.AddPhoto.tr(), APPColors.Main.grey, () {
+                      _speedDialChild(context, AppIcons.addPhoto, LocaleKeys.AddPhoto.tr(), APPColors.Main.grey, () {
                         ShowModalBottomSheet().show(
                           context,
                           AddImageModalBottomSheet(
@@ -170,8 +127,7 @@ class ScopeDetail extends StatelessWidget {
                           ),
                         );
                       }),
-                      _speedDialChild(context, AppIcons.documantScanner,
-                          LocaleKeys.AddPdf.tr(), APPColors.NewNotifi.grey, () {
+                      _speedDialChild(context, AppIcons.documantScanner, LocaleKeys.AddPdf.tr(), APPColors.NewNotifi.grey, () {
                         ShowModalBottomSheet().show(
                           context,
                           AddDocumentsModalBottomSheet(
@@ -182,11 +138,7 @@ class ScopeDetail extends StatelessWidget {
                           ),
                         );
                       }),
-                      _speedDialChild(
-                          context,
-                          AppIcons.workHistory,
-                          LocaleKeys.AddEfforts.tr(),
-                          APPColors.Secondary.blue, () {
+                      _speedDialChild(context, AppIcons.workHistory, LocaleKeys.AddEfforts.tr(), APPColors.Secondary.blue, () {
                         ShowModalBottomSheet().show(
                           context,
                           AddEffortsModalBottomSheet(
@@ -200,8 +152,7 @@ class ScopeDetail extends StatelessWidget {
                           ),
                         );
                       }),
-                      _speedDialChild(context, AppIcons.save,
-                          LocaleKeys.Save.tr(), APPColors.Main.green, () async {
+                      _speedDialChild(context, AppIcons.save, LocaleKeys.Save.tr(), APPColors.Main.green, () async {
                         final screenContext = context;
                         final response = await showModalBottomSheet<bool>(
                           context: context,
@@ -234,8 +185,7 @@ class ScopeDetail extends StatelessWidget {
 
   CustomMainAppbar _appbar(BuildContext context) {
     return CustomMainAppbar(
-      title:
-          ('${LocaleKeys.CheckList.tr()} - ${maintanenceList?.id.toString()}'),
+      title: ('${LocaleKeys.CheckList.tr()} - ${maintanenceList?.id.toString()}'),
       returnBack: false,
       leading: IconButton(
         icon: const Icon(AppIcons.goBackArrow),
@@ -244,8 +194,7 @@ class ScopeDetail extends StatelessWidget {
     );
   }
 
-  SpeedDialChild _speedDialChild(BuildContext context, IconData iconname,
-      String label, Color color, Function onPressFunction) {
+  SpeedDialChild _speedDialChild(BuildContext context, IconData iconname, String label, Color color, Function onPressFunction) {
     return SpeedDialChild(
       child: Icon(iconname),
       backgroundColor: color,
