@@ -1,12 +1,18 @@
 import 'package:animated_widgets/animated_widgets.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:vm_fm_4/core/constants/paths/service_tools.dart';
+import 'package:vm_fm_4/feature/service/graphql_manager.dart';
+import 'package:vm_fm_4/product/screens/splash/queries/splash_queries.dart';
+import 'package:vm_fm_4/product/screens/splash/queries/splash_query_variables.dart';
 
 import '../../../core/constants/paths/asset_paths.dart';
 import '../../../core/route/app_route.gr.dart';
 import '../../../feature/extensions/context_extension.dart';
 import '../../../feature/global_providers/global_provider.dart';
+import '../home/screens/work_order_support/graphql_result_handling.dart';
 import 'splash_provider.dart';
 
 @RoutePage()
@@ -20,9 +26,39 @@ class SplashScreen extends StatelessWidget {
       child: Consumer<SplashProvider>(
         builder: (context, SplashProvider splashProvider, child) {
           splashProvider.setSplashFinished(context);
-          _navigate(context);
-          return _splashScreenBody(context);
+          // _navigate(context);
+          return _versionControl(context, splashProvider.deviceVersion);
         },
+      ),
+    );
+  }
+
+  Widget _versionControl(BuildContext context, deviceVersion) {
+    return GraphQLProvider(
+      client: GraphQLManager.getClient(HttpLink(ServiceTools.url.generalGraphql_url)),
+      child: Query(
+        options: QueryOptions(
+          document: gql(SplashQuery.versionControl),
+          variables: SplashQueryVariables.getVersion(),
+        ),
+        builder: GraphqlResultHandling.withGenericHandling(
+          context,
+          (QueryResult result, {refetch, fetchMore}) {
+            if (result.data == null && !result.hasException) {
+              return const Text('asd');
+            }
+            if ('v1.0.4' == result.data?['versions'].first['versionNo'].toString()) {
+              _navigate(context);
+            }
+            print(result.data?['versions'].first['versionNo'].toString());
+            return 'v1.0.4' != result.data?['versions'].first['versionNo'].toString()
+                ? Text(
+                    result.data?['versions'].first['versionNo'],
+                    style: const TextStyle(color: Colors.white),
+                  )
+                : _splashScreenBody(context);
+          },
+        ),
       ),
     );
   }

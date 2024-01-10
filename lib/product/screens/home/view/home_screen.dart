@@ -125,6 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
             AppIcons.contentPasteOff,
             const SearchWorkOrderScreen(),
           ),
+          
         ],
       ),
     );
