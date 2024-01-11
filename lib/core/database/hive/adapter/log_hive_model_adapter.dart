@@ -24,16 +24,16 @@ class LogHiveModelAdapter extends TypeAdapter<List<LogHiveModel>> {
   }
 
   @override
-  void write(BinaryWriter writer, List<LogHiveModel> logs) {
-    writer.writeByte(logs.length);
-    for (var i = 0; i < logs.length; i++) {
-      writer.writeString(logs[i].response ?? '');
-      writer.writeString(logs[i].requestPath ?? '');
-      writer.writeInt(logs[i].statusCode ?? 0);
-      writer.writeString(logs[i].headers ?? '');
-      writer.writeString(logs[i].error ?? '');
-      writer.writeString(logs[i].date.toString());
-      writer.writeString(logs[i].userToken ?? '');
+  void write(BinaryWriter writer, List<LogHiveModel> obj) {
+    writer.writeByte(obj.length);
+    for (var i = 0; i < obj.length; i++) {
+      writer.writeString(obj[i].response ?? '');
+      writer.writeString(obj[i].requestPath ?? '');
+      writer.writeInt(obj[i].statusCode ?? 0);
+      writer.writeString(obj[i].headers ?? '');
+      writer.writeString(obj[i].error ?? '');
+      writer.writeString(obj[i].date.toString());
+      writer.writeString(obj[i].userToken ?? '');
     }
   }
 }

@@ -39,7 +39,6 @@ class NewOrderScreen extends StatelessWidget {
       child: Consumer3<WoCreateProvider, SearchWorkOrderProvider, ThemeProvider>(
           builder: (context, WoCreateProvider woCreateProvider, SearchWorkOrderProvider searchWorkOrderProvider, ThemeProvider themeProvider, child) {
         // themeProvider.getPreferences();
-        print(context.locale);
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (woCreateProvider.isWorkOrderCreate) {
             snackBar(context, SnackbarStrings.woCreate, 'success');

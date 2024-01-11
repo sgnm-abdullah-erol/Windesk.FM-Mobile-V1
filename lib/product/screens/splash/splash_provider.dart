@@ -6,13 +6,9 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:vm_fm_4/core/constants/paths/service_tools.dart';
 import 'package:vm_fm_4/feature/global_providers/global_provider.dart';
 import 'package:vm_fm_4/feature/service/global_services.dart/auth_service/auth_service_repository_impl.dart';
-import 'package:vm_fm_4/feature/service/graphql_manager.dart';
-import 'package:vm_fm_4/product/screens/splash/graphql_result_handling.dart';
 
 import '../../../core/database/shared_manager.dart';
 import '../../../core/enums/shared_enums.dart';
@@ -29,9 +25,6 @@ class SplashProvider extends ChangeNotifier {
 
   bool _isUserAlreadyLoggedIn = false;
   bool get isUserAlreadyLoggedIn => _isUserAlreadyLoggedIn;
-
-  
-
 
   Future<void> _getDeviceInformation() async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
