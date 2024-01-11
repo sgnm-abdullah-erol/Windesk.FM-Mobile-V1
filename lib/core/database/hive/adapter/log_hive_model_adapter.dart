@@ -1,16 +1,16 @@
 import 'package:hive/hive.dart';
-import 'package:vm_fm_4/core/database/hive/boxes/log_hive_model.dart';
+import 'package:vm_fm_4/core/database/hive/boxes/http_log_hive_model.dart';
 
-class LogHiveModelAdapter extends TypeAdapter<List<LogHiveModel>> {
+class LogHiveModelAdapter extends TypeAdapter<List<HttpLogHiveModel>> {
   @override
   final int typeId = 1; // Bu, LogHiveModel türüne atanan benzersiz bir tür kimliğidir.
 
   @override
-  List<LogHiveModel> read(BinaryReader reader) {
+  List<HttpLogHiveModel> read(BinaryReader reader) {
     final numOfLogs = reader.readByte();
-    final logs = <LogHiveModel>[];
+    final logs = <HttpLogHiveModel>[];
     for (var i = 0; i < numOfLogs; i++) {
-      logs.add(LogHiveModel(
+      logs.add(HttpLogHiveModel(
         response: reader.readString(),
         requestPath: reader.readString(),
         statusCode: reader.readInt(),
@@ -24,7 +24,7 @@ class LogHiveModelAdapter extends TypeAdapter<List<LogHiveModel>> {
   }
 
   @override
-  void write(BinaryWriter writer, List<LogHiveModel> obj) {
+  void write(BinaryWriter writer, List<HttpLogHiveModel> obj) {
     writer.writeByte(obj.length);
     for (var i = 0; i < obj.length; i++) {
       writer.writeString(obj[i].response ?? '');

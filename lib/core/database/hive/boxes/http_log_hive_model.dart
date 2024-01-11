@@ -1,9 +1,9 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
-part 'log_hive_model.g.dart';
+part 'http_log_hive_model.g.dart';
 
 @HiveType(typeId: 1)
-class LogHiveModel {
+class HttpLogHiveModel {
   @HiveField(0)
   final String? response;
   @HiveField(1)
@@ -21,7 +21,7 @@ class LogHiveModel {
   @HiveField(7)
   final String? userToken;
 
-  LogHiveModel({
+  HttpLogHiveModel({
     this.response,
     this.requestPath,
     this.statusCode,

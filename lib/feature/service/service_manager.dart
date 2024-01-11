@@ -6,8 +6,8 @@ import 'package:dio/dio.dart';
 import 'package:vm_fm_4/core/constants/paths/service_tools.dart';
 import 'package:vm_fm_4/core/database/shared_manager.dart';
 import 'package:vm_fm_4/core/enums/shared_enums.dart';
-import 'package:vm_fm_4/feature/service/log/log_service.dart';
-import 'package:vm_fm_4/feature/service/log/log_service_model.dart';
+import 'package:vm_fm_4/feature/models/log/http_log_service_model.dart';
+import 'package:vm_fm_4/feature/service/log/http_log_service.dart';
 
 class ServiceManager {
   late final Dio dio;
@@ -46,10 +46,10 @@ class ServiceManager {
       return;
     } else {
       String userToken = await SharedManager().getString(SharedEnum.userToken);
-      LogService.singleLogServiceRequest(
+      HttpLogService.singleLogServiceRequest(
         dio,
         userToken,
-        LogServiceModel(
+        HttpLogServiceModel(
           response: jsonEncode(response.data),
           requestPath: response.realUri.toString(),
           statusCode: response.statusCode,
@@ -67,10 +67,10 @@ class ServiceManager {
       return;
     } else {
       String userToken = await SharedManager().getString(SharedEnum.userToken);
-      LogService.singleLogServiceRequest(
+      HttpLogService.singleLogServiceRequest(
         dio,
         userToken,
-        LogServiceModel(
+        HttpLogServiceModel(
           response: const {},
           requestPath: error.requestOptions.path,
           statusCode: error.response?.statusCode,

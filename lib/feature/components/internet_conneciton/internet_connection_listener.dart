@@ -5,12 +5,15 @@ import 'dart:io';
 import 'package:hive/hive.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:vm_fm_4/core/database/hive/box_manager.dart';
-import 'package:vm_fm_4/core/database/hive/boxes/log_hive_model.dart';
+import 'package:vm_fm_4/core/database/hive/boxes/graphql_log_hive_model.dart';
+import 'package:vm_fm_4/core/database/hive/boxes/http_log_hive_model.dart';
 import 'package:vm_fm_4/core/database/shared_manager.dart';
 import 'package:vm_fm_4/core/enums/shared_enums.dart';
 import 'package:vm_fm_4/feature/components/snackBar/snackbar.dart';
-import 'package:vm_fm_4/feature/service/log/log_service.dart';
-import 'package:vm_fm_4/feature/service/log/log_service_model.dart';
+import 'package:vm_fm_4/feature/models/log/graphql_log_service_model.dart';
+import 'package:vm_fm_4/feature/models/log/http_log_service_model.dart';
+import 'package:vm_fm_4/feature/service/log/graphql_log_service.dart';
+import 'package:vm_fm_4/feature/service/log/http_log_service.dart';
 import 'package:vm_fm_4/feature/service/service_manager.dart';
 
 class InternetListenerClass {
@@ -37,24 +40,24 @@ class InternetListenerClass {
           if (durum != 1) {
             // clear hive box log and send logs to server
             snackBar(context, 'İnternet bağlantısı sağlandı. ', 'success');
-            _internetReconnected();
+            _internetReconnectedHttp();
           }
           break;
         case InternetConnectionStatus.disconnected:
           print('You are disconnected from the internet.');
           durum = 0;
           snackBar(context, 'İnternet bağlantısı bulunamadı. Lütfen kontrol ediniz.', 'error');
-          await _internetConnectionLost();
+          _internetConnectionLostHttp();
           break;
       }
     });
   }
 
-  void _internetReconnected() async {
+  void _internetReconnectedHttp() async {
     // add reconnected information to log box
-    final Box<LogHiveModel> logBox = BoxManager.logBox;
+    final Box<HttpLogHiveModel> logBox = BoxManager.logBox;
     String userToken = await SharedManager().getString(SharedEnum.userToken);
-    final logHiveModel = LogHiveModel(
+    final logHiveModel = HttpLogHiveModel(
       response: 'Internet connection reconnected.',
       requestPath: 'mobile',
       statusCode: 500,
@@ -68,10 +71,10 @@ class InternetListenerClass {
     logBox.add(logHiveModel);
 
     // send logs to server
-    List<LogHiveModel> logList = [];
+    List<HttpLogHiveModel> logList = [];
 
     // first clear log box
-    for (LogHiveModel log in logBox.values) {
+    for (HttpLogHiveModel log in logBox.values) {
       logList.add(log);
     }
 
@@ -80,11 +83,11 @@ class InternetListenerClass {
     await logBox.clear();
 
     // send logs to server
-    for (LogHiveModel log in logList) {
-      LogService.singleLogServiceRequest(
+    for (HttpLogHiveModel log in logList) {
+      HttpLogService.singleLogServiceRequest(
         ServiceManager().dio,
         userToken,
-        LogServiceModel(
+        HttpLogServiceModel(
           response: log.response,
           requestPath: log.requestPath,
           statusCode: log.statusCode,
@@ -97,10 +100,10 @@ class InternetListenerClass {
     }
   }
 
-  Future<void> _internetConnectionLost() async {
-    final Box<LogHiveModel> logBox = BoxManager.logBox;
+  void _internetConnectionLostHttp() async {
+    final Box<HttpLogHiveModel> logBox = BoxManager.logBox;
     String userToken = await SharedManager().getString(SharedEnum.userToken);
-    final logHiveModel = LogHiveModel(
+    final logHiveModel = HttpLogHiveModel(
       response: 'Internet connection error.',
       requestPath: 'mobile',
       statusCode: 500,
@@ -112,5 +115,34 @@ class InternetListenerClass {
     );
 
     logBox.add(logHiveModel);
+  }
+
+  void _internetReconnectedGraphql() async {
+    final logBox = BoxManager.graphqlLogBox;
+
+    // send logs to server
+    List<GraphqlLogHiveModel> logList = [];
+
+    // first clear log box
+    for (GraphqlLogHiveModel log in logBox.values) {
+      logList.add(log);
+    }
+
+    print('logList: $logList');
+
+    await logBox.clear();
+
+    // send logs to server
+    for (GraphqlLogHiveModel log in logList) {
+      GraphqlLogService.log(
+        GraphqlLogServiceModel(
+          url: log.url,
+          query: log.query,
+          variables: log.variables,
+          result: log.result,
+          error: log.error,
+        ),
+      );
+    }
   }
 }

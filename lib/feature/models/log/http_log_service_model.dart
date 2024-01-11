@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class LogServiceModel<T> extends Equatable {
+class HttpLogServiceModel<T> extends Equatable {
   final T? response;
   final String? requestPath;
   final int? statusCode;
@@ -9,7 +9,7 @@ class LogServiceModel<T> extends Equatable {
   final String? error;
   final String? logCatchError;
 
-  const LogServiceModel({
+  const HttpLogServiceModel({
     required this.response,
     required this.requestPath,
     required this.statusCode,
