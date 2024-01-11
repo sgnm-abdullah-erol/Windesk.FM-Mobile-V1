@@ -56,7 +56,6 @@ class SplashScreen extends StatelessWidget {
             if ('v1.0.4' == result.data?['versions'].first['versionNo'].toString()) {
               _navigate(context);
             }
-            print(result.data?['versions'].first['versionNo'].toString());
             return 'v1.0.4' != result.data?['versions'].first['versionNo'].toString()
                 ? WillPopScope(
                     child: Scaffold(
@@ -66,14 +65,7 @@ class SplashScreen extends StatelessWidget {
                         padding: const EdgeInsets.all(10.0),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            const Text(LocaleKeys.UpdateApp).tr(),
-                            CustomLoginButton(
-                                title: LocaleKeys.Update,
-                                onPressed: () {
-                                  print('Navigate store page');
-                                })
-                          ],
+                          children: [const Text(LocaleKeys.UpdateApp).tr(), CustomLoginButton(title: LocaleKeys.Update, onPressed: () {})],
                         ),
                       )),
                     ),
