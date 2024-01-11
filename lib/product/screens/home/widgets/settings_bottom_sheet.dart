@@ -18,9 +18,10 @@ class SettingsBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     fetchUsers() async {
       final file = File('../../../../');
-      var result = await http.get(Uri.parse("http://188.132.200.55/example_1.json"));
-      print(result.body);
-      print(jsonDecode(result.body));
+      var result =
+          await http.get(Uri.parse("http://138.201.186.190:32664/ifm/documents/mobile/languageFile/v1.0.7/en/8be9067c2d458865e9689e578ac497fc.json"));
+      //print(result.body);
+      //print(jsonDecode(result.body));
     }
 
     IconData themeIcon = context.read<ThemeProvider>().isDark ? AppIcons.darkMode : AppIcons.lightMode;
@@ -38,16 +39,6 @@ class SettingsBottomSheet extends StatelessWidget {
             children: [
               TextButton(
                   onPressed: () async {
-                    // await FlutterDownloader.enqueue(
-                    //   url: 'http://188.132.200.55/example_1.json',
-                    //   headers: {}, // optional: header send with url (auth token etc)
-                    //   savedDir: './',
-                    //   showNotification: true, // show download progress in status bar (for Android)
-                    //   openFileFromNotification: true, // click on notification to open downloaded file (for Android)
-                    // );
-                    // final directory = await getExternalStorageDirectory();
-                    // print(directory);
-
                     fetchUsers();
                   },
                   child: const Text('indir')),

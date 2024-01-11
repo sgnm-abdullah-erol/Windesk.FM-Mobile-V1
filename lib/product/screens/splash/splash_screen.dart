@@ -1,10 +1,14 @@
 import 'package:animated_widgets/animated_widgets.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:vm_fm_4/core/constants/paths/service_tools.dart';
+import 'package:vm_fm_4/feature/components/appbar/custom_main_appbar.dart';
+import 'package:vm_fm_4/feature/components/buttons/custom_login_button.dart';
 import 'package:vm_fm_4/feature/service/graphql_manager.dart';
+import 'package:vm_fm_4/generated/locale_keys.g.dart';
 import 'package:vm_fm_4/product/screens/splash/queries/splash_queries.dart';
 import 'package:vm_fm_4/product/screens/splash/queries/splash_query_variables.dart';
 
@@ -25,12 +29,9 @@ class SplashScreen extends StatelessWidget {
       create: (context) => SplashProvider(),
       child: Consumer<SplashProvider>(
         builder: (context, SplashProvider splashProvider, child) {
-          // splashProvider.setSplashFinished(context);
-          // // _navigate(context);
-          // return _versionControl(context, splashProvider.deviceVersion);
           splashProvider.setSplashFinished(context);
-          _navigate(context);
-          return _splashScreenBody(context);
+          // _navigate(context);
+          return _versionControl(context, splashProvider.deviceVersion);
         },
       ),
     );
@@ -50,13 +51,31 @@ class SplashScreen extends StatelessWidget {
             if (result.data == null && !result.hasException) {
               return const Text('asd');
             }
-            if ('v1.0.3' == result.data?['versions'].first['versionNo'].toString()) {
+            if ('v1.0.4' == result.data?['versions'].first['versionNo'].toString()) {
               _navigate(context);
             }
             print(result.data?['versions'].first['versionNo'].toString());
-            return 'v1.0.3' != result.data?['versions'].first['versionNo'].toString()
-                ? const Column(
-                    children: [Text('güncelleme')],
+            return 'v1.0.4' != result.data?['versions'].first['versionNo'].toString()
+                ? WillPopScope(
+                    child: Scaffold(
+                      appBar: const CustomMainAppbar(title: ''),
+                      body: Center(
+                          child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            const Text(LocaleKeys.UpdateApp).tr(),
+                            CustomLoginButton(
+                                title: LocaleKeys.Update,
+                                onPressed: () {
+                                  print('Navigate store page');
+                                })
+                          ],
+                        ),
+                      )),
+                    ),
+                    onWillPop: () async => false,
                   )
                 : _splashScreenBody(context);
           },

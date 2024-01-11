@@ -1140,5 +1140,7 @@
 	"FacilityName": "İstanbul Finans Merkezi",
 	"ConnectionSuccess": "IFM : Connection Success",
 	"ConnectionUnSuccess": "IFM : Connection Fail",
-	"ConnectionWait": "IFM : Connection Waiting"
+	"ConnectionWait": "IFM : Connection Waiting",
+	"Update":"Güncelle",
+	"UpdateApp": "You need to update\nthe application to use it."
 }
