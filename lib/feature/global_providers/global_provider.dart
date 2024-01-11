@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class GlobalProvider extends ChangeNotifier {
+  bool _requiredUpdate = false;
+  bool get requiredUpdate => _requiredUpdate;
+
   String? _deviceModel;
   String get deviceModel => _deviceModel ?? '';
 
@@ -15,6 +18,11 @@ class GlobalProvider extends ChangeNotifier {
 
   String? _userId;
   String get userId => _userId ?? '';
+
+  void setRequiredUpdate(bool updateVar) {
+    _requiredUpdate = updateVar;
+    notifyListeners();
+  }
 
   void setUserId(String userId) {
     _userId = userId;

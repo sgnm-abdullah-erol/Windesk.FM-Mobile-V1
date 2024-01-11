@@ -13,5 +13,6 @@ final class Init {
     // firebase error occur when app is in background
     FirebaseNotification.init();
     await AppLocalization.init();
+    
   }
 }

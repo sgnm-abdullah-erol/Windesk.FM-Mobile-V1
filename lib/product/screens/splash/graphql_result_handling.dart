@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:vm_fm_4/feature/extensions/context_extension.dart';
-
-import '../work_order_list/widgets/custom_loading_indicator2.dart';
+import 'package:vm_fm_4/product/screens/home/screens/work_order_list/widgets/custom_loading_indicator.dart';
 
 final class GraphqlResultHandling {
   static QueryBuilder withGenericHandling(BuildContext context, QueryBuilder builder) {
@@ -15,7 +14,7 @@ final class GraphqlResultHandling {
         return SizedBox(
           height: context.height * 4 / 5,
           width: context.width,
-          child: const Center(child: CustomLoadingIndicator2()),
+          child: const Center(child: CustomLoadingIndicator()),
         );
       }
 
