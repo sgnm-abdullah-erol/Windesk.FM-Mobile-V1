@@ -6,9 +6,9 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:vm_fm_4/feature/models/reject_state_models/reject_state_model.dart';
 import 'package:vm_fm_4/feature/models/work_order_models/delivered_spare_of_model.dart';
-import 'package:vm_fm_4/feature/models/work_space/work_space_current_state.dart';
 import 'package:vm_fm_4/feature/models/work_space/child_location_structure.dart';
 import 'package:vm_fm_4/feature/models/work_space/main_location_structure.dart';
+import 'package:vm_fm_4/feature/models/work_space/work_space_current_state.dart';
 
 import '../../../../core/constants/paths/service_tools.dart';
 import '../../../../core/enums/task_node_enums.dart';
@@ -34,46 +34,56 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
 
     String url =
         '${ServiceTools.url.workorder_url}/task/workSpace/task/state/List/for/assigned/user/pagination/swagger?page=$page&limit=10&orderBy=DESC&orderByColumn%5B0%5D=updatedAt';
+    Response? response;
+    try {
+      response = await super.dio.get(
+            url,
+            options: Options(
+              headers: {
+                'authorization': 'Bearer $token',
+                'language': language,
+              },
+            ),
+          );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = response.data;
 
-    final response = await super.dio.get(
-          url,
-          options: Options(
-            headers: {
-              'authorization': 'Bearer $token',
-              'language': language,
-            },
-          ),
-        );
+        super.logger.w(response);
+        return Left(workSpaceDetailList);
+      } else {
+        super.logger.wtf(response);
 
-    if (response.statusCode == 200 || response.statusCode == 201) {
-      final data = response.data;
-      workSpaceDetailList = WorkSpaceDetail.fromJsonList(data);
-      super.logger.w(response);
-      return Left(workSpaceDetailList);
-    } else {
-      super.logger.wtf(response);
-      return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+      }
+    } catch (e) {
+      super.logger.wtf(e);
+      return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: "400"));
     }
   }
 
   Future<Either<List, CustomServiceException>> getTaskHistoryApi(String id, String token) async {
     String url = '${ServiceTools.url.workorder_url}/task/one/task/state/List/with/user/approver/date/hour/second/status/$id';
     super.logger.wtf(url);
-    final response = await super.dio.get(
-          url,
-          options: Options(
-            headers: {'authorization': 'Bearer $token'},
-          ),
-        );
 
-    super.logger.wtf(response);
+    try {
+      final response = await super.dio.get(
+            url,
+            options: Options(
+              headers: {'authorization': 'Bearer $token'},
+            ),
+          );
 
-    if (response.statusCode == 200 || response.statusCode == 201) {
-      final data = response.data;
+      super.logger.wtf(response);
 
-      return Left(data);
-    } else {
-      return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = response.data;
+
+        return Left(data);
+      } else {
+        return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
+      }
+    } catch (e) {
+      return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: "400"));
     }
   }
 
@@ -94,7 +104,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
               responseType: ResponseType.json,
             ),
           );
-      super.logger.e(response);
+      super.logger.e(response.data);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
@@ -107,6 +117,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       }
     } catch (error) {
       super.logger.e(error.toString());
+
       return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
     }
   }
@@ -134,12 +145,14 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
         workSpaceAppendings = WorkSpacePendiks.fromJsonList(data);
+
         return Left(workSpaceAppendings);
       } else {
         return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
       }
     } catch (error) {
       super.logger.e(error.toString());
+
       return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
     }
   }
@@ -182,9 +195,11 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
             ),
           );
       final data = response.data;
+
       return Left(data);
     } catch (error) {
       super.logger.e(error.toString());
+
       return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
     }
   }
@@ -207,6 +222,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       return Left(assetListModel);
     } catch (error) {
       super.logger.e(error.toString());
+
       return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
     }
   }
@@ -252,6 +268,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
         workSpaceDetailList = WorkSpaceDetail.fromJsonList(data);
+
         return Left(workSpaceDetailList);
       } else {
         return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
@@ -288,6 +305,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       }
     } catch (e) {
       super.logger.i(e);
+
       return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
     }
   }
@@ -363,13 +381,13 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
         workSpaceSpareparts = WorkSpaceSpareparts.fromJsonList(data);
 
         super.logger.d(response);
-
         return Left(workSpaceSpareparts);
       } else {
         return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
       }
     } catch (e) {
       super.logger.i(e);
+
       return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
     }
   }
@@ -391,13 +409,13 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
         workSpaceUserInventory = WorkSpaceUserInventory.fromJson(data);
-
         return Left(workSpaceUserInventory);
       } else {
         return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
       }
     } catch (e) {
       super.logger.i(e);
+
       return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
     }
   }
@@ -443,12 +461,14 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
         }
 
         super.logger.i(data);
+
         return Left(result);
       } else {
         return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
       }
     } catch (e) {
       super.logger.i(e);
+
       return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
     }
   }
@@ -487,12 +507,14 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = response.data;
         workSpaceRequestedMaterials = WorkSpaceRequestedMaterialsInventory.fromJsonList(data) ?? [];
+
         return Left(workSpaceRequestedMaterials);
       } else {
         return Right(CustomServiceException(message: CustomServiceMessages.work, statusCode: response.statusCode.toString()));
       }
     } catch (e) {
       super.logger.i(e);
+
       return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
     }
   }
@@ -548,6 +570,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       }
     } catch (e) {
       super.logger.i(e);
+
       return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
     }
   }
@@ -588,6 +611,7 @@ class WorkSpaceServiceRepositoryImpl extends WorkSpaceServiceRepository {
       }
     } catch (e) {
       super.logger.e(e);
+
       return Right(CustomServiceException(message: CustomServiceMessages.workOrderWorkloadError, statusCode: '500'));
     }
   }
