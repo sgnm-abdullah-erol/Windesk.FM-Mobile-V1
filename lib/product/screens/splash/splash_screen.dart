@@ -25,9 +25,12 @@ class SplashScreen extends StatelessWidget {
       create: (context) => SplashProvider(),
       child: Consumer<SplashProvider>(
         builder: (context, SplashProvider splashProvider, child) {
+          // splashProvider.setSplashFinished(context);
+          // // _navigate(context);
+          // return _versionControl(context, splashProvider.deviceVersion);
           splashProvider.setSplashFinished(context);
-          // _navigate(context);
-          return _versionControl(context, splashProvider.deviceVersion);
+          _navigate(context);
+          return _splashScreenBody(context);
         },
       ),
     );
@@ -47,14 +50,13 @@ class SplashScreen extends StatelessWidget {
             if (result.data == null && !result.hasException) {
               return const Text('asd');
             }
-            if ('v1.0.4' == result.data?['versions'].first['versionNo'].toString()) {
+            if ('v1.0.3' == result.data?['versions'].first['versionNo'].toString()) {
               _navigate(context);
             }
             print(result.data?['versions'].first['versionNo'].toString());
-            return 'v1.0.4' != result.data?['versions'].first['versionNo'].toString()
-                ? Text(
-                    result.data?['versions'].first['versionNo'],
-                    style: const TextStyle(color: Colors.white),
+            return 'v1.0.3' != result.data?['versions'].first['versionNo'].toString()
+                ? const Column(
+                    children: [Text('güncelleme')],
                   )
                 : _splashScreenBody(context);
           },
