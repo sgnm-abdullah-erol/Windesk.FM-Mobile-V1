@@ -48,6 +48,7 @@ class InternetListenerClass {
           durum = 0;
           snackBar(context, 'İnternet bağlantısı bulunamadı. Lütfen kontrol ediniz.', 'error');
           _internetConnectionLostHttp();
+          _internetReconnectedGraphql();
           break;
       }
     });
