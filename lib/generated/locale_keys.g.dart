@@ -384,6 +384,9 @@ class LocaleKeys {
   static const String ConnectionUnSuccess = 'ConnectionUnSuccess';
   static const String ConnectionWait = 'ConnectionWait';
 
+  static const String Update = 'Update';
+  static const String UpdateApp = 'UpdateApp';
+
   // // static String const ----------MAİNTENANCE---------- = '----------MAİNTENANCE----------';
   // static const Manage Check List = 'Manage Check List';
   // static const Add Check List = 'Add Check List';

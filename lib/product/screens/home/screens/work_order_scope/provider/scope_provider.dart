@@ -138,7 +138,6 @@ class ScopeProvider extends ChangeNotifier {
     notifyListeners();
 
     final String token = await SharedManager().getString(SharedEnum.userToken);
-
     final response = await workSpaceService.saveDocumentForMaintenance(imagePath, '', desc, token, scopeId, taskKey, 'image', labels);
 
     response.fold(
