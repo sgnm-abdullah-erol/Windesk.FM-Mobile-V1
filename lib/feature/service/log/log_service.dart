@@ -27,7 +27,7 @@ class LogService {
     } catch (error) {
       final Box<LogHiveModel> logBox = BoxManager.logBox;
       final logHiveModel = LogHiveModel(
-        response: serviceModel.response,
+        response: serviceModel.response.toString(),
         requestPath: serviceModel.requestPath,
         statusCode: serviceModel.statusCode,
         headers: serviceModel.headers,

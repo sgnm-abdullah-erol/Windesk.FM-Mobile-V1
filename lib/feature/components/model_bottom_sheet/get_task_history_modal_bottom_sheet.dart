@@ -10,60 +10,48 @@ import '../../../core/constants/style/border_radius.dart';
 import '../../../generated/locale_keys.g.dart';
 
 class GetTaskHistoryModalBottomSheet {
-  Future<bool?> showAlertDialog(
-      BuildContext context,
-      WorkOrderDetailProvider workOrderDetailProvider,
-      String textData,
-      String title) async {
+  Future<bool?> showAlertDialog(BuildContext context, WorkOrderDetailProvider workOrderDetailProvider, String textData, String title) async {
     // show the dialog
     return await showDialog(
       context: context,
       builder: (BuildContext context) {
         return ChangeNotifierProvider(
-          create: (context) =>
-              WorkOrderDetailProvider(detail: workOrderDetailProvider.detail),
+          create: (context) => WorkOrderDetailProvider(detail: workOrderDetailProvider.detail),
           child: Consumer<WorkOrderDetailProvider>(
             builder: (context, value, child) {
               return AlertDialog(
-                shape: RoundedRectangleBorder(
-                    borderRadius: CustomBorderRadius.mediumBorderRadius),
+                shape: RoundedRectangleBorder(borderRadius: CustomBorderRadius.mediumBorderRadius),
                 title: Text(title, style: context.titleMedium).tr(),
                 content: SizedBox(
                   width: 150,
                   height: MediaQuery.of(context).size.height * 0.3,
                   child: ListView(
                     children: [
-                      for (var i = 0;
-                          i <
-                              (workOrderDetailProvider
-                                      .taskHistoryData?.length ??
-                                  0);
-                          i++) ...{
+                      for (var i = 0; i < (workOrderDetailProvider.taskHistoryData?.length ?? 0); i++) ...{
                         ListTile(
-                            title: Text(
-                              TimeClass().convertDateToLocal(
-                                  workOrderDetailProvider.taskHistoryData?[i]
-                                      [1]),
-                              style: const TextStyle(fontSize: 15),
-                            ),
-                            subtitle: Column(
+                          title: Text(
+                            TimeClass().convertDateToLocal(workOrderDetailProvider.taskHistoryData?[i][1]),
+                            style: const TextStyle(fontSize: 15),
+                          ),
+                          subtitle: Flexible(
+                            child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  workOrderDetailProvider.taskHistoryData?[i]
-                                      [0],
+                                  workOrderDetailProvider.taskHistoryData?[i][0],
                                   style: const TextStyle(fontSize: 13),
+                                  maxLines: 5,
+                                  overflow: TextOverflow.visible,
                                 ),
                                 Text(
-                                  workOrderDetailProvider.taskHistoryData?[i][2]
-                                      [0],
-                                  style: const TextStyle(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.bold),
+                                  workOrderDetailProvider.taskHistoryData?[i][2][0],
+                                  style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                                 ),
                                 const Divider(),
                               ],
-                            ))
+                            ),
+                          ),
+                        )
                       }
                     ],
                   ),

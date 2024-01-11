@@ -27,16 +27,13 @@ class ServiceManager {
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (RequestOptions options, handler) {
-          print('REQUEST[${options.method}] => PATH: ${options.path}');
           return handler.next(options);
         },
         onResponse: (Response response, handler) async {
-          print('RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}');
           await _parseResponse(response);
           return handler.next(response);
         },
         onError: (DioException error, handler) async {
-          print('ERROR[${error.response?.statusCode}] => PATH: ${error.requestOptions.path}');
           await _parseError(error);
           return handler.next(error);
         },
@@ -46,7 +43,7 @@ class ServiceManager {
 
   Future<void> _parseResponse(Response response) async {
     if (response.realUri.toString() == '${ServiceTools.url.log_url}/mobile/log') {
-      print('RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}');
+      return;
     } else {
       String userToken = await SharedManager().getString(SharedEnum.userToken);
       LogService.singleLogServiceRequest(
@@ -67,7 +64,7 @@ class ServiceManager {
 
   Future<void> _parseError(DioException error) async {
     if (error.requestOptions.path == '${ServiceTools.url.log_url}/log') {
-      print('ERROR IN IF');
+      return;
     } else {
       String userToken = await SharedManager().getString(SharedEnum.userToken);
       LogService.singleLogServiceRequest(
