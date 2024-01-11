@@ -1,6 +1,7 @@
 {
 	"Filter": "Filtrele",
 	"SLAStates": "SLA Durumları",
+	"View":"Görüntüle",
 	"----------------Maintenance----------": "-----------Maintenance--------------",
 	"Yol": "Yol",
 	"İş": "İş",
@@ -42,6 +43,7 @@
 	"WorkOrderList": "İş Emri Listesi",
 	"WorkOrderSearch": "İş Emri Arama",
 	"NewWorkOrder": "Yeni İş Emri",
+	"WorkOrderSample":"(İş Emri Numarası Giriniz Örn.3235)",
 	"Delete": "Sil",
 	"MaterialError": "Malzeme bulunamadı",
 	"Notes": "Notlar",
@@ -295,6 +297,7 @@
 	"DeleteMaterial": "Malzeme Silme İşlemi Başarıyla Gerçekleşti",
 	"DeleteDocument": "Döküman Silme İşlemi Başarıyla Gerçekleşti",
 	"NewWorkOrderCreated": "Yeni İş Emri Oluşturuldu.",
+	"WoCreateError":"İş Emri Oluşturulurken Hata Oluştu.",
 	"WorkOrderNumber": "İş Emri Numarası",
 	"Defination": "Tanım",
 	"Explanation": "Açıklama",

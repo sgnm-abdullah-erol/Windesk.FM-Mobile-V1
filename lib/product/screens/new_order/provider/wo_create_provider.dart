@@ -298,6 +298,8 @@ class WoCreateProvider extends ChangeNotifier {
   void setLocation(String newValue) {
     woBlockListChildren.clear();
     woFloorListChildren.clear();
+    _woSpaceListChildren.clear();
+
     _location = newValue;
     for (var i = 0; i < (_woLocationList.children?.length ?? 0); i++) {
       if (_woLocationList.children?[i].name == newValue) {
@@ -315,6 +317,8 @@ class WoCreateProvider extends ChangeNotifier {
 
   void setBlock(String newValue) {
     woFloorListChildren.clear();
+    _woSpaceListChildren.clear();
+
     _block = newValue;
     for (var i = 0; i < (_woBlockList.children?.length ?? 0); i++) {
       if (_woBlockList.children?[i].name == newValue) {
@@ -367,6 +371,9 @@ class WoCreateProvider extends ChangeNotifier {
     bool isChildrenExist;
     _requestType = newValue;
     _getRequestedTypesChildrenTree1.clear();
+    // if (_requestType1 == '') {
+    //   _getRequestedTypesChildrenTree1.add('');
+    // }
     notifyListeners();
     for (var i = 0; i < (_getRequestedTypes.length); i++) {
       if (_getRequestedTypes[i].name == newValue) {
@@ -375,12 +382,17 @@ class WoCreateProvider extends ChangeNotifier {
         _requestedTypeTree1 = !isChildrenExist;
         notifyListeners();
         if (isChildrenExist) {
+          // _getRequestedTypesChildrenTree1.add('Seçiniz');
+          // _getRequestedTypesChildrenTree1.add('');
+          //  _getRequestedTypesChildrenTree1.add('');
+
           for (var b = 0; b < (_getRequestedTypes[i].children!.length); b++) {
             _getRequestedTypesChildrenTree1.add(_getRequestedTypes[i].children![b].name ?? '');
           }
         }
       }
     }
+
     notifyListeners();
   }
 
@@ -410,7 +422,7 @@ class WoCreateProvider extends ChangeNotifier {
     _locationLoading = false;
     notifyListeners();
     _woLocationListChildren.clear();
-
+    _woLocationListChildren.add('');
     response.fold(
       (l) => {
         _woLocationList = l,
@@ -432,7 +444,8 @@ class WoCreateProvider extends ChangeNotifier {
     _lazyLoading = false;
     notifyListeners();
     if (lazyType == 'Building') {
-      _woLocationListChildren.clear();
+      //_woLocationListChildren.clear();
+      _woBlockListChildren.add('');
       response.fold(
         (l) => {
           _woBlockList = l,
@@ -445,6 +458,7 @@ class WoCreateProvider extends ChangeNotifier {
       );
     } else if (lazyType == 'Block') {
       woFloorListChildren.clear();
+      woFloorListChildren.add('');
       response.fold(
         (l) => {
           _woFloorList = l,
@@ -456,6 +470,7 @@ class WoCreateProvider extends ChangeNotifier {
         (r) => {},
       );
     } else if (lazyType == 'Floor') {
+      _woSpaceListChildren.add('');
       response.fold(
         (l) => {
           _woSpaceList = l,
@@ -610,6 +625,7 @@ class WoCreateProvider extends ChangeNotifier {
     final int? result = await getDefaultWorkSpaceOfUser(context);
     final token = await SharedManager().getString(SharedEnum.userToken);
     final response = await _woCreateServiceRepository.getWorkFlows(token, result.toString());
+    _workFlowNames.add('');
     response.fold(
       (l) => {
         _woCreateWorkSpaceModel = l,

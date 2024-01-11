@@ -12,7 +12,7 @@ class LocaleKeys {
   static const String Apply = 'Apply';
   static const String SLAStates = 'SLAStates';
   static const String Close = 'Close';
-
+  static const String View = 'View';
   // maintenance
   static const String ScopeList = 'ScopeList';
 
@@ -103,7 +103,7 @@ class LocaleKeys {
   static const String LogoutError = 'LogoutError';
   static const String LoginEmptyError = 'LoginEmptyError';
   static const String LoginSuccess = 'LoginSuccess';
-
+  static const String WoCreateError = "WoCreateError";
   static const String EffortAdded = 'EffortAdded';
   static const String EffortAddedError = 'EffortAddedError';
   static const String MaterialAdded = 'MaterialAdded';
@@ -244,6 +244,7 @@ class LocaleKeys {
   static const String WorkOrdersInMyGroup = 'Work Orders in My Group';
   static const String AwaitingApprova = 'Awaiting Approva';
   static const String WorkOrders = 'Work Orders';
+  static const String WorkOrderSample = 'WorkOrderSample';
   static const String Intheprocess = 'In the process';
   static const String January = 'January';
   static const String February = 'February';

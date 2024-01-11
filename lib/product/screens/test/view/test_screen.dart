@@ -1,8 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
-import 'dart:async';
-
 import 'package:auto_route/auto_route.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
@@ -15,9 +14,7 @@ import 'package:vm_fm_4/generated/locale_keys.g.dart';
 
 import '../../../../feature/extensions/context_extension.dart';
 import '../../../../feature/global_providers/global_provider.dart';
-
 import '../test_provider.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 @RoutePage()
 class TestScreen extends StatefulWidget {
@@ -28,27 +25,25 @@ class TestScreen extends StatefulWidget {
 }
 
 class _TestScreenState extends State<TestScreen> {
-  final RoundedLoadingButtonController _controllerButton =
-      RoundedLoadingButtonController();
+  final RoundedLoadingButtonController _controllerButton = RoundedLoadingButtonController();
 
   DateTime _currentDateTime = DateTime.now();
 
   @override
   void initState() {
     super.initState();
-    _updateDateTime();
-  }
-  void _updateDateTime() {
-    // Update the current date and time every second
-    Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() {
-        _currentDateTime = DateTime.now();
-      });
-    });
   }
 
   @override
   Widget build(BuildContext context) {
+    void updateDateTime() {
+      // Update the current date and time every second
+
+      setState(() {
+        _currentDateTime = DateTime.now();
+      });
+    }
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -58,17 +53,13 @@ class _TestScreenState extends State<TestScreen> {
           create: (context) => ThemeProvider(),
         )
       ],
-      child: Consumer2<TestProvider, ThemeProvider>(builder: (context,
-          TestProvider testProvider, ThemeProvider themeProvider, child) {
+      child: Consumer2<TestProvider, ThemeProvider>(builder: (context, TestProvider testProvider, ThemeProvider themeProvider, child) {
         themeProvider.getPreferences();
-        testProvider.getInfoLoad == false
-            ? testProvider.getTestScreenInfo()
-            : null;
+        testProvider.getInfoLoad == false ? testProvider.getTestScreenInfo() : null;
         return WillPopScope(
           child: Scaffold(
             appBar: const CustomMainAppbar(title: LocaleKeys.TestTab),
-            body: Center(
-                child: _bodyWidget(context, testProvider, themeProvider)),
+            body: Center(child: _bodyWidget(context, testProvider, themeProvider, updateDateTime)),
           ),
           onWillPop: () async => false,
         );
@@ -76,13 +67,12 @@ class _TestScreenState extends State<TestScreen> {
     );
   }
 
-  _bodyWidget(BuildContext context, TestProvider testProvider,
-      ThemeProvider themeProvider) {
+  _bodyWidget(BuildContext context, TestProvider testProvider, ThemeProvider themeProvider, updateDateTime) {
     return Column(
       children: [
         _headerWidget(context),
         _infoWidget(context, testProvider),
-        _buttonsAndTestResultWidget(context, testProvider, themeProvider),
+        _buttonsAndTestResultWidget(context, testProvider, themeProvider, updateDateTime),
       ],
     );
   }
@@ -103,7 +93,7 @@ class _TestScreenState extends State<TestScreen> {
 
   Widget _headerWidget(BuildContext context) {
     return Expanded(
-            flex: 1,
+      flex: 1,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
@@ -119,6 +109,7 @@ class _TestScreenState extends State<TestScreen> {
       ),
     );
   }
+
   Widget _infoWidget(BuildContext context, TestProvider testProvider) {
     return Expanded(
       flex: 2,
@@ -131,9 +122,9 @@ class _TestScreenState extends State<TestScreen> {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
-          _infoText(context,LocaleKeys.Device.tr(),context.read<TestProvider>().deviceModel.toString()),
-          _infoText(context,LocaleKeys.OS.tr(),context.read<TestProvider>().deviceOS.toString()),
-          _infoText(context,LocaleKeys.AppVersion.tr(),context.read<TestProvider>().appVersion.toString()),
+          _infoText(context, LocaleKeys.Device.tr(), context.read<TestProvider>().deviceModel.toString()),
+          _infoText(context, LocaleKeys.OS.tr(), context.read<TestProvider>().deviceOS.toString()),
+          _infoText(context, LocaleKeys.AppVersion.tr(), context.read<TestProvider>().appVersion.toString()),
           Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: Column(
@@ -143,7 +134,10 @@ class _TestScreenState extends State<TestScreen> {
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 //Text(AppStrings.serverTime + testProvider.serverTime),
-                Text('${LocaleKeys.PhoneTime.tr()} : $_currentDateTime', overflow: TextOverflow.ellipsis,),
+                Text(
+                  '${LocaleKeys.PhoneTime.tr()} : $_currentDateTime',
+                  overflow: TextOverflow.ellipsis,
+                ),
               ],
             ),
           ),
@@ -154,14 +148,13 @@ class _TestScreenState extends State<TestScreen> {
 
   Padding _infoText(BuildContext context, String title, String subTitle) {
     return Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: Text('$title : $subTitle'),
-        );
+      padding: const EdgeInsets.all(5.0),
+      child: Text('$title : $subTitle'),
+    );
   }
-  Widget _buttonsAndTestResultWidget(BuildContext context,
-      TestProvider testProvider, ThemeProvider themeProvider) {
-    return Consumer<ThemeProvider>(
-        builder: (context, ThemeProvider themeProvider, child) {
+
+  Widget _buttonsAndTestResultWidget(BuildContext context, TestProvider testProvider, ThemeProvider themeProvider, updateDateTime) {
+    return Consumer<ThemeProvider>(builder: (context, ThemeProvider themeProvider, child) {
       return Expanded(
         child: Column(
           children: [
@@ -176,8 +169,7 @@ class _TestScreenState extends State<TestScreen> {
             //     textColor: Colors.red,
             //     iconColor: Colors.black,
             //     icon: Icons.abc),
-            buttonTest(context, LocaleKeys.AccessTest.tr(), testProvider,
-                _controllerButton),
+            buttonTest(context, LocaleKeys.AccessTest.tr(), testProvider, _controllerButton, updateDateTime),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -224,8 +216,7 @@ class _TestScreenState extends State<TestScreen> {
   }
 }
 
-Widget buttonTest(BuildContext context, String buttonText,
-    TestProvider testProvider, controllerButton) {
+Widget buttonTest(BuildContext context, String buttonText, TestProvider testProvider, controllerButton, updateDateTime) {
   return Consumer<ThemeProvider>(
     builder: (context, ThemeProvider themeProvider, child) {
       return SizedBox(
@@ -237,6 +228,7 @@ Widget buttonTest(BuildContext context, String buttonText,
             successColor: Colors.amber,
             controller: controllerButton,
             onPressed: () {
+              updateDateTime();
               controllerButton.success();
               testProvider.accessTestV1Function();
               //testProvider.accessTestV2Function();
@@ -246,10 +238,7 @@ Widget buttonTest(BuildContext context, String buttonText,
             valueColor: Colors.white,
             borderRadius: 12,
             child: Center(
-              child: Text(
-                  buttonText == LocaleKeys.AccessTest.tr()
-                      ? LocaleKeys.AccessTest.tr()
-                      : LocaleKeys.AccessTest.tr(),
+              child: Text(buttonText == LocaleKeys.AccessTest.tr() ? LocaleKeys.AccessTest.tr() : LocaleKeys.AccessTest.tr(),
                   style: const TextStyle(color: Colors.white)),
             ),
           ),
@@ -259,8 +248,7 @@ Widget buttonTest(BuildContext context, String buttonText,
   );
 }
 
-SizedBox buttonNotify(BuildContext context, String buttonText, onPressFunction,
-    controllerButton) {
+SizedBox buttonNotify(BuildContext context, String buttonText, onPressFunction, controllerButton) {
   return SizedBox(
     width: context.width * 0.7,
     child: Padding(
@@ -273,10 +261,7 @@ SizedBox buttonNotify(BuildContext context, String buttonText, onPressFunction,
         valueColor: Colors.white,
         borderRadius: 12,
         child: Center(
-          child: Text(
-              buttonText == LocaleKeys.AccessTest.tr()
-                  ? LocaleKeys.AccessTest.tr()
-                  : LocaleKeys.AccessTest.tr(),
+          child: Text(buttonText == LocaleKeys.AccessTest.tr() ? LocaleKeys.AccessTest.tr() : LocaleKeys.AccessTest.tr(),
               style: const TextStyle(color: Colors.white)),
         ),
       ),
