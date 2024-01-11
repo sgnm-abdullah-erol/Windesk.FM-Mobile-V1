@@ -14,14 +14,9 @@ import '../../work_order_list/widgets/custom_loading_indicator.dart';
 import '../provider/search_work_order_provider.dart';
 
 @RoutePage()
-class SearchWorkOrderScreen extends StatefulWidget {
+class SearchWorkOrderScreen extends StatelessWidget {
   const SearchWorkOrderScreen({super.key});
 
-  @override
-  State<SearchWorkOrderScreen> createState() => _SearchWorkOrderScreenState();
-}
-
-class _SearchWorkOrderScreenState extends State<SearchWorkOrderScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
