@@ -1223,5 +1223,7 @@
 	"FacilityName": "İstanbul Finans Merkezi",
 	"ConnectionSuccess": "IFM : Erişim Başarılı",
 	"ConnectionUnSuccess": "IFM : Erişim Başarısız",
-	"ConnectionWait": "IFM : Erişim Bekleniyor"
+	"ConnectionWait": "IFM : Erişim Bekleniyor",
+	"Update":"Güncelle",
+	"UpdateApp":"Uygulamayı kullanabilmeniz için\ngüncelleme gerekmektedir."
 }
