@@ -5,8 +5,9 @@ class LogServiceModel<T> extends Equatable {
   final String? requestPath;
   final int? statusCode;
   final String? headers;
-  final DateTime? date;
+  final String? date;
   final String? error;
+  final String? logCatchError;
 
   const LogServiceModel({
     required this.response,
@@ -14,6 +15,7 @@ class LogServiceModel<T> extends Equatable {
     required this.statusCode,
     required this.headers,
     required this.date,
+    required this.logCatchError,
     this.error,
   });
 

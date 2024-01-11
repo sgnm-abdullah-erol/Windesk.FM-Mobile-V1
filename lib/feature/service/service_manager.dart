@@ -32,50 +32,57 @@ class ServiceManager {
         },
         onResponse: (Response response, handler) async {
           print('RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}');
-
-          if (response.realUri.toString() == '${ServiceTools.url.log_url}/log') {
-            print('RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}');
-          } else {
-            String userToken = await SharedManager().getString(SharedEnum.userToken);
-            LogService.singleLogServiceRequest(
-              dio,
-              userToken,
-              LogServiceModel(
-                response: jsonEncode(response.data),
-                requestPath: response.realUri.toString(),
-                statusCode: response.statusCode,
-                headers: jsonEncode(response.headers.toString()),
-                date: DateTime.now(),
-                error: null,
-              ),
-            );
-          }
+          await _parseResponse(response);
           return handler.next(response);
         },
         onError: (DioException error, handler) async {
           print('ERROR[${error.response?.statusCode}] => PATH: ${error.requestOptions.path}');
-
-          if (error.requestOptions.path == '${ServiceTools.url.log_url}/log') {
-            print('ERROR IN IF');
-          } else {
-            String userToken = await SharedManager().getString(SharedEnum.userToken);
-            LogService.singleLogServiceRequest(
-              dio,
-              userToken,
-              LogServiceModel(
-                response: const {},
-                requestPath: error.requestOptions.path,
-                statusCode: error.response?.statusCode,
-                headers: jsonEncode(error.response?.headers.toString()),
-                date: DateTime.now(),
-                error: error.message,
-              ),
-            );
-          }
-
+          await _parseError(error);
           return handler.next(error);
         },
       ),
     );
+  }
+
+  Future<void> _parseResponse(Response response) async {
+    if (response.realUri.toString() == '${ServiceTools.url.log_url}/mobile/log') {
+      print('RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}');
+    } else {
+      String userToken = await SharedManager().getString(SharedEnum.userToken);
+      LogService.singleLogServiceRequest(
+        dio,
+        userToken,
+        LogServiceModel(
+          response: jsonEncode(response.data),
+          requestPath: response.realUri.toString(),
+          statusCode: response.statusCode,
+          headers: jsonEncode(response.headers.toString()),
+          date: DateTime.now().toIso8601String(),
+          logCatchError: '',
+          error: null,
+        ),
+      );
+    }
+  }
+
+  Future<void> _parseError(DioException error) async {
+    if (error.requestOptions.path == '${ServiceTools.url.log_url}/log') {
+      print('ERROR IN IF');
+    } else {
+      String userToken = await SharedManager().getString(SharedEnum.userToken);
+      LogService.singleLogServiceRequest(
+        dio,
+        userToken,
+        LogServiceModel(
+          response: const {},
+          requestPath: error.requestOptions.path,
+          statusCode: error.response?.statusCode,
+          headers: jsonEncode(error.response?.headers.toString()),
+          date: DateTime.now().toIso8601String(),
+          logCatchError: '',
+          error: error.message,
+        ),
+      );
+    }
   }
 }
